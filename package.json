@@ -1,8 +1,8 @@
 {
-  "name": "edge-drop",
+  "name": "t-drop",
   "version": "0.3.2",
-  "description": "Edge-Drop — a clipboard manager that lives on the left edge of your screen and expands on hover.",
-  "author": "Edge-Drop",
+  "description": "T-Drop — a clipboard manager that lives on the left edge of your screen and expands on hover.",
+  "author": "TXAVLOG",
   "license": "Apache-2.0",
   "private": true,
   "main": "out/main/index.js",
@@ -22,8 +22,8 @@
     "test": "vitest run"
   },
   "build": {
-    "appId": "com.edgedrop.app",
-    "productName": "Edge-Drop",
+    "appId": "com.tdrop.app",
+    "productName": "T-Drop",
     "directories": {
       "output": "dist",
       "buildResources": "resources"
@@ -50,8 +50,8 @@
     ],
     "extraResources": [
       {
-        "from": "resources/startup/EdgeDropStartup.exe",
-        "to": "startup/EdgeDropStartup.exe"
+        "from": "resources/startup/TDropStartup.exe",
+        "to": "startup/TDropStartup.exe"
       },
       {
         "from": "node_modules/emoji-datasource-twitter/img/twitter/64",
@@ -66,8 +66,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "Deepender25",
-      "repo": "Edge-Drop"
+      "owner": "TXAVLOG",
+      "repo": "T-Drop"
     },
     "win": {
       "target": [
@@ -90,23 +90,32 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "shortcutName": "Edge-Drop",
+      "shortcutName": "T-Drop",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "artifactName": "Edge-Drop-Setup-${version}.${ext}"
+      "artifactName": "T-Drop-Setup-${version}.${ext}"
     },
     "appx": {
-      "identityName": "Deepender.EdgeDrop",
+      "identityName": "TXAVLOG.TDrop",
       "publisher": "CN=55FECDC4-7144-4A41-98FC-056C003F76FD",
-      "publisherDisplayName": "Deepender",
-      "applicationId": "EdgeDrop",
-      "displayName": "Edge Drop",
+      "publisherDisplayName": "TXAVLOG",
+      "applicationId": "TDrop",
+      "displayName": "T-Drop",
       "capabilities": [
         "runFullTrust",
         "internetClient"
       ],
       "customExtensionsPath": "resources/appx/startup-extensions.xml"
-    }
+    },
+    "fileAssociations": [
+      {
+        "ext": "txa",
+        "name": "T-Drop Backup Archive",
+        "description": "T-Drop Encrypted Backup Archive",
+        "icon": "resources/icon.ico",
+        "role": "Editor"
+      }
+    ]
   },
   "devDependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",
@@ -131,7 +140,7 @@
     "svg-path-bbox": "^2.1.0",
     "typescript": "^5.4.3",
     "vite": "^5.2.6",
-    "vitest": "^4.1.10"
+    "vitest": "^1.6.0"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",

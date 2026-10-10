@@ -1,3 +1,4 @@
+/* eslint-disable no-control-regex */
 /**
  * Input path validation and sanitization helpers for file operations and PowerShell transactions.
  */

@@ -36,7 +36,7 @@ import {
 } from '../electron/store/paths'
 
 function expectedStoreTemp(): string {
-  return join(fsRoots.home, 'AppData', 'Local', 'Temp', 'Edge-Drop')
+  return join(fsRoots.home, 'AppData', 'Local', 'Temp', 'T-Drop')
 }
 
 function sha10(filePath: string): string {
@@ -64,7 +64,7 @@ describe('Store vs exe filesystem interop', () => {
       expect(getUnpackagedTempDir()).toBe(join(fsRoots.userData, 'temp'))
     })
 
-    it('store: is the real user Local\\Temp\\Edge-Drop, not userData', () => {
+    it('store: is the real user Local\\Temp\\T-Drop, not userData', () => {
       process.env.APP_BUILD_TARGET = 'store'
       const dir = getUnpackagedTempDir()
       expect(dir).toBe(expectedStoreTemp())
@@ -171,7 +171,7 @@ describe('Store vs exe filesystem interop', () => {
     })
 
     it('copies files whose path is under Packages\\ (virtualized package root)', () => {
-      const pkg = join(fsRoots.home, 'AppData', 'Local', 'Packages', 'Deepender.EdgeDrop_test', 'LocalCache', 'shot.png')
+      const pkg = join(fsRoots.home, 'AppData', 'Local', 'Packages', 'TXAVLOG.TDrop_test', 'LocalCache', 'shot.png')
       mkdirSync(join(pkg, '..'), { recursive: true })
       writeFileSync(pkg, 'pkg-bytes')
       const dest = toUnpackagedFilePath(pkg)
@@ -181,7 +181,7 @@ describe('Store vs exe filesystem interop', () => {
     })
 
     it('copies files whose path is under WindowsApps\\', () => {
-      const winapps = join(fsRoots.home, 'WindowsApps', 'Deepender.EdgeDrop', 'resources', 'icon.png')
+      const winapps = join(fsRoots.home, 'WindowsApps', 'TXAVLOG.TDrop', 'resources', 'icon.png')
       mkdirSync(join(winapps, '..'), { recursive: true })
       writeFileSync(winapps, 'icon')
       const dest = toUnpackagedFilePath(winapps)

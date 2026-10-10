@@ -5,13 +5,14 @@
  * renderer calls them through the typed preload bridge, so a signature mismatch
  * is a compile-time error rather than a runtime one.
  */
-import { app, ipcMain, clipboard, nativeImage, shell, net } from 'electron'
+import { app, ipcMain, clipboard, nativeImage, shell, net, dialog } from 'electron'
 import { existsSync } from 'node:fs'
 import { execFile } from 'node:child_process'
 import { psHost, getSystemPowerShellPath, getWritableCwd } from './powershell'
 import { filterValidPaths, isExistingFilePath } from './pathValidation'
 import { type InvokeMap, type InvokeChannel, type SendMap, type SendChannel } from '../../shared/ipc'
 import { getStore, loadSettings, saveSettings, pushState, addFiles, getWatcher } from './state'
+import { createTxaBackup, previewTxaBackup, restoreTxaBackup, isBackupBusy } from '../store/backup'
 import { sendToMainWindow, setInteractive, setHeartbeatPaused, setHotZoneWidth, repositionWindow, getDisplayListOptions, popUpAndRetract, setWindowFocusable, captureExternalForeground, traceFg, resolvePasteTarget } from './window'
 import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
@@ -416,7 +417,7 @@ export function registerIpc(): void {
     watcher.setPaused(true)
 
     try {
-      // 1. Close panel immediately so Edge-Drop slides shut with 0ms UI lag
+      // 1. Close panel immediately so T-Drop slides shut with 0ms UI lag
       pushState.togglePanel(false)
 
       // 2. Write item to system clipboard
@@ -765,6 +766,78 @@ export function registerIpc(): void {
 
   handle('displays:list', () => {
     return getDisplayListOptions()
+  })
+
+  handle('backup:create', async (suggestedPath) => {
+    if (isBackupBusy()) {
+      return { ok: false, error: 'A backup or restore operation is already in progress.' }
+    }
+    let targetPath = suggestedPath
+    if (!targetPath) {
+      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '')
+      const saveResult = await dialog.showSaveDialog({
+        title: 'T-Drop - Tạo bản sao lưu (.txa)',
+        defaultPath: `T-Drop-Backup-${dateStr}.txa`,
+        filters: [{ name: 'T-Drop Encrypted Backup (*.txa)', extensions: ['txa'] }]
+      })
+      if (saveResult.canceled || !saveResult.filePath) {
+        return { ok: false, error: 'User cancelled save dialog.' }
+      }
+      targetPath = saveResult.filePath
+    }
+    const res = createTxaBackup(targetPath)
+    return {
+      ok: res.ok,
+      filePath: res.filePath,
+      fileSizeBytes: res.fileSizeBytes,
+      itemsCount: res.manifest?.itemsCount,
+      imagesCount: res.manifest?.imagesCount,
+      error: res.error
+    }
+  })
+
+  handle('backup:preview', async (filePath) => {
+    let targetPath = filePath
+    if (!targetPath) {
+      const openResult = await dialog.showOpenDialog({
+        title: 'T-Drop - Mở tệp sao lưu (.txa)',
+        filters: [{ name: 'T-Drop Encrypted Backup (*.txa)', extensions: ['txa'] }],
+        properties: ['openFile']
+      })
+      if (openResult.canceled || !openResult.filePaths[0]) {
+        return { ok: false, error: 'User cancelled open dialog.' }
+      }
+      targetPath = openResult.filePaths[0]
+    }
+    const res = previewTxaBackup(targetPath)
+    return {
+      ok: res.ok,
+      filePath: res.filePath,
+      manifest: res.manifest,
+      error: res.error
+    }
+  })
+
+  handle('backup:restore', async (filePath, mode = 'merge') => {
+    if (isBackupBusy()) {
+      return { ok: false, error: 'A backup or restore operation is already in progress.' }
+    }
+    const res = restoreTxaBackup(filePath, mode)
+    if (res.ok) {
+      try {
+        getStore().load()
+        pushState.items({ reason: 'usage' })
+        pushState.settings(loadSettings())
+      } catch (err) {
+        console.error('[IPC] Post-restore store reload failed:', err)
+      }
+    }
+    return {
+      ok: res.ok,
+      restoredItemsCount: res.restoredItemsCount,
+      mode: res.mode,
+      error: res.error
+    }
   })
 }
 

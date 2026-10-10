@@ -47,15 +47,15 @@ describe('ClipboardWatcher Re-Copy Detection & Flare Flow', () => {
 
   it('detects re-copies of the identical item when the OS sequence number increments', async () => {
     mockSeq = 100
-    mockText = 'Hello Edge-Drop'
-    mockItem = { kind: 'text', text: 'Hello Edge-Drop' }
+    mockText = 'Hello T-Drop'
+    mockItem = { kind: 'text', text: 'Hello T-Drop' }
     const { onNew } = await startWatcher()
     expect(onNew).not.toHaveBeenCalled()
 
     mockSeq = 101
     await copyAndSettle()
     expect(onNew).toHaveBeenCalledTimes(1)
-    expect(onNew).toHaveBeenCalledWith({ kind: 'text', text: 'Hello Edge-Drop' })
+    expect(onNew).toHaveBeenCalledWith({ kind: 'text', text: 'Hello T-Drop' })
 
     await vi.advanceTimersByTimeAsync(200)
     expect(onNew).toHaveBeenCalledTimes(1)

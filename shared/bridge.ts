@@ -68,6 +68,10 @@ export interface EdgeApi {
   getDisplays: () => Promise<import('./types').DisplayInfo[]>
   setInternalDrag: (active: boolean) => void
   broadcastTutorialStep: (step: number) => void
+  createBackup: (suggestedPath?: string) => Promise<{ ok: boolean; filePath?: string; fileSizeBytes?: number; itemsCount?: number; imagesCount?: number; error?: string }>
+  previewBackup: (filePath?: string) => Promise<{ ok: boolean; filePath?: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }; error?: string }>
+  restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => Promise<{ ok: boolean; restoredItemsCount?: number; mode?: 'merge' | 'overwrite'; error?: string }>
+  onBackupFileOpened?: (cb: (info: { filePath: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number } }) => void) => () => void
 
   /* Main -> Renderer */
   onItems: (cb: (items: import('./types').ClipboardItemDto[], meta?: { reason?: 'usage' | 'capture' }) => void) => () => void

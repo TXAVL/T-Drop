@@ -110,6 +110,15 @@ export interface InvokeMap {
 
   /** Get the list of connected displays. */
   'displays:list': { args: []; result: import('./types').DisplayInfo[] }
+
+  /** Create an encrypted .txa backup file. Opens save dialog if targetPath omitted. */
+  'backup:create': { args: [suggestedPath?: string]; result: { ok: boolean; filePath?: string; fileSizeBytes?: number; itemsCount?: number; imagesCount?: number; error?: string } }
+
+  /** Open and preview a .txa backup file. Opens open dialog if filePath omitted. */
+  'backup:preview': { args: [filePath?: string]; result: { ok: boolean; filePath?: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }; error?: string } }
+
+  /** Restore data from an encrypted .txa backup file. */
+  'backup:restore': { args: [filePath: string, mode?: 'merge' | 'overwrite']; result: { ok: boolean; restoredItemsCount?: number; mode?: 'merge' | 'overwrite'; error?: string } }
 }
 
 /* ------------------------------------------------------------------ */
@@ -117,6 +126,8 @@ export interface InvokeMap {
 /* ------------------------------------------------------------------ */
 
 export interface EventMap {
+  /** Fired when a .txa file is launched from Windows Explorer or passed into the app. */
+  'backup:file-opened': [info: { filePath: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number } }]
   /** Full new item list whenever the history changes. `reason` tells the
    *  renderer WHY: 'usage' pushes come from manual drag gestures (drag-out
    *  recency bumps and drag-in imports) and must never trigger the capture

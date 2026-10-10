@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$src = Join-Path $root 'resources\startup\EdgeDropStartup.cs'
-$out = Join-Path $root 'resources\startup\EdgeDropStartup.exe'
+$src = Join-Path $root 'resources\startup\TDropStartup.cs'
+$out = Join-Path $root 'resources\startup\TDropStartup.exe'
 $csc = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
 $winrt = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\System.Runtime.WindowsRuntime.dll'
 $runtime = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\System.Runtime.dll'

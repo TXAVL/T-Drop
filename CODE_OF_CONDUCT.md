@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We as members, contributors, and leaders pledge to make participation in the Edge-Drop community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socioeconomic status, nationality, personal appearance, race, caste, religion, or sexual identity and orientation.
+We as members, contributors, and leaders pledge to make participation in the T-Drop community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socioeconomic status, nationality, personal appearance, race, caste, religion, or sexual identity and orientation.
 
 We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
@@ -28,7 +28,7 @@ Examples of unacceptable behavior include:
 
 ## Working with a solo maintainer
 
-Edge-Drop is maintained by one person and is in active beta. To keep the project healthy:
+T-Drop is maintained by one person and is in active beta. To keep the project healthy:
 
 - Before sending a pull request, open an issue first to discuss scope, as described in the Contributing section of the README.
 - When filing a bug, include the details that help reproduce it. For clipboard format issues, the README asks for `clipboard.availableFormats()` output. Never paste passwords, tokens, or other sensitive clipboard content into issues.
@@ -42,7 +42,7 @@ The maintainer has the right and responsibility to remove, edit, or reject comme
 
 ## Scope
 
-This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public spaces. Community spaces for Edge-Drop include the GitHub repository (issues, pull requests, discussions, releases) and the project's website and documentation.
+This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public spaces. Community spaces for T-Drop include the GitHub repository (issues, pull requests, discussions, releases) and the project's website and documentation.
 
 ## Reporting
 

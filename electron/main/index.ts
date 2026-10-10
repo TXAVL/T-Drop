@@ -2,7 +2,7 @@
  * Electron main process entry point.
  *
  * Lifecycle:
- *   1. Single-instance lock (only one Edge-Drop may run).
+ *   1. Single-instance lock (only one T-Drop may run).
  *   2. App 'ready' -> ensure dirs, create the edge window + tray, register the
  *      image protocol + IPC handlers, start the clipboard watcher.
  *   3. On 'window-all-closed' we DON'T quit (the panel is hidden, not closed).
@@ -11,7 +11,7 @@
 import { app, BrowserWindow, protocol, session } from 'electron'
 import { APP_CONFIG, runtime } from './config'
 import { ensureDirs, PATHS } from '../store/paths'
-import { createWindow, getMainWindow, setInteractive, setVisible, startCursorPoll, stopCursorPoll, stopHeartbeat, setHotZoneWidth, registerTaskbarCreatedListener } from './window'
+import { createWindow, getMainWindow, setInteractive, setVisible, startCursorPoll, stopCursorPoll, stopHeartbeat, setHotZoneWidth, registerTaskbarCreatedListener, sendToMainWindow } from './window'
 import { createTray, registerIncognitoApplier, refreshTray } from './tray'
 import { registerIpc, registerSendListeners } from './ipc'
 import { reconcileLaunchAtLoginOnStartup } from './loginItems'
@@ -27,8 +27,24 @@ import { existsSync, createReadStream } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { resolveStoredImage, resolveEmojiAsset, emojiAssetDir } from './imageProtocol'
 import { getThumbnailPayload, thumbnailCacheControl } from './thumbnailCache'
+import { registerTxaAssociation } from './txaAssociation'
+import { previewTxaBackup } from '../store/backup'
 
-// Edge-Drop renders a small, mostly static transparent panel. Chromium's GPU
+function handleFileArg(args: string[]): void {
+  const txaPath = args.find((arg) => typeof arg === 'string' && arg.toLowerCase().endsWith('.txa') && existsSync(arg))
+  if (txaPath) {
+    console.log('[Main] Detected .txa backup file launch:', txaPath)
+    setVisible(true)
+    sendToMainWindow('window:toggle', true)
+    const preview = previewTxaBackup(txaPath)
+    sendToMainWindow('backup:file-opened', {
+      filePath: txaPath,
+      manifest: preview.manifest
+    })
+  }
+}
+
+// T-Drop renders a small, mostly static transparent panel. Chromium's GPU
 // process costs substantially more memory (~150–250 MB) than the iGPU compositing
 // savings are worth for such a simple UI. Software compositing keeps the process
 // count and RAM footprint minimal without meaningfully affecting visual quality.
@@ -50,10 +66,11 @@ const gotLock = app.requestSingleInstanceLock()
 if (!gotLock) {
   app.quit()
 } else {
-  app.on('second-instance', () => {
-    // If a second copy launches, just reveal the existing panel.
+  app.on('second-instance', (_event, argv) => {
+    // If a second copy launches, reveal the existing panel and handle any opened .txa file.
     setVisible(true)
     getMainWindow()?.focus()
+    handleFileArg(argv)
   })
   app.on('browser-window-blur', () => {
     triggerFullscreenCheck()
@@ -94,7 +111,7 @@ app.whenReady().then(() => {
   // GitHub NSIS needs an explicit AUMID. Store packages already have one from
   // the AppX identity; overriding it breaks toasts and taskbar grouping.
   if (!isStoreBuild()) {
-    app.setAppUserModelId('com.edgedrop.app')
+    app.setAppUserModelId('com.tdrop.app')
   }
 
   ensureDirs()
@@ -148,6 +165,15 @@ app.whenReady().then(() => {
   getWatcher().setPaused(settings.incognito)
   pushState.settings(settings)
   initAutoUpdater()
+
+  // Register .txa association for Windows Explorer and process initial startup argv
+  registerTxaAssociation()
+  const win = getMainWindow()
+  if (win) {
+    win.webContents.once('did-finish-load', () => {
+      handleFileArg(process.argv)
+    })
+  }
 
   // Keep the tray checkmarks in sync after settings change from the UI.
   // (Tray menu is rebuilt on each open, so no extra wiring is needed here.)

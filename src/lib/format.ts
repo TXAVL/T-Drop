@@ -76,7 +76,7 @@ export function formatImageDisplayName(
 ): string {
   if (originalName && originalName.trim()) return originalName
   const name = basename(path)
-  const isInternalHash = /^[a-z0-9]{6,12}-[a-z0-9]{6,12}\.[a-z0-9]+$/i.test(name) || path.includes('edge-drop/images') || path.includes('edge-drop\\images') || path.includes('edge-drop/temp') || path.includes('edge-drop\\temp')
+  const isInternalHash = /^[a-z0-9]{6,12}-[a-z0-9]{6,12}\.[a-z0-9]+$/i.test(name) || path.includes('t-drop/images') || path.includes('t-drop\\images') || path.includes('t-drop/temp') || path.includes('t-drop\\temp') || path.includes('edge-drop/images') || path.includes('edge-drop\\images') || path.includes('edge-drop/temp') || path.includes('edge-drop\\temp')
 
   if (isInternalHash) {
     const label = source === 'image' ? t('item.imageItem') : t('item.screenshot')

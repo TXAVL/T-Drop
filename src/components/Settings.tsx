@@ -15,6 +15,7 @@ import { SlideCommit } from './SlideCommit'
 import { WakeSlider } from './WakeSlider'
 import { playDialTickSound, playToggleSound, playButtonClickSound } from '../lib/soundEffects'
 import { useTranslation } from '../i18n'
+import donateQr from '../assets/donate-qr.png'
 import '../styles/settings.css'
 
 type SettingsTab = 'behaviour' | 'position' | 'appearance'
@@ -183,6 +184,353 @@ export function Settings({
   const hasBackgroundUpdate = !updateDownloaded && !isDownloading && (!!updateInfo?.hasUpdate || checkState.status === 'available')
   const downloadPercent = updateInfo?.downloadProgress?.percent ?? 0
 
+  // ── Backup & Restore (.txa) State & Handlers ────────────────────────────
+  const [restoreModal, setRestoreModal] = useState<{
+    open: boolean
+    filePath: string
+    manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }
+    mode: 'merge' | 'overwrite'
+    isRestoring: boolean
+  } | null>(null)
+  const [isExporting, setIsExporting] = useState(false)
+  const [donateModalOpen, setDonateModalOpen] = useState(false)
+  const [copiedStk, setCopiedStk] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.edge?.onBackupFileOpened) return
+    const unsub = window.edge.onBackupFileOpened((info) => {
+      setRestoreModal({
+        open: true,
+        filePath: info.filePath,
+        manifest: info.manifest,
+        mode: 'merge',
+        isRestoring: false
+      })
+    })
+    return () => {
+      unsub()
+    }
+  }, [])
+
+  const handleCreateBackup = async () => {
+    if (isExporting) return
+    setIsExporting(true)
+    playButtonClickSound()
+    try {
+      const res = await window.edge.createBackup()
+      if (res.ok) {
+        pushToast({
+          id: Date.now().toString(),
+          message: t('backup.exportSuccess', { items: res.itemsCount ?? 0 }),
+          tone: 'info'
+        })
+      } else if (res.error && res.error !== 'User cancelled save dialog.') {
+        pushToast({
+          id: Date.now().toString(),
+          message: t('backup.exportFailed', { error: res.error }),
+          tone: 'error'
+        })
+      }
+    } catch (err) {
+      pushToast({
+        id: Date.now().toString(),
+        message: t('backup.exportFailed', { error: String(err) }),
+        tone: 'error'
+      })
+    } finally {
+      setIsExporting(false)
+    }
+  }
+
+  const handleOpenBackupFile = async () => {
+    playButtonClickSound()
+    try {
+      const res = await window.edge.previewBackup()
+      if (res.ok && res.filePath) {
+        setRestoreModal({
+          open: true,
+          filePath: res.filePath,
+          manifest: res.manifest,
+          mode: 'merge',
+          isRestoring: false
+        })
+      } else if (res.error && res.error !== 'User cancelled open dialog.') {
+        pushToast({
+          id: Date.now().toString(),
+          message: t('backup.importFailed', { error: res.error }),
+          tone: 'error'
+        })
+      }
+    } catch (err) {
+      pushToast({
+        id: Date.now().toString(),
+        message: t('backup.importFailed', { error: String(err) }),
+        tone: 'error'
+      })
+    }
+  }
+
+  const handleConfirmRestore = async () => {
+    if (!restoreModal || restoreModal.isRestoring) return
+    setRestoreModal((prev) => (prev ? { ...prev, isRestoring: true } : null))
+    playButtonClickSound()
+    try {
+      const res = await window.edge.restoreBackup(restoreModal.filePath, restoreModal.mode)
+      if (res.ok) {
+        pushToast({
+          id: Date.now().toString(),
+          message: t('backup.importSuccess', { count: res.restoredItemsCount ?? 0 }),
+          tone: 'info'
+        })
+        setRestoreModal(null)
+      } else {
+        pushToast({
+          id: Date.now().toString(),
+          message: t('backup.importFailed', { error: res.error || 'Unknown error' }),
+          tone: 'error'
+        })
+        setRestoreModal((prev) => (prev ? { ...prev, isRestoring: false } : null))
+      }
+    } catch (err) {
+      pushToast({
+        id: Date.now().toString(),
+        message: t('backup.importFailed', { error: String(err) }),
+        tone: 'error'
+      })
+      setRestoreModal((prev) => (prev ? { ...prev, isRestoring: false } : null))
+    }
+  }
+
+  const renderBackupCard = (isShelf = false) => {
+    const content = (
+      <>
+        <div className="shelf-card-top">
+          <div className="setting-group-label">{t('backup.title') || 'BACKUP & RESTORE'}</div>
+          <div className="setting-title">{t('backup.title') || 'Backup & Restore (.txa)'}</div>
+          <div className="setting-desc">{t('backup.desc')}</div>
+        </div>
+        <div className="shelf-card-bottom">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, width: '100%' }}>
+            <button
+              type="button"
+              className="pill active"
+              style={{ justifyContent: 'center', height: 32, fontSize: 11.5, fontWeight: 550, borderRadius: 8 }}
+              disabled={isExporting}
+              onClick={handleCreateBackup}
+            >
+              {isExporting ? '...' : (t('backup.exportBtn') || 'Export (.txa)')}
+            </button>
+            <button
+              type="button"
+              className="pill outline"
+              style={{ justifyContent: 'center', height: 32, fontSize: 11.5, fontWeight: 550, borderRadius: 8 }}
+              onClick={handleOpenBackupFile}
+            >
+              {t('backup.importBtn') || 'Restore (.txa)'}
+            </button>
+          </div>
+        </div>
+      </>
+    )
+
+    if (isShelf) {
+      return (
+        <div className="settings-shelf-card backup-card behaviour-col">
+          {content}
+        </div>
+      )
+    }
+
+    return (
+      <div className="setting-card">
+        {content}
+      </div>
+    )
+  }
+
+  const renderRestoreModal = () => {
+    if (!restoreModal) return null
+    return (
+      <div className="txa-modal-backdrop">
+        <div className="txa-modal-box">
+          <div className="txa-modal-title">
+            <span>{t('backup.modalTitle') || 'Restore T-Drop Backup'}</span>
+            <span className="txa-modal-badge">.TXA</span>
+          </div>
+          <div className="txa-modal-desc">
+            {t('backup.modalDesc') || 'Review archive details and choose how to restore your data.'}
+          </div>
+
+          <div className="txa-meta-card">
+            <div className="txa-meta-row">
+              <span className="txa-meta-label">{t('backup.fileLabel') || 'File'}:</span>
+              <span
+                className="txa-meta-value"
+                style={{ maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                title={restoreModal.filePath}
+              >
+                {restoreModal.filePath.split(/[\\/]/).pop()}
+              </span>
+            </div>
+            {restoreModal.manifest && (
+              <>
+                <div className="txa-meta-row">
+                  <span className="txa-meta-label">{t('backup.dateLabel') || 'Created'}:</span>
+                  <span className="txa-meta-value">
+                    {new Date(restoreModal.manifest.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="txa-meta-row">
+                  <span className="txa-meta-label">{t('backup.itemsLabel') || 'Items'}:</span>
+                  <span className="txa-meta-value">{restoreModal.manifest.itemsCount}</span>
+                </div>
+                <div className="txa-meta-row">
+                  <span className="txa-meta-label">{t('backup.imagesLabel') || 'Images'}:</span>
+                  <span className="txa-meta-value">{restoreModal.manifest.imagesCount}</span>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="txa-mode-choice">
+            <div
+              className={`txa-mode-btn ${restoreModal.mode === 'merge' ? 'active' : ''}`}
+              onClick={() => setRestoreModal((m) => (m ? { ...m, mode: 'merge' } : null))}
+            >
+              <div className="txa-mode-btn-title">
+                {t('backup.modeMerge') || 'Merge (Recommended)'}
+              </div>
+              <div className="txa-mode-btn-desc">
+                {t('backup.modeMergeDesc') || 'Keep current items and add non-duplicate items from the backup.'}
+              </div>
+            </div>
+
+            <div
+              className={`txa-mode-btn ${restoreModal.mode === 'overwrite' ? 'active' : ''}`}
+              onClick={() => setRestoreModal((m) => (m ? { ...m, mode: 'overwrite' } : null))}
+            >
+              <div className="txa-mode-btn-title">
+                {t('backup.modeOverwrite') || 'Overwrite All'}
+              </div>
+              <div className="txa-mode-btn-desc">
+                {t('backup.modeOverwriteDesc') || 'Completely replace current history and settings with the backup.'}
+              </div>
+            </div>
+          </div>
+
+          <div className="txa-modal-actions">
+            <button
+              type="button"
+              className="txa-btn txa-btn-secondary"
+              disabled={restoreModal.isRestoring}
+              onClick={() => setRestoreModal(null)}
+            >
+              {t('backup.cancel') || 'Cancel'}
+            </button>
+            <button
+              type="button"
+              className="txa-btn txa-btn-primary"
+              disabled={restoreModal.isRestoring}
+              onClick={handleConfirmRestore}
+            >
+              {restoreModal.isRestoring
+                ? (t('backup.restoring') || 'Restoring...')
+                : (t('backup.confirmRestore') || 'Restore Now')}
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const renderDonateModal = () => {
+    if (!donateModalOpen) return null
+
+    const handleCopyStk = () => {
+      playButtonClickSound()
+      navigator.clipboard.writeText('2211231106')
+      setCopiedStk(true)
+      setTimeout(() => setCopiedStk(false), 2000)
+    }
+
+    return (
+      <div
+        className="txa-modal-overlay"
+        onClick={() => setDonateModalOpen(false)}
+      >
+        <div
+          className="txa-modal-card donate-modal-card"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="txa-modal-header">
+            <div className="txa-modal-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#00d2ff' }}>
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01"/>
+              </svg>
+              <span>{t('footer.donateTitle') || 'Ủng hộ tác giả (MB Bank)'}</span>
+            </div>
+            <button
+              type="button"
+              className="txa-modal-close"
+              onClick={() => setDonateModalOpen(false)}
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="donate-modal-body">
+            <div className="donate-qr-container">
+              <img
+                src={donateQr}
+                alt="MB Bank VietQR"
+                className="donate-qr-img"
+              />
+            </div>
+
+            <div className="donate-bank-info">
+              <div className="donate-bank-row">
+                <span className="donate-label">{t('footer.bankName') || 'Ngân hàng:'}</span>
+                <span className="donate-value highlight">MB Bank</span>
+              </div>
+              <div className="donate-bank-row">
+                <span className="donate-label">{t('footer.accountNumber') || 'Số tài khoản:'}</span>
+                <div className="donate-stk-group">
+                  <span className="donate-value code">2211231106</span>
+                  <button
+                    type="button"
+                    className="donate-copy-btn"
+                    onClick={handleCopyStk}
+                  >
+                    {copiedStk ? (t('footer.copied') || '✓ Đã chép') : (t('footer.copy') || 'Sao chép')}
+                  </button>
+                </div>
+              </div>
+              <div className="donate-bank-row">
+                <span className="donate-label">{t('footer.accountHolder') || 'Chủ tài khoản:'}</span>
+                <span className="donate-value highlight">TANG XUAN ANH</span>
+              </div>
+            </div>
+
+            <p className="donate-note">
+              {t('footer.donateNote') || 'Quét mã VietQR trên bất kỳ ứng dụng ngân hàng hoặc ví điện tử để ủng hộ.'}
+            </p>
+          </div>
+
+          <div className="txa-modal-actions" style={{ justifyContent: 'center' }}>
+            <button
+              type="button"
+              className="txa-btn txa-btn-secondary"
+              onClick={() => setDonateModalOpen(false)}
+            >
+              {t('common.close') || 'Đóng'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   // ── Tab state & Independent Scroll Memory per section ──────────────────────
   const activeTab = useStore((s) => s.settingsTab)
   const setActiveTab = useStore((s) => s.setSettingsTab)
@@ -273,7 +621,7 @@ export function Settings({
             style={{ width: '100%', justifyContent: 'center', padding: '7px 14px', cursor: 'pointer', whiteSpace: 'nowrap', fontSize: '12.5px' }}
             onClick={() => {
               playButtonClickSound()
-              window.open('https://github.com/Deepender25/Edge-Drop/issues/new/choose', '_blank')
+              window.open('https://github.com/TXAVLOG/T-Drop/issues/new/choose', '_blank')
             }}
           >
             {t('footer.submitFeedback')}
@@ -288,16 +636,18 @@ export function Settings({
             {t('footer.supportPromo')}
           </div>
           <div className="support-buttons-group">
-            {/* Primary Action: Support via Ko-fi / UPI */}
+            {/* Primary Action: Support via VietQR / MB Bank */}
             <button
+              type="button"
               className="kofi-support-btn"
               onClick={() => {
                 playButtonClickSound()
-                window.open('https://www.edgedrop.app/supportedgedrop', '_blank')
+                setDonateModalOpen(true)
               }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff4757" stroke="none" style={{ flexShrink: 0 }}>
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, color: '#0070f3' }}>
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01"/>
               </svg>
               <span>{t('footer.supportOnKofi')}</span>
             </button>
@@ -321,7 +671,7 @@ export function Settings({
                 className="github-promo-btn"
                 onClick={() => {
                   playButtonClickSound()
-                  window.open('https://github.com/Deepender25/Edge-Drop', '_blank')
+                  window.open('https://github.com/TXAVLOG/T-Drop', '_blank')
                 }}
               >
                 <GithubOctocatLogo width={14} height={14} className="github-octocat-icon" />
@@ -793,11 +1143,12 @@ export function Settings({
             className="shelf-kofi-btn"
             onClick={() => {
               playButtonClickSound()
-              window.open('https://www.edgedrop.app/supportedgedrop', '_blank')
+              setDonateModalOpen(true)
             }}
           >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="#ff4757" stroke="none" style={{ flexShrink: 0 }}>
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, color: '#0070f3' }}>
+              <rect width="18" height="18" x="3" y="3" rx="2"/>
+              <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01"/>
             </svg>
             <span>{t('footer.supportOnKofi')}</span>
           </button>
@@ -819,7 +1170,7 @@ export function Settings({
               className="shelf-github-btn"
               onClick={() => {
                 playButtonClickSound()
-                window.open('https://github.com/Deepender25/Edge-Drop', '_blank')
+                window.open('https://github.com/TXAVLOG/T-Drop', '_blank')
               }}
             >
               <GithubOctocatLogo width={13} height={13} className="github-octocat-icon" />
@@ -834,8 +1185,8 @@ export function Settings({
     const renderHorizontalAboutCard = () => (
       <div className="settings-shelf-card about-card">
         <div className="shelf-card-top">
-          <div className="setting-group-label">{t('groups.aboutEdgeDrop') || 'ABOUT EDGE-DROP'}</div>
-          <div className="setting-title">Edge-Drop v{currentVersion || '0.3.2'}</div>
+          <div className="setting-group-label">{t('groups.aboutEdgeDrop') || 'ABOUT T-DROP'}</div>
+          <div className="setting-title">T-Drop v{currentVersion || '0.3.2'}</div>
           <div className="setting-desc">{t('footer.feedbackDesc')}</div>
         </div>
         <div className="shelf-card-bottom">
@@ -845,7 +1196,7 @@ export function Settings({
             style={{ width: '100%', justifyContent: 'center', height: 30, fontSize: 11.5, fontWeight: 550, borderRadius: 999 }}
             onClick={() => {
               playButtonClickSound()
-              window.open('https://github.com/Deepender25/Edge-Drop/issues/new/choose', '_blank')
+              window.open('https://github.com/TXAVLOG/T-Drop/issues/new/choose', '_blank')
             }}
           >
             {t('footer.submitFeedback')}
@@ -1020,7 +1371,7 @@ export function Settings({
                 <div className="shelf-card-top">
                   <div className="setting-group-label">{t('groups.keyboardShortcut') || 'KEYBOARD SHORTCUT'}</div>
                   <div className="setting-title">{t('behaviour.toggleHotkeyTitle')}</div>
-                  <div className="setting-desc">{t('groups.toggleHotkeyPressDesc') || 'Press anywhere to toggle Edge-Drop'}</div>
+                  <div className="setting-desc">{t('groups.toggleHotkeyPressDesc') || 'Press anywhere to toggle T-Drop'}</div>
                 </div>
                 <div className="shelf-card-bottom">
                   <HotkeyRecorder
@@ -1168,6 +1519,9 @@ export function Settings({
                 </div>
               </div>
 
+              {/* Card 10B: Backup & Restore (.txa) */}
+              {renderBackupCard(true)}
+
               {/* ── SUB-GROUP 5 DIVIDER: Updates ── */}
               {!isStoreBuild && (
                 <div className="shelf-section-divider">
@@ -1233,7 +1587,7 @@ export function Settings({
                     <div className="setting-desc">
                       {checkState.status === 'error'
                         ? (checkState.error || t('behaviour.updateCheckFailed'))
-                        : `Edge-Drop v${currentVersion || '0.3.1'}`}
+                        : `T-Drop v${currentVersion || '0.3.2'}`}
                     </div>
                   </div>
                   <div className="shelf-card-bottom">
@@ -1597,6 +1951,8 @@ export function Settings({
             </>
           )}
         </div>
+        {renderRestoreModal()}
+        {renderDonateModal()}
       </div>
     )
   }
@@ -1890,6 +2246,9 @@ export function Settings({
                       </div>
                     </div>
                   </div>
+
+                  {/* Card 10B: Backup & Restore (.txa) */}
+                  {renderBackupCard(false)}
 
                   {/* ── UPDATES SECTION (Consolidated above Community & Support) ── */}
                   {!isStoreBuild && (
@@ -2553,6 +2912,8 @@ export function Settings({
             </AnimatePresence>
 
           </div>
+          {renderRestoreModal()}
+          {renderDonateModal()}
         </div>
       )
     }

@@ -12,7 +12,7 @@ const child = vi.hoisted(() => ({
 
 const mocks = vi.hoisted(() => ({
   isPackaged: true,
-  exePath: 'C:\\Program Files\\WindowsApps\\Deepender.EdgeDrop_0.3.1.0_x64__aqnvcnjbf5ns8\\app\\Edge-Drop.exe',
+  exePath: 'C:\\Program Files\\WindowsApps\\TXAVLOG.TDrop_0.3.1.0_x64__aqnvcnjbf5ns8\\app\\T-Drop.exe',
   loadSettings: vi.fn(() => ({ launchAtLogin: false })),
   saveSettings: vi.fn((patch: Record<string, unknown>) => ({ launchAtLogin: false, ...patch }))
 }))

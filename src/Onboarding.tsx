@@ -122,8 +122,8 @@ export function Onboarding() {
         borderBottom: '1px solid #262626'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src={logoUrl} alt="Edge-Drop Logo" style={{ width: '28px', height: '28px' }} />
-          <span style={{ fontWeight: 700, fontSize: '16px', letterSpacing: '-0.02em' }}>Edge-Drop</span>
+          <img src={logoUrl} alt="T-Drop Logo" style={{ width: '28px', height: '28px' }} />
+          <span style={{ fontWeight: 700, fontSize: '16px', letterSpacing: '-0.02em' }}>T-Drop</span>
         </div>
         <button
           onClick={handleSkip}

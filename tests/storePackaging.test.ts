@@ -43,9 +43,9 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
   })
 
   it('declares the Store identity and required capabilities', () => {
-    expect(pkg.build.appx.identityName).toBe('Deepender.EdgeDrop')
+    expect(pkg.build.appx.identityName).toBe('TXAVLOG.TDrop')
     expect(pkg.build.appx.publisher).toMatch(/^CN=/)
-    expect(pkg.build.appx.applicationId).toBe('EdgeDrop')
+    expect(pkg.build.appx.applicationId).toBe('TDrop')
     expect(pkg.build.appx.capabilities).toEqual(expect.arrayContaining(['runFullTrust', 'internetClient']))
     expect(pkg.build.appx.capabilities).not.toContain('broadFileSystemAccess')
   })
@@ -65,10 +65,10 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
   it('ships the windowless StartupTask helper outside the asar', () => {
     expect(pkg.build.files).toEqual(expect.arrayContaining(['!resources/startup/**/*.exe']))
     expect(pkg.build.extraResources).toEqual(expect.arrayContaining([
-      { from: 'resources/startup/EdgeDropStartup.exe', to: 'startup/EdgeDropStartup.exe' }
+      { from: 'resources/startup/TDropStartup.exe', to: 'startup/TDropStartup.exe' }
     ]))
-    expect(existsSync(join(root, 'resources/startup/EdgeDropStartup.exe'))).toBe(true)
-    expect(existsSync(join(root, 'resources/startup/EdgeDropStartup.cs'))).toBe(true)
+    expect(existsSync(join(root, 'resources/startup/TDropStartup.exe'))).toBe(true)
+    expect(existsSync(join(root, 'resources/startup/TDropStartup.cs'))).toBe(true)
   })
 
   it('keeps only runtime packages as production dependencies', () => {
@@ -126,16 +126,14 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
       'ungroup.gif',
       'stack.gif',
       'preview.gif',
-      'kofi-qr.png',
-      'upi-sponsor-qr.png'
+      'donate-qr.png'
     ]) {
       expect(existsSync(join(readmeDir, name))).toBe(true)
     }
     const readme = read('README.md')
     expect(readme).toContain('.github/readme/Logo.gif')
     expect(readme).toContain('.github/readme/open.gif')
-    expect(readme).toContain('.github/readme/kofi-qr.png')
-    expect(readme).toContain('.github/readme/upi-sponsor-qr.png')
+    expect(readme).toContain('.github/readme/donate-qr.png')
     expect(readme).not.toMatch(/src="public\/[^"]+\.(gif|png)"/)
     expect(readme).not.toContain('/main/public/')
   })
@@ -150,22 +148,22 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
   it('keeps GitHub Releases as the NSIS publish source and NSIS artifact name', () => {
     expect(pkg.build.publish).toEqual({
       provider: 'github',
-      owner: 'Deepender25',
-      repo: 'Edge-Drop'
+      owner: 'TXAVLOG',
+      repo: 'T-Drop'
     })
     expect(pkg.build.nsis.artifactName).toContain('${version}')
     expect(pkg.build.nsis.artifactName).toMatch(/\.\$\{ext\}$/)
   })
 
-  it('StartupTask XML uses the same TaskId as STORE_STARTUP_TASK_ID and launches Edge-Drop.exe', () => {
+  it('StartupTask XML uses the same TaskId as STORE_STARTUP_TASK_ID and launches T-Drop.exe', () => {
     const xml = read('resources/appx/startup-extensions.xml')
     expect(xml).toContain('Category="windows.startupTask"')
     expect(xml).toContain('EntryPoint="Windows.FullTrustApplication"')
-    expect(xml).toContain('Executable="app\\Edge-Drop.exe"')
+    expect(xml).toContain('Executable="app\\T-Drop.exe"')
     expect(xml).toContain(`TaskId="${STORE_STARTUP_TASK_ID}"`)
     expect(xml).not.toContain('SlackStartup')
     expect(xml).toContain('Enabled="true"')
-    expect(xml).toContain('DisplayName="Edge-Drop"')
+    expect(xml).toContain('DisplayName="T-Drop"')
   })
 
   it('electron-builder still injects customExtensionsPath into the AppX Extensions block', () => {
@@ -177,7 +175,7 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
 
   it('main process only sets the custom AUMID on the GitHub build', () => {
     const src = read('electron/main/index.ts')
-    expect(src).toMatch(/if\s*\(\s*!isStoreBuild\(\)\s*\)\s*\{[\s\S]*setAppUserModelId\('com\.edgedrop\.app'\)/)
+    expect(src).toMatch(/if\s*\(\s*!isStoreBuild\(\)\s*\)\s*\{[\s\S]*setAppUserModelId\('com\.tdrop\.app'\)/)
     expect(src).not.toMatch(/setAppUserModelId\([\s\S]*isStoreBuild\(\)/)
   })
 
@@ -195,7 +193,7 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
     expect(src).toContain('store-review-promo-btn')
     expect(src).toContain('ms-windows-store://review/?ProductId=9P3JMHN9M4NR')
     expect(src).toContain('github-promo-btn')
-    expect(src).toContain('https://github.com/Deepender25/Edge-Drop')
+    expect(src).toContain('https://github.com/TXAVLOG/T-Drop')
   })
 
   it('updater module hard-returns on Store for every public entry', () => {

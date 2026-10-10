@@ -660,7 +660,7 @@ export const useStore = create<AppState>((set, get) => ({
       return
     }
 
-    // 1. Edge-drop retracts into the bar (260ms)
+    // 1. T-drop retracts into the bar (260ms)
     playEdgeRetractSound()
     set({
       edgeTransition: {

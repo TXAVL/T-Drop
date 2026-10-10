@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { formatScreenshotFilename, formatClipboardImageFilename, stageDragFile } from '../electron/main/drag'
 import type { ItemData } from '../shared/types'
 
@@ -228,7 +228,7 @@ describe('Drag-out usage gating on drop location', () => {
   it('does not touch item when drag drops back inside the source window', () => {
     const touchSpy = vi.fn()
     const isWholeItemDrag = true
-    const isInside = true // Dropped back onto Edge-Drop window
+    const isInside = true // Dropped back onto T-Drop window
     const movePastedToTop = true
 
     if (isWholeItemDrag && !isInside && movePastedToTop) {

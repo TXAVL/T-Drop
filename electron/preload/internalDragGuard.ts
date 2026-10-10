@@ -3,7 +3,7 @@
  *
  * PROBLEM
  * -------
- * When Edge-Drop exports an item via a native OS drag and the user drops it
+ * When T-Drop exports an item via a native OS drag and the user drops it
  * back onto our own window, Windows delivers that drop ASYNCHRONOUSLY after
  * the OLE loop returns — sometimes well over a second later on loaded
  * systems. Without protection the delivered files re-enter item:add-files

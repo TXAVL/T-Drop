@@ -2597,4 +2597,268 @@
   }
 }
 
+/* ── Backup Restore Modal ─────────────────────────────────────────── */
+.txa-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.txa-modal-box {
+  width: 100%;
+  max-width: 340px;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.txa-modal-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.txa-modal-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 242, 254, 0.18);
+  color: #00f2fe;
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.txa-modal-desc {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.txa-meta-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.txa-meta-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.txa-meta-label {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.txa-meta-value {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.txa-mode-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.txa-mode-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.txa-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.txa-mode-btn.active {
+  background: rgba(0, 242, 254, 0.1);
+  border-color: rgba(0, 242, 254, 0.5);
+}
+
+.txa-mode-btn-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.txa-mode-btn-desc {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.3;
+}
+
+.txa-modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.txa-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.txa-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+}
+.txa-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.txa-btn-primary {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  color: #000000;
+}
+.txa-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+}
+.txa-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Donate / QR Code Modal ── */
+.donate-modal-card {
+  max-width: 320px;
+  text-align: center;
+}
+
+.donate-modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.donate-qr-container {
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donate-qr-img {
+  width: 190px;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.donate-bank-info {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.donate-bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+}
+
+.donate-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+}
+
+.donate-value {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.donate-value.highlight {
+  color: #00d2ff;
+  font-weight: 600;
+}
+
+.donate-stk-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.donate-stk-group .code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #00f2fe;
+  letter-spacing: 0.5px;
+}
+
+.donate-copy-btn {
+  padding: 2px 7px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  background: rgba(0, 242, 254, 0.12);
+  color: #00f2fe;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.donate-copy-btn:hover {
+  background: rgba(0, 242, 254, 0.25);
+}
+
+.donate-note {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+  margin: 0;
+}
+
+
+
 

@@ -46,7 +46,7 @@ export function ItemList() {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [collapsedMap, setCollapsedMap] = useState<Record<string, boolean>>(() => {
     try {
-      const saved = localStorage.getItem('edge_drop_pinned_collapsed_map')
+      const saved = localStorage.getItem('t_drop_pinned_collapsed_map') || localStorage.getItem('edge_drop_pinned_collapsed_map')
       if (saved) return JSON.parse(saved)
     } catch {}
     return { all: true, text: true, image: true, file: true, link: true }
@@ -57,7 +57,7 @@ export function ItemList() {
   const setPinnedCollapsed = (val: boolean) => {
     setCollapsedMap((prev) => {
       const next = { ...prev, [typeFilter]: val }
-      localStorage.setItem('edge_drop_pinned_collapsed_map', JSON.stringify(next))
+      localStorage.setItem('t_drop_pinned_collapsed_map', JSON.stringify(next))
       return next
     })
   }

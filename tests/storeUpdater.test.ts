@@ -113,12 +113,12 @@ describe('auto-updater isolation', () => {
       expect(mocks.updateAvailable).not.toHaveBeenCalled()
     })
 
-    it('checkForUpdatesManual hits the Edge-Drop releases endpoint', async () => {
+    it('checkForUpdatesManual hits the T-Drop releases endpoint', async () => {
       mockGithubRelease('v0.3.1')
       await checkForUpdatesManual()
       expect(mocks.netRequest).toHaveBeenCalledWith(expect.objectContaining({
         method: 'GET',
-        url: 'https://api.github.com/repos/Deepender25/Edge-Drop/releases/latest'
+        url: 'https://api.github.com/repos/TXAVLOG/T-Drop/releases/latest'
       }))
     })
   })

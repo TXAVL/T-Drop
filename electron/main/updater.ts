@@ -114,9 +114,9 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
     try {
       const request = net.request({
         method: 'GET',
-        url: 'https://api.github.com/repos/Deepender25/Edge-Drop/releases/latest'
+        url: 'https://api.github.com/repos/TXAVLOG/T-Drop/releases/latest'
       })
-      request.setHeader('User-Agent', 'Edge-Drop-App')
+      request.setHeader('User-Agent', 'T-Drop-App')
       request.setHeader('Accept', 'application/vnd.github.v3+json')
 
       const timer = setTimeout(() => {

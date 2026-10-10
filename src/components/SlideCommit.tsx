@@ -139,19 +139,19 @@ export function SlideCommit({
   const spin = useMotionValue(0)
   const pulse = useMotionValue(1)
   const shake = useMotionValue(0)
-  const seen = useTransform(x, (v) => clamp(v, 0, TRAVEL))
-  const edge = useTransform([seen, anchor], ([v, a]) => v + GRIP + clamp(a - v, 0, TRAVEL))
-  const clip = useTransform(edge, (R) => `inset(0 ${Math.max(0, INNER - R)}px 0 0 round ${gripR}px)`)
-  const content = useTransform([seen, edge], ([v, R]) => `translateX(${(v + R) / 2 - INNER / 2}px)`)
+  const seen = useTransform(x, (v: number) => clamp(v, 0, TRAVEL))
+  const edge = useTransform([seen, anchor], ([v, a]: any[]) => (v as number) + GRIP + clamp((a as number) - (v as number), 0, TRAVEL))
+  const clip = useTransform(edge, (R: any) => `inset(0 ${Math.max(0, INNER - Number(R))}px 0 0 round ${gripR}px)`)
+  const content = useTransform([seen, edge], ([v, R]: any[]) => `translateX(${((v as number) + (R as number)) / 2 - INNER / 2}px)`)
   const swell = hot && !held && phase === 'idle' && !reduce ? SWELL : 1
-  const shape = useTransform(x, (v) => {
+  const shape = useTransform(x, (v: number) => {
     const q = 1 - Math.min(SQUASH_MAX, Math.max(0, -v) / SQUASH_DIV)
     return `scale(${q * swell}, ${swell / q})`
   })
-  const origin = useTransform(seen, (v) => `${v}px 50%`)
+  const origin = useTransform(seen, (v: number) => `${v}px 50%`)
   const say = useTransform(seen, [0, TRAVEL * 0.55], [1, 0])
-  const arrow = useTransform([seen, shown], ([v, on]) => on * clamp(1 - (v - TRAVEL * 0.55) / (TRAVEL * 0.4), 0, 1))
-  const trackTransform = useTransform([shake, pulse], ([s, p]) => `translateX(${s}px) scale(${p})`)
+  const arrow = useTransform([seen, shown], ([v, on]: any[]) => (on as number) * clamp(1 - ((v as number) - TRAVEL * 0.55) / (TRAVEL * 0.4), 0, 1))
+  const trackTransform = useTransform([shake, pulse], ([s, p]: any[]) => `translateX(${s}px) scale(${p})`)
 
   const labelText = typeof label === 'string' ? label : 'Slide to confirm'
   useMotionValueEvent(seen, 'change', (v) => {
@@ -179,15 +179,15 @@ export function SlideCommit({
   }
 
   const goHome = (velocity: number) => {
-    if (reduce) animate(x, 0, { duration: 0.2, ease: EASE_OUT })
-    else animate(x, 0, { ...homeSpring, velocity: Math.min(0, velocity) })
+    if (reduce) (animate as any)(x, 0, { duration: 0.2, ease: EASE_OUT })
+    else (animate as any)(x, 0, { ...homeSpring, velocity: Math.min(0, velocity) })
   }
 
   const settle = () => {
     setPhase('idle')
     animate(shown, 1, { duration: 0.2, delay: 0.12 })
     if (reduce) anchor.set(0)
-    else animate(anchor, 0, { type: 'spring', duration: 0.3, bounce: 0 })
+    else (animate as any)(anchor, 0, { type: 'spring', duration: 0.3, bounce: 0 })
   }
 
   const resolve = (viaKey: boolean) => {
@@ -196,9 +196,9 @@ export function SlideCommit({
     animate(spin, 0, { duration: 0.12 })
     if (reduce) x.set(0)
     else {
-      animate(x, 0, commitSpring)
+      (animate as any)(x, 0, commitSpring)
       if (!viaKey && landingDip > 0) {
-        animate(pulse, [1, 1 - landingDip, 1], { duration: 0.46, times: [0, 0.62, 1], ease: EASE_OUT, delay: 0.1 })
+        (animate as any)(pulse, [1, 1 - landingDip, 1], { duration: 0.46, times: [0, 0.62, 1], ease: EASE_OUT, delay: 0.1 })
       }
     }
     onDone?.()
@@ -212,7 +212,7 @@ export function SlideCommit({
     animate(shown, 1, { duration: 0.2, delay: 0.12 })
     if (reduce) goHome(0)
     else {
-      animate(shake, SHAKE, { duration: 0.45, ease: EASE_OUT })
+      (animate as any)(shake, SHAKE, { duration: 0.45, ease: EASE_OUT })
       homeTimer.current = setTimeout(() => {
         if (!grip.current) goHome(0)
       }, 300)

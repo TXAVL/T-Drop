@@ -1,3 +1,4 @@
+/* eslint-disable no-control-regex */
 /**
  * Native drag-out of items into other applications.
  *
@@ -34,6 +35,7 @@ function stampForFilename(capturedAt?: number): string {
   return `${year}-${month}-${day} ${hours}.${minutes}.${seconds}`
 }
 
+// eslint-disable-next-line no-control-regex
 function sanitizeFileName(name: string): string {
   return name.replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_').replace(/^\.+/, '').trim() || 'Image'
 }
