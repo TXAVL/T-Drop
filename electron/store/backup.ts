@@ -24,15 +24,16 @@ import { gzipSync, gunzipSync } from 'node:zlib'
 import { PATHS } from './paths'
 import type { ClipboardItem, Settings } from '../../shared/types'
 
-const TXA_MAGIC_HEADER = `TXA-ARCHIVE-V1 [ENCRYPTED T-DROP BACKUP]
-================================================================================
-CẢNH BÁO / WARNING:
-Tệp này là bản sao lưu dữ liệu đã được mã hóa của ứng dụng T-Drop (.txa).
-Nếu mở bằng Notepad hoặc trình soạn thảo văn bản, tệp sẽ hiển thị ký tự mã hóa lỗi font.
-Để xem và khôi phục lịch sử bảng tạm, vui lòng mở tệp này bằng ứng dụng T-Drop.
-This is an encrypted T-Drop archive. Open with T-Drop: https://github.com/TXAVLOG/T-Drop
-================================================================================
-\x00TXA_BINARY_PAYLOAD_START\x00\r\n`
+const TXA_MAGIC_HEADER =
+  '\uFEFFTXA-ARCHIVE-V1 [ENCRYPTED T-DROP BACKUP]\r\n' +
+  '================================================================================\r\n' +
+  'CẢNH BÁO / WARNING:\r\n' +
+  'Tệp này là bản sao lưu dữ liệu đã được mã hóa của ứng dụng T-Drop (.txa).\r\n' +
+  'Nếu mở bằng Notepad hoặc trình soạn thảo văn bản, phần dữ liệu bên dưới sẽ là mã nhị phân mã hóa.\r\n' +
+  'Để xem và khôi phục lịch sử bảng tạm, vui lòng mở tệp này bằng ứng dụng T-Drop.\r\n' +
+  'This is an encrypted T-Drop archive. Open with T-Drop: https://github.com/TXAVLOG/T-Drop\r\n' +
+  '================================================================================\r\n' +
+  '\x00TXA_BINARY_PAYLOAD_START\x00\r\n'
 
 const KDF_SALT = Buffer.from('T-DROP-SECURE-VAULT-SALT-v1', 'utf8')
 const KDF_SECRET = 'TXAVLOG-T-DROP-AES-GCM-KEY-2026'
@@ -214,18 +215,27 @@ export function unpackTxaBackup(source: string | Buffer): { ok: boolean; data?: 
   try {
     const rawBuffer = typeof source === 'string' ? readFileSync(source) : source
 
-    // Verify magic header
-    const headerBuf = Buffer.from(TXA_MAGIC_HEADER, 'utf8')
-    if (rawBuffer.length < headerBuf.length + 28) {
+    // Marker separating the human-readable text header from the encrypted binary payload
+    const marker = Buffer.from('\x00TXA_BINARY_PAYLOAD_START\x00', 'utf8')
+    const markerIdx = rawBuffer.indexOf(marker)
+    if (markerIdx === -1) {
       return { ok: false, error: 'invalid_format' }
     }
 
-    const headerSlice = rawBuffer.subarray(0, headerBuf.length)
-    if (!headerSlice.equals(headerBuf)) {
+    // Verify header signature before marker (supports both BOM and legacy non-BOM)
+    const headerPrefix = rawBuffer.subarray(0, markerIdx).toString('utf8')
+    if (!headerPrefix.includes('TXA-ARCHIVE-V1')) {
       return { ok: false, error: 'invalid_header' }
     }
 
-    let offset = headerBuf.length
+    let offset = markerIdx + marker.length
+    if (rawBuffer[offset] === 0x0d) offset++ // skip \r if present
+    if (rawBuffer[offset] === 0x0a) offset++ // skip \n if present
+
+    if (rawBuffer.length < offset + 28) {
+      return { ok: false, error: 'invalid_format' }
+    }
+
     const iv = rawBuffer.subarray(offset, offset + 12)
     offset += 12
     const tag = rawBuffer.subarray(offset, offset + 16)
