@@ -841,8 +841,8 @@ export const en: TranslationKeys = {
   "backup": {
     "title": "Backup & Restore",
     "desc": "Export your clipboard history, pinned items, and settings to an encrypted archive (.txa) or restore from an existing backup.",
-    "exportBtn": "Export Backup (.txa)",
-    "importBtn": "Restore Backup (.txa)",
+    "exportBtn": "Export (.txa)",
+    "importBtn": "Restore (.txa)",
     "exportSuccess": "Backup exported successfully!",
     "exportFailed": "Failed to export backup.",
     "importSuccess": "Restored {count} items successfully!",
@@ -5110,8 +5110,8 @@ export const vi: TranslationKeys = {
   "backup": {
     "title": "Sao lưu & Khôi phục",
     "desc": "Xuất lịch sử bảng tạm, mục đã ghim và cài đặt ra tệp sao lưu (.txa) hoặc khôi phục từ bản sao lưu trước đó.",
-    "exportBtn": "Sao lưu dữ liệu (.txa)",
-    "importBtn": "Khôi phục dữ liệu (.txa)",
+    "exportBtn": "Sao lưu (.txa)",
+    "importBtn": "Khôi phục (.txa)",
     "exportSuccess": "Đã xuất bản sao lưu thành công!",
     "exportFailed": "Không thể xuất bản sao lưu.",
     "importSuccess": "Khôi phục thành công {count} mục!",

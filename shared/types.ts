@@ -244,7 +244,7 @@ export const DEFAULT_SETTINGS: Settings = {
   soundEffects: true,
   lastSeenChangelogVersion: undefined,
   hoverActivation: true,
-  fontSizeScale: 1.0,
+  fontSizeScale: 1.04,
   autoUpdates: true,
   updateMode: 'auto',
   skippedUpdateVersion: undefined,

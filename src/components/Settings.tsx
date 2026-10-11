@@ -279,17 +279,39 @@ export function Settings({
             <button
               type="button"
               className="pill active"
-              style={{ justifyContent: 'center', height: 32, fontSize: 11.5, fontWeight: 550, borderRadius: 8 }}
+              style={{
+                justifyContent: 'center',
+                height: 34,
+                fontSize: 'calc(11.5px * var(--font-scale, 1))',
+                fontWeight: 600,
+                borderRadius: 8,
+                padding: '4px 6px',
+                minWidth: 0,
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis'
+              }}
               disabled={isExporting}
               onClick={handleCreateBackup}
+              title={t('backup.exportBtn') || 'Export (.txa)'}
             >
               {isExporting ? '...' : (t('backup.exportBtn') || 'Export (.txa)')}
             </button>
             <button
               type="button"
               className="pill outline"
-              style={{ justifyContent: 'center', height: 32, fontSize: 11.5, fontWeight: 550, borderRadius: 8 }}
+              style={{
+                justifyContent: 'center',
+                height: 34,
+                fontSize: 'calc(11.5px * var(--font-scale, 1))',
+                fontWeight: 600,
+                borderRadius: 8,
+                padding: '4px 6px',
+                minWidth: 0,
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis'
+              }}
               onClick={handleOpenBackupFile}
+              title={t('backup.importBtn') || 'Restore (.txa)'}
             >
               {t('backup.importBtn') || 'Restore (.txa)'}
             </button>
@@ -1783,6 +1805,44 @@ export function Settings({
                 </div>
               )}
 
+              {/* Card 3: Typography / Text Size */}
+              <div className="settings-shelf-card typography-card appearance-col">
+                <div className="shelf-card-top">
+                  <div className="setting-group-label">{t('groups.textSize') || 'TEXT SIZE'}</div>
+                  <div className="setting-title">{t('appearance.textSizeTitle')}</div>
+                  <div className="setting-desc">{t('appearance.textSizeDesc')}</div>
+                </div>
+                <div className="shelf-card-bottom">
+                  <div className="setting-pills">
+                    {[
+                      { label: t('appearance.small'), val: 0.94 },
+                      { label: t('appearance.normal'), val: 1.04 },
+                      { label: t('appearance.large'), val: 1.16 }
+                    ].map((opt) => {
+                      const currentScale = settings.fontSizeScale ?? 1.04
+                      const isActive =
+                        opt.val === 0.94
+                          ? currentScale <= 0.98
+                          : opt.val === 1.04
+                          ? currentScale > 0.98 && currentScale < 1.10
+                          : currentScale >= 1.10
+                      return (
+                        <button
+                          key={opt.label}
+                          className={`pill ${isActive ? 'active' : ''}`}
+                          onClick={() => {
+                            playButtonClickSound()
+                            patch({ fontSizeScale: opt.val })
+                          }}
+                        >
+                          {opt.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+
               {/* ── SUB-GROUP 2 DIVIDER: Audio & Feedback ── */}
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('appearance.audioAndFeedback') || 'AUDIO FEEDBACK'}</span>
@@ -2732,21 +2792,30 @@ export function Settings({
                     <div className="shelf-card-bottom">
                       <div className="setting-pills">
                         {[
-                          { label: t('appearance.small'), val: 0.85 },
-                          { label: t('appearance.normal'), val: 1.0 },
-                          { label: t('appearance.large'), val: 1.15 }
-                        ].map((opt) => (
-                          <button
-                            key={opt.label}
-                            className={`pill ${Math.abs((settings.fontSizeScale ?? 1.0) - opt.val) < 0.05 ? 'active' : ''}`}
-                            onClick={() => {
-                              playButtonClickSound()
-                              patch({ fontSizeScale: opt.val })
-                            }}
-                          >
-                            {opt.label}
-                          </button>
-                        ))}
+                          { label: t('appearance.small'), val: 0.94 },
+                          { label: t('appearance.normal'), val: 1.04 },
+                          { label: t('appearance.large'), val: 1.16 }
+                        ].map((opt) => {
+                          const currentScale = settings.fontSizeScale ?? 1.04
+                          const isActive =
+                            opt.val === 0.94
+                              ? currentScale <= 0.98
+                              : opt.val === 1.04
+                              ? currentScale > 0.98 && currentScale < 1.10
+                              : currentScale >= 1.10
+                          return (
+                            <button
+                              key={opt.label}
+                              className={`pill ${isActive ? 'active' : ''}`}
+                              onClick={() => {
+                                playButtonClickSound()
+                                patch({ fontSizeScale: opt.val })
+                              }}
+                            >
+                              {opt.label}
+                            </button>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>

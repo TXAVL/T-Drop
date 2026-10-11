@@ -50,6 +50,10 @@ export default function App() {
         const fonts = doc?.fonts
         if (fonts?.load) {
           void Promise.allSettled([
+            fonts.load('400 12px "Inter"'),
+            fonts.load('500 12px "Inter"'),
+            fonts.load('600 12px "Inter"'),
+            fonts.load('700 12px "Inter"'),
             fonts.load('400 12px "Plus Jakarta Sans"'),
             fonts.load('500 12px "Plus Jakarta Sans"'),
             fonts.load('600 12px "Plus Jakarta Sans"'),
@@ -322,7 +326,7 @@ export default function App() {
   // Apply theme whenever settings change.
   useEffect(() => {
     applyReduceMotion(settings.reduceMotion)
-    const scale = settings.fontSizeScale ?? 1.0
+    const scale = settings.fontSizeScale ?? 1.04
     document.documentElement.style.setProperty('--font-scale', String(scale))
   }, [settings.reduceMotion, settings.fontSizeScale])
 

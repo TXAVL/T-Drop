@@ -44,8 +44,8 @@
   --dur-fast: 140ms;
   --dur-base: 240ms;
 
-  /* Typography — bundled OFL faces, not system fallbacks. */
-  --font-ui: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  /* Typography — bundled OFL faces, optimized for crisp Vietnamese glyphs */
+  --font-ui: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Cascadia Mono', ui-monospace, monospace;
 
   /* Typography scale */
