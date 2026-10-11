@@ -17,6 +17,7 @@ import { ItemList } from './ItemList'
 import { EmojiPicker } from './EmojiPicker'
 import { Settings } from './Settings'
 import { ToastStack } from './Toast'
+import { RestoreModal } from './RestoreModal'
 import { ClearMenu } from './ClearMenu'
 import { PreviewFlyout } from './PreviewFlyout'
 import { IndicatorStyleFlyout } from './IndicatorStyleFlyout'
@@ -461,6 +462,7 @@ export function Panel() {
           />
 
           <ToastStack />
+          <RestoreModal />
           {!isHorizontal && !emojiOpen && !settingsOpen && <ShelfSearch />}
           <div style={{ flex: 1, display: 'grid', gridTemplate: '1fr / 1fr', overflow: 'hidden', position: 'relative' }}>
             {/* Main clipboard / emoji view (persistent so ItemList is never torn down and doesn't jump on Y-axis) */}

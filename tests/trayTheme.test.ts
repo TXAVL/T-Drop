@@ -22,8 +22,8 @@ vi.mock('electron', () => {
   }
   return {
     app: {
-      getAppPath: vi.fn().mockReturnValue(process.cwd()),
-      getPreferredSystemLanguages: vi.fn().mockReturnValue(['en-US'])
+      getAppPath: () => process.cwd(),
+      getPreferredSystemLanguages: () => ['en-US']
     },
     nativeTheme: {
       get shouldUseDarkColors() {
@@ -63,7 +63,7 @@ import { nativeTheme } from 'electron'
 
 describe('Tray Icon Theme Adaptation (Issue #64)', () => {
   beforeEach(() => {
-    vi.restoreAllMocks()
+    vi.clearAllMocks()
   })
 
   it('defines both PATHS.trayIcon and PATHS.trayDarkIcon', () => {

@@ -58,7 +58,7 @@ describe('Windows Snipping Tool & Clipboard Image Detection (#41)', () => {
 
     ;(clipboard as any).__setMockState({
       formats: ['CF_DIBV5', 'CF_BITMAP', 'CF_UNICODETEXT'],
-      text: 'Visual Studio Code - Edge-Drop',
+      text: 'Visual Studio Code - T-Drop',
       html: '',
       image: mockImage
     })

@@ -648,7 +648,7 @@ export function useEdgeHover(): void {
     // ── window blur (Alt+Tab / OS focus stolen) ────────────────────────────
     // When the user presses Alt+Tab or any other mechanism gives focus to
     // another OS window, the Electron renderer fires a native `blur` event on
-    // the global `window` object. Because the Edge-Drop window is `focusable:
+    // the global `window` object. Because the T-Drop window is `focusable:
     // false`, the cursor-poll path never learns that the app lost OS focus —
     // the cursor position it last saw was still "inside the blade", so
     // isInsideBlade() keeps returning true and the panel is stuck open.

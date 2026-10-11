@@ -46,7 +46,7 @@ describe('WorkAreaCache — versioned stick-display cache', () => {
 
   it('retains LAST-KNOWN-GOOD rectangle when enumeration throws', () => {
     let shouldThrow = false
-    const cache = new WorkAreaCache((id) => {
+    const cache = new WorkAreaCache((_id) => {
       if (shouldThrow) throw new Error('display topology exploded')
       return { displayId: 7, workArea: wa(100) }
     })

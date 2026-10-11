@@ -510,7 +510,7 @@ export class ItemStore {
       if (targetPaths.length === 1) {
         const p = targetPaths[0]
         const pLower = p.toLowerCase()
-        const isFromManagedDir = pLower.includes('images') || pLower.includes('temp') || pLower.includes('edge-drop')
+        const isFromManagedDir = pLower.includes('images') || pLower.includes('temp') || pLower.includes('t-drop') || pLower.includes('edge-drop')
         if (isImageExt(p) && isFromManagedDir) {
           const imgName = pathBasename(p)
           let imageId = imgName.split('.')[0]

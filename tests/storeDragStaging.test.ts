@@ -77,10 +77,10 @@ describe('stageDragFile uses the correct staging root per build', () => {
     expect(staged!.file).toContain('Screenshot 2026-08-15 22.30.45.png')
     expect(existsSync(staged!.file)).toBe(true)
     expect(readFileSync(staged!.file, 'utf8')).toBe('png-img_exe')
-    expect(existsSync(join(fsRoots.home, 'AppData', 'Local', 'Temp', 'Edge-Drop'))).toBe(false)
+    expect(existsSync(join(fsRoots.home, 'AppData', 'Local', 'Temp', 'T-Drop'))).toBe(false)
   })
 
-  it('store image: copies into the real user Local\\Temp\\Edge-Drop folder', () => {
+  it('store image: copies into the real user Local\\Temp\\T-Drop folder', () => {
     process.env.APP_BUILD_TARGET = 'store'
     writeImage('img_store')
     const staged = stageDragFile({
@@ -91,7 +91,7 @@ describe('stageDragFile uses the correct staging root per build', () => {
       bytes: 8,
       ext: 'png'
     }, stamp)
-    const interop = join(fsRoots.home, 'AppData', 'Local', 'Temp', 'Edge-Drop')
+    const interop = join(fsRoots.home, 'AppData', 'Local', 'Temp', 'T-Drop')
     expect(staged).not.toBeNull()
     expect(staged!.file.startsWith(interop)).toBe(true)
     expect(staged!.file.startsWith(join(fsRoots.userData, 'temp'))).toBe(false)
@@ -117,7 +117,7 @@ describe('stageDragFile uses the correct staging root per build', () => {
     expect(staged).not.toBeNull()
     expect(staged!.files).toHaveLength(2)
     expect(staged!.files![0]).not.toBe(pkgImg)
-    expect(staged!.files![0]).toContain(join('AppData', 'Local', 'Temp', 'Edge-Drop'))
+    expect(staged!.files![0]).toContain(join('AppData', 'Local', 'Temp', 'T-Drop'))
     expect(staged!.files![1]).toBe(doc)
     expect(readFileSync(staged!.files![0], 'utf8')).toBe('png-inside')
   })
@@ -127,7 +127,7 @@ describe('stageDragFile uses the correct staging root per build', () => {
     const data: ItemData = { kind: 'text', text: 'hello store drag', isUrl: false }
     const staged = stageDragFile(data)
     expect(staged).not.toBeNull()
-    expect(staged!.file).toContain(join('AppData', 'Local', 'Temp', 'Edge-Drop'))
+    expect(staged!.file).toContain(join('AppData', 'Local', 'Temp', 'T-Drop'))
     expect(readFileSync(staged!.file, 'utf8')).toBe('hello store drag')
   })
 

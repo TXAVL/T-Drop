@@ -1,8 +1,10 @@
 <p align="center">
-  <img src=".github/readme/Logo.gif" alt="Edge-Drop Logo" width="220" style="max-width: 100%; height: auto;" />
+  <img src=".github/readme/Logo.gif" alt="T-Drop Logo" width="220" style="max-width: 100%; height: auto;" />
 </p>
 
-<h1 align="center">Edge-Drop</h1>
+<h1 align="center">T-Drop</h1>
+
+<p align="center"><em>(Forked from <a href="https://github.com/TXAVLOG/T-Drop">T-Drop</a>)</em></p>
 
 <p align="center">
   <strong>Zero-click, hover-activated clipboard shelf and desktop file-transfer hub with native OS integration.</strong><br/>
@@ -26,28 +28,28 @@
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="160" alt="Get it from Microsoft Store" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/Deepender25/Edge-Drop/releases/latest" target="_blank">
+  <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
     <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="48" alt="Download .exe Installer" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Deepender25/Edge-Drop/releases"><img alt="Release" src="https://img.shields.io/github/v/release/Deepender25/Edge-Drop?style=flat-square&labelColor=23272e&color=d2f4e8" /></a>
-  <a href="https://github.com/Deepender25/Edge-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Deepender25/Edge-Drop?style=flat-square&labelColor=23272e&color=f6c7d6" /></a>
-  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/Deepender25/Edge-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
+  <a href="https://github.com/TXAVLOG/T-Drop/releases"><img alt="Release" src="https://img.shields.io/github/v/release/TXAVLOG/T-Drop?style=flat-square&labelColor=23272e&color=d2f4e8" /></a>
+  <a href="https://github.com/TXAVLOG/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVLOG/T-Drop?style=flat-square&labelColor=23272e&color=f6c7d6" /></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/TXAVLOG/T-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-93a4fc?style=flat-square&logo=windows&logoColor=white&labelColor=23272e" alt="Platform" />
 </p>
 
 ---
 
 > [!IMPORTANT]
-> Edge-Drop is an independent open-source project. It is not affiliated with, endorsed by, sponsored by, or connected to Microsoft or the Microsoft Edge browser in any way.
+> T-Drop is an independent open-source project. It is not affiliated with, endorsed by, sponsored by, or connected to Microsoft or the Microsoft Edge browser in any way.
 
 ## Why
 
 Every clipboard manager on the market breaks your flow. You copy something, switch apps, paste, then hunt through `Win+V` history with arrow keys or dig into a tray menu. Multi-step. Modal. Slow.
 
-**Edge-Drop removes the friction.** It anchors to the screen edge of your monitor as a transparent, always-on-top, click-through surface. When your cursor approaches the edge, the shelf springs open. Drag images, file stacks, rich text, and HTML bundles *out* of it — directly into whatever desktop app you're already using. No shortcuts. No window switching. No modal dialogs.
+**T-Drop removes the friction.** It anchors to the screen edge of your monitor as a transparent, always-on-top, click-through surface. When your cursor approaches the edge, the shelf springs open. Drag images, file stacks, rich text, and HTML bundles *out* of it — directly into whatever desktop app you're already using. No shortcuts. No window switching. No modal dialogs.
 
 It is built for the developer and creative workflow where you constantly juggle screenshots, code snippets, file paths, design assets, and reference links between many windows at once.
 
@@ -57,14 +59,14 @@ It is built for the developer and creative workflow where you constantly juggle 
 
 > All demos are fast-loading, silent autoplay loops.
 
-<h3 align="center">Full Overview: Welcome to Edge-Drop</h3>
+<h3 align="center">Full Overview: Welcome to T-Drop</h3>
 
 <p align="center">
   <em>Zero-click edge-hover activation, fluid spring physics, and seamless drag-and-drop into any desktop app.</em>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/open.gif" alt="Full Overview: Welcome to Edge-Drop" width="85%" />
+  <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/open.gif" alt="Full Overview: Welcome to T-Drop" width="85%" />
 </p>
 
 <br/>
@@ -74,36 +76,36 @@ It is built for the developer and creative workflow where you constantly juggle 
     <td width="50%" align="center">
       <b>1. Collect Anything</b><br/>
       <sub>Captures text, high-res images, files, and links in real time.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/browser-demo.gif" width="100%" alt="Collect Anything" />
+      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/browser-demo.gif" width="100%" alt="Collect Anything" />
     </td>
     <td width="50%" align="center">
       <b>2. Drag & Drop Anywhere</b><br/>
       <sub>Drag items directly into any app or workspace.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/paste.gif" width="100%" alt="Drag & Drop Anywhere" />
+      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/paste.gif" width="100%" alt="Drag & Drop Anywhere" />
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
       <b>3. Copy Multiple Files</b><br/>
       <sub>Select several files at once and drop them wherever you need.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/file-stacks-demo.gif" width="100%" alt="Copy Multiple Files" />
+      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/file-stacks-demo.gif" width="100%" alt="Copy Multiple Files" />
     </td>
     <td width="50%" align="center">
       <b>4. Ungroup & Split Stacks</b><br/>
       <sub>Break file packages into individual standalone clipboard cards.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/ungroup.gif" width="100%" alt="Ungroup & Split Stacks" />
+      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/ungroup.gif" width="100%" alt="Ungroup & Split Stacks" />
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
       <b>5. Combine & Merge Items</b><br/>
       <sub>Select and merge multiple clipboard items into a single stack.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/stack.gif" width="100%" alt="Combine & Merge Items" />
+      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/stack.gif" width="100%" alt="Combine & Merge Items" />
     </td>
     <td width="50%" align="center">
       <b>6. Quick Preview Flyout</b><br/>
       <sub>Inspect high-res images, formatted text, and code with zoom.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/Edge-Drop/main/.github/readme/preview.gif" width="100%" alt="Quick Preview Flyout" />
+      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/preview.gif" width="100%" alt="Quick Preview Flyout" />
     </td>
   </tr>
 </table>
@@ -113,60 +115,48 @@ It is built for the developer and creative workflow where you constantly juggle 
 ## Support & Sponsor
 
 <p align="center">
-  <strong>Edge-Drop is 100% free and open-source forever.</strong><br/>
-  If Edge-Drop speeds up your daily workflow, consider supporting ongoing development!
+  <strong>T-Drop is 100% free and open-source forever.</strong><br/>
+  If T-Drop speeds up your daily workflow, consider supporting ongoing development!
 </p>
 
 <table align="center" border="0" style="border-collapse: collapse; border: none;">
   <tr>
     <th align="center" width="50%" style="border: none; padding: 10px 15px 5px;">
-      <h3>🌍 International (Ko-fi)</h3>
-    </th>
-    <th align="center" width="50%" style="border: none; padding: 10px 15px 5px;">
-      <h3>🇮🇳 India (UPI)</h3>
+<table align="center" style="border: none; border-collapse: collapse;">
+  <tr>
+    <th align="center" style="border: none; padding: 10px 15px 5px;">
+      <h3>💳 Ủng hộ qua Ngân hàng Quân Đội (MB Bank)</h3>
     </th>
   </tr>
   <tr>
     <td align="center" style="border: none; padding: 5px 15px 15px; vertical-align: middle;">
-      <a href="https://ko-fi.com/deepender" target="_blank">
-        <img src=".github/readme/kofi-qr.png" alt="Scan or Click for Ko-fi Support" width="160" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 5px 15px 15px; vertical-align: middle;">
-      <a href="https://www.edgedrop.app/supportedgedrop/upi" target="_blank">
-        <img src=".github/readme/upi-sponsor-qr.png" alt="Scan or Click for UPI Donation Page" width="160" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
-      </a>
+      <img src=".github/readme/donate-qr.png" alt="Quét mã VietQR MB Bank" width="220" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
     </td>
   </tr>
   <tr>
     <td align="center" style="border: none; padding: 0 15px 15px; vertical-align: middle;">
-      <a href="https://ko-fi.com/deepender" target="_blank">
-        <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Buy Me a Coffee on Ko-fi" height="36" />
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 0 15px 15px; vertical-align: middle;">
-      <a href="https://www.edgedrop.app/supportedgedrop/upi" target="_blank">
-        <img src="https://img.shields.io/badge/Donate%20via-UPI-128856?style=for-the-badge&logo=googlepay&logoColor=white" alt="Donate via UPI" height="36" />
-      </a>
+      <p><b>Ngân hàng:</b> MB Bank (Ngân hàng Quân Đội)</p>
+      <p><b>Số tài khoản:</b> <code>2211231106</code></p>
+      <p><b>Chủ tài khoản:</b> <code>TANG XUAN ANH</code></p>
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center" style="border: none; padding: 5px 15px 10px;">
-      <sub><i>* Note: Scanning or clicking the UPI card opens the <a href="https://www.edgedrop.app/supportedgedrop/upi" target="_blank">UPI Donation Page</a> (GPay, PhonePe, Paytm, or any UPI app).</i></sub>
+    <td align="center" style="border: none; padding: 5px 15px 10px;">
+      <sub><i>* Hỗ trợ chuyển khoản nhanh 24/7 qua Napas 247 / VietQR từ mọi ứng dụng ngân hàng.</i></sub>
     </td>
   </tr>
 </table>
 
 ### Project Sponsors & Featured Products
 
-A huge thank you to the incredible sponsors and products actively sponsoring Edge-Drop!
+A huge thank you to the incredible sponsors and products actively sponsoring T-Drop!
 
 | Sponsor / Product | Links | Description |
 | :--- | :--- | :--- |
 | <a href="https://elitistreview.com/" target="_blank"><img src="https://unavatar.io/x/Elitistreview" width="32" height="32" style="border-radius: 50%; vertical-align: middle;" alt="Elitistreview" /></a> &nbsp; **[Elitistreview](https://elitistreview.com/)** | [Website](https://elitistreview.com/) &nbsp;·&nbsp; [X](https://x.com/Elitistreview) &nbsp;·&nbsp; [Bluesky](https://bsky.app/profile/elitistreview.com) | *When it comes to wine, there is an objective reality out there, and it is on Elitistreview.com.* |
 
 <p align="center">
-  <sub>💡 <em>Want your product, startup, or website featured here and seen by developers? <a href="https://ko-fi.com/deepender" target="_blank">Sponsor Edge-Drop on Ko-fi</a> or <a href="https://www.edgedrop.app/supportedgedrop/upi" target="_blank">UPI</a> and share your link!</em></sub>
+  <sub>💡 <em>Muốn đưa sản phẩm, dự án hoặc website của bạn lên đây? Liên hệ hoặc <a href="#-support--sponsor-t-drop">Ủng hộ qua MB Bank</a> và gửi thông tin nhé!</em></sub>
 </p>
 
 ---
@@ -193,7 +183,7 @@ A huge thank you to the incredible sponsors and products actively sponsoring Edg
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px 25px 12px; vertical-align: middle;">
-      <a href="https://github.com/Deepender25/Edge-Drop/releases/latest" target="_blank">
+      <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
         <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="52" alt="Download .exe Installer" style="border-radius: 8px;" />
       </a>
     </td>
@@ -218,8 +208,8 @@ A huge thank you to the incredible sponsors and products actively sponsoring Edg
 
 ### Run from source
 ```bash
-git clone https://github.com/Deepender25/Edge-Drop.git
-cd Edge-Drop
+git clone https://github.com/TXAVLOG/T-Drop.git
+cd T-Drop
 npm install
 npm run dev          # launches Electron + Vite HMR
 ```
@@ -236,7 +226,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 ```
 
 > [!NOTE]
-> On Windows, if packaging fails with `EBUSY: resource busy or locked`, close any running Edge-Drop instances first: `taskkill /F /IM electron.exe /T`.
+> On Windows, if packaging fails with `EBUSY: resource busy or locked`, close any running T-Drop instances first: `taskkill /F /IM electron.exe /T`.
 
 ---
 
@@ -252,9 +242,9 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 - **Multi-monitor support:** Pick exactly which display the panel sticks to, with options for Left or Right screen edges. Features a single source of truth multi-display engine (`getDisplayListOptions()`) with real-time physical resolution calculation (3840×2160, 2560×1440, 1920×1080) across all High-DPI Windows display scaling factors.
 - **Rest-as-Intent Seam Policy (Multi-Monitor):** Intelligent 140ms dwell threshold for interior monitor boundaries. Moving your cursor between displays passes through smoothly without accidental shelf triggers, while stopping deliberately at the edge opens the shelf instantly.
 - **Versioned Screen Geometry & Probe:** Replaced asynchronous display queries with a pure geometric screen probe (`stickProbe.ts`) backed by versioned display-change caching, eliminating boundary seam jitter across mixed-DPI monitor arrays.
-- **Cross-Reboot Display Persistence:** Edge-Drop remembers your chosen monitor across device restarts. A 4-tier resolution pipeline silently re-identifies the correct physical monitor after Windows re-assigns numeric display IDs on reboot.
+- **Cross-Reboot Display Persistence:** T-Drop remembers your chosen monitor across device restarts. A 4-tier resolution pipeline silently re-identifies the correct physical monitor after Windows re-assigns numeric display IDs on reboot.
 - **Top screen edge dock:** Besides the left and right edges, the shelf can now live horizontally along the top of your screen (up to 1080px wide), with its own trigger zone, flares, preview flyout, and settings layouts.
-- **Smart Windows Fullscreen Game Detection:** Native Win32 `SHQueryUserNotificationState` OS detection (`fullscreen.ts`) combined with `GetForegroundWindow` + `GetClassNameA` filtering (`Progman`, `WorkerW`, `Shell_TrayWnd`) automatically suppresses edge hover during Direct3D games (*VALORANT*, *Cyberpunk*, *PowerPoint*) while allowing Edge-Drop to open smoothly on the Windows Home Screen / Desktop.
+- **Smart Windows Fullscreen Game Detection:** Native Win32 `SHQueryUserNotificationState` OS detection (`fullscreen.ts`) combined with `GetForegroundWindow` + `GetClassNameA` filtering (`Progman`, `WorkerW`, `Shell_TrayWnd`) automatically suppresses edge hover during Direct3D games (*VALORANT*, *Cyberpunk*, *PowerPoint*) while allowing T-Drop to open smoothly on the Windows Home Screen / Desktop.
 - **Self-Healing Launch at Login (Quoted Paths):** Automatic Windows Registry synchronization (`HKCU\Software\Microsoft\Windows\CurrentVersion\Run`) strictly quotes executable paths, guaranteeing that usernames or installation paths with spaces launch cleanly on startup. Includes automatic migration and healing for unquoted keys across updates.
 - **RAM Footprint Stabilization (~130 MB):** Large text entries (>300 chars) are stored as disk payload files (`payloads/<id>.txt`), holding only 300-char preview snippets in memory. Locks operational RAM to ~130 MB–160 MB with a V8 ceiling cap of 512 MB.
 - **High-Performance Image Thumbnailing Protocol (`edgelocal://thumb/`):** Custom Electron protocol streams 240px thumbnails for history cards instead of loading multi-megapixel raw image files into memory, preventing GPU memory bloat.
@@ -328,9 +318,9 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 - **Return-to-Shelf Integrity (Self-Drop Protection):** Returning dragged items back onto the shelf is a clean no-op. The capturing preload drop filter prevents accidental re-ingestion, card duplication, usage count increments, or card splitting.
 - **Click vs. Drag Gesture Discrimination:** A small pointer-movement guard prevents mouse drags across text and link cards from triggering accidental click-to-paste actions, while preserving instant single-click copy/paste.
 - **External Usage Accounting:** Item usage counts (`hitCount`) and move-to-top reordering are strictly gated to drops that land in external applications (e.g. Word, Photoshop, Discord, Explorer).
-- **Original Filename Preservation:** Images and files captured or dropped into Edge-Drop preserve their original source filenames across clipboard transfers, drag operations, and disk exports.
+- **Original Filename Preservation:** Images and files captured or dropped into T-Drop preserve their original source filenames across clipboard transfers, drag operations, and disk exports.
 - **Dynamic Z-Band Demotion:** Temporarily demotes window Z-band during active drags (`setAlwaysOnTop(true, 'normal')`) to ensure smooth drag-out into all Windows desktop software.
-- **Universal Drag-in Vault:** Drag text, web images, links, and local files directly into the Edge-Drop shelf.
+- **Universal Drag-in Vault:** Drag text, web images, links, and local files directly into the T-Drop shelf.
 
 **Fluid collections & stacks**
 - **Stack Fan Tiles:** Collapsed file bundles feature wide presentation cards with folder-silhouette masks and category-specific pastel vector badges.
@@ -373,7 +363,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 - **Refined Obsidian Aesthetics & Multi-Layer Depth**: Dual-layer 3D glass hairline highlights (`inset 0 1px 0 rgba(255, 255, 255, 0.12)`) and dual typography hierarchy (monospaced *JetBrains Mono* metadata + *Inter/SF Pro* system title font stack).
 - **Windows Light Theme Adaptive System Tray:** Dynamically detects Windows taskbar theme changes and automatically swaps between pure-white and high-contrast dark vector tray icons.
 - **Dynamic Preview Flyout**: Responsive layout for single files and multi-file collections with calibrated hover boundary tracking.
-- **Customizable Copy Indicator Styles**: Select from 4 vector copy indicators (**Edge-Drop Logo**, **Tick**, **Copy**, and **Sparkle**) in a 2x2 grid flyout selector.
+- **Customizable Copy Indicator Styles**: Select from 4 vector copy indicators (**T-Drop Logo**, **Tick**, **Copy**, and **Sparkle**) in a 2x2 grid flyout selector.
 - **Universal Click-to-Paste**: Click any text snippet, image thumbnail, or file tile inside Preview Flyout to instantly paste into active desktop applications.
 - Minimalist macOS aesthetic — deep black obsidian surface, hairline borders, and adaptive spring physics (`useAdaptiveSpring`).
 
@@ -382,7 +372,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 ## Codebase & Architecture
 
 ### Process Isolation & IPC Contract
-Edge-Drop is organized into three strictly isolated layers:
+T-Drop is organized into three strictly isolated layers:
 
 1. **Main Process (`electron/main/`)**: Node.js runtime handling OS integrations, Win32 OLE drag pipelines, Windows DPAPI encryption (`safeStorage`), native `ClipboardWatcher` polling, and background auto-updates (`updater.ts`).
 2. **Preload Sandbox (`electron/preload/`)**: Context-isolated bridge (`contextBridge.exposeInMainWorld('edge', api)`). Consumes single-source-of-truth contracts in `shared/ipc.ts` (`InvokeMap`, `EventMap`, `SendMap`) and `shared/bridge.ts` (`EdgeApi`).
@@ -400,7 +390,7 @@ Edge-Drop is organized into three strictly isolated layers:
 
 ## Security
 
-Edge-Drop touches the OS clipboard, the filesystem, and the Win32 OLE drag pipeline — so the security posture is intentional, not optional.
+T-Drop touches the OS clipboard, the filesystem, and the Win32 OLE drag pipeline — so the security posture is intentional, not optional.
 
 | Control | Implementation |
 |---|---|
@@ -408,7 +398,7 @@ Edge-Drop touches the OS clipboard, the filesystem, and the Win32 OLE drag pipel
 | Encrypted Storage | **Windows DPAPI `safeStorage`** — Plaintext history (`items.json`) encrypted at rest with user-session DPAPI keys & zero-data-loss auto-migration (`.bak` backups) |
 | Process Isolation | `contextIsolation: true` · `nodeIntegration: false` · `sandbox: true` on all browser windows |
 | PowerShell Hardening | Absolute executable path `${SystemRoot}\System32\WindowsPowerShell\v1.0\powershell.exe`, non-blocking `execFile`, strict path validation (`pathValidation.ts`), and queue deadlock protection |
-| Protocol Confinement | `edgelocal://` canonical path resolution (`path.resolve()`) strictly confined within `%APPDATA%/Edge-Drop/images/` and SHA-256 ETag revalidation |
+| Protocol Confinement | `edgelocal://` canonical path resolution (`path.resolve()`) strictly confined within `%APPDATA%/T-Drop/images/` and SHA-256 ETag revalidation |
 | Detector Teardown | Static `resources/detector.html` (zero `data:` URL inline scripts) with explicit `closed` lifecycle memory dereferencing |
 | Typed IPC | `shared/ipc.ts` defines `InvokeMap`, `EventMap`, `SendMap` — channel names and payload types are statically checked on both sides |
 | Privacy-Aware Clipboard | Honors `ExcludeClipboardContentFromMonitorProcessing`, `ClipboardViewerIgnore`, `CanIncludeInClipboardHistory`, `CanUploadToCloudClipboard`, plus 1Password / Bitwarden / KeePass concealed formats |
@@ -436,7 +426,7 @@ Edge-Drop touches the OS clipboard, the filesystem, and the Win32 OLE drag pipel
 ## Project Structure
 
 ```
-Edge-Drop/
+T-Drop/
 ├─ shared/                 Typed IPC contracts & domain models
 │  ├─ types.ts             ClipboardItem, Bundle, Settings, DragRequest DTOs
 │  ├─ bridge.ts            EdgeApi preload interface
@@ -472,7 +462,7 @@ Edge-Drop/
 
 ## Roadmap
 
-Edge-Drop is in **public beta**. The following are planned, in rough priority order:
+T-Drop is in **public beta**. The following are planned, in rough priority order:
 
 - [ ] **AI semantic self-organization** — embed text/URL/HTML items, auto-cluster into named groups, replace manual pinning
 - [ ] **AI summarization** — condense multi-file bundles and long HTML copies into one-line summaries + tags
@@ -496,11 +486,11 @@ Edge-Drop is in **public beta**. The following are planned, in rough priority or
 
 ## Contributing
 
-Edge-Drop is Apache-2.0 licensed and open to contributions. As a solo-maintained project in active beta, the best ways to help right now are:
+T-Drop is Apache-2.0 licensed and open to contributions. As a solo-maintained project in active beta, the best ways to help right now are:
 
 1. **File issues** for bugs, crashes, or privacy-edge-cases you hit (especially around clipboard format detection on different apps)
-2. **macOS porting** — Currently Edge-Drop only supports Windows; contributions for a macOS port are welcome
-3. **Suggest format readers** — if you copy from an app whose content Edge-Drop mis-categorizes, open an issue with the available formats list (`clipboard.availableFormats()` output)
+2. **macOS porting** — Currently T-Drop only supports Windows; contributions for a macOS port are welcome
+3. **Suggest format readers** — if you copy from an app whose content T-Drop mis-categorizes, open an issue with the available formats list (`clipboard.availableFormats()` output)
 4. **Pick up a roadmap item** — open an issue first to discuss scope, then send a PR against a feature branch
 
 All contributors are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
@@ -523,5 +513,5 @@ Apache License 2.0 — see [LICENSE](LICENSE). Commercial and non-commercial use
 ---
 
 <p align="center">
-  <sub>Support Edge-Drop on <a href="https://ko-fi.com/deepender" target="_blank">Ko-fi ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/Deepender25/Edge-Drop" target="_blank">GitHub ⭐</a></sub>
+  <sub>Ủng hộ tác giả qua <a href="#-support--sponsor-t-drop">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVLOG/T-Drop" target="_blank">GitHub ⭐</a></sub>
 </p>

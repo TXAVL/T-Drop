@@ -1,7 +1,9 @@
 /** Local, renderer-only emoji picker preferences. Not part of Settings IPC. */
 
-const RECENTS_KEY = 'edge-drop.emoji.recents'
-const TONE_KEY = 'edge-drop.emoji.skinTone'
+const RECENTS_KEY = 't-drop.emoji.recents'
+const RECENTS_KEY_LEGACY = 'edge-drop.emoji.recents'
+const TONE_KEY = 't-drop.emoji.skinTone'
+const TONE_KEY_LEGACY = 'edge-drop.emoji.skinTone'
 
 interface MinimalStorage {
   getItem(key: string): string | null
@@ -18,7 +20,8 @@ function storage(): MinimalStorage | null {
 }
 
 export function loadRecents(): string[] {
-  const raw = storage()?.getItem(RECENTS_KEY)
+  const store = storage()
+  const raw = store?.getItem(RECENTS_KEY) || store?.getItem(RECENTS_KEY_LEGACY)
   if (!raw) return []
   try {
     const parsed = JSON.parse(raw) as unknown
@@ -38,7 +41,8 @@ export function saveRecents(unifieds: readonly string[]): void {
 }
 
 export function loadSkinToneId(): number {
-  const raw = storage()?.getItem(TONE_KEY)
+  const store = storage()
+  const raw = store?.getItem(TONE_KEY) ?? store?.getItem(TONE_KEY_LEGACY)
   const n = raw == null ? 0 : Number(raw)
   return Number.isInteger(n) && n >= 0 && n <= 5 ? n : 0
 }

@@ -114,9 +114,9 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
     try {
       const request = net.request({
         method: 'GET',
-        url: 'https://api.github.com/repos/Deepender25/Edge-Drop/releases/latest'
+        url: 'https://api.github.com/repos/TXAVLOG/T-Drop/releases/latest'
       })
-      request.setHeader('User-Agent', 'Edge-Drop-App')
+      request.setHeader('User-Agent', 'T-Drop-App')
       request.setHeader('Accept', 'application/vnd.github.v3+json')
 
       const timer = setTimeout(() => {
@@ -209,7 +209,16 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
       }
       return { status: 'up-to-date', version: app.getVersion() }
     } catch (err: any) {
-      return { status: 'error', error: typeof err === 'string' ? err : err?.message || 'Failed to check for updates' }
+      const msg = typeof err === 'string' ? err : err?.message || ''
+      if (
+        msg.includes('No published versions on GitHub') ||
+        msg.includes('404') ||
+        msg.includes('HttpError: 404')
+      ) {
+        console.log('[AutoUpdater] No published releases on GitHub yet. Current version is up-to-date.')
+        return { status: 'up-to-date', version: app.getVersion() }
+      }
+      return { status: 'error', error: msg || 'Failed to check for updates' }
     }
   }
 
@@ -319,8 +328,12 @@ export function initAutoUpdater(): void {
     })
 
     autoUpdater.on('error', (err: Error | string) => {
-      const msg = typeof err === 'string' ? err : err?.message
-      console.warn('[AutoUpdater] Update check error:', msg)
+      const msg = typeof err === 'string' ? err : err?.message || ''
+      if (msg.includes('No published versions on GitHub') || msg.includes('404')) {
+        console.log('[AutoUpdater] No published releases on GitHub yet.')
+      } else {
+        console.warn('[AutoUpdater] Update check error:', msg)
+      }
     })
 
     // Background check runs in 'auto' and 'notify' modes; only 'off' stays
@@ -332,8 +345,12 @@ export function initAutoUpdater(): void {
       }
       setTimeout(() => {
         autoUpdater.checkForUpdates().catch((err: Error | string) => {
-          const msg = typeof err === 'string' ? err : err?.message
-          console.warn('[AutoUpdater] checkForUpdates failed:', msg)
+          const msg = typeof err === 'string' ? err : err?.message || ''
+          if (msg.includes('No published versions on GitHub') || msg.includes('404')) {
+            console.log('[AutoUpdater] No published releases on GitHub yet.')
+          } else {
+            console.warn('[AutoUpdater] checkForUpdates failed:', msg)
+          }
         })
       }, 3000)
     } else {

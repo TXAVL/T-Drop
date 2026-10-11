@@ -213,9 +213,7 @@ export class ClipboardWatcher {
         // Incomplete file list: retry is already scheduled. Only restart if
         // a newer copy landed after that read.
         if (seqNow !== this.lastSeq) this.pollTick()
-        return
-      }
-      if (seqNow !== this.lastSeq) {
+      } else if (seqNow !== this.lastSeq) {
         this.pollTick()
       } else if (seqNow !== seqWhenSettled) {
         // Seq moved during our read. Explorer delay-renders of a file list
@@ -257,7 +255,7 @@ export class ClipboardWatcher {
    *    the change and re-capture it correctly.
    *
    * NOTE: The one edge case this does NOT solve is: user copies X, deletes X
-   * from Edge-Drop, then immediately copies X again WITHOUT copying anything
+   * from T-Drop, then immediately copies X again WITHOUT copying anything
    * else in between (system clipboard never changed). In that narrow case we
    * cannot detect the re-copy because the OS clipboard didn't change. This is
    * an acceptable limitation — the common-case fix (zombie prevention) is far

@@ -36,11 +36,11 @@ const masterEn = {
     autoUpdatesDescOff: 'Background update checks paused. Check for updates manually below',
     checkForUpdates: 'Check for updates',
     checkingForUpdates: 'Checking GitHub for updates...',
-    isUpToDate: '✓ Edge-Drop is up to date',
+    isUpToDate: '✓ T-Drop is up to date',
     checkAgain: 'Check again',
     tryAgain: 'Try again',
     updateCheckFailed: 'Update check failed',
-    updateAvailableTitle: 'Edge-Drop v{version} is available!',
+    updateAvailableTitle: 'T-Drop v{version} is available!',
     updateAvailableDesc: 'A newer version is ready on GitHub. Would you like to download and update now?',
     downloadAndUpdate: 'Download & Update',
     skip: 'Skip',
@@ -58,11 +58,11 @@ const masterEn = {
   },
   position: {
     edgePlacementTitle: 'Edge Placement',
-    edgePlacementDesc: 'Choose which screen edge Edge-Drop anchors to',
+    edgePlacementDesc: 'Choose which screen edge T-Drop anchors to',
     leftEdge: 'Left Edge',
     rightEdge: 'Right Edge',
     displayTitle: 'Display Screen',
-    displayDesc: 'Choose which monitor Edge-Drop attaches to',
+    displayDesc: 'Choose which monitor T-Drop attaches to',
     primaryDisplay: 'Primary Display',
     verticalPositionTitle: 'Vertical Position',
     verticalPositionDesc: 'Adjust vertical alignment along screen edge',
@@ -89,7 +89,7 @@ const masterEn = {
     indicatorStyleDesc: 'Choose visual shape style for edge copy indicator',
     typography: 'Typography',
     textSizeTitle: 'Text size',
-    textSizeDesc: 'Adjust UI typography scale across Edge-Drop',
+    textSizeDesc: 'Adjust UI typography scale across T-Drop',
     audioAndFeedback: 'Audio & Feedback',
     small: 'Small',
     normal: 'Normal',
@@ -158,10 +158,10 @@ const masterEn = {
     files: 'files'
   },
   onboarding: {
-    welcomeTitle: 'Welcome to Edge-Drop',
-    welcomeDesc: 'Edge-Drop lives hidden on the left edge of your screen. Simply move your mouse to the left edge to open the panel, and move away to hide it.',
+    welcomeTitle: 'Welcome to T-Drop',
+    welcomeDesc: 'T-Drop lives hidden on the left edge of your screen. Simply move your mouse to the left edge to open the panel, and move away to hide it.',
     collectTitle: 'Collect Anything',
-    collectDesc: 'Whenever you press Ctrl+C to copy text, images, or files, Edge-Drop automatically catches and saves them in the background.',
+    collectDesc: 'Whenever you press Ctrl+C to copy text, images, or files, T-Drop automatically catches and saves them in the background.',
     dragTitle: 'Drag & Drop Anywhere',
     dragDesc: 'Need to use an item? Just open the panel and drag the card directly into any application, folder, or document.',
     stacksTitle: 'Explore File Stacks',
@@ -173,7 +173,7 @@ const masterEn = {
     previewTitle: 'Preview Flyout',
     previewDesc: 'Click the preview button on any card to open a side flyout. Inspect high-resolution images, browse file collections, read long text snippets, or drag items directly from the preview.',
     configTitle: 'Configure Your Clipboard',
-    configDesc: 'Customize how Edge-Drop works for you.',
+    configDesc: 'Customize how T-Drop works for you.',
     skip: 'Skip',
     back: 'Back',
     next: 'Next',
@@ -195,8 +195,8 @@ const masterEn = {
     left: 'Left',
     right: 'Right',
     display: 'Display',
-    quit: 'Quit Edge-Drop',
-    welcomeTitle: 'Edge-Drop Clipboard Shelf',
+    quit: 'Quit T-Drop',
+    welcomeTitle: 'T-Drop Clipboard Shelf',
     welcomeBody: 'Hover against the middle-left screen edge, or press Alt+C to slide open your shelf.'
   },
   flyout: {
@@ -235,13 +235,13 @@ const masterEn = {
     feedbackDesc: 'Report a bug or suggest a feature on GitHub',
     submitFeedback: 'Submit Feedback ↗',
     applicationGroup: 'Application',
-    quitTitle: 'Quit Edge-Drop',
+    quitTitle: 'Quit T-Drop',
     quitDesc: 'Exit application and stop background process',
-    supportPromo: 'Edge-Drop is 100% free & open-source. If it helps your daily workflow, consider supporting development to make it even better!',
+    supportPromo: 'T-Drop is 100% free & open-source. If it helps your daily workflow, consider supporting development to make it even better!',
     supportOnKofi: 'Support via Ko-fi / UPI',
     starOnGithub: 'Star on GitHub',
     reviewOnStore: 'Review on Microsoft Store',
-    githubPromo: 'Enjoying Edge-Drop? Show your support by starring the project on GitHub!',
+    githubPromo: 'Enjoying T-Drop? Show your support by starring the project on GitHub!',
     version: 'Version'
   }
 };
@@ -404,12 +404,12 @@ const overrides = {
 };
 
 function getFullDict(langCode) {
-  const jsonPath = path.join(__dirname, '..', 'edge-drop-translations', `${langCode}.json`);
+  const jsonPath = path.join(__dirname, '..', 't-drop-translations', `${langCode}.json`);
   let jsonDict = {};
   if (fs.existsSync(jsonPath)) {
     try {
       jsonDict = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-    } catch (e) {}
+    } catch {}
   }
   const c = cache[langCode] || {};
   const ov = overrides[langCode] || {};
@@ -694,7 +694,7 @@ export const LANGUAGES: LanguageMeta[] = ${JSON.stringify(languagesList, null, 2
 
 `;
 
-for (const [code, varName] of Object.entries(langCodeToVar)) {
+for (const [, varName] of Object.entries(langCodeToVar)) {
   fileContent += `export const ${varName}: TranslationKeys = ${JSON.stringify(compiled[varName], null, 2)}\n\n`;
 }
 

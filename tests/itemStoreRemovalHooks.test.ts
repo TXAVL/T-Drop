@@ -185,7 +185,7 @@ describe('ItemStore image recovery (no silent low-res fallback)', () => {
     const p = join(fsRoots.userData, 'images', 'vanishing.png')
     writeFileSync(p, 'b')
     expect(store.resolveStoredImagePath('vanishing', 'png')).toBe(p)
-    existsSync(p) && rmSync(p)
+    if (existsSync(p)) rmSync(p)
     expect(store.resolveStoredImagePath('vanishing', 'png')).toBe(null)
   })
 })

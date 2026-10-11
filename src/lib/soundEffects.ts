@@ -1,5 +1,5 @@
 /**
- * Web Audio API Haptic Sound Synthesizer for Edge-Drop.
+ * Web Audio API Haptic Sound Synthesizer for T-Drop.
  * Provides zero-latency, tactile mechanical audio effects for sliders, toggles, and buttons.
  */
 

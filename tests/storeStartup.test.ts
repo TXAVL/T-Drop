@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { STORE_STARTUP_TASK_ID } from '../electron/main/config'
@@ -32,7 +32,7 @@ vi.mock('node:child_process', () => ({
 
 import { disable, enable, getStatus, parseStartupHelperState } from '../electron/main/storeStartup'
 
-const helperPath = join(__dirname, '..', 'resources', 'startup', 'EdgeDropStartup.exe')
+const helperPath = join(__dirname, '..', 'resources', 'startup', 'TDropStartup.exe')
 
 describe('Store StartupTask (getStatus / enable / disable)', () => {
   beforeEach(() => {

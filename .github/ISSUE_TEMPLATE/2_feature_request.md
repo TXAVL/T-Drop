@@ -1,6 +1,6 @@
 ---
 name: ✨ Request a Feature
-about: Suggest an idea or new feature for Edge-Drop
+about: Suggest an idea or new feature for T-Drop
 title: '[FEATURE]: '
 labels: 'enhancement'
 ---

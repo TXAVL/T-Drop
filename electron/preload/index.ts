@@ -215,8 +215,12 @@ const api = {
   focusWindow: (focusable?: boolean) => invoke('window:focus', focusable),
   setInternalDrag: (active: boolean) => { setInternalDragState(active) },
   broadcastTutorialStep: (step: number) => send('tutorial:set-step', step),
+  createBackup: (suggestedPath?: string) => invoke('backup:create', suggestedPath),
+  previewBackup: (filePath?: string) => invoke('backup:preview', filePath),
+  restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => invoke('backup:restore', filePath, mode),
 
   /* Main -> Renderer */
+  onBackupFileOpened: (cb: (info: EventArgs<'backup:file-opened'>[0]) => void) => on('backup:file-opened', cb),
   onItems: (cb: (items: EventArgs<'state:items'>[0]) => void) => on('state:items', cb),
   onSettings: (cb: (settings: EventArgs<'state:settings'>[0]) => void) => on('state:settings', cb),
   onToggle: (cb: (open?: boolean) => void) => on('window:toggle', cb),

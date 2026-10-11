@@ -9,7 +9,7 @@ describe('resolveStoredImage', () => {
   let imagesDir: string
 
   beforeEach(() => {
-    imagesDir = join(tmpdir(), `edge-drop-image-protocol-${process.pid}-${Date.now()}`)
+    imagesDir = join(tmpdir(), `t-drop-image-protocol-${process.pid}-${Date.now()}`)
     mkdirSync(imagesDir, { recursive: true })
   })
 

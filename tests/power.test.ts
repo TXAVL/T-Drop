@@ -4,7 +4,7 @@
  * These tests verify the logic of each power fix without requiring an
  * Electron runtime.  We test the pure computation functions directly.
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Helpers
@@ -57,13 +57,13 @@ describe('Fix 1 — adaptive poll rate constants', () => {
   })
 
   it('cursor within PROXIMITY triggers fast mode (right panel)', () => {
-    const { clientX, displayWidth, stickPosition } = makeTick(1850, 500, 1920, 'right')
+    const { clientX, displayWidth } = makeTick(1850, 500, 1920, 'right')
     const distFromEdge = displayWidth - clientX
     expect(distFromEdge).toBeLessThanOrEqual(FAST_POLL_PROXIMITY_PX)
   })
 
   it('cursor beyond PROXIMITY stays in slow mode (right panel)', () => {
-    const { clientX, displayWidth, stickPosition } = makeTick(1000, 500, 1920, 'right')
+    const { clientX, displayWidth } = makeTick(1000, 500, 1920, 'right')
     const distFromEdge = displayWidth - clientX
     expect(distFromEdge).toBeGreaterThan(FAST_POLL_PROXIMITY_PX)
   })

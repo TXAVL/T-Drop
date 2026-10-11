@@ -15,7 +15,7 @@
  * hovering ITS edge does nothing - but hovering the PRIMARY screen's edge
  * pops the panel open on the secondary."
  */
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { WorkAreaCache } from '../electron/main/workAreaCache'
 import { computeStickBounds } from '../electron/main/geometry'
 import { probeStickEdge, probeSeamAware, isNearProximity, FAST_POLL_PROXIMITY_PX, REST_FRAMES_REQUIRED, MAX_INTENT_SPEED_PX_PER_MS, type SeamTickState } from '../electron/main/stickProbe'

@@ -26,32 +26,38 @@ export const StartupTaskState = {
 
 export function resolveStartupHelperPath(): string | null {
   // Allow tests / enterprise layouts to override the helper location.
-  const override = process.env.EDGE_DROP_STARTUP_HELPER
+  const override = process.env.T_DROP_STARTUP_HELPER || process.env.EDGE_DROP_STARTUP_HELPER
   if (override && existsSync(override)) return override
   const candidates: string[] = []
   if (typeof process.resourcesPath === 'string' && process.resourcesPath) {
+    candidates.push(join(process.resourcesPath, 'startup', 'TDropStartup.exe'))
     candidates.push(join(process.resourcesPath, 'startup', 'EdgeDropStartup.exe'))
   }
   try {
     const appPath = app.getAppPath()
+    candidates.push(join(appPath, '..', 'startup', 'TDropStartup.exe'))
+    candidates.push(join(appPath, 'resources', 'startup', 'TDropStartup.exe'))
     candidates.push(join(appPath, '..', 'startup', 'EdgeDropStartup.exe'))
     candidates.push(join(appPath, 'resources', 'startup', 'EdgeDropStartup.exe'))
   } catch {
     /* tests / app not ready */
   }
-  // Packaged exe lives next to resources/: <install>/Edge-Drop.exe +
-  // <install>/resources/startup/EdgeDropStartup.exe (extraResources).
+  // Packaged exe lives next to resources/: <install>/T-Drop.exe +
+  // <install>/resources/startup/TDropStartup.exe (extraResources).
   try {
     const exePath = app.getPath('exe')
     if (exePath) {
       const { dirname } = require('node:path') as typeof import('node:path')
       const exeDir = dirname(exePath)
+      candidates.push(join(exeDir, 'resources', 'startup', 'TDropStartup.exe'))
+      candidates.push(join(exeDir, 'startup', 'TDropStartup.exe'))
       candidates.push(join(exeDir, 'resources', 'startup', 'EdgeDropStartup.exe'))
       candidates.push(join(exeDir, 'startup', 'EdgeDropStartup.exe'))
     }
   } catch {
     /* ignore */
   }
+  candidates.push(join(process.cwd(), 'resources', 'startup', 'TDropStartup.exe'))
   candidates.push(join(process.cwd(), 'resources', 'startup', 'EdgeDropStartup.exe'))
   return candidates.find((path) => path && existsSync(path)) ?? null
 }

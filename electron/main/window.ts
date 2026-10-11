@@ -181,7 +181,7 @@ export function isInteractive(): boolean {
  *
  * The shelf normally never takes OS focus, so paste (Ctrl+V to "whatever is
  * focused") just works. Typing in search REQUIRES focus, which moves the
- * foreground to Edge-Drop. To keep the user's flow (click item -> lands in
+ * foreground to T-Drop. To keep the user's flow (click item -> lands in
  * their app), the main process notes which window was in front at open time
  * and again at search-engage time (when WE cannot yet be foreground, so the
  * reading is guaranteed correct), and hands focus back — verified — before

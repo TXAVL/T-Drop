@@ -20,12 +20,15 @@ export { StartupTaskState }
 
 /** Historical + current Run-key names written by this app. */
 export const GITHUB_LOGIN_ITEM_NAMES = [
+  'T-Drop',
+  'com.tdrop.app',
+  'electron.app.T-Drop',
   'Edge-Drop',
   'com.edgedrop.app',
   'electron.app.Edge-Drop'
 ] as const
 
-export const CANONICAL_LOGIN_ITEM_NAME = 'Edge-Drop'
+export const CANONICAL_LOGIN_ITEM_NAME = 'T-Drop'
 
 export interface LaunchAtLoginResult {
   enabled: boolean

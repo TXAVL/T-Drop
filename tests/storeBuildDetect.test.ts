@@ -104,17 +104,17 @@ describe('isStoreBuild — every detection signal', () => {
   })
 
   it('is true when packaged package.json has buildTarget store', () => {
-    writePackagedJson({ buildTarget: 'store', name: 'edge-drop' })
+    writePackagedJson({ buildTarget: 'store', name: 't-drop' })
     expect(isStoreBuild()).toBe(true)
   })
 
   it('is false when packaged package.json has buildTarget github', () => {
-    writePackagedJson({ buildTarget: 'github', name: 'edge-drop' })
+    writePackagedJson({ buildTarget: 'github', name: 't-drop' })
     expect(isStoreBuild()).toBe(false)
   })
 
   it('is false when packaged package.json has no buildTarget', () => {
-    writePackagedJson({ name: 'edge-drop', version: '0.3.1' })
+    writePackagedJson({ name: 't-drop', version: '0.3.1' })
     expect(isStoreBuild()).toBe(false)
   })
 

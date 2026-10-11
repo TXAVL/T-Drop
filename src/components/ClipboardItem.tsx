@@ -1065,7 +1065,7 @@ function Preview({ item }: { item: ClipboardItemDto }) {
       const entry = item.data.entries?.[0]
       const rawName = entry?.name ?? basename(first)
       const displayName = formatImageDisplayName(first, item.capturedAt)
-      const isInternalHash = /^[a-z0-9]{6,12}-[a-z0-9]{6,12}\.[a-z0-9]+$/i.test(rawName) || first.includes('edge-drop/images') || first.includes('edge-drop\\images') || first.includes('edge-drop/temp') || first.includes('edge-drop\\temp')
+      const isInternalHash = /^[a-z0-9]{6,12}-[a-z0-9]{6,12}\.[a-z0-9]+$/i.test(rawName) || first.includes('t-drop/images') || first.includes('t-drop\\images') || first.includes('t-drop/temp') || first.includes('t-drop\\temp') || first.includes('edge-drop/images') || first.includes('edge-drop\\images') || first.includes('edge-drop/temp') || first.includes('edge-drop\\temp')
       const isImage = !entry?.isDirectory && (entry?.isImage || getFileKind(first).kind === 'image')
 
       // Single image file — show its thumbnail.
