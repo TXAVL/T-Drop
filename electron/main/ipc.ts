@@ -785,7 +785,8 @@ export function registerIpc(): void {
       }
       targetPath = saveResult.filePath
     }
-    const res = createTxaBackup(targetPath)
+    const store = getStore()
+    const res = createTxaBackup(targetPath, store.list())
     return {
       ok: res.ok,
       filePath: res.filePath,

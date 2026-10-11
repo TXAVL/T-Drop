@@ -5,24 +5,17 @@ export interface TranslationKeys {
     links: string
     images: string
     files: string
-  
-    [key: string]: string | undefined
   }
   tabs: {
     behaviour: string
     position: string
     appearance: string
-    generalStartup?: string
-  
-    [key: string]: string | undefined
   }
   header: {
     searchPlaceholder: string
     settings: string
     close: string
     whatsNew: string
-  
-    [key: string]: string | undefined
   }
   behaviour: {
     languageTitle: string
@@ -68,7 +61,12 @@ export interface TranslationKeys {
     never: string
     capacityTitle: string
     capacityDesc: string
-  
+    connectingDownload?: string
+    connecting?: string
+    downloadingWithPercent?: string
+    download?: string
+    notifyModeSubtitle?: string
+    newUpdateAvailable?: string
     [key: string]: string | undefined
   }
   position: {
@@ -96,8 +94,6 @@ export interface TranslationKeys {
     edgeTriggerThicknessDesc: string
     panelHeightTitle: string
     panelHeightDesc: string
-  
-    [key: string]: string | undefined
   }
   appearance: {
     copyIndicatorTitle: string
@@ -120,8 +116,6 @@ export interface TranslationKeys {
     tickStyle: string
     copyStyle: string
     sparkleStyle: string
-  
-    [key: string]: string | undefined
   }
   item: {
     copy: string
@@ -150,8 +144,6 @@ export interface TranslationKeys {
     moreFiles: string
     singleFile: string
     scrollToTop: string
-  
-    [key: string]: string | undefined
   }
   fileKinds: {
     pdf: string
@@ -165,8 +157,6 @@ export interface TranslationKeys {
     video: string
     image: string
     file: string
-  
-    [key: string]: string | undefined
   }
   emptyState: {
     shelfEmpty: string
@@ -179,8 +169,6 @@ export interface TranslationKeys {
     links: string
     images: string
     files: string
-  
-    [key: string]: string | undefined
   }
   onboarding: {
     welcomeTitle: string
@@ -210,7 +198,8 @@ export interface TranslationKeys {
     proTip2: string
     proTip3: string
     proTip4: string
-  
+    backupTitle?: string
+    backupDesc?: string
     [key: string]: string | undefined
   }
   tray: {
@@ -225,8 +214,6 @@ export interface TranslationKeys {
     quit: string
     welcomeTitle: string
     welcomeBody: string
-  
-    [key: string]: string | undefined
   }
   flyout: {
     copyBeaconStyleTitle: string
@@ -250,8 +237,6 @@ export interface TranslationKeys {
     clickToPasteDrag: string
     openInExplorer: string
     current: string
-  
-    [key: string]: string | undefined
   }
   toast: {
     copiedToClipboard: string
@@ -259,8 +244,6 @@ export interface TranslationKeys {
     itemPinned: string
     itemUnpinned: string
     settingsSaved: string
-  
-    [key: string]: string | undefined
   }
   footer: {
     communityAndSupport: string
@@ -276,48 +259,35 @@ export interface TranslationKeys {
     reviewOnStore?: string
     githubPromo: string
     version: string
-    donateTitle?: string
-    bankName?: string
-    accountNumber?: string
-    accountHolder?: string
-    copy?: string
-    copied?: string
-    donateNote?: string
-  
-    [key: string]: string | undefined
-  }
-  groups?: {
-    general?: string
-    startup?: string
-    privacy?: string
-    feedback?: string
-    shortcuts?: string
-    backup?: string
-    alignment?: string
-    displayMonitor?: string
-    locationHint?: string
-    triggerPosition?: string
-    hoverZoneLength?: string
-    triggerThickness?: string
-    panelHeight?: string
-    copyBeacon?: string
-    beaconStyle?: string
-    textSize?: string
-    audioFeedback?: string
-    languageSelectDesc?: string
-    [key: string]: string | undefined
-  }
-  common?: {
-    close?: string
-    cancel?: string
-    save?: string
-    ok?: string
     [key: string]: string | undefined
   }
   backup?: {
-    [key: string]: string | undefined
-  }
-  emoji?: {
+    title: string
+    desc: string
+    exportBtn: string
+    importBtn: string
+    exportSuccess: string
+    exportFailed: string
+    importSuccess: string
+    importFailed: string
+    busyError: string
+    modalTitle: string
+    modalDesc: string
+    fileLabel: string
+    dateLabel: string
+    itemsLabel: string
+    imagesLabel: string
+    modeLabel: string
+    modeMerge: string
+    modeMergeDesc: string
+    modeOverwrite: string
+    modeOverwriteDesc: string
+    confirmRestore: string
+    cancel: string
+    restoring: string
+    autoDetectedTitle: string
+    previewTitle: string
+    itemsUnit: string
     [key: string]: string | undefined
   }
 }
@@ -501,19 +471,12 @@ export const en: TranslationKeys = {
     "text": "Text",
     "links": "Links",
     "images": "Images",
-    "files": "Files",
-    "colors": "Colors",
-    "title": "Filter by type"
+    "files": "Files"
   },
   "tabs": {
     "behaviour": "Behaviour",
     "position": "Position",
-    "appearance": "Appearance",
-    "generalStartup": "General & Startup",
-    "activationShortcuts": "Shortcuts & Trigger",
-    "clipboardRules": "Clipboard Rules",
-    "storageRetention": "Storage & Retention",
-    "updates": "Updates"
+    "appearance": "Appearance"
   },
   "header": {
     "searchPlaceholder": "Search history...",
@@ -556,31 +519,24 @@ export const en: TranslationKeys = {
     "skip": "Skip",
     "downloadingUpdate": "Downloading update package in background...",
     "updateReadyTitle": "Update v{version} Ready",
-    "updateReadyDesc": "Click to restart T-Drop and apply the update.",
+    "updateReadyDesc": "Slide to restart T-Drop and apply the update.",
     "restartToUpdate": "Restart to Update",
     "restartToUpdateBelow": "Restart to update below",
     "newUpdateAvailableBelow": "New update available below",
+    "slideToRestart": "Slide to restart",
+    "restarting": "Restarting...",
+    "restartFailed": "Restart failed",
     "autoDeleteTitle": "Auto-delete timer",
     "autoDeleteDesc": "Automatically purge copied items (preserves Pinned)",
     "never": "Never",
     "capacityTitle": "History capacity",
     "capacityDesc": "Maximum unpinned items stored in history",
-    "toggleHotkeyTitle": "Global Toggle Shortcut",
-    "toggleHotkeyDesc": "Press this shortcut from anywhere to open or hide T-Drop",
-    "hotkeyEdit": "Edit",
-    "hotkeyRecording": "Press key combination...",
-    "hotkeyCancel": "Cancel",
-    "hotkeyReset": "Reset to default ({shortcut})",
+    "connectingDownload": "Connecting to download server...",
+    "connecting": "Connecting...",
     "downloadingWithPercent": "Downloading update ({percent}%)...",
-    "updateLabelAvailable": "Update available",
-    "updateLabelDownloading": "Downloading update...",
-    "updateLabelReady": "Update ready",
-    "updateModeAuto": "Automatic",
-    "updateModeNotify": "Notify only",
-    "updateModeNotifyDesc": "Notify when updates are available without downloading automatically",
-    "updateModeOff": "Disabled",
-    "restarting": "Restarting...",
-    "restartFailed": "Failed to restart application" 
+    "download": "Download",
+    "notifyModeSubtitle": "Notification mode · Click to download",
+    "newUpdateAvailable": "New update available {version}"
   },
   "position": {
     "edgePlacementTitle": "Edge Placement",
@@ -606,13 +562,7 @@ export const en: TranslationKeys = {
     "edgeTriggerThicknessTitle": "Edge trigger thickness",
     "edgeTriggerThicknessDesc": "Physical thickness of the invisible trigger strip",
     "panelHeightTitle": "Panel height",
-    "panelHeightDesc": "Vertical size of the clipboard shelf",
-    "horizontalPositionTitle": "Horizontal Alignment",
-    "horizontalPositionDesc": "Adjust horizontal alignment along screen edge",
-    "left": "Left",
-    "right": "Right",
-    "topEdge": "Top Edge",
-    "loadingDisplays": "Detecting displays..." 
+    "panelHeightDesc": "Vertical size of the clipboard shelf"
   },
   "appearance": {
     "copyIndicatorTitle": "Copy Indicator",
@@ -634,9 +584,7 @@ export const en: TranslationKeys = {
     "logoStyle": "Logo",
     "tickStyle": "Tick",
     "copyStyle": "Copy",
-    "sparkleStyle": "Sparkle",
-    "closeStyleSelector": "Close Style Selector",
-    "openStyleSelector": "Select Beacon Style" 
+    "sparkleStyle": "Sparkle"
   },
   "item": {
     "copy": "Copy",
@@ -664,14 +612,7 @@ export const en: TranslationKeys = {
     "moreImages": "+{count} more images",
     "moreFiles": "+{count} more files",
     "singleFile": "1 file",
-    "scrollToTop": "Scroll to top",
-    "clearAll": "Clear All",
-    "clearAllConfirm": "Are you sure you want to clear all unpinned items?",
-    "copiedTimes": "Copied {count} times",
-    "imagePlaceholder": "Image item",
-    "clearLast1h": "Clear last hour",
-    "clearLast6h": "Clear last 6 hours",
-    "clearLast24h": "Clear last 24 hours"
+    "scrollToTop": "Scroll to top"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -725,7 +666,9 @@ export const en: TranslationKeys = {
     "proTip1": "Press Alt + C to instantly toggle the shelf.",
     "proTip2": "Access settings anytime via the gear icon (top right).",
     "proTip3": "Drag & drop files to the left edge to add them.",
-    "proTip4": "Click a text box, then a clipboard item to auto-paste."
+    "proTip4": "Click a text box, then a clipboard item to auto-paste.",
+    "backupTitle": "Backup & Restore Archive (.txa)",
+    "backupDesc": "Export your clipboard history, pinned items, and settings into an encrypted .txa archive. Seamlessly transfer to a new PC or restore anytime with Merge or Overwrite modes."
   },
   "tray": {
     "showClipboard": "Show Clipboard",
@@ -761,23 +704,14 @@ export const en: TranslationKeys = {
     "copyFile": "Copy File",
     "clickToPasteDrag": "Click to paste · Drag to move",
     "openInExplorer": "Open location in Explorer",
-    "current": "Current",
-    "clickToDeselect": "Click to deselect",
-    "clickToSelect": "Click to select",
-    "deselectItem": "Deselect item",
-    "selectItem": "Select item",
-    "clickToPasteImageDrag": "Click to paste · Drag to drop",
-    "copied": "Copied!" 
+    "current": "Current"
   },
   "toast": {
     "copiedToClipboard": "Copied to clipboard",
     "itemDeleted": "Item deleted",
     "itemPinned": "Item pinned",
     "itemUnpinned": "Item unpinned",
-    "settingsSaved": "Settings saved",
-    "shortcutUpdated": "Shortcut updated to {shortcut}",
-    "clearFailed": "Failed to clear items",
-    "deleteFailed": "Failed to delete item" 
+    "settingsSaved": "Settings saved"
   },
   "footer": {
     "communityAndSupport": "Community & Support",
@@ -788,94 +722,39 @@ export const en: TranslationKeys = {
     "quitTitle": "Quit T-Drop",
     "quitDesc": "Close application and stop background process",
     "supportPromo": "T-Drop is 100% free & open-source. If it helps your daily workflow, consider supporting development to make it even better!",
-    "supportTagline": "T-Drop is completely free and open-source.", 
     "supportOnKofi": "Support Author (QR Donate)",
     "starOnGithub": "Star on GitHub",
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "If you like T-Drop, please consider starring the project on GitHub!",
-    "version": "Version",
-    "donateTitle": "Support the Author (MB Bank)",
-    "bankName": "Bank:",
-    "accountNumber": "Account Number:",
-    "accountHolder": "Account Holder:",
-    "copy": "Copy",
-    "copied": "✓ Copied",
-    "donateNote": "Scan VietQR on any banking or e-wallet app to support."
-  },
-  "groups": {
-    "general": "General",
-    "startup": "Startup",
-    "privacy": "Privacy",
-    "feedback": "Feedback",
-    "shortcuts": "Shortcuts",
-    "backup": "Backup & Restore",
-    "alignment": "Alignment",
-    "displayMonitor": "Display Monitor",
-    "locationHint": "Location Hint",
-    "triggerPosition": "Trigger Position",
-    "hoverZoneLength": "Hover Zone Length",
-    "triggerThickness": "Trigger Thickness",
-    "panelHeight": "Panel Height",
-    "copyBeacon": "Copy Beacon",
-    "beaconStyle": "Beacon Style",
-    "textSize": "Text Size",
-    "audioFeedback": "Audio Feedback",
-    "languageSelectDesc": "Select application display language",
-    "keyboardShortcut": "Keyboard Shortcut",
-    "aboutEdgeDrop": "About T-Drop",
-    "clipboardBehaviour": "Clipboard Behaviour",
-    "edgeHintPulseDesc": "Subtle indicator showing active trigger zone",
-    "fullscreenProtection": "Fullscreen Protection",
-    "hoverActivation": "Hover Activation",
-    "restartCleanup": "Restart Cleanup",
-    "storageCapacity": "Storage Capacity",
-    "toggleHotkeyPressDesc": "Press any key combo to record new global shortcut",
-    "updates": "Updates" 
-  },
-  "common": {
-    "close": "Close",
-    "cancel": "Cancel",
-    "save": "Save",
-    "ok": "OK"
+    "version": "Version"
   },
   "backup": {
-    "title": "Backup & Restore",
-    "desc": "Export your clipboard history, pinned items, and settings to an encrypted archive (.txa) or restore from an existing backup.",
-    "exportBtn": "Export (.txa)",
-    "importBtn": "Restore (.txa)",
-    "exportSuccess": "Backup exported successfully!",
-    "exportFailed": "Failed to export backup.",
-    "importSuccess": "Restored {count} items successfully!",
+    "title": "Backup & Restore (.txa)",
+    "desc": "Create encrypted standalone backups to preserve clipboard items, images, and settings across Windows reinstalls.",
+    "exportBtn": "Export Backup (.txa)",
+    "importBtn": "Import & Restore (.txa)",
+    "exportSuccess": "Successfully created encrypted backup ({items} items)",
+    "exportFailed": "Failed to create backup: {error}",
+    "importSuccess": "Successfully restored {count} items into clipboard history",
     "importFailed": "Failed to restore backup: {error}",
-    "autoDetectedTitle": "Backup Archive Detected",
-    "previewTitle": "Restore Preview",
-    "confirmRestore": "Confirm Restore",
-    "modeMerge": "Merge with Current History",
-    "modeMergeDesc": "Add backup items without removing your existing clips.",
-    "modeOverwrite": "Overwrite (Replace All)",
-    "modeOverwriteDesc": "Clear existing clips and replace completely with backup.",
-    "items": "Items",
-    "itemsUnit": "items",
-    "createdAt": "Created at",
-    "file": "File",
-    "restoring": "Restoring...",
-    "cancel": "Cancel",
     "busyError": "Another backup or restore operation is already in progress.",
     "modalTitle": "Restore T-Drop Backup",
     "modalDesc": "Review archive details and choose how to restore your data.",
-    "fileLabel": "Backup File",
-    "dateLabel": "Created",
-    "itemsLabel": "Items",
-    "imagesLabel": "Images",
-    "modeLabel": "Restore Mode"
-  },
-  "emoji": {
-    "categories": "Categories",
-    "clearRecents": "Clear Recent Emojis",
-    "emptyRecents": "No recent emojis",
-    "loadFailed": "Failed to load emojis",
-    "open": "Emoji Picker",
-    "skinTone": "Skin Tone"
+    "fileLabel": "Backup File:",
+    "dateLabel": "Created:",
+    "itemsLabel": "Items:",
+    "imagesLabel": "Images:",
+    "modeLabel": "Restore Mode:",
+    "modeMerge": "Merge (Recommended)",
+    "modeMergeDesc": "Keep current items and add non-duplicate items from the backup.",
+    "modeOverwrite": "Overwrite All",
+    "modeOverwriteDesc": "Completely replace current history and settings with the backup.",
+    "confirmRestore": "Restore Now",
+    "cancel": "Cancel",
+    "restoring": "Restoring...",
+    "autoDetectedTitle": "Backup Archive Detected",
+    "previewTitle": "Restore Preview",
+    "itemsUnit": "items"
   }
 }
 
@@ -933,15 +812,24 @@ export const es: TranslationKeys = {
     "skip": "Omitir",
     "downloadingUpdate": "Descargando el paquete de actualización en segundo plano...",
     "updateReadyTitle": "Actualización v{version} lista",
-    "updateReadyDesc": "Haz clic para reiniciar T-Drop y aplicar la actualización.",
+    "updateReadyDesc": "Desliza para reiniciar T-Drop y aplicar la actualización.",
     "restartToUpdate": "Reiniciar para actualizar",
     "restartToUpdateBelow": "Reiniciar para actualizar más abajo",
     "newUpdateAvailableBelow": "Nueva actualización disponible más abajo",
+    "slideToRestart": "Deslizar para reiniciar",
+    "restarting": "Reiniciando...",
+    "restartFailed": "Error al reiniciar",
     "autoDeleteTitle": "Temporizador de eliminación automática",
     "autoDeleteDesc": "Eliminar automáticamente elementos copiados (conserva los fijados)",
     "never": "Nunca",
     "capacityTitle": "Capacidad del historial",
-    "capacityDesc": "Máximo de elementos no fijados almacenados en el historial"
+    "capacityDesc": "Máximo de elementos no fijados almacenados en el historial",
+    "connectingDownload": "Conectando con el servidor de descarga...",
+    "connecting": "Conectando...",
+    "downloadingWithPercent": "Descargando actualización ({percent}%)...",
+    "download": "Descargar",
+    "notifyModeSubtitle": "Modo de notificación · Haz clic para descargar",
+    "newUpdateAvailable": "Nueva actualización disponible {version}"
   },
   "position": {
     "edgePlacementTitle": "Borde de la pantalla",
@@ -1017,12 +905,7 @@ export const es: TranslationKeys = {
     "moreImages": "+{count} imágenes más",
     "moreFiles": "+{count} archivos más",
     "singleFile": "1 archivo",
-    "scrollToTop": "Volver arriba",
-    "clearLast1h": "Borrar la última hora",
-    "clearLast6h": "Borrar las últimas 6 horas",
-    "clearLast24h": "Borrar las últimas 24 horas",
-    "clearAll": "Borrar todo el historial",
-    "clearAllConfirm": "Toca de nuevo para confirmar"
+    "scrollToTop": "Volver arriba"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1076,7 +959,9 @@ export const es: TranslationKeys = {
     "proTip1": "Pulsa Alt + C para abrir o cerrar el panel al instante.",
     "proTip2": "Accede a la configuración en cualquier momento con el icono de engranaje (arriba a la derecha).",
     "proTip3": "Arrastra y suelta archivos en el borde izquierdo para añadirlos.",
-    "proTip4": "Haz clic en un cuadro de texto y luego en un elemento del portapapeles para pegarlo automáticamente."
+    "proTip4": "Haz clic en un cuadro de texto y luego en un elemento del portapapeles para pegarlo automáticamente.",
+    "backupTitle": "Copia de seguridad y restauración (.txa)",
+    "backupDesc": "Exporta tu historial del portapapeles, elementos fijados y ajustes a un archivo .txa cifrado. Restáuralo en cualquier momento con los modos Fusionar o Sobrescribir."
   },
   "tray": {
     "showClipboard": "Mostrar portapapeles",
@@ -1135,6 +1020,34 @@ export const es: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Si te gusta T-Drop, ¡considera darle una estrella en GitHub!",
     "version": "Versión"
+  },
+  "backup": {
+    "title": "Copia de seguridad y restauración (.txa)",
+    "desc": "Crea copias de seguridad cifradas para conservar elementos, imágenes y ajustes al reinstalar Windows.",
+    "exportBtn": "Exportar copia (.txa)",
+    "importBtn": "Restaurar datos (.txa)",
+    "exportSuccess": "Copia creada con éxito ({items} elementos)",
+    "exportFailed": "Error al crear la copia: {error}",
+    "importSuccess": "Se restauraron {count} elementos con éxito",
+    "importFailed": "Error al restaurar: {error}",
+    "busyError": "Ya hay una operación de copia o restauración en curso.",
+    "modalTitle": "Restaurar copia de seguridad T-Drop",
+    "modalDesc": "Revisa los detalles del archivo y elige cómo restaurar tus datos.",
+    "fileLabel": "Archivo de copia:",
+    "dateLabel": "Fecha de creación:",
+    "itemsLabel": "Elementos:",
+    "imagesLabel": "Imágenes:",
+    "modeLabel": "Modo de restauración:",
+    "modeMerge": "Fusionar (Recomendado)",
+    "modeMergeDesc": "Conserva los elementos actuales y añade los nuevos de la copia.",
+    "modeOverwrite": "Sobrescribir todo",
+    "modeOverwriteDesc": "Reemplaza completamente el historial y los ajustes con la copia.",
+    "confirmRestore": "Confirmar restauración",
+    "cancel": "Cancelar",
+    "restoring": "Restaurando...",
+    "autoDetectedTitle": "Copia de seguridad detectada",
+    "previewTitle": "Vista previa de copia de seguridad",
+    "itemsUnit": "elementos"
   }
 }
 
@@ -1192,15 +1105,24 @@ export const fr: TranslationKeys = {
     "skip": "Ignorer",
     "downloadingUpdate": "Téléchargement du paquet de mise à jour en arrière-plan...",
     "updateReadyTitle": "Mise à jour v{version} prête",
-    "updateReadyDesc": "Cliquez pour redémarrer T-Drop et appliquer la mise à jour.",
+    "updateReadyDesc": "Glissez pour redémarrer T-Drop et appliquer la mise à jour.",
     "restartToUpdate": "Redémarrer pour mettre à jour",
     "restartToUpdateBelow": "Redémarrer pour mettre à jour ci-dessous",
     "newUpdateAvailableBelow": "Nouvelle mise à jour disponible ci-dessous",
+    "slideToRestart": "Glisser pour redémarrer",
+    "restarting": "Redémarrage...",
+    "restartFailed": "Échec du redémarrage",
     "autoDeleteTitle": "Minuteur de suppression automatique",
     "autoDeleteDesc": "Supprimer automatiquement les éléments copiés (conserve les épinglés)",
     "never": "Jamais",
     "capacityTitle": "Capacité de l'historique",
-    "capacityDesc": "Nombre maximum d'éléments non épinglés stockés dans l'historique"
+    "capacityDesc": "Nombre maximum d'éléments non épinglés stockés dans l'historique",
+    "connectingDownload": "Connexion au serveur de téléchargement...",
+    "connecting": "Connexion...",
+    "downloadingWithPercent": "Téléchargement de la mise à jour ({percent}%)...",
+    "download": "Télécharger",
+    "notifyModeSubtitle": "Mode notification · Cliquez pour télécharger",
+    "newUpdateAvailable": "Nouvelle mise à jour disponible {version}"
   },
   "position": {
     "edgePlacementTitle": "Bord de l'écran",
@@ -1276,12 +1198,7 @@ export const fr: TranslationKeys = {
     "moreImages": "+{count} images de plus",
     "moreFiles": "+{count} fichiers de plus",
     "singleFile": "1 fichier",
-    "scrollToTop": "Remonter en haut",
-    "clearLast1h": "Effacer la dernière heure",
-    "clearLast6h": "Effacer les 6 dernières heures",
-    "clearLast24h": "Effacer les 24 dernières heures",
-    "clearAll": "Effacer tout l’historique",
-    "clearAllConfirm": "Appuyez à nouveau pour confirmer"
+    "scrollToTop": "Remonter en haut"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1335,7 +1252,9 @@ export const fr: TranslationKeys = {
     "proTip1": "Appuyez sur Alt + C pour basculer instantanément l'étagère.",
     "proTip2": "Accédez aux paramètres à tout moment via l'icône d'engrenage (en haut à droite).",
     "proTip3": "Glissez-déposez des fichiers sur le bord gauche pour les ajouter.",
-    "proTip4": "Cliquez sur une zone de texte, puis sur un élément du presse-papiers pour le coller automatiquement."
+    "proTip4": "Cliquez sur une zone de texte, puis sur un élément du presse-papiers pour le coller automatiquement.",
+    "backupTitle": "Sauvegarde & Restauration (.txa)",
+    "backupDesc": "Exportez votre historique du presse-papiers, éléments épinglés et paramètres dans une archive .txa chiffrée. Restaurez-la à tout moment en mode Fusion ou Écrasement."
   },
   "tray": {
     "showClipboard": "Afficher le presse-papiers",
@@ -1394,6 +1313,34 @@ export const fr: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Si vous aimez T-Drop, pensez à mettre une étoile au projet sur GitHub !",
     "version": "Version"
+  },
+  "backup": {
+    "title": "Sauvegarde & Restauration (.txa)",
+    "desc": "Créez des sauvegardes chiffrées pour préserver vos clips, images et réglages lors d’une réinstallation de Windows.",
+    "exportBtn": "Exporter sauvegarde (.txa)",
+    "importBtn": "Restaurer données (.txa)",
+    "exportSuccess": "Sauvegarde créée avec succès ({items} éléments)",
+    "exportFailed": "Échec de la sauvegarde : {error}",
+    "importSuccess": "{count} éléments restaurés avec succès",
+    "importFailed": "Échec de la restauration : {error}",
+    "busyError": "Une opération de sauvegarde ou de restauration est déjà en cours.",
+    "modalTitle": "Restaurer la sauvegarde T-Drop",
+    "modalDesc": "Vérifiez les détails et choisissez le mode de restauration.",
+    "fileLabel": "Fichier de sauvegarde :",
+    "dateLabel": "Date de création :",
+    "itemsLabel": "Éléments :",
+    "imagesLabel": "Images :",
+    "modeLabel": "Mode de restauration :",
+    "modeMerge": "Fusionner (Recommandé)",
+    "modeMergeDesc": "Conserver les éléments actuels et ajouter les nouveaux.",
+    "modeOverwrite": "Remplacer tout",
+    "modeOverwriteDesc": "Remplacer entièrement l’historique et les réglages.",
+    "confirmRestore": "Confirmer la restauration",
+    "cancel": "Annuler",
+    "restoring": "Restauration en cours...",
+    "autoDetectedTitle": "Sauvegarde détectée",
+    "previewTitle": "Aperçu de la sauvegarde",
+    "itemsUnit": "éléments"
   }
 }
 
@@ -1451,15 +1398,24 @@ export const de: TranslationKeys = {
     "skip": "Überspringen",
     "downloadingUpdate": "Update-Paket wird im Hintergrund heruntergeladen...",
     "updateReadyTitle": "Update v{version} bereit",
-    "updateReadyDesc": "Klicken Sie, um T-Drop neu zu starten und das Update anzuwenden.",
+    "updateReadyDesc": "Wischen Sie, um T-Drop neu zu starten und das Update anzuwenden.",
     "restartToUpdate": "Neu starten zum Aktualisieren",
     "restartToUpdateBelow": "Neu starten zum Aktualisieren unten",
     "newUpdateAvailableBelow": "Neues Update verfügbar unten",
+    "slideToRestart": "Zum Neustarten wischen",
+    "restarting": "Wird neu gestartet...",
+    "restartFailed": "Neustart fehlgeschlagen",
     "autoDeleteTitle": "Auto-Lösch-Timer",
     "autoDeleteDesc": "Kopierte Elemente automatisch löschen (angepinnte bleiben erhalten)",
     "never": "Nie",
     "capacityTitle": "Verlaufskapazität",
-    "capacityDesc": "Maximale Anzahl unangepinnter Elemente im Verlauf"
+    "capacityDesc": "Maximale Anzahl unangepinnter Elemente im Verlauf",
+    "connectingDownload": "Verbindung zum Download-Server wird hergestellt...",
+    "connecting": "Verbinden...",
+    "downloadingWithPercent": "Update wird heruntergeladen ({percent}%)...",
+    "download": "Herunterladen",
+    "notifyModeSubtitle": "Benachrichtigungsmodus · Klicken zum Herunterladen",
+    "newUpdateAvailable": "Neues Update verfügbar {version}"
   },
   "position": {
     "edgePlacementTitle": "Randplatzierung",
@@ -1535,12 +1491,7 @@ export const de: TranslationKeys = {
     "moreImages": "+{count} weitere Bilder",
     "moreFiles": "+{count} weitere Dateien",
     "singleFile": "1 Datei",
-    "scrollToTop": "Nach oben scrollen",
-    "clearLast1h": "Letzte Stunde löschen",
-    "clearLast6h": "Letzte 6 Stunden löschen",
-    "clearLast24h": "Letzte 24 Stunden löschen",
-    "clearAll": "Gesamten Verlauf löschen",
-    "clearAllConfirm": "Zum Bestätigen erneut tippen"
+    "scrollToTop": "Nach oben scrollen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1594,7 +1545,9 @@ export const de: TranslationKeys = {
     "proTip1": "Alt + C drücken, um die Ablage sofort umzuschalten.",
     "proTip2": "Über das Zahnrad-Symbol (oben rechts) jederzeit auf Einstellungen zugreifen.",
     "proTip3": "Dateien an den linken Rand ziehen & ablegen, um sie hinzuzufügen.",
-    "proTip4": "Auf ein Textfeld klicken, dann auf ein Zwischenablage-Element, um automatisch einzufügen."
+    "proTip4": "Auf ein Textfeld klicken, dann auf ein Zwischenablage-Element, um automatisch einzufügen.",
+    "backupTitle": "Sichern & Wiederherstellen (.txa)",
+    "backupDesc": "Exportieren Sie Zwischenablage-Verlauf, angeheftete Elemente und Einstellungen in ein verschlüsseltes .txa-Archiv. Jederzeit zusammenführen oder überschreiben."
   },
   "tray": {
     "showClipboard": "Zwischenablage anzeigen",
@@ -1653,6 +1606,34 @@ export const de: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Wenn Ihnen T-Drop gefällt, geben Sie dem Projekt bitte einen Stern auf GitHub!",
     "version": "Version"
+  },
+  "backup": {
+    "title": "Sichern & Wiederherstellen (.txa)",
+    "desc": "Erstellen Sie verschlüsselte Sicherungen für Zwischenablage, Bilder und Einstellungen bei Neuinstallationen.",
+    "exportBtn": "Sicherung exportieren (.txa)",
+    "importBtn": "Daten wiederherstellen (.txa)",
+    "exportSuccess": "Sicherung erfolgreich erstellt ({items} Elemente)",
+    "exportFailed": "Sicherung fehlgeschlagen: {error}",
+    "importSuccess": "{count} Elemente erfolgreich wiederhergestellt",
+    "importFailed": "Wiederherstellung fehlgeschlagen: {error}",
+    "busyError": "Ein Sicherungs- oder Wiederherstellungsvorgang wird bereits ausgeführt.",
+    "modalTitle": "T-Drop-Sicherung wiederherstellen",
+    "modalDesc": "Überprüfen Sie die Archivdetails und wählen Sie den Wiederherstellungsmodus.",
+    "fileLabel": "Sicherungsdatei:",
+    "dateLabel": "Erstellungsdatum:",
+    "itemsLabel": "Elemente:",
+    "imagesLabel": "Bilder:",
+    "modeLabel": "Wiederherstellungsmodus:",
+    "modeMerge": "Zusammenführen (Empfohlen)",
+    "modeMergeDesc": "Bestehende Elemente behalten und neue aus der Sicherung hinzufügen.",
+    "modeOverwrite": "Alles überschreiben",
+    "modeOverwriteDesc": "Aktuellen Verlauf und Einstellungen vollständig ersetzen.",
+    "confirmRestore": "Wiederherstellung bestätigen",
+    "cancel": "Abbrechen",
+    "restoring": "Wiederherstellung läuft...",
+    "autoDetectedTitle": "Sicherungsdatei erkannt",
+    "previewTitle": "Sicherungsvorschau",
+    "itemsUnit": "Elemente"
   }
 }
 
@@ -1710,15 +1691,24 @@ export const it: TranslationKeys = {
     "skip": "Salta",
     "downloadingUpdate": "Scaricamento del pacchetto di aggiornamento in background...",
     "updateReadyTitle": "Aggiornamento v{version} pronto",
-    "updateReadyDesc": "Fai clic per riavviare T-Drop e applicare l'aggiornamento.",
+    "updateReadyDesc": "Scorri per riavviare T-Drop e applicare l'aggiornamento.",
     "restartToUpdate": "Riavvia per aggiornare",
     "restartToUpdateBelow": "Riavvia per aggiornare qui sotto",
     "newUpdateAvailableBelow": "Nuovo aggiornamento disponibile qui sotto",
+    "slideToRestart": "Scorri per riavviare",
+    "restarting": "Riavvio in corso...",
+    "restartFailed": "Riavvio non riuscito",
     "autoDeleteTitle": "Timer di eliminazione automatica",
     "autoDeleteDesc": "Elimina automaticamente gli elementi copiati (mantiene i bloccati)",
     "never": "Mai",
     "capacityTitle": "Capacità cronologia",
-    "capacityDesc": "Numero massimo di elementi non bloccati memorizzati nella cronologia"
+    "capacityDesc": "Numero massimo di elementi non bloccati memorizzati nella cronologia",
+    "connectingDownload": "Connessione al server di download...",
+    "connecting": "Connessione...",
+    "downloadingWithPercent": "Download aggiornamento in corso ({percent}%)...",
+    "download": "Scarica",
+    "notifyModeSubtitle": "Modalità notifica · Fai clic per scaricare",
+    "newUpdateAvailable": "Nuovo aggiornamento disponibile {version}"
   },
   "position": {
     "edgePlacementTitle": "Posizionamento bordo",
@@ -1794,12 +1784,7 @@ export const it: TranslationKeys = {
     "moreImages": "+{count} altre immagini",
     "moreFiles": "+{count} altri file",
     "singleFile": "1 file",
-    "scrollToTop": "Torna in cima",
-    "clearLast1h": "Cancella ultima ora",
-    "clearLast6h": "Cancella ultime 6 ore",
-    "clearLast24h": "Cancella ultime 24 ore",
-    "clearAll": "Cancella tutta la cronologia",
-    "clearAllConfirm": "Tocca di nuovo per confermare"
+    "scrollToTop": "Torna in cima"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1853,7 +1838,9 @@ export const it: TranslationKeys = {
     "proTip1": "Premi Alt + C per aprire/chiudere istantaneamente lo scaffale.",
     "proTip2": "Accedi alle impostazioni in qualsiasi momento tramite l'icona ingranaggio (in alto a destra).",
     "proTip3": "Trascina e rilascia file sul bordo sinistro per aggiungerli.",
-    "proTip4": "Fai clic su una casella di testo, poi su un elemento degli appunti per incollarlo automaticamente."
+    "proTip4": "Fai clic su una casella di testo, poi su un elemento degli appunti per incollarlo automaticamente.",
+    "backupTitle": "Backup e Ripristino (.txa)",
+    "backupDesc": "Esporta cronologia appunti, elementi bloccati e impostazioni in un archivio cifrato .txa. Ripristina in qualsiasi momento."
   },
   "tray": {
     "showClipboard": "Mostra appunti",
@@ -1912,6 +1899,34 @@ export const it: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Se ti piace T-Drop, valuta di mettere una stella al progetto su GitHub!",
     "version": "Versione"
+  },
+  "backup": {
+    "title": "Backup e Ripristino (.txa)",
+    "desc": "Crea backup crittografati per proteggere cronologia e impostazioni.",
+    "exportBtn": "Esporta Backup (.txa)",
+    "importBtn": "Ripristina Dati (.txa)",
+    "exportSuccess": "Backup creato con successo ({items} elementi)",
+    "exportFailed": "Impossibile creare il backup: {error}",
+    "importSuccess": "{count} elementi ripristinati con successo",
+    "importFailed": "Ripristino non riuscito: {error}",
+    "busyError": "Un’altra operazione di backup o ripristino è già in corso.",
+    "modalTitle": "Ripristina Backup T-Drop",
+    "modalDesc": "Verifica i dettagli dell’archivio e seleziona la modalità di ripristino.",
+    "fileLabel": "File di backup:",
+    "dateLabel": "Data creazione:",
+    "itemsLabel": "Elementi:",
+    "imagesLabel": "Immagini:",
+    "modeLabel": "Modalità di ripristino:",
+    "modeMerge": "Unisci (Consigliato)",
+    "modeMergeDesc": "Mantieni gli elementi attuali e aggiungi quelli dal backup.",
+    "modeOverwrite": "Sovrascrivi tutto",
+    "modeOverwriteDesc": "Sostituisci completamente cronologia e impostazioni con il backup.",
+    "confirmRestore": "Conferma ripristino",
+    "cancel": "Annulla",
+    "restoring": "Ripristino in corso...",
+    "autoDetectedTitle": "File di backup rilevato",
+    "previewTitle": "Anteprima backup",
+    "itemsUnit": "elementi"
   }
 }
 
@@ -1969,15 +1984,24 @@ export const pt: TranslationKeys = {
     "skip": "Pular",
     "downloadingUpdate": "Baixando pacote de atualização em segundo plano...",
     "updateReadyTitle": "Atualização v{version} pronta",
-    "updateReadyDesc": "Clique para reiniciar o T-Drop e aplicar a atualização.",
+    "updateReadyDesc": "Deslize para reiniciar o T-Drop e aplicar a atualização.",
     "restartToUpdate": "Reiniciar para atualizar",
     "restartToUpdateBelow": "Reiniciar para atualizar abaixo",
     "newUpdateAvailableBelow": "Nova atualização disponível abaixo",
+    "slideToRestart": "Deslize para reiniciar",
+    "restarting": "Reiniciando...",
+    "restartFailed": "Falha ao reiniciar",
     "autoDeleteTitle": "Temporizador de exclusão automática",
     "autoDeleteDesc": "Excluir automaticamente itens copiados (preserva fixados)",
     "never": "Nunca",
     "capacityTitle": "Capacidade do histórico",
-    "capacityDesc": "Máximo de itens não fixados armazenados no histórico"
+    "capacityDesc": "Máximo de itens não fixados armazenados no histórico",
+    "connectingDownload": "Conectando ao servidor de download...",
+    "connecting": "Conectando...",
+    "downloadingWithPercent": "Baixando atualização ({percent}%)...",
+    "download": "Baixar",
+    "notifyModeSubtitle": "Modo de notificação · Clique para baixar",
+    "newUpdateAvailable": "Nova atualização disponível {version}"
   },
   "position": {
     "edgePlacementTitle": "Posicionamento da borda",
@@ -2053,12 +2077,7 @@ export const pt: TranslationKeys = {
     "moreImages": "+{count} imagens a mais",
     "moreFiles": "+{count} arquivos a mais",
     "singleFile": "1 arquivo",
-    "scrollToTop": "Voltar ao topo",
-    "clearLast1h": "Limpar última hora",
-    "clearLast6h": "Limpar últimas 6 horas",
-    "clearLast24h": "Limpar últimas 24 horas",
-    "clearAll": "Limpar todo o histórico",
-    "clearAllConfirm": "Toque novamente para confirmar"
+    "scrollToTop": "Voltar ao topo"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2112,7 +2131,9 @@ export const pt: TranslationKeys = {
     "proTip1": "Pressione Alt + C para alternar a prateleira instantaneamente.",
     "proTip2": "Acesse as configurações a qualquer momento pelo ícone de engrenagem (canto superior direito).",
     "proTip3": "Arraste e solte arquivos na borda esquerda para adicioná-los.",
-    "proTip4": "Clique em uma caixa de texto, depois em um item da área de transferência para colar automaticamente."
+    "proTip4": "Clique em uma caixa de texto, depois em um item da área de transferência para colar automaticamente.",
+    "backupTitle": "Backup e Restauração (.txa)",
+    "backupDesc": "Exporte com segurança o histórico da área de transferência, itens fixados e configurações para um arquivo .txa criptografado."
   },
   "tray": {
     "showClipboard": "Mostrar área de transferência",
@@ -2171,6 +2192,34 @@ export const pt: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Se você gosta do T-Drop, considere dar uma estrela no projeto no GitHub!",
     "version": "Versão"
+  },
+  "backup": {
+    "title": "Backup e Restauração (.txa)",
+    "desc": "Crie backups criptografados para preservar itens, imagens e configurações.",
+    "exportBtn": "Exportar Backup (.txa)",
+    "importBtn": "Restaurar Dados (.txa)",
+    "exportSuccess": "Backup criado com sucesso ({items} itens)",
+    "exportFailed": "Falha ao criar backup: {error}",
+    "importSuccess": "{count} itens restaurados com sucesso",
+    "importFailed": "Falha ao restaurar: {error}",
+    "busyError": "Outra operação de backup ou restauração já está em andamento.",
+    "modalTitle": "Restaurar Backup do T-Drop",
+    "modalDesc": "Revise os detalhes do arquivo e escolha o método de restauração.",
+    "fileLabel": "Arquivo de backup:",
+    "dateLabel": "Data de criação:",
+    "itemsLabel": "Itens:",
+    "imagesLabel": "Imagens:",
+    "modeLabel": "Modo de restauração:",
+    "modeMerge": "Mesclar (Recomendado)",
+    "modeMergeDesc": "Mantém os itens atuais e adiciona novos do backup.",
+    "modeOverwrite": "Sobrescrever tudo",
+    "modeOverwriteDesc": "Substitui completamente o histórico e as configurações pelo backup.",
+    "confirmRestore": "Confirmar restauração",
+    "cancel": "Cancelar",
+    "restoring": "Restaurando...",
+    "autoDetectedTitle": "Backup detectado",
+    "previewTitle": "Pré-visualização do backup",
+    "itemsUnit": "itens"
   }
 }
 
@@ -2228,15 +2277,24 @@ export const ru: TranslationKeys = {
     "skip": "Пропустить",
     "downloadingUpdate": "Загрузка пакета обновления в фоновом режиме...",
     "updateReadyTitle": "Обновление v{version} готово",
-    "updateReadyDesc": "Нажмите, чтобы перезапустить T-Drop и применить обновление.",
+    "updateReadyDesc": "Проведите, чтобы перезапустить T-Drop и применить обновление.",
     "restartToUpdate": "Перезапустить для обновления",
     "restartToUpdateBelow": "Перезапустить для обновления ниже",
     "newUpdateAvailableBelow": "Доступно новое обновление ниже",
+    "slideToRestart": "Проведите для перезапуска",
+    "restarting": "Перезапуск...",
+    "restartFailed": "Сбой перезапуска",
     "autoDeleteTitle": "Таймер автоудаления",
     "autoDeleteDesc": "Автоматически удалять скопированные элементы (закреплённые сохраняются)",
     "never": "Никогда",
     "capacityTitle": "Объём истории",
-    "capacityDesc": "Максимум незакреплённых элементов в истории"
+    "capacityDesc": "Максимум незакреплённых элементов в истории",
+    "connectingDownload": "Подключение к серверу загрузки...",
+    "connecting": "Подключение...",
+    "downloadingWithPercent": "Загрузка обновления ({percent}%)...",
+    "download": "Скачать",
+    "notifyModeSubtitle": "Режим уведомлений · Нажмите для загрузки",
+    "newUpdateAvailable": "Доступно новое обновление {version}"
   },
   "position": {
     "edgePlacementTitle": "Размещение у края",
@@ -2312,12 +2370,7 @@ export const ru: TranslationKeys = {
     "moreImages": "+{count} ещё изображений",
     "moreFiles": "+{count} ещё файлов",
     "singleFile": "1 файл",
-    "scrollToTop": "Прокрутить наверх",
-    "clearLast1h": "Очистить за последний час",
-    "clearLast6h": "Очистить за последние 6 часов",
-    "clearLast24h": "Очистить за последние 24 часа",
-    "clearAll": "Очистить всю историю",
-    "clearAllConfirm": "Нажмите ещё раз для подтверждения"
+    "scrollToTop": "Прокрутить наверх"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2371,7 +2424,9 @@ export const ru: TranslationKeys = {
     "proTip1": "Нажмите Alt + C, чтобы мгновенно открыть/закрыть полку.",
     "proTip2": "Откройте настройки в любое время через значок шестерёнки (вверху справа).",
     "proTip3": "Перетащите файлы на левый край, чтобы добавить их.",
-    "proTip4": "Щёлкните текстовое поле, затем элемент буфера обмена для автоматической вставки."
+    "proTip4": "Щёлкните текстовое поле, затем элемент буфера обмена для автоматической вставки.",
+    "backupTitle": "Резервное копирование и восстановление (.txa)",
+    "backupDesc": "Экспортируйте историю буфера, закрепленные элементы и настройки в зашифрованный архив .txa. Восстанавливайте в любое время."
   },
   "tray": {
     "showClipboard": "Показать буфер обмена",
@@ -2430,6 +2485,34 @@ export const ru: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Если вам нравится T-Drop, пожалуйста, поставьте звёзду проекту на GitHub!",
     "version": "Версия"
+  },
+  "backup": {
+    "title": "Резервное копирование и восстановление (.txa)",
+    "desc": "Создавайте зашифрованные копии для сохранения истории буфера и настроек при переустановке Windows.",
+    "exportBtn": "Экспорт копии (.txa)",
+    "importBtn": "Восстановить данные (.txa)",
+    "exportSuccess": "Резервная копия создана ({items} элементов)",
+    "exportFailed": "Ошибка создания копии: {error}",
+    "importSuccess": "Успешно восстановлено элементов: {count}",
+    "importFailed": "Ошибка восстановления: {error}",
+    "busyError": "Другая операция резервного копирования уже выполняется.",
+    "modalTitle": "Восстановление резервной копии T-Drop",
+    "modalDesc": "Проверьте данные архива и выберите режим восстановления.",
+    "fileLabel": "Файл копии:",
+    "dateLabel": "Дата создания:",
+    "itemsLabel": "Элементы:",
+    "imagesLabel": "Изображения:",
+    "modeLabel": "Режим восстановления:",
+    "modeMerge": "Объединить (Рекомендуется)",
+    "modeMergeDesc": "Сохранить текущие элементы и добавить новые из копии.",
+    "modeOverwrite": "Перезаписать все",
+    "modeOverwriteDesc": "Полностью заменить текущую историю и настройки данными из копии.",
+    "confirmRestore": "Подтвердить восстановление",
+    "cancel": "Отмена",
+    "restoring": "Восстановление...",
+    "autoDetectedTitle": "Обнаружен файл резервной копии",
+    "previewTitle": "Предпросмотр резервной копии",
+    "itemsUnit": "элементов"
   }
 }
 
@@ -2487,15 +2570,24 @@ export const ja: TranslationKeys = {
     "skip": "スキップ",
     "downloadingUpdate": "更新パッケージをダウンロード中...",
     "updateReadyTitle": "v{version} の準備完了",
-    "updateReadyDesc": "再起動して更新を適用します。",
+    "updateReadyDesc": "スライドして T-Drop を再起動し、更新を適用します。",
     "restartToUpdate": "再起動して更新",
     "restartToUpdateBelow": "下から再起動して更新",
     "newUpdateAvailableBelow": "新しい更新があります",
+    "slideToRestart": "スライドして再起動",
+    "restarting": "再起動中...",
+    "restartFailed": "再起動に失敗しました",
     "autoDeleteTitle": "自動削除タイマー",
     "autoDeleteDesc": "指定時間後に自動削除 (ピン留めは保持)",
     "never": "なし",
     "capacityTitle": "履歴の最大件数",
-    "capacityDesc": "保存する未ピン留め項目の最大数"
+    "capacityDesc": "保存する未ピン留め項目の最大数",
+    "connectingDownload": "ダウンロードサーバーに接続中...",
+    "connecting": "接続中...",
+    "downloadingWithPercent": "アップデートをダウンロード中 ({percent}%)...",
+    "download": "ダウンロード",
+    "notifyModeSubtitle": "通知モード · クリックしてダウンロード",
+    "newUpdateAvailable": "新しいアップデートがあります {version}"
   },
   "position": {
     "edgePlacementTitle": "画面端の配置",
@@ -2571,12 +2663,7 @@ export const ja: TranslationKeys = {
     "moreImages": "+{count} 枚の画像",
     "moreFiles": "+{count} 個のファイル",
     "singleFile": "1 個のファイル",
-    "scrollToTop": "先頭へスクロール",
-    "clearLast1h": "過去1時間を消去",
-    "clearLast6h": "過去6時間を消去",
-    "clearLast24h": "過去24時間を消去",
-    "clearAll": "履歴をすべて消去",
-    "clearAllConfirm": "もう一度押して確認します"
+    "scrollToTop": "先頭へスクロール"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2630,7 +2717,9 @@ export const ja: TranslationKeys = {
     "proTip1": "Alt + C でパネルの表示を瞬時に切り替えられます",
     "proTip2": "右上の歯車アイコンからいつでも設定にアクセスできます",
     "proTip3": "左端にファイルをドラッグ＆ドロップして追加します",
-    "proTip4": "テキストボックスをクリックしてからクリップボードのアイテムを押すと自動で貼り付けられます"
+    "proTip4": "テキストボックスをクリックしてからクリップボードのアイテムを押すと自動で貼り付けられます",
+    "backupTitle": "バックアップと復元 (.txa)",
+    "backupDesc": "クリップボード履歴、ピン留め項目、設定を暗号化された .txa アーカイブに安全にエクスポート。統合または上書きモードでいつでも復元できます。"
   },
   "tray": {
     "showClipboard": "パネルを表示",
@@ -2689,6 +2778,34 @@ export const ja: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "T-Drop を気に入っていただけたら、GitHub でスターをよろしくお願いします！",
     "version": "バージョン"
+  },
+  "backup": {
+    "title": "バックアップと復元 (.txa)",
+    "desc": "暗号化されたバックアップを作成し、クリップボードや設定を安全に保護します。",
+    "exportBtn": "バックアップをエクスポート (.txa)",
+    "importBtn": "データを復元 (.txa)",
+    "exportSuccess": "暗号化バックアップを作成しました ({items} 件)",
+    "exportFailed": "バックアップの作成に失敗しました: {error}",
+    "importSuccess": "{count} 件の項目を正常に復元しました",
+    "importFailed": "復元に失敗しました: {error}",
+    "busyError": "他のバックアップまたは復元処理が実行中です。",
+    "modalTitle": "T-Drop バックアップの復元",
+    "modalDesc": "ファイルの詳細を確認し、復元方法を選択してください。",
+    "fileLabel": "バックアップファイル:",
+    "dateLabel": "作成日時:",
+    "itemsLabel": "項目数:",
+    "imagesLabel": "画像数:",
+    "modeLabel": "復元モード:",
+    "modeMerge": "マージ (推奨)",
+    "modeMergeDesc": "現在の項目を保持し、バックアップから新しい項目を追加します。",
+    "modeOverwrite": "すべて上書き",
+    "modeOverwriteDesc": "現在の履歴と設定をバックアップで完全に置き換えます。",
+    "confirmRestore": "復元を実行",
+    "cancel": "キャンセル",
+    "restoring": "復元中...",
+    "autoDetectedTitle": "バックアップファイルを検出",
+    "previewTitle": "バックアップのプレビュー",
+    "itemsUnit": "件"
   }
 }
 
@@ -2746,15 +2863,24 @@ export const ko: TranslationKeys = {
     "skip": "건너뛰기",
     "downloadingUpdate": "백그라운드에서 업데이트 패키지 다운로드 중...",
     "updateReadyTitle": "업데이트 v{version} 준비 완료",
-    "updateReadyDesc": "클릭하여 T-Drop을 다시 시작하고 업데이트를 적용합니다.",
+    "updateReadyDesc": "밀어서 T-Drop을 다시 시작하고 업데이트를 적용합니다.",
     "restartToUpdate": "업데이트하려면 다시 시작",
     "restartToUpdateBelow": "아래에서 다시 시작하여 업데이트",
     "newUpdateAvailableBelow": "아래에 새 업데이트가 있습니다",
+    "slideToRestart": "밀어서 다시 시작",
+    "restarting": "다시 시작 중...",
+    "restartFailed": "다시 시작 실패",
     "autoDeleteTitle": "자동 삭제 타이머",
     "autoDeleteDesc": "복사한 항목 자동 삭제 (고정 항목은 유지)",
     "never": "사용 안 함",
     "capacityTitle": "기록 용량",
-    "capacityDesc": "기록에 저장되는 고정 안 됨 항목의 최대 수"
+    "capacityDesc": "기록에 저장되는 고정 안 됨 항목의 최대 수",
+    "connectingDownload": "다운로드 서버에 연결하는 중...",
+    "connecting": "연결 중...",
+    "downloadingWithPercent": "업데이트 다운로드 중 ({percent}%)...",
+    "download": "다운로드",
+    "notifyModeSubtitle": "알림 모드 · 클릭하여 다운로드",
+    "newUpdateAvailable": "새 업데이트 이용 가능 {version}"
   },
   "position": {
     "edgePlacementTitle": "가장자리 배치",
@@ -2830,12 +2956,7 @@ export const ko: TranslationKeys = {
     "moreImages": "+{count}개 이미지 더",
     "moreFiles": "+{count}개 파일 더",
     "singleFile": "1개 파일",
-    "scrollToTop": "맨 위로 스크롤",
-    "clearLast1h": "최근 1시간 지우기",
-    "clearLast6h": "최근 6시간 지우기",
-    "clearLast24h": "최근 24시간 지우기",
-    "clearAll": "전체 기록 지우기",
-    "clearAllConfirm": "확인하려면 다시 탭하세요"
+    "scrollToTop": "맨 위로 스크롤"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2889,7 +3010,9 @@ export const ko: TranslationKeys = {
     "proTip1": "Alt + C를 눌러 선반을 즉시 토글하세요.",
     "proTip2": "톱니바퀴 아이콘 (우측 상단)으로 언제든 설정에 접근하세요.",
     "proTip3": "파일을 왼쪽 가장자리로 드래그 앤 드롭하여 추가하세요.",
-    "proTip4": "텍스트 상자를 클릭한 후 클립보드 항목을 누르면 자동 붙여넣기됩니다."
+    "proTip4": "텍스트 상자를 클릭한 후 클립보드 항목을 누르면 자동 붙여넣기됩니다.",
+    "backupTitle": "백업 및 복원 아카이브 (.txa)",
+    "backupDesc": "클립보드 기록, 고정 항목 및 설정을 암호화된 .txa 아카이브로 안전하게 내보내고 언제든지 병합 또는 덮어쓰기 모드로 복원하세요."
   },
   "tray": {
     "showClipboard": "클립보드 표시",
@@ -2948,6 +3071,34 @@ export const ko: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "T-Drop이 마음에 드시면 GitHub에서 프로젝트에 별표를 고려해 주세요!",
     "version": "버전"
+  },
+  "backup": {
+    "title": "백업 및 복원 (.txa)",
+    "desc": "암호화된 백업을 생성하여 클립보드 항목, 이미지 및 설정을 안전하게 보관합니다.",
+    "exportBtn": "백업 내보내기 (.txa)",
+    "importBtn": "데이터 복원 (.txa)",
+    "exportSuccess": "암호화된 백업 생성 완료 ({items}개 항목)",
+    "exportFailed": "백업 생성 실패: {error}",
+    "importSuccess": "{count}개 항목을 성공적으로 복원했습니다",
+    "importFailed": "복원 실패: {error}",
+    "busyError": "다른 백업 또는 복원 작업이 이미 진행 중입니다.",
+    "modalTitle": "T-Drop 백업 복원",
+    "modalDesc": "보관 파일 정보를 검토하고 복원 방식을 선택하세요.",
+    "fileLabel": "백업 파일:",
+    "dateLabel": "생성 날짜:",
+    "itemsLabel": "항목 수:",
+    "imagesLabel": "이미지 수:",
+    "modeLabel": "복원 모드:",
+    "modeMerge": "데이터 병합 (권장)",
+    "modeMergeDesc": "현재 항목을 유지하고 백업에서 새 항목을 추가합니다.",
+    "modeOverwrite": "전체 덮어쓰기",
+    "modeOverwriteDesc": "현재 기록과 설정을 백업 데이터로 완전히 교체합니다.",
+    "confirmRestore": "복원 확인",
+    "cancel": "취소",
+    "restoring": "복원 중...",
+    "autoDetectedTitle": "백업 파일 감지됨",
+    "previewTitle": "백업 미리보기",
+    "itemsUnit": "개"
   }
 }
 
@@ -3005,15 +3156,24 @@ export const zhCN: TranslationKeys = {
     "skip": "跳过",
     "downloadingUpdate": "正在后台下载更新包...",
     "updateReadyTitle": "更新 v{version} 已就绪",
-    "updateReadyDesc": "点击重启 T-Drop 并应用更新。",
+    "updateReadyDesc": "滑动以重启 T-Drop 并应用更新。",
     "restartToUpdate": "重启以更新",
     "restartToUpdateBelow": "在下方重启以更新",
     "newUpdateAvailableBelow": "下方有可用的新更新",
+    "slideToRestart": "滑动以重启",
+    "restarting": "正在重启...",
+    "restartFailed": "重启失败",
     "autoDeleteTitle": "自动删除计时器",
     "autoDeleteDesc": "自动清除已复制的项（保留固定项）",
     "never": "从不",
     "capacityTitle": "历史记录容量",
-    "capacityDesc": "历史记录中存储的最大未固定项数量"
+    "capacityDesc": "历史记录中存储的最大未固定项数量",
+    "connectingDownload": "正在连接下载服务器...",
+    "connecting": "连接中...",
+    "downloadingWithPercent": "正在下载更新 ({percent}%)...",
+    "download": "下载",
+    "notifyModeSubtitle": "通知模式 · 点击下载",
+    "newUpdateAvailable": "发现新版本 {version}"
   },
   "position": {
     "edgePlacementTitle": "边缘位置",
@@ -3089,12 +3249,7 @@ export const zhCN: TranslationKeys = {
     "moreImages": "+{count} 张更多图片",
     "moreFiles": "+{count} 个更多文件",
     "singleFile": "1 个文件",
-    "scrollToTop": "滚动到顶部",
-    "clearLast1h": "清除最近 1 小时",
-    "clearLast6h": "清除最近 6 小时",
-    "clearLast24h": "清除最近 24 小时",
-    "clearAll": "清除所有历史记录",
-    "clearAllConfirm": "再次点击以确认"
+    "scrollToTop": "滚动到顶部"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3148,7 +3303,9 @@ export const zhCN: TranslationKeys = {
     "proTip1": "按 Alt + C 立即切换搁架。",
     "proTip2": "随时通过齿轮图标（右上角）访问设置。",
     "proTip3": "将文件拖放到左边缘即可添加。",
-    "proTip4": "先点击文本框，再点击剪贴板项即可自动粘贴。"
+    "proTip4": "先点击文本框，再点击剪贴板项即可自动粘贴。",
+    "backupTitle": "备份与恢复存档 (.txa)",
+    "backupDesc": "将剪贴板历史记录、固定项和设置安全导出为加密的 .txa 归档文件。可随时通过合并或覆盖模式恢复。"
   },
   "tray": {
     "showClipboard": "显示剪贴板",
@@ -3207,6 +3364,34 @@ export const zhCN: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "如果您喜欢 T-Drop，请在 GitHub 上为项目加星！",
     "version": "版本"
+  },
+  "backup": {
+    "title": "备份与恢复 (.txa)",
+    "desc": "创建加密的独立备份，在重装系统时保护剪贴板项目、图片和设置。",
+    "exportBtn": "导出备份 (.txa)",
+    "importBtn": "恢复数据 (.txa)",
+    "exportSuccess": "成功创建加密备份（{items} 项）",
+    "exportFailed": "创建备份失败：{error}",
+    "importSuccess": "成功恢复 {count} 项记录",
+    "importFailed": "恢复失败：{error}",
+    "busyError": "已有备份或恢复操作正在进行中。",
+    "modalTitle": "恢复 T-Drop 备份",
+    "modalDesc": "查看存档详情并选择数据恢复方式。",
+    "fileLabel": "备份文件:",
+    "dateLabel": "创建时间:",
+    "itemsLabel": "项目数量:",
+    "imagesLabel": "图片数量:",
+    "modeLabel": "恢复模式:",
+    "modeMerge": "合并数据（推荐）",
+    "modeMergeDesc": "保留当前项目并追加备份中的非重复项。",
+    "modeOverwrite": "全部覆盖",
+    "modeOverwriteDesc": "完全清除现有记录并使用备份数据替代。",
+    "confirmRestore": "确认恢复",
+    "cancel": "取消",
+    "restoring": "正在恢复...",
+    "autoDetectedTitle": "检测到备份文件",
+    "previewTitle": "备份文件预览",
+    "itemsUnit": "项"
   }
 }
 
@@ -3264,15 +3449,24 @@ export const zhTW: TranslationKeys = {
     "skip": "略過",
     "downloadingUpdate": "正在背景下載更新包...",
     "updateReadyTitle": "更新 v{version} 已就緒",
-    "updateReadyDesc": "點擊重新啟動 T-Drop 並套用更新。",
+    "updateReadyDesc": "滑動以重新啟動 T-Drop 並套用更新。",
     "restartToUpdate": "重新啟動以更新",
     "restartToUpdateBelow": "在下方重新啟動以更新",
     "newUpdateAvailableBelow": "下方有可用的新更新",
+    "slideToRestart": "滑動以重新啟動",
+    "restarting": "正在重新啟動...",
+    "restartFailed": "重新啟動失敗",
     "autoDeleteTitle": "自動刪除計時器",
     "autoDeleteDesc": "自動清除已複製的項目（保留固定項）",
     "never": "從不",
     "capacityTitle": "歷史記錄容量",
-    "capacityDesc": "歷史記錄中儲存的最大未固定項目數量"
+    "capacityDesc": "歷史記錄中儲存的最大未固定項目數量",
+    "connectingDownload": "正在連線下載伺服器...",
+    "connecting": "連線中...",
+    "downloadingWithPercent": "正在下載更新 ({percent}%)...",
+    "download": "下載",
+    "notifyModeSubtitle": "通知模式 · 點擊下載",
+    "newUpdateAvailable": "有新版本可用 {version}"
   },
   "position": {
     "edgePlacementTitle": "邊緣位置",
@@ -3348,12 +3542,7 @@ export const zhTW: TranslationKeys = {
     "moreImages": "+{count} 張更多圖片",
     "moreFiles": "+{count} 個更多檔案",
     "singleFile": "1 個檔案",
-    "scrollToTop": "捲動到頂部",
-    "clearLast1h": "清除最近 1 小時",
-    "clearLast6h": "清除最近 6 小時",
-    "clearLast24h": "清除最近 24 小時",
-    "clearAll": "清除所有歷史記錄",
-    "clearAllConfirm": "再次點擊以確認"
+    "scrollToTop": "捲動到頂部"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3407,7 +3596,9 @@ export const zhTW: TranslationKeys = {
     "proTip1": "按 Alt + C 立即切換層架。",
     "proTip2": "隨時透過齒輪圖示（右上角）存取設定。",
     "proTip3": "將檔案拖放到左邊緣即可新增。",
-    "proTip4": "先點擊文字方塊，再點擊剪貼簿項目即可自動貼上。"
+    "proTip4": "先點擊文字方塊，再點擊剪貼簿項目即可自動貼上。",
+    "backupTitle": "備份與還原封存 (.txa)",
+    "backupDesc": "將剪貼簿歷史記錄、釘選項目與設定安全匯出為加密的 .txa 封存檔。可隨時透過合併或覆寫模式還原。"
   },
   "tray": {
     "showClipboard": "顯示剪貼簿",
@@ -3466,6 +3657,34 @@ export const zhTW: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "如果您喜歡 T-Drop，請在 GitHub 上為專案加星！",
     "version": "版本"
+  },
+  "backup": {
+    "title": "備份與還原 (.txa)",
+    "desc": "建立加密的獨立備份，在重灌系統時保留剪貼簿項目、圖片與設定。",
+    "exportBtn": "匯出備份 (.txa)",
+    "importBtn": "還原資料 (.txa)",
+    "exportSuccess": "成功建立加密備份（{items} 項）",
+    "exportFailed": "建立備份失敗：{error}",
+    "importSuccess": "成功還原 {count} 項記錄",
+    "importFailed": "還原失敗：{error}",
+    "busyError": "已有備份或還原操作正在進行中。",
+    "modalTitle": "還原 T-Drop 備份",
+    "modalDesc": "查看封存資訊並選擇資料還原方式。",
+    "fileLabel": "備份檔案:",
+    "dateLabel": "建立時間:",
+    "itemsLabel": "項目數量:",
+    "imagesLabel": "圖片數量:",
+    "modeLabel": "還原模式:",
+    "modeMerge": "合併資料（建議）",
+    "modeMergeDesc": "保留目前項目並加入備份中的新項目。",
+    "modeOverwrite": "全部覆寫",
+    "modeOverwriteDesc": "完全清除現有記錄並以備份資料取代。",
+    "confirmRestore": "確認還原",
+    "cancel": "取消",
+    "restoring": "正在還原...",
+    "autoDetectedTitle": "偵測到備份檔案",
+    "previewTitle": "備份檔案預覽",
+    "itemsUnit": "項"
   }
 }
 
@@ -3523,15 +3742,24 @@ export const hi: TranslationKeys = {
     "skip": "छोड़ें",
     "downloadingUpdate": "बैकग्राउंड में अपडेट पैकेज डाउनलोड हो रहा है...",
     "updateReadyTitle": "अपडेट v{version} तैयार",
-    "updateReadyDesc": "T-Drop को रीस्टार्ट करने और अपडेट लागू करने के लिए क्लिक करें।",
+    "updateReadyDesc": "T-Drop को पुनः आरंभ करने और अपडेट लागू करने के लिए स्लाइड करें।",
     "restartToUpdate": "अपडेट के लिए रीस्टार्ट करें",
     "restartToUpdateBelow": "नीचे अपडेट के लिए रीस्टार्ट करें",
     "newUpdateAvailableBelow": "नीचे नया अपडेट उपलब्ध है",
+    "slideToRestart": "रीस्टार्ट करने के लिए स्लाइड करें",
+    "restarting": "पुनः आरंभ हो रहा है...",
+    "restartFailed": "रीस्टार्ट विफल",
     "autoDeleteTitle": "स्वतः-हटाने टाइमर",
     "autoDeleteDesc": "कॉपी किए गए आइटम स्वचालित रूप से हटाएँ (पिन किए गए सुरक्षित रखें)",
     "never": "कभी नहीं",
     "capacityTitle": "इतिहास क्षमता",
-    "capacityDesc": "इतिहास में संग्रहीत अधिकतम अनपिन किए गए आइटम"
+    "capacityDesc": "इतिहास में संग्रहीत अधिकतम अनपिन किए गए आइटम",
+    "connectingDownload": "डाउनलोड सर्वर से कनेक्ट हो रहा है...",
+    "connecting": "कनेक्ट हो रहा है...",
+    "downloadingWithPercent": "अपडेट डाउनलोड हो रहा है ({percent}%)...",
+    "download": "डाउनलोड करें",
+    "notifyModeSubtitle": "सूचना मोड · डाउनलोड करने के लिए क्लिक करें",
+    "newUpdateAvailable": "नया अपडेट उपलब्ध है {version}"
   },
   "position": {
     "edgePlacementTitle": "किनारा प्लेसमेंट",
@@ -3607,12 +3835,7 @@ export const hi: TranslationKeys = {
     "moreImages": "+{count} और छवियाँ",
     "moreFiles": "+{count} और फ़ाइलें",
     "singleFile": "1 फ़ाइल",
-    "scrollToTop": "शीर्ष पर स्क्रॉल करें",
-    "clearLast1h": "पिछले 1 घंटे को साफ़ करें",
-    "clearLast6h": "पिछले 6 घंटे साफ़ करें",
-    "clearLast24h": "पिछले 24 घंटे साफ़ करें",
-    "clearAll": "पूरा इतिहास साफ़ करें",
-    "clearAllConfirm": "पुष्टि करने के लिए फिर से टैप करें"
+    "scrollToTop": "शीर्ष पर स्क्रॉल करें"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3666,7 +3889,9 @@ export const hi: TranslationKeys = {
     "proTip1": "शेल्फ़ तुरंत टॉगल करने के लिए Alt + C दबाएँ।",
     "proTip2": "गियर आइकन (ऊपर दाएँ) के माध्यम से कभी भी सेटिंग्स एक्सेस करें।",
     "proTip3": "जोड़ने के लिए फ़ाइलें बाएँ किनारे पर खींचें और छोड़ें।",
-    "proTip4": "टेक्स्ट बॉक्स पर क्लिक करें, फिर स्वतः-पेस्ट के लिए क्लिपबोर्ड आइटम पर क्लिक करें।"
+    "proTip4": "टेक्स्ट बॉक्स पर क्लिक करें, फिर स्वतः-पेस्ट के लिए क्लिपबोर्ड आइटम पर क्लिक करें।",
+    "backupTitle": "बैकअप और पुनर्स्थापना संग्रह (.txa)",
+    "backupDesc": "अपने क्लिपबोर्ड इतिहास, पिन किए गए आइटम और सेटिंग्स को एक एन्क्रिप्टेड .txa संग्रह में सुरक्षित रूप से निर्यात करें।"
   },
   "tray": {
     "showClipboard": "क्लिपबोर्ड दिखाएँ",
@@ -3725,6 +3950,34 @@ export const hi: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "यदि आपको T-Drop पसंद आता है, तो कृपया GitHub पर प्रोजेक्ट को स्टार देने पर विचार करें!",
     "version": "संस्करण"
+  },
+  "backup": {
+    "title": "बैकअप और पुनर्स्थापना (.txa)",
+    "desc": "विंडोज पुनः स्थापित करने पर अपने क्लिप और सेटिंग्स को सुरक्षित रखने के लिए एन्क्रिप्टेड बैकअप बनाएं।",
+    "exportBtn": "बैकअप निर्यात करें (.txa)",
+    "importBtn": "डेटा पुनर्स्थापित करें (.txa)",
+    "exportSuccess": "एन्क्रिप्टेड बैकअप सफलतापूर्वक बनाया गया ({items} आइटम)",
+    "exportFailed": "बैकअप बनाने में विफल: {error}",
+    "importSuccess": "{count} आइटम सफलतापूर्वक पुनर्स्थापित किए गए",
+    "importFailed": "पुनर्स्थापित करने में विफल: {error}",
+    "busyError": "एक अन्य बैकअप या पुनर्स्थापना कार्य पहले से प्रगति पर है।",
+    "modalTitle": "T-Drop बैकअप पुनर्स्थापित करें",
+    "modalDesc": "संग्रह विवरण देखें और डेटा पुनर्स्थापित करने का तरीका चुनें।",
+    "fileLabel": "बैकअप फ़ाइल:",
+    "dateLabel": "निर्माण तिथि:",
+    "itemsLabel": "आइटम:",
+    "imagesLabel": "चित्र:",
+    "modeLabel": "पुनर्स्थापना मोड:",
+    "modeMerge": "मर्ज करें (अनुशंसित)",
+    "modeMergeDesc": "वर्तमान आइटम रखें और बैकअप से नए आइटम जोड़ें।",
+    "modeOverwrite": "सभी अधिलेखित करें",
+    "modeOverwriteDesc": "मौजूदा इतिहास और सेटिंग्स को पूरी तरह से बैकअप से बदलें।",
+    "confirmRestore": "पुनर्स्थापना की पुष्टि करें",
+    "cancel": "रद्द करें",
+    "restoring": "पुनर्स्थापित हो रहा है...",
+    "autoDetectedTitle": "बैकअप फ़ाइल मिली",
+    "previewTitle": "बैकअप पूर्वावलोकन",
+    "itemsUnit": "आइटम"
   }
 }
 
@@ -3782,15 +4035,24 @@ export const ar: TranslationKeys = {
     "skip": "تخطٍّ",
     "downloadingUpdate": "جارٍ تنزيل حزمة التحديث في الخلفية...",
     "updateReadyTitle": "التحديث v{version} جاهز",
-    "updateReadyDesc": "انقر لإعادة تشغيل T-Drop وتطبيق التحديث.",
+    "updateReadyDesc": "اسحب لإعادة تشغيل T-Drop وتطبيق التحديث.",
     "restartToUpdate": "إعادة التشغيل للتحديث",
     "restartToUpdateBelow": "أعد التشغيل للتحديث أدناه",
     "newUpdateAvailableBelow": "توجد تحديثات جديدة أدناه",
+    "slideToRestart": "اسحب لإعادة التشغيل",
+    "restarting": "جارٍ إعادة التشغيل...",
+    "restartFailed": "فشلت إعادة التشغيل",
     "autoDeleteTitle": "مؤقت الحذف التلقائي",
     "autoDeleteDesc": "حذف العناصر المنسوخة تلقائياً (يحافظ على المثبّتة)",
     "never": "أبداً",
     "capacityTitle": "سعة السجل",
-    "capacityDesc": "الحد الأقصى للعناصر غير المثبّتة المخزّنة في السجل"
+    "capacityDesc": "الحد الأقصى للعناصر غير المثبّتة المخزّنة في السجل",
+    "connectingDownload": "جارٍ الاتصال بخادم التنزيل...",
+    "connecting": "جارٍ الاتصال...",
+    "downloadingWithPercent": "جارٍ تنزيل التحديث ({percent}%)...",
+    "download": "تنزيل",
+    "notifyModeSubtitle": "وضع الإشعار · انقر للتنزيل",
+    "newUpdateAvailable": "يتوفر تحديث جديد {version}"
   },
   "position": {
     "edgePlacementTitle": "موضع الحافة",
@@ -3866,12 +4128,7 @@ export const ar: TranslationKeys = {
     "moreImages": "+{count} صور أخرى",
     "moreFiles": "+{count} ملفات أخرى",
     "singleFile": "ملف واحد",
-    "scrollToTop": "التمرير للأعلى",
-    "clearLast1h": "مسح الساعة الأخيرة",
-    "clearLast6h": "مسح آخر 6 ساعات",
-    "clearLast24h": "مسح آخر 24 ساعة",
-    "clearAll": "مسح كل السجل",
-    "clearAllConfirm": "اضغط مرة أخرى للتأكيد"
+    "scrollToTop": "التمرير للأعلى"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3925,7 +4182,9 @@ export const ar: TranslationKeys = {
     "proTip1": "اضغط Alt + C لتبديل الرف فوراً.",
     "proTip2": "الوصول إلى الإعدادات في أي وقت عبر أيقونة الترس (أعلى اليمين).",
     "proTip3": "اسحب وأفلت الملفات على الحافة اليسرى لإضافتها.",
-    "proTip4": "انقر على مربع نص، ثم على عنصر حافظة للّصق تلقائياً."
+    "proTip4": "انقر على مربع نص، ثم على عنصر حافظة للّصق تلقائياً.",
+    "backupTitle": "النسخ الاحتياطي والاستعادة (.txa)",
+    "backupDesc": "قم بتصدير سجل الحافظة والعناصر المثبتة والإعدادات بأمان إلى أرشيف .txa مشفر."
   },
   "tray": {
     "showClipboard": "إظهار الحافظة",
@@ -3984,6 +4243,34 @@ export const ar: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "إذا أحببت T-Drop، يُرجى النظر في تمييز المشروع بنجمة على GitHub!",
     "version": "الإصدار"
+  },
+  "backup": {
+    "title": "النسخ الاحتياطي والاستعادة (.txa)",
+    "desc": "أنشئ نسخاً احتياطية مشفرة لحفظ سجل الحافظة والإعدادات عند إعادة تثبيت Windows.",
+    "exportBtn": "تصدير نسخة احتياطية (.txa)",
+    "importBtn": "استعادة البيانات (.txa)",
+    "exportSuccess": "تم إنشاء النسخة الاحتياطية بنجاح ({items} عنصر)",
+    "exportFailed": "فشل إنشاء النسخة الاحتياطية: {error}",
+    "importSuccess": "تمت استعادة {count} عنصر بنجاح",
+    "importFailed": "فشلت الاستعادة: {error}",
+    "busyError": "هناك عملية نسخ احتياطي أو استعادة قيد التشغيل بالفعل.",
+    "modalTitle": "استعادة نسخة T-Drop الاحتياطية",
+    "modalDesc": "راجع تفاصيل الأرشيف واختر طريقة استعادة البيانات.",
+    "fileLabel": "ملف النسخة الاحتياطية:",
+    "dateLabel": "تاريخ الإنشاء:",
+    "itemsLabel": "العناصر:",
+    "imagesLabel": "الصور:",
+    "modeLabel": "وضع الاستعادة:",
+    "modeMerge": "دمج (موصى به)",
+    "modeMergeDesc": "الاحتفاظ بالعناصر الحالية وإضافة عناصر جديدة من النسخة الاحتياطية.",
+    "modeOverwrite": "استبدال الكل",
+    "modeOverwriteDesc": "استبدال السجل والإعدادات الحالية بالكامل بالنسخة الاحتياطية.",
+    "confirmRestore": "تأكيد الاستعادة",
+    "cancel": "إلغاء",
+    "restoring": "جارٍ الاستعادة...",
+    "autoDetectedTitle": "تم اكتشاف ملف نسخة احتياطية",
+    "previewTitle": "معاينة النسخة الاحتياطية",
+    "itemsUnit": "عنصر"
   }
 }
 
@@ -4041,15 +4328,24 @@ export const fa: TranslationKeys = {
     "skip": "فعلاً نه",
     "downloadingUpdate": "بسته آپدیت داره توی پس‌زمینه دانلود می‌شه...",
     "updateReadyTitle": "آپدیت نسخه {version} آماده‌ست",
-    "updateReadyDesc": "کلیک کن تا T-Drop دوباره اجرا بشه و آپدیت نصب بشه.",
+    "updateReadyDesc": "برای راه‌اندازی مجدد T-Drop و اعمال به‌روزرسانی بکشید.",
     "restartToUpdate": "اجرای دوباره و نصب آپدیت",
     "restartToUpdateBelow": "برای نصب آپدیت، از گزینه پایین برنامه رو دوباره اجرا کن",
     "newUpdateAvailableBelow": "یه آپدیت جدید پایین منتظرته",
+    "slideToRestart": "برای شروع مجدد بکشید",
+    "restarting": "در حال راه‌اندازی مجدد...",
+    "restartFailed": "راه‌اندازی مجدد ناموفق بود",
     "autoDeleteTitle": "حذف خودکار",
     "autoDeleteDesc": "آیتم‌های کپی‌شده خودکار پاک بشن (سنجاق‌شده‌ها می‌مونن)",
     "never": "هیچ‌وقت",
     "capacityTitle": "ظرفیت تاریخچه",
-    "capacityDesc": "بیشترین تعداد آیتم سنجاق‌نشده‌ای که توی تاریخچه نگه داشته می‌شه"
+    "capacityDesc": "بیشترین تعداد آیتم سنجاق‌نشده‌ای که توی تاریخچه نگه داشته می‌شه",
+    "connectingDownload": "در حال اتصال به سرور دانلود...",
+    "connecting": "در حال اتصال...",
+    "downloadingWithPercent": "در حال دانلود به‌روزرسانی ({percent}%)...",
+    "download": "دانلود",
+    "notifyModeSubtitle": "حالت اعلان · برای دانلود کلیک کنید",
+    "newUpdateAvailable": "به‌روزرسانی جدید موجود است {version}"
   },
   "position": {
     "edgePlacementTitle": "لبه برنامه",
@@ -4125,12 +4421,7 @@ export const fa: TranslationKeys = {
     "moreImages": "+{count} عکس دیگه",
     "moreFiles": "+{count} فایل دیگه",
     "singleFile": "۱ فایل",
-    "scrollToTop": "برو بالا",
-    "clearLast1h": "پاک کردن یک ساعت گذشته",
-    "clearLast6h": "پاک کردن ۶ ساعت گذشته",
-    "clearLast24h": "پاک کردن ۲۴ ساعت گذشته",
-    "clearAll": "پاک کردن کل تاریخچه",
-    "clearAllConfirm": "برای تأیید دوباره ضربه بزنید"
+    "scrollToTop": "برو بالا"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4184,7 +4475,9 @@ export const fa: TranslationKeys = {
     "proTip1": "با Alt + C قفسه رو یه‌لحظه‌ای باز یا بسته کن.",
     "proTip2": "از آیکن چرخ‌دنده بالا سمت راست، هر وقت خواستی برو تنظیمات.",
     "proTip3": "برای اضافه کردن فایل‌ها، بکش و بندازشون روی لبه چپ.",
-    "proTip4": "اول روی کادر متن کلیک کن، بعد روی یه آیتم کلیپ‌بورد بزن تا خودش جای‌گذاری بشه."
+    "proTip4": "اول روی کادر متن کلیک کن، بعد روی یه آیتم کلیپ‌بورد بزن تا خودش جای‌گذاری بشه.",
+    "backupTitle": "پشتیبان‌گیری و بازیابی (.txa)",
+    "backupDesc": "تاریخچه کلیپ‌بورد، موارد پین‌شده و تنظیمات خود را به یک آرشیو رمزگذاری‌شده .txa صادر کنید."
   },
   "tray": {
     "showClipboard": "کلیپ‌بورد رو نشون بده",
@@ -4243,6 +4536,34 @@ export const fa: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "T-Drop رو دوست داری؟ با یه ستاره توی GitHub حمایتش کن!",
     "version": "نسخه"
+  },
+  "backup": {
+    "title": "پشتیبان‌گیری و بازیابی (.txa)",
+    "desc": "پشتیبان‌های رمزگذاری‌شده ایجاد کنید تا تنظیمات و کلیپ‌ها حفظ شوند.",
+    "exportBtn": "خروجی پشتیبان (.txa)",
+    "importBtn": "بازیابی داده‌ها (.txa)",
+    "exportSuccess": "پشتیبان با موفقیت ایجاد شد ({items} مورد)",
+    "exportFailed": "خطا در ایجاد پشتیبان: {error}",
+    "importSuccess": "{count} مورد با موفقیت بازیابی شد",
+    "importFailed": "خطا در بازیابی: {error}",
+    "busyError": "عملیات پشتیبان‌گیری یا بازیابی دیگری در حال انجام است.",
+    "modalTitle": "بازیابی پشتیبان T-Drop",
+    "modalDesc": "جزئیات آرشیو را بررسی کرده و حالت بازیابی را انتخاب کنید.",
+    "fileLabel": "فایل پشتیبان:",
+    "dateLabel": "تاریخ ایجاد:",
+    "itemsLabel": "تعداد موارد:",
+    "imagesLabel": "تصاویر:",
+    "modeLabel": "حالت بازیابی:",
+    "modeMerge": "ادغام (پیشنهادی)",
+    "modeMergeDesc": "موارد فعلی را نگه داشته و موارد جدید را اضافه کنید.",
+    "modeOverwrite": "بازنویسی کامل",
+    "modeOverwriteDesc": "جایگزینی کامل تاریخچه و تنظیمات با فایل پشتیبان.",
+    "confirmRestore": "تأیید بازیابی",
+    "cancel": "لغو",
+    "restoring": "در حال بازیابی...",
+    "autoDetectedTitle": "فایل پشتیبان شناسایی شد",
+    "previewTitle": "پیش‌نمایش پشتیبان",
+    "itemsUnit": "مورد"
   }
 }
 
@@ -4300,15 +4621,24 @@ export const bn: TranslationKeys = {
     "skip": "এড়িয়ে যান",
     "downloadingUpdate": "ব্যাকগ্রাউন্ডে আপডেট প্যাকেজ ডাউনলোড হচ্ছে...",
     "updateReadyTitle": "আপডেট v{version} প্রস্তুত",
-    "updateReadyDesc": "T-Drop পুনরায় চালু এবং আপডেট প্রয়োগ করতে ক্লিক করুন।",
+    "updateReadyDesc": "T-Drop পুনরায় চালু এবং আপডেট প্রয়োগ করতে স্লাইড করুন।",
     "restartToUpdate": "আপডেট করতে পুনরায় চালু করুন",
     "restartToUpdateBelow": "নিচে আপডেট করতে পুনরায় চালু করুন",
     "newUpdateAvailableBelow": "নিচে নতুন আপডেট উপলব্ধ",
+    "slideToRestart": "রিস্টার্ট করতে স্লাইড করুন",
+    "restarting": "পুনরায় চালু হচ্ছে...",
+    "restartFailed": "রিস্টার্ট ব্যর্থ হয়েছে",
     "autoDeleteTitle": "স্বয়ংক্রিয় মুছে ফেলার টাইমার",
     "autoDeleteDesc": "কপি করা আইটেম স্বয়ংক্রিয়ভাবে মুছে ফেলুন (পিন করা সংরক্ষণ)",
     "never": "কখনও না",
     "capacityTitle": "ইতিহাস ধারণক্ষমতা",
-    "capacityDesc": "ইতিহাসে সংরক্ষিত সর্বোচ্চ আনপিন করা আইটেম"
+    "capacityDesc": "ইতিহাসে সংরক্ষিত সর্বোচ্চ আনপিন করা আইটেম",
+    "connectingDownload": "ডাউনলোড সার্ভারের সাথে সংযোগ স্থাপন করা হচ্ছে...",
+    "connecting": "সংযোগ করা হচ্ছে...",
+    "downloadingWithPercent": "আপডেট ডাউনলোড হচ্ছে ({percent}%)...",
+    "download": "ডাউনলোড",
+    "notifyModeSubtitle": "বিজ্ঞপ্তি মোড · ডাউনলোড করতে ক্লিক করুন",
+    "newUpdateAvailable": "নতুন আপডেট উপলব্ধ {version}"
   },
   "position": {
     "edgePlacementTitle": "প্রান্ত স্থাপনা",
@@ -4384,12 +4714,7 @@ export const bn: TranslationKeys = {
     "moreImages": "+{count} টি অতিরিক্ত ছবি",
     "moreFiles": "+{count} টি অতিরিক্ত ফাইল",
     "singleFile": "১টি ফাইল",
-    "scrollToTop": "শীর্ষে স্ক্রোল করুন",
-    "clearLast1h": "গত ১ ঘণ্টা মুছুন",
-    "clearLast6h": "গত ৬ ঘণ্টা মুছুন",
-    "clearLast24h": "গত ২৪ ঘণ্টা মুছুন",
-    "clearAll": "সব ইতিহাস মুছুন",
-    "clearAllConfirm": "নিশ্চিত করতে আবার ট্যাপ করুন"
+    "scrollToTop": "শীর্ষে স্ক্রোল করুন"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4443,7 +4768,9 @@ export const bn: TranslationKeys = {
     "proTip1": "শেলফ তাৎক্ষণিকভাবে টগল করতে Alt + C চাপুন।",
     "proTip2": "গিয়ার আইকনের (উপর ডান) মাধ্যমে যেকোনো সময় সেটিংস অ্যাক্সেস করুন।",
     "proTip3": "যোগ করতে ফাইলগুলি বাম প্রান্তে টেনে আনুন এবং ছাড়ুন।",
-    "proTip4": "টেক্সট বক্সে ক্লিক করুন, তারপর স্বয়ংক্রিয় পেস্ট করতে ক্লিপবোর্ড আইটেমে ক্লিক করুন।"
+    "proTip4": "টেক্সট বক্সে ক্লিক করুন, তারপর স্বয়ংক্রিয় পেস্ট করতে ক্লিপবোর্ড আইটেমে ক্লিক করুন।",
+    "backupTitle": "ব্যাকআপ ও পুনরুদ্ধার আর্কাইভ (.txa)",
+    "backupDesc": "আপনার ক্লিপবোর্ড ইতিহাস, পিন করা আইটেম এবং সেটিংস একটি এনক্রিপ্ট করা .txa আর্কাইভে রপ্তানি করুন।"
   },
   "tray": {
     "showClipboard": "ক্লিপবোর্ড দেখান",
@@ -4502,6 +4829,34 @@ export const bn: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "আপনি যদি T-Drop পছন্দ করেন, তবে GitHub-এ প্রকল্পে তারা দেওয়ার কথা বিবেচনা করুন!",
     "version": "সংস্করণ"
+  },
+  "backup": {
+    "title": "ব্যাকআপ ও পুনরুদ্ধার (.txa)",
+    "desc": "উইন্ডোজ পুনরায় ইনস্টল করার সময় ডেটা সুরক্ষিত রাখতে এনক্রিপ্ট করা ব্যাকআপ তৈরি করুন।",
+    "exportBtn": "ব্যাকআপ রপ্তানি (.txa)",
+    "importBtn": "ডেটা পুনরুদ্ধার (.txa)",
+    "exportSuccess": "এনক্রিপ্ট করা ব্যাকআপ সফলভাবে তৈরি হয়েছে ({items} আইটেম)",
+    "exportFailed": "ব্যাকআপ তৈরি ব্যর্থ হয়েছে: {error}",
+    "importSuccess": "{count} আইটেম সফলভাবে পুনরুদ্ধার করা হয়েছে",
+    "importFailed": "পুনরুদ্ধার ব্যর্থ হয়েছে: {error}",
+    "busyError": "অন্য একটি ব্যাকআপ বা পুনরুদ্ধার প্রক্রিয়া চলছে।",
+    "modalTitle": "T-Drop ব্যাকআপ পুনরুদ্ধার",
+    "modalDesc": "আর্কাইভ বিবরণ পর্যালোচনা করুন এবং পুনরুদ্ধারের মোড নির্বাচন করুন।",
+    "fileLabel": "ব্যাকআপ ফাইল:",
+    "dateLabel": "তৈরির তারিখ:",
+    "itemsLabel": "আইটেম:",
+    "imagesLabel": "ছবি:",
+    "modeLabel": "পুনরুদ্ধার মোড:",
+    "modeMerge": "একত্রীকরণ (প্রস্তাবিত)",
+    "modeMergeDesc": "বর্তমান আইটেমগুলি রাখুন এবং ব্যাকআপ থেকে নতুন আইটেম যুক্ত করুন।",
+    "modeOverwrite": "সম্পূর্ণ ওভাররাইট",
+    "modeOverwriteDesc": "বর্তমান ইতিহাস এবং সেটিংস সম্পূর্ণভাবে ব্যাকআপ দিয়ে প্রতিস্থাপন করুন।",
+    "confirmRestore": "পুনরুদ্ধার নিশ্চিত করুন",
+    "cancel": "বাতিল",
+    "restoring": "পুনরুদ্ধার করা হচ্ছে...",
+    "autoDetectedTitle": "ব্যাকআপ ফাইল সনাক্ত করা হয়েছে",
+    "previewTitle": "ব্যাকআপ প্রাকদর্শন",
+    "itemsUnit": "আইটেম"
   }
 }
 
@@ -4559,15 +4914,24 @@ export const tr: TranslationKeys = {
     "skip": "Atla",
     "downloadingUpdate": "Güncelleme paketi arka planda indiriliyor...",
     "updateReadyTitle": "Güncelleme v{version} Hazır",
-    "updateReadyDesc": "T-Drop'u yeniden başlatmak ve güncellemeyi uygulamak için tıklayın.",
+    "updateReadyDesc": "T-Drop'u yeniden başlatmak ve güncellemeyi uygulamak için kaydırın.",
     "restartToUpdate": "Güncellemek için yeniden başlat",
     "restartToUpdateBelow": "Aşağıda güncellemek için yeniden başlat",
     "newUpdateAvailableBelow": "Aşağıda yeni güncelleme mevcut",
+    "slideToRestart": "Yeniden başlatmak için kaydırın",
+    "restarting": "Yeniden başlatılıyor...",
+    "restartFailed": "Yeniden başlatılamadı",
     "autoDeleteTitle": "Otomatik silme zamanlayıcısı",
     "autoDeleteDesc": "Kopyalanan öğeleri otomatik temizle (Sabitlenenleri korur)",
     "never": "Asla",
     "capacityTitle": "Geçmiş kapasitesi",
-    "capacityDesc": "Geçmişte saklanan en fazla sabitlenmemiş öğe sayısı"
+    "capacityDesc": "Geçmişte saklanan en fazla sabitlenmemiş öğe sayısı",
+    "connectingDownload": "İndirme sunucusuna bağlanılıyor...",
+    "connecting": "Bağlanılıyor...",
+    "downloadingWithPercent": "Güncelleme indiriliyor ({percent}%)...",
+    "download": "İndir",
+    "notifyModeSubtitle": "Bildirim modu · İndirmek için tıklayın",
+    "newUpdateAvailable": "Yeni güncelleme mevcut {version}"
   },
   "position": {
     "edgePlacementTitle": "Kenar Yerleşimi",
@@ -4643,12 +5007,7 @@ export const tr: TranslationKeys = {
     "moreImages": "+{count} görsel daha",
     "moreFiles": "+{count} dosya daha",
     "singleFile": "1 dosya",
-    "scrollToTop": "Başa kaydır",
-    "clearLast1h": "Son 1 saati temizle",
-    "clearLast6h": "Son 6 saati temizle",
-    "clearLast24h": "Son 24 saati temizle",
-    "clearAll": "Tüm geçmişi temizle",
-    "clearAllConfirm": "Onaylamak için tekrar dokunun"
+    "scrollToTop": "Başa kaydır"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4702,7 +5061,9 @@ export const tr: TranslationKeys = {
     "proTip1": "Rafı anında açıp kapatmak için Alt + C tuşlarına basın.",
     "proTip2": "Çark simgesi (sağ üst) üzerinden istediğiniz zaman ayarlara erişin.",
     "proTip3": "Eklemek için dosyaları sol kenara sürükleyip bırakın.",
-    "proTip4": "Bir metin kutusuna, ardından otomatik yapıştırmak için bir pano öğesine tıklayın."
+    "proTip4": "Bir metin kutusuna, ardından otomatik yapıştırmak için bir pano öğesine tıklayın.",
+    "backupTitle": "Yedekleme ve Geri Yükleme Arşivi (.txa)",
+    "backupDesc": "Pano geçmişinizi, sabitlenen öğeleri ve ayarları şifreli bir .txa arşivine aktarın. İstediğiniz zaman Birleştir veya Üzerine Yaz modlarıyla geri yükleyin."
   },
   "tray": {
     "showClipboard": "Panoyu Göster",
@@ -4761,6 +5122,34 @@ export const tr: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "T-Drop'u beğendiyseniz, lütfen GitHub'da projeye yıldız vermeyi düşünün!",
     "version": "Sürüm"
+  },
+  "backup": {
+    "title": "Yedekleme ve Geri Yükleme (.txa)",
+    "desc": "Windows yeniden yüklemelerinde pano öğelerini, resimleri ve ayarları korumak için şifreli bağımsız yedekler oluşturun.",
+    "exportBtn": "Yedeği Dışa Aktar (.txa)",
+    "importBtn": "Verileri Geri Yükle (.txa)",
+    "exportSuccess": "Şifreli yedek başarıyla oluşturuldu ({items} öğe)",
+    "exportFailed": "Yedekleme oluşturulamadı: {error}",
+    "importSuccess": "{count} öğe başarıyla geri yüklendi",
+    "importFailed": "Geri yükleme başarısız: {error}",
+    "busyError": "Başka bir yedekleme veya geri yükleme işlemi zaten devam ediyor.",
+    "modalTitle": "T-Drop Yedeğini Geri Yükle",
+    "modalDesc": "Arşiv ayrıntılarını inceleyin ve verilerinizi nasıl geri yükleyeceğinizi seçin.",
+    "fileLabel": "Yedek Dosyası:",
+    "dateLabel": "Oluşturulma Tarihi:",
+    "itemsLabel": "Öğe Sayısı:",
+    "imagesLabel": "Resim Sayısı:",
+    "modeLabel": "Geri Yükleme Modu:",
+    "modeMerge": "Birleştir (Önerilen)",
+    "modeMergeDesc": "Mevcut öğeleri koruyun ve yedekten yeni öğeleri ekleyin.",
+    "modeOverwrite": "Tümünün Üzerine Yaz",
+    "modeOverwriteDesc": "Mevcut geçmişi ve ayarları tamamen yedekle değiştirin.",
+    "confirmRestore": "Geri Yüklemeyi Onayla",
+    "cancel": "İptal",
+    "restoring": "Geri yükleniyor...",
+    "autoDetectedTitle": "Yedek Dosyası Algılandı",
+    "previewTitle": "Yedek Önizlemesi",
+    "itemsUnit": "öğe"
   }
 }
 
@@ -4770,19 +5159,12 @@ export const vi: TranslationKeys = {
     "text": "Văn bản",
     "links": "Liên kết",
     "images": "Hình ảnh",
-    "files": "Tệp",
-    "colors": "Màu sắc",
-    "title": "Lọc theo loại"
+    "files": "Tệp"
   },
   "tabs": {
     "behaviour": "Hành vi",
     "position": "Vị trí",
-    "appearance": "Giao diện",
-    "generalStartup": "Chung & Khởi động",
-    "activationShortcuts": "Phím tắt & Kích hoạt",
-    "clipboardRules": "Quy tắc bảng tạm",
-    "storageRetention": "Lưu trữ & Giới hạn",
-    "updates": "Cập nhật"
+    "appearance": "Giao diện"
   },
   "header": {
     "searchPlaceholder": "Tìm trong lịch sử...",
@@ -4825,31 +5207,24 @@ export const vi: TranslationKeys = {
     "skip": "Bỏ qua",
     "downloadingUpdate": "Đang tải xuống gói cập nhật trong nền...",
     "updateReadyTitle": "Cập nhật v{version} đã sẵn sàng",
-    "updateReadyDesc": "Nhấp để khởi động lại T-Drop và áp dụng cập nhật.",
+    "updateReadyDesc": "Kéo để khởi động lại T-Drop và áp dụng cập nhật.",
     "restartToUpdate": "Khởi động lại để cập nhật",
     "restartToUpdateBelow": "Khởi động lại để cập nhật bên dưới",
     "newUpdateAvailableBelow": "Có bản cập nhật mới bên dưới",
+    "slideToRestart": "Kéo để khởi động lại",
+    "restarting": "Đang khởi động lại...",
+    "restartFailed": "Khởi động lại thất bại",
     "autoDeleteTitle": "Bộ hẹn giờ tự động xóa",
     "autoDeleteDesc": "Tự động thanh lọc các mục đã sao chép (giữ mục đã ghim)",
     "never": "Không bao giờ",
     "capacityTitle": "Dung lượng lịch sử",
     "capacityDesc": "Số mục chưa ghim tối đa được lưu trong lịch sử",
-    "toggleHotkeyTitle": "Phím tắt bật/tắt toàn cục",
-    "toggleHotkeyDesc": "Bấm tổ hợp phím này ở bất cứ đâu để mở hoặc ẩn T-Drop",
-    "hotkeyEdit": "Sửa",
-    "hotkeyRecording": "Bấm tổ hợp phím...",
-    "hotkeyCancel": "Hủy",
-    "hotkeyReset": "Đặt lại mặc định ({shortcut})",
+    "connectingDownload": "Đang kết nối máy chủ tải về...",
+    "connecting": "Đang kết nối...",
     "downloadingWithPercent": "Đang tải bản cập nhật ({percent}%)...",
-    "updateLabelAvailable": "Có bản cập nhật mới",
-    "updateLabelDownloading": "Đang tải bản cập nhật...",
-    "updateLabelReady": "Bản cập nhật đã sẵn sàng",
-    "updateModeAuto": "Tự động",
-    "updateModeNotify": "Chỉ thông báo",
-    "updateModeNotifyDesc": "Thông báo khi có bản cập nhật mới mà không tự động tải",
-    "updateModeOff": "Tắt",
-    "restarting": "Đang khởi động lại...",
-    "restartFailed": "Không thể khởi động lại ứng dụng" 
+    "download": "Tải về",
+    "notifyModeSubtitle": "Chế độ thông báo · Bấm để tải về",
+    "newUpdateAvailable": "Có bản cập nhật mới {version}"
   },
   "position": {
     "edgePlacementTitle": "Vị trí mép",
@@ -4875,13 +5250,7 @@ export const vi: TranslationKeys = {
     "edgeTriggerThicknessTitle": "Độ dày kích hoạt mép",
     "edgeTriggerThicknessDesc": "Độ dày vật lý của dải kích hoạt vô hình",
     "panelHeightTitle": "Chiều cao bảng",
-    "panelHeightDesc": "Kích thước dọc của giá bảng tạm",
-    "horizontalPositionTitle": "Căn lề ngang",
-    "horizontalPositionDesc": "Điều chỉnh vị trí bảng theo chiều ngang cạnh màn hình",
-    "left": "Trái",
-    "right": "Phải",
-    "topEdge": "Cạnh trên",
-    "loadingDisplays": "Đang dò tìm màn hình..." 
+    "panelHeightDesc": "Kích thước dọc của giá bảng tạm"
   },
   "appearance": {
     "copyIndicatorTitle": "Chỉ báo sao chép",
@@ -4903,9 +5272,7 @@ export const vi: TranslationKeys = {
     "logoStyle": "Logo",
     "tickStyle": "Dấu kiểm",
     "copyStyle": "Sao chép",
-    "sparkleStyle": "Lấp lánh",
-    "closeStyleSelector": "Đóng bảng chọn kiểu",
-    "openStyleSelector": "Chọn kiểu chỉ báo" 
+    "sparkleStyle": "Lấp lánh"
   },
   "item": {
     "copy": "Sao chép",
@@ -4933,14 +5300,7 @@ export const vi: TranslationKeys = {
     "moreImages": "+{count} hình ảnh nữa",
     "moreFiles": "+{count} tệp nữa",
     "singleFile": "1 tệp",
-    "scrollToTop": "Cuộn lên đầu",
-    "clearAll": "Xóa tất cả",
-    "clearAllConfirm": "Bạn có chắc chắn muốn xóa tất cả mục chưa ghim?",
-    "copiedTimes": "Đã chép {count} lần",
-    "imagePlaceholder": "Hình ảnh",
-    "clearLast1h": "Xóa 1 giờ qua",
-    "clearLast6h": "Xóa 6 giờ qua",
-    "clearLast24h": "Xóa 24 giờ qua"
+    "scrollToTop": "Cuộn lên đầu"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4994,7 +5354,9 @@ export const vi: TranslationKeys = {
     "proTip1": "Nhấn Alt + C để chuyển đổi giá ngay lập tức.",
     "proTip2": "Truy cập cài đặt bất cứ lúc nào qua biểu tượng bánh răng (trên cùng bên phải).",
     "proTip3": "Kéo & thả tệp vào mép trái để thêm chúng.",
-    "proTip4": "Nhấp vào hộp văn bản, sau đó nhấp vào một mục bảng tạm để tự động dán."
+    "proTip4": "Nhấp vào hộp văn bản, sau đó nhấp vào một mục bảng tạm để tự động dán.",
+    "backupTitle": "Sao lưu & Khôi phục dữ liệu (.txa)",
+    "backupDesc": "Đóng gói toàn bộ lịch sử, mục đã ghim và cài đặt vào tệp .txa được mã hóa an toàn. Dễ dàng chuyển sang máy mới hoặc khôi phục bất cứ lúc nào với 2 chế độ Gộp hoặc Ghi đè."
   },
   "tray": {
     "showClipboard": "Hiển thị Bảng tạm",
@@ -5030,23 +5392,14 @@ export const vi: TranslationKeys = {
     "copyFile": "Sao chép Tệp",
     "clickToPasteDrag": "Nhấp để dán · Kéo để di chuyển",
     "openInExplorer": "Mở vị trí trong Explorer",
-    "current": "Hiện tại",
-    "clickToDeselect": "Bấm để bỏ chọn",
-    "clickToSelect": "Bấm để chọn",
-    "deselectItem": "Bỏ chọn mục",
-    "selectItem": "Chọn mục",
-    "clickToPasteImageDrag": "Bấm để dán · Kéo để thả",
-    "copied": "Đã sao chép!" 
+    "current": "Hiện tại"
   },
   "toast": {
     "copiedToClipboard": "Đã sao chép vào bảng tạm",
     "itemDeleted": "Đã xóa mục",
     "itemPinned": "Đã ghim mục",
     "itemUnpinned": "Đã bỏ ghim mục",
-    "settingsSaved": "Đã lưu cài đặt",
-    "shortcutUpdated": "Đã đổi phím tắt sang {shortcut}",
-    "clearFailed": "Không thể xóa các mục",
-    "deleteFailed": "Không thể xóa mục" 
+    "settingsSaved": "Đã lưu cài đặt"
   },
   "footer": {
     "communityAndSupport": "Cộng đồng & Hỗ trợ",
@@ -5057,94 +5410,39 @@ export const vi: TranslationKeys = {
     "quitTitle": "Thoát T-Drop",
     "quitDesc": "Đóng ứng dụng và dừng quy trình nền",
     "supportPromo": "T-Drop hoàn toàn miễn phí và mã nguồn mở. Nếu ứng dụng giúp ích cho công việc hằng ngày của bạn, hãy cân nhắc ủng hộ quá trình phát triển để ứng dụng ngày càng tốt hơn!",
-    "supportTagline": "T-Drop hoàn toàn miễn phí và mã nguồn mở.", 
     "supportOnKofi": "Ủng hộ tác giả (Quét mã QR)",
     "starOnGithub": "Đánh sao trên GitHub",
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Nếu bạn thích T-Drop, hãy cân nhắc đánh sao cho dự án trên GitHub!",
-    "version": "Phiên bản",
-    "donateTitle": "Ủng hộ tác giả (MB Bank)",
-    "bankName": "Ngân hàng:",
-    "accountNumber": "Số tài khoản:",
-    "accountHolder": "Chủ tài khoản:",
-    "copy": "Sao chép",
-    "copied": "✓ Đã chép",
-    "donateNote": "Quét mã VietQR trên bất kỳ ứng dụng ngân hàng hoặc ví điện tử để ủng hộ."
-  },
-  "groups": {
-    "general": "Cài đặt chung",
-    "startup": "Khởi động cùng hệ thống",
-    "privacy": "Quyền riêng tư",
-    "feedback": "Phản hồi",
-    "shortcuts": "Phím tắt",
-    "backup": "Sao lưu & Khôi phục",
-    "alignment": "Căn lề hiển thị",
-    "displayMonitor": "Màn hình hiển thị",
-    "locationHint": "Gợi ý vị trí cạnh",
-    "triggerPosition": "Vị trí kích hoạt",
-    "hoverZoneLength": "Độ dài vùng rê chuột",
-    "triggerThickness": "Độ dày vùng kích hoạt",
-    "panelHeight": "Chiều cao bảng",
-    "copyBeacon": "Chỉ báo sao chép",
-    "beaconStyle": "Kiểu chỉ báo",
-    "textSize": "Cỡ chữ",
-    "audioFeedback": "Âm thanh & Phản hồi",
-    "languageSelectDesc": "Chọn ngôn ngữ hiển thị giao diện",
-    "keyboardShortcut": "Phím tắt",
-    "aboutEdgeDrop": "Về T-Drop",
-    "clipboardBehaviour": "Hành vi bảng tạm",
-    "edgeHintPulseDesc": "Hiệu ứng chỉ báo vùng kích hoạt",
-    "fullscreenProtection": "Chế độ toàn màn hình",
-    "hoverActivation": "Kích hoạt bằng rê chuột",
-    "restartCleanup": "Dọn dẹp khi khởi động lại",
-    "storageCapacity": "Dung lượng lưu trữ",
-    "toggleHotkeyPressDesc": "Bấm tổ hợp phím để ghi nhận phím tắt mới",
-    "updates": "Cập nhật" 
-  },
-  "common": {
-    "close": "Đóng",
-    "cancel": "Hủy",
-    "save": "Lưu",
-    "ok": "Đồng ý"
+    "version": "Phiên bản"
   },
   "backup": {
-    "title": "Sao lưu & Khôi phục",
-    "desc": "Xuất lịch sử bảng tạm, mục đã ghim và cài đặt ra tệp sao lưu (.txa) hoặc khôi phục từ bản sao lưu trước đó.",
-    "exportBtn": "Sao lưu (.txa)",
-    "importBtn": "Khôi phục (.txa)",
-    "exportSuccess": "Đã xuất bản sao lưu thành công!",
-    "exportFailed": "Không thể xuất bản sao lưu.",
-    "importSuccess": "Khôi phục thành công {count} mục!",
-    "importFailed": "Không thể khôi phục: {error}",
-    "autoDetectedTitle": "Phát hiện bản sao lưu",
-    "previewTitle": "Xem trước bản sao lưu",
-    "confirmRestore": "Xác nhận khôi phục",
-    "modeMerge": "Gộp với dữ liệu hiện tại",
-    "modeMergeDesc": "Thêm các mục từ sao lưu mà không xóa dữ liệu hiện có.",
-    "modeOverwrite": "Ghi đè (Thay thế toàn bộ)",
-    "modeOverwriteDesc": "Xóa toàn bộ dữ liệu hiện tại và thay thế bằng bản sao lưu.",
-    "items": "Số lượng",
-    "itemsUnit": "mục",
-    "createdAt": "Thời gian tạo",
-    "file": "Tệp sao lưu",
-    "restoring": "Đang khôi phục...",
-    "cancel": "Hủy",
+    "title": "Sao lưu & Khôi phục (.txa)",
+    "desc": "Tạo bản sao lưu mã hóa độc quyền để bảo vệ lịch sử bảng tạm, hình ảnh và cài đặt khi cài lại Windows.",
+    "exportBtn": "Xuất bản sao lưu (.txa)",
+    "importBtn": "Khôi phục dữ liệu (.txa)",
+    "exportSuccess": "Đã tạo bản sao lưu mã hóa thành công ({items} mục)",
+    "exportFailed": "Không thể tạo sao lưu: {error}",
+    "importSuccess": "Đã khôi phục thành công {count} mục vào lịch sử",
+    "importFailed": "Không thể khôi phục sao lưu: {error}",
     "busyError": "Một tiến trình sao lưu hoặc khôi phục đang được thực hiện.",
     "modalTitle": "Khôi phục dữ liệu T-Drop",
     "modalDesc": "Xem thông tin tệp sao lưu và chọn cách thức khôi phục dữ liệu.",
-    "fileLabel": "Tệp sao lưu",
-    "dateLabel": "Ngày tạo",
-    "itemsLabel": "Số mục",
-    "imagesLabel": "Số hình ảnh",
-    "modeLabel": "Chế độ khôi phục"
-  },
-  "emoji": {
-    "categories": "Danh mục",
-    "clearRecents": "Xóa biểu tượng gần đây",
-    "emptyRecents": "Chưa có biểu tượng gần đây",
-    "loadFailed": "Không thể tải biểu tượng cảm xúc",
-    "open": "Bảng chọn Emoji",
-    "skinTone": "Tông màu da"
+    "fileLabel": "Tệp sao lưu:",
+    "dateLabel": "Thời gian tạo:",
+    "itemsLabel": "Số lượng mục:",
+    "imagesLabel": "Hình ảnh:",
+    "modeLabel": "Chế độ khôi phục:",
+    "modeMerge": "Gộp dữ liệu (Khuyên dùng)",
+    "modeMergeDesc": "Giữ nguyên các mục hiện có và thêm các mục mới từ bản sao lưu.",
+    "modeOverwrite": "Ghi đè toàn bộ",
+    "modeOverwriteDesc": "Thay thế hoàn toàn lịch sử và cài đặt bằng dữ liệu trong bản sao lưu.",
+    "confirmRestore": "Xác nhận khôi phục",
+    "cancel": "Hủy",
+    "restoring": "Đang khôi phục...",
+    "autoDetectedTitle": "Phát hiện bản sao lưu T-Drop",
+    "previewTitle": "Xem trước bản sao lưu",
+    "itemsUnit": "mục"
   }
 }
 
@@ -5202,15 +5500,24 @@ export const pl: TranslationKeys = {
     "skip": "Pomiń",
     "downloadingUpdate": "Pobieranie pakietu aktualizacji w tle...",
     "updateReadyTitle": "Aktualizacja v{version} gotowa",
-    "updateReadyDesc": "Kliknij, aby ponownie uruchomić T-Drop i zastosować aktualizację.",
+    "updateReadyDesc": "Przesuń, aby zrestartować T-Drop i zastosować aktualizację.",
     "restartToUpdate": "Uruchom ponownie, aby zaktualizować",
     "restartToUpdateBelow": "Uruchom ponownie, aby zaktualizować poniżej",
     "newUpdateAvailableBelow": "Nowa aktualizacja dostępna poniżej",
+    "slideToRestart": "Przesuń, aby zrestartować",
+    "restarting": "Uruchamianie ponowne...",
+    "restartFailed": "Nie udało się zrestartować",
     "autoDeleteTitle": "Czasomierz automatycznego usuwania",
     "autoDeleteDesc": "Automatycznie usuwaj skopiowane elementy (zachowuje przypięte)",
     "never": "Nigdy",
     "capacityTitle": "Pojemność historii",
-    "capacityDesc": "Maksymalna liczba odpiętych elementów przechowywanych w historii"
+    "capacityDesc": "Maksymalna liczba odpiętych elementów przechowywanych w historii",
+    "connectingDownload": "Łączenie z serwerem pobierania...",
+    "connecting": "Łączenie...",
+    "downloadingWithPercent": "Pobieranie aktualizacji ({percent}%)...",
+    "download": "Pobierz",
+    "notifyModeSubtitle": "Tryb powiadomień · Kliknij, aby pobrać",
+    "newUpdateAvailable": "Dostępna nowa aktualizacja {version}"
   },
   "position": {
     "edgePlacementTitle": "Położenie krawędzi",
@@ -5286,12 +5593,7 @@ export const pl: TranslationKeys = {
     "moreImages": "+{count} więcej obrazów",
     "moreFiles": "+{count} więcej plików",
     "singleFile": "1 plik",
-    "scrollToTop": "Przewiń na górę",
-    "clearLast1h": "Wyczyść ostatnią godzinę",
-    "clearLast6h": "Wyczyść ostatnie 6 godzin",
-    "clearLast24h": "Wyczyść ostatnie 24 godziny",
-    "clearAll": "Wyczyść całą historię",
-    "clearAllConfirm": "Dotknij ponownie, aby potwierdzić"
+    "scrollToTop": "Przewiń na górę"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5345,7 +5647,9 @@ export const pl: TranslationKeys = {
     "proTip1": "Naciśnij Alt + C, aby natychmiast przełączyć półkę.",
     "proTip2": "Uzyskaj dostęp do ustawień w dowolnym momencie przez ikonę koła zębatego (prawy górny róg).",
     "proTip3": "Przeciągnij i upuść pliki na lewą krawędź, aby je dodać.",
-    "proTip4": "Kliknij pole tekstowe, a następnie element schowka, aby automatycznie wkleić."
+    "proTip4": "Kliknij pole tekstowe, a następnie element schowka, aby automatycznie wkleić.",
+    "backupTitle": "Kopia zapasowa i przywracanie (.txa)",
+    "backupDesc": "Eksportuj historię schowka, przypięte elementy i ustawienia do zaszyfrowanego archiwum .txa. Przywracaj w trybie scalania lub zastępowania."
   },
   "tray": {
     "showClipboard": "Pokaż schowek",
@@ -5404,6 +5708,34 @@ export const pl: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Jeśli lubisz T-Drop, rozważ dodanie gwiazdki projektowi na GitHub!",
     "version": "Wersja"
+  },
+  "backup": {
+    "title": "Kopia zapasowa i przywracanie (.txa)",
+    "desc": "Twórz zaszyfrowane kopie zapasowe, aby zachować historię schowka i ustawienia.",
+    "exportBtn": "Eksportuj kopię (.txa)",
+    "importBtn": "Przywróć dane (.txa)",
+    "exportSuccess": "Pomyślnie utworzono kopię ({items} elementów)",
+    "exportFailed": "Nie udało się utworzyć kopii: {error}",
+    "importSuccess": "Pomyślnie przywrócono {count} elementów",
+    "importFailed": "Błąd przywracania: {error}",
+    "busyError": "Inna operacja kopii lub przywracania jest już w toku.",
+    "modalTitle": "Przywróć kopię T-Drop",
+    "modalDesc": "Przejrzyj szczegóły archiwum i wybierz tryb przywracania.",
+    "fileLabel": "Plik kopii:",
+    "dateLabel": "Data utworzenia:",
+    "itemsLabel": "Elementy:",
+    "imagesLabel": "Obrazy:",
+    "modeLabel": "Tryb przywracania:",
+    "modeMerge": "Scal (Zalecane)",
+    "modeMergeDesc": "Zachowaj bieżące elementy i dodaj nowe z kopii zapasowej.",
+    "modeOverwrite": "Zastąp wszystko",
+    "modeOverwriteDesc": "Całkowicie zastąp bieżącą historię i ustawienia danymi z kopii.",
+    "confirmRestore": "Potwierdź przywrócenie",
+    "cancel": "Anuluj",
+    "restoring": "Przywracanie...",
+    "autoDetectedTitle": "Wykryto plik kopii zapasowej",
+    "previewTitle": "Podgląd kopii zapasowej",
+    "itemsUnit": "elementów"
   }
 }
 
@@ -5461,15 +5793,24 @@ export const nl: TranslationKeys = {
     "skip": "Overslaan",
     "downloadingUpdate": "Updatepakket op de achtergrond downloaden...",
     "updateReadyTitle": "Update v{version} klaar",
-    "updateReadyDesc": "Klik om T-Drop te herstarten en de update toe te passen.",
+    "updateReadyDesc": "Schuif om T-Drop opnieuw te starten en de update toe te passen.",
     "restartToUpdate": "Herstarten om bij te werken",
     "restartToUpdateBelow": "Herstarten om bij te werken hieronder",
     "newUpdateAvailableBelow": "Nieuwe update beschikbaar hieronder",
+    "slideToRestart": "Schuif om opnieuw te starten",
+    "restarting": "Opnieuw opstarten...",
+    "restartFailed": "Opnieuw opstarten mislukt",
     "autoDeleteTitle": "Auto-verwijderingstimer",
     "autoDeleteDesc": "Gekopieerde items automatisch wissen (behoudt vastgezette)",
     "never": "Nooit",
     "capacityTitle": "Geschiedeniscapaciteit",
-    "capacityDesc": "Maximum aantal niet-vastgezette items in geschiedenis"
+    "capacityDesc": "Maximum aantal niet-vastgezette items in geschiedenis",
+    "connectingDownload": "Verbinden met downloadserver...",
+    "connecting": "Verbinden...",
+    "downloadingWithPercent": "Update downloaden ({percent}%)...",
+    "download": "Downloaden",
+    "notifyModeSubtitle": "Meldingsmodus · Klik om te downloaden",
+    "newUpdateAvailable": "Nieuwe update beschikbaar {version}"
   },
   "position": {
     "edgePlacementTitle": "Randplaatsing",
@@ -5545,12 +5886,7 @@ export const nl: TranslationKeys = {
     "moreImages": "+{count} afbeeldingen meer",
     "moreFiles": "+{count} bestanden meer",
     "singleFile": "1 bestand",
-    "scrollToTop": "Naar boven scrollen",
-    "clearLast1h": "Laatste uur wissen",
-    "clearLast6h": "Laatste 6 uur wissen",
-    "clearLast24h": "Laatste 24 uur wissen",
-    "clearAll": "Volledige geschiedenis wissen",
-    "clearAllConfirm": "Tik opnieuw om te bevestigen"
+    "scrollToTop": "Naar boven scrollen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5604,7 +5940,9 @@ export const nl: TranslationKeys = {
     "proTip1": "Druk op Alt + C om de plank direct te wisselen.",
     "proTip2": "Toegang tot instellingen altijd via het tandwielpictogram (rechtsboven).",
     "proTip3": "Bestanden naar de linkerrand slepen en neerzetten om toe te voegen.",
-    "proTip4": "Klik op een tekstvak en vervolgens op een klemborditem om automatisch te plakken."
+    "proTip4": "Klik op een tekstvak en vervolgens op een klemborditem om automatisch te plakken.",
+    "backupTitle": "Back-up en herstel (.txa)",
+    "backupDesc": "Exporteer klembordgeschiedenis, vastgemaakte items en instellingen naar een versleuteld .txa-archief."
   },
   "tray": {
     "showClipboard": "Klembord tonen",
@@ -5663,6 +6001,34 @@ export const nl: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Als je T-Drop leuk vindt, overweeg dan om het project een ster te geven op GitHub!",
     "version": "Versie"
+  },
+  "backup": {
+    "title": "Back-up en herstel (.txa)",
+    "desc": "Maak versleutelde back-ups om klemborditems, afbeeldingen en instellingen te behouden.",
+    "exportBtn": "Back-up exporteren (.txa)",
+    "importBtn": "Gegevens herstellen (.txa)",
+    "exportSuccess": "Back-up succesvol aangemaakt ({items} items)",
+    "exportFailed": "Kan back-up niet maken: {error}",
+    "importSuccess": "{count} items succesvol hersteld",
+    "importFailed": "Herstel mislukt: {error}",
+    "busyError": "Er is al een back-up- of herstelbewerking bezig.",
+    "modalTitle": "T-Drop back-up herstellen",
+    "modalDesc": "Bekijk de archiefgegevens en kies hoe u gegevens wilt herstellen.",
+    "fileLabel": "Back-upbestand:",
+    "dateLabel": "Aanmaakdatum:",
+    "itemsLabel": "Items:",
+    "imagesLabel": "Afbeeldingen:",
+    "modeLabel": "Herstelmodus:",
+    "modeMerge": "Samenvoegen (Aanbevolen)",
+    "modeMergeDesc": "Huidige items behouden en nieuwe toevoegen uit back-up.",
+    "modeOverwrite": "Alles overschrijven",
+    "modeOverwriteDesc": "Huidige geschiedenis en instellingen volledig vervangen door back-up.",
+    "confirmRestore": "Herstel bevestigen",
+    "cancel": "Annuleren",
+    "restoring": "Herstellen...",
+    "autoDetectedTitle": "Back-upbestand gedetecteerd",
+    "previewTitle": "Voorbeeld van back-up",
+    "itemsUnit": "items"
   }
 }
 
@@ -5720,15 +6086,24 @@ export const sv: TranslationKeys = {
     "skip": "Hoppa över",
     "downloadingUpdate": "Hämtar uppdateringspaket i bakgrunden...",
     "updateReadyTitle": "Uppdatering v{version} redo",
-    "updateReadyDesc": "Klicka för att starta om T-Drop och tillämpa uppdateringen.",
+    "updateReadyDesc": "Dra för att starta om T-Drop och tillämpa uppdateringen.",
     "restartToUpdate": "Starta om för att uppdatera",
     "restartToUpdateBelow": "Starta om för att uppdatera nedan",
     "newUpdateAvailableBelow": "Ny uppdatering tillgänglig nedan",
+    "slideToRestart": "Dra för att starta om",
+    "restarting": "Startar om...",
+    "restartFailed": "Omstart misslyckades",
     "autoDeleteTitle": "Timer för automatisk borttagning",
     "autoDeleteDesc": "Rensa automatiskt kopierade objekt (bevarar fästa)",
     "never": "Aldrig",
     "capacityTitle": "Historikkapacitet",
-    "capacityDesc": "Maximalt antal ofästa objekt i historik"
+    "capacityDesc": "Maximalt antal ofästa objekt i historik",
+    "connectingDownload": "Ansluter till nedladdningsserver...",
+    "connecting": "Ansluter...",
+    "downloadingWithPercent": "Laddar ner uppdatering ({percent}%)...",
+    "download": "Ladda ner",
+    "notifyModeSubtitle": "Aviseringsläge · Klicka för att ladda ner",
+    "newUpdateAvailable": "Ny uppdatering tillgänglig {version}"
   },
   "position": {
     "edgePlacementTitle": "Kantplacering",
@@ -5804,12 +6179,7 @@ export const sv: TranslationKeys = {
     "moreImages": "+{count} fler bilder",
     "moreFiles": "+{count} fler filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Scrolla till toppen",
-    "clearLast1h": "Rensa senaste timmen",
-    "clearLast6h": "Rensa senaste 6 timmarna",
-    "clearLast24h": "Rensa senaste 24 timmarna",
-    "clearAll": "Rensa all historik",
-    "clearAllConfirm": "Tryck igen för att bekräfta"
+    "scrollToTop": "Scrolla till toppen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5863,7 +6233,9 @@ export const sv: TranslationKeys = {
     "proTip1": "Tryck Alt + C för att omedelbart visa/dölja hyllan.",
     "proTip2": "Kom åt inställningar när som helst via kugghjulsikonen (överst till höger).",
     "proTip3": "Dra och släpp filer vid vänster kant för att lägga till dem.",
-    "proTip4": "Klicka på en textruta, sedan på ett urklippsobjekt för att klistra in automatiskt."
+    "proTip4": "Klicka på en textruta, sedan på ett urklippsobjekt för att klistra in automatiskt.",
+    "backupTitle": "Säkerhetskopiering och återställning (.txa)",
+    "backupDesc": "Exportera urklippshistorik, fästa objekt och inställningar till ett krypterat .txa-arkiv."
   },
   "tray": {
     "showClipboard": "Visa urklipp",
@@ -5922,6 +6294,34 @@ export const sv: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Om du gillar T-Drop, överväg att stjärnmärka projektet på GitHub!",
     "version": "Version"
+  },
+  "backup": {
+    "title": "Säkerhetskopiering och återställning (.txa)",
+    "desc": "Skapa krypterade säkerhetskopior för att bevara urklippsobjekt och inställningar.",
+    "exportBtn": "Exportera säkerhetskopia (.txa)",
+    "importBtn": "Återställ data (.txa)",
+    "exportSuccess": "Säkerhetskopia skapad ({items} objekt)",
+    "exportFailed": "Kunde inte skapa säkerhetskopia: {error}",
+    "importSuccess": "{count} objekt har återställts",
+    "importFailed": "Återställning misslyckades: {error}",
+    "busyError": "En annan säkerhetskopiering eller återställning pågår redan.",
+    "modalTitle": "Återställ T-Drop säkerhetskopia",
+    "modalDesc": "Granska arkivinformationen och välj återställningsläge.",
+    "fileLabel": "Säkerhetskopia:",
+    "dateLabel": "Skapad den:",
+    "itemsLabel": "Objekt:",
+    "imagesLabel": "Bilder:",
+    "modeLabel": "Återställningsläge:",
+    "modeMerge": "Slå samman (Rekommenderas)",
+    "modeMergeDesc": "Behåll befintliga objekt och lägg till nya från säkerhetskopian.",
+    "modeOverwrite": "Skriv över allt",
+    "modeOverwriteDesc": "Ersätt historik och inställningar helt med säkerhetskopian.",
+    "confirmRestore": "Bekräfta återställning",
+    "cancel": "Avbryt",
+    "restoring": "Återställer...",
+    "autoDetectedTitle": "Säkerhetskopia upptäckt",
+    "previewTitle": "Förhandsgranskning av säkerhetskopia",
+    "itemsUnit": "objekt"
   }
 }
 
@@ -5979,15 +6379,24 @@ export const id: TranslationKeys = {
     "skip": "Lewati",
     "downloadingUpdate": "Mengunduh paket pembaruan di latar belakang...",
     "updateReadyTitle": "Pembaruan v{version} Siap",
-    "updateReadyDesc": "Klik untuk memulai ulang T-Drop dan menerapkan pembaruan.",
+    "updateReadyDesc": "Geser untuk memulai ulang T-Drop dan menerapkan pembaruan.",
     "restartToUpdate": "Mulai ulang untuk memperbarui",
     "restartToUpdateBelow": "Mulai ulang untuk memperbarui di bawah",
     "newUpdateAvailableBelow": "Pembaruan baru tersedia di bawah",
+    "slideToRestart": "Geser untuk memulai ulang",
+    "restarting": "Memulai ulang...",
+    "restartFailed": "Gagal memulai ulang",
     "autoDeleteTitle": "Pengatur waktu hapus otomatis",
     "autoDeleteDesc": "Bersihkan item yang disalin secara otomatis (mempertahankan Disematkan)",
     "never": "Tidak pernah",
     "capacityTitle": "Kapasitas riwayat",
-    "capacityDesc": "Jumlah maksimum item tidak disematkan yang disimpan dalam riwayat"
+    "capacityDesc": "Jumlah maksimum item tidak disematkan yang disimpan dalam riwayat",
+    "connectingDownload": "Menghubungkan ke server unduhan...",
+    "connecting": "Menghubungkan...",
+    "downloadingWithPercent": "Mengunduh pembaruan ({percent}%)...",
+    "download": "Unduh",
+    "notifyModeSubtitle": "Mode pemberitahuan · Klik untuk mengunduh",
+    "newUpdateAvailable": "Pembaruan baru tersedia {version}"
   },
   "position": {
     "edgePlacementTitle": "Penempatan Tepi",
@@ -6063,12 +6472,7 @@ export const id: TranslationKeys = {
     "moreImages": "+{count} gambar lagi",
     "moreFiles": "+{count} berkas lagi",
     "singleFile": "1 berkas",
-    "scrollToTop": "Gulir ke atas",
-    "clearLast1h": "Hapus 1 jam terakhir",
-    "clearLast6h": "Hapus 6 jam terakhir",
-    "clearLast24h": "Hapus 24 jam terakhir",
-    "clearAll": "Hapus semua riwayat",
-    "clearAllConfirm": "Ketuk lagi untuk mengonfirmasi"
+    "scrollToTop": "Gulir ke atas"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6122,7 +6526,9 @@ export const id: TranslationKeys = {
     "proTip1": "Tekan Alt + C untuk segera beralih rak.",
     "proTip2": "Akses pengaturan kapan saja melalui ikon roda gigi (kanan atas).",
     "proTip3": "Seret & jatuhkan berkas ke tepi kiri untuk menambahkannya.",
-    "proTip4": "Klik kotak teks, lalu item papan klip untuk menempel otomatis."
+    "proTip4": "Klik kotak teks, lalu item papan klip untuk menempel otomatis.",
+    "backupTitle": "Cadangan & Pemulihan Arsip (.txa)",
+    "backupDesc": "Ekspor riwayat papan klip, item yang disematkan, dan pengaturan ke arsip .txa terenkripsi. Pulihkan kapan saja dengan mode Gabung atau Timpa."
   },
   "tray": {
     "showClipboard": "Tampilkan Papan Klip",
@@ -6181,6 +6587,34 @@ export const id: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Jika Anda menyukai T-Drop, harap pertimbangkan untuk memberi bintang pada proyek di GitHub!",
     "version": "Versi"
+  },
+  "backup": {
+    "title": "Cadangan & Pemulihan (.txa)",
+    "desc": "Buat cadangan terenkripsi untuk mengamankan item papan klip, gambar, dan pengaturan saat instal ulang Windows.",
+    "exportBtn": "Ekspor Cadangan (.txa)",
+    "importBtn": "Pulihkan Data (.txa)",
+    "exportSuccess": "Cadangan terenkripsi berhasil dibuat ({items} item)",
+    "exportFailed": "Gagal membuat cadangan: {error}",
+    "importSuccess": "{count} item berhasil dipulihkan",
+    "importFailed": "Gagal memulihkan: {error}",
+    "busyError": "Operasi pencadangan atau pemulihan lain sedang berlangsung.",
+    "modalTitle": "Pulihkan Cadangan T-Drop",
+    "modalDesc": "Tinjau detail arsip dan pilih cara pemulihan data.",
+    "fileLabel": "File Cadangan:",
+    "dateLabel": "Tanggal Dibuat:",
+    "itemsLabel": "Item:",
+    "imagesLabel": "Gambar:",
+    "modeLabel": "Mode Pemulihan:",
+    "modeMerge": "Gabung (Disarankan)",
+    "modeMergeDesc": "Pertahankan item saat ini dan tambahkan item baru dari cadangan.",
+    "modeOverwrite": "Timpa Semua",
+    "modeOverwriteDesc": "Gantikan seluruh riwayat dan pengaturan dengan data cadangan.",
+    "confirmRestore": "Konfirmasi Pemulihan",
+    "cancel": "Batal",
+    "restoring": "Memulihkan...",
+    "autoDetectedTitle": "File Cadangan Terdeteksi",
+    "previewTitle": "Pratinjau Cadangan",
+    "itemsUnit": "item"
   }
 }
 
@@ -6238,15 +6672,24 @@ export const uk: TranslationKeys = {
     "skip": "Пропустити",
     "downloadingUpdate": "Завантаження пакета оновлення у фоновому режимі...",
     "updateReadyTitle": "Оновлення v{version} готове",
-    "updateReadyDesc": "Натисніть, щоб перезапустити T-Drop та застосувати оновлення.",
+    "updateReadyDesc": "Проведіть, щоб перезапустити T-Drop та застосувати оновлення.",
     "restartToUpdate": "Перезапустити для оновлення",
     "restartToUpdateBelow": "Перезапустити для оновлення нижче",
     "newUpdateAvailableBelow": "Нове оновлення доступне нижче",
+    "slideToRestart": "Проведіть для перезапуску",
+    "restarting": "Перезапуск...",
+    "restartFailed": "Не вдалося перезапустити",
     "autoDeleteTitle": "Таймер авто-видалення",
     "autoDeleteDesc": "Автоматично очищати скопійовані елементи (зберігає прикріплені)",
     "never": "Ніколи",
     "capacityTitle": "Об'єм історії",
-    "capacityDesc": "Максимум неприкріплених елементів в історії"
+    "capacityDesc": "Максимум неприкріплених елементів в історії",
+    "connectingDownload": "Підключення до сервера завантаження...",
+    "connecting": "Підключення...",
+    "downloadingWithPercent": "Завантаження оновлення ({percent}%)...",
+    "download": "Завантажити",
+    "notifyModeSubtitle": "Режим сповіщення · Натисніть для завантаження",
+    "newUpdateAvailable": "Доступне нове оновлення {version}"
   },
   "position": {
     "edgePlacementTitle": "Розміщення краю",
@@ -6322,12 +6765,7 @@ export const uk: TranslationKeys = {
     "moreImages": "+{count} більше зображень",
     "moreFiles": "+{count} більше файлів",
     "singleFile": "1 файл",
-    "scrollToTop": "Прокрутити вгору",
-    "clearLast1h": "Очистити за останню годину",
-    "clearLast6h": "Очистити за останні 6 годин",
-    "clearLast24h": "Очистити за останні 24 години",
-    "clearAll": "Очистити всю історію",
-    "clearAllConfirm": "Натисніть ще раз для підтвердження"
+    "scrollToTop": "Прокрутити вгору"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6381,7 +6819,9 @@ export const uk: TranslationKeys = {
     "proTip1": "Натисніть Alt + C, щоб миттєво переключити полицю.",
     "proTip2": "Отримайте доступ до налаштувань будь-коли через значок шестірні (у верхньому правому куті).",
     "proTip3": "Перетягніть файли до лівого краю, щоб додати їх.",
-    "proTip4": "Натисніть на текстове поле, потім на елемент буфера обміну для автоматичного вставлення."
+    "proTip4": "Натисніть на текстове поле, потім на елемент буфера обміну для автоматичного вставлення.",
+    "backupTitle": "Резервне копіювання та відновлення (.txa)",
+    "backupDesc": "Експортуйте історію буфера обміну, закріплені елементи та налаштування у зашифрований архів .txa."
   },
   "tray": {
     "showClipboard": "Показати буфер обміну",
@@ -6440,6 +6880,34 @@ export const uk: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Якщо вам подобається T-Drop, будь ласка, поставте зірку проєкту на GitHub!",
     "version": "Версія"
+  },
+  "backup": {
+    "title": "Резервне копіювання та відновлення (.txa)",
+    "desc": "Створюйте зашифровані резервні копії для збереження історії та налаштувань під час перевстановлення Windows.",
+    "exportBtn": "Експорт копії (.txa)",
+    "importBtn": "Відновити дані (.txa)",
+    "exportSuccess": "Резервну копію успішно створено ({items} елементів)",
+    "exportFailed": "Не вдалося створити копію: {error}",
+    "importSuccess": "Успішно відновлено {count} елементів",
+    "importFailed": "Помилка відновлення: {error}",
+    "busyError": "Інша операція резервного копіювання або відновлення вже виконується.",
+    "modalTitle": "Відновлення резервної копії T-Drop",
+    "modalDesc": "Перегляньте деталі архіву та виберіть режим відновлення.",
+    "fileLabel": "Файл копії:",
+    "dateLabel": "Дата створення:",
+    "itemsLabel": "Елементи:",
+    "imagesLabel": "Зображення:",
+    "modeLabel": "Режим відновлення:",
+    "modeMerge": "Об’єднати (Рекомендовано)",
+    "modeMergeDesc": "Зберегти поточні елементи та додати нові з копії.",
+    "modeOverwrite": "Перезаписати все",
+    "modeOverwriteDesc": "Повністю замінити поточну історію та налаштування копією.",
+    "confirmRestore": "Підтвердити відновлення",
+    "cancel": "Скасувати",
+    "restoring": "Відновлення...",
+    "autoDetectedTitle": "Виявлено файл резервної копії",
+    "previewTitle": "Попередній перегляд копії",
+    "itemsUnit": "елементів"
   }
 }
 
@@ -6497,15 +6965,24 @@ export const el: TranslationKeys = {
     "skip": "Παράλειψη",
     "downloadingUpdate": "Λήψη πακέτου ενημέρωσης στο παρασκήνιο...",
     "updateReadyTitle": "Η ενημέρωση v{version} είναι έτοιμη",
-    "updateReadyDesc": "Κάντε κλικ για επανεκκίνηση του T-Drop και εφαρμογή της ενημέρωσης.",
+    "updateReadyDesc": "Σύρετε για επανεκκίνηση του T-Drop και εφαρμογή της ενημέρωσης.",
     "restartToUpdate": "Επανεκκίνηση για ενημέρωση",
     "restartToUpdateBelow": "Επανεκκίνηση για ενημέρωση παρακάτω",
     "newUpdateAvailableBelow": "Νέα ενημέρωση διαθέσιμη παρακάτω",
+    "slideToRestart": "Σύρετε για επανεκκίνηση",
+    "restarting": "Επανεκκίνηση...",
+    "restartFailed": "Η επανεκκίνηση απέτυχε",
     "autoDeleteTitle": "Χρονοδιακόπτης αυτόματης διαγραφής",
     "autoDeleteDesc": "Αυτόματη εκκαθάριση αντιγραμμένων στοιχείων (διατηρεί τα Καρφιτσωμένα)",
     "never": "Ποτέ",
     "capacityTitle": "Χωρητικότητα ιστορικού",
-    "capacityDesc": "Μέγιστος αριθμός μη καρφιτσωμένων στοιχείων στο ιστορικό"
+    "capacityDesc": "Μέγιστος αριθμός μη καρφιτσωμένων στοιχείων στο ιστορικό",
+    "connectingDownload": "Σύνδεση με τον διακομιστή λήψης...",
+    "connecting": "Σύνδεση...",
+    "downloadingWithPercent": "Λήψη ενημέρωσης ({percent}%)...",
+    "download": "Λήψη",
+    "notifyModeSubtitle": "Λειτουργία ειδοποίησης · Κάντε κλικ για λήψη",
+    "newUpdateAvailable": "Νέα ενημέρωση διαθέσιμη {version}"
   },
   "position": {
     "edgePlacementTitle": "Τοποθέτηση άκρης",
@@ -6581,12 +7058,7 @@ export const el: TranslationKeys = {
     "moreImages": "+{count} περισσότερες εικόνες",
     "moreFiles": "+{count} περισσότερα αρχεία",
     "singleFile": "1 αρχείο",
-    "scrollToTop": "Κύλιση στην κορυφή",
-    "clearLast1h": "Εκκαθάριση τελευταίας ώρας",
-    "clearLast6h": "Εκκαθάριση τελευταίων 6 ωρών",
-    "clearLast24h": "Εκκαθάριση τελευταίων 24 ωρών",
-    "clearAll": "Εκκαθάριση όλου του ιστορικού",
-    "clearAllConfirm": "Πατήστε ξανά για επιβεβαίωση"
+    "scrollToTop": "Κύλιση στην κορυφή"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6640,7 +7112,9 @@ export const el: TranslationKeys = {
     "proTip1": "Πατήστε Alt + C για άμεση εναλλαγή του ραφιού.",
     "proTip2": "Πρόσβαση στις ρυθμίσεις ανά πάσα στιγμή μέσω του εικονιδίου γραναζιού (πάνω δεξιά).",
     "proTip3": "Σύρσιμο & απόθεση αρχείων στην αριστερή άκρη για προσθήκη τους.",
-    "proTip4": "Κάντε κλικ σε ένα πλαίσιο κειμένου και έπειτα σε ένα στοιχείο πρόχειρου για αυτόματη επικόλληση."
+    "proTip4": "Κάντε κλικ σε ένα πλαίσιο κειμένου και έπειτα σε ένα στοιχείο πρόχειρου για αυτόματη επικόλληση.",
+    "backupTitle": "Αντίγραφα ασφαλείας & Επαναφορά (.txa)",
+    "backupDesc": "Εξαγάγετε το ιστορικό προχείρου, τα καρφιτσωμένα στοιχεία και τις ρυθμίσεις σε κρυπτογραφημένο αρχείο .txa."
   },
   "tray": {
     "showClipboard": "Εμφάνιση Προχείρου",
@@ -6699,6 +7173,34 @@ export const el: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Αν σας αρέσει το T-Drop, εξετάστε την δυνατότητα να ασφαλίσετε το έργο στο GitHub!",
     "version": "Έκδοση"
+  },
+  "backup": {
+    "title": "Αντίγραφα ασφαλείας & Επαναφορά (.txa)",
+    "desc": "Δημιουργήστε κρυπτογραφημένα αντίγραφα ασφαλείας για να διατηρήσετε στοιχεία και ρυθμίσεις.",
+    "exportBtn": "Εξαγωγή αντιγράφου (.txa)",
+    "importBtn": "Επαναφορά δεδομένων (.txa)",
+    "exportSuccess": "Επιτυχής δημιουργία αντιγράφου ({items} στοιχεία)",
+    "exportFailed": "Αποτυχία δημιουργίας αντιγράφου: {error}",
+    "importSuccess": "Επιτυχής επαναφορά {count} στοιχείων",
+    "importFailed": "Αποτυχία επαναφοράς: {error}",
+    "busyError": "Μια άλλη λειτουργία αντιγράφου ή επαναφοράς βρίσκεται σε εξέλιξη.",
+    "modalTitle": "Επαναφορά αντιγράφου T-Drop",
+    "modalDesc": "Ελέγξτε τις λεπτομέρειες του αρχείου και επιλέξτε τρόπο επαναφοράς.",
+    "fileLabel": "Αρχείο αντιγράφου:",
+    "dateLabel": "Ημερομηνία δημιουργίας:",
+    "itemsLabel": "Στοιχεία:",
+    "imagesLabel": "Εικόνες:",
+    "modeLabel": "Λειτουργία επαναφοράς:",
+    "modeMerge": "Συγχώνευση (Συνιστάται)",
+    "modeMergeDesc": "Διατήρηση τρεχόντων στοιχείων και προσθήκη νέων από το αντίγραφο.",
+    "modeOverwrite": "Αντικατάσταση όλων",
+    "modeOverwriteDesc": "Πλήρης αντικατάσταση ιστορικού και ρυθμίσεων με το αντίγραφο.",
+    "confirmRestore": "Επιβεβαίωση επαναφοράς",
+    "cancel": "Ακύρωση",
+    "restoring": "Επαναφορά...",
+    "autoDetectedTitle": "Εντοπίστηκε αρχείο αντιγράφου",
+    "previewTitle": "Προεπισκόπηση αντιγράφου",
+    "itemsUnit": "στοιχεία"
   }
 }
 
@@ -6756,15 +7258,24 @@ export const cs: TranslationKeys = {
     "skip": "Přeskočit",
     "downloadingUpdate": "Stahování balíčku aktualizace na pozadí...",
     "updateReadyTitle": "Aktualizace v{version} připravena",
-    "updateReadyDesc": "Klikněte pro restart T-Drop a použití aktualizace.",
+    "updateReadyDesc": "Přejetím restartujte T-Drop a použijte aktualizaci.",
     "restartToUpdate": "Restartovat pro aktualizaci",
     "restartToUpdateBelow": "Restartovat pro aktualizaci níže",
     "newUpdateAvailableBelow": "Nová aktualizace k dispozici níže",
+    "slideToRestart": "Přejetím restartovat",
+    "restarting": "Restartování...",
+    "restartFailed": "Restart se nezdařil",
     "autoDeleteTitle": "Časovač automatického mazání",
     "autoDeleteDesc": "Automaticky odstranit zkopírované položky (zachová připnuté)",
     "never": "Nikdy",
     "capacityTitle": "Kapacita historie",
-    "capacityDesc": "Maximální počet nepřipnutých položek v historii"
+    "capacityDesc": "Maximální počet nepřipnutých položek v historii",
+    "connectingDownload": "Připojování ke stahovacímu serveru...",
+    "connecting": "Připojování...",
+    "downloadingWithPercent": "Stahování aktualizace ({percent}%)...",
+    "download": "Stáhnout",
+    "notifyModeSubtitle": "Režim oznámení · Klikněte pro stažení",
+    "newUpdateAvailable": "K dispozici je nová aktualizace {version}"
   },
   "position": {
     "edgePlacementTitle": "Umístění na okraji",
@@ -6840,12 +7351,7 @@ export const cs: TranslationKeys = {
     "moreImages": "+{count} dalších obrázků",
     "moreFiles": "+{count} dalších souborů",
     "singleFile": "1 soubor",
-    "scrollToTop": "Přejít nahoru",
-    "clearLast1h": "Vymazat poslední hodinu",
-    "clearLast6h": "Vymazat posledních 6 hodin",
-    "clearLast24h": "Vymazat posledních 24 hodin",
-    "clearAll": "Vymazat celou historii",
-    "clearAllConfirm": "Potvrďte dalším klepnutím"
+    "scrollToTop": "Přejít nahoru"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6899,7 +7405,9 @@ export const cs: TranslationKeys = {
     "proTip1": "Stiskněte Alt + C pro okamžité přepnutí police.",
     "proTip2": "K nastavení přistupujte kdykoli přes ikonu ozubeného kola (vpravo nahoře).",
     "proTip3": "Přetáhněte soubory na levý okraj pro jejich přidání.",
-    "proTip4": "Klikněte na textové pole a poté na položku schránky pro automatické vložení."
+    "proTip4": "Klikněte na textové pole a poté na položku schránky pro automatické vložení.",
+    "backupTitle": "Zálohování a obnovení (.txa)",
+    "backupDesc": "Exportujte historii schránky, připnuté položky a nastavení do šifrovaného archivu .txa."
   },
   "tray": {
     "showClipboard": "Zobrazit schránku",
@@ -6958,6 +7466,34 @@ export const cs: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Pokud se vám T-Drop líbí, zvažte prosím ohvězdičkování projektu na GitHub!",
     "version": "Verze"
+  },
+  "backup": {
+    "title": "Zálohování a obnovení (.txa)",
+    "desc": "Vytvářejte šifrované zálohy pro zachování položek schránky a nastavení při přeinstalaci Windows.",
+    "exportBtn": "Exportovat zálohu (.txa)",
+    "importBtn": "Obnovit data (.txa)",
+    "exportSuccess": "Záloha úspěšně vytvořena ({items} položek)",
+    "exportFailed": "Vytvoření zálohy se nezdařilo: {error}",
+    "importSuccess": "Úspěšně obnoveno {count} položek",
+    "importFailed": "Obnovení se nezdařilo: {error}",
+    "busyError": "Již probíhá jiná operace zálohování nebo obnovení.",
+    "modalTitle": "Obnovit zálohu T-Drop",
+    "modalDesc": "Zkontrolujte podrobnosti archivu a vyberte režim obnovení.",
+    "fileLabel": "Záložní soubor:",
+    "dateLabel": "Datum vytvoření:",
+    "itemsLabel": "Položky:",
+    "imagesLabel": "Obrázky:",
+    "modeLabel": "Režim obnovení:",
+    "modeMerge": "Sloučit (Doporučeno)",
+    "modeMergeDesc": "Ponechat stávající položky a přidat nové ze zálohy.",
+    "modeOverwrite": "Přepsat vše",
+    "modeOverwriteDesc": "Zcela nahradit aktuální historii a nastavení zálohou.",
+    "confirmRestore": "Potvrdit obnovení",
+    "cancel": "Zrušit",
+    "restoring": "Obnovování...",
+    "autoDetectedTitle": "Zjištěn záložní soubor",
+    "previewTitle": "Náhled zálohy",
+    "itemsUnit": "položek"
   }
 }
 
@@ -7015,15 +7551,24 @@ export const ro: TranslationKeys = {
     "skip": "Sari peste",
     "downloadingUpdate": "Se descarcă pachetul de actualizare în fundal...",
     "updateReadyTitle": "Actualizarea v{version} este gata",
-    "updateReadyDesc": "Dă clic pentru a reporni T-Drop și a aplica actualizarea.",
+    "updateReadyDesc": "Glisează pentru a reporni T-Drop și a aplica actualizarea.",
     "restartToUpdate": "Repornește pentru a actualiza",
     "restartToUpdateBelow": "Repornește pentru a actualiza mai jos",
     "newUpdateAvailableBelow": "Actualizare nouă disponibilă mai jos",
+    "slideToRestart": "Glisează pentru repornire",
+    "restarting": "Se repornește...",
+    "restartFailed": "Repornire eșuată",
     "autoDeleteTitle": "Cronometru ștergere automată",
     "autoDeleteDesc": "Șterge automat elementele copiate (păstrează Pinate)",
     "never": "Niciodată",
     "capacityTitle": "Capacitate istoric",
-    "capacityDesc": "Numărul maxim de elemente nepinate stocate în istoric"
+    "capacityDesc": "Numărul maxim de elemente nepinate stocate în istoric",
+    "connectingDownload": "Conectare la serverul de descărcare...",
+    "connecting": "Conectare...",
+    "downloadingWithPercent": "Descărcare actualizare ({percent}%)...",
+    "download": "Descarcă",
+    "notifyModeSubtitle": "Mod notificare · Faceți clic pentru a descărca",
+    "newUpdateAvailable": "Actualizare nouă disponibilă {version}"
   },
   "position": {
     "edgePlacementTitle": "Plasare margine",
@@ -7099,12 +7644,7 @@ export const ro: TranslationKeys = {
     "moreImages": "+{count} imagini mai mult",
     "moreFiles": "+{count} fișiere mai mult",
     "singleFile": "1 fișier",
-    "scrollToTop": "Derulează sus",
-    "clearLast1h": "Șterge ultima oră",
-    "clearLast6h": "Șterge ultimele 6 ore",
-    "clearLast24h": "Șterge ultimele 24 de ore",
-    "clearAll": "Șterge tot istoricul",
-    "clearAllConfirm": "Atinge din nou pentru confirmare"
+    "scrollToTop": "Derulează sus"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7158,7 +7698,9 @@ export const ro: TranslationKeys = {
     "proTip1": "Apasă Alt + C pentru a comuta instantaneu raftul.",
     "proTip2": "Accesează setările oricând prin pictograma de roată dințată (dreapta-sus).",
     "proTip3": "Trage și plasează fișiere spre marginea stângă pentru a le adăuga.",
-    "proTip4": "Dă clic pe o casetă de text, apoi pe un element din clipboard pentru a-l lipi automat."
+    "proTip4": "Dă clic pe o casetă de text, apoi pe un element din clipboard pentru a-l lipi automat.",
+    "backupTitle": "Copie de rezervă și restaurare (.txa)",
+    "backupDesc": "Exportați istoricul clipboard-ului, elementele fixate și setările într-o arhivă .txa criptată."
   },
   "tray": {
     "showClipboard": "Arată clipboard",
@@ -7217,6 +7759,34 @@ export const ro: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Dacă îți place T-Drop, te rugăm să iei în considerare marcarea cu stea a proiectului pe GitHub!",
     "version": "Versiune"
+  },
+  "backup": {
+    "title": "Copie de rezervă și restaurare (.txa)",
+    "desc": "Creați copii de rezervă criptate pentru a păstra elementele din clipboard și setările.",
+    "exportBtn": "Exportă copie (.txa)",
+    "importBtn": "Restaurează date (.txa)",
+    "exportSuccess": "Copie de rezervă creată cu succes ({items} elemente)",
+    "exportFailed": "Crearea copiei a eșuat: {error}",
+    "importSuccess": "{count} elemente restaurate cu succes",
+    "importFailed": "Restaurarea a eșuat: {error}",
+    "busyError": "O altă operațiune de backup sau restaurare este deja în curs.",
+    "modalTitle": "Restaurare copie T-Drop",
+    "modalDesc": "Examinați detaliile arhivei și alegeți modul de restaurare.",
+    "fileLabel": "Fișier copie:",
+    "dateLabel": "Data creării:",
+    "itemsLabel": "Elemente:",
+    "imagesLabel": "Imagini:",
+    "modeLabel": "Mod restaurare:",
+    "modeMerge": "Îmbinare (Recomandat)",
+    "modeMergeDesc": "Păstrați elementele curente și adăugați cele noi din copie.",
+    "modeOverwrite": "Suprapune tot",
+    "modeOverwriteDesc": "Înlocuiți complet istoricul și setările cu datele din copie.",
+    "confirmRestore": "Confirmă restaurarea",
+    "cancel": "Anulează",
+    "restoring": "Se restaurează...",
+    "autoDetectedTitle": "Fișier de rezervă detectat",
+    "previewTitle": "Previzualizare copie de rezervă",
+    "itemsUnit": "elemente"
   }
 }
 
@@ -7274,15 +7844,24 @@ export const hu: TranslationKeys = {
     "skip": "Kihagyás",
     "downloadingUpdate": "Frissítési csomag letöltése a háttérben...",
     "updateReadyTitle": "A v{version} frissítés készen áll",
-    "updateReadyDesc": "Kattintson az T-Drop újraindításához és a frissítés alkalmazásához.",
+    "updateReadyDesc": "Csúsztassa az T-Drop újraindításához és a frissítés alkalmazásához.",
     "restartToUpdate": "Újraindítás a frissítéshez",
     "restartToUpdateBelow": "Újraindítás a frissítéshez lent",
     "newUpdateAvailableBelow": "Új frissítés érhető el lent",
+    "slideToRestart": "Csúsztassa az újraindításhoz",
+    "restarting": "Újraindítás...",
+    "restartFailed": "Az újraindítás sikertelen",
     "autoDeleteTitle": "Automatikus törlési időzítő",
     "autoDeleteDesc": "Másolt elemek automatikus tisztítása (a rögzítetteket megőrzi)",
     "never": "Soha",
     "capacityTitle": "Előzmények kapacitása",
-    "capacityDesc": "Az előzményekben tárolt nem rögzített elemek maximális száma"
+    "capacityDesc": "Az előzményekben tárolt nem rögzített elemek maximális száma",
+    "connectingDownload": "Csatlakozás a letöltési kiszolgálóhoz...",
+    "connecting": "Csatlakozás...",
+    "downloadingWithPercent": "Frissítés letöltése ({percent}%)...",
+    "download": "Letöltés",
+    "notifyModeSubtitle": "Értesítési mód · Kattintson a letöltéshez",
+    "newUpdateAvailable": "Új frissítés érhető el {version}"
   },
   "position": {
     "edgePlacementTitle": "Szél-elhelyezés",
@@ -7358,12 +7937,7 @@ export const hu: TranslationKeys = {
     "moreImages": "+{count} további kép",
     "moreFiles": "+{count} további fájl",
     "singleFile": "1 fájl",
-    "scrollToTop": "Görgetés a tetejére",
-    "clearLast1h": "Elmúlt óra törlése",
-    "clearLast6h": "Elmúlt 6 óra törlése",
-    "clearLast24h": "Elmúlt 24 óra törlése",
-    "clearAll": "Teljes előzmény törlése",
-    "clearAllConfirm": "Koppintson újra a megerősítéshez"
+    "scrollToTop": "Görgetés a tetejére"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7417,7 +7991,9 @@ export const hu: TranslationKeys = {
     "proTip1": "Nyomja meg az Alt + C billentyűt a polc azonnali váltásához.",
     "proTip2": "A fogaskerék ikonon (jobb felső) keresztül bármikor elérheti a beállításokat.",
     "proTip3": "Húzzon és ejtsen fájlokat a bal szélre a hozzáadáshoz.",
-    "proTip4": "Kattintson egy szövegdobozra, majd egy vágólap-elemre az automatikus beillesztéshez."
+    "proTip4": "Kattintson egy szövegdobozra, majd egy vágólap-elemre az automatikus beillesztéshez.",
+    "backupTitle": "Biztonsági mentés és visszaállítás (.txa)",
+    "backupDesc": "Exportálja vágólap-előzményeit, kitűzött elemeit és beállításait egy titkosított .txa archívumba."
   },
   "tray": {
     "showClipboard": "Vágólap megjelenítése",
@@ -7476,6 +8052,34 @@ export const hu: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Ha tetszik az T-Drop, fontolja meg a projekt csillagozását a GitHubon!",
     "version": "Verzió"
+  },
+  "backup": {
+    "title": "Biztonsági mentés és visszaállítás (.txa)",
+    "desc": "Hozzon létre titkosított biztonsági mentéseket a vágólap és a beállítások megőrzéséhez.",
+    "exportBtn": "Mentés exportálása (.txa)",
+    "importBtn": "Adatok visszaállítása (.txa)",
+    "exportSuccess": "Biztonsági mentés sikeresen létrehozva ({items} elem)",
+    "exportFailed": "Nem sikerült létrehozni a mentést: {error}",
+    "importSuccess": "{count} elem sikeresen visszaállítva",
+    "importFailed": "Visszaállítás sikertelen: {error}",
+    "busyError": "Egy másik mentési vagy visszaállítási művelet már folyamatban van.",
+    "modalTitle": "T-Drop mentés visszaállítása",
+    "modalDesc": "Tekintse át az archívum részleteit és válassza ki a visszaállítási módot.",
+    "fileLabel": "Mentési fájl:",
+    "dateLabel": "Létrehozás dátuma:",
+    "itemsLabel": "Elemek száma:",
+    "imagesLabel": "Képek:",
+    "modeLabel": "Visszaállítási mód:",
+    "modeMerge": "Egyesítés (Ajánlott)",
+    "modeMergeDesc": "Meglévő elemek megőrzése és az újak hozzáadása a mentésből.",
+    "modeOverwrite": "Minden felülírása",
+    "modeOverwriteDesc": "A jelenlegi előzmények és beállítások teljes felülírása a mentéssel.",
+    "confirmRestore": "Visszaállítás megerősítése",
+    "cancel": "Mégse",
+    "restoring": "Visszaállítás folyamatban...",
+    "autoDetectedTitle": "Biztonsági mentési fájl észlelve",
+    "previewTitle": "Mentés előnézete",
+    "itemsUnit": "elem"
   }
 }
 
@@ -7533,15 +8137,24 @@ export const da: TranslationKeys = {
     "skip": "Spring over",
     "downloadingUpdate": "Downloader opdateringspakke i baggrunden...",
     "updateReadyTitle": "Opdatering v{version} klar",
-    "updateReadyDesc": "Klik for at genstarte T-Drop og anvende opdateringen.",
+    "updateReadyDesc": "Skub for at genstarte T-Drop og anvende opdateringen.",
     "restartToUpdate": "Genstart for at opdatere",
     "restartToUpdateBelow": "Genstart for at opdatere nedenfor",
     "newUpdateAvailableBelow": "Ny opdatering tilgængelig nedenfor",
+    "slideToRestart": "Skub for at genstarte",
+    "restarting": "Genstarter...",
+    "restartFailed": "Genstart mislykkedes",
     "autoDeleteTitle": "Timer til automatisk sletning",
     "autoDeleteDesc": "Ryd automatisk kopierede elementer (bevarer Fastgjorte)",
     "never": "Aldrig",
     "capacityTitle": "Historikkapacitet",
-    "capacityDesc": "Maksimalt antal ikke-fastgjorte elementer gemt i historik"
+    "capacityDesc": "Maksimalt antal ikke-fastgjorte elementer gemt i historik",
+    "connectingDownload": "Opretter forbindelse til downloadserver...",
+    "connecting": "Opretter forbindelse...",
+    "downloadingWithPercent": "Downloader opdatering ({percent}%)...",
+    "download": "Download",
+    "notifyModeSubtitle": "Underretningstilstand · Klik for at downloade",
+    "newUpdateAvailable": "Ny opdatering tilgængelig {version}"
   },
   "position": {
     "edgePlacementTitle": "Kantplacering",
@@ -7617,12 +8230,7 @@ export const da: TranslationKeys = {
     "moreImages": "+{count} flere billeder",
     "moreFiles": "+{count} flere filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Rul til toppen",
-    "clearLast1h": "Ryd sidste time",
-    "clearLast6h": "Ryd sidste 6 timer",
-    "clearLast24h": "Ryd sidste 24 timer",
-    "clearAll": "Ryd hele historikken",
-    "clearAllConfirm": "Tryk igen for at bekræfte"
+    "scrollToTop": "Rul til toppen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7676,7 +8284,9 @@ export const da: TranslationKeys = {
     "proTip1": "Tryk på Alt + C for at skifte hylden med det samme.",
     "proTip2": "Få adgang til indstillinger når som helst via tandhjulsikonet (øverst til højre).",
     "proTip3": "Træk og slip filer til venstre kant for at tilføje dem.",
-    "proTip4": "Klik på en tekstboks, og derefter et udklipsholder-element for at indsætte automatisk."
+    "proTip4": "Klik på en tekstboks, og derefter et udklipsholder-element for at indsætte automatisk.",
+    "backupTitle": "Sikkerhedskopiering og gendannelse (.txa)",
+    "backupDesc": "Eksportér udklipsholderhistorik, fastgjorte elementer og indstillinger til et krypteret .txa-arkiv."
   },
   "tray": {
     "showClipboard": "Vis udklipsholder",
@@ -7735,6 +8345,34 @@ export const da: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Hvis du kan lide T-Drop, så overvej at give projektet en stjerne på GitHub!",
     "version": "Version"
+  },
+  "backup": {
+    "title": "Sikkerhedskopiering og gendannelse (.txa)",
+    "desc": "Opret krypterede sikkerhedskopier for at bevare udklipsholder og indstillinger ved geninstallation af Windows.",
+    "exportBtn": "Eksportér sikkerhedskopi (.txa)",
+    "importBtn": "Gendan data (.txa)",
+    "exportSuccess": "Sikkerhedskopi oprettet med succes ({items} elementer)",
+    "exportFailed": "Kunne ikke oprette sikkerhedskopi: {error}",
+    "importSuccess": "{count} elementer blev gendannet",
+    "importFailed": "Gendannelse mislykkedes: {error}",
+    "busyError": "En anden sikkerhedskopiering eller gendannelse er allerede i gang.",
+    "modalTitle": "Gendan T-Drop sikkerhedskopi",
+    "modalDesc": "Gennemgå arkivoplysningerne og vælg gendannelsestilstand.",
+    "fileLabel": "Sikkerhedskopifil:",
+    "dateLabel": "Oprettelsesdato:",
+    "itemsLabel": "Elementer:",
+    "imagesLabel": "Billeder:",
+    "modeLabel": "Gendannelsestilstand:",
+    "modeMerge": "Flet (Anbefalet)",
+    "modeMergeDesc": "Bevar nuværende elementer og tilføj nye fra sikkerhedskopien.",
+    "modeOverwrite": "Overskriv alle",
+    "modeOverwriteDesc": "Erstat nuværende historik og indstillinger fuldstændigt med sikkerhedskopien.",
+    "confirmRestore": "Bekræft gendannelse",
+    "cancel": "Annuller",
+    "restoring": "Gendanner...",
+    "autoDetectedTitle": "Sikkerhedskopifil fundet",
+    "previewTitle": "Forhåndsvisning af sikkerhedskopi",
+    "itemsUnit": "elementer"
   }
 }
 
@@ -7792,15 +8430,24 @@ export const fi: TranslationKeys = {
     "skip": "Ohita",
     "downloadingUpdate": "Ladataan päivityspakettia taustalla...",
     "updateReadyTitle": "Päivitys v{version} valmis",
-    "updateReadyDesc": "Napsauta T-Dropin uudelleenkäynnistämiseksi ja päivityksen käyttöönottamiseksi.",
+    "updateReadyDesc": "Pyyhkäise käynnistääksesi T-Dropin uudelleen ja ottaaksesi päivityksen käyttöön.",
     "restartToUpdate": "Käynnistä uudelleen päivittääksesi",
     "restartToUpdateBelow": "Käynnistä uudelleen päivittääksesi alla",
     "newUpdateAvailableBelow": "Uusi päivitys saatavilla alla",
+    "slideToRestart": "Pyyhkäise käynnistääksesi uudelleen",
+    "restarting": "Käynnistetään uudelleen...",
+    "restartFailed": "Uudelleenkäynnistys epäonnistui",
     "autoDeleteTitle": "Automaattisen poiston ajastin",
     "autoDeleteDesc": "Poista kopioidut kohteet automaattisesti (säilyttää Kiinnitetyt)",
     "never": "Ei koskaan",
     "capacityTitle": "Historian kapasiteetti",
-    "capacityDesc": "Historiassa säilytettyjen kiinnittämättömien kohteiden enimmäismäärä"
+    "capacityDesc": "Historiassa säilytettyjen kiinnittämättömien kohteiden enimmäismäärä",
+    "connectingDownload": "Yhdistetään latauspalvelimeen...",
+    "connecting": "Yhdistetään...",
+    "downloadingWithPercent": "Ladataan päivitystä ({percent}%)...",
+    "download": "Lataa",
+    "notifyModeSubtitle": "Ilmoitustila · Lataa napsauttamalla",
+    "newUpdateAvailable": "Uusi päivitys saatavilla {version}"
   },
   "position": {
     "edgePlacementTitle": "Reunan sijoitus",
@@ -7876,12 +8523,7 @@ export const fi: TranslationKeys = {
     "moreImages": "+{count} kuvaa lisää",
     "moreFiles": "+{count} tiedostoa lisää",
     "singleFile": "1 tiedosto",
-    "scrollToTop": "Vieritä ylös",
-    "clearLast1h": "Tyhjennä viimeinen tunti",
-    "clearLast6h": "Tyhjennä viimeiset 6 tuntia",
-    "clearLast24h": "Tyhjennä viimeiset 24 tuntia",
-    "clearAll": "Tyhjennä koko historia",
-    "clearAllConfirm": "Vahvista napauttamalla uudelleen"
+    "scrollToTop": "Vieritä ylös"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7935,7 +8577,9 @@ export const fi: TranslationKeys = {
     "proTip1": "Paina Alt + C vaihtaaksesi hyllyä heti.",
     "proTip2": "Avaa asetukset milloin tahansa hammasrataskuvakkeen kautta (oikea ylä).",
     "proTip3": "Vedä ja pudota tiedostoja vasempaan reunaan lisätäksesi ne.",
-    "proTip4": "Napsauta tekstikenttää, sitten leikepöydän kohdetta liittääksesi automaattisesti."
+    "proTip4": "Napsauta tekstikenttää, sitten leikepöydän kohdetta liittääksesi automaattisesti.",
+    "backupTitle": "Varmuuskopiointi ja palautus (.txa)",
+    "backupDesc": "Vie leikepöytähistoria, kiinnitetyt kohteet ja asetukset salattuun .txa-arkistoon."
   },
   "tray": {
     "showClipboard": "Näytä leikepöytä",
@@ -7994,6 +8638,34 @@ export const fi: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Jos pidät T-Dropista, harkitse projektin tähteyttä GitHubissa!",
     "version": "Versio"
+  },
+  "backup": {
+    "title": "Varmuuskopiointi ja palautus (.txa)",
+    "desc": "Luo salattuja varmuuskopioita leikepöydän ja asetusten säilyttämiseksi Windowsin uudelleenasennuksessa.",
+    "exportBtn": "Vie varmuuskopio (.txa)",
+    "importBtn": "Palauta tiedot (.txa)",
+    "exportSuccess": "Varmuuskopio luotu onnistuneesti ({items} kohdetta)",
+    "exportFailed": "Varmuuskopion luonti epäonnistui: {error}",
+    "importSuccess": "{count} kohdetta palautettu onnistuneesti",
+    "importFailed": "Palautus epäonnistui: {error}",
+    "busyError": "Toinen varmuuskopiointi tai palautus on jo käynnissä.",
+    "modalTitle": "Palauta T-Drop-varmuuskopio",
+    "modalDesc": "Tarkista arkiston tiedot ja valitse palautustila.",
+    "fileLabel": "Varmuuskopiotiedosto:",
+    "dateLabel": "Luontipäivämäärä:",
+    "itemsLabel": "Kohteet:",
+    "imagesLabel": "Kuvat:",
+    "modeLabel": "Palautustila:",
+    "modeMerge": "Yhdistä (Suositus)",
+    "modeMergeDesc": "Säilytä nykyiset kohteet ja lisää uudet varmuuskopiosta.",
+    "modeOverwrite": "Korvaa kaikki",
+    "modeOverwriteDesc": "Korvaa nykyinen historia ja asetukset kokonaan varmuuskopiolla.",
+    "confirmRestore": "Vahvista palautus",
+    "cancel": "Peruuta",
+    "restoring": "Palautetaan...",
+    "autoDetectedTitle": "Varmuuskopiotiedosto havaittu",
+    "previewTitle": "Varmuuskopion esikatselu",
+    "itemsUnit": "kohdetta"
   }
 }
 
@@ -8051,15 +8723,24 @@ export const th: TranslationKeys = {
     "skip": "ข้าม",
     "downloadingUpdate": "กำลังดาวน์โหลดแพ็กเกจอัปเดตในเบื้องหลัง...",
     "updateReadyTitle": "อัปเดต v{version} พร้อมแล้ว",
-    "updateReadyDesc": "คลิกเพื่อรีสตาร์ท T-Drop และใช้อัปเดต",
+    "updateReadyDesc": "เลื่อนเพื่อรีสตาร์ท T-Drop และใช้อัปเดต",
     "restartToUpdate": "รีสตาร์ทเพื่ออัปเดต",
     "restartToUpdateBelow": "รีสตาร์ทเพื่ออัปเดตด้านล่าง",
     "newUpdateAvailableBelow": "มีอัปเดตใหม่ด้านล่าง",
+    "slideToRestart": "เลื่อนเพื่อรีสตาร์ท",
+    "restarting": "กำลังรีสตาร์ท...",
+    "restartFailed": "รีสตาร์ทไม่สำเร็จ",
     "autoDeleteTitle": "ตัวจับเวลาลบอัตโนมัติ",
     "autoDeleteDesc": "ล้างรายการที่คัดลอกอัตโนมัติ (คงรายการที่ปักหมุดไว้)",
     "never": "ไม่เคย",
     "capacityTitle": "ความจุประวัติ",
-    "capacityDesc": "จำนวนรายการที่ไม่ได้ปักหมุดสูงสุดที่เก็บในประวัติ"
+    "capacityDesc": "จำนวนรายการที่ไม่ได้ปักหมุดสูงสุดที่เก็บในประวัติ",
+    "connectingDownload": "กำลังเชื่อมต่อกับเซิร์ฟเวอร์ดาวน์โหลด...",
+    "connecting": "กำลังเชื่อมต่อ...",
+    "downloadingWithPercent": "กำลังดาวน์โหลดการอัปเดต ({percent}%)...",
+    "download": "ดาวน์โหลด",
+    "notifyModeSubtitle": "โหมดการแจ้งเตือน · คลิกเพื่อดาวน์โหลด",
+    "newUpdateAvailable": "มีการอัปเดตใหม่ {version}"
   },
   "position": {
     "edgePlacementTitle": "ตำแหน่งขอบ",
@@ -8135,12 +8816,7 @@ export const th: TranslationKeys = {
     "moreImages": "+{count} รูปภาพเพิ่มเติม",
     "moreFiles": "+{count} ไฟล์เพิ่มเติม",
     "singleFile": "1 ไฟล์",
-    "scrollToTop": "เลื่อนไปที่ด้านบน",
-    "clearLast1h": "ล้างข้อมูล 1 ชั่วโมงล่าสุด",
-    "clearLast6h": "ล้างข้อมูล 6 ชั่วโมงล่าสุด",
-    "clearLast24h": "ล้างข้อมูล 24 ชั่วโมงล่าสุด",
-    "clearAll": "ล้างประวัติทั้งหมด",
-    "clearAllConfirm": "แตะอีกครั้งเพื่อยืนยัน"
+    "scrollToTop": "เลื่อนไปที่ด้านบน"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8194,7 +8870,9 @@ export const th: TranslationKeys = {
     "proTip1": "กด Alt + C เพื่อสลับชั้นวางทันที",
     "proTip2": "เข้าถึงการตั้งค่าได้ตลอดเวลาผ่านไอคอนรูปเฟือง (ขวาบน)",
     "proTip3": "ลากและวางไฟล์ไปยังขอบซ้ายเพื่อเพิ่ม",
-    "proTip4": "คลิกที่กล่องข้อความ แล้วคลิกรายการคลิปบอร์ดเพื่อวางอัตโนมัติ"
+    "proTip4": "คลิกที่กล่องข้อความ แล้วคลิกรายการคลิปบอร์ดเพื่อวางอัตโนมัติ",
+    "backupTitle": "สำรองและกู้คืนข้อมูล (.txa)",
+    "backupDesc": "ส่งออกประวัติคลิปบอร์ด รายการที่ปักหมุด และการตั้งค่าไปยังไฟล์ .txa ที่เข้ารหัสอย่างปลอดภัย"
   },
   "tray": {
     "showClipboard": "แสดงคลิปบอร์ด",
@@ -8253,6 +8931,34 @@ export const th: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "หากคุณชอบ T-Drop โปรดพิจารณาติดดาวให้โปรเจกต์บน GitHub!",
     "version": "เวอร์ชัน"
+  },
+  "backup": {
+    "title": "สำรองและกู้คืนข้อมูล (.txa)",
+    "desc": "สร้างข้อมูลสำรองที่เข้ารหัสเพื่อรักษาประวัติคลิปบอร์ดและรูปภาพเมื่อติดตั้ง Windows ใหม่",
+    "exportBtn": "ส่งออกข้อมูลสำรอง (.txa)",
+    "importBtn": "กู้คืนข้อมูล (.txa)",
+    "exportSuccess": "สร้างข้อมูลสำรองสำเร็จ ({items} รายการ)",
+    "exportFailed": "สร้างข้อมูลสำรองไม่สำเร็จ: {error}",
+    "importSuccess": "กู้คืนข้อมูลสำเร็จ {count} รายการ",
+    "importFailed": "การกู้คืนล้มเหลว: {error}",
+    "busyError": "กำลังดำเนินการสำรองหรือกู้คืนข้อมูลอื่นอยู่",
+    "modalTitle": "กู้คืนข้อมูลสำรอง T-Drop",
+    "modalDesc": "ตรวจสอบรายละเอียดและเลือกวิธีการกู้คืนข้อมูล",
+    "fileLabel": "ไฟล์สำรอง:",
+    "dateLabel": "วันที่สร้าง:",
+    "itemsLabel": "จำนวนรายการ:",
+    "imagesLabel": "รูปภาพ:",
+    "modeLabel": "โหมดการกู้คืน:",
+    "modeMerge": "รวมข้อมูล (แนะนำ)",
+    "modeMergeDesc": "เก็บรายการปัจจุบันไว้และเพิ่มรายการใหม่จากไฟล์สำรอง",
+    "modeOverwrite": "เขียนทับทั้งหมด",
+    "modeOverwriteDesc": "แทนที่ประวัติและการตั้งค่าปัจจุบันทั้งหมดด้วยข้อมูลสำรอง",
+    "confirmRestore": "ยืนยันการกู้คืน",
+    "cancel": "ยกเลิก",
+    "restoring": "กำลังกู้คืน...",
+    "autoDetectedTitle": "ตรวจพบไฟล์สำรอง",
+    "previewTitle": "ดูตัวอย่างข้อมูลสำรอง",
+    "itemsUnit": "รายการ"
   }
 }
 
@@ -8310,15 +9016,24 @@ export const he: TranslationKeys = {
     "skip": "דלג",
     "downloadingUpdate": "מוריד חבילת עדכון ברקע...",
     "updateReadyTitle": "עדכון v{version} מוכן",
-    "updateReadyDesc": "לחץ להפעלה מחדש של T-Drop ויישום העדכון.",
+    "updateReadyDesc": "החלק כדי להפעיל מחדש את T-Drop ולהחיל את העדכון.",
     "restartToUpdate": "הפעל מחדש כדי לעדכן",
     "restartToUpdateBelow": "הפעל מחדש כדי לעדכן למטה",
     "newUpdateAvailableBelow": "עדכון חדש זמין למטה",
+    "slideToRestart": "החלק להפעלה מחדש",
+    "restarting": "מפעיל מחדש...",
+    "restartFailed": "ההפעלה מחדש נכשלה",
     "autoDeleteTitle": "טיימר מחיקה אוטומטי",
     "autoDeleteDesc": "מחק אוטומטית פריטים שהועתקו (שומר על מוצמדים)",
     "never": "לעולם לא",
     "capacityTitle": "קיבולת היסטוריה",
-    "capacityDesc": "מספר מרבי של פריטים לא מוצמדים בהיסטוריה"
+    "capacityDesc": "מספר מרבי של פריטים לא מוצמדים בהיסטוריה",
+    "connectingDownload": "מתחבר לשרת ההורדות...",
+    "connecting": "מתחבר...",
+    "downloadingWithPercent": "מוריד עדכון ({percent}%)...",
+    "download": "הורד",
+    "notifyModeSubtitle": "מצב התראה · לחץ להורדה",
+    "newUpdateAvailable": "עדכון חדש זמין {version}"
   },
   "position": {
     "edgePlacementTitle": "מיקום קצה",
@@ -8394,12 +9109,7 @@ export const he: TranslationKeys = {
     "moreImages": "+{count} תמונות נוספות",
     "moreFiles": "+{count} קבצים נוספים",
     "singleFile": "קובץ 1",
-    "scrollToTop": "גלול לראש",
-    "clearLast1h": "נקה את השעה האחרונה",
-    "clearLast6h": "נקה את 6 השעות האחרונות",
-    "clearLast24h": "נקה את 24 השעות האחרונות",
-    "clearAll": "נקה את כל ההיסטוריה",
-    "clearAllConfirm": "הקש שוב כדי לאשר"
+    "scrollToTop": "גלול לראש"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8453,7 +9163,9 @@ export const he: TranslationKeys = {
     "proTip1": "לחץ Alt + C כדי להחליף את המדף מיד.",
     "proTip2": "גש להגדרות בכל עת דרך סמל גלגל השיניים (למעלה מימין).",
     "proTip3": "גרור ושחרר קבצים לקצה השמאלי כדי להוסיף אותם.",
-    "proTip4": "לחץ על תיבת טקסט, ואז על פריט לוח כדי להדביק אוטומטית."
+    "proTip4": "לחץ על תיבת טקסט, ואז על פריט לוח כדי להדביק אוטומטית.",
+    "backupTitle": "גיבוי ושחזור ארכיון (.txa)",
+    "backupDesc": "ייצא את היסטוריית לוח הגזירים, פריטים מוצמדים והגدرות לקובץ .txa מוצפן ומאובטח."
   },
   "tray": {
     "showClipboard": "הצג לוח",
@@ -8512,6 +9224,34 @@ export const he: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "אם אתה אוהב את T-Drop, אנא שקול לתת כוכב לפרויקט ב-GitHub!",
     "version": "גרסה"
+  },
+  "backup": {
+    "title": "גיבוי ושחזור (.txa)",
+    "desc": "צור גיבויים מוצפנים לשמירה על פריטי לוח הגזירים וההגדרות בעת התקנה מחדש של Windows.",
+    "exportBtn": "ייצא גיבוי (.txa)",
+    "importBtn": "שחזר נתונים (.txa)",
+    "exportSuccess": "הגיבוי המוצפן נוצר בהצלחה ({items} פריטים)",
+    "exportFailed": "יצירת הגיבוי נכשלה: {error}",
+    "importSuccess": "{count} פריטים שוחזרו בהצלחה",
+    "importFailed": "השחזור נכשל: {error}",
+    "busyError": "פעולת גיבוי או שחזור אחרת כבר מתבצעת.",
+    "modalTitle": "שחזור גיבוי T-Drop",
+    "modalDesc": "בדוק את פרטי הארכיון ובחר כיצד לשחזר את הנתונים.",
+    "fileLabel": "קובץ גיבוי:",
+    "dateLabel": "תאריך יצירה:",
+    "itemsLabel": "פריטים:",
+    "imagesLabel": "תמונות:",
+    "modeLabel": "מצב שחזור:",
+    "modeMerge": "מיזוג (מומלץ)",
+    "modeMergeDesc": "שמור על הפריטים הנוכחיים והוסף פריטים חדשים מהגיבוי.",
+    "modeOverwrite": "דרוס הכל",
+    "modeOverwriteDesc": "החלף לחלוטין את ההיסטוריה וההגדרות הנוכחיות בנתוני הגיבוי.",
+    "confirmRestore": "אשר שחזור",
+    "cancel": "ביטול",
+    "restoring": "משחזר...",
+    "autoDetectedTitle": "זוהה קובץ גיבוי",
+    "previewTitle": "תצוגה מקדימה של הגיבוי",
+    "itemsUnit": "פריטים"
   }
 }
 
@@ -8569,15 +9309,24 @@ export const no: TranslationKeys = {
     "skip": "Hopp over",
     "downloadingUpdate": "Laster ned oppdateringspakke i bakgrunnen...",
     "updateReadyTitle": "Oppdatering v{version} klar",
-    "updateReadyDesc": "Klikk for å starte T-Drop på nytt og bruke oppdateringen.",
+    "updateReadyDesc": "Skyv for å starte T-Drop på nytt og bruke oppdateringen.",
     "restartToUpdate": "Start på nytt for å oppdatere",
     "restartToUpdateBelow": "Start på nytt for å oppdatere nedenfor",
     "newUpdateAvailableBelow": "Ny oppdatering tilgjengelig nedenfor",
+    "slideToRestart": "Skyv for å starte på nytt",
+    "restarting": "Starter på nytt...",
+    "restartFailed": "Omstart mislyktes",
     "autoDeleteTitle": "Timer for automatisk sletting",
     "autoDeleteDesc": "Fjern kopierte elementer automatisk (beholder Festede)",
     "never": "Aldri",
     "capacityTitle": "Historikk-kapasitet",
-    "capacityDesc": "Maksimalt antall ikke-festede elementer lagret i historikk"
+    "capacityDesc": "Maksimalt antall ikke-festede elementer lagret i historikk",
+    "connectingDownload": "Kobler til nedlastingsserver...",
+    "connecting": "Kobler til...",
+    "downloadingWithPercent": "Laster ned oppdatering ({percent}%)...",
+    "download": "Last ned",
+    "notifyModeSubtitle": "Varslingsmodus · Klikk for å laste ned",
+    "newUpdateAvailable": "Ny oppdatering tilgjengelig {version}"
   },
   "position": {
     "edgePlacementTitle": "Kant-plassering",
@@ -8653,12 +9402,7 @@ export const no: TranslationKeys = {
     "moreImages": "+{count} flere bilder",
     "moreFiles": "+{count} flere filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Rull til toppen",
-    "clearLast1h": "Tøm siste time",
-    "clearLast6h": "Tøm siste 6 timer",
-    "clearLast24h": "Tøm siste 24 timer",
-    "clearAll": "Tøm all historikk",
-    "clearAllConfirm": "Trykk igjen for å bekrefte"
+    "scrollToTop": "Rull til toppen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8712,7 +9456,9 @@ export const no: TranslationKeys = {
     "proTip1": "Trykk Alt + C for å umiddelbart bytte hyllen.",
     "proTip2": "Få tilgang til innstillinger når som helst via tannhjulikonet (øverst til høyre).",
     "proTip3": "Dra og slipp filer til venstre kant for å legge dem til.",
-    "proTip4": "Klikk på en tekstboks, deretter et utklippstavle-element for å lime inn automatisk."
+    "proTip4": "Klikk på en tekstboks, deretter et utklippstavle-element for å lime inn automatisk.",
+    "backupTitle": "Sikkerhetskopiering og gjenoppretting (.txa)",
+    "backupDesc": "Eksporter utklippstavlehistorikk, festede elementer og innstillinger til et kryptert .txa-arkiv."
   },
   "tray": {
     "showClipboard": "Vis utklippstavle",
@@ -8771,6 +9517,34 @@ export const no: TranslationKeys = {
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Hvis du liker T-Drop, vennligst vurder å gi prosjektet en stjerne på GitHub!",
     "version": "Versjon"
+  },
+  "backup": {
+    "title": "Sikkerhetskopiering og gjenoppretting (.txa)",
+    "desc": "Opprett krypterte sikkerhetskopier for å bevare utklipp og innstillinger ved reinstallering av Windows.",
+    "exportBtn": "Eksporter sikkerhetskopi (.txa)",
+    "importBtn": "Gjenopprett data (.txa)",
+    "exportSuccess": "Sikkerhetskopi opprettet ({items} elementer)",
+    "exportFailed": "Kunne ikke opprette sikkerhetskopi: {error}",
+    "importSuccess": "{count} elementer ble gjenopprettet",
+    "importFailed": "Gjenoppretting mislyktes: {error}",
+    "busyError": "En annen sikkerhetskopiering eller gjenoppretting pågår allerede.",
+    "modalTitle": "Gjenopprett T-Drop sikkerhetskopi",
+    "modalDesc": "Se gjennom arkivdetaljene og velg gjenopprettingsmodus.",
+    "fileLabel": "Sikkerhetskopifil:",
+    "dateLabel": "Opprettet dato:",
+    "itemsLabel": "Elementer:",
+    "imagesLabel": "Bilder:",
+    "modeLabel": "Gjenopprettingsmodus:",
+    "modeMerge": "Slå sammen (Anbefalt)",
+    "modeMergeDesc": "Behold gjeldende elementer og legg til nye fra sikkerhetskopien.",
+    "modeOverwrite": "Overskriv alt",
+    "modeOverwriteDesc": "Erstatt gjeldende historikk og innstillinger helt med sikkerhetskopien.",
+    "confirmRestore": "Bekreft gjenoppretting",
+    "cancel": "Avbryt",
+    "restoring": "Gjenoppretter...",
+    "autoDetectedTitle": "Sikkerhetskopifil oppdaget",
+    "previewTitle": "Forhåndsvisning av sikkerhetskopi",
+    "itemsUnit": "elementer"
   }
 }
 

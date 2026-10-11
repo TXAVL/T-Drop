@@ -50,7 +50,7 @@
     "skip": "건너뛰기",
     "downloadingUpdate": "백그라운드에서 업데이트 패키지 다운로드 중...",
     "updateReadyTitle": "업데이트 v{version} 준비 완료",
-    "updateReadyDesc": "클릭하여 T-Drop을 다시 시작하고 업데이트를 적용합니다.",
+    "updateReadyDesc": "밀어서 T-Drop을 다시 시작하고 업데이트를 적용합니다.",
     "restartToUpdate": "업데이트하려면 다시 시작",
     "restartToUpdateBelow": "아래에서 다시 시작하여 업데이트",
     "newUpdateAvailableBelow": "아래에 새 업데이트가 있습니다",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "편집",
     "hotkeyRecording": "키 조합을 누르세요...",
     "hotkeyCancel": "취소",
-    "hotkeyReset": "기본값으로 재설정 ({shortcut})"
+    "hotkeyReset": "기본값으로 재설정 ({shortcut})",
+    "connectingDownload": "다운로드 서버에 연결하는 중...",
+    "connecting": "연결 중...",
+    "downloadingWithPercent": "업데이트 다운로드 중 ({percent}%)...",
+    "download": "다운로드",
+    "notifyModeSubtitle": "알림 모드 · 클릭하여 다운로드",
+    "newUpdateAvailable": "새 업데이트 이용 가능 {version}",
+    "slideToRestart": "밀어서 다시 시작",
+    "restarting": "다시 시작 중...",
+    "restartFailed": "다시 시작 실패"
   },
   "position": {
     "edgePlacementTitle": "가장자리 배치",
@@ -201,7 +210,9 @@
     "proTip1": "Alt + C를 눌러 선반을 즉시 토글하세요.",
     "proTip2": "톱니바퀴 아이콘 (우측 상단)으로 언제든 설정에 접근하세요.",
     "proTip3": "파일을 왼쪽 가장자리로 드래그 앤 드롭하여 추가하세요.",
-    "proTip4": "텍스트 상자를 클릭한 후 클립보드 항목을 누르면 자동 붙여넣기됩니다."
+    "proTip4": "텍스트 상자를 클릭한 후 클립보드 항목을 누르면 자동 붙여넣기됩니다.",
+    "backupTitle": "백업 및 복원 아카이브 (.txa)",
+    "backupDesc": "클립보드 기록, 고정 항목 및 설정을 암호화된 .txa 아카이브로 안전하게 내보내고 언제든지 병합 또는 덮어쓰기 모드로 복원하세요."
   },
   "tray": {
     "showClipboard": "클립보드 표시",
@@ -260,5 +271,33 @@
     "version": "버전",
     "supportPromo": "T-Drop은 100% 무료 오픈소스입니다. 일상적인 작업에 도움이 된다면, 더 나은 앱을 만들 수 있도록 개발을 후원해 주세요!",
     "supportOnKofi": "Ko-fi에서 후원하기"
+  },
+  "backup": {
+    "title": "백업 및 복원 (.txa)",
+    "desc": "암호화된 백업을 생성하여 클립보드 항목, 이미지 및 설정을 안전하게 보관합니다.",
+    "exportBtn": "백업 내보내기 (.txa)",
+    "importBtn": "데이터 복원 (.txa)",
+    "exportSuccess": "암호화된 백업 생성 완료 ({items}개 항목)",
+    "exportFailed": "백업 생성 실패: {error}",
+    "importSuccess": "{count}개 항목을 성공적으로 복원했습니다",
+    "importFailed": "복원 실패: {error}",
+    "busyError": "다른 백업 또는 복원 작업이 이미 진행 중입니다.",
+    "modalTitle": "T-Drop 백업 복원",
+    "modalDesc": "보관 파일 정보를 검토하고 복원 방식을 선택하세요.",
+    "fileLabel": "백업 파일:",
+    "dateLabel": "생성 날짜:",
+    "itemsLabel": "항목 수:",
+    "imagesLabel": "이미지 수:",
+    "modeLabel": "복원 모드:",
+    "modeMerge": "데이터 병합 (권장)",
+    "modeMergeDesc": "현재 항목을 유지하고 백업에서 새 항목을 추가합니다.",
+    "modeOverwrite": "전체 덮어쓰기",
+    "modeOverwriteDesc": "현재 기록과 설정을 백업 데이터로 완전히 교체합니다.",
+    "confirmRestore": "복원 확인",
+    "cancel": "취소",
+    "restoring": "복원 중...",
+    "autoDetectedTitle": "백업 파일 감지됨",
+    "previewTitle": "백업 미리보기",
+    "itemsUnit": "개"
   }
 }

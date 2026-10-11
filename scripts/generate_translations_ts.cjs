@@ -46,15 +46,24 @@ const masterEn = {
     skip: 'Skip',
     downloadingUpdate: 'Downloading in background...',
     updateReadyTitle: 'Update v{version} Ready',
-    updateReadyDesc: 'Restart to apply update',
+    updateReadyDesc: 'Slide to restart T-Drop and apply the update.',
     restartToUpdate: 'Restart to Update',
     restartToUpdateBelow: 'Restart to update below',
     newUpdateAvailableBelow: 'New update available below',
+    slideToRestart: 'Slide to restart',
+    restarting: 'Restarting...',
+    restartFailed: 'Restart failed',
     autoDeleteTitle: 'Auto-delete timer',
     autoDeleteDesc: 'Automatically purge copied items (preserves Pinned)',
     never: 'Never',
     capacityTitle: 'History capacity',
-    capacityDesc: 'Maximum unpinned items stored in history'
+    capacityDesc: 'Maximum unpinned items stored in history',
+    connectingDownload: 'Connecting to download server...',
+    connecting: 'Connecting...',
+    downloadingWithPercent: 'Downloading update ({percent}%)...',
+    download: 'Download',
+    notifyModeSubtitle: 'Notification mode · Click to download',
+    newUpdateAvailable: 'New update available {version}'
   },
   position: {
     edgePlacementTitle: 'Edge Placement',
@@ -184,7 +193,9 @@ const masterEn = {
     proTip1: 'Press Alt + C to instantly toggle the shelf.',
     proTip2: 'Access settings anytime via the gear icon (top right).',
     proTip3: 'Drag & drop files to the left edge to add them.',
-    proTip4: 'Click a text box, then a clipboard item to auto-paste.'
+    proTip4: 'Click a text box, then a clipboard item to auto-paste.',
+    backupTitle: 'Backup & Restore Archive (.txa)',
+    backupDesc: 'Export your clipboard history, pinned items, and settings into an encrypted .txa archive. Seamlessly transfer to a new PC or restore anytime with Merge or Overwrite modes.'
   },
   tray: {
     showClipboard: 'Show Clipboard',
@@ -243,6 +254,34 @@ const masterEn = {
     reviewOnStore: 'Review on Microsoft Store',
     githubPromo: 'Enjoying T-Drop? Show your support by starring the project on GitHub!',
     version: 'Version'
+  },
+  backup: {
+    title: 'Backup & Restore (.txa)',
+    desc: 'Create encrypted standalone backups to preserve clipboard items, images, and settings across Windows reinstalls.',
+    exportBtn: 'Export Backup (.txa)',
+    importBtn: 'Import & Restore (.txa)',
+    exportSuccess: 'Successfully created encrypted backup ({items} items)',
+    exportFailed: 'Failed to create backup: {error}',
+    importSuccess: 'Successfully restored {count} items into clipboard history',
+    importFailed: 'Failed to restore backup: {error}',
+    busyError: 'Another backup or restore operation is already in progress.',
+    modalTitle: 'Restore T-Drop Backup',
+    modalDesc: 'Review archive details and choose how to restore your data.',
+    fileLabel: 'Backup File:',
+    dateLabel: 'Created:',
+    itemsLabel: 'Items:',
+    imagesLabel: 'Images:',
+    modeLabel: 'Restore Mode:',
+    modeMerge: 'Merge (Recommended)',
+    modeMergeDesc: 'Keep current items and add non-duplicate items from the backup.',
+    modeOverwrite: 'Overwrite All',
+    modeOverwriteDesc: 'Completely replace current history and settings with the backup.',
+    confirmRestore: 'Restore Now',
+    cancel: 'Cancel',
+    restoring: 'Restoring...',
+    autoDetectedTitle: 'Backup Archive Detected',
+    previewTitle: 'Restore Preview',
+    itemsUnit: 'items'
   }
 };
 
@@ -492,6 +531,13 @@ let fileContent = `export interface TranslationKeys {
     never: string
     capacityTitle: string
     capacityDesc: string
+    connectingDownload?: string
+    connecting?: string
+    downloadingWithPercent?: string
+    download?: string
+    notifyModeSubtitle?: string
+    newUpdateAvailable?: string
+    [key: string]: string | undefined
   }
   position: {
     edgePlacementTitle: string
@@ -622,6 +668,9 @@ let fileContent = `export interface TranslationKeys {
     proTip2: string
     proTip3: string
     proTip4: string
+    backupTitle?: string
+    backupDesc?: string
+    [key: string]: string | undefined
   }
   tray: {
     showClipboard: string
@@ -680,6 +729,36 @@ let fileContent = `export interface TranslationKeys {
     reviewOnStore?: string
     githubPromo: string
     version: string
+    [key: string]: string | undefined
+  }
+  backup?: {
+    title: string
+    desc: string
+    exportBtn: string
+    importBtn: string
+    exportSuccess: string
+    exportFailed: string
+    importSuccess: string
+    importFailed: string
+    busyError: string
+    modalTitle: string
+    modalDesc: string
+    fileLabel: string
+    dateLabel: string
+    itemsLabel: string
+    imagesLabel: string
+    modeLabel: string
+    modeMerge: string
+    modeMergeDesc: string
+    modeOverwrite: string
+    modeOverwriteDesc: string
+    confirmRestore: string
+    cancel: string
+    restoring: string
+    autoDetectedTitle: string
+    previewTitle: string
+    itemsUnit: string
+    [key: string]: string | undefined
   }
 }
 

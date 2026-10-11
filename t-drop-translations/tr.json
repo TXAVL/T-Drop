@@ -50,7 +50,7 @@
     "skip": "Atla",
     "downloadingUpdate": "Güncelleme paketi arka planda indiriliyor...",
     "updateReadyTitle": "Güncelleme v{version} Hazır",
-    "updateReadyDesc": "T-Drop'u yeniden başlatmak ve güncellemeyi uygulamak için tıklayın.",
+    "updateReadyDesc": "T-Drop'u yeniden başlatmak ve güncellemeyi uygulamak için kaydırın.",
     "restartToUpdate": "Güncellemek için yeniden başlat",
     "restartToUpdateBelow": "Aşağıda güncellemek için yeniden başlat",
     "newUpdateAvailableBelow": "Aşağıda yeni güncelleme mevcut",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Düzenle",
     "hotkeyRecording": "Tuş kombinasyonuna basın...",
     "hotkeyCancel": "İptal",
-    "hotkeyReset": "Varsayılana sıfırla ({shortcut})"
+    "hotkeyReset": "Varsayılana sıfırla ({shortcut})",
+    "connectingDownload": "İndirme sunucusuna bağlanılıyor...",
+    "connecting": "Bağlanılıyor...",
+    "downloadingWithPercent": "Güncelleme indiriliyor ({percent}%)...",
+    "download": "İndir",
+    "notifyModeSubtitle": "Bildirim modu · İndirmek için tıklayın",
+    "newUpdateAvailable": "Yeni güncelleme mevcut {version}",
+    "slideToRestart": "Yeniden başlatmak için kaydırın",
+    "restarting": "Yeniden başlatılıyor...",
+    "restartFailed": "Yeniden başlatılamadı"
   },
   "position": {
     "edgePlacementTitle": "Kenar Yerleşimi",
@@ -201,7 +210,9 @@
     "proTip1": "Rafı anında açıp kapatmak için Alt + C tuşlarına basın.",
     "proTip2": "Çark simgesi (sağ üst) üzerinden istediğiniz zaman ayarlara erişin.",
     "proTip3": "Eklemek için dosyaları sol kenara sürükleyip bırakın.",
-    "proTip4": "Bir metin kutusuna, ardından otomatik yapıştırmak için bir pano öğesine tıklayın."
+    "proTip4": "Bir metin kutusuna, ardından otomatik yapıştırmak için bir pano öğesine tıklayın.",
+    "backupTitle": "Yedekleme ve Geri Yükleme Arşivi (.txa)",
+    "backupDesc": "Pano geçmişinizi, sabitlenen öğeleri ve ayarları şifreli bir .txa arşivine aktarın. İstediğiniz zaman Birleştir veya Üzerine Yaz modlarıyla geri yükleyin."
   },
   "tray": {
     "showClipboard": "Panoyu Göster",
@@ -260,5 +271,33 @@
     "version": "Sürüm",
     "supportPromo": "T-Drop %100 ücretsiz ve açık kaynaklıdır. Günlük iş akışınıza yardımcı oluyorsa, daha da geliştirilmesine destek olmayı düşünebilirsiniz!",
     "supportOnKofi": "Ko-fi üzerinden destek ol"
+  },
+  "backup": {
+    "title": "Yedekleme ve Geri Yükleme (.txa)",
+    "desc": "Windows yeniden yüklemelerinde pano öğelerini, resimleri ve ayarları korumak için şifreli bağımsız yedekler oluşturun.",
+    "exportBtn": "Yedeği Dışa Aktar (.txa)",
+    "importBtn": "Verileri Geri Yükle (.txa)",
+    "exportSuccess": "Şifreli yedek başarıyla oluşturuldu ({items} öğe)",
+    "exportFailed": "Yedekleme oluşturulamadı: {error}",
+    "importSuccess": "{count} öğe başarıyla geri yüklendi",
+    "importFailed": "Geri yükleme başarısız: {error}",
+    "busyError": "Başka bir yedekleme veya geri yükleme işlemi zaten devam ediyor.",
+    "modalTitle": "T-Drop Yedeğini Geri Yükle",
+    "modalDesc": "Arşiv ayrıntılarını inceleyin ve verilerinizi nasıl geri yükleyeceğinizi seçin.",
+    "fileLabel": "Yedek Dosyası:",
+    "dateLabel": "Oluşturulma Tarihi:",
+    "itemsLabel": "Öğe Sayısı:",
+    "imagesLabel": "Resim Sayısı:",
+    "modeLabel": "Geri Yükleme Modu:",
+    "modeMerge": "Birleştir (Önerilen)",
+    "modeMergeDesc": "Mevcut öğeleri koruyun ve yedekten yeni öğeleri ekleyin.",
+    "modeOverwrite": "Tümünün Üzerine Yaz",
+    "modeOverwriteDesc": "Mevcut geçmişi ve ayarları tamamen yedekle değiştirin.",
+    "confirmRestore": "Geri Yüklemeyi Onayla",
+    "cancel": "İptal",
+    "restoring": "Geri yükleniyor...",
+    "autoDetectedTitle": "Yedek Dosyası Algılandı",
+    "previewTitle": "Yedek Önizlemesi",
+    "itemsUnit": "öğe"
   }
 }

@@ -50,7 +50,7 @@
     "skip": "Kihagyás",
     "downloadingUpdate": "Frissítési csomag letöltése a háttérben...",
     "updateReadyTitle": "A v{version} frissítés készen áll",
-    "updateReadyDesc": "Kattintson az T-Drop újraindításához és a frissítés alkalmazásához.",
+    "updateReadyDesc": "Csúsztassa az T-Drop újraindításához és a frissítés alkalmazásához.",
     "restartToUpdate": "Újraindítás a frissítéshez",
     "restartToUpdateBelow": "Újraindítás a frissítéshez lent",
     "newUpdateAvailableBelow": "Új frissítés érhető el lent",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Szerkesztés",
     "hotkeyRecording": "Nyomja meg a billentyűkombinációt...",
     "hotkeyCancel": "Mégse",
-    "hotkeyReset": "Visszaállítás alapértelmezettre ({shortcut})"
+    "hotkeyReset": "Visszaállítás alapértelmezettre ({shortcut})",
+    "connectingDownload": "Csatlakozás a letöltési kiszolgálóhoz...",
+    "connecting": "Csatlakozás...",
+    "downloadingWithPercent": "Frissítés letöltése ({percent}%)...",
+    "download": "Letöltés",
+    "notifyModeSubtitle": "Értesítési mód · Kattintson a letöltéshez",
+    "newUpdateAvailable": "Új frissítés érhető el {version}",
+    "slideToRestart": "Csúsztassa az újraindításhoz",
+    "restarting": "Újraindítás...",
+    "restartFailed": "Az újraindítás sikertelen"
   },
   "position": {
     "edgePlacementTitle": "Szél-elhelyezés",
@@ -201,7 +210,9 @@
     "proTip1": "Nyomja meg az Alt + C billentyűt a polc azonnali váltásához.",
     "proTip2": "A fogaskerék ikonon (jobb felső) keresztül bármikor elérheti a beállításokat.",
     "proTip3": "Húzzon és ejtsen fájlokat a bal szélre a hozzáadáshoz.",
-    "proTip4": "Kattintson egy szövegdobozra, majd egy vágólap-elemre az automatikus beillesztéshez."
+    "proTip4": "Kattintson egy szövegdobozra, majd egy vágólap-elemre az automatikus beillesztéshez.",
+    "backupTitle": "Biztonsági mentés és visszaállítás (.txa)",
+    "backupDesc": "Exportálja vágólap-előzményeit, kitűzött elemeit és beállításait egy titkosított .txa archívumba."
   },
   "tray": {
     "showClipboard": "Vágólap megjelenítése",
@@ -260,5 +271,33 @@
     "version": "Verzió",
     "supportPromo": "Az T-Drop 100%-ban ingyenes és nyílt forráskódú. Ha megkönnyíti a mindennapi munkádat, fontold meg a fejlesztés támogatását, hogy még jobb lehessen!",
     "supportOnKofi": "Támogatás a Ko-fi oldalon"
+  },
+  "backup": {
+    "title": "Biztonsági mentés és visszaállítás (.txa)",
+    "desc": "Hozzon létre titkosított biztonsági mentéseket a vágólap és a beállítások megőrzéséhez.",
+    "exportBtn": "Mentés exportálása (.txa)",
+    "importBtn": "Adatok visszaállítása (.txa)",
+    "exportSuccess": "Biztonsági mentés sikeresen létrehozva ({items} elem)",
+    "exportFailed": "Nem sikerült létrehozni a mentést: {error}",
+    "importSuccess": "{count} elem sikeresen visszaállítva",
+    "importFailed": "Visszaállítás sikertelen: {error}",
+    "busyError": "Egy másik mentési vagy visszaállítási művelet már folyamatban van.",
+    "modalTitle": "T-Drop mentés visszaállítása",
+    "modalDesc": "Tekintse át az archívum részleteit és válassza ki a visszaállítási módot.",
+    "fileLabel": "Mentési fájl:",
+    "dateLabel": "Létrehozás dátuma:",
+    "itemsLabel": "Elemek száma:",
+    "imagesLabel": "Képek:",
+    "modeLabel": "Visszaállítási mód:",
+    "modeMerge": "Egyesítés (Ajánlott)",
+    "modeMergeDesc": "Meglévő elemek megőrzése és az újak hozzáadása a mentésből.",
+    "modeOverwrite": "Minden felülírása",
+    "modeOverwriteDesc": "A jelenlegi előzmények és beállítások teljes felülírása a mentéssel.",
+    "confirmRestore": "Visszaállítás megerősítése",
+    "cancel": "Mégse",
+    "restoring": "Visszaállítás folyamatban...",
+    "autoDetectedTitle": "Biztonsági mentési fájl észlelve",
+    "previewTitle": "Mentés előnézete",
+    "itemsUnit": "elem"
   }
 }

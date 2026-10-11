@@ -50,7 +50,7 @@
     "skip": "דלג",
     "downloadingUpdate": "מוריד חבילת עדכון ברקע...",
     "updateReadyTitle": "עדכון v{version} מוכן",
-    "updateReadyDesc": "לחץ להפעלה מחדש של T-Drop ויישום העדכון.",
+    "updateReadyDesc": "החלק כדי להפעיל מחדש את T-Drop ולהחיל את העדכון.",
     "restartToUpdate": "הפעל מחדש כדי לעדכן",
     "restartToUpdateBelow": "הפעל מחדש כדי לעדכן למטה",
     "newUpdateAvailableBelow": "עדכון חדש זמין למטה",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "עריכה",
     "hotkeyRecording": "לחץ על שילוב המקשים...",
     "hotkeyCancel": "ביטול",
-    "hotkeyReset": "איפוס לברירת המחדל ({shortcut})"
+    "hotkeyReset": "איפוס לברירת המחדל ({shortcut})",
+    "connectingDownload": "מתחבר לשרת ההורדות...",
+    "connecting": "מתחבר...",
+    "downloadingWithPercent": "מוריד עדכון ({percent}%)...",
+    "download": "הורד",
+    "notifyModeSubtitle": "מצב התראה · לחץ להורדה",
+    "newUpdateAvailable": "עדכון חדש זמין {version}",
+    "slideToRestart": "החלק להפעלה מחדש",
+    "restarting": "מפעיל מחדש...",
+    "restartFailed": "ההפעלה מחדש נכשלה"
   },
   "position": {
     "edgePlacementTitle": "מיקום קצה",
@@ -201,7 +210,9 @@
     "proTip1": "לחץ Alt + C כדי להחליף את המדף מיד.",
     "proTip2": "גש להגדרות בכל עת דרך סמל גלגל השיניים (למעלה מימין).",
     "proTip3": "גרור ושחרר קבצים לקצה השמאלי כדי להוסיף אותם.",
-    "proTip4": "לחץ על תיבת טקסט, ואז על פריט לוח כדי להדביק אוטומטית."
+    "proTip4": "לחץ על תיבת טקסט, ואז על פריט לוח כדי להדביק אוטומטית.",
+    "backupTitle": "גיבוי ושחזור ארכיון (.txa)",
+    "backupDesc": "ייצא את היסטוריית לוח הגזירים, פריטים מוצמדים והגدرות לקובץ .txa מוצפן ומאובטח."
   },
   "tray": {
     "showClipboard": "הצג לוח",
@@ -260,5 +271,33 @@
     "version": "גרסה",
     "supportPromo": "T-Drop הוא חינמי לחלוטין ובקוד פתוח. אם הוא עוזר לכם בעבודה היומיומית, שקלו לתמוך בפיתוח כדי להפוך אותו לטוב אפילו יותר!",
     "supportOnKofi": "תמכו ב-Ko-fi"
+  },
+  "backup": {
+    "title": "גיבוי ושחזור (.txa)",
+    "desc": "צור גיבויים מוצפנים לשמירה על פריטי לוח הגזירים וההגדרות בעת התקנה מחדש של Windows.",
+    "exportBtn": "ייצא גיבוי (.txa)",
+    "importBtn": "שחזר נתונים (.txa)",
+    "exportSuccess": "הגיבוי המוצפן נוצר בהצלחה ({items} פריטים)",
+    "exportFailed": "יצירת הגיבוי נכשלה: {error}",
+    "importSuccess": "{count} פריטים שוחזרו בהצלחה",
+    "importFailed": "השחזור נכשל: {error}",
+    "busyError": "פעולת גיבוי או שחזור אחרת כבר מתבצעת.",
+    "modalTitle": "שחזור גיבוי T-Drop",
+    "modalDesc": "בדוק את פרטי הארכיון ובחר כיצד לשחזר את הנתונים.",
+    "fileLabel": "קובץ גיבוי:",
+    "dateLabel": "תאריך יצירה:",
+    "itemsLabel": "פריטים:",
+    "imagesLabel": "תמונות:",
+    "modeLabel": "מצב שחזור:",
+    "modeMerge": "מיזוג (מומלץ)",
+    "modeMergeDesc": "שמור על הפריטים הנוכחיים והוסף פריטים חדשים מהגיבוי.",
+    "modeOverwrite": "דרוס הכל",
+    "modeOverwriteDesc": "החלף לחלוטין את ההיסטוריה וההגדרות הנוכחיות בנתוני הגיבוי.",
+    "confirmRestore": "אשר שחזור",
+    "cancel": "ביטול",
+    "restoring": "משחזר...",
+    "autoDetectedTitle": "זוהה קובץ גיבוי",
+    "previewTitle": "תצוגה מקדימה של הגיבוי",
+    "itemsUnit": "פריטים"
   }
 }

@@ -54,7 +54,7 @@
     "skip": "スキップ",
     "downloadingUpdate": "更新パッケージをダウンロード中...",
     "updateReadyTitle": "v{version} の準備完了",
-    "updateReadyDesc": "再起動して更新を適用します。",
+    "updateReadyDesc": "スライドして T-Drop を再起動し、更新を適用します。",
     "restartToUpdate": "再起動して更新",
     "restartToUpdateBelow": "下から再起動して更新",
     "newUpdateAvailableBelow": "新しい更新があります",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "編集",
     "hotkeyRecording": "キーの組み合わせを押してください...",
     "hotkeyCancel": "キャンセル",
-    "hotkeyReset": "デフォルトに戻す（{shortcut}）"
+    "hotkeyReset": "デフォルトに戻す（{shortcut}）",
+    "connectingDownload": "ダウンロードサーバーに接続中...",
+    "connecting": "接続中...",
+    "downloadingWithPercent": "アップデートをダウンロード中 ({percent}%)...",
+    "download": "ダウンロード",
+    "notifyModeSubtitle": "通知モード · クリックしてダウンロード",
+    "newUpdateAvailable": "新しいアップデートがあります {version}",
+    "slideToRestart": "スライドして再起動",
+    "restarting": "再起動中...",
+    "restartFailed": "再起動に失敗しました"
   },
   "position": {
     "edgePlacementTitle": "画面端の配置",
@@ -201,7 +210,9 @@
     "proTip1": "Alt + C でパネルの表示を瞬時に切り替えられます",
     "proTip2": "右上の歯車アイコンからいつでも設定にアクセスできます",
     "proTip3": "左端にファイルをドラッグ＆ドロップして追加します",
-    "proTip4": "テキストボックスをクリックしてからクリップボードのアイテムを押すと自動で貼り付けられます"
+    "proTip4": "テキストボックスをクリックしてからクリップボードのアイテムを押すと自動で貼り付けられます",
+    "backupTitle": "バックアップと復元 (.txa)",
+    "backupDesc": "クリップボード履歴、ピン留め項目、設定を暗号化された .txa アーカイブに安全にエクスポート。統合または上書きモードでいつでも復元できます。"
   },
   "tray": {
     "showClipboard": "パネルを表示",
@@ -260,5 +271,33 @@
     "version": "バージョン",
     "supportPromo": "T-Drop は100%無料のオープンソースです。日々の作業に役立っているなら、さらに良くするために開発を応援していただけると嬉しいです！",
     "supportOnKofi": "Ko-fiで支援する"
+  },
+  "backup": {
+    "title": "バックアップと復元 (.txa)",
+    "desc": "暗号化されたバックアップを作成し、クリップボードや設定を安全に保護します。",
+    "exportBtn": "バックアップをエクスポート (.txa)",
+    "importBtn": "データを復元 (.txa)",
+    "exportSuccess": "暗号化バックアップを作成しました ({items} 件)",
+    "exportFailed": "バックアップの作成に失敗しました: {error}",
+    "importSuccess": "{count} 件の項目を正常に復元しました",
+    "importFailed": "復元に失敗しました: {error}",
+    "busyError": "他のバックアップまたは復元処理が実行中です。",
+    "modalTitle": "T-Drop バックアップの復元",
+    "modalDesc": "ファイルの詳細を確認し、復元方法を選択してください。",
+    "fileLabel": "バックアップファイル:",
+    "dateLabel": "作成日時:",
+    "itemsLabel": "項目数:",
+    "imagesLabel": "画像数:",
+    "modeLabel": "復元モード:",
+    "modeMerge": "マージ (推奨)",
+    "modeMergeDesc": "現在の項目を保持し、バックアップから新しい項目を追加します。",
+    "modeOverwrite": "すべて上書き",
+    "modeOverwriteDesc": "現在の履歴と設定をバックアップで完全に置き換えます。",
+    "confirmRestore": "復元を実行",
+    "cancel": "キャンセル",
+    "restoring": "復元中...",
+    "autoDetectedTitle": "バックアップファイルを検出",
+    "previewTitle": "バックアップのプレビュー",
+    "itemsUnit": "件"
   }
 }

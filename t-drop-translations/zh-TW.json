@@ -50,7 +50,7 @@
     "skip": "略過",
     "downloadingUpdate": "正在背景下載更新包...",
     "updateReadyTitle": "更新 v{version} 已就緒",
-    "updateReadyDesc": "點擊重新啟動 T-Drop 並套用更新。",
+    "updateReadyDesc": "滑動以重新啟動 T-Drop 並套用更新。",
     "restartToUpdate": "重新啟動以更新",
     "restartToUpdateBelow": "在下方重新啟動以更新",
     "newUpdateAvailableBelow": "下方有可用的新更新",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "編輯",
     "hotkeyRecording": "請按下按鍵組合...",
     "hotkeyCancel": "取消",
-    "hotkeyReset": "重設為預設值（{shortcut}）"
+    "hotkeyReset": "重設為預設值（{shortcut}）",
+    "connectingDownload": "正在連線下載伺服器...",
+    "connecting": "連線中...",
+    "downloadingWithPercent": "正在下載更新 ({percent}%)...",
+    "download": "下載",
+    "notifyModeSubtitle": "通知模式 · 點擊下載",
+    "newUpdateAvailable": "有新版本可用 {version}",
+    "slideToRestart": "滑動以重新啟動",
+    "restarting": "正在重新啟動...",
+    "restartFailed": "重新啟動失敗"
   },
   "position": {
     "edgePlacementTitle": "邊緣位置",
@@ -201,7 +210,9 @@
     "proTip1": "按 Alt + C 立即切換層架。",
     "proTip2": "隨時透過齒輪圖示（右上角）存取設定。",
     "proTip3": "將檔案拖放到左邊緣即可新增。",
-    "proTip4": "先點擊文字方塊，再點擊剪貼簿項目即可自動貼上。"
+    "proTip4": "先點擊文字方塊，再點擊剪貼簿項目即可自動貼上。",
+    "backupTitle": "備份與還原封存 (.txa)",
+    "backupDesc": "將剪貼簿歷史記錄、釘選項目與設定安全匯出為加密的 .txa 封存檔。可隨時透過合併或覆寫模式還原。"
   },
   "tray": {
     "showClipboard": "顯示剪貼簿",
@@ -260,5 +271,33 @@
     "version": "版本",
     "supportPromo": "T-Drop 完全免費且開源。如果它能幫助提升您的日常工作效率，歡迎支持開發，讓它變得更好！",
     "supportOnKofi": "在 Ko-fi 上支持"
+  },
+  "backup": {
+    "title": "備份與還原 (.txa)",
+    "desc": "建立加密的獨立備份，在重灌系統時保留剪貼簿項目、圖片與設定。",
+    "exportBtn": "匯出備份 (.txa)",
+    "importBtn": "還原資料 (.txa)",
+    "exportSuccess": "成功建立加密備份（{items} 項）",
+    "exportFailed": "建立備份失敗：{error}",
+    "importSuccess": "成功還原 {count} 項記錄",
+    "importFailed": "還原失敗：{error}",
+    "busyError": "已有備份或還原操作正在進行中。",
+    "modalTitle": "還原 T-Drop 備份",
+    "modalDesc": "查看封存資訊並選擇資料還原方式。",
+    "fileLabel": "備份檔案:",
+    "dateLabel": "建立時間:",
+    "itemsLabel": "項目數量:",
+    "imagesLabel": "圖片數量:",
+    "modeLabel": "還原模式:",
+    "modeMerge": "合併資料（建議）",
+    "modeMergeDesc": "保留目前項目並加入備份中的新項目。",
+    "modeOverwrite": "全部覆寫",
+    "modeOverwriteDesc": "完全清除現有記錄並以備份資料取代。",
+    "confirmRestore": "確認還原",
+    "cancel": "取消",
+    "restoring": "正在還原...",
+    "autoDetectedTitle": "偵測到備份檔案",
+    "previewTitle": "備份檔案預覽",
+    "itemsUnit": "項"
   }
 }

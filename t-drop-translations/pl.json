@@ -50,7 +50,7 @@
     "skip": "Pomiń",
     "downloadingUpdate": "Pobieranie pakietu aktualizacji w tle...",
     "updateReadyTitle": "Aktualizacja v{version} gotowa",
-    "updateReadyDesc": "Kliknij, aby ponownie uruchomić T-Drop i zastosować aktualizację.",
+    "updateReadyDesc": "Przesuń, aby zrestartować T-Drop i zastosować aktualizację.",
     "restartToUpdate": "Uruchom ponownie, aby zaktualizować",
     "restartToUpdateBelow": "Uruchom ponownie, aby zaktualizować poniżej",
     "newUpdateAvailableBelow": "Nowa aktualizacja dostępna poniżej",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Edytuj",
     "hotkeyRecording": "Naciśnij kombinację klawiszy...",
     "hotkeyCancel": "Anuluj",
-    "hotkeyReset": "Przywróć domyślny ({shortcut})"
+    "hotkeyReset": "Przywróć domyślny ({shortcut})",
+    "connectingDownload": "Łączenie z serwerem pobierania...",
+    "connecting": "Łączenie...",
+    "downloadingWithPercent": "Pobieranie aktualizacji ({percent}%)...",
+    "download": "Pobierz",
+    "notifyModeSubtitle": "Tryb powiadomień · Kliknij, aby pobrać",
+    "newUpdateAvailable": "Dostępna nowa aktualizacja {version}",
+    "slideToRestart": "Przesuń, aby zrestartować",
+    "restarting": "Uruchamianie ponowne...",
+    "restartFailed": "Nie udało się zrestartować"
   },
   "position": {
     "edgePlacementTitle": "Położenie krawędzi",
@@ -201,7 +210,9 @@
     "proTip1": "Naciśnij Alt + C, aby natychmiast przełączyć półkę.",
     "proTip2": "Uzyskaj dostęp do ustawień w dowolnym momencie przez ikonę koła zębatego (prawy górny róg).",
     "proTip3": "Przeciągnij i upuść pliki na lewą krawędź, aby je dodać.",
-    "proTip4": "Kliknij pole tekstowe, a następnie element schowka, aby automatycznie wkleić."
+    "proTip4": "Kliknij pole tekstowe, a następnie element schowka, aby automatycznie wkleić.",
+    "backupTitle": "Kopia zapasowa i przywracanie (.txa)",
+    "backupDesc": "Eksportuj historię schowka, przypięte elementy i ustawienia do zaszyfrowanego archiwum .txa. Przywracaj w trybie scalania lub zastępowania."
   },
   "tray": {
     "showClipboard": "Pokaż schowek",
@@ -260,5 +271,33 @@
     "version": "Wersja",
     "supportPromo": "T-Drop jest w 100% darmowy i otwartoźródłowy. Jeśli pomaga Ci w codziennej pracy, rozważ wsparcie jego rozwoju, aby był jeszcze lepszy!",
     "supportOnKofi": "Wesprzyj na Ko-fi"
+  },
+  "backup": {
+    "title": "Kopia zapasowa i przywracanie (.txa)",
+    "desc": "Twórz zaszyfrowane kopie zapasowe, aby zachować historię schowka i ustawienia.",
+    "exportBtn": "Eksportuj kopię (.txa)",
+    "importBtn": "Przywróć dane (.txa)",
+    "exportSuccess": "Pomyślnie utworzono kopię ({items} elementów)",
+    "exportFailed": "Nie udało się utworzyć kopii: {error}",
+    "importSuccess": "Pomyślnie przywrócono {count} elementów",
+    "importFailed": "Błąd przywracania: {error}",
+    "busyError": "Inna operacja kopii lub przywracania jest już w toku.",
+    "modalTitle": "Przywróć kopię T-Drop",
+    "modalDesc": "Przejrzyj szczegóły archiwum i wybierz tryb przywracania.",
+    "fileLabel": "Plik kopii:",
+    "dateLabel": "Data utworzenia:",
+    "itemsLabel": "Elementy:",
+    "imagesLabel": "Obrazy:",
+    "modeLabel": "Tryb przywracania:",
+    "modeMerge": "Scal (Zalecane)",
+    "modeMergeDesc": "Zachowaj bieżące elementy i dodaj nowe z kopii zapasowej.",
+    "modeOverwrite": "Zastąp wszystko",
+    "modeOverwriteDesc": "Całkowicie zastąp bieżącą historię i ustawienia danymi z kopii.",
+    "confirmRestore": "Potwierdź przywrócenie",
+    "cancel": "Anuluj",
+    "restoring": "Przywracanie...",
+    "autoDetectedTitle": "Wykryto plik kopii zapasowej",
+    "previewTitle": "Podgląd kopii zapasowej",
+    "itemsUnit": "elementów"
   }
 }

@@ -50,7 +50,7 @@
     "skip": "Hopp over",
     "downloadingUpdate": "Laster ned oppdateringspakke i bakgrunnen...",
     "updateReadyTitle": "Oppdatering v{version} klar",
-    "updateReadyDesc": "Klikk for å starte T-Drop på nytt og bruke oppdateringen.",
+    "updateReadyDesc": "Skyv for å starte T-Drop på nytt og bruke oppdateringen.",
     "restartToUpdate": "Start på nytt for å oppdatere",
     "restartToUpdateBelow": "Start på nytt for å oppdatere nedenfor",
     "newUpdateAvailableBelow": "Ny oppdatering tilgjengelig nedenfor",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Rediger",
     "hotkeyRecording": "Trykk på tastekombinasjonen...",
     "hotkeyCancel": "Avbryt",
-    "hotkeyReset": "Tilbakestill til standard ({shortcut})"
+    "hotkeyReset": "Tilbakestill til standard ({shortcut})",
+    "connectingDownload": "Kobler til nedlastingsserver...",
+    "connecting": "Kobler til...",
+    "downloadingWithPercent": "Laster ned oppdatering ({percent}%)...",
+    "download": "Last ned",
+    "notifyModeSubtitle": "Varslingsmodus · Klikk for å laste ned",
+    "newUpdateAvailable": "Ny oppdatering tilgjengelig {version}",
+    "slideToRestart": "Skyv for å starte på nytt",
+    "restarting": "Starter på nytt...",
+    "restartFailed": "Omstart mislyktes"
   },
   "position": {
     "edgePlacementTitle": "Kant-plassering",
@@ -201,7 +210,9 @@
     "proTip1": "Trykk Alt + C for å umiddelbart bytte hyllen.",
     "proTip2": "Få tilgang til innstillinger når som helst via tannhjulikonet (øverst til høyre).",
     "proTip3": "Dra og slipp filer til venstre kant for å legge dem til.",
-    "proTip4": "Klikk på en tekstboks, deretter et utklippstavle-element for å lime inn automatisk."
+    "proTip4": "Klikk på en tekstboks, deretter et utklippstavle-element for å lime inn automatisk.",
+    "backupTitle": "Sikkerhetskopiering og gjenoppretting (.txa)",
+    "backupDesc": "Eksporter utklippstavlehistorikk, festede elementer og innstillinger til et kryptert .txa-arkiv."
   },
   "tray": {
     "showClipboard": "Vis utklippstavle",
@@ -260,5 +271,33 @@
     "version": "Versjon",
     "supportPromo": "T-Drop er 100 % gratis og åpen kildekode. Hvis det hjelper deg i den daglige arbeidsflyten, kan du vurdere å støtte utviklingen for å gjøre det enda bedre!",
     "supportOnKofi": "Støtt på Ko-fi"
+  },
+  "backup": {
+    "title": "Sikkerhetskopiering og gjenoppretting (.txa)",
+    "desc": "Opprett krypterte sikkerhetskopier for å bevare utklipp og innstillinger ved reinstallering av Windows.",
+    "exportBtn": "Eksporter sikkerhetskopi (.txa)",
+    "importBtn": "Gjenopprett data (.txa)",
+    "exportSuccess": "Sikkerhetskopi opprettet ({items} elementer)",
+    "exportFailed": "Kunne ikke opprette sikkerhetskopi: {error}",
+    "importSuccess": "{count} elementer ble gjenopprettet",
+    "importFailed": "Gjenoppretting mislyktes: {error}",
+    "busyError": "En annen sikkerhetskopiering eller gjenoppretting pågår allerede.",
+    "modalTitle": "Gjenopprett T-Drop sikkerhetskopi",
+    "modalDesc": "Se gjennom arkivdetaljene og velg gjenopprettingsmodus.",
+    "fileLabel": "Sikkerhetskopifil:",
+    "dateLabel": "Opprettet dato:",
+    "itemsLabel": "Elementer:",
+    "imagesLabel": "Bilder:",
+    "modeLabel": "Gjenopprettingsmodus:",
+    "modeMerge": "Slå sammen (Anbefalt)",
+    "modeMergeDesc": "Behold gjeldende elementer og legg til nye fra sikkerhetskopien.",
+    "modeOverwrite": "Overskriv alt",
+    "modeOverwriteDesc": "Erstatt gjeldende historikk og innstillinger helt med sikkerhetskopien.",
+    "confirmRestore": "Bekreft gjenoppretting",
+    "cancel": "Avbryt",
+    "restoring": "Gjenoppretter...",
+    "autoDetectedTitle": "Sikkerhetskopifil oppdaget",
+    "previewTitle": "Forhåndsvisning av sikkerhetskopi",
+    "itemsUnit": "elementer"
   }
 }

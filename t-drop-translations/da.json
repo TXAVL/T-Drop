@@ -50,7 +50,7 @@
     "skip": "Spring over",
     "downloadingUpdate": "Downloader opdateringspakke i baggrunden...",
     "updateReadyTitle": "Opdatering v{version} klar",
-    "updateReadyDesc": "Klik for at genstarte T-Drop og anvende opdateringen.",
+    "updateReadyDesc": "Skub for at genstarte T-Drop og anvende opdateringen.",
     "restartToUpdate": "Genstart for at opdatere",
     "restartToUpdateBelow": "Genstart for at opdatere nedenfor",
     "newUpdateAvailableBelow": "Ny opdatering tilgængelig nedenfor",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Rediger",
     "hotkeyRecording": "Tryk på tastekombinationen...",
     "hotkeyCancel": "Annuller",
-    "hotkeyReset": "Nulstil til standard ({shortcut})"
+    "hotkeyReset": "Nulstil til standard ({shortcut})",
+    "connectingDownload": "Opretter forbindelse til downloadserver...",
+    "connecting": "Opretter forbindelse...",
+    "downloadingWithPercent": "Downloader opdatering ({percent}%)...",
+    "download": "Download",
+    "notifyModeSubtitle": "Underretningstilstand · Klik for at downloade",
+    "newUpdateAvailable": "Ny opdatering tilgængelig {version}",
+    "slideToRestart": "Skub for at genstarte",
+    "restarting": "Genstarter...",
+    "restartFailed": "Genstart mislykkedes"
   },
   "position": {
     "edgePlacementTitle": "Kantplacering",
@@ -201,7 +210,9 @@
     "proTip1": "Tryk på Alt + C for at skifte hylden med det samme.",
     "proTip2": "Få adgang til indstillinger når som helst via tandhjulsikonet (øverst til højre).",
     "proTip3": "Træk og slip filer til venstre kant for at tilføje dem.",
-    "proTip4": "Klik på en tekstboks, og derefter et udklipsholder-element for at indsætte automatisk."
+    "proTip4": "Klik på en tekstboks, og derefter et udklipsholder-element for at indsætte automatisk.",
+    "backupTitle": "Sikkerhedskopiering og gendannelse (.txa)",
+    "backupDesc": "Eksportér udklipsholderhistorik, fastgjorte elementer og indstillinger til et krypteret .txa-arkiv."
   },
   "tray": {
     "showClipboard": "Vis udklipsholder",
@@ -260,5 +271,33 @@
     "version": "Version",
     "supportPromo": "T-Drop er 100 % gratis og open source. Hvis det hjælper dig i din daglige arbejdsgang, kan du overveje at støtte udviklingen, så det bliver endnu bedre!",
     "supportOnKofi": "Støt på Ko-fi"
+  },
+  "backup": {
+    "title": "Sikkerhedskopiering og gendannelse (.txa)",
+    "desc": "Opret krypterede sikkerhedskopier for at bevare udklipsholder og indstillinger ved geninstallation af Windows.",
+    "exportBtn": "Eksportér sikkerhedskopi (.txa)",
+    "importBtn": "Gendan data (.txa)",
+    "exportSuccess": "Sikkerhedskopi oprettet med succes ({items} elementer)",
+    "exportFailed": "Kunne ikke oprette sikkerhedskopi: {error}",
+    "importSuccess": "{count} elementer blev gendannet",
+    "importFailed": "Gendannelse mislykkedes: {error}",
+    "busyError": "En anden sikkerhedskopiering eller gendannelse er allerede i gang.",
+    "modalTitle": "Gendan T-Drop sikkerhedskopi",
+    "modalDesc": "Gennemgå arkivoplysningerne og vælg gendannelsestilstand.",
+    "fileLabel": "Sikkerhedskopifil:",
+    "dateLabel": "Oprettelsesdato:",
+    "itemsLabel": "Elementer:",
+    "imagesLabel": "Billeder:",
+    "modeLabel": "Gendannelsestilstand:",
+    "modeMerge": "Flet (Anbefalet)",
+    "modeMergeDesc": "Bevar nuværende elementer og tilføj nye fra sikkerhedskopien.",
+    "modeOverwrite": "Overskriv alle",
+    "modeOverwriteDesc": "Erstat nuværende historik og indstillinger fuldstændigt med sikkerhedskopien.",
+    "confirmRestore": "Bekræft gendannelse",
+    "cancel": "Annuller",
+    "restoring": "Gendanner...",
+    "autoDetectedTitle": "Sikkerhedskopifil fundet",
+    "previewTitle": "Forhåndsvisning af sikkerhedskopi",
+    "itemsUnit": "elementer"
   }
 }

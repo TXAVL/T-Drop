@@ -50,7 +50,7 @@
     "skip": "Hoppa över",
     "downloadingUpdate": "Hämtar uppdateringspaket i bakgrunden...",
     "updateReadyTitle": "Uppdatering v{version} redo",
-    "updateReadyDesc": "Klicka för att starta om T-Drop och tillämpa uppdateringen.",
+    "updateReadyDesc": "Dra för att starta om T-Drop och tillämpa uppdateringen.",
     "restartToUpdate": "Starta om för att uppdatera",
     "restartToUpdateBelow": "Starta om för att uppdatera nedan",
     "newUpdateAvailableBelow": "Ny uppdatering tillgänglig nedan",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Redigera",
     "hotkeyRecording": "Tryck på tangentkombinationen...",
     "hotkeyCancel": "Avbryt",
-    "hotkeyReset": "Återställ till standard ({shortcut})"
+    "hotkeyReset": "Återställ till standard ({shortcut})",
+    "connectingDownload": "Ansluter till nedladdningsserver...",
+    "connecting": "Ansluter...",
+    "downloadingWithPercent": "Laddar ner uppdatering ({percent}%)...",
+    "download": "Ladda ner",
+    "notifyModeSubtitle": "Aviseringsläge · Klicka för att ladda ner",
+    "newUpdateAvailable": "Ny uppdatering tillgänglig {version}",
+    "slideToRestart": "Dra för att starta om",
+    "restarting": "Startar om...",
+    "restartFailed": "Omstart misslyckades"
   },
   "position": {
     "edgePlacementTitle": "Kantplacering",
@@ -201,7 +210,9 @@
     "proTip1": "Tryck Alt + C för att omedelbart visa/dölja hyllan.",
     "proTip2": "Kom åt inställningar när som helst via kugghjulsikonen (överst till höger).",
     "proTip3": "Dra och släpp filer vid vänster kant för att lägga till dem.",
-    "proTip4": "Klicka på en textruta, sedan på ett urklippsobjekt för att klistra in automatiskt."
+    "proTip4": "Klicka på en textruta, sedan på ett urklippsobjekt för att klistra in automatiskt.",
+    "backupTitle": "Säkerhetskopiering och återställning (.txa)",
+    "backupDesc": "Exportera urklippshistorik, fästa objekt och inställningar till ett krypterat .txa-arkiv."
   },
   "tray": {
     "showClipboard": "Visa urklipp",
@@ -260,5 +271,33 @@
     "version": "Version",
     "supportPromo": "T-Drop är 100 % gratis och med öppen källkod. Om det hjälper dig i ditt dagliga arbete kan du överväga att stödja utvecklingen så att det blir ännu bättre!",
     "supportOnKofi": "Stöd på Ko-fi"
+  },
+  "backup": {
+    "title": "Säkerhetskopiering och återställning (.txa)",
+    "desc": "Skapa krypterade säkerhetskopior för att bevara urklippsobjekt och inställningar.",
+    "exportBtn": "Exportera säkerhetskopia (.txa)",
+    "importBtn": "Återställ data (.txa)",
+    "exportSuccess": "Säkerhetskopia skapad ({items} objekt)",
+    "exportFailed": "Kunde inte skapa säkerhetskopia: {error}",
+    "importSuccess": "{count} objekt har återställts",
+    "importFailed": "Återställning misslyckades: {error}",
+    "busyError": "En annan säkerhetskopiering eller återställning pågår redan.",
+    "modalTitle": "Återställ T-Drop säkerhetskopia",
+    "modalDesc": "Granska arkivinformationen och välj återställningsläge.",
+    "fileLabel": "Säkerhetskopia:",
+    "dateLabel": "Skapad den:",
+    "itemsLabel": "Objekt:",
+    "imagesLabel": "Bilder:",
+    "modeLabel": "Återställningsläge:",
+    "modeMerge": "Slå samman (Rekommenderas)",
+    "modeMergeDesc": "Behåll befintliga objekt och lägg till nya från säkerhetskopian.",
+    "modeOverwrite": "Skriv över allt",
+    "modeOverwriteDesc": "Ersätt historik och inställningar helt med säkerhetskopian.",
+    "confirmRestore": "Bekräfta återställning",
+    "cancel": "Avbryt",
+    "restoring": "Återställer...",
+    "autoDetectedTitle": "Säkerhetskopia upptäckt",
+    "previewTitle": "Förhandsgranskning av säkerhetskopia",
+    "itemsUnit": "objekt"
   }
 }

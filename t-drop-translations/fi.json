@@ -50,7 +50,7 @@
     "skip": "Ohita",
     "downloadingUpdate": "Ladataan päivityspakettia taustalla...",
     "updateReadyTitle": "Päivitys v{version} valmis",
-    "updateReadyDesc": "Napsauta T-Dropin uudelleenkäynnistämiseksi ja päivityksen käyttöönottamiseksi.",
+    "updateReadyDesc": "Pyyhkäise käynnistääksesi T-Dropin uudelleen ja ottaaksesi päivityksen käyttöön.",
     "restartToUpdate": "Käynnistä uudelleen päivittääksesi",
     "restartToUpdateBelow": "Käynnistä uudelleen päivittääksesi alla",
     "newUpdateAvailableBelow": "Uusi päivitys saatavilla alla",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Muokkaa",
     "hotkeyRecording": "Paina näppäinyhdistelmää...",
     "hotkeyCancel": "Peruuta",
-    "hotkeyReset": "Palauta oletusasetukseksi ({shortcut})"
+    "hotkeyReset": "Palauta oletusasetukseksi ({shortcut})",
+    "connectingDownload": "Yhdistetään latauspalvelimeen...",
+    "connecting": "Yhdistetään...",
+    "downloadingWithPercent": "Ladataan päivitystä ({percent}%)...",
+    "download": "Lataa",
+    "notifyModeSubtitle": "Ilmoitustila · Lataa napsauttamalla",
+    "newUpdateAvailable": "Uusi päivitys saatavilla {version}",
+    "slideToRestart": "Pyyhkäise käynnistääksesi uudelleen",
+    "restarting": "Käynnistetään uudelleen...",
+    "restartFailed": "Uudelleenkäynnistys epäonnistui"
   },
   "position": {
     "edgePlacementTitle": "Reunan sijoitus",
@@ -201,7 +210,9 @@
     "proTip1": "Paina Alt + C vaihtaaksesi hyllyä heti.",
     "proTip2": "Avaa asetukset milloin tahansa hammasrataskuvakkeen kautta (oikea ylä).",
     "proTip3": "Vedä ja pudota tiedostoja vasempaan reunaan lisätäksesi ne.",
-    "proTip4": "Napsauta tekstikenttää, sitten leikepöydän kohdetta liittääksesi automaattisesti."
+    "proTip4": "Napsauta tekstikenttää, sitten leikepöydän kohdetta liittääksesi automaattisesti.",
+    "backupTitle": "Varmuuskopiointi ja palautus (.txa)",
+    "backupDesc": "Vie leikepöytähistoria, kiinnitetyt kohteet ja asetukset salattuun .txa-arkistoon."
   },
   "tray": {
     "showClipboard": "Näytä leikepöytä",
@@ -260,5 +271,33 @@
     "version": "Versio",
     "supportPromo": "T-Drop on 100 % ilmainen ja avoimen lähdekoodin ohjelmisto. Jos se helpottaa päivittäistä työnkulkuasi, harkitse kehityksen tukemista, jotta siitä tulee vielä parempi!",
     "supportOnKofi": "Tue Ko-fi:ssa"
+  },
+  "backup": {
+    "title": "Varmuuskopiointi ja palautus (.txa)",
+    "desc": "Luo salattuja varmuuskopioita leikepöydän ja asetusten säilyttämiseksi Windowsin uudelleenasennuksessa.",
+    "exportBtn": "Vie varmuuskopio (.txa)",
+    "importBtn": "Palauta tiedot (.txa)",
+    "exportSuccess": "Varmuuskopio luotu onnistuneesti ({items} kohdetta)",
+    "exportFailed": "Varmuuskopion luonti epäonnistui: {error}",
+    "importSuccess": "{count} kohdetta palautettu onnistuneesti",
+    "importFailed": "Palautus epäonnistui: {error}",
+    "busyError": "Toinen varmuuskopiointi tai palautus on jo käynnissä.",
+    "modalTitle": "Palauta T-Drop-varmuuskopio",
+    "modalDesc": "Tarkista arkiston tiedot ja valitse palautustila.",
+    "fileLabel": "Varmuuskopiotiedosto:",
+    "dateLabel": "Luontipäivämäärä:",
+    "itemsLabel": "Kohteet:",
+    "imagesLabel": "Kuvat:",
+    "modeLabel": "Palautustila:",
+    "modeMerge": "Yhdistä (Suositus)",
+    "modeMergeDesc": "Säilytä nykyiset kohteet ja lisää uudet varmuuskopiosta.",
+    "modeOverwrite": "Korvaa kaikki",
+    "modeOverwriteDesc": "Korvaa nykyinen historia ja asetukset kokonaan varmuuskopiolla.",
+    "confirmRestore": "Vahvista palautus",
+    "cancel": "Peruuta",
+    "restoring": "Palautetaan...",
+    "autoDetectedTitle": "Varmuuskopiotiedosto havaittu",
+    "previewTitle": "Varmuuskopion esikatselu",
+    "itemsUnit": "kohdetta"
   }
 }

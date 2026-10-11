@@ -1,8 +1,9 @@
-import { app, net } from 'electron'
+import { app, net, Notification } from 'electron'
 import { isStoreBuild } from './config'
 import { pushState } from './state'
 import { getSettings } from '../store/settings'
 import { resolveUpdateMode } from '../../shared/types'
+import { getMainWindow, setVisible, sendToMainWindow } from './window'
 
 export interface CachedUpdateInfo {
   hasUpdate: boolean
@@ -29,16 +30,25 @@ export function clearCachedUpdateState(): void {
  */
 export function quitAndInstallUpdate(): void {
   if (isStoreBuild()) return
+  if (!app.isPackaged) {
+    console.log('[AutoUpdater] Dev mode — quitAndInstall is simulated. In packaged builds, app restarts and updates.')
+    sendToMainWindow('ui:toast', {
+      id: `dev-restart-${Date.now()}`,
+      message: 'Dev Mode: Update verified! In packaged .exe builds, T-Drop will restart and install now.',
+      tone: 'info'
+    })
+    return
+  }
   if (!_autoUpdater) {
     console.error('[AutoUpdater] quitAndInstall requested but autoUpdater is not initialized.')
     return
   }
-  if (!app.isPackaged) {
-    console.log('[AutoUpdater] Dev mode — quitAndInstall is a no-op here. Works in packaged builds.')
-    return
-  }
   console.log('[AutoUpdater] quitAndInstall triggered by renderer button.')
-  _autoUpdater.quitAndInstall(false, true)
+  try {
+    _autoUpdater.quitAndInstall(false, true)
+  } catch (err) {
+    console.error('[AutoUpdater] quitAndInstall failed:', err)
+  }
 }
 
 /**
@@ -50,7 +60,7 @@ export function syncAutoUpdaterState(): void {
   const mode = resolveUpdateMode(getSettings())
   const autoDownload = mode === 'auto'
   _autoUpdater.autoDownload = autoDownload
-  _autoUpdater.autoInstallOnAppQuit = autoDownload
+  _autoUpdater.autoInstallOnAppQuit = false
   console.log('[AutoUpdater] Synced mode =', mode, 'autoDownload =', autoDownload)
 }
 
@@ -245,6 +255,10 @@ export async function startUpdateDownload(): Promise<void> {
       return
     }
   }
+  if (_cachedUpdateInfo) {
+    _cachedUpdateInfo.downloadProgress = { percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 }
+  }
+  pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
   try {
     await _autoUpdater.downloadUpdate()
   } catch (err) {
@@ -255,6 +269,38 @@ export async function startUpdateDownload(): Promise<void> {
     } catch (retryErr) {
       console.error('[AutoUpdater] downloadUpdate retry failed:', retryErr)
     }
+  }
+}
+
+/**
+ * Displays a Windows system desktop notification in 'notify' mode.
+ * Clicking the notification focuses T-Drop, reveals the shelf, and begins the download.
+ */
+export function showUpdateSystemNotification(version: string): void {
+  try {
+    if (typeof Notification !== 'undefined' && Notification.isSupported && Notification.isSupported()) {
+      const notif = new Notification({
+        title: 'T-Drop - Có bản cập nhật mới!',
+        body: `Phiên bản mới v${version} đã sẵn sàng. Bấm vào đây để tải về và cập nhật.`
+      })
+      notif.on('click', () => {
+        try {
+          setVisible(true)
+          const win = getMainWindow()
+          if (win && !win.isDestroyed()) {
+            win.show()
+            win.focus()
+          }
+          pushState.togglePanel(true)
+        } catch {
+          /* ignore */
+        }
+        void startUpdateDownload()
+      })
+      notif.show()
+    }
+  } catch (err) {
+    console.warn('[AutoUpdater] Failed to show system notification:', err)
   }
 }
 
@@ -281,7 +327,7 @@ export function initAutoUpdater(): void {
 
     autoUpdater.logger = console
     autoUpdater.autoDownload = autoDownload
-    autoUpdater.autoInstallOnAppQuit = autoDownload
+    autoUpdater.autoInstallOnAppQuit = false
 
     if (!app.isPackaged) {
       console.log('[AutoUpdater] Unpackaged dev build detected — enabling forceDevUpdateConfig')
@@ -294,8 +340,26 @@ export function initAutoUpdater(): void {
 
     autoUpdater.on('update-available', (info: { version: string }) => {
       console.log('[AutoUpdater] New update available on GitHub:', info.version)
-      _cachedUpdateInfo = { hasUpdate: true, latestVersion: info.version, downloaded: false }
+      const currentMode = resolveUpdateMode(getSettings())
+      const isAuto = currentMode === 'auto'
+
+      _cachedUpdateInfo = {
+        hasUpdate: true,
+        latestVersion: info.version,
+        downloaded: false,
+        downloadProgress: isAuto
+          ? { percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 }
+          : undefined
+      }
+
       pushState.updateAvailable({ version: info.version })
+
+      if (isAuto) {
+        pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
+      } else {
+        // 'notify' mode: only send system notification, do not download in background
+        showUpdateSystemNotification(info.version)
+      }
     })
 
     autoUpdater.on('update-not-available', (info: { version: string }) => {

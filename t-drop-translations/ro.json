@@ -50,7 +50,7 @@
     "skip": "Sari peste",
     "downloadingUpdate": "Se descarcă pachetul de actualizare în fundal...",
     "updateReadyTitle": "Actualizarea v{version} este gata",
-    "updateReadyDesc": "Dă clic pentru a reporni T-Drop și a aplica actualizarea.",
+    "updateReadyDesc": "Glisează pentru a reporni T-Drop și a aplica actualizarea.",
     "restartToUpdate": "Repornește pentru a actualiza",
     "restartToUpdateBelow": "Repornește pentru a actualiza mai jos",
     "newUpdateAvailableBelow": "Actualizare nouă disponibilă mai jos",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Editează",
     "hotkeyRecording": "Apasă combinația de taste...",
     "hotkeyCancel": "Anulează",
-    "hotkeyReset": "Resetează la valoarea implicită ({shortcut})"
+    "hotkeyReset": "Resetează la valoarea implicită ({shortcut})",
+    "connectingDownload": "Conectare la serverul de descărcare...",
+    "connecting": "Conectare...",
+    "downloadingWithPercent": "Descărcare actualizare ({percent}%)...",
+    "download": "Descarcă",
+    "notifyModeSubtitle": "Mod notificare · Faceți clic pentru a descărca",
+    "newUpdateAvailable": "Actualizare nouă disponibilă {version}",
+    "slideToRestart": "Glisează pentru repornire",
+    "restarting": "Se repornește...",
+    "restartFailed": "Repornire eșuată"
   },
   "position": {
     "edgePlacementTitle": "Plasare margine",
@@ -201,7 +210,9 @@
     "proTip1": "Apasă Alt + C pentru a comuta instantaneu raftul.",
     "proTip2": "Accesează setările oricând prin pictograma de roată dințată (dreapta-sus).",
     "proTip3": "Trage și plasează fișiere spre marginea stângă pentru a le adăuga.",
-    "proTip4": "Dă clic pe o casetă de text, apoi pe un element din clipboard pentru a-l lipi automat."
+    "proTip4": "Dă clic pe o casetă de text, apoi pe un element din clipboard pentru a-l lipi automat.",
+    "backupTitle": "Copie de rezervă și restaurare (.txa)",
+    "backupDesc": "Exportați istoricul clipboard-ului, elementele fixate și setările într-o arhivă .txa criptată."
   },
   "tray": {
     "showClipboard": "Arată clipboard",
@@ -260,5 +271,33 @@
     "version": "Versiune",
     "supportPromo": "T-Drop este 100% gratuit și open-source. Dacă îți este util în activitatea de zi cu zi, ia în considerare susținerea dezvoltării pentru a-l face și mai bun!",
     "supportOnKofi": "Susține pe Ko-fi"
+  },
+  "backup": {
+    "title": "Copie de rezervă și restaurare (.txa)",
+    "desc": "Creați copii de rezervă criptate pentru a păstra elementele din clipboard și setările.",
+    "exportBtn": "Exportă copie (.txa)",
+    "importBtn": "Restaurează date (.txa)",
+    "exportSuccess": "Copie de rezervă creată cu succes ({items} elemente)",
+    "exportFailed": "Crearea copiei a eșuat: {error}",
+    "importSuccess": "{count} elemente restaurate cu succes",
+    "importFailed": "Restaurarea a eșuat: {error}",
+    "busyError": "O altă operațiune de backup sau restaurare este deja în curs.",
+    "modalTitle": "Restaurare copie T-Drop",
+    "modalDesc": "Examinați detaliile arhivei și alegeți modul de restaurare.",
+    "fileLabel": "Fișier copie:",
+    "dateLabel": "Data creării:",
+    "itemsLabel": "Elemente:",
+    "imagesLabel": "Imagini:",
+    "modeLabel": "Mod restaurare:",
+    "modeMerge": "Îmbinare (Recomandat)",
+    "modeMergeDesc": "Păstrați elementele curente și adăugați cele noi din copie.",
+    "modeOverwrite": "Suprapune tot",
+    "modeOverwriteDesc": "Înlocuiți complet istoricul și setările cu datele din copie.",
+    "confirmRestore": "Confirmă restaurarea",
+    "cancel": "Anulează",
+    "restoring": "Se restaurează...",
+    "autoDetectedTitle": "Fișier de rezervă detectat",
+    "previewTitle": "Previzualizare copie de rezervă",
+    "itemsUnit": "elemente"
   }
 }

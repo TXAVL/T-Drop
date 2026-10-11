@@ -50,7 +50,7 @@
     "skip": "跳过",
     "downloadingUpdate": "正在后台下载更新包...",
     "updateReadyTitle": "更新 v{version} 已就绪",
-    "updateReadyDesc": "点击重启 T-Drop 并应用更新。",
+    "updateReadyDesc": "滑动以重启 T-Drop 并应用更新。",
     "restartToUpdate": "重启以更新",
     "restartToUpdateBelow": "在下方重启以更新",
     "newUpdateAvailableBelow": "下方有可用的新更新",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "编辑",
     "hotkeyRecording": "请按下按键组合...",
     "hotkeyCancel": "取消",
-    "hotkeyReset": "恢复默认值（{shortcut}）"
+    "hotkeyReset": "恢复默认值（{shortcut}）",
+    "connectingDownload": "正在连接下载服务器...",
+    "connecting": "连接中...",
+    "downloadingWithPercent": "正在下载更新 ({percent}%)...",
+    "download": "下载",
+    "notifyModeSubtitle": "通知模式 · 点击下载",
+    "newUpdateAvailable": "发现新版本 {version}",
+    "slideToRestart": "滑动以重启",
+    "restarting": "正在重启...",
+    "restartFailed": "重启失败"
   },
   "position": {
     "edgePlacementTitle": "边缘位置",
@@ -201,7 +210,9 @@
     "proTip1": "按 Alt + C 立即切换搁架。",
     "proTip2": "随时通过齿轮图标（右上角）访问设置。",
     "proTip3": "将文件拖放到左边缘即可添加。",
-    "proTip4": "先点击文本框，再点击剪贴板项即可自动粘贴。"
+    "proTip4": "先点击文本框，再点击剪贴板项即可自动粘贴。",
+    "backupTitle": "备份与恢复存档 (.txa)",
+    "backupDesc": "将剪贴板历史记录、固定项和设置安全导出为加密的 .txa 归档文件。可随时通过合并或覆盖模式恢复。"
   },
   "tray": {
     "showClipboard": "显示剪贴板",
@@ -260,5 +271,33 @@
     "version": "版本",
     "supportPromo": "T-Drop 完全免费且开源。如果它能帮助提升您的日常工作效率，欢迎支持开发，让它变得更好！",
     "supportOnKofi": "在 Ko-fi 上支持"
+  },
+  "backup": {
+    "title": "备份与恢复 (.txa)",
+    "desc": "创建加密的独立备份，在重装系统时保护剪贴板项目、图片和设置。",
+    "exportBtn": "导出备份 (.txa)",
+    "importBtn": "恢复数据 (.txa)",
+    "exportSuccess": "成功创建加密备份（{items} 项）",
+    "exportFailed": "创建备份失败：{error}",
+    "importSuccess": "成功恢复 {count} 项记录",
+    "importFailed": "恢复失败：{error}",
+    "busyError": "已有备份或恢复操作正在进行中。",
+    "modalTitle": "恢复 T-Drop 备份",
+    "modalDesc": "查看存档详情并选择数据恢复方式。",
+    "fileLabel": "备份文件:",
+    "dateLabel": "创建时间:",
+    "itemsLabel": "项目数量:",
+    "imagesLabel": "图片数量:",
+    "modeLabel": "恢复模式:",
+    "modeMerge": "合并数据（推荐）",
+    "modeMergeDesc": "保留当前项目并追加备份中的非重复项。",
+    "modeOverwrite": "全部覆盖",
+    "modeOverwriteDesc": "完全清除现有记录并使用备份数据替代。",
+    "confirmRestore": "确认恢复",
+    "cancel": "取消",
+    "restoring": "正在恢复...",
+    "autoDetectedTitle": "检测到备份文件",
+    "previewTitle": "备份文件预览",
+    "itemsUnit": "项"
   }
 }

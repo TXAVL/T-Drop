@@ -170,6 +170,9 @@ app.whenReady().then(() => {
   registerTxaAssociation()
   const win = getMainWindow()
   if (win) {
+    if (!app.isPackaged) {
+      win.webContents.openDevTools({ mode: 'detach' })
+    }
     win.webContents.once('did-finish-load', () => {
       handleFileArg(process.argv)
       if (!existsSync(PATHS.indexFile())) {
@@ -347,6 +350,21 @@ export function registerGlobalHotkey(targetHotkey?: string): boolean {
       _lastHotkeyToggleTime = now
       pushState.togglePanel()
     })
+
+    if (!app.isPackaged) {
+      try {
+        globalShortcut.register('F12', () => {
+          const wc = getMainWindow()?.webContents
+          if (wc) {
+            if (wc.isDevToolsOpened()) {
+              wc.closeDevTools()
+            } else {
+              wc.openDevTools({ mode: 'detach' })
+            }
+          }
+        })
+      } catch { /* ignore */ }
+    }
 
     if (!success && hotkey !== 'Alt+C') {
       console.warn(`[Main] Failed to register global shortcut ${hotkey}, falling back to Alt+C`)

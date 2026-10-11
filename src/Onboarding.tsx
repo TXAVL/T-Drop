@@ -6,6 +6,147 @@ import { useTranslation } from './i18n'
 import { useStore } from './store/appStore'
 import { edge } from './lib/edge'
 
+function BackupMockupView() {
+  const { t } = useTranslation()
+  return (
+    <div style={{
+      width: '100%',
+      height: '100%',
+      background: 'radial-gradient(ellipse at 50% 30%, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.08) 50%, rgba(18, 18, 20, 0.95) 100%)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px',
+      boxSizing: 'border-box',
+      position: 'relative'
+    }}>
+      <motion.div
+        initial={{ scale: 0.94, opacity: 0, y: 10 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+        style={{
+          width: '380px',
+          background: 'rgba(24, 24, 28, 0.94)',
+          border: '1px solid rgba(16, 185, 129, 0.35)',
+          borderRadius: '16px',
+          padding: '18px 20px',
+          boxShadow: '0 16px 36px rgba(0,0,0,0.5), 0 0 24px rgba(16, 185, 129, 0.15)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{
+            width: '42px',
+            height: '42px',
+            borderRadius: '10px',
+            background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
+            display: 'grid',
+            placeItems: 'center',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.35)',
+            flexShrink: 0
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '14px', fontWeight: 700, color: '#fff' }}>backup_tdrop.txa</span>
+              <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', fontWeight: 600 }}>
+                ENCRYPTED
+              </span>
+            </div>
+            <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+              156 {t('backup.itemsUnit') || 'items'} · {t('backup.title') || 'Backup & Restore'}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '2px' }}>
+          <div style={{
+            background: 'rgba(16, 185, 129, 0.08)',
+            border: '1px solid rgba(16, 185, 129, 0.25)',
+            borderRadius: '10px',
+            padding: '8px 10px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2px'
+          }}>
+            <div style={{ fontSize: '11.5px', fontWeight: 650, color: '#34d399', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span>🔄</span> {t('backup.modeMerge') || 'Merge (Recommended)'}
+            </div>
+            <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+              {t('backup.modeMergeDesc') || 'Keep current items and add non-duplicate items from the backup.'}
+            </div>
+          </div>
+
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '10px',
+            padding: '8px 10px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2px'
+          }}>
+            <div style={{ fontSize: '11.5px', fontWeight: 650, color: 'rgba(255,255,255,0.85)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span>⚡</span> {t('backup.modeOverwrite') || 'Overwrite All'}
+            </div>
+            <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+              {t('backup.modeOverwriteDesc') || 'Completely replace current history and settings with the backup.'}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+          <div style={{
+            flex: 1,
+            height: '28px',
+            borderRadius: '8px',
+            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            color: '#000',
+            fontSize: '11px',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            padding: '0 4px'
+          }}>
+            {t('backup.exportBtn') || 'Export Backup (.txa)'}
+          </div>
+          <div style={{
+            flex: 1,
+            height: '28px',
+            borderRadius: '8px',
+            background: 'rgba(255, 255, 255, 0.06)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            color: '#fff',
+            fontSize: '11px',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            padding: '0 4px'
+          }}>
+            {t('backup.importBtn') || 'Restore Backup (.txa)'}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
 export function Onboarding() {
   const { t } = useTranslation()
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -69,6 +210,13 @@ export function Onboarding() {
       description: t('onboarding.previewDesc'),
       videoSrc: 'preview.webm',
       placeholderColor: 'linear-gradient(135deg, #A855F7 0%, #EC4899 100%)'
+    },
+    {
+      id: 'slide-backup',
+      title: t('onboarding.backupTitle') || 'Backup & Restore Archive (.txa)',
+      description: t('onboarding.backupDesc') || 'Export your clipboard history, pinned items, and settings into an encrypted .txa archive. Seamlessly transfer to a new PC or restore anytime with Merge or Overwrite modes.',
+      videoSrc: '',
+      placeholderColor: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(6, 182, 212, 0.2) 100%)'
     },
     {
       id: 'slide-6',
@@ -251,15 +399,19 @@ export function Onboarding() {
                 transition={{ duration: 0.3 }}
                 style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: currentSlide.placeholderColor }}
               >
-                <video
-                  key={currentSlide.videoSrc}
-                  src={`${currentSlide.videoSrc}?v=1`}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                {currentSlide.id === 'slide-backup' ? (
+                  <BackupMockupView />
+                ) : (
+                  <video
+                    key={currentSlide.videoSrc}
+                    src={`${currentSlide.videoSrc}?v=1`}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                )}
               </motion.div>
             </AnimatePresence>
           </div>

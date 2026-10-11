@@ -50,7 +50,7 @@
     "skip": "تخطٍّ",
     "downloadingUpdate": "جارٍ تنزيل حزمة التحديث في الخلفية...",
     "updateReadyTitle": "التحديث v{version} جاهز",
-    "updateReadyDesc": "انقر لإعادة تشغيل T-Drop وتطبيق التحديث.",
+    "updateReadyDesc": "اسحب لإعادة تشغيل T-Drop وتطبيق التحديث.",
     "restartToUpdate": "إعادة التشغيل للتحديث",
     "restartToUpdateBelow": "أعد التشغيل للتحديث أدناه",
     "newUpdateAvailableBelow": "توجد تحديثات جديدة أدناه",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "تعديل",
     "hotkeyRecording": "اضغط مجموعة المفاتيح...",
     "hotkeyCancel": "إلغاء",
-    "hotkeyReset": "إعادة التعيين إلى الافتراضي ({shortcut})"
+    "hotkeyReset": "إعادة التعيين إلى الافتراضي ({shortcut})",
+    "connectingDownload": "جارٍ الاتصال بخادم التنزيل...",
+    "connecting": "جارٍ الاتصال...",
+    "downloadingWithPercent": "جارٍ تنزيل التحديث ({percent}%)...",
+    "download": "تنزيل",
+    "notifyModeSubtitle": "وضع الإشعار · انقر للتنزيل",
+    "newUpdateAvailable": "يتوفر تحديث جديد {version}",
+    "slideToRestart": "اسحب لإعادة التشغيل",
+    "restarting": "جارٍ إعادة التشغيل...",
+    "restartFailed": "فشلت إعادة التشغيل"
   },
   "position": {
     "edgePlacementTitle": "موضع الحافة",
@@ -201,7 +210,9 @@
     "proTip1": "اضغط Alt + C لتبديل الرف فوراً.",
     "proTip2": "الوصول إلى الإعدادات في أي وقت عبر أيقونة الترس (أعلى اليمين).",
     "proTip3": "اسحب وأفلت الملفات على الحافة اليسرى لإضافتها.",
-    "proTip4": "انقر على مربع نص، ثم على عنصر حافظة للّصق تلقائياً."
+    "proTip4": "انقر على مربع نص، ثم على عنصر حافظة للّصق تلقائياً.",
+    "backupTitle": "النسخ الاحتياطي والاستعادة (.txa)",
+    "backupDesc": "قم بتصدير سجل الحافظة والعناصر المثبتة والإعدادات بأمان إلى أرشيف .txa مشفر."
   },
   "tray": {
     "showClipboard": "إظهار الحافظة",
@@ -260,5 +271,33 @@
     "version": "الإصدار",
     "supportPromo": "T-Drop مجاني ومفتوح المصدر بالكامل. إذا كان يساعدك في سير عملك اليومي، ففكر في دعم تطويره ليصبح أفضل!",
     "supportOnKofi": "ادعم عبر Ko-fi"
+  },
+  "backup": {
+    "title": "النسخ الاحتياطي والاستعادة (.txa)",
+    "desc": "أنشئ نسخاً احتياطية مشفرة لحفظ سجل الحافظة والإعدادات عند إعادة تثبيت Windows.",
+    "exportBtn": "تصدير نسخة احتياطية (.txa)",
+    "importBtn": "استعادة البيانات (.txa)",
+    "exportSuccess": "تم إنشاء النسخة الاحتياطية بنجاح ({items} عنصر)",
+    "exportFailed": "فشل إنشاء النسخة الاحتياطية: {error}",
+    "importSuccess": "تمت استعادة {count} عنصر بنجاح",
+    "importFailed": "فشلت الاستعادة: {error}",
+    "busyError": "هناك عملية نسخ احتياطي أو استعادة قيد التشغيل بالفعل.",
+    "modalTitle": "استعادة نسخة T-Drop الاحتياطية",
+    "modalDesc": "راجع تفاصيل الأرشيف واختر طريقة استعادة البيانات.",
+    "fileLabel": "ملف النسخة الاحتياطية:",
+    "dateLabel": "تاريخ الإنشاء:",
+    "itemsLabel": "العناصر:",
+    "imagesLabel": "الصور:",
+    "modeLabel": "وضع الاستعادة:",
+    "modeMerge": "دمج (موصى به)",
+    "modeMergeDesc": "الاحتفاظ بالعناصر الحالية وإضافة عناصر جديدة من النسخة الاحتياطية.",
+    "modeOverwrite": "استبدال الكل",
+    "modeOverwriteDesc": "استبدال السجل والإعدادات الحالية بالكامل بالنسخة الاحتياطية.",
+    "confirmRestore": "تأكيد الاستعادة",
+    "cancel": "إلغاء",
+    "restoring": "جارٍ الاستعادة...",
+    "autoDetectedTitle": "تم اكتشاف ملف نسخة احتياطية",
+    "previewTitle": "معاينة النسخة الاحتياطية",
+    "itemsUnit": "عنصر"
   }
 }

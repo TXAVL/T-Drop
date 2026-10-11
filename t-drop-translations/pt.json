@@ -50,7 +50,7 @@
     "skip": "Pular",
     "downloadingUpdate": "Baixando pacote de atualização em segundo plano...",
     "updateReadyTitle": "Atualização v{version} pronta",
-    "updateReadyDesc": "Clique para reiniciar o T-Drop e aplicar a atualização.",
+    "updateReadyDesc": "Deslize para reiniciar o T-Drop e aplicar a atualização.",
     "restartToUpdate": "Reiniciar para atualizar",
     "restartToUpdateBelow": "Reiniciar para atualizar abaixo",
     "newUpdateAvailableBelow": "Nova atualização disponível abaixo",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Editar",
     "hotkeyRecording": "Pressione a combinação de teclas...",
     "hotkeyCancel": "Cancelar",
-    "hotkeyReset": "Redefinir para o padrão ({shortcut})"
+    "hotkeyReset": "Redefinir para o padrão ({shortcut})",
+    "connectingDownload": "Conectando ao servidor de download...",
+    "connecting": "Conectando...",
+    "downloadingWithPercent": "Baixando atualização ({percent}%)...",
+    "download": "Baixar",
+    "notifyModeSubtitle": "Modo de notificação · Clique para baixar",
+    "newUpdateAvailable": "Nova atualização disponível {version}",
+    "slideToRestart": "Deslize para reiniciar",
+    "restarting": "Reiniciando...",
+    "restartFailed": "Falha ao reiniciar"
   },
   "position": {
     "edgePlacementTitle": "Posicionamento da borda",
@@ -201,7 +210,9 @@
     "proTip1": "Pressione Alt + C para alternar a prateleira instantaneamente.",
     "proTip2": "Acesse as configurações a qualquer momento pelo ícone de engrenagem (canto superior direito).",
     "proTip3": "Arraste e solte arquivos na borda esquerda para adicioná-los.",
-    "proTip4": "Clique em uma caixa de texto, depois em um item da área de transferência para colar automaticamente."
+    "proTip4": "Clique em uma caixa de texto, depois em um item da área de transferência para colar automaticamente.",
+    "backupTitle": "Backup e Restauração (.txa)",
+    "backupDesc": "Exporte com segurança o histórico da área de transferência, itens fixados e configurações para um arquivo .txa criptografado."
   },
   "tray": {
     "showClipboard": "Mostrar área de transferência",
@@ -260,5 +271,33 @@
     "version": "Versão",
     "supportPromo": "O T-Drop é 100% gratuito e de código aberto. Se ele ajuda no seu fluxo de trabalho diário, considere apoiar o desenvolvimento para torná-lo ainda melhor!",
     "supportOnKofi": "Apoiar no Ko-fi"
+  },
+  "backup": {
+    "title": "Backup e Restauração (.txa)",
+    "desc": "Crie backups criptografados para preservar itens, imagens e configurações.",
+    "exportBtn": "Exportar Backup (.txa)",
+    "importBtn": "Restaurar Dados (.txa)",
+    "exportSuccess": "Backup criado com sucesso ({items} itens)",
+    "exportFailed": "Falha ao criar backup: {error}",
+    "importSuccess": "{count} itens restaurados com sucesso",
+    "importFailed": "Falha ao restaurar: {error}",
+    "busyError": "Outra operação de backup ou restauração já está em andamento.",
+    "modalTitle": "Restaurar Backup do T-Drop",
+    "modalDesc": "Revise os detalhes do arquivo e escolha o método de restauração.",
+    "fileLabel": "Arquivo de backup:",
+    "dateLabel": "Data de criação:",
+    "itemsLabel": "Itens:",
+    "imagesLabel": "Imagens:",
+    "modeLabel": "Modo de restauração:",
+    "modeMerge": "Mesclar (Recomendado)",
+    "modeMergeDesc": "Mantém os itens atuais e adiciona novos do backup.",
+    "modeOverwrite": "Sobrescrever tudo",
+    "modeOverwriteDesc": "Substitui completamente o histórico e as configurações pelo backup.",
+    "confirmRestore": "Confirmar restauração",
+    "cancel": "Cancelar",
+    "restoring": "Restaurando...",
+    "autoDetectedTitle": "Backup detectado",
+    "previewTitle": "Pré-visualização do backup",
+    "itemsUnit": "itens"
   }
 }

@@ -50,7 +50,7 @@
     "skip": "Lewati",
     "downloadingUpdate": "Mengunduh paket pembaruan di latar belakang...",
     "updateReadyTitle": "Pembaruan v{version} Siap",
-    "updateReadyDesc": "Klik untuk memulai ulang T-Drop dan menerapkan pembaruan.",
+    "updateReadyDesc": "Geser untuk memulai ulang T-Drop dan menerapkan pembaruan.",
     "restartToUpdate": "Mulai ulang untuk memperbarui",
     "restartToUpdateBelow": "Mulai ulang untuk memperbarui di bawah",
     "newUpdateAvailableBelow": "Pembaruan baru tersedia di bawah",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Edit",
     "hotkeyRecording": "Tekan kombinasi tombol...",
     "hotkeyCancel": "Batal",
-    "hotkeyReset": "Atur ulang ke default ({shortcut})"
+    "hotkeyReset": "Atur ulang ke default ({shortcut})",
+    "connectingDownload": "Menghubungkan ke server unduhan...",
+    "connecting": "Menghubungkan...",
+    "downloadingWithPercent": "Mengunduh pembaruan ({percent}%)...",
+    "download": "Unduh",
+    "notifyModeSubtitle": "Mode pemberitahuan · Klik untuk mengunduh",
+    "newUpdateAvailable": "Pembaruan baru tersedia {version}",
+    "slideToRestart": "Geser untuk memulai ulang",
+    "restarting": "Memulai ulang...",
+    "restartFailed": "Gagal memulai ulang"
   },
   "position": {
     "edgePlacementTitle": "Penempatan Tepi",
@@ -201,7 +210,9 @@
     "proTip1": "Tekan Alt + C untuk segera beralih rak.",
     "proTip2": "Akses pengaturan kapan saja melalui ikon roda gigi (kanan atas).",
     "proTip3": "Seret & jatuhkan berkas ke tepi kiri untuk menambahkannya.",
-    "proTip4": "Klik kotak teks, lalu item papan klip untuk menempel otomatis."
+    "proTip4": "Klik kotak teks, lalu item papan klip untuk menempel otomatis.",
+    "backupTitle": "Cadangan & Pemulihan Arsip (.txa)",
+    "backupDesc": "Ekspor riwayat papan klip, item yang disematkan, dan pengaturan ke arsip .txa terenkripsi. Pulihkan kapan saja dengan mode Gabung atau Timpa."
   },
   "tray": {
     "showClipboard": "Tampilkan Papan Klip",
@@ -260,5 +271,33 @@
     "version": "Versi",
     "supportPromo": "T-Drop 100% gratis dan bersifat open-source. Jika aplikasi ini membantu alur kerja harian Anda, pertimbangkan untuk mendukung pengembangannya agar menjadi lebih baik lagi!",
     "supportOnKofi": "Dukung di Ko-fi"
+  },
+  "backup": {
+    "title": "Cadangan & Pemulihan (.txa)",
+    "desc": "Buat cadangan terenkripsi untuk mengamankan item papan klip, gambar, dan pengaturan saat instal ulang Windows.",
+    "exportBtn": "Ekspor Cadangan (.txa)",
+    "importBtn": "Pulihkan Data (.txa)",
+    "exportSuccess": "Cadangan terenkripsi berhasil dibuat ({items} item)",
+    "exportFailed": "Gagal membuat cadangan: {error}",
+    "importSuccess": "{count} item berhasil dipulihkan",
+    "importFailed": "Gagal memulihkan: {error}",
+    "busyError": "Operasi pencadangan atau pemulihan lain sedang berlangsung.",
+    "modalTitle": "Pulihkan Cadangan T-Drop",
+    "modalDesc": "Tinjau detail arsip dan pilih cara pemulihan data.",
+    "fileLabel": "File Cadangan:",
+    "dateLabel": "Tanggal Dibuat:",
+    "itemsLabel": "Item:",
+    "imagesLabel": "Gambar:",
+    "modeLabel": "Mode Pemulihan:",
+    "modeMerge": "Gabung (Disarankan)",
+    "modeMergeDesc": "Pertahankan item saat ini dan tambahkan item baru dari cadangan.",
+    "modeOverwrite": "Timpa Semua",
+    "modeOverwriteDesc": "Gantikan seluruh riwayat dan pengaturan dengan data cadangan.",
+    "confirmRestore": "Konfirmasi Pemulihan",
+    "cancel": "Batal",
+    "restoring": "Memulihkan...",
+    "autoDetectedTitle": "File Cadangan Terdeteksi",
+    "previewTitle": "Pratinjau Cadangan",
+    "itemsUnit": "item"
   }
 }

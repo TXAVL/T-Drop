@@ -377,7 +377,7 @@
         </button>
         <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.1</span>
+          <span data-i18n="nav.download">Tải về v0.1.2</span>
         </a>
       </div>
     </div>
@@ -391,12 +391,77 @@
       <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.</p>
     </div>
 
-    <!-- ── VERSION 0.1.1 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.2 ────────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.1</span>
+          <span>Version v0.1.2</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">11/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v012.summary">
+        Ra mắt thanh Banner cập nhật động trực quan (UpdateBanner), tự động hiển thị tiến trình tải % và tốc độ MB/s thời gian thực; tối ưu hóa quy trình khôi phục bản sao lưu .txa và tích hợp liên kết tệp trực tiếp từ Windows; bổ sung giới thiệu Sao lưu trong Onboarding; đồng bộ trọn vẹn 31 ngôn ngữ và hỗ trợ DevTools tiện lợi.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item1.title">Thanh Banner Tiến Trình Cập Nhật Động (Update Banner &amp; Lifecycle)</h3>
+            <p data-i18n="v012.item1.desc">
+              Tích hợp thanh banner nổi bật gắn ngay đầu giá đồ khi có bản cập nhật mới. Hiển thị tiến trình tải xuống chi tiết thời gian thực (% dung lượng, MB/MB và tốc độ MB/s), kèm nút "Khởi động lại để cập nhật" với hiệu ứng chuyển trạng thái mượt mà. Hỗ trợ chế độ chỉ thông báo qua Windows Notification với nút Tải về và Bỏ qua.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item2.title">Khôi Phục Dữ Liệu Tự Động Từ Tệp .txa (Restore Modal &amp; File Association)</h3>
+            <p data-i18n="v012.item2.desc">
+              Hỗ trợ nhấp đúp mở trực tiếp tệp sao lưu .txa từ Windows Explorer. Tự động phát hiện tệp sao lưu khi cài mới và mở cửa sổ khôi phục dữ liệu trực quan với xem trước chi tiết (ngày tạo, số lượng mục/ảnh) cùng hai chế độ Gộp thông minh hoặc Ghi đè sạch sẽ.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item3.title">Giới Thiệu Sao Lưu &amp; Khôi Phục Trong Hướng Dẫn Ban Đầu (Onboarding)</h3>
+            <p data-i18n="v012.item3.desc">
+              Bổ sung slide giới thiệu tính năng Sao lưu &amp; Khôi phục dữ liệu (.txa) vào cửa sổ hướng dẫn lần đầu (Onboarding) với giao diện mô phỏng trực quan, các nút tương tác và hướng dẫn chi tiết.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item4.title">Đồng Bộ Toàn Diện 31 Ngôn Ngữ &amp; Chuẩn Hóa Thao Tác Kéo Trượt</h3>
+            <p data-i18n="v012.item4.desc">
+              Dịch và đồng bộ 100% tất cả các khóa ngôn ngữ mới trên toàn bộ 31 ngôn ngữ. Chuẩn hóa mô tả thao tác thanh trượt xác nhận từ "Nhấn" sang "Kéo" (Slide to restart) cho thanh SlideCommit và đảm bảo các chuỗi dự phòng (fallback) luôn là tiếng Anh chuẩn.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item5.title">Tích Hợp Phím Tắt F12 &amp; Cửa Sổ DevTools Tách Rời Khi Phát Triển</h3>
+            <p data-i18n="v012.item5.desc">
+              Tự động mở cửa sổ DevTools dạng tách rời khi chạy ở chế độ dev (npm run dev), hỗ trợ phím tắt toàn cục F12 và menu chuột phải khay hệ thống (System Tray) giúp việc gỡ lỗi thuận tiện.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.1 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.1</span>
         </div>
         <div class="release-date">11/10/2026</div>
       </div>
@@ -527,7 +592,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.1',
+        'nav.download': 'Tải về v0.1.2',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.',
@@ -535,6 +600,17 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v012.summary': 'Ra mắt thanh Banner cập nhật động trực quan (UpdateBanner), tự động hiển thị tiến trình tải % và tốc độ MB/s thời gian thực; tối ưu hóa quy trình khôi phục bản sao lưu .txa và tích hợp liên kết tệp trực tiếp từ Windows; bổ sung giới thiệu Sao lưu trong Onboarding; đồng bộ trọn vẹn 31 ngôn ngữ và hỗ trợ DevTools tiện lợi.',
+        'v012.item1.title': 'Thanh Banner Tiến Trình Cập Nhật Động (Update Banner & Lifecycle)',
+        'v012.item1.desc': 'Tích hợp thanh banner nổi bật gắn ngay đầu giá đồ khi có bản cập nhật mới. Hiển thị tiến trình tải xuống chi tiết thời gian thực (% dung lượng, MB/MB và tốc độ MB/s), kèm nút "Khởi động lại để cập nhật" với hiệu ứng chuyển trạng thái mượt mà. Hỗ trợ chế độ chỉ thông báo qua Windows Notification với nút Tải về và Bỏ qua.',
+        'v012.item2.title': 'Khôi Phục Dữ Liệu Tự Động Từ Tệp .txa (Restore Modal & File Association)',
+        'v012.item2.desc': 'Hỗ trợ nhấp đúp mở trực tiếp tệp sao lưu .txa từ Windows Explorer. Tự động phát hiện tệp sao lưu khi cài mới và mở cửa sổ khôi phục dữ liệu trực quan với xem trước chi tiết (ngày tạo, số lượng mục/ảnh) cùng hai chế độ Gộp thông minh hoặc Ghi đè sạch sẽ.',
+        'v012.item3.title': 'Giới Thiệu Sao Lưu & Khôi Phục Trong Hướng Dẫn Ban Đầu (Onboarding)',
+        'v012.item3.desc': 'Bổ sung slide giới thiệu tính năng Sao lưu & Khôi phục dữ liệu (.txa) vào cửa sổ hướng dẫn lần đầu (Onboarding) với giao diện mô phỏng trực quan, các nút tương tác và hướng dẫn chi tiết.',
+        'v012.item4.title': 'Đồng Bộ Toàn Diện 31 Ngôn Ngữ & Chuẩn Hóa Thao Tác Kéo Trượt',
+        'v012.item4.desc': 'Dịch và đồng bộ 100% tất cả các khóa ngôn ngữ mới trên toàn bộ 31 ngôn ngữ. Chuẩn hóa mô tả thao tác thanh trượt xác nhận từ "Nhấn" sang "Kéo" (Slide to restart) cho thanh SlideCommit và đảm bảo các chuỗi dự phòng (fallback) luôn là tiếng Anh chuẩn.',
+        'v012.item5.title': 'Tích Hợp Phím Tắt F12 & Cửa Sổ DevTools Tách Rời Khi Phát Triển',
+        'v012.item5.desc': 'Tự động mở cửa sổ DevTools dạng tách rời khi chạy ở chế độ dev (npm run dev), hỗ trợ phím tắt toàn cục F12 và menu chuột phải khay hệ thống (System Tray) giúp việc gỡ lỗi thuận tiện.',
         'v011.summary': 'Nâng cấp giao diện UI/UX toàn diện cho giá đồ (Top-Edge Dock & Shelf), mở rộng không gian hiển thị thẻ và cửa sổ hướng dẫn Onboarding, sửa lỗi bố cục bị bó hẹp khi đặt giá ở cạnh trên, khắc phục liên kết phản hồi GitHub Issues bị 404 và cải tiến thông báo kiểm tra cập nhật rõ ràng.',
         'v011.item1.title': 'Nâng cấp UI/UX Giá đồ & Dock ngang cạnh trên',
         'v011.item1.desc': 'Tối ưu tỷ lệ chiều cao và lề đệm bên trong khay giá đồ, thiết kế thẻ nội dung rộng rãi và thông thoáng, loại bỏ hiện tượng bị che khuất dòng thời gian chân trang; bổ sung hiệu ứng viền sáng acrylic và đổ bóng chiều sâu mượt mà khi rê chuột.',
@@ -559,7 +635,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.1',
+        'nav.download': 'Download v0.1.2',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows.',
@@ -567,6 +643,17 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v012.summary': 'Introduces visual dynamic UpdateBanner with real-time download percentage and speed; streamlined .txa backup restoration with Windows Explorer file association; new Backup slide in Onboarding; full 31-language synchronization and handy DevTools integration.',
+        'v012.item1.title': 'Dynamic Update Banner & Progress Lifecycle',
+        'v012.item1.desc': 'Visual update banner docked at the top of the shelf upon update detection. Displays real-time download progress (percentage %, transferred/total size, and download speed in MB/s), with a sleek "Restart to Update" button and Windows system notification support.',
+        'v012.item2.title': 'Automated .txa Backup Restoration & Windows File Association',
+        'v012.item2.desc': 'Support for opening .txa backup files directly from Windows Explorer. Features automatic archive detection on startup and an intuitive restore modal with complete metadata previews (creation date, item/image counts, Smart Merge, or Clean Overwrite).',
+        'v012.item3.title': 'Backup & Restore Introduction in Onboarding',
+        'v012.item3.desc': 'Added dedicated Backup & Restore (.txa) slide to the first-run onboarding tutorial, featuring interactive mockups and clear explanations of archive transfer capabilities.',
+        'v012.item4.title': 'Comprehensive 31-Language Sync & Slide Prompt Standardization',
+        'v012.item4.desc': 'Full synchronization across all 31 supported languages for all new feature keys. Accurately updated restart confirmation prompts from "Click" to "Slide to restart" to match the interactive swipe capsule, with clean English fallbacks.',
+        'v012.item5.title': 'F12 Hotkey & Detached DevTools Integration',
+        'v012.item5.desc': 'Automated detached DevTools window in development mode, complete with global F12 hotkey and System Tray context menu toggle for effortless developer debugging.',
         'v011.summary': 'Comprehensive UI/UX overhaul for the Shelf and Top-Edge Dock, adaptive layout for first-run Onboarding, fixed 404 feedback link, and clarified up-to-date notifications.',
         'v011.item1.title': 'Top-Edge Dock & Shelf UI/UX Redesign',
         'v011.item1.desc': 'Refined vertical budget and card layout in horizontal mode. Enlarged item card breathing space to prevent timestamp footer cut-off, with acrylic elevation and glowing borders on hover.',

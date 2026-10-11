@@ -50,7 +50,7 @@
     "skip": "Ignorer",
     "downloadingUpdate": "Téléchargement du paquet de mise à jour en arrière-plan...",
     "updateReadyTitle": "Mise à jour v{version} prête",
-    "updateReadyDesc": "Cliquez pour redémarrer T-Drop et appliquer la mise à jour.",
+    "updateReadyDesc": "Glissez pour redémarrer T-Drop et appliquer la mise à jour.",
     "restartToUpdate": "Redémarrer pour mettre à jour",
     "restartToUpdateBelow": "Redémarrer pour mettre à jour ci-dessous",
     "newUpdateAvailableBelow": "Nouvelle mise à jour disponible ci-dessous",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Modifier",
     "hotkeyRecording": "Appuyez sur la combinaison de touches...",
     "hotkeyCancel": "Annuler",
-    "hotkeyReset": "Rétablir par défaut ({shortcut})"
+    "hotkeyReset": "Rétablir par défaut ({shortcut})",
+    "connectingDownload": "Connexion au serveur de téléchargement...",
+    "connecting": "Connexion...",
+    "downloadingWithPercent": "Téléchargement de la mise à jour ({percent}%)...",
+    "download": "Télécharger",
+    "notifyModeSubtitle": "Mode notification · Cliquez pour télécharger",
+    "newUpdateAvailable": "Nouvelle mise à jour disponible {version}",
+    "slideToRestart": "Glisser pour redémarrer",
+    "restarting": "Redémarrage...",
+    "restartFailed": "Échec du redémarrage"
   },
   "position": {
     "edgePlacementTitle": "Bord de l'écran",
@@ -201,7 +210,9 @@
     "proTip1": "Appuyez sur Alt + C pour basculer instantanément l'étagère.",
     "proTip2": "Accédez aux paramètres à tout moment via l'icône d'engrenage (en haut à droite).",
     "proTip3": "Glissez-déposez des fichiers sur le bord gauche pour les ajouter.",
-    "proTip4": "Cliquez sur une zone de texte, puis sur un élément du presse-papiers pour le coller automatiquement."
+    "proTip4": "Cliquez sur une zone de texte, puis sur un élément du presse-papiers pour le coller automatiquement.",
+    "backupTitle": "Sauvegarde & Restauration (.txa)",
+    "backupDesc": "Exportez votre historique du presse-papiers, éléments épinglés et paramètres dans une archive .txa chiffrée. Restaurez-la à tout moment en mode Fusion ou Écrasement."
   },
   "tray": {
     "showClipboard": "Afficher le presse-papiers",
@@ -260,5 +271,33 @@
     "version": "Version",
     "supportPromo": "T-Drop est 100 % gratuit et open source. S'il améliore votre flux de travail quotidien, pensez à soutenir son développement pour le rendre encore meilleur !",
     "supportOnKofi": "Soutenir sur Ko-fi"
+  },
+  "backup": {
+    "title": "Sauvegarde & Restauration (.txa)",
+    "desc": "Créez des sauvegardes chiffrées pour préserver vos clips, images et réglages lors d’une réinstallation de Windows.",
+    "exportBtn": "Exporter sauvegarde (.txa)",
+    "importBtn": "Restaurer données (.txa)",
+    "exportSuccess": "Sauvegarde créée avec succès ({items} éléments)",
+    "exportFailed": "Échec de la sauvegarde : {error}",
+    "importSuccess": "{count} éléments restaurés avec succès",
+    "importFailed": "Échec de la restauration : {error}",
+    "busyError": "Une opération de sauvegarde ou de restauration est déjà en cours.",
+    "modalTitle": "Restaurer la sauvegarde T-Drop",
+    "modalDesc": "Vérifiez les détails et choisissez le mode de restauration.",
+    "fileLabel": "Fichier de sauvegarde :",
+    "dateLabel": "Date de création :",
+    "itemsLabel": "Éléments :",
+    "imagesLabel": "Images :",
+    "modeLabel": "Mode de restauration :",
+    "modeMerge": "Fusionner (Recommandé)",
+    "modeMergeDesc": "Conserver les éléments actuels et ajouter les nouveaux.",
+    "modeOverwrite": "Remplacer tout",
+    "modeOverwriteDesc": "Remplacer entièrement l’historique et les réglages.",
+    "confirmRestore": "Confirmer la restauration",
+    "cancel": "Annuler",
+    "restoring": "Restauration en cours...",
+    "autoDetectedTitle": "Sauvegarde détectée",
+    "previewTitle": "Aperçu de la sauvegarde",
+    "itemsUnit": "éléments"
   }
 }

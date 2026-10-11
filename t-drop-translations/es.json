@@ -50,7 +50,7 @@
     "skip": "Omitir",
     "downloadingUpdate": "Descargando el paquete de actualización en segundo plano...",
     "updateReadyTitle": "Actualización v{version} lista",
-    "updateReadyDesc": "Haz clic para reiniciar T-Drop y aplicar la actualización.",
+    "updateReadyDesc": "Desliza para reiniciar T-Drop y aplicar la actualización.",
     "restartToUpdate": "Reiniciar para actualizar",
     "restartToUpdateBelow": "Reiniciar para actualizar más abajo",
     "newUpdateAvailableBelow": "Nueva actualización disponible más abajo",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Editar",
     "hotkeyRecording": "Pulsa la combinación de teclas...",
     "hotkeyCancel": "Cancelar",
-    "hotkeyReset": "Restablecer al valor predeterminado ({shortcut})"
+    "hotkeyReset": "Restablecer al valor predeterminado ({shortcut})",
+    "connectingDownload": "Conectando con el servidor de descarga...",
+    "connecting": "Conectando...",
+    "downloadingWithPercent": "Descargando actualización ({percent}%)...",
+    "download": "Descargar",
+    "notifyModeSubtitle": "Modo de notificación · Haz clic para descargar",
+    "newUpdateAvailable": "Nueva actualización disponible {version}",
+    "slideToRestart": "Deslizar para reiniciar",
+    "restarting": "Reiniciando...",
+    "restartFailed": "Error al reiniciar"
   },
   "position": {
     "edgePlacementTitle": "Borde de la pantalla",
@@ -201,7 +210,9 @@
     "proTip1": "Pulsa Alt + C para abrir o cerrar el panel al instante.",
     "proTip2": "Accede a la configuración en cualquier momento con el icono de engranaje (arriba a la derecha).",
     "proTip3": "Arrastra y suelta archivos en el borde izquierdo para añadirlos.",
-    "proTip4": "Haz clic en un cuadro de texto y luego en un elemento del portapapeles para pegarlo automáticamente."
+    "proTip4": "Haz clic en un cuadro de texto y luego en un elemento del portapapeles para pegarlo automáticamente.",
+    "backupTitle": "Copia de seguridad y restauración (.txa)",
+    "backupDesc": "Exporta tu historial del portapapeles, elementos fijados y ajustes a un archivo .txa cifrado. Restáuralo en cualquier momento con los modos Fusionar o Sobrescribir."
   },
   "tray": {
     "showClipboard": "Mostrar portapapeles",
@@ -260,5 +271,33 @@
     "version": "Versión",
     "supportPromo": "T-Drop es 100 % gratuito y de código abierto. Si te ayuda en tu trabajo diario, considera apoyar su desarrollo para hacerlo aún mejor.",
     "supportOnKofi": "Apoyar en Ko-fi"
+  },
+  "backup": {
+    "title": "Copia de seguridad y restauración (.txa)",
+    "desc": "Crea copias de seguridad cifradas para conservar elementos, imágenes y ajustes al reinstalar Windows.",
+    "exportBtn": "Exportar copia (.txa)",
+    "importBtn": "Restaurar datos (.txa)",
+    "exportSuccess": "Copia creada con éxito ({items} elementos)",
+    "exportFailed": "Error al crear la copia: {error}",
+    "importSuccess": "Se restauraron {count} elementos con éxito",
+    "importFailed": "Error al restaurar: {error}",
+    "busyError": "Ya hay una operación de copia o restauración en curso.",
+    "modalTitle": "Restaurar copia de seguridad T-Drop",
+    "modalDesc": "Revisa los detalles del archivo y elige cómo restaurar tus datos.",
+    "fileLabel": "Archivo de copia:",
+    "dateLabel": "Fecha de creación:",
+    "itemsLabel": "Elementos:",
+    "imagesLabel": "Imágenes:",
+    "modeLabel": "Modo de restauración:",
+    "modeMerge": "Fusionar (Recomendado)",
+    "modeMergeDesc": "Conserva los elementos actuales y añade los nuevos de la copia.",
+    "modeOverwrite": "Sobrescribir todo",
+    "modeOverwriteDesc": "Reemplaza completamente el historial y los ajustes con la copia.",
+    "confirmRestore": "Confirmar restauración",
+    "cancel": "Cancelar",
+    "restoring": "Restaurando...",
+    "autoDetectedTitle": "Copia de seguridad detectada",
+    "previewTitle": "Vista previa de copia de seguridad",
+    "itemsUnit": "elementos"
   }
 }

@@ -50,7 +50,7 @@
     "skip": "Overslaan",
     "downloadingUpdate": "Updatepakket op de achtergrond downloaden...",
     "updateReadyTitle": "Update v{version} klaar",
-    "updateReadyDesc": "Klik om T-Drop te herstarten en de update toe te passen.",
+    "updateReadyDesc": "Schuif om T-Drop opnieuw te starten en de update toe te passen.",
     "restartToUpdate": "Herstarten om bij te werken",
     "restartToUpdateBelow": "Herstarten om bij te werken hieronder",
     "newUpdateAvailableBelow": "Nieuwe update beschikbaar hieronder",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Bewerken",
     "hotkeyRecording": "Druk op de toetscombinatie...",
     "hotkeyCancel": "Annuleren",
-    "hotkeyReset": "Terugzetten naar standaard ({shortcut})"
+    "hotkeyReset": "Terugzetten naar standaard ({shortcut})",
+    "connectingDownload": "Verbinden met downloadserver...",
+    "connecting": "Verbinden...",
+    "downloadingWithPercent": "Update downloaden ({percent}%)...",
+    "download": "Downloaden",
+    "notifyModeSubtitle": "Meldingsmodus · Klik om te downloaden",
+    "newUpdateAvailable": "Nieuwe update beschikbaar {version}",
+    "slideToRestart": "Schuif om opnieuw te starten",
+    "restarting": "Opnieuw opstarten...",
+    "restartFailed": "Opnieuw opstarten mislukt"
   },
   "position": {
     "edgePlacementTitle": "Randplaatsing",
@@ -201,7 +210,9 @@
     "proTip1": "Druk op Alt + C om de plank direct te wisselen.",
     "proTip2": "Toegang tot instellingen altijd via het tandwielpictogram (rechtsboven).",
     "proTip3": "Bestanden naar de linkerrand slepen en neerzetten om toe te voegen.",
-    "proTip4": "Klik op een tekstvak en vervolgens op een klemborditem om automatisch te plakken."
+    "proTip4": "Klik op een tekstvak en vervolgens op een klemborditem om automatisch te plakken.",
+    "backupTitle": "Back-up en herstel (.txa)",
+    "backupDesc": "Exporteer klembordgeschiedenis, vastgemaakte items en instellingen naar een versleuteld .txa-archief."
   },
   "tray": {
     "showClipboard": "Klembord tonen",
@@ -260,5 +271,33 @@
     "version": "Versie",
     "supportPromo": "T-Drop is 100% gratis en open source. Als het je dagelijkse workflow makkelijker maakt, overweeg dan de ontwikkeling te steunen zodat het nog beter wordt!",
     "supportOnKofi": "Steun op Ko-fi"
+  },
+  "backup": {
+    "title": "Back-up en herstel (.txa)",
+    "desc": "Maak versleutelde back-ups om klemborditems, afbeeldingen en instellingen te behouden.",
+    "exportBtn": "Back-up exporteren (.txa)",
+    "importBtn": "Gegevens herstellen (.txa)",
+    "exportSuccess": "Back-up succesvol aangemaakt ({items} items)",
+    "exportFailed": "Kan back-up niet maken: {error}",
+    "importSuccess": "{count} items succesvol hersteld",
+    "importFailed": "Herstel mislukt: {error}",
+    "busyError": "Er is al een back-up- of herstelbewerking bezig.",
+    "modalTitle": "T-Drop back-up herstellen",
+    "modalDesc": "Bekijk de archiefgegevens en kies hoe u gegevens wilt herstellen.",
+    "fileLabel": "Back-upbestand:",
+    "dateLabel": "Aanmaakdatum:",
+    "itemsLabel": "Items:",
+    "imagesLabel": "Afbeeldingen:",
+    "modeLabel": "Herstelmodus:",
+    "modeMerge": "Samenvoegen (Aanbevolen)",
+    "modeMergeDesc": "Huidige items behouden en nieuwe toevoegen uit back-up.",
+    "modeOverwrite": "Alles overschrijven",
+    "modeOverwriteDesc": "Huidige geschiedenis en instellingen volledig vervangen door back-up.",
+    "confirmRestore": "Herstel bevestigen",
+    "cancel": "Annuleren",
+    "restoring": "Herstellen...",
+    "autoDetectedTitle": "Back-upbestand gedetecteerd",
+    "previewTitle": "Voorbeeld van back-up",
+    "itemsUnit": "items"
   }
 }

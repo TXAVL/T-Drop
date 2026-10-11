@@ -431,7 +431,11 @@ export const useStore = create<AppState>((set, get) => ({
   },
 
   async installUpdate() {
-    await edge.installUpdate()
+    try {
+      await edge.installUpdate()
+    } catch {
+      /* ignore */
+    }
   },
 
   setItems: (items, _meta) => {

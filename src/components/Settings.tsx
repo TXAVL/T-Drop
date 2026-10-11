@@ -14,6 +14,7 @@ import { HotkeyRecorder } from './HotkeyRecorder'
 import { SlideCommit } from './SlideCommit'
 import { WakeSlider } from './WakeSlider'
 import { playDialTickSound, playToggleSound, playButtonClickSound } from '../lib/soundEffects'
+import { formatBytes, formatSpeed } from '../lib/format'
 import { useTranslation } from '../i18n'
 import donateQr from '../assets/donate-qr.png'
 import '../styles/settings.css'
@@ -653,7 +654,7 @@ export function Settings({
           </div>
           <div className="shelf-card-bottom">
             <SlideCommit
-              label={t('behaviour.restart') || 'Restart'}
+              label={t('behaviour.slideToRestart') || 'Slide to restart'}
               doneLabel={t('behaviour.restarting') || 'Restarting...'}
               errorLabel={t('behaviour.restartFailed') || 'Restart failed'}
               height={32}
@@ -693,14 +694,35 @@ export function Settings({
                 : t('behaviour.downloadingUpdate')}
             </div>
             <div className="setting-desc">
-              {downloadPercent > 0 ? t('behaviour.downloadingWithPercent', { percent: downloadPercent }) : t('behaviour.downloadingUpdate')}
+              {downloadPercent > 0
+                ? t('behaviour.downloadingWithPercent', { percent: downloadPercent })
+                : (t('behaviour.connectingDownload') || 'Đang kết nối máy chủ tải về...')}
             </div>
           </div>
           <div className="shelf-card-bottom">
-            <div className="shelf-update-progress-wrap">
-              <div className="shelf-progress-bar" style={{ width: `${downloadPercent}%` }} />
-              <span className="shelf-progress-text">{downloadPercent > 0 ? `${downloadPercent}%` : 'Connecting...'}</span>
-            </div>
+            {(() => {
+              const progress = updateInfo?.downloadProgress
+              const transferredStr = progress?.transferred && progress.transferred > 0 ? formatBytes(progress.transferred) : ''
+              const totalStr = progress?.total && progress.total > 0 ? formatBytes(progress.total) : ''
+              const speedStr = formatSpeed(progress?.bytesPerSecond)
+              const hasBytes = !!(transferredStr && totalStr)
+              return (
+                <>
+                  <div className="shelf-update-progress-wrap">
+                    <div className="shelf-progress-bar" style={{ width: `${Math.max(3, downloadPercent)}%` }} />
+                    <span className="shelf-progress-text">
+                      {downloadPercent > 0 ? `${downloadPercent}%` : (t('behaviour.connecting') || 'Connecting...')}
+                    </span>
+                  </div>
+                  {hasBytes && (
+                    <div className="shelf-progress-meta-row">
+                      <span className="shelf-progress-meta-bytes">{transferredStr} / {totalStr}</span>
+                      {speedStr && <span className="shelf-progress-meta-speed">↓ {speedStr}</span>}
+                    </div>
+                  )}
+                </>
+              )
+            })()}
           </div>
         </div>
       )
@@ -799,7 +821,7 @@ export function Settings({
           </div>
           <div className="shelf-card-bottom">
             <SlideCommit
-              label={t('behaviour.restart') || 'Restart'}
+              label={t('behaviour.slideToRestart') || 'Slide to restart'}
               doneLabel={t('behaviour.restarting') || 'Restarting...'}
               errorLabel={t('behaviour.restartFailed') || 'Restart failed'}
               height={32}
@@ -839,14 +861,35 @@ export function Settings({
                 : t('behaviour.downloadingUpdate')}
             </div>
             <div className="setting-desc">
-              {downloadPercent > 0 ? t('behaviour.downloadingWithPercent', { percent: downloadPercent }) : t('behaviour.downloadingUpdate')}
+              {downloadPercent > 0
+                ? t('behaviour.downloadingWithPercent', { percent: downloadPercent })
+                : (t('behaviour.connectingDownload') || 'Đang kết nối máy chủ tải về...')}
             </div>
           </div>
           <div className="shelf-card-bottom">
-            <div className="shelf-update-progress-wrap">
-              <div className="shelf-progress-bar" style={{ width: `${downloadPercent}%` }} />
-              <span className="shelf-progress-text">{downloadPercent > 0 ? `${downloadPercent}%` : 'Connecting...'}</span>
-            </div>
+            {(() => {
+              const progress = updateInfo?.downloadProgress
+              const transferredStr = progress?.transferred && progress.transferred > 0 ? formatBytes(progress.transferred) : ''
+              const totalStr = progress?.total && progress.total > 0 ? formatBytes(progress.total) : ''
+              const speedStr = formatSpeed(progress?.bytesPerSecond)
+              const hasBytes = !!(transferredStr && totalStr)
+              return (
+                <>
+                  <div className="shelf-update-progress-wrap">
+                    <div className="shelf-progress-bar" style={{ width: `${Math.max(3, downloadPercent)}%` }} />
+                    <span className="shelf-progress-text">
+                      {downloadPercent > 0 ? `${downloadPercent}%` : (t('behaviour.connecting') || 'Connecting...')}
+                    </span>
+                  </div>
+                  {hasBytes && (
+                    <div className="shelf-progress-meta-row">
+                      <span className="shelf-progress-meta-bytes">{transferredStr} / {totalStr}</span>
+                      {speedStr && <span className="shelf-progress-meta-speed">↓ {speedStr}</span>}
+                    </div>
+                  )}
+                </>
+              )
+            })()}
           </div>
         </div>
       )

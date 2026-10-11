@@ -50,7 +50,7 @@
     "skip": "Überspringen",
     "downloadingUpdate": "Update-Paket wird im Hintergrund heruntergeladen...",
     "updateReadyTitle": "Update v{version} bereit",
-    "updateReadyDesc": "Klicken Sie, um T-Drop neu zu starten und das Update anzuwenden.",
+    "updateReadyDesc": "Wischen Sie, um T-Drop neu zu starten und das Update anzuwenden.",
     "restartToUpdate": "Neu starten zum Aktualisieren",
     "restartToUpdateBelow": "Neu starten zum Aktualisieren unten",
     "newUpdateAvailableBelow": "Neues Update verfügbar unten",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Bearbeiten",
     "hotkeyRecording": "Tastenkombination drücken...",
     "hotkeyCancel": "Abbrechen",
-    "hotkeyReset": "Auf Standard zurücksetzen ({shortcut})"
+    "hotkeyReset": "Auf Standard zurücksetzen ({shortcut})",
+    "connectingDownload": "Verbindung zum Download-Server wird hergestellt...",
+    "connecting": "Verbinden...",
+    "downloadingWithPercent": "Update wird heruntergeladen ({percent}%)...",
+    "download": "Herunterladen",
+    "notifyModeSubtitle": "Benachrichtigungsmodus · Klicken zum Herunterladen",
+    "newUpdateAvailable": "Neues Update verfügbar {version}",
+    "slideToRestart": "Zum Neustarten wischen",
+    "restarting": "Wird neu gestartet...",
+    "restartFailed": "Neustart fehlgeschlagen"
   },
   "position": {
     "edgePlacementTitle": "Randplatzierung",
@@ -201,7 +210,9 @@
     "proTip1": "Alt + C drücken, um die Ablage sofort umzuschalten.",
     "proTip2": "Über das Zahnrad-Symbol (oben rechts) jederzeit auf Einstellungen zugreifen.",
     "proTip3": "Dateien an den linken Rand ziehen & ablegen, um sie hinzuzufügen.",
-    "proTip4": "Auf ein Textfeld klicken, dann auf ein Zwischenablage-Element, um automatisch einzufügen."
+    "proTip4": "Auf ein Textfeld klicken, dann auf ein Zwischenablage-Element, um automatisch einzufügen.",
+    "backupTitle": "Sichern & Wiederherstellen (.txa)",
+    "backupDesc": "Exportieren Sie Zwischenablage-Verlauf, angeheftete Elemente und Einstellungen in ein verschlüsseltes .txa-Archiv. Jederzeit zusammenführen oder überschreiben."
   },
   "tray": {
     "showClipboard": "Zwischenablage anzeigen",
@@ -260,5 +271,33 @@
     "version": "Version",
     "supportPromo": "T-Drop ist 100 % kostenlos und Open Source. Wenn es deinen Arbeitsalltag erleichtert, unterstütze gerne die Entwicklung, damit es noch besser wird!",
     "supportOnKofi": "Auf Ko-fi unterstützen"
+  },
+  "backup": {
+    "title": "Sichern & Wiederherstellen (.txa)",
+    "desc": "Erstellen Sie verschlüsselte Sicherungen für Zwischenablage, Bilder und Einstellungen bei Neuinstallationen.",
+    "exportBtn": "Sicherung exportieren (.txa)",
+    "importBtn": "Daten wiederherstellen (.txa)",
+    "exportSuccess": "Sicherung erfolgreich erstellt ({items} Elemente)",
+    "exportFailed": "Sicherung fehlgeschlagen: {error}",
+    "importSuccess": "{count} Elemente erfolgreich wiederhergestellt",
+    "importFailed": "Wiederherstellung fehlgeschlagen: {error}",
+    "busyError": "Ein Sicherungs- oder Wiederherstellungsvorgang wird bereits ausgeführt.",
+    "modalTitle": "T-Drop-Sicherung wiederherstellen",
+    "modalDesc": "Überprüfen Sie die Archivdetails und wählen Sie den Wiederherstellungsmodus.",
+    "fileLabel": "Sicherungsdatei:",
+    "dateLabel": "Erstellungsdatum:",
+    "itemsLabel": "Elemente:",
+    "imagesLabel": "Bilder:",
+    "modeLabel": "Wiederherstellungsmodus:",
+    "modeMerge": "Zusammenführen (Empfohlen)",
+    "modeMergeDesc": "Bestehende Elemente behalten und neue aus der Sicherung hinzufügen.",
+    "modeOverwrite": "Alles überschreiben",
+    "modeOverwriteDesc": "Aktuellen Verlauf und Einstellungen vollständig ersetzen.",
+    "confirmRestore": "Wiederherstellung bestätigen",
+    "cancel": "Abbrechen",
+    "restoring": "Wiederherstellung läuft...",
+    "autoDetectedTitle": "Sicherungsdatei erkannt",
+    "previewTitle": "Sicherungsvorschau",
+    "itemsUnit": "Elemente"
   }
 }

@@ -50,7 +50,7 @@
     "skip": "Salta",
     "downloadingUpdate": "Scaricamento del pacchetto di aggiornamento in background...",
     "updateReadyTitle": "Aggiornamento v{version} pronto",
-    "updateReadyDesc": "Fai clic per riavviare T-Drop e applicare l'aggiornamento.",
+    "updateReadyDesc": "Scorri per riavviare T-Drop e applicare l'aggiornamento.",
     "restartToUpdate": "Riavvia per aggiornare",
     "restartToUpdateBelow": "Riavvia per aggiornare qui sotto",
     "newUpdateAvailableBelow": "Nuovo aggiornamento disponibile qui sotto",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Modifica",
     "hotkeyRecording": "Premi la combinazione di tasti...",
     "hotkeyCancel": "Annulla",
-    "hotkeyReset": "Ripristina predefinita ({shortcut})"
+    "hotkeyReset": "Ripristina predefinita ({shortcut})",
+    "connectingDownload": "Connessione al server di download...",
+    "connecting": "Connessione...",
+    "downloadingWithPercent": "Download aggiornamento in corso ({percent}%)...",
+    "download": "Scarica",
+    "notifyModeSubtitle": "Modalità notifica · Fai clic per scaricare",
+    "newUpdateAvailable": "Nuovo aggiornamento disponibile {version}",
+    "slideToRestart": "Scorri per riavviare",
+    "restarting": "Riavvio in corso...",
+    "restartFailed": "Riavvio non riuscito"
   },
   "position": {
     "edgePlacementTitle": "Posizionamento bordo",
@@ -201,7 +210,9 @@
     "proTip1": "Premi Alt + C per aprire/chiudere istantaneamente lo scaffale.",
     "proTip2": "Accedi alle impostazioni in qualsiasi momento tramite l'icona ingranaggio (in alto a destra).",
     "proTip3": "Trascina e rilascia file sul bordo sinistro per aggiungerli.",
-    "proTip4": "Fai clic su una casella di testo, poi su un elemento degli appunti per incollarlo automaticamente."
+    "proTip4": "Fai clic su una casella di testo, poi su un elemento degli appunti per incollarlo automaticamente.",
+    "backupTitle": "Backup e Ripristino (.txa)",
+    "backupDesc": "Esporta cronologia appunti, elementi bloccati e impostazioni in un archivio cifrato .txa. Ripristina in qualsiasi momento."
   },
   "tray": {
     "showClipboard": "Mostra appunti",
@@ -260,5 +271,33 @@
     "version": "Versione",
     "supportPromo": "T-Drop è completamente gratuito e open source. Se ti aiuta nel tuo lavoro quotidiano, valuta di supportarne lo sviluppo per renderlo ancora migliore!",
     "supportOnKofi": "Supporta su Ko-fi"
+  },
+  "backup": {
+    "title": "Backup e Ripristino (.txa)",
+    "desc": "Crea backup crittografati per proteggere cronologia e impostazioni.",
+    "exportBtn": "Esporta Backup (.txa)",
+    "importBtn": "Ripristina Dati (.txa)",
+    "exportSuccess": "Backup creato con successo ({items} elementi)",
+    "exportFailed": "Impossibile creare il backup: {error}",
+    "importSuccess": "{count} elementi ripristinati con successo",
+    "importFailed": "Ripristino non riuscito: {error}",
+    "busyError": "Un’altra operazione di backup o ripristino è già in corso.",
+    "modalTitle": "Ripristina Backup T-Drop",
+    "modalDesc": "Verifica i dettagli dell’archivio e seleziona la modalità di ripristino.",
+    "fileLabel": "File di backup:",
+    "dateLabel": "Data creazione:",
+    "itemsLabel": "Elementi:",
+    "imagesLabel": "Immagini:",
+    "modeLabel": "Modalità di ripristino:",
+    "modeMerge": "Unisci (Consigliato)",
+    "modeMergeDesc": "Mantieni gli elementi attuali e aggiungi quelli dal backup.",
+    "modeOverwrite": "Sovrascrivi tutto",
+    "modeOverwriteDesc": "Sostituisci completamente cronologia e impostazioni con il backup.",
+    "confirmRestore": "Conferma ripristino",
+    "cancel": "Annulla",
+    "restoring": "Ripristino in corso...",
+    "autoDetectedTitle": "File di backup rilevato",
+    "previewTitle": "Anteprima backup",
+    "itemsUnit": "elementi"
   }
 }

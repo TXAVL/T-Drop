@@ -321,6 +321,24 @@ export function createTray(): Tray {
         label: t('display'),
         submenu: buildDisplaySubmenu()
       },
+      ...(!app.isPackaged
+        ? [
+            { type: 'separator' as const },
+            {
+              label: 'Toggle DevTools',
+              click: () => {
+                const wc = getMainWindow()?.webContents
+                if (wc) {
+                  if (wc.isDevToolsOpened()) {
+                    wc.closeDevTools()
+                  } else {
+                    wc.openDevTools({ mode: 'detach' })
+                  }
+                }
+              }
+            }
+          ]
+        : []),
       { type: 'separator' },
       {
         label: t('quit'),

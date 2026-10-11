@@ -89,29 +89,67 @@ export function isBackupBusy(): boolean {
 }
 
 /**
+ * Safely reads stored items from disk, handling DPAPI safeStorage encryption,
+ * Index container ({ items: [...] }), or direct array structures.
+ */
+export function readItemsFromDisk(): ClipboardItem[] {
+  const itemsFile = PATHS.indexFile()
+  if (!existsSync(itemsFile)) return []
+  try {
+    const rawBuffer = readFileSync(itemsFile)
+    const rawStr = rawBuffer.toString('utf8').trim()
+    let parsed: any = null
+    try {
+      parsed = JSON.parse(rawStr)
+    } catch {
+      return []
+    }
+
+    if (parsed && parsed.encrypted === true && typeof parsed.payload === 'string') {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const { safeStorage } = require('electron')
+        if (safeStorage && safeStorage.isEncryptionAvailable()) {
+          const decrypted = safeStorage.decryptString(Buffer.from(parsed.payload, 'base64'))
+          const parsedIndex = JSON.parse(decrypted)
+          if (Array.isArray(parsedIndex?.items)) return parsedIndex.items
+          if (Array.isArray(parsedIndex)) return parsedIndex
+        }
+      } catch (err) {
+        console.error('[Backup] Failed to decrypt items with safeStorage:', err)
+      }
+    } else if (parsed && Array.isArray(parsed.items)) {
+      return parsed.items
+    } else if (Array.isArray(parsed)) {
+      return parsed
+    }
+  } catch (err) {
+    console.error('[Backup] Failed to read items from disk:', err)
+  }
+  return []
+}
+
+/**
  * Creates an encrypted `.txa` file at the specified `targetPath`.
  */
-export function createTxaBackup(targetPath: string): BackupCreateResult {
+export function createTxaBackup(
+  targetPath: string,
+  storeItems?: readonly ClipboardItem[]
+): BackupCreateResult {
   if (backupBusy) {
     return { ok: false, error: 'busy' }
   }
   backupBusy = true
 
   try {
-    const itemsFile = PATHS.indexFile()
     const settingsFile = PATHS.settingsFile()
     const imagesDir = PATHS.imagesDir()
     const payloadsDir = PATHS.payloadsDir()
 
     // 1. Read items & settings
-    let items: ClipboardItem[] = []
-    if (existsSync(itemsFile)) {
-      try {
-        items = JSON.parse(readFileSync(itemsFile, 'utf8'))
-      } catch {
-        items = []
-      }
-    }
+    const items: ClipboardItem[] = storeItems && Array.isArray(storeItems)
+      ? [...storeItems]
+      : readItemsFromDisk()
 
     let settings: Partial<Settings> = {}
     if (existsSync(settingsFile)) {
@@ -328,26 +366,38 @@ export function restoreTxaBackup(
 
     // 3. Restore items
     const itemsFile = PATHS.indexFile()
-    let currentItems: ClipboardItem[] = []
-    if (existsSync(itemsFile)) {
-      try {
-        currentItems = JSON.parse(readFileSync(itemsFile, 'utf8'))
-      } catch {
-        currentItems = []
-      }
-    }
+    const currentItems = readItemsFromDisk()
+    const backupItems = Array.isArray(backupData.items) ? backupData.items : []
 
     let finalItems: ClipboardItem[] = []
     if (mode === 'overwrite') {
-      finalItems = backupData.items || []
+      finalItems = backupItems
     } else {
       // Merge mode: Existing items stay, new non-duplicate items are merged
       const existingIds = new Set(currentItems.map((i) => i.id))
-      const toAdd = (backupData.items || []).filter((i) => !existingIds.has(i.id))
+      const toAdd = backupItems.filter((i) => i && typeof i.id === 'string' && !existingIds.has(i.id))
       finalItems = [...currentItems, ...toAdd]
     }
 
-    writeFileSync(itemsFile, JSON.stringify(finalItems, null, 2), 'utf8')
+    const indexObj = { items: finalItems }
+    const jsonStr = JSON.stringify(indexObj)
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { safeStorage } = require('electron')
+      if (safeStorage && safeStorage.isEncryptionAvailable()) {
+        const encryptedBuf = safeStorage.encryptString(jsonStr)
+        const envelope = {
+          v: 2,
+          encrypted: true,
+          payload: encryptedBuf.toString('base64')
+        }
+        writeFileSync(itemsFile, JSON.stringify(envelope), 'utf8')
+      } else {
+        writeFileSync(itemsFile, jsonStr, 'utf8')
+      }
+    } catch {
+      writeFileSync(itemsFile, jsonStr, 'utf8')
+    }
 
     // 4. Restore settings if overwrite or if missing
     if (backupData.settings && Object.keys(backupData.settings).length > 0) {

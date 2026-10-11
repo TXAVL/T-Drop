@@ -95,6 +95,10 @@ export class ItemStore {
         // Plain JSON (Legacy v0.1.1 format from active users)
         parsedIndex = parsedJson as Index
         needsMigration = true
+      } else if (Array.isArray(parsedJson)) {
+        // Direct array format
+        parsedIndex = { items: parsedJson } as Index
+        needsMigration = true
       }
 
       if (parsedIndex && Array.isArray(parsedIndex.items)) {

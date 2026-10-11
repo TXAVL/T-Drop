@@ -26,6 +26,10 @@ export default function App() {
   const warmupDone = useRef(false)
   const audioWarmed = useRef(false)
 
+  if (typeof window !== 'undefined') {
+    ;(window as any).useStore = useStore
+  }
+
   // Drive the edge open/close behavior.
   useEdgeHover()
 

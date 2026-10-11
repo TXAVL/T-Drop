@@ -96,3 +96,10 @@ const IMG_EXT = /\.(png|jpe?g|gif|webp|bmp|svg|avif|ico|tiff?|jfif|pjpeg|pjp)$/i
 export function isImagePath(p: string): boolean {
   return IMG_EXT.test(p)
 }
+
+/** Human-readable transfer speed (e.g. "3.5 MB/s", "450 KB/s"). */
+export function formatSpeed(bytesPerSec?: number): string {
+  if (!bytesPerSec || bytesPerSec <= 0) return ''
+  if (bytesPerSec < 1024 * 1024) return `${(bytesPerSec / 1024).toFixed(0)} KB/s`
+  return `${(bytesPerSec / (1024 * 1024)).toFixed(1)} MB/s`
+}

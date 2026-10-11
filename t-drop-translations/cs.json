@@ -50,7 +50,7 @@
     "skip": "Přeskočit",
     "downloadingUpdate": "Stahování balíčku aktualizace na pozadí...",
     "updateReadyTitle": "Aktualizace v{version} připravena",
-    "updateReadyDesc": "Klikněte pro restart T-Drop a použití aktualizace.",
+    "updateReadyDesc": "Přejetím restartujte T-Drop a použijte aktualizaci.",
     "restartToUpdate": "Restartovat pro aktualizaci",
     "restartToUpdateBelow": "Restartovat pro aktualizaci níže",
     "newUpdateAvailableBelow": "Nová aktualizace k dispozici níže",
@@ -66,7 +66,16 @@
     "hotkeyEdit": "Upravit",
     "hotkeyRecording": "Stiskněte kombinaci kláves...",
     "hotkeyCancel": "Zrušit",
-    "hotkeyReset": "Obnovit výchozí ({shortcut})"
+    "hotkeyReset": "Obnovit výchozí ({shortcut})",
+    "connectingDownload": "Připojování ke stahovacímu serveru...",
+    "connecting": "Připojování...",
+    "downloadingWithPercent": "Stahování aktualizace ({percent}%)...",
+    "download": "Stáhnout",
+    "notifyModeSubtitle": "Režim oznámení · Klikněte pro stažení",
+    "newUpdateAvailable": "K dispozici je nová aktualizace {version}",
+    "slideToRestart": "Přejetím restartovat",
+    "restarting": "Restartování...",
+    "restartFailed": "Restart se nezdařil"
   },
   "position": {
     "edgePlacementTitle": "Umístění na okraji",
@@ -201,7 +210,9 @@
     "proTip1": "Stiskněte Alt + C pro okamžité přepnutí police.",
     "proTip2": "K nastavení přistupujte kdykoli přes ikonu ozubeného kola (vpravo nahoře).",
     "proTip3": "Přetáhněte soubory na levý okraj pro jejich přidání.",
-    "proTip4": "Klikněte na textové pole a poté na položku schránky pro automatické vložení."
+    "proTip4": "Klikněte na textové pole a poté na položku schránky pro automatické vložení.",
+    "backupTitle": "Zálohování a obnovení (.txa)",
+    "backupDesc": "Exportujte historii schránky, připnuté položky a nastavení do šifrovaného archivu .txa."
   },
   "tray": {
     "showClipboard": "Zobrazit schránku",
@@ -260,5 +271,33 @@
     "version": "Verze",
     "supportPromo": "T-Drop je 100% zdarma a s otevřeným zdrojovým kódem. Pokud vám usnadňuje každodenní práci, zvažte podporu jeho vývoje, aby byl ještě lepší!",
     "supportOnKofi": "Podpořit na Ko-fi"
+  },
+  "backup": {
+    "title": "Zálohování a obnovení (.txa)",
+    "desc": "Vytvářejte šifrované zálohy pro zachování položek schránky a nastavení při přeinstalaci Windows.",
+    "exportBtn": "Exportovat zálohu (.txa)",
+    "importBtn": "Obnovit data (.txa)",
+    "exportSuccess": "Záloha úspěšně vytvořena ({items} položek)",
+    "exportFailed": "Vytvoření zálohy se nezdařilo: {error}",
+    "importSuccess": "Úspěšně obnoveno {count} položek",
+    "importFailed": "Obnovení se nezdařilo: {error}",
+    "busyError": "Již probíhá jiná operace zálohování nebo obnovení.",
+    "modalTitle": "Obnovit zálohu T-Drop",
+    "modalDesc": "Zkontrolujte podrobnosti archivu a vyberte režim obnovení.",
+    "fileLabel": "Záložní soubor:",
+    "dateLabel": "Datum vytvoření:",
+    "itemsLabel": "Položky:",
+    "imagesLabel": "Obrázky:",
+    "modeLabel": "Režim obnovení:",
+    "modeMerge": "Sloučit (Doporučeno)",
+    "modeMergeDesc": "Ponechat stávající položky a přidat nové ze zálohy.",
+    "modeOverwrite": "Přepsat vše",
+    "modeOverwriteDesc": "Zcela nahradit aktuální historii a nastavení zálohou.",
+    "confirmRestore": "Potvrdit obnovení",
+    "cancel": "Zrušit",
+    "restoring": "Obnovování...",
+    "autoDetectedTitle": "Zjištěn záložní soubor",
+    "previewTitle": "Náhled zálohy",
+    "itemsUnit": "položek"
   }
 }
