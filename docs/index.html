@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhật ký cập nhật | T-Drop - Trình quản lý Clipboard Windows</title>
+  <meta name="title" content="Nhật ký cập nhật | T-Drop - Trình quản lý Clipboard Windows" />
+  <meta name="description" content="Xem các tính năng mới, cải tiến và bản sửa lỗi mới nhất của T-Drop - Trình quản lý bảng tạm Windows mã nguồn mở." />
+  <meta name="theme-color" content="#09090b" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #09090b;
+      --card-bg: rgba(24, 24, 27, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(0, 210, 255, 0.35);
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent-cyan: #00d2ff;
+      --accent-purple: #9d4edd;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(0, 210, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(157, 78, 221, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(9, 9, 11, 0.75);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.45));
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .github-btn {
+      background: #ffffff;
+      color: #000000;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .github-btn:hover {
+      background: #e4e4e7;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Container */
+    .main-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 3.5rem;
+      text-align: left;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.85rem;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+    }
+
+    /* Timeline Releases */
+    .release-card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 2.25rem;
+      margin-bottom: 2.5rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .release-card.latest {
+      border-color: rgba(0, 210, 255, 0.3);
+      box-shadow: 0 8px 32px -8px rgba(0, 210, 255, 0.12);
+    }
+
+    .release-card:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .release-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .release-version {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tag-latest {
+      background: linear-gradient(135deg, #00d2ff, #7928ca);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-upstream {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .release-date {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .release-summary {
+      font-size: 1rem;
+      color: #e4e4e7;
+      margin-bottom: 1.75rem;
+      line-height: 1.65;
+    }
+
+    /* Change Item Groups */
+    .change-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .change-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .badge {
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .badge.new {
+      background: rgba(0, 210, 255, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+
+    .badge.improved {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .badge.fixed {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .change-content h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+
+    .change-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      background: rgba(9, 9, 11, 0.9);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      .release-card {
+        padding: 1.5rem;
+      }
+      .change-item {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="https://github.com/TXAVLOG/T-Drop" class="brand">
+        <svg class="brand-logo" viewBox="0 0 1800 1800" preserveAspectRatio="xMidYMid meet">
+          <rect width="100%" height="100%" rx="360" fill="#141416" />
+          <g transform="translate(0,1800) scale(0.1,-0.1)" fill="#00d2ff">
+            <path d="M9005 14013 c-152 -19 -325 -52 -470 -89 -110 -29 -335 -99 -390 -123 -11 -5 -45 -19 -75 -31 -50 -20 -323 -153 -377 -184 -226 -128 -511 -348 -684 -527 -132 -136 -278 -319 -345 -432 -16 -27 -37 -61 -46 -75 -127 -202 -234 -494 -282 -768 -18 -104 -21 -364 -5 -434 6 -25 14 -65 19 -90 9 -50 36 -125 70 -193 45 -89 133 -164 229 -193 84 -25 233 -13 326 26 53 23 169 80 197 98 23 14 166 103 233 145 11 6 38 23 60 37 22 14 47 29 55 33 8 4 38 21 65 38 28 16 64 37 80 45 17 8 59 31 95 50 143 79 335 170 410 194 14 5 50 18 80 30 65 24 153 54 230 76 30 9 75 22 100 30 25 8 55 14 68 14 12 0 48 6 80 14 159 40 448 57 617 36 308 -38 435 -74 650 -181 193 -96 350 -224 464 -378 62 -84 151 -254 151 -289 0 -11 8 -37 17 -58 13 -31 17 -73 17 -204 1 -168 -6 -216 -51 -335 -150 -398 -550 -689 -1053 -765 -36 -5 -94 -14 -130 -20 -231 -35 -748 10 -1092 96 -153 38 -186 46 -228 60 -25 8 -53 14 -62 14 -10 0 -32 6 -50 14 -18 8 -80 29 -138 47 -143 44 -205 64 -270 89 -30 12 -68 26 -85 31 -16 5 -39 13 -50 18 -11 5 -42 16 -70 26 -27 9 -84 30 -125 47 -41 16 -92 36 -112 44 -21 8 -57 21 -80 30 -24 9 -59 22 -78 29 -19 7 -69 26 -110 43 -153 61 -356 135 -415 152 -28 8 -53 16 -135 45 -32 12 -83 27 -200 61 -66 19 -155 41 -235 58 -38 8 -102 22 -141 31 -40 8 -86 15 -103 15 -16 0 -76 7 -133 16 -80 13 -145 15 -307 11 -113 -3 -228 -10 -256 -16 -27 -6 -84 -18 -125 -27 -41 -9 -86 -21 -100 -26 -14 -6 -38 -14 -55 -19 -83 -22 -220 -88 -321 -155 -174 -115 -342 -310 -423 -489 -12 -27 -26 -58 -31 -67 -31 -57 -76 -233 -89 -344 -18 -154 -9 -299 30 -454 84 -341 313 -611 614 -723 120 -45 168 -52 335 -52 169 0 176 1 350 53 30 9 64 22 75 29 11 7 25 13 33 13 7 0 91 38 185 84 299 145 399 189 537 231 30 10 73 24 95 31 23 8 49 14 59 14 11 0 42 6 70 14 107 31 343 69 536 87 213 21 685 23 965 5 138 -9 338 -22 445 -28 449 -29 930 -7 1163 53 22 6 62 15 90 20 29 5 75 15 102 23 28 8 75 21 105 30 45 12 171 56 265 91 66 25 333 155 380 185 17 11 39 24 50 30 62 31 258 165 330 225 159 132 221 188 313 283 161 166 316 361 417 523 149 241 264 468 340 669 9 25 23 60 31 78 8 18 14 39 14 47 0 8 6 29 14 47 20 50 64 208 89 328 46 214 51 270 51 525 0 213 -4 268 -22 370 -32 172 -70 323 -91 364 -6 11 -11 27 -11 36 0 13 -45 118 -70 165 -5 8 -27 51 -50 95 -140 274 -377 541 -648 730 -136 95 -361 216 -502 270 -25 9 -60 23 -78 31 -18 8 -39 14 -47 14 -8 0 -29 6 -47 14 -90 38 -340 93 -548 121 -149 19 -596 19 -755 -2z"/>
+          </g>
+        </svg>
+        <span>T-Drop</span>
+      </a>
+      <div class="nav-actions">
+        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">
+          <span id="langFlag">🇬🇧</span>
+          <span id="langLabel">English</span>
+        </button>
+        <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          <span data-i18n="nav.download">Tải về v0.1.0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrap">
+    <div class="hero">
+      <div class="hero-badge" data-i18n="hero.badge">CẬP NHẬT &amp; NHẬT KÝ PHÁT HÀNH</div>
+      <h1 class="hero-title" data-i18n="hero.title">Có gì mới trong T-Drop</h1>
+      <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.</p>
+    </div>
+
+    <!-- ── VERSION 0.1.0 ────────────────────────────────────────── -->
+    <article class="release-card latest">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.0</span>
+          <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">11/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v010.summary">
+        Bản phát hành độc lập đầu tiên của T-Drop (fork từ Edge Drop v0.3.x). Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item1.title">Sao lưu &amp; Khôi phục dữ liệu mã hóa (.txa)</h3>
+            <p data-i18n="v010.item1.desc">
+              Hỗ trợ đóng gói toàn bộ lịch sử bảng tạm, mục ghim và cài đặt thành tệp nhị phân nén Gzip được mã hóa an toàn AES-256-GCM. Tiêu đề tệp bắt đầu bằng chuẩn UTF-8 BOM giúp mở bằng Windows Notepad luôn hiển thị tiếng Việt rõ ràng, kèm 2 chế độ khôi phục: Gộp dữ liệu thông minh hoặc Ghi đè sạch sẽ.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item2.title">Tích hợp Font chữ UI Inter chuẩn quốc tế</h3>
+            <p data-i18n="v010.item2.desc">
+              Tích hợp bộ font Inter trọn gói (400, 500, 600, 700) tối ưu hóa tiếng Việt 100%, nét chữ rõ ràng với công nghệ ClearType trên Windows, loại bỏ hoàn toàn hiện tượng dính dấu hay vỡ nét glyph.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item3.title">Tối ưu hóa kích thước hiển thị chữ linh hoạt</h3>
+            <p data-i18n="v010.item3.desc">
+              Cỡ chữ mặc định toàn bộ ứng dụng được tăng nhẹ 4% (1.04) giúp giao diện thoáng mắt và dễ đọc hơn. Nấc Cỡ bé (Small) được nâng từ 0.85 lên 0.94 để không bị bé lí nhí. Hỗ trợ điều chỉnh cỡ chữ trên cả giao diện dock ngang (Shelf).
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item4.title">Sửa lỗi cắt chữ các nút thao tác sao lưu</h3>
+            <p data-i18n="v010.item4.desc">
+              Thiết kế lại các nút "Sao lưu (.txa)" và "Khôi phục (.txa)" vừa vặn hoàn hảo trong thẻ cấu hình, không còn bị dấu ba chấm (...) và bổ sung tooltip giải thích chi tiết.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item5.title">Tích hợp Mã QR Donate &amp; Nhận diện T-Drop</h3>
+            <p data-i18n="v010.item5.desc">
+              Bổ sung popup hỗ trợ nhà phát triển với mã QR quét MoMo / ngân hàng nhanh và nút sao chép số tài khoản tức thì. Cập nhật nhận diện T-Drop, khoá phím tắt Alt + C và đồng bộ từ vựng trên toàn bộ 31 ngôn ngữ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.3.2 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.2</span>
+          <span class="tag-upstream" data-i18n="tag.upstream">KẾ THỪA GỐC</span>
+        </div>
+        <div class="release-date">26/09/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v032.summary">
+        Giới thiệu thanh trượt dock ngang phía trên màn hình (Top-Edge Dock), ô tìm kiếm lịch sử bảng tạm theo thời gian thực, bảng chọn mẫu màu Swatch Color, 3 chế độ cập nhật ứng dụng và hiển thị font ClearType Windows.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.item1.title">Tìm kiếm trong khay &amp; Lọc thời gian thực</h3>
+            <p data-i18n="v032.item1.desc">
+              Ô tìm kiếm trực tiếp trên khay lịch sử, lọc ngay tức thì từ 100 đến 1.000 mục mà không làm mất tiêu điểm (focus) của ứng dụng đang thao tác.
+            </p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.item2.title">Thanh Dock ngang cạnh trên màn hình</h3>
+            <p data-i18n="v032.item2.desc">
+              Khả năng gắn khay ở cạnh trên màn hình với bố cục xem trước ngang, thanh trượt dạng sóng và tối ưu hóa chuyển động mượt mà.
+            </p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.item3.title">Bảo vệ toàn màn hình khi chơi game</h3>
+            <p data-i18n="v032.item3.desc">
+              Tự động ẩn và vô hiệu hóa vùng cảm biến khi đang chạy các ứng dụng hoặc trò chơi Direct3D toàn màn hình, chống mở nhầm trong lúc làm việc hoặc chơi game.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.3.1 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.1</span>
+          <span class="tag-upstream" data-i18n="tag.upstream">KẾ THỪA GỐC</span>
+        </div>
+        <div class="release-date">08/09/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v031.summary">
+        Bổ sung bảng chọn Emoji Picker tích hợp ngay thanh điều hướng, thẻ liên kết web hiển thị đầy đủ URL, cảm biến sao chép thông minh và sửa lỗi trùng lặp dữ liệu từ Excel / Explorer.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.item1.title">Bảng chọn biểu tượng cảm xúc Emoji Picker</h3>
+            <p data-i18n="v031.item1.desc">
+              Thư viện emoji phong phú phân loại theo danh mục, hỗ trợ tìm kiếm và dán trực tiếp mà không cần bấm thêm phím tắt hệ thống.
+            </p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.item2.title">Khởi động cùng Windows an toàn &amp; Chống nhân bản</h3>
+            <p data-i18n="v031.item2.desc">
+              Tự động bọc dấu ngoặc kép đường dẫn trong Registry để hỗ trợ tên người dùng có khoảng trắng, loại bỏ hiện tượng chụp lặp lại khi copy bảng tính Excel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/TXAVLOG/T-Drop" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/TXAVLOG/T-Drop/releases" target="_blank" rel="noopener" data-i18n="footer.releases">Bản phát hành</a>
+      <a href="https://github.com/TXAVLOG/T-Drop/issues" target="_blank" rel="noopener" data-i18n="footer.issues">Báo lỗi &amp; Góp ý</a>
+      <a href="https://github.com/TXAVLOG/T-Drop/blob/main/LICENSE" target="_blank" rel="noopener">Giấy phép Apache-2.0</a>
+    </div>
+    <p>&copy; 2026 T-Drop by TXAVLOG. Kế thừa mã nguồn mở từ Edge Drop bởi Deepender Yadav.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      vi: {
+        'nav.download': 'Tải về v0.1.0',
+        'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
+        'hero.title': 'Có gì mới trong T-Drop',
+        'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.',
+        'tag.latest': 'MỚI NHẤT',
+        'tag.upstream': 'KẾ THỪA GỐC',
+        'badge.new': 'Mới',
+        'badge.improved': 'Cải tiến',
+        'badge.fixed': 'Sửa lỗi',
+        'v010.summary': 'Bản phát hành độc lập đầu tiên của T-Drop (fork từ Edge Drop v0.3.x). Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.',
+        'v010.item1.title': 'Sao lưu & Khôi phục dữ liệu mã hóa (.txa)',
+        'v010.item1.desc': 'Hỗ trợ đóng gói toàn bộ lịch sử bảng tạm, mục ghim và cài đặt thành tệp nhị phân nén Gzip được mã hóa an toàn AES-256-GCM. Tiêu đề tệp bắt đầu bằng chuẩn UTF-8 BOM giúp mở bằng Windows Notepad luôn hiển thị tiếng Việt rõ ràng, kèm 2 chế độ khôi phục: Gộp dữ liệu thông minh hoặc Ghi đè sạch sẽ.',
+        'v010.item2.title': 'Tích hợp Font chữ UI Inter chuẩn quốc tế',
+        'v010.item2.desc': 'Tích hợp bộ font Inter trọn gói (400, 500, 600, 700) tối ưu hóa tiếng Việt 100%, nét chữ rõ ràng với công nghệ ClearType trên Windows, loại bỏ hoàn toàn hiện tượng dính dấu hay vỡ nét glyph.',
+        'v010.item3.title': 'Tối ưu hóa kích thước hiển thị chữ linh hoạt',
+        'v010.item3.desc': 'Cỡ chữ mặc định toàn bộ ứng dụng được tăng nhẹ 4% (1.04) giúp giao diện thoáng mắt và dễ đọc hơn. Nấc Cỡ bé (Small) được nâng từ 0.85 lên 0.94 để không bị bé lí nhí. Hỗ trợ điều chỉnh cỡ chữ trên cả giao diện dock ngang (Shelf).',
+        'v010.item4.title': 'Sửa lỗi cắt chữ các nút thao tác sao lưu',
+        'v010.item4.desc': 'Thiết kế lại các nút "Sao lưu (.txa)" và "Khôi phục (.txa)" vừa vặn hoàn hảo trong thẻ cấu hình, không còn bị dấu ba chấm (...) và bổ sung tooltip giải thích chi tiết.',
+        'v010.item5.title': 'Tích hợp Mã QR Donate & Nhận diện T-Drop',
+        'v010.item5.desc': 'Bổ sung popup hỗ trợ nhà phát triển với mã QR quét MoMo / ngân hàng nhanh và nút sao chép số tài khoản tức thì. Cập nhật nhận diện T-Drop, khoá phím tắt Alt + C và đồng bộ từ vựng trên toàn bộ 31 ngôn ngữ.',
+        'v032.summary': 'Giới thiệu thanh trượt dock ngang phía trên màn hình (Top-Edge Dock), ô tìm kiếm lịch sử bảng tạm theo thời gian thực, bảng chọn mẫu màu Swatch Color, 3 chế độ cập nhật ứng dụng và hiển thị font ClearType Windows.',
+        'v032.item1.title': 'Tìm kiếm trong khay & Lọc thời gian thực',
+        'v032.item1.desc': 'Ô tìm kiếm trực tiếp trên khay lịch sử, lọc ngay tức thì từ 100 đến 1.000 mục mà không làm mất tiêu điểm (focus) của ứng dụng đang thao tác.',
+        'v032.item2.title': 'Thanh Dock ngang cạnh trên màn hình',
+        'v032.item2.desc': 'Khả năng gắn khay ở cạnh trên màn hình với bố cục xem trước ngang, thanh trượt dạng sóng và tối ưu hóa chuyển động mượt mà.',
+        'v032.item3.title': 'Bảo vệ toàn màn hình khi chơi game',
+        'v032.item3.desc': 'Tự động ẩn và vô hiệu hóa vùng cảm biến khi đang chạy các ứng dụng hoặc trò chơi Direct3D toàn màn hình, chống mở nhầm trong lúc làm việc hoặc chơi game.',
+        'v031.summary': 'Bổ sung bảng chọn Emoji Picker tích hợp ngay thanh điều hướng, thẻ liên kết web hiển thị đầy đủ URL, cảm biến sao chép thông minh và sửa lỗi trùng lặp dữ liệu từ Excel / Explorer.',
+        'v031.item1.title': 'Bảng chọn biểu tượng cảm xúc Emoji Picker',
+        'v031.item1.desc': 'Thư viện emoji phong phú phân loại theo danh mục, hỗ trợ tìm kiếm và dán trực tiếp mà không cần bấm thêm phím tắt hệ thống.',
+        'v031.item2.title': 'Khởi động cùng Windows an toàn & Chống nhân bản',
+        'v031.item2.desc': 'Tự động bọc dấu ngoặc kép đường dẫn trong Registry để hỗ trợ tên người dùng có khoảng trắng, loại bỏ hiện tượng chụp lặp lại khi copy bảng tính Excel.',
+        'footer.releases': 'Bản phát hành',
+        'footer.issues': 'Báo lỗi & Góp ý'
+      },
+      en: {
+        'nav.download': 'Download v0.1.0',
+        'hero.badge': 'UPDATES & RELEASE CHANGELOG',
+        'hero.title': "What's New in T-Drop",
+        'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows.',
+        'tag.latest': 'LATEST',
+        'tag.upstream': 'INHERITED',
+        'badge.new': 'New',
+        'badge.improved': 'Improved',
+        'badge.fixed': 'Fixed',
+        'v010.summary': 'The inaugural standalone release of T-Drop (forked from Edge Drop v0.3.x). Introduces an encrypted backup and restore system (.txa), crisp Inter UI typography with full Vietnamese support, refined typography scaling, and integrated donation QR support.',
+        'v010.item1.title': 'Encrypted Backup & Restore System (.txa)',
+        'v010.item1.desc': 'Export clipboard history, pinned items, and settings into Gzip-compressed archives encrypted with AES-256-GCM. Features UTF-8 BOM headers for clean rendering in Windows Notepad, plus two restore modes: Smart Merge or Clean Overwrite.',
+        'v010.item2.title': 'Inter UI Font Integration',
+        'v010.item2.desc': 'Bundles the international Inter font family (400, 500, 600, 700) with flawless Vietnamese typography, crisp ClearType subpixel rendering on Windows, and zero glyph collision.',
+        'v010.item3.title': 'Responsive Typography Scaling',
+        'v010.item3.desc': 'Default UI font scale increased to 1.04 for improved legibility. Small size raised from 0.85 to 0.94 to avoid overly tiny text. Full text size selector now also available on horizontal shelf dock.',
+        'v010.item4.title': 'Fixed Backup Button Label Truncation',
+        'v010.item4.desc': 'Redesigned backup and restore action buttons to cleanly display full labels without ellipsis clipping, complete with informative hover tooltips.',
+        'v010.item5.title': 'Donation QR Code & T-Drop Identity',
+        'v010.item5.desc': 'Integrated developer support modal with instant MoMo / Bank transfer QR scanning and copy-to-clipboard account details. Polished brand identity and synchronized 31-language translations.',
+        'v032.summary': 'Introduced Top-Edge Dock, in-shelf search with real-time history filtering, Swatch color palette tab, 3 configurable update modes, and native ClearType text rendering.',
+        'v032.item1.title': 'In-Shelf Search & Live History Filtering',
+        'v032.item1.desc': 'Search box directly inside the shelf filtering up to 1,000 items in real time without stealing foreground application focus.',
+        'v032.item2.title': 'Top-Edge Dock & Horizontal Layout',
+        'v032.item2.desc': 'Dock along the top screen edge with horizontal previews, wave sliders, and smooth opening animations.',
+        'v032.item3.title': 'Fullscreen Game Suppression',
+        'v032.item3.desc': 'Direct3D fullscreen detection prevents edge hover activations during gaming sessions.',
+        'v031.summary': 'Built-in Emoji Picker, cleaner link cards with full URL visibility, and robust Windows startup quote-wrapping.',
+        'v031.item1.title': 'Built-in Emoji Picker',
+        'v031.item1.desc': 'Comprehensive emoji library with search, category filtering, and direct paste into active windows.',
+        'v031.item2.title': 'Secure Windows Autostart & Duplicate Guards',
+        'v031.item2.desc': 'Properly quotes registry paths with spaces and suppresses duplicated captures from Excel spreadsheets.',
+        'footer.releases': 'Releases',
+        'footer.issues': 'Issues & Feedback'
+      }
+    };
+
+    let currentLang = 'vi';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      const t = translations[lang] || translations.vi;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.textContent = t[key];
+        }
+      });
+
+      const langFlag = document.getElementById('langFlag');
+      const langLabel = document.getElementById('langLabel');
+      if (lang === 'vi') {
+        langFlag.textContent = '🇻🇳';
+        langLabel.textContent = 'Tiếng Việt';
+      } else {
+        langFlag.textContent = '🇬🇧';
+        langLabel.textContent = 'English';
+      }
+    }
+
+    function toggleLanguage() {
+      setLanguage(currentLang === 'vi' ? 'en' : 'vi');
+    }
+
+    // Auto-detect browser language if English
+    if (!navigator.language.startsWith('vi')) {
+      setLanguage('en');
+    }
+  </script>
+</body>
+</html>

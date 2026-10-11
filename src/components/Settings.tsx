@@ -575,7 +575,7 @@ export function Settings({
             )}
           </div>
           <div className="app-version-footer">
-            <span>{t('footer.version')} {currentVersion || '0.3.1'}</span>
+            <span>{t('footer.version')} {currentVersion || '0.1.0'}</span>
             <span className="version-separator">·</span>
             <button
               type="button"
@@ -585,7 +585,7 @@ export function Settings({
                 if (currentVersion) {
                   patch({ lastSeenChangelogVersion: currentVersion })
                 }
-                window.open('https://www.edgedrop.app/changelog', '_blank')
+                window.open('https://txavlog.github.io/T-Drop/changelog', '_blank')
               }}
             >
               <span>{t('header.whatsNew')}</span>
@@ -617,7 +617,7 @@ export function Settings({
     if (targetVersion) {
       patch({ lastSeenChangelogVersion: targetVersion })
     }
-    window.open('https://www.edgedrop.app/changelog', '_blank')
+    window.open('https://txavlog.github.io/T-Drop/changelog', '_blank')
   }
 
   // ── Promoted Top Update Card Renderer (Vertical Layout) ────────────────────
@@ -1104,7 +1104,7 @@ export function Settings({
               onClick={() => {
                 playButtonClickSound()
                 if (currentVersion) patch({ lastSeenChangelogVersion: currentVersion })
-                window.open('https://www.edgedrop.app/changelog', '_blank')
+                window.open('https://txavlog.github.io/T-Drop/changelog', '_blank')
               }}
             >
               {t('header.whatsNew')} ↗

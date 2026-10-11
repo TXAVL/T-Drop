@@ -9,8 +9,6 @@ FIXES_CHECKLIST.md
 .DS_Store
 .vscode/*
 !.vscode/extensions.json
-
-docs/
 dev-app-update.yml
 reddit-subreddits-for-edgedrop.md
 launch-playbook-edgedrop.md
