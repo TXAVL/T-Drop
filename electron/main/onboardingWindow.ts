@@ -15,12 +15,14 @@ export function createOnboardingWindow(): void {
   }
 
   onboardingWindow = new BrowserWindow({
-    width: 800,
-    height: 640,
+    width: 980,
+    height: 680,
+    minWidth: 880,
+    minHeight: 620,
     center: true,
     show: false,
     frame: false,
-    resizable: false,
+    resizable: true,
     backgroundColor: '#121212',
     webPreferences: {
       preload: join(__dirname, '../preload/index.cjs'),

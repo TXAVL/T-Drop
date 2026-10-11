@@ -145,34 +145,90 @@ export function Onboarding() {
       </div>
 
       {/* Main Content Area */}
-      {currentSlide.id === 'slide-6' ? (
-        <div style={{ flex: 1, display: 'flex', gap: '32px', padding: '24px 32px', boxSizing: 'border-box', overflow: 'hidden' }}>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <h1 style={{ fontSize: '28px', margin: '0 0 12px 0', fontWeight: 700, letterSpacing: '-0.02em' }}>
-              {currentSlide.title}
-            </h1>
-            <p style={{ fontSize: '15px', lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', margin: '0 0 24px 0' }}>
-              {currentSlide.description}
-            </p>
-            <div style={{ background: '#1a1a1c', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                {t('onboarding.proTips')}
+      {currentSlide.id === 'slide-6' ? (() => {
+        const isTopEdge = useStore.getState().settings.stickPosition === 'top'
+        return (
+          <div style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: isTopEdge ? 'column' : 'row',
+            gap: isTopEdge ? '14px' : '32px',
+            padding: isTopEdge ? '16px 28px' : '24px 32px',
+            boxSizing: 'border-box',
+            overflow: 'hidden'
+          }}>
+            {isTopEdge ? (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexShrink: 0 }}>
+                <div style={{ flex: 1 }}>
+                  <h1 style={{ fontSize: '22px', margin: '0 0 6px 0', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                    {currentSlide.title}
+                  </h1>
+                  <p style={{ fontSize: '13.5px', lineHeight: 1.5, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+                    {currentSlide.description}
+                  </p>
+                </div>
+                <div style={{
+                  background: '#1a1a1c',
+                  padding: '10px 16px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  flex: '0 0 auto',
+                  maxWidth: '440px'
+                }}>
+                  <div style={{ fontSize: '11.5px', fontWeight: 600, color: '#fff', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    {t('onboarding.proTips')}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>
+                    {t('onboarding.proTip1')} · {t('onboarding.proTip2')}
+                  </div>
+                </div>
               </div>
-              <ul style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', margin: 0, paddingLeft: '20px', lineHeight: 1.6 }}>
-                <li>{t('onboarding.proTip1')}</li>
-                <li>{t('onboarding.proTip2')}</li>
-                <li>{t('onboarding.proTip3')}</li>
-                <li>{t('onboarding.proTip4')}</li>
-              </ul>
+            ) : (
+              <div style={{ flex: '1 1 340px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h1 style={{ fontSize: '28px', margin: '0 0 12px 0', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                  {currentSlide.title}
+                </h1>
+                <p style={{ fontSize: '15px', lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', margin: '0 0 24px 0' }}>
+                  {currentSlide.description}
+                </p>
+                <div style={{ background: '#1a1a1c', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    {t('onboarding.proTips')}
+                  </div>
+                  <ul style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', margin: 0, paddingLeft: '20px', lineHeight: 1.6 }}>
+                    <li>{t('onboarding.proTip1')}</li>
+                    <li>{t('onboarding.proTip2')}</li>
+                    <li>{t('onboarding.proTip3')}</li>
+                    <li>{t('onboarding.proTip4')}</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            <div style={{
+              flex: 1,
+              width: '100%',
+              background: '#1a1a1c',
+              borderRadius: '16px',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+              overflow: 'hidden',
+              display: 'flex',
+              minHeight: 0
+            }}>
+              <div style={{
+                flex: 1,
+                width: '100%',
+                overflowY: isTopEdge ? 'hidden' : 'auto',
+                overflowX: isTopEdge ? 'auto' : 'hidden',
+                padding: isTopEdge ? '10px 14px' : '16px'
+              }}>
+                <Settings inlineIndicatorStyle={true} />
+              </div>
             </div>
           </div>
-          <div style={{ flex: 1, background: '#1a1a1c', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.05)', overflow: 'hidden', display: 'flex', minHeight: 0 }}>
-            <div style={{ flex: 1, overflowY: 'auto', padding: '16px' }}>
-              <Settings inlineIndicatorStyle={true} />
-            </div>
-          </div>
-        </div>
-      ) : (
+        )
+      })() : (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px 48px' }}>
           <div style={{
             width: '100%',

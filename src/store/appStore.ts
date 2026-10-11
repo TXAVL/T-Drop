@@ -326,6 +326,11 @@ export const useStore = create<AppState>((set, get) => ({
           manualCheckState: { status: 'up-to-date', version: res.version },
           manualUpdateActive: false
         })
+        get().pushToast({
+          id: `update-check-${Date.now()}`,
+          message: t('behaviour.isUpToDate'),
+          tone: 'info'
+        })
       } else {
         set({
           manualCheckState: { status: 'error', error: res.error || 'Check failed' },

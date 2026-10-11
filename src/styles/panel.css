@@ -293,7 +293,8 @@
   flex-direction: row;
   overflow-y: hidden;
   overflow-x: auto;
-  padding: 6px 14px 8px;
+  padding: 4px 14px 10px;
+  scrollbar-width: thin;
 }
 .list.horizontal .list-stack {
   flex-direction: row;
@@ -568,6 +569,14 @@
   font-size: calc(13px * var(--font-scale, 1));
   line-height: 1.45;
   color: #a1a1aa;
+}
+.list.horizontal .empty {
+  min-width: 320px;
+  margin: auto;
+  padding: 16px 24px;
+}
+.list.horizontal .empty .empty-text {
+  max-width: 320px;
 }
 
 /* Footer */

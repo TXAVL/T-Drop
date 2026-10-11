@@ -161,7 +161,7 @@ export function createTxaBackup(targetPath: string): BackupCreateResult {
 
     const manifest: TxaManifest = {
       app: 'T-Drop',
-      version: '0.1.0',
+      version: '0.1.1',
       createdAt: new Date().toISOString(),
       itemsCount: items.length,
       imagesCount: Object.keys(images).length,

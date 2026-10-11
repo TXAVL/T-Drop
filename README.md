@@ -4,12 +4,12 @@
 
 <h1 align="center">T-Drop</h1>
 
-<p align="center"><em>(Forked from <a href="https://github.com/TXAVLOG/T-Drop">T-Drop</a>)</em></p>
+<p align="center"><em>Giá đồ clipboard đa năng trên mép màn hình Windows</em></p>
 
 <p align="center">
   <strong>Zero-click, hover-activated clipboard shelf and desktop file-transfer hub with native OS integration.</strong><br/>
   <em>Lives invisibly on the screen edge. Approach it, and it springs open. Drag anything out — anywhere.</em><br/>
-  <a href="https://www.edgedrop.app"><strong>Live site: edgedrop.app</strong></a>
+  <a href="https://txavlog.github.io/T-Drop/"><strong>Trang giới thiệu: txavlog.github.io/T-Drop</strong></a>
 </p>
 
 <p align="center">
@@ -24,10 +24,6 @@
 </p>
 
 <p align="center">
-  <a href="https://apps.microsoft.com/detail/9P3JMHN9M4NR" target="_blank">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="160" alt="Get it from Microsoft Store" />
-  </a>
-  &nbsp;&nbsp;
   <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
     <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="48" alt="Download .exe Installer" />
   </a>
@@ -66,7 +62,7 @@ It is built for the developer and creative workflow where you constantly juggle 
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/open.gif" alt="Full Overview: Welcome to T-Drop" width="85%" />
+  <img src=".github/readme/open.gif" alt="Full Overview: Welcome to T-Drop" width="85%" />
 </p>
 
 <br/>
@@ -76,36 +72,36 @@ It is built for the developer and creative workflow where you constantly juggle 
     <td width="50%" align="center">
       <b>1. Collect Anything</b><br/>
       <sub>Captures text, high-res images, files, and links in real time.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/browser-demo.gif" width="100%" alt="Collect Anything" />
+      <img src=".github/readme/browser-demo.gif" width="100%" alt="Collect Anything" />
     </td>
     <td width="50%" align="center">
       <b>2. Drag & Drop Anywhere</b><br/>
       <sub>Drag items directly into any app or workspace.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/paste.gif" width="100%" alt="Drag & Drop Anywhere" />
+      <img src=".github/readme/paste.gif" width="100%" alt="Drag & Drop Anywhere" />
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
       <b>3. Copy Multiple Files</b><br/>
       <sub>Select several files at once and drop them wherever you need.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/file-stacks-demo.gif" width="100%" alt="Copy Multiple Files" />
+      <img src=".github/readme/file-stacks-demo.gif" width="100%" alt="Copy Multiple Files" />
     </td>
     <td width="50%" align="center">
       <b>4. Ungroup & Split Stacks</b><br/>
       <sub>Break file packages into individual standalone clipboard cards.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/ungroup.gif" width="100%" alt="Ungroup & Split Stacks" />
+      <img src=".github/readme/ungroup.gif" width="100%" alt="Ungroup & Split Stacks" />
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
       <b>5. Combine & Merge Items</b><br/>
       <sub>Select and merge multiple clipboard items into a single stack.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/stack.gif" width="100%" alt="Combine & Merge Items" />
+      <img src=".github/readme/stack.gif" width="100%" alt="Combine & Merge Items" />
     </td>
     <td width="50%" align="center">
       <b>6. Quick Preview Flyout</b><br/>
       <sub>Inspect high-res images, formatted text, and code with zoom.</sub><br/><br/>
-      <img src="https://raw.githubusercontent.com/Deepender25/T-Drop/main/.github/readme/preview.gif" width="100%" alt="Quick Preview Flyout" />
+      <img src=".github/readme/preview.gif" width="100%" alt="Quick Preview Flyout" />
     </td>
   </tr>
 </table>
@@ -164,39 +160,17 @@ A huge thank you to the incredible sponsors and products actively sponsoring T-D
 ## Download
 
 <p align="center">
-  <strong>Choose your preferred installation method for Windows 10 & 11:</strong>
+  <strong>Tải bản cài đặt cho Windows 10 & 11:</strong>
 </p>
 
-<table align="center" border="0" style="border-collapse: collapse; border: none;">
-  <tr>
-    <th align="center" width="50%" style="border: none; padding: 10px 25px 5px;">
-      <h3>Microsoft Store</h3>
-    </th>
-    <th align="center" width="50%" style="border: none; padding: 10px 25px 5px;">
-      <h3>Windows Installer</h3>
-    </th>
-  </tr>
-  <tr>
-    <td align="center" style="border: none; padding: 10px 25px 12px; vertical-align: middle;">
-      <a href="https://apps.microsoft.com/detail/9P3JMHN9M4NR" target="_blank">
-        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="175" alt="Download from Microsoft Store" style="border-radius: 8px;" />
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px 25px 12px; vertical-align: middle;">
-      <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
-        <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="52" alt="Download .exe Installer" style="border-radius: 8px;" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" style="border: none; padding: 0 25px 15px; vertical-align: top;">
-      <sub>Updates delivered via the Microsoft Store · native sandbox</sub>
-    </td>
-    <td align="center" style="border: none; padding: 0 25px 15px; vertical-align: top;">
-      <sub>Standalone setup with built-in auto-updater</sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
+    <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="52" alt="Download .exe Installer" style="border-radius: 8px;" />
+  </a>
+  <br/><br/>
+  <sub>Cài đặt độc lập với tính năng tự động cập nhật nền · Hỗ trợ Windows 10 & 11</sub><br/>
+  <sub>Tải file cài đặt <code>T-Drop-Setup-x.x.x.exe</code> từ <a href="https://github.com/TXAVLOG/T-Drop/releases/latest">GitHub Releases</a>.</sub>
+</p>
 
 ---
 

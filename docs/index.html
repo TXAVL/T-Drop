@@ -377,7 +377,7 @@
         </button>
         <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.0</span>
+          <span data-i18n="nav.download">Tải về v0.1.1</span>
         </a>
       </div>
     </div>
@@ -391,17 +391,72 @@
       <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.</p>
     </div>
 
-    <!-- ── VERSION 0.1.0 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.1 ────────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.0</span>
+          <span>Version v0.1.1</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
         </div>
         <div class="release-date">11/10/2026</div>
       </div>
+      <p class="release-summary" data-i18n="v011.summary">
+        Nâng cấp giao diện UI/UX toàn diện cho giá đồ (Top-Edge Dock &amp; Shelf), mở rộng không gian hiển thị thẻ và cửa sổ hướng dẫn Onboarding, sửa lỗi bố cục bị bó hẹp khi đặt giá ở cạnh trên, khắc phục liên kết phản hồi GitHub Issues bị 404 và cải tiến thông báo kiểm tra cập nhật rõ ràng.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item1.title">Nâng cấp UI/UX Giá đồ &amp; Dock ngang cạnh trên</h3>
+            <p data-i18n="v011.item1.desc">
+              Tối ưu tỷ lệ chiều cao và lề đệm bên trong khay giá đồ, thiết kế thẻ nội dung rộng rãi và thông thoáng, loại bỏ hiện tượng bị che khuất dòng thời gian chân trang; bổ sung hiệu ứng viền sáng acrylic và đổ bóng chiều sâu mượt mà khi rê chuột.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item2.title">Bố cục thích ứng linh hoạt cho Bảng hướng dẫn lần đầu (Onboarding)</h3>
+            <p data-i18n="v011.item2.desc">
+              Mở rộng kích thước cửa sổ hướng dẫn ban đầu lên 980x680px. Tự động thích ứng bố cục khi người dùng chọn vị trí giá ở cạnh trên màn hình, giải phóng toàn bộ chiều ngang cho khay cài đặt mà không còn bị gò bó trong cột dọc hẹp.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item3.title">Khắc phục đường dẫn gửi phản hồi (Feedback) bị lỗi 404</h3>
+            <p data-i18n="v011.item3.desc">
+              Cập nhật đường dẫn nút "Gửi Phản hồi" trỏ thẳng đến trang GitHub Issues chính thức của kho mã nguồn T-Drop, sẵn sàng tiếp nhận đóng góp ý kiến và báo lỗi từ người dùng.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item4.title">Thông báo trạng thái cập nhật rõ ràng &amp; chính xác</h3>
+            <p data-i18n="v011.item4.desc">
+              Chuyển đổi thông báo khi kiểm tra phiên bản từ "T-Drop đã cập nhật" gây hiểu nhầm thành "✓ Đã là phiên bản mới nhất", hiển thị thông tin phiên bản chi tiết và gửi thông báo Toast xác nhận khi kiểm tra thủ công.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.0 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.0</span>
+        </div>
+        <div class="release-date">10/10/2026</div>
+      </div>
       <p class="release-summary" data-i18n="v010.summary">
-        Bản phát hành độc lập đầu tiên của T-Drop (fork từ Edge Drop v0.3.x). Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.
+        Bản phát hành độc lập đầu tiên của T-Drop. Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.
       </p>
 
       <div class="change-group">
@@ -456,85 +511,6 @@
         </div>
       </div>
     </article>
-
-    <!-- ── VERSION 0.3.2 ────────────────────────────────────────── -->
-    <article class="release-card">
-      <div class="release-header">
-        <div class="release-version">
-          <span>Version v0.3.2</span>
-          <span class="tag-upstream" data-i18n="tag.upstream">KẾ THỪA GỐC</span>
-        </div>
-        <div class="release-date">26/09/2026</div>
-      </div>
-      <p class="release-summary" data-i18n="v032.summary">
-        Giới thiệu thanh trượt dock ngang phía trên màn hình (Top-Edge Dock), ô tìm kiếm lịch sử bảng tạm theo thời gian thực, bảng chọn mẫu màu Swatch Color, 3 chế độ cập nhật ứng dụng và hiển thị font ClearType Windows.
-      </p>
-
-      <div class="change-group">
-        <div class="change-item">
-          <span class="badge new" data-i18n="badge.new">Mới</span>
-          <div class="change-content">
-            <h3 data-i18n="v032.item1.title">Tìm kiếm trong khay &amp; Lọc thời gian thực</h3>
-            <p data-i18n="v032.item1.desc">
-              Ô tìm kiếm trực tiếp trên khay lịch sử, lọc ngay tức thì từ 100 đến 1.000 mục mà không làm mất tiêu điểm (focus) của ứng dụng đang thao tác.
-            </p>
-          </div>
-        </div>
-        <div class="change-item">
-          <span class="badge new" data-i18n="badge.new">Mới</span>
-          <div class="change-content">
-            <h3 data-i18n="v032.item2.title">Thanh Dock ngang cạnh trên màn hình</h3>
-            <p data-i18n="v032.item2.desc">
-              Khả năng gắn khay ở cạnh trên màn hình với bố cục xem trước ngang, thanh trượt dạng sóng và tối ưu hóa chuyển động mượt mà.
-            </p>
-          </div>
-        </div>
-        <div class="change-item">
-          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
-          <div class="change-content">
-            <h3 data-i18n="v032.item3.title">Bảo vệ toàn màn hình khi chơi game</h3>
-            <p data-i18n="v032.item3.desc">
-              Tự động ẩn và vô hiệu hóa vùng cảm biến khi đang chạy các ứng dụng hoặc trò chơi Direct3D toàn màn hình, chống mở nhầm trong lúc làm việc hoặc chơi game.
-            </p>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- ── VERSION 0.3.1 ────────────────────────────────────────── -->
-    <article class="release-card">
-      <div class="release-header">
-        <div class="release-version">
-          <span>Version v0.3.1</span>
-          <span class="tag-upstream" data-i18n="tag.upstream">KẾ THỪA GỐC</span>
-        </div>
-        <div class="release-date">08/09/2026</div>
-      </div>
-      <p class="release-summary" data-i18n="v031.summary">
-        Bổ sung bảng chọn Emoji Picker tích hợp ngay thanh điều hướng, thẻ liên kết web hiển thị đầy đủ URL, cảm biến sao chép thông minh và sửa lỗi trùng lặp dữ liệu từ Excel / Explorer.
-      </p>
-
-      <div class="change-group">
-        <div class="change-item">
-          <span class="badge new" data-i18n="badge.new">Mới</span>
-          <div class="change-content">
-            <h3 data-i18n="v031.item1.title">Bảng chọn biểu tượng cảm xúc Emoji Picker</h3>
-            <p data-i18n="v031.item1.desc">
-              Thư viện emoji phong phú phân loại theo danh mục, hỗ trợ tìm kiếm và dán trực tiếp mà không cần bấm thêm phím tắt hệ thống.
-            </p>
-          </div>
-        </div>
-        <div class="change-item">
-          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
-          <div class="change-content">
-            <h3 data-i18n="v031.item2.title">Khởi động cùng Windows an toàn &amp; Chống nhân bản</h3>
-            <p data-i18n="v031.item2.desc">
-              Tự động bọc dấu ngoặc kép đường dẫn trong Registry để hỗ trợ tên người dùng có khoảng trắng, loại bỏ hiện tượng chụp lặp lại khi copy bảng tính Excel.
-            </p>
-          </div>
-        </div>
-      </div>
-    </article>
   </main>
 
   <!-- Footer -->
@@ -551,16 +527,24 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.0',
+        'nav.download': 'Tải về v0.1.1',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.',
         'tag.latest': 'MỚI NHẤT',
-        'tag.upstream': 'KẾ THỪA GỐC',
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
-        'v010.summary': 'Bản phát hành độc lập đầu tiên của T-Drop (fork từ Edge Drop v0.3.x). Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.',
+        'v011.summary': 'Nâng cấp giao diện UI/UX toàn diện cho giá đồ (Top-Edge Dock & Shelf), mở rộng không gian hiển thị thẻ và cửa sổ hướng dẫn Onboarding, sửa lỗi bố cục bị bó hẹp khi đặt giá ở cạnh trên, khắc phục liên kết phản hồi GitHub Issues bị 404 và cải tiến thông báo kiểm tra cập nhật rõ ràng.',
+        'v011.item1.title': 'Nâng cấp UI/UX Giá đồ & Dock ngang cạnh trên',
+        'v011.item1.desc': 'Tối ưu tỷ lệ chiều cao và lề đệm bên trong khay giá đồ, thiết kế thẻ nội dung rộng rãi và thông thoáng, loại bỏ hiện tượng bị che khuất dòng thời gian chân trang; bổ sung hiệu ứng viền sáng acrylic và đổ bóng chiều sâu mượt mà khi rê chuột.',
+        'v011.item2.title': 'Bố cục thích ứng linh hoạt cho Bảng hướng dẫn lần đầu (Onboarding)',
+        'v011.item2.desc': 'Mở rộng kích thước cửa sổ hướng dẫn ban đầu lên 980x680px. Tự động thích ứng bố cục khi người dùng chọn vị trí giá ở cạnh trên màn hình, giải phóng toàn bộ chiều ngang cho khay cài đặt mà không còn bị gò bó trong cột dọc hẹp.',
+        'v011.item3.title': 'Khắc phục đường dẫn gửi phản hồi (Feedback) bị lỗi 404',
+        'v011.item3.desc': 'Cập nhật đường dẫn nút "Gửi Phản hồi" trỏ thẳng đến trang GitHub Issues chính thức của kho mã nguồn T-Drop, sẵn sàng tiếp nhận đóng góp ý kiến và báo lỗi từ người dùng.',
+        'v011.item4.title': 'Thông báo trạng thái cập nhật rõ ràng & chính xác',
+        'v011.item4.desc': 'Chuyển đổi thông báo khi kiểm tra phiên bản từ "T-Drop đã cập nhật" gây hiểu nhầm thành "✓ Đã là phiên bản mới nhất", hiển thị thông tin phiên bản chi tiết và gửi thông báo Toast xác nhận khi kiểm tra thủ công.',
+        'v010.summary': 'Bản phát hành độc lập đầu tiên của T-Drop. Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.',
         'v010.item1.title': 'Sao lưu & Khôi phục dữ liệu mã hóa (.txa)',
         'v010.item1.desc': 'Hỗ trợ đóng gói toàn bộ lịch sử bảng tạm, mục ghim và cài đặt thành tệp nhị phân nén Gzip được mã hóa an toàn AES-256-GCM. Tiêu đề tệp bắt đầu bằng chuẩn UTF-8 BOM giúp mở bằng Windows Notepad luôn hiển thị tiếng Việt rõ ràng, kèm 2 chế độ khôi phục: Gộp dữ liệu thông minh hoặc Ghi đè sạch sẽ.',
         'v010.item2.title': 'Tích hợp Font chữ UI Inter chuẩn quốc tế',
@@ -571,32 +555,28 @@
         'v010.item4.desc': 'Thiết kế lại các nút "Sao lưu (.txa)" và "Khôi phục (.txa)" vừa vặn hoàn hảo trong thẻ cấu hình, không còn bị dấu ba chấm (...) và bổ sung tooltip giải thích chi tiết.',
         'v010.item5.title': 'Tích hợp Mã QR Donate & Nhận diện T-Drop',
         'v010.item5.desc': 'Bổ sung popup hỗ trợ nhà phát triển với mã QR quét MoMo / ngân hàng nhanh và nút sao chép số tài khoản tức thì. Cập nhật nhận diện T-Drop, khoá phím tắt Alt + C và đồng bộ từ vựng trên toàn bộ 31 ngôn ngữ.',
-        'v032.summary': 'Giới thiệu thanh trượt dock ngang phía trên màn hình (Top-Edge Dock), ô tìm kiếm lịch sử bảng tạm theo thời gian thực, bảng chọn mẫu màu Swatch Color, 3 chế độ cập nhật ứng dụng và hiển thị font ClearType Windows.',
-        'v032.item1.title': 'Tìm kiếm trong khay & Lọc thời gian thực',
-        'v032.item1.desc': 'Ô tìm kiếm trực tiếp trên khay lịch sử, lọc ngay tức thì từ 100 đến 1.000 mục mà không làm mất tiêu điểm (focus) của ứng dụng đang thao tác.',
-        'v032.item2.title': 'Thanh Dock ngang cạnh trên màn hình',
-        'v032.item2.desc': 'Khả năng gắn khay ở cạnh trên màn hình với bố cục xem trước ngang, thanh trượt dạng sóng và tối ưu hóa chuyển động mượt mà.',
-        'v032.item3.title': 'Bảo vệ toàn màn hình khi chơi game',
-        'v032.item3.desc': 'Tự động ẩn và vô hiệu hóa vùng cảm biến khi đang chạy các ứng dụng hoặc trò chơi Direct3D toàn màn hình, chống mở nhầm trong lúc làm việc hoặc chơi game.',
-        'v031.summary': 'Bổ sung bảng chọn Emoji Picker tích hợp ngay thanh điều hướng, thẻ liên kết web hiển thị đầy đủ URL, cảm biến sao chép thông minh và sửa lỗi trùng lặp dữ liệu từ Excel / Explorer.',
-        'v031.item1.title': 'Bảng chọn biểu tượng cảm xúc Emoji Picker',
-        'v031.item1.desc': 'Thư viện emoji phong phú phân loại theo danh mục, hỗ trợ tìm kiếm và dán trực tiếp mà không cần bấm thêm phím tắt hệ thống.',
-        'v031.item2.title': 'Khởi động cùng Windows an toàn & Chống nhân bản',
-        'v031.item2.desc': 'Tự động bọc dấu ngoặc kép đường dẫn trong Registry để hỗ trợ tên người dùng có khoảng trắng, loại bỏ hiện tượng chụp lặp lại khi copy bảng tính Excel.',
         'footer.releases': 'Bản phát hành',
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.0',
+        'nav.download': 'Download v0.1.1',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows.',
         'tag.latest': 'LATEST',
-        'tag.upstream': 'INHERITED',
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
-        'v010.summary': 'The inaugural standalone release of T-Drop (forked from Edge Drop v0.3.x). Introduces an encrypted backup and restore system (.txa), crisp Inter UI typography with full Vietnamese support, refined typography scaling, and integrated donation QR support.',
+        'v011.summary': 'Comprehensive UI/UX overhaul for the Shelf and Top-Edge Dock, adaptive layout for first-run Onboarding, fixed 404 feedback link, and clarified up-to-date notifications.',
+        'v011.item1.title': 'Top-Edge Dock & Shelf UI/UX Redesign',
+        'v011.item1.desc': 'Refined vertical budget and card layout in horizontal mode. Enlarged item card breathing space to prevent timestamp footer cut-off, with acrylic elevation and glowing borders on hover.',
+        'v011.item2.title': 'Adaptive Onboarding Window Layout',
+        'v011.item2.desc': 'Expanded onboarding window to 980x680px. Slide 6 now dynamically adapts to a wide horizontal presentation when top-edge dock is chosen, removing the cramped vertical container restriction.',
+        'v011.item3.title': 'Fixed 404 Feedback Link',
+        'v011.item3.desc': 'Directs the Submit Feedback action to the official GitHub Issues page for seamless bug reporting and feature requests.',
+        'v011.item4.title': 'Accurate Up-to-Date Status',
+        'v011.item4.desc': 'Replaced ambiguous "T-Drop updated" wording with clear "✓ Already on the latest version" and instant confirmation toasts upon manual check.',
+        'v010.summary': 'The inaugural standalone release of T-Drop. Introduces an encrypted backup and restore system (.txa), crisp Inter UI typography with full Vietnamese support, refined typography scaling, and integrated donation QR support.',
         'v010.item1.title': 'Encrypted Backup & Restore System (.txa)',
         'v010.item1.desc': 'Export clipboard history, pinned items, and settings into Gzip-compressed archives encrypted with AES-256-GCM. Features UTF-8 BOM headers for clean rendering in Windows Notepad, plus two restore modes: Smart Merge or Clean Overwrite.',
         'v010.item2.title': 'Inter UI Font Integration',
@@ -607,18 +587,6 @@
         'v010.item4.desc': 'Redesigned backup and restore action buttons to cleanly display full labels without ellipsis clipping, complete with informative hover tooltips.',
         'v010.item5.title': 'Donation QR Code & T-Drop Identity',
         'v010.item5.desc': 'Integrated developer support modal with instant MoMo / Bank transfer QR scanning and copy-to-clipboard account details. Polished brand identity and synchronized 31-language translations.',
-        'v032.summary': 'Introduced Top-Edge Dock, in-shelf search with real-time history filtering, Swatch color palette tab, 3 configurable update modes, and native ClearType text rendering.',
-        'v032.item1.title': 'In-Shelf Search & Live History Filtering',
-        'v032.item1.desc': 'Search box directly inside the shelf filtering up to 1,000 items in real time without stealing foreground application focus.',
-        'v032.item2.title': 'Top-Edge Dock & Horizontal Layout',
-        'v032.item2.desc': 'Dock along the top screen edge with horizontal previews, wave sliders, and smooth opening animations.',
-        'v032.item3.title': 'Fullscreen Game Suppression',
-        'v032.item3.desc': 'Direct3D fullscreen detection prevents edge hover activations during gaming sessions.',
-        'v031.summary': 'Built-in Emoji Picker, cleaner link cards with full URL visibility, and robust Windows startup quote-wrapping.',
-        'v031.item1.title': 'Built-in Emoji Picker',
-        'v031.item1.desc': 'Comprehensive emoji library with search, category filtering, and direct paste into active windows.',
-        'v031.item2.title': 'Secure Windows Autostart & Duplicate Guards',
-        'v031.item2.desc': 'Properly quotes registry paths with spaces and suppresses duplicated captures from Excel spreadsheets.',
         'footer.releases': 'Releases',
         'footer.issues': 'Issues & Feedback'
       }

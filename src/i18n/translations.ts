@@ -4815,7 +4815,7 @@ export const vi: TranslationKeys = {
     "autoUpdatesDescOff": "Kiểm tra cập nhật nền đã tạm dừng. Kiểm tra thủ công bên dưới",
     "checkForUpdates": "Kiểm tra cập nhật",
     "checkingForUpdates": "Đang kiểm tra cập nhật trên GitHub...",
-    "isUpToDate": "✓ T-Drop đã cập nhật",
+    "isUpToDate": "✓ Đã là phiên bản mới nhất",
     "checkAgain": "Kiểm tra lại",
     "tryAgain": "Thử lại",
     "updateCheckFailed": "Kiểm tra cập nhật thất bại",
