@@ -668,7 +668,10 @@ export const en: TranslationKeys = {
     "clearAll": "Clear All",
     "clearAllConfirm": "Are you sure you want to clear all unpinned items?",
     "copiedTimes": "Copied {count} times",
-    "imagePlaceholder": "Image item" 
+    "imagePlaceholder": "Image item",
+    "clearLast1h": "Clear last hour",
+    "clearLast6h": "Clear last 6 hours",
+    "clearLast24h": "Clear last 24 hours"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -856,7 +859,15 @@ export const en: TranslationKeys = {
     "createdAt": "Created at",
     "file": "File",
     "restoring": "Restoring...",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "busyError": "Another backup or restore operation is already in progress.",
+    "modalTitle": "Restore T-Drop Backup",
+    "modalDesc": "Review archive details and choose how to restore your data.",
+    "fileLabel": "Backup File",
+    "dateLabel": "Created",
+    "itemsLabel": "Items",
+    "imagesLabel": "Images",
+    "modeLabel": "Restore Mode"
   },
   "emoji": {
     "categories": "Categories",
@@ -1006,7 +1017,12 @@ export const es: TranslationKeys = {
     "moreImages": "+{count} imágenes más",
     "moreFiles": "+{count} archivos más",
     "singleFile": "1 archivo",
-    "scrollToTop": "Volver arriba"
+    "scrollToTop": "Volver arriba",
+    "clearLast1h": "Borrar la última hora",
+    "clearLast6h": "Borrar las últimas 6 horas",
+    "clearLast24h": "Borrar las últimas 24 horas",
+    "clearAll": "Borrar todo el historial",
+    "clearAllConfirm": "Toca de nuevo para confirmar"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1260,7 +1276,12 @@ export const fr: TranslationKeys = {
     "moreImages": "+{count} images de plus",
     "moreFiles": "+{count} fichiers de plus",
     "singleFile": "1 fichier",
-    "scrollToTop": "Remonter en haut"
+    "scrollToTop": "Remonter en haut",
+    "clearLast1h": "Effacer la dernière heure",
+    "clearLast6h": "Effacer les 6 dernières heures",
+    "clearLast24h": "Effacer les 24 dernières heures",
+    "clearAll": "Effacer tout l’historique",
+    "clearAllConfirm": "Appuyez à nouveau pour confirmer"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1514,7 +1535,12 @@ export const de: TranslationKeys = {
     "moreImages": "+{count} weitere Bilder",
     "moreFiles": "+{count} weitere Dateien",
     "singleFile": "1 Datei",
-    "scrollToTop": "Nach oben scrollen"
+    "scrollToTop": "Nach oben scrollen",
+    "clearLast1h": "Letzte Stunde löschen",
+    "clearLast6h": "Letzte 6 Stunden löschen",
+    "clearLast24h": "Letzte 24 Stunden löschen",
+    "clearAll": "Gesamten Verlauf löschen",
+    "clearAllConfirm": "Zum Bestätigen erneut tippen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1768,7 +1794,12 @@ export const it: TranslationKeys = {
     "moreImages": "+{count} altre immagini",
     "moreFiles": "+{count} altri file",
     "singleFile": "1 file",
-    "scrollToTop": "Torna in cima"
+    "scrollToTop": "Torna in cima",
+    "clearLast1h": "Cancella ultima ora",
+    "clearLast6h": "Cancella ultime 6 ore",
+    "clearLast24h": "Cancella ultime 24 ore",
+    "clearAll": "Cancella tutta la cronologia",
+    "clearAllConfirm": "Tocca di nuovo per confermare"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2022,7 +2053,12 @@ export const pt: TranslationKeys = {
     "moreImages": "+{count} imagens a mais",
     "moreFiles": "+{count} arquivos a mais",
     "singleFile": "1 arquivo",
-    "scrollToTop": "Voltar ao topo"
+    "scrollToTop": "Voltar ao topo",
+    "clearLast1h": "Limpar última hora",
+    "clearLast6h": "Limpar últimas 6 horas",
+    "clearLast24h": "Limpar últimas 24 horas",
+    "clearAll": "Limpar todo o histórico",
+    "clearAllConfirm": "Toque novamente para confirmar"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2276,7 +2312,12 @@ export const ru: TranslationKeys = {
     "moreImages": "+{count} ещё изображений",
     "moreFiles": "+{count} ещё файлов",
     "singleFile": "1 файл",
-    "scrollToTop": "Прокрутить наверх"
+    "scrollToTop": "Прокрутить наверх",
+    "clearLast1h": "Очистить за последний час",
+    "clearLast6h": "Очистить за последние 6 часов",
+    "clearLast24h": "Очистить за последние 24 часа",
+    "clearAll": "Очистить всю историю",
+    "clearAllConfirm": "Нажмите ещё раз для подтверждения"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2530,7 +2571,12 @@ export const ja: TranslationKeys = {
     "moreImages": "+{count} 枚の画像",
     "moreFiles": "+{count} 個のファイル",
     "singleFile": "1 個のファイル",
-    "scrollToTop": "先頭へスクロール"
+    "scrollToTop": "先頭へスクロール",
+    "clearLast1h": "過去1時間を消去",
+    "clearLast6h": "過去6時間を消去",
+    "clearLast24h": "過去24時間を消去",
+    "clearAll": "履歴をすべて消去",
+    "clearAllConfirm": "もう一度押して確認します"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2784,7 +2830,12 @@ export const ko: TranslationKeys = {
     "moreImages": "+{count}개 이미지 더",
     "moreFiles": "+{count}개 파일 더",
     "singleFile": "1개 파일",
-    "scrollToTop": "맨 위로 스크롤"
+    "scrollToTop": "맨 위로 스크롤",
+    "clearLast1h": "최근 1시간 지우기",
+    "clearLast6h": "최근 6시간 지우기",
+    "clearLast24h": "최근 24시간 지우기",
+    "clearAll": "전체 기록 지우기",
+    "clearAllConfirm": "확인하려면 다시 탭하세요"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3038,7 +3089,12 @@ export const zhCN: TranslationKeys = {
     "moreImages": "+{count} 张更多图片",
     "moreFiles": "+{count} 个更多文件",
     "singleFile": "1 个文件",
-    "scrollToTop": "滚动到顶部"
+    "scrollToTop": "滚动到顶部",
+    "clearLast1h": "清除最近 1 小时",
+    "clearLast6h": "清除最近 6 小时",
+    "clearLast24h": "清除最近 24 小时",
+    "clearAll": "清除所有历史记录",
+    "clearAllConfirm": "再次点击以确认"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3292,7 +3348,12 @@ export const zhTW: TranslationKeys = {
     "moreImages": "+{count} 張更多圖片",
     "moreFiles": "+{count} 個更多檔案",
     "singleFile": "1 個檔案",
-    "scrollToTop": "捲動到頂部"
+    "scrollToTop": "捲動到頂部",
+    "clearLast1h": "清除最近 1 小時",
+    "clearLast6h": "清除最近 6 小時",
+    "clearLast24h": "清除最近 24 小時",
+    "clearAll": "清除所有歷史記錄",
+    "clearAllConfirm": "再次點擊以確認"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3546,7 +3607,12 @@ export const hi: TranslationKeys = {
     "moreImages": "+{count} और छवियाँ",
     "moreFiles": "+{count} और फ़ाइलें",
     "singleFile": "1 फ़ाइल",
-    "scrollToTop": "शीर्ष पर स्क्रॉल करें"
+    "scrollToTop": "शीर्ष पर स्क्रॉल करें",
+    "clearLast1h": "पिछले 1 घंटे को साफ़ करें",
+    "clearLast6h": "पिछले 6 घंटे साफ़ करें",
+    "clearLast24h": "पिछले 24 घंटे साफ़ करें",
+    "clearAll": "पूरा इतिहास साफ़ करें",
+    "clearAllConfirm": "पुष्टि करने के लिए फिर से टैप करें"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3800,7 +3866,12 @@ export const ar: TranslationKeys = {
     "moreImages": "+{count} صور أخرى",
     "moreFiles": "+{count} ملفات أخرى",
     "singleFile": "ملف واحد",
-    "scrollToTop": "التمرير للأعلى"
+    "scrollToTop": "التمرير للأعلى",
+    "clearLast1h": "مسح الساعة الأخيرة",
+    "clearLast6h": "مسح آخر 6 ساعات",
+    "clearLast24h": "مسح آخر 24 ساعة",
+    "clearAll": "مسح كل السجل",
+    "clearAllConfirm": "اضغط مرة أخرى للتأكيد"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4054,7 +4125,12 @@ export const fa: TranslationKeys = {
     "moreImages": "+{count} عکس دیگه",
     "moreFiles": "+{count} فایل دیگه",
     "singleFile": "۱ فایل",
-    "scrollToTop": "برو بالا"
+    "scrollToTop": "برو بالا",
+    "clearLast1h": "پاک کردن یک ساعت گذشته",
+    "clearLast6h": "پاک کردن ۶ ساعت گذشته",
+    "clearLast24h": "پاک کردن ۲۴ ساعت گذشته",
+    "clearAll": "پاک کردن کل تاریخچه",
+    "clearAllConfirm": "برای تأیید دوباره ضربه بزنید"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4308,7 +4384,12 @@ export const bn: TranslationKeys = {
     "moreImages": "+{count} টি অতিরিক্ত ছবি",
     "moreFiles": "+{count} টি অতিরিক্ত ফাইল",
     "singleFile": "১টি ফাইল",
-    "scrollToTop": "শীর্ষে স্ক্রোল করুন"
+    "scrollToTop": "শীর্ষে স্ক্রোল করুন",
+    "clearLast1h": "গত ১ ঘণ্টা মুছুন",
+    "clearLast6h": "গত ৬ ঘণ্টা মুছুন",
+    "clearLast24h": "গত ২৪ ঘণ্টা মুছুন",
+    "clearAll": "সব ইতিহাস মুছুন",
+    "clearAllConfirm": "নিশ্চিত করতে আবার ট্যাপ করুন"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4562,7 +4643,12 @@ export const tr: TranslationKeys = {
     "moreImages": "+{count} görsel daha",
     "moreFiles": "+{count} dosya daha",
     "singleFile": "1 dosya",
-    "scrollToTop": "Başa kaydır"
+    "scrollToTop": "Başa kaydır",
+    "clearLast1h": "Son 1 saati temizle",
+    "clearLast6h": "Son 6 saati temizle",
+    "clearLast24h": "Son 24 saati temizle",
+    "clearAll": "Tüm geçmişi temizle",
+    "clearAllConfirm": "Onaylamak için tekrar dokunun"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4851,7 +4937,10 @@ export const vi: TranslationKeys = {
     "clearAll": "Xóa tất cả",
     "clearAllConfirm": "Bạn có chắc chắn muốn xóa tất cả mục chưa ghim?",
     "copiedTimes": "Đã chép {count} lần",
-    "imagePlaceholder": "Hình ảnh" 
+    "imagePlaceholder": "Hình ảnh",
+    "clearLast1h": "Xóa 1 giờ qua",
+    "clearLast6h": "Xóa 6 giờ qua",
+    "clearLast24h": "Xóa 24 giờ qua"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5039,7 +5128,15 @@ export const vi: TranslationKeys = {
     "createdAt": "Thời gian tạo",
     "file": "Tệp sao lưu",
     "restoring": "Đang khôi phục...",
-    "cancel": "Hủy"
+    "cancel": "Hủy",
+    "busyError": "Một tiến trình sao lưu hoặc khôi phục đang được thực hiện.",
+    "modalTitle": "Khôi phục dữ liệu T-Drop",
+    "modalDesc": "Xem thông tin tệp sao lưu và chọn cách thức khôi phục dữ liệu.",
+    "fileLabel": "Tệp sao lưu",
+    "dateLabel": "Ngày tạo",
+    "itemsLabel": "Số mục",
+    "imagesLabel": "Số hình ảnh",
+    "modeLabel": "Chế độ khôi phục"
   },
   "emoji": {
     "categories": "Danh mục",
@@ -5189,7 +5286,12 @@ export const pl: TranslationKeys = {
     "moreImages": "+{count} więcej obrazów",
     "moreFiles": "+{count} więcej plików",
     "singleFile": "1 plik",
-    "scrollToTop": "Przewiń na górę"
+    "scrollToTop": "Przewiń na górę",
+    "clearLast1h": "Wyczyść ostatnią godzinę",
+    "clearLast6h": "Wyczyść ostatnie 6 godzin",
+    "clearLast24h": "Wyczyść ostatnie 24 godziny",
+    "clearAll": "Wyczyść całą historię",
+    "clearAllConfirm": "Dotknij ponownie, aby potwierdzić"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5443,7 +5545,12 @@ export const nl: TranslationKeys = {
     "moreImages": "+{count} afbeeldingen meer",
     "moreFiles": "+{count} bestanden meer",
     "singleFile": "1 bestand",
-    "scrollToTop": "Naar boven scrollen"
+    "scrollToTop": "Naar boven scrollen",
+    "clearLast1h": "Laatste uur wissen",
+    "clearLast6h": "Laatste 6 uur wissen",
+    "clearLast24h": "Laatste 24 uur wissen",
+    "clearAll": "Volledige geschiedenis wissen",
+    "clearAllConfirm": "Tik opnieuw om te bevestigen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5697,7 +5804,12 @@ export const sv: TranslationKeys = {
     "moreImages": "+{count} fler bilder",
     "moreFiles": "+{count} fler filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Scrolla till toppen"
+    "scrollToTop": "Scrolla till toppen",
+    "clearLast1h": "Rensa senaste timmen",
+    "clearLast6h": "Rensa senaste 6 timmarna",
+    "clearLast24h": "Rensa senaste 24 timmarna",
+    "clearAll": "Rensa all historik",
+    "clearAllConfirm": "Tryck igen för att bekräfta"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5951,7 +6063,12 @@ export const id: TranslationKeys = {
     "moreImages": "+{count} gambar lagi",
     "moreFiles": "+{count} berkas lagi",
     "singleFile": "1 berkas",
-    "scrollToTop": "Gulir ke atas"
+    "scrollToTop": "Gulir ke atas",
+    "clearLast1h": "Hapus 1 jam terakhir",
+    "clearLast6h": "Hapus 6 jam terakhir",
+    "clearLast24h": "Hapus 24 jam terakhir",
+    "clearAll": "Hapus semua riwayat",
+    "clearAllConfirm": "Ketuk lagi untuk mengonfirmasi"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6205,7 +6322,12 @@ export const uk: TranslationKeys = {
     "moreImages": "+{count} більше зображень",
     "moreFiles": "+{count} більше файлів",
     "singleFile": "1 файл",
-    "scrollToTop": "Прокрутити вгору"
+    "scrollToTop": "Прокрутити вгору",
+    "clearLast1h": "Очистити за останню годину",
+    "clearLast6h": "Очистити за останні 6 годин",
+    "clearLast24h": "Очистити за останні 24 години",
+    "clearAll": "Очистити всю історію",
+    "clearAllConfirm": "Натисніть ще раз для підтвердження"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6459,7 +6581,12 @@ export const el: TranslationKeys = {
     "moreImages": "+{count} περισσότερες εικόνες",
     "moreFiles": "+{count} περισσότερα αρχεία",
     "singleFile": "1 αρχείο",
-    "scrollToTop": "Κύλιση στην κορυφή"
+    "scrollToTop": "Κύλιση στην κορυφή",
+    "clearLast1h": "Εκκαθάριση τελευταίας ώρας",
+    "clearLast6h": "Εκκαθάριση τελευταίων 6 ωρών",
+    "clearLast24h": "Εκκαθάριση τελευταίων 24 ωρών",
+    "clearAll": "Εκκαθάριση όλου του ιστορικού",
+    "clearAllConfirm": "Πατήστε ξανά για επιβεβαίωση"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6713,7 +6840,12 @@ export const cs: TranslationKeys = {
     "moreImages": "+{count} dalších obrázků",
     "moreFiles": "+{count} dalších souborů",
     "singleFile": "1 soubor",
-    "scrollToTop": "Přejít nahoru"
+    "scrollToTop": "Přejít nahoru",
+    "clearLast1h": "Vymazat poslední hodinu",
+    "clearLast6h": "Vymazat posledních 6 hodin",
+    "clearLast24h": "Vymazat posledních 24 hodin",
+    "clearAll": "Vymazat celou historii",
+    "clearAllConfirm": "Potvrďte dalším klepnutím"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6967,7 +7099,12 @@ export const ro: TranslationKeys = {
     "moreImages": "+{count} imagini mai mult",
     "moreFiles": "+{count} fișiere mai mult",
     "singleFile": "1 fișier",
-    "scrollToTop": "Derulează sus"
+    "scrollToTop": "Derulează sus",
+    "clearLast1h": "Șterge ultima oră",
+    "clearLast6h": "Șterge ultimele 6 ore",
+    "clearLast24h": "Șterge ultimele 24 de ore",
+    "clearAll": "Șterge tot istoricul",
+    "clearAllConfirm": "Atinge din nou pentru confirmare"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7221,7 +7358,12 @@ export const hu: TranslationKeys = {
     "moreImages": "+{count} további kép",
     "moreFiles": "+{count} további fájl",
     "singleFile": "1 fájl",
-    "scrollToTop": "Görgetés a tetejére"
+    "scrollToTop": "Görgetés a tetejére",
+    "clearLast1h": "Elmúlt óra törlése",
+    "clearLast6h": "Elmúlt 6 óra törlése",
+    "clearLast24h": "Elmúlt 24 óra törlése",
+    "clearAll": "Teljes előzmény törlése",
+    "clearAllConfirm": "Koppintson újra a megerősítéshez"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7475,7 +7617,12 @@ export const da: TranslationKeys = {
     "moreImages": "+{count} flere billeder",
     "moreFiles": "+{count} flere filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Rul til toppen"
+    "scrollToTop": "Rul til toppen",
+    "clearLast1h": "Ryd sidste time",
+    "clearLast6h": "Ryd sidste 6 timer",
+    "clearLast24h": "Ryd sidste 24 timer",
+    "clearAll": "Ryd hele historikken",
+    "clearAllConfirm": "Tryk igen for at bekræfte"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7729,7 +7876,12 @@ export const fi: TranslationKeys = {
     "moreImages": "+{count} kuvaa lisää",
     "moreFiles": "+{count} tiedostoa lisää",
     "singleFile": "1 tiedosto",
-    "scrollToTop": "Vieritä ylös"
+    "scrollToTop": "Vieritä ylös",
+    "clearLast1h": "Tyhjennä viimeinen tunti",
+    "clearLast6h": "Tyhjennä viimeiset 6 tuntia",
+    "clearLast24h": "Tyhjennä viimeiset 24 tuntia",
+    "clearAll": "Tyhjennä koko historia",
+    "clearAllConfirm": "Vahvista napauttamalla uudelleen"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7983,7 +8135,12 @@ export const th: TranslationKeys = {
     "moreImages": "+{count} รูปภาพเพิ่มเติม",
     "moreFiles": "+{count} ไฟล์เพิ่มเติม",
     "singleFile": "1 ไฟล์",
-    "scrollToTop": "เลื่อนไปที่ด้านบน"
+    "scrollToTop": "เลื่อนไปที่ด้านบน",
+    "clearLast1h": "ล้างข้อมูล 1 ชั่วโมงล่าสุด",
+    "clearLast6h": "ล้างข้อมูล 6 ชั่วโมงล่าสุด",
+    "clearLast24h": "ล้างข้อมูล 24 ชั่วโมงล่าสุด",
+    "clearAll": "ล้างประวัติทั้งหมด",
+    "clearAllConfirm": "แตะอีกครั้งเพื่อยืนยัน"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8237,7 +8394,12 @@ export const he: TranslationKeys = {
     "moreImages": "+{count} תמונות נוספות",
     "moreFiles": "+{count} קבצים נוספים",
     "singleFile": "קובץ 1",
-    "scrollToTop": "גלול לראש"
+    "scrollToTop": "גלול לראש",
+    "clearLast1h": "נקה את השעה האחרונה",
+    "clearLast6h": "נקה את 6 השעות האחרונות",
+    "clearLast24h": "נקה את 24 השעות האחרונות",
+    "clearAll": "נקה את כל ההיסטוריה",
+    "clearAllConfirm": "הקש שוב כדי לאשר"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8491,7 +8653,12 @@ export const no: TranslationKeys = {
     "moreImages": "+{count} flere bilder",
     "moreFiles": "+{count} flere filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Rull til toppen"
+    "scrollToTop": "Rull til toppen",
+    "clearLast1h": "Tøm siste time",
+    "clearLast6h": "Tøm siste 6 timer",
+    "clearLast24h": "Tøm siste 24 timer",
+    "clearAll": "Tøm all historikk",
+    "clearAllConfirm": "Trykk igjen for å bekrefte"
   },
   "fileKinds": {
     "pdf": "PDF",
