@@ -279,6 +279,18 @@ export default function App() {
       if (useStore.getState().isInternalCopying) return
       useStore.getState().triggerCopyFlare()
     })
+    const offBackupOpened = edge.onBackupFileOpened?.((info) => {
+      useStore.getState().setRestoreModal({
+        open: true,
+        filePath: info.filePath,
+        manifest: info.manifest,
+        mode: 'merge',
+        isRestoring: false,
+        autoDetected: (info as any)?.autoDetected
+      })
+      useStore.getState().setOpen(true)
+      edge.setInteractive(true)
+    })
     // Recover any update findings that landed before we subscribed (slow
     // first load can miss the startup check's fire-and-forget push).
     // Skip-filtering applies automatically inside setUpdateAvailable.
@@ -303,6 +315,7 @@ export default function App() {
       offUpdateProgress()
       offUpdateDownloaded()
       offCopyFlare()
+      offBackupOpened?.()
     }
   }, [hydrate, setItems, setSettings, pushToast])
 

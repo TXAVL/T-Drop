@@ -12,6 +12,23 @@ export function getResolvedLanguage(settingLang?: string): string {
   const g = globalThis as any
   if (!g.window || !g.window.navigator) return 'en'
   const navLang = ((g.window.navigator.language as string) || '').toLowerCase()
+  const navLangs = Array.isArray(g.window.navigator.languages) ? (g.window.navigator.languages as string[]) : []
+
+  // Check if browser/OS has Vietnamese in languages list
+  if (navLang.startsWith('vi') || navLangs.some((l) => (l || '').toLowerCase().startsWith('vi'))) {
+    return 'vi'
+  }
+
+  // Check timezone for Vietnam / Indochina (Asia/Ho_Chi_Minh, Asia/Saigon, GMT+7)
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+    if (tz.includes('Ho_Chi_Minh') || tz.includes('Saigon') || tz.includes('Hanoi')) {
+      return 'vi'
+    }
+    if (new Date().getTimezoneOffset() === -420) {
+      return 'vi'
+    }
+  } catch {}
 
   if (navLang.startsWith('zh-tw') || navLang.startsWith('zh-hk')) return 'zh-TW'
   if (navLang.startsWith('zh')) return 'zh-CN'

@@ -28,7 +28,7 @@ import { createHash } from 'node:crypto'
 import { resolveStoredImage, resolveEmojiAsset, emojiAssetDir } from './imageProtocol'
 import { getThumbnailPayload, thumbnailCacheControl } from './thumbnailCache'
 import { registerTxaAssociation } from './txaAssociation'
-import { previewTxaBackup } from '../store/backup'
+import { previewTxaBackup, findAvailableTxaBackups } from '../store/backup'
 
 function handleFileArg(args: string[]): void {
   const txaPath = args.find((arg) => typeof arg === 'string' && arg.toLowerCase().endsWith('.txa') && existsSync(arg))
@@ -111,7 +111,7 @@ app.whenReady().then(() => {
   // GitHub NSIS needs an explicit AUMID. Store packages already have one from
   // the AppX identity; overriding it breaks toasts and taskbar grouping.
   if (!isStoreBuild()) {
-    app.setAppUserModelId('com.tdrop.app')
+    app.setAppUserModelId('T-Drop')
   }
 
   ensureDirs()
@@ -172,6 +172,18 @@ app.whenReady().then(() => {
   if (win) {
     win.webContents.once('did-finish-load', () => {
       handleFileArg(process.argv)
+      if (!existsSync(PATHS.indexFile())) {
+        const backups = findAvailableTxaBackups()
+        if (backups.length > 0) {
+          const newest = backups[0]
+          const preview = previewTxaBackup(newest.filePath)
+          sendToMainWindow('backup:file-opened', {
+            filePath: newest.filePath,
+            manifest: preview.manifest,
+            autoDetected: true
+          })
+        }
+      }
     })
   }
 

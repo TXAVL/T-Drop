@@ -185,13 +185,7 @@ export function Settings({
   const downloadPercent = updateInfo?.downloadProgress?.percent ?? 0
 
   // ── Backup & Restore (.txa) State & Handlers ────────────────────────────
-  const [restoreModal, setRestoreModal] = useState<{
-    open: boolean
-    filePath: string
-    manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }
-    mode: 'merge' | 'overwrite'
-    isRestoring: boolean
-  } | null>(null)
+  const setRestoreModal = useStore((s) => s.setRestoreModal)
   const [isExporting, setIsExporting] = useState(false)
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [copiedStk, setCopiedStk] = useState(false)
@@ -270,36 +264,7 @@ export function Settings({
     }
   }
 
-  const handleConfirmRestore = async () => {
-    if (!restoreModal || restoreModal.isRestoring) return
-    setRestoreModal((prev) => (prev ? { ...prev, isRestoring: true } : null))
-    playButtonClickSound()
-    try {
-      const res = await window.edge.restoreBackup(restoreModal.filePath, restoreModal.mode)
-      if (res.ok) {
-        pushToast({
-          id: Date.now().toString(),
-          message: t('backup.importSuccess', { count: res.restoredItemsCount ?? 0 }),
-          tone: 'info'
-        })
-        setRestoreModal(null)
-      } else {
-        pushToast({
-          id: Date.now().toString(),
-          message: t('backup.importFailed', { error: res.error || 'Unknown error' }),
-          tone: 'error'
-        })
-        setRestoreModal((prev) => (prev ? { ...prev, isRestoring: false } : null))
-      }
-    } catch (err) {
-      pushToast({
-        id: Date.now().toString(),
-        message: t('backup.importFailed', { error: String(err) }),
-        tone: 'error'
-      })
-      setRestoreModal((prev) => (prev ? { ...prev, isRestoring: false } : null))
-    }
-  }
+
 
   const renderBackupCard = (isShelf = false) => {
     const content = (
@@ -348,100 +313,7 @@ export function Settings({
     )
   }
 
-  const renderRestoreModal = () => {
-    if (!restoreModal) return null
-    return (
-      <div className="txa-modal-backdrop">
-        <div className="txa-modal-box">
-          <div className="txa-modal-title">
-            <span>{t('backup.modalTitle') || 'Restore T-Drop Backup'}</span>
-            <span className="txa-modal-badge">.TXA</span>
-          </div>
-          <div className="txa-modal-desc">
-            {t('backup.modalDesc') || 'Review archive details and choose how to restore your data.'}
-          </div>
-
-          <div className="txa-meta-card">
-            <div className="txa-meta-row">
-              <span className="txa-meta-label">{t('backup.fileLabel') || 'File'}:</span>
-              <span
-                className="txa-meta-value"
-                style={{ maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                title={restoreModal.filePath}
-              >
-                {restoreModal.filePath.split(/[\\/]/).pop()}
-              </span>
-            </div>
-            {restoreModal.manifest && (
-              <>
-                <div className="txa-meta-row">
-                  <span className="txa-meta-label">{t('backup.dateLabel') || 'Created'}:</span>
-                  <span className="txa-meta-value">
-                    {new Date(restoreModal.manifest.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
-                <div className="txa-meta-row">
-                  <span className="txa-meta-label">{t('backup.itemsLabel') || 'Items'}:</span>
-                  <span className="txa-meta-value">{restoreModal.manifest.itemsCount}</span>
-                </div>
-                <div className="txa-meta-row">
-                  <span className="txa-meta-label">{t('backup.imagesLabel') || 'Images'}:</span>
-                  <span className="txa-meta-value">{restoreModal.manifest.imagesCount}</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className="txa-mode-choice">
-            <div
-              className={`txa-mode-btn ${restoreModal.mode === 'merge' ? 'active' : ''}`}
-              onClick={() => setRestoreModal((m) => (m ? { ...m, mode: 'merge' } : null))}
-            >
-              <div className="txa-mode-btn-title">
-                {t('backup.modeMerge') || 'Merge (Recommended)'}
-              </div>
-              <div className="txa-mode-btn-desc">
-                {t('backup.modeMergeDesc') || 'Keep current items and add non-duplicate items from the backup.'}
-              </div>
-            </div>
-
-            <div
-              className={`txa-mode-btn ${restoreModal.mode === 'overwrite' ? 'active' : ''}`}
-              onClick={() => setRestoreModal((m) => (m ? { ...m, mode: 'overwrite' } : null))}
-            >
-              <div className="txa-mode-btn-title">
-                {t('backup.modeOverwrite') || 'Overwrite All'}
-              </div>
-              <div className="txa-mode-btn-desc">
-                {t('backup.modeOverwriteDesc') || 'Completely replace current history and settings with the backup.'}
-              </div>
-            </div>
-          </div>
-
-          <div className="txa-modal-actions">
-            <button
-              type="button"
-              className="txa-btn txa-btn-secondary"
-              disabled={restoreModal.isRestoring}
-              onClick={() => setRestoreModal(null)}
-            >
-              {t('backup.cancel') || 'Cancel'}
-            </button>
-            <button
-              type="button"
-              className="txa-btn txa-btn-primary"
-              disabled={restoreModal.isRestoring}
-              onClick={handleConfirmRestore}
-            >
-              {restoreModal.isRestoring
-                ? (t('backup.restoring') || 'Restoring...')
-                : (t('backup.confirmRestore') || 'Restore Now')}
-            </button>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  const renderRestoreModal = () => null
 
   const renderDonateModal = () => {
     if (!donateModalOpen) return null

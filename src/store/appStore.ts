@@ -52,6 +52,15 @@ export interface UpdateProgress {
   total?: number
 }
 
+export interface RestoreModalState {
+  open: boolean
+  filePath: string
+  manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }
+  mode: 'merge' | 'overwrite'
+  isRestoring: boolean
+  autoDetected?: boolean
+}
+
 interface AppState {
   items: ClipboardItemDto[]
   settings: Settings
@@ -95,6 +104,8 @@ interface AppState {
   /** Item ID currently being previewed in the flyout. */
   previewItemId: string | null
   previewItemRect: { x?: number; y?: number; width?: number; height?: number } | null
+  restoreModal: RestoreModalState | null
+  setRestoreModal: (modal: RestoreModalState | null) => void
 
   sliderActive: boolean
   sliderReleasedTime: number
@@ -227,6 +238,8 @@ export const useStore = create<AppState>((set, get) => ({
   updateInfo: null,
   previewItemId: null,
   previewItemRect: null,
+  restoreModal: null,
+  setRestoreModal: (restoreModal) => set({ restoreModal }),
   sliderActive: false,
   sliderReleasedTime: 0,
   setSliderActive: (active) => set({

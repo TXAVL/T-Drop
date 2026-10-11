@@ -7,7 +7,17 @@
  * - Binary Container: AES-256-GCM authenticated encryption + gzip compression.
  * - Payload: Bundles history items, user settings, binary screenshots/images, and text payloads.
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+  statSync,
+  openSync,
+  readSync,
+  closeSync
+} from 'node:fs'
 import { join } from 'node:path'
 import { createCipheriv, createDecipheriv, pbkdf2Sync, randomBytes } from 'node:crypto'
 import { gzipSync, gunzipSync } from 'node:zlib'
@@ -358,3 +368,64 @@ export function restoreTxaBackup(
     backupBusy = false
   }
 }
+
+export interface DiscoveredBackup {
+  filePath: string
+  fileName: string
+  mtime: number
+  sizeBytes: number
+}
+
+/**
+ * Scans common directories (Desktop, Downloads, Documents, OneDrive) for available `.txa` backup files.
+ * Returns valid candidates sorted by last modified time (newest first).
+ */
+export function findAvailableTxaBackups(extraDirs: string[] = []): DiscoveredBackup[] {
+  const candidates: DiscoveredBackup[] = []
+  const userProfile = process.env.USERPROFILE || process.env.HOME || ''
+  const searchDirs = new Set<string>([
+    join(userProfile, 'Desktop'),
+    join(userProfile, 'Downloads'),
+    join(userProfile, 'Documents'),
+    join(userProfile, 'OneDrive', 'Desktop'),
+    join(userProfile, 'OneDrive', 'Documents'),
+    join(userProfile, 'OneDrive', 'Downloads'),
+    ...extraDirs
+  ])
+
+  for (const dir of searchDirs) {
+    if (!dir || !existsSync(dir)) continue
+    try {
+      const files = readdirSync(dir)
+      for (const file of files) {
+        if (file.toLowerCase().endsWith('.txa')) {
+          const fullPath = join(dir, file)
+          try {
+            const st = statSync(fullPath)
+            if (st.isFile() && st.size > 64) {
+              const fd = openSync(fullPath, 'r')
+              const buf = Buffer.alloc(32)
+              readSync(fd, buf, 0, 32, 0)
+              closeSync(fd)
+              if (buf.toString('utf8').startsWith('TXA-ARCHIVE-V1')) {
+                candidates.push({
+                  filePath: fullPath,
+                  fileName: file,
+                  mtime: st.mtimeMs,
+                  sizeBytes: st.size
+                })
+              }
+            }
+          } catch {
+            /* ignore unreadable file */
+          }
+        }
+      }
+    } catch {
+      /* ignore unreadable directory */
+    }
+  }
+
+  return candidates.sort((a, b) => b.mtime - a.mtime)
+}
+

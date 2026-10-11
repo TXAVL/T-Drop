@@ -11,7 +11,8 @@ import { existsSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { PATHS } from '../store/paths'
 import { loadSettings, saveSettings } from '../store/settings'
-import { getMainWindow, setVisible, repositionWindow, getDisplayListOptions, registerWindowRepositionListener, popUpAndRetract } from './window'
+import { getMainWindow, setVisible, repositionWindow, getDisplayListOptions, registerWindowRepositionListener, popUpAndRetract, sendToMainWindow } from './window'
+import { findAvailableTxaBackups, previewTxaBackup } from '../store/backup'
 import type { StickPosition } from '../../shared/types'
 import { pushState } from './state'
 import { TRANSLATIONS, en } from '../../src/i18n/translations'
@@ -94,6 +95,71 @@ export function updateTrayIcon(): void {
     console.error('[Tray] Failed to update tray icon image:', err)
   }
 }
+export function detectSystemLanguage(): string {
+  try {
+    const sysLangs = app.getPreferredSystemLanguages ? app.getPreferredSystemLanguages() : []
+    for (const raw of sysLangs) {
+      const first = (raw || '').toLowerCase()
+      if (first.startsWith('vi')) return 'vi'
+      if (first.startsWith('zh-tw') || first.startsWith('zh-hk')) return 'zh-TW'
+      if (first.startsWith('zh')) return 'zh-CN'
+      if (first.startsWith('es')) return 'es'
+      if (first.startsWith('fr')) return 'fr'
+      if (first.startsWith('de')) return 'de'
+      if (first.startsWith('hi')) return 'hi'
+      if (first.startsWith('ja')) return 'ja'
+      if (first.startsWith('ru')) return 'ru'
+      if (first.startsWith('it')) return 'it'
+      if (first.startsWith('pt')) return 'pt'
+      if (first.startsWith('ko')) return 'ko'
+      if (first.startsWith('ar')) return 'ar'
+      if (first.startsWith('fa')) return 'fa'
+      if (first.startsWith('bn')) return 'bn'
+      if (first.startsWith('tr')) return 'tr'
+      if (first.startsWith('pl')) return 'pl'
+      if (first.startsWith('nl')) return 'nl'
+      if (first.startsWith('sv')) return 'sv'
+      if (first.startsWith('id')) return 'id'
+      if (first.startsWith('uk')) return 'uk'
+      if (first.startsWith('el')) return 'el'
+      if (first.startsWith('cs')) return 'cs'
+      if (first.startsWith('ro')) return 'ro'
+      if (first.startsWith('hu')) return 'hu'
+      if (first.startsWith('da')) return 'da'
+      if (first.startsWith('fi')) return 'fi'
+      if (first.startsWith('th')) return 'th'
+      if (first.startsWith('he')) return 'he'
+      if (first.startsWith('no') || first.startsWith('nb') || first.startsWith('nn')) return 'no'
+    }
+  } catch {}
+
+  try {
+    const locale = (app.getLocale ? app.getLocale() : '').toLowerCase()
+    if (locale.startsWith('vi')) return 'vi'
+  } catch {}
+
+  // Check timezone for Vietnam / Indochina
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+    if (tz.includes('Ho_Chi_Minh') || tz.includes('Saigon') || tz.includes('Hanoi')) {
+      return 'vi'
+    }
+    if (new Date().getTimezoneOffset() === -420) {
+      return 'vi'
+    }
+  } catch {}
+
+  return 'en'
+}
+
+export function getTrayText(settingsLang: string | undefined, key: keyof typeof en['tray']): string {
+  let langCode = settingsLang || 'system'
+  if (langCode === 'system') {
+    langCode = detectSystemLanguage()
+  }
+  const dict = TRANSLATIONS[langCode]
+  return (dict?.tray?.[key]) || en.tray[key] || key
+}
 
 export function createTray(): Tray {
   const image = getTrayImage()
@@ -108,16 +174,46 @@ export function createTray(): Tray {
     })
   }
 
-  // Show welcome notification on first run
+  // Show welcome notification or auto-detect backup on first run
   if (!existsSync(PATHS.indexFile())) {
     try {
       if (Notification.isSupported()) {
         const initialSettings = loadSettings()
-        new Notification({
-          title: getTrayText(initialSettings.language, 'welcomeTitle'),
-          body: getTrayText(initialSettings.language, 'welcomeBody'),
-          icon: PATHS.icon()
-        }).show()
+        const resolvedLang = initialSettings.language === 'system' ? detectSystemLanguage() : initialSettings.language
+        const isVi = resolvedLang === 'vi'
+
+        // Check if any existing .txa backup files are present
+        const backups = findAvailableTxaBackups()
+        if (backups.length > 0) {
+          const newest = backups[0]
+          const notif = new Notification({
+            title: isVi ? 'T-Drop - Phát hiện bản sao lưu' : 'T-Drop - Backup Detected',
+            body: isVi
+              ? `Tìm thấy bản sao lưu "${newest.fileName}". Bấm để khôi phục dữ liệu!`
+              : `Found backup "${newest.fileName}". Click to restore your data!`,
+            icon: PATHS.icon()
+          })
+          notif.on('click', () => {
+            const win = getMainWindow()
+            if (win) {
+              setVisible(true)
+              win.focus()
+              const preview = previewTxaBackup(newest.filePath)
+              sendToMainWindow('backup:file-opened', {
+                filePath: newest.filePath,
+                manifest: preview.manifest,
+                autoDetected: true
+              })
+            }
+          })
+          notif.show()
+        } else {
+          new Notification({
+            title: getTrayText(resolvedLang, 'welcomeTitle'),
+            body: getTrayText(resolvedLang, 'welcomeBody'),
+            icon: PATHS.icon()
+          }).show()
+        }
       }
     } catch { /* ignore */ }
   }
@@ -165,46 +261,6 @@ export function createTray(): Tray {
     }))
   }
 
-function getTrayText(settingsLang: string | undefined, key: keyof typeof en['tray']): string {
-  let langCode = settingsLang || 'system'
-  if (langCode === 'system') {
-    const sysLangs = app.getPreferredSystemLanguages()
-    const first = (sysLangs[0] || '').toLowerCase()
-    if (first.startsWith('zh-tw') || first.startsWith('zh-hk')) langCode = 'zh-TW'
-    else if (first.startsWith('zh')) langCode = 'zh-CN'
-    else if (first.startsWith('es')) langCode = 'es'
-    else if (first.startsWith('fr')) langCode = 'fr'
-    else if (first.startsWith('de')) langCode = 'de'
-    else if (first.startsWith('hi')) langCode = 'hi'
-    else if (first.startsWith('ja')) langCode = 'ja'
-    else if (first.startsWith('ru')) langCode = 'ru'
-    else if (first.startsWith('it')) langCode = 'it'
-    else if (first.startsWith('pt')) langCode = 'pt'
-    else if (first.startsWith('ko')) langCode = 'ko'
-    else if (first.startsWith('ar')) langCode = 'ar'
-    else if (first.startsWith('fa')) langCode = 'fa'
-    else if (first.startsWith('bn')) langCode = 'bn'
-    else if (first.startsWith('tr')) langCode = 'tr'
-    else if (first.startsWith('vi')) langCode = 'vi'
-    else if (first.startsWith('pl')) langCode = 'pl'
-    else if (first.startsWith('nl')) langCode = 'nl'
-    else if (first.startsWith('sv')) langCode = 'sv'
-    else if (first.startsWith('id')) langCode = 'id'
-    else if (first.startsWith('uk')) langCode = 'uk'
-    else if (first.startsWith('el')) langCode = 'el'
-    else if (first.startsWith('cs')) langCode = 'cs'
-    else if (first.startsWith('ro')) langCode = 'ro'
-    else if (first.startsWith('hu')) langCode = 'hu'
-    else if (first.startsWith('da')) langCode = 'da'
-    else if (first.startsWith('fi')) langCode = 'fi'
-    else if (first.startsWith('th')) langCode = 'th'
-    else if (first.startsWith('he')) langCode = 'he'
-    else if (first.startsWith('no') || first.startsWith('nb') || first.startsWith('nn')) langCode = 'no'
-    else langCode = 'en'
-  }
-  const dict = TRANSLATIONS[langCode]
-  return (dict?.tray?.[key]) || en.tray[key] || key
-}
 
   const rebuild = () => {
     const settings = loadSettings()
