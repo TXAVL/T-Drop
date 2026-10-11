@@ -200,7 +200,7 @@
   gap: 8px;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
   -webkit-user-select: none;
   transition: background 0.14s ease;
@@ -2597,31 +2597,68 @@
   }
 }
 
-/* ── Backup Restore Modal ─────────────────────────────────────────── */
+/* ── Backup Restore & Donate Modal System ─────────────────────────── */
+.txa-modal-overlay,
 .txa-modal-backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
+.txa-modal-card,
 .txa-modal-box {
   width: 100%;
-  max-width: 340px;
-  background: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
+  max-width: 330px;
+  margin: auto;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: #141416;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
   padding: 18px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-sizing: border-box;
+  position: relative;
+  scrollbar-width: thin;
+}
+
+.txa-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.txa-modal-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.txa-modal-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .txa-modal-title {
@@ -2783,7 +2820,7 @@
 }
 
 .donate-qr-img {
-  width: 190px;
+  width: 160px;
   height: auto;
   border-radius: 6px;
   display: block;

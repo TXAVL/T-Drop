@@ -82,14 +82,17 @@ function getNestedProp(obj: any, path: string): string | undefined {
  * E.g., t('header.searchPlaceholder')
  * E.g., t('behaviour.updateAvailableTitle', { version: '0.3.1' })
  */
-export function t(path: string, params?: Record<string, string | number>): string {
+export function t(path: string, params?: Record<string, string | number>, fallback?: string): string {
   const settingsLang = useStore.getState().settings.language
   const langCode = getResolvedLanguage(settingsLang)
   const dict = TRANSLATIONS[langCode]
 
   let val = dict ? getNestedProp(dict, path) : undefined
   if (!val) {
-    val = getNestedProp(en, path) || path
+    val = getNestedProp(en, path)
+  }
+  if (!val) {
+    return fallback !== undefined ? fallback : ''
   }
 
   if (params) {

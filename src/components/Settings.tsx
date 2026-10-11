@@ -1882,7 +1882,7 @@ export function Settings({
                   </div>
 
                   {/* Card 1: Language */}
-                  <div className="setting-card">
+                  <div className="setting-card" style={{ zIndex: 30, overflow: 'visible' }}>
                     <div className="shelf-card-top">
                       <div className="setting-group-label">{t('groups.general') || 'GENERAL'}</div>
                       <div className="setting-title">{t('behaviour.languageTitle')}</div>
@@ -2903,7 +2903,7 @@ function LanguageDropdown({ direction = 'down', compact = false }: { direction?:
   }, [isOpen, selectedLang.code])
 
   return (
-    <div ref={dropdownRef} style={{ position: 'relative', width: '100%' }}>
+    <div ref={dropdownRef} style={{ position: 'relative', width: '100%', zIndex: isOpen ? 50 : 1 }}>
       <button
         type="button"
         onClick={() => {
@@ -2955,15 +2955,15 @@ function LanguageDropdown({ direction = 'down', compact = false }: { direction?:
               bottom: direction === 'up' ? 'calc(100% + 5px)' : 'auto',
               left: 0,
               right: 0,
-              maxHeight: direction === 'up' ? (compact ? 88 : 140) : 180,
+              maxHeight: direction === 'up' ? (compact ? 88 : 140) : 220,
               overflowY: 'auto',
-              background: '#121214',
-              border: '1px solid rgba(255, 255, 255, 0.14)',
+              background: '#161618',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
               borderRadius: 10,
               padding: '4px',
-              boxShadow: '0 12px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
-              zIndex: 100,
-              scrollbarWidth: 'none'
+              boxShadow: '0 16px 36px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08)',
+              zIndex: 1000,
+              scrollbarWidth: 'thin'
             }}
           >
             {languages.map((lang) => {

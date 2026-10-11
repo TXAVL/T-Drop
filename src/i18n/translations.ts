@@ -10,6 +10,7 @@ export interface TranslationKeys {
     behaviour: string
     position: string
     appearance: string
+    generalStartup?: string
   }
   header: {
     searchPlaceholder: string
@@ -249,6 +250,41 @@ export interface TranslationKeys {
     reviewOnStore?: string
     githubPromo: string
     version: string
+    donateTitle?: string
+    bankName?: string
+    accountNumber?: string
+    accountHolder?: string
+    copy?: string
+    copied?: string
+    donateNote?: string
+  }
+  groups?: {
+    general?: string
+    startup?: string
+    privacy?: string
+    feedback?: string
+    shortcuts?: string
+    backup?: string
+    alignment?: string
+    displayMonitor?: string
+    locationHint?: string
+    triggerPosition?: string
+    hoverZoneLength?: string
+    triggerThickness?: string
+    panelHeight?: string
+    copyBeacon?: string
+    beaconStyle?: string
+    textSize?: string
+    audioFeedback?: string
+    languageSelectDesc?: string
+    [key: string]: string | undefined
+  }
+  common?: {
+    close?: string
+    cancel?: string
+    save?: string
+    ok?: string
+    [key: string]: string | undefined
   }
 }
 
@@ -436,7 +472,8 @@ export const en: TranslationKeys = {
   "tabs": {
     "behaviour": "Behaviour",
     "position": "Position",
-    "appearance": "Appearance"
+    "appearance": "Appearance",
+    "generalStartup": "General & Startup"
   },
   "header": {
     "searchPlaceholder": "Search history...",
@@ -675,7 +712,40 @@ export const en: TranslationKeys = {
     "starOnGithub": "Star on GitHub",
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "If you like T-Drop, please consider starring the project on GitHub!",
-    "version": "Version"
+    "version": "Version",
+    "donateTitle": "Support the Author (MB Bank)",
+    "bankName": "Bank:",
+    "accountNumber": "Account Number:",
+    "accountHolder": "Account Holder:",
+    "copy": "Copy",
+    "copied": "✓ Copied",
+    "donateNote": "Scan VietQR on any banking or e-wallet app to support."
+  },
+  "groups": {
+    "general": "General",
+    "startup": "Startup",
+    "privacy": "Privacy",
+    "feedback": "Feedback",
+    "shortcuts": "Shortcuts",
+    "backup": "Backup & Restore",
+    "alignment": "Alignment",
+    "displayMonitor": "Display Monitor",
+    "locationHint": "Location Hint",
+    "triggerPosition": "Trigger Position",
+    "hoverZoneLength": "Hover Zone Length",
+    "triggerThickness": "Trigger Thickness",
+    "panelHeight": "Panel Height",
+    "copyBeacon": "Copy Beacon",
+    "beaconStyle": "Beacon Style",
+    "textSize": "Text Size",
+    "audioFeedback": "Audio Feedback",
+    "languageSelectDesc": "Select application display language"
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "ok": "OK"
   }
 }
 
@@ -4500,7 +4570,8 @@ export const vi: TranslationKeys = {
   "tabs": {
     "behaviour": "Hành vi",
     "position": "Vị trí",
-    "appearance": "Giao diện"
+    "appearance": "Giao diện",
+    "generalStartup": "Chung & Khởi động"
   },
   "header": {
     "searchPlaceholder": "Tìm trong lịch sử...",
@@ -4739,7 +4810,40 @@ export const vi: TranslationKeys = {
     "starOnGithub": "Đánh sao trên GitHub",
     "reviewOnStore": "Review on Microsoft Store",
     "githubPromo": "Nếu bạn thích T-Drop, hãy cân nhắc đánh sao cho dự án trên GitHub!",
-    "version": "Phiên bản"
+    "version": "Phiên bản",
+    "donateTitle": "Ủng hộ tác giả (MB Bank)",
+    "bankName": "Ngân hàng:",
+    "accountNumber": "Số tài khoản:",
+    "accountHolder": "Chủ tài khoản:",
+    "copy": "Sao chép",
+    "copied": "✓ Đã chép",
+    "donateNote": "Quét mã VietQR trên bất kỳ ứng dụng ngân hàng hoặc ví điện tử để ủng hộ."
+  },
+  "groups": {
+    "general": "Cài đặt chung",
+    "startup": "Khởi động cùng hệ thống",
+    "privacy": "Quyền riêng tư",
+    "feedback": "Phản hồi",
+    "shortcuts": "Phím tắt",
+    "backup": "Sao lưu & Khôi phục",
+    "alignment": "Căn lề hiển thị",
+    "displayMonitor": "Màn hình hiển thị",
+    "locationHint": "Gợi ý vị trí cạnh",
+    "triggerPosition": "Vị trí kích hoạt",
+    "hoverZoneLength": "Độ dài vùng rê chuột",
+    "triggerThickness": "Độ dày vùng kích hoạt",
+    "panelHeight": "Chiều cao bảng",
+    "copyBeacon": "Chỉ báo sao chép",
+    "beaconStyle": "Kiểu chỉ báo",
+    "textSize": "Cỡ chữ",
+    "audioFeedback": "Âm thanh & Phản hồi",
+    "languageSelectDesc": "Chọn ngôn ngữ hiển thị giao diện"
+  },
+  "common": {
+    "close": "Đóng",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "ok": "Đồng ý"
   }
 }
 
