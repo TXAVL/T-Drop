@@ -5,18 +5,24 @@ export interface TranslationKeys {
     links: string
     images: string
     files: string
+  
+    [key: string]: string | undefined
   }
   tabs: {
     behaviour: string
     position: string
     appearance: string
     generalStartup?: string
+  
+    [key: string]: string | undefined
   }
   header: {
     searchPlaceholder: string
     settings: string
     close: string
     whatsNew: string
+  
+    [key: string]: string | undefined
   }
   behaviour: {
     languageTitle: string
@@ -62,6 +68,8 @@ export interface TranslationKeys {
     never: string
     capacityTitle: string
     capacityDesc: string
+  
+    [key: string]: string | undefined
   }
   position: {
     edgePlacementTitle: string
@@ -88,6 +96,8 @@ export interface TranslationKeys {
     edgeTriggerThicknessDesc: string
     panelHeightTitle: string
     panelHeightDesc: string
+  
+    [key: string]: string | undefined
   }
   appearance: {
     copyIndicatorTitle: string
@@ -110,6 +120,8 @@ export interface TranslationKeys {
     tickStyle: string
     copyStyle: string
     sparkleStyle: string
+  
+    [key: string]: string | undefined
   }
   item: {
     copy: string
@@ -138,6 +150,8 @@ export interface TranslationKeys {
     moreFiles: string
     singleFile: string
     scrollToTop: string
+  
+    [key: string]: string | undefined
   }
   fileKinds: {
     pdf: string
@@ -151,6 +165,8 @@ export interface TranslationKeys {
     video: string
     image: string
     file: string
+  
+    [key: string]: string | undefined
   }
   emptyState: {
     shelfEmpty: string
@@ -163,6 +179,8 @@ export interface TranslationKeys {
     links: string
     images: string
     files: string
+  
+    [key: string]: string | undefined
   }
   onboarding: {
     welcomeTitle: string
@@ -192,6 +210,8 @@ export interface TranslationKeys {
     proTip2: string
     proTip3: string
     proTip4: string
+  
+    [key: string]: string | undefined
   }
   tray: {
     showClipboard: string
@@ -205,6 +225,8 @@ export interface TranslationKeys {
     quit: string
     welcomeTitle: string
     welcomeBody: string
+  
+    [key: string]: string | undefined
   }
   flyout: {
     copyBeaconStyleTitle: string
@@ -228,6 +250,8 @@ export interface TranslationKeys {
     clickToPasteDrag: string
     openInExplorer: string
     current: string
+  
+    [key: string]: string | undefined
   }
   toast: {
     copiedToClipboard: string
@@ -235,6 +259,8 @@ export interface TranslationKeys {
     itemPinned: string
     itemUnpinned: string
     settingsSaved: string
+  
+    [key: string]: string | undefined
   }
   footer: {
     communityAndSupport: string
@@ -257,6 +283,8 @@ export interface TranslationKeys {
     copy?: string
     copied?: string
     donateNote?: string
+  
+    [key: string]: string | undefined
   }
   groups?: {
     general?: string
@@ -284,6 +312,12 @@ export interface TranslationKeys {
     cancel?: string
     save?: string
     ok?: string
+    [key: string]: string | undefined
+  }
+  backup?: {
+    [key: string]: string | undefined
+  }
+  emoji?: {
     [key: string]: string | undefined
   }
 }
@@ -467,13 +501,19 @@ export const en: TranslationKeys = {
     "text": "Text",
     "links": "Links",
     "images": "Images",
-    "files": "Files"
+    "files": "Files",
+    "colors": "Colors",
+    "title": "Filter by type"
   },
   "tabs": {
     "behaviour": "Behaviour",
     "position": "Position",
     "appearance": "Appearance",
-    "generalStartup": "General & Startup"
+    "generalStartup": "General & Startup",
+    "activationShortcuts": "Shortcuts & Trigger",
+    "clipboardRules": "Clipboard Rules",
+    "storageRetention": "Storage & Retention",
+    "updates": "Updates"
   },
   "header": {
     "searchPlaceholder": "Search history...",
@@ -524,7 +564,23 @@ export const en: TranslationKeys = {
     "autoDeleteDesc": "Automatically purge copied items (preserves Pinned)",
     "never": "Never",
     "capacityTitle": "History capacity",
-    "capacityDesc": "Maximum unpinned items stored in history"
+    "capacityDesc": "Maximum unpinned items stored in history",
+    "toggleHotkeyTitle": "Global Toggle Shortcut",
+    "toggleHotkeyDesc": "Press this shortcut from anywhere to open or hide T-Drop",
+    "hotkeyEdit": "Edit",
+    "hotkeyRecording": "Press key combination...",
+    "hotkeyCancel": "Cancel",
+    "hotkeyReset": "Reset to default ({shortcut})",
+    "downloadingWithPercent": "Downloading update ({percent}%)...",
+    "updateLabelAvailable": "Update available",
+    "updateLabelDownloading": "Downloading update...",
+    "updateLabelReady": "Update ready",
+    "updateModeAuto": "Automatic",
+    "updateModeNotify": "Notify only",
+    "updateModeNotifyDesc": "Notify when updates are available without downloading automatically",
+    "updateModeOff": "Disabled",
+    "restarting": "Restarting...",
+    "restartFailed": "Failed to restart application" 
   },
   "position": {
     "edgePlacementTitle": "Edge Placement",
@@ -550,7 +606,13 @@ export const en: TranslationKeys = {
     "edgeTriggerThicknessTitle": "Edge trigger thickness",
     "edgeTriggerThicknessDesc": "Physical thickness of the invisible trigger strip",
     "panelHeightTitle": "Panel height",
-    "panelHeightDesc": "Vertical size of the clipboard shelf"
+    "panelHeightDesc": "Vertical size of the clipboard shelf",
+    "horizontalPositionTitle": "Horizontal Alignment",
+    "horizontalPositionDesc": "Adjust horizontal alignment along screen edge",
+    "left": "Left",
+    "right": "Right",
+    "topEdge": "Top Edge",
+    "loadingDisplays": "Detecting displays..." 
   },
   "appearance": {
     "copyIndicatorTitle": "Copy Indicator",
@@ -572,7 +634,9 @@ export const en: TranslationKeys = {
     "logoStyle": "Logo",
     "tickStyle": "Tick",
     "copyStyle": "Copy",
-    "sparkleStyle": "Sparkle"
+    "sparkleStyle": "Sparkle",
+    "closeStyleSelector": "Close Style Selector",
+    "openStyleSelector": "Select Beacon Style" 
   },
   "item": {
     "copy": "Copy",
@@ -600,7 +664,11 @@ export const en: TranslationKeys = {
     "moreImages": "+{count} more images",
     "moreFiles": "+{count} more files",
     "singleFile": "1 file",
-    "scrollToTop": "Scroll to top"
+    "scrollToTop": "Scroll to top",
+    "clearAll": "Clear All",
+    "clearAllConfirm": "Are you sure you want to clear all unpinned items?",
+    "copiedTimes": "Copied {count} times",
+    "imagePlaceholder": "Image item" 
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -690,14 +758,23 @@ export const en: TranslationKeys = {
     "copyFile": "Copy File",
     "clickToPasteDrag": "Click to paste · Drag to move",
     "openInExplorer": "Open location in Explorer",
-    "current": "Current"
+    "current": "Current",
+    "clickToDeselect": "Click to deselect",
+    "clickToSelect": "Click to select",
+    "deselectItem": "Deselect item",
+    "selectItem": "Select item",
+    "clickToPasteImageDrag": "Click to paste · Drag to drop",
+    "copied": "Copied!" 
   },
   "toast": {
     "copiedToClipboard": "Copied to clipboard",
     "itemDeleted": "Item deleted",
     "itemPinned": "Item pinned",
     "itemUnpinned": "Item unpinned",
-    "settingsSaved": "Settings saved"
+    "settingsSaved": "Settings saved",
+    "shortcutUpdated": "Shortcut updated to {shortcut}",
+    "clearFailed": "Failed to clear items",
+    "deleteFailed": "Failed to delete item" 
   },
   "footer": {
     "communityAndSupport": "Community & Support",
@@ -708,6 +785,7 @@ export const en: TranslationKeys = {
     "quitTitle": "Quit T-Drop",
     "quitDesc": "Close application and stop background process",
     "supportPromo": "T-Drop is 100% free & open-source. If it helps your daily workflow, consider supporting development to make it even better!",
+    "supportTagline": "T-Drop is completely free and open-source.", 
     "supportOnKofi": "Support Author (QR Donate)",
     "starOnGithub": "Star on GitHub",
     "reviewOnStore": "Review on Microsoft Store",
@@ -739,13 +817,54 @@ export const en: TranslationKeys = {
     "beaconStyle": "Beacon Style",
     "textSize": "Text Size",
     "audioFeedback": "Audio Feedback",
-    "languageSelectDesc": "Select application display language"
+    "languageSelectDesc": "Select application display language",
+    "keyboardShortcut": "Keyboard Shortcut",
+    "aboutEdgeDrop": "About T-Drop",
+    "clipboardBehaviour": "Clipboard Behaviour",
+    "edgeHintPulseDesc": "Subtle indicator showing active trigger zone",
+    "fullscreenProtection": "Fullscreen Protection",
+    "hoverActivation": "Hover Activation",
+    "restartCleanup": "Restart Cleanup",
+    "storageCapacity": "Storage Capacity",
+    "toggleHotkeyPressDesc": "Press any key combo to record new global shortcut",
+    "updates": "Updates" 
   },
   "common": {
     "close": "Close",
     "cancel": "Cancel",
     "save": "Save",
     "ok": "OK"
+  },
+  "backup": {
+    "title": "Backup & Restore",
+    "desc": "Export your clipboard history, pinned items, and settings to an encrypted archive (.txa) or restore from an existing backup.",
+    "exportBtn": "Export Backup (.txa)",
+    "importBtn": "Restore Backup (.txa)",
+    "exportSuccess": "Backup exported successfully!",
+    "exportFailed": "Failed to export backup.",
+    "importSuccess": "Restored {count} items successfully!",
+    "importFailed": "Failed to restore backup: {error}",
+    "autoDetectedTitle": "Backup Archive Detected",
+    "previewTitle": "Restore Preview",
+    "confirmRestore": "Confirm Restore",
+    "modeMerge": "Merge with Current History",
+    "modeMergeDesc": "Add backup items without removing your existing clips.",
+    "modeOverwrite": "Overwrite (Replace All)",
+    "modeOverwriteDesc": "Clear existing clips and replace completely with backup.",
+    "items": "Items",
+    "itemsUnit": "items",
+    "createdAt": "Created at",
+    "file": "File",
+    "restoring": "Restoring...",
+    "cancel": "Cancel"
+  },
+  "emoji": {
+    "categories": "Categories",
+    "clearRecents": "Clear Recent Emojis",
+    "emptyRecents": "No recent emojis",
+    "loadFailed": "Failed to load emojis",
+    "open": "Emoji Picker",
+    "skinTone": "Skin Tone"
   }
 }
 
@@ -4565,13 +4684,19 @@ export const vi: TranslationKeys = {
     "text": "Văn bản",
     "links": "Liên kết",
     "images": "Hình ảnh",
-    "files": "Tệp"
+    "files": "Tệp",
+    "colors": "Màu sắc",
+    "title": "Lọc theo loại"
   },
   "tabs": {
     "behaviour": "Hành vi",
     "position": "Vị trí",
     "appearance": "Giao diện",
-    "generalStartup": "Chung & Khởi động"
+    "generalStartup": "Chung & Khởi động",
+    "activationShortcuts": "Phím tắt & Kích hoạt",
+    "clipboardRules": "Quy tắc bảng tạm",
+    "storageRetention": "Lưu trữ & Giới hạn",
+    "updates": "Cập nhật"
   },
   "header": {
     "searchPlaceholder": "Tìm trong lịch sử...",
@@ -4622,7 +4747,23 @@ export const vi: TranslationKeys = {
     "autoDeleteDesc": "Tự động thanh lọc các mục đã sao chép (giữ mục đã ghim)",
     "never": "Không bao giờ",
     "capacityTitle": "Dung lượng lịch sử",
-    "capacityDesc": "Số mục chưa ghim tối đa được lưu trong lịch sử"
+    "capacityDesc": "Số mục chưa ghim tối đa được lưu trong lịch sử",
+    "toggleHotkeyTitle": "Phím tắt bật/tắt toàn cục",
+    "toggleHotkeyDesc": "Bấm tổ hợp phím này ở bất cứ đâu để mở hoặc ẩn T-Drop",
+    "hotkeyEdit": "Sửa",
+    "hotkeyRecording": "Bấm tổ hợp phím...",
+    "hotkeyCancel": "Hủy",
+    "hotkeyReset": "Đặt lại mặc định ({shortcut})",
+    "downloadingWithPercent": "Đang tải bản cập nhật ({percent}%)...",
+    "updateLabelAvailable": "Có bản cập nhật mới",
+    "updateLabelDownloading": "Đang tải bản cập nhật...",
+    "updateLabelReady": "Bản cập nhật đã sẵn sàng",
+    "updateModeAuto": "Tự động",
+    "updateModeNotify": "Chỉ thông báo",
+    "updateModeNotifyDesc": "Thông báo khi có bản cập nhật mới mà không tự động tải",
+    "updateModeOff": "Tắt",
+    "restarting": "Đang khởi động lại...",
+    "restartFailed": "Không thể khởi động lại ứng dụng" 
   },
   "position": {
     "edgePlacementTitle": "Vị trí mép",
@@ -4648,7 +4789,13 @@ export const vi: TranslationKeys = {
     "edgeTriggerThicknessTitle": "Độ dày kích hoạt mép",
     "edgeTriggerThicknessDesc": "Độ dày vật lý của dải kích hoạt vô hình",
     "panelHeightTitle": "Chiều cao bảng",
-    "panelHeightDesc": "Kích thước dọc của giá bảng tạm"
+    "panelHeightDesc": "Kích thước dọc của giá bảng tạm",
+    "horizontalPositionTitle": "Căn lề ngang",
+    "horizontalPositionDesc": "Điều chỉnh vị trí bảng theo chiều ngang cạnh màn hình",
+    "left": "Trái",
+    "right": "Phải",
+    "topEdge": "Cạnh trên",
+    "loadingDisplays": "Đang dò tìm màn hình..." 
   },
   "appearance": {
     "copyIndicatorTitle": "Chỉ báo sao chép",
@@ -4670,7 +4817,9 @@ export const vi: TranslationKeys = {
     "logoStyle": "Logo",
     "tickStyle": "Dấu kiểm",
     "copyStyle": "Sao chép",
-    "sparkleStyle": "Lấp lánh"
+    "sparkleStyle": "Lấp lánh",
+    "closeStyleSelector": "Đóng bảng chọn kiểu",
+    "openStyleSelector": "Chọn kiểu chỉ báo" 
   },
   "item": {
     "copy": "Sao chép",
@@ -4698,7 +4847,11 @@ export const vi: TranslationKeys = {
     "moreImages": "+{count} hình ảnh nữa",
     "moreFiles": "+{count} tệp nữa",
     "singleFile": "1 tệp",
-    "scrollToTop": "Cuộn lên đầu"
+    "scrollToTop": "Cuộn lên đầu",
+    "clearAll": "Xóa tất cả",
+    "clearAllConfirm": "Bạn có chắc chắn muốn xóa tất cả mục chưa ghim?",
+    "copiedTimes": "Đã chép {count} lần",
+    "imagePlaceholder": "Hình ảnh" 
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4788,14 +4941,23 @@ export const vi: TranslationKeys = {
     "copyFile": "Sao chép Tệp",
     "clickToPasteDrag": "Nhấp để dán · Kéo để di chuyển",
     "openInExplorer": "Mở vị trí trong Explorer",
-    "current": "Hiện tại"
+    "current": "Hiện tại",
+    "clickToDeselect": "Bấm để bỏ chọn",
+    "clickToSelect": "Bấm để chọn",
+    "deselectItem": "Bỏ chọn mục",
+    "selectItem": "Chọn mục",
+    "clickToPasteImageDrag": "Bấm để dán · Kéo để thả",
+    "copied": "Đã sao chép!" 
   },
   "toast": {
     "copiedToClipboard": "Đã sao chép vào bảng tạm",
     "itemDeleted": "Đã xóa mục",
     "itemPinned": "Đã ghim mục",
     "itemUnpinned": "Đã bỏ ghim mục",
-    "settingsSaved": "Đã lưu cài đặt"
+    "settingsSaved": "Đã lưu cài đặt",
+    "shortcutUpdated": "Đã đổi phím tắt sang {shortcut}",
+    "clearFailed": "Không thể xóa các mục",
+    "deleteFailed": "Không thể xóa mục" 
   },
   "footer": {
     "communityAndSupport": "Cộng đồng & Hỗ trợ",
@@ -4806,6 +4968,7 @@ export const vi: TranslationKeys = {
     "quitTitle": "Thoát T-Drop",
     "quitDesc": "Đóng ứng dụng và dừng quy trình nền",
     "supportPromo": "T-Drop hoàn toàn miễn phí và mã nguồn mở. Nếu ứng dụng giúp ích cho công việc hằng ngày của bạn, hãy cân nhắc ủng hộ quá trình phát triển để ứng dụng ngày càng tốt hơn!",
+    "supportTagline": "T-Drop hoàn toàn miễn phí và mã nguồn mở.", 
     "supportOnKofi": "Ủng hộ tác giả (Quét mã QR)",
     "starOnGithub": "Đánh sao trên GitHub",
     "reviewOnStore": "Review on Microsoft Store",
@@ -4837,13 +5000,54 @@ export const vi: TranslationKeys = {
     "beaconStyle": "Kiểu chỉ báo",
     "textSize": "Cỡ chữ",
     "audioFeedback": "Âm thanh & Phản hồi",
-    "languageSelectDesc": "Chọn ngôn ngữ hiển thị giao diện"
+    "languageSelectDesc": "Chọn ngôn ngữ hiển thị giao diện",
+    "keyboardShortcut": "Phím tắt",
+    "aboutEdgeDrop": "Về T-Drop",
+    "clipboardBehaviour": "Hành vi bảng tạm",
+    "edgeHintPulseDesc": "Hiệu ứng chỉ báo vùng kích hoạt",
+    "fullscreenProtection": "Chế độ toàn màn hình",
+    "hoverActivation": "Kích hoạt bằng rê chuột",
+    "restartCleanup": "Dọn dẹp khi khởi động lại",
+    "storageCapacity": "Dung lượng lưu trữ",
+    "toggleHotkeyPressDesc": "Bấm tổ hợp phím để ghi nhận phím tắt mới",
+    "updates": "Cập nhật" 
   },
   "common": {
     "close": "Đóng",
     "cancel": "Hủy",
     "save": "Lưu",
     "ok": "Đồng ý"
+  },
+  "backup": {
+    "title": "Sao lưu & Khôi phục",
+    "desc": "Xuất lịch sử bảng tạm, mục đã ghim và cài đặt ra tệp sao lưu (.txa) hoặc khôi phục từ bản sao lưu trước đó.",
+    "exportBtn": "Sao lưu dữ liệu (.txa)",
+    "importBtn": "Khôi phục dữ liệu (.txa)",
+    "exportSuccess": "Đã xuất bản sao lưu thành công!",
+    "exportFailed": "Không thể xuất bản sao lưu.",
+    "importSuccess": "Khôi phục thành công {count} mục!",
+    "importFailed": "Không thể khôi phục: {error}",
+    "autoDetectedTitle": "Phát hiện bản sao lưu",
+    "previewTitle": "Xem trước bản sao lưu",
+    "confirmRestore": "Xác nhận khôi phục",
+    "modeMerge": "Gộp với dữ liệu hiện tại",
+    "modeMergeDesc": "Thêm các mục từ sao lưu mà không xóa dữ liệu hiện có.",
+    "modeOverwrite": "Ghi đè (Thay thế toàn bộ)",
+    "modeOverwriteDesc": "Xóa toàn bộ dữ liệu hiện tại và thay thế bằng bản sao lưu.",
+    "items": "Số lượng",
+    "itemsUnit": "mục",
+    "createdAt": "Thời gian tạo",
+    "file": "Tệp sao lưu",
+    "restoring": "Đang khôi phục...",
+    "cancel": "Hủy"
+  },
+  "emoji": {
+    "categories": "Danh mục",
+    "clearRecents": "Xóa biểu tượng gần đây",
+    "emptyRecents": "Chưa có biểu tượng gần đây",
+    "loadFailed": "Không thể tải biểu tượng cảm xúc",
+    "open": "Bảng chọn Emoji",
+    "skinTone": "Tông màu da"
   }
 }
 

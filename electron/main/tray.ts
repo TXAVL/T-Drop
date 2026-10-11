@@ -158,7 +158,9 @@ export function getTrayText(settingsLang: string | undefined, key: keyof typeof 
     langCode = detectSystemLanguage()
   }
   const dict = TRANSLATIONS[langCode]
-  return (dict?.tray?.[key]) || en.tray[key] || key
+  const dictVal = (dict?.tray as any)?.[key]
+  const enVal = (en.tray as any)?.[key]
+  return String(dictVal || enVal || key)
 }
 
 export function createTray(): Tray {
