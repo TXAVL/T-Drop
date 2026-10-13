@@ -45,7 +45,7 @@ export function quitAndInstallUpdate(): void {
   }
   console.log('[AutoUpdater] quitAndInstall triggered by renderer button.')
   try {
-    _autoUpdater.quitAndInstall(false, true)
+    _autoUpdater.quitAndInstall(true, true)
   } catch (err) {
     console.error('[AutoUpdater] quitAndInstall failed:', err)
   }
@@ -198,6 +198,10 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
       console.log(`[AutoUpdater] Fast check found new version: v${latestVersion} (current: v${currentVersion})`)
       _cachedUpdateInfo = { hasUpdate: true, latestVersion, downloaded: false }
       pushState.updateAvailable({ version: latestVersion })
+      const mode = resolveUpdateMode(getSettings())
+      if (mode === 'auto') {
+        void startUpdateDownload()
+      }
       return { status: 'available', version: latestVersion }
     } else {
       console.log(`[AutoUpdater] Fast check confirms app is up to date: v${currentVersion}`)
@@ -215,6 +219,11 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
       const result = await Promise.race([checkPromise, timeoutPromise])
       if (result && result.updateInfo && semverCompare(result.updateInfo.version, app.getVersion()) > 0) {
         _cachedUpdateInfo = { hasUpdate: true, latestVersion: result.updateInfo.version, downloaded: false }
+        pushState.updateAvailable({ version: result.updateInfo.version })
+        const mode = resolveUpdateMode(getSettings())
+        if (mode === 'auto') {
+          void startUpdateDownload()
+        }
         return { status: 'available', version: result.updateInfo.version }
       }
       return { status: 'up-to-date', version: app.getVersion() }
@@ -260,6 +269,11 @@ export async function startUpdateDownload(): Promise<void> {
   }
   pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
   try {
+    try {
+      await _autoUpdater.checkForUpdates()
+    } catch {
+      /* ignore pre-check error, attempt download */
+    }
     await _autoUpdater.downloadUpdate()
   } catch (err) {
     console.warn('[AutoUpdater] downloadUpdate failed, retrying with checkForUpdates first:', err)

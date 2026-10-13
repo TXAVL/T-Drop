@@ -10,16 +10,17 @@ import { clipboard } from 'electron'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { existsSync } from 'node:fs'
-import koffi from 'koffi'
 import type { ClipboardImageSource, ItemData } from '../../shared/types'
 
 let getSeqNum: (() => number) | null = null
 if (process.platform === 'win32') {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const koffi = require('koffi')
     const user32 = koffi.load('user32.dll')
     getSeqNum = user32.func('uint32 GetClipboardSequenceNumber()')
   } catch (err) {
-    console.error('[formats] Failed to load GetClipboardSequenceNumber from user32.dll:', err)
+    console.warn('[formats] Failed to load GetClipboardSequenceNumber via koffi:', err)
   }
 }
 

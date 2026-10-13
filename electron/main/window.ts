@@ -14,7 +14,6 @@
  */
 import { BrowserWindow, screen, shell, powerMonitor, app } from 'electron'
 import { join } from 'node:path'
-import koffi from 'koffi'
 import { APP_CONFIG } from './config'
 import { runtime } from './config'
 import { PATHS } from '../store/paths'
@@ -42,6 +41,8 @@ let setForegroundWindowFn: SetForegroundWindowFn | null = null
 
 if (process.platform === 'win32') {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const koffi = require('koffi')
     const user32 = koffi.load('user32.dll')
     registerWindowMessageFn = user32.func('uint32 RegisterWindowMessageA(const char *lpString)') as RegisterWindowMessageFn
     try {

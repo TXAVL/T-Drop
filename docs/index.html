@@ -377,7 +377,7 @@
         </button>
         <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.3</span>
+          <span data-i18n="nav.download">Tải về v0.1.4</span>
         </a>
       </div>
     </div>
@@ -391,12 +391,57 @@
       <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.</p>
     </div>
 
-    <!-- ── VERSION 0.1.3 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.4 ────────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.3</span>
+          <span>Version v0.1.4</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">13/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v014.summary">
+        Khắc phục sự cố tải ngầm bản cập nhật bị kẹt ở trạng thái "Đang kết nối...", nâng cấp quyền Administrator UAC tự động khi cài đặt giúp ngăn lỗi trình gỡ cài đặt NSIS xóa mất ứng dụng trên Windows, đồng thời tối ưu hóa việc nạp module gốc koffi tránh gây lỗi tắt ứng dụng đột ngột (Issue #2).
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v014.item1.title">Tự Động Kích Hoạt Tải Xuống Cập Nhật (Auto-Trigger Download)</h3>
+            <p data-i18n="v014.item1.desc">
+              Khắc phục lỗi kiểm tra cập nhật bị kẹt vô tận ở 0% ("Đang kết nối đến máy chủ tải về..."), chỉ tải sau khi khởi động lại ứng dụng. Giờ đây khi phát hiện bản mới, tiến trình tải ngầm được kích hoạt ngay lập tức mà không cần khởi động lại.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v014.item2.title">Phân Quyền UAC Cho Bộ Cài Đặt NSIS (UAC Elevation &amp; Silent Install)</h3>
+            <p data-i18n="v014.item2.desc">
+              Cấu hình phân quyền quản trị perMachine và allowElevation cho bộ cài đặt NSIS. Bộ cập nhật tự động gọi elevate.exe để yêu cầu quyền Administrator khi ghi đè tệp tin trong Program Files, loại bỏ hoàn toàn tình trạng bộ gỡ cài đặt xóa sạch ứng dụng và báo lỗi thiếu quyền. Đồng thời chuyển sang chế độ cài đặt im lặng giúp cập nhật an toàn, không xung đột giao diện.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v014.item3.title">Nạp An Toàn Module Hệ Thống Koffi (Resilient Koffi Loading - Issue #2)</h3>
+            <p data-i18n="v014.item3.desc">
+              Chuyển đổi toàn bộ việc nạp thư viện koffi sang cơ chế dynamic require với khối try/catch dự phòng trên toàn bộ ứng dụng (fullscreen, window, formats). Khắc phục triệt để lỗi ngoại lệ ENOENT koffi/package.json khiến ứng dụng không thể khởi động được nếu tệp tin gốc bị gián đoạn.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.3 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.3</span>
         </div>
         <div class="release-date">13/10/2026</div>
       </div>
@@ -647,7 +692,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.3',
+        'nav.download': 'Tải về v0.1.4',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.',
@@ -655,6 +700,13 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v014.summary': 'Khắc phục sự cố tải ngầm bản cập nhật bị kẹt ở trạng thái "Đang kết nối...", nâng cấp quyền Administrator UAC tự động khi cài đặt giúp ngăn lỗi trình gỡ cài đặt NSIS xóa mất ứng dụng trên Windows, đồng thời tối ưu hóa việc nạp module gốc koffi tránh gây lỗi tắt ứng dụng đột ngột (Issue #2).',
+        'v014.item1.title': 'Tự Động Kích Hoạt Tải Xuống Cập Nhật (Auto-Trigger Download)',
+        'v014.item1.desc': 'Khắc phục lỗi kiểm tra cập nhật bị kẹt vô tận ở 0% ("Đang kết nối đến máy chủ tải về..."), chỉ tải sau khi khởi động lại ứng dụng. Giờ đây khi phát hiện bản mới, tiến trình tải ngầm được kích hoạt ngay lập tức mà không cần khởi động lại.',
+        'v014.item2.title': 'Phân Quyền UAC Cho Bộ Cài Đặt NSIS (UAC Elevation & Silent Install)',
+        'v014.item2.desc': 'Cấu hình phân quyền quản trị perMachine và allowElevation cho bộ cài đặt NSIS. Bộ cập nhật tự động gọi elevate.exe để yêu cầu quyền Administrator khi ghi đè tệp tin trong Program Files, loại bỏ hoàn toàn tình trạng bộ gỡ cài đặt xóa sạch ứng dụng và báo lỗi thiếu quyền. Đồng thời chuyển sang chế độ cài đặt im lặng giúp cập nhật an toàn, không xung đột giao diện.',
+        'v014.item3.title': 'Nạp An Toàn Module Hệ Thống Koffi (Resilient Koffi Loading - Issue #2)',
+        'v014.item3.desc': 'Chuyển đổi toàn bộ việc nạp thư viện koffi sang cơ chế dynamic require với khối try/catch dự phòng trên toàn bộ ứng dụng (fullscreen, window, formats). Khắc phục triệt để lỗi ngoại lệ ENOENT koffi/package.json khiến ứng dụng không thể khởi động được nếu tệp tin gốc bị gián đoạn.',
         'v013.summary': 'Bổ sung công cụ Tẩy Link Rác 1-click (Clean URL / Tracker Stripper) với bộ lọc thông minh bảo toàn mốc thời gian YouTube; nhận diện và chuyển đổi đa định dạng màu sắc (HEX, RGB, HSL) với format chips và Color Inspector chuyên sâu; mở rộng chiều ngang Panel lên 320px giúp thẻ clip thông thoáng; sửa triệt để lỗi menu Xóa sạch (ClearMenu) rỗng chữ và đồng bộ trọn vẹn 31 ngôn ngữ.',
         'v013.item1.title': 'Tẩy Link Rác Thông Minh (URL Tracking Stripper)',
         'v013.item1.desc': 'Tự động nhận diện và gỡ bỏ mã theo dõi rác (utm_*, fbclid, gclid, mc_eid, Shopee sp_atk/xptdk, Twitter & TikTok share tokens). Bảo tồn mốc thời gian xem video YouTube (t=120s) khi loại bỏ tham số si. Tích hợp nút cây chổi 🧹 trên thanh công cụ hover và Preview Flyout, huy hiệu làm sạch tức thì ở chân thẻ, cùng tùy chọn tự động làm sạch liên kết khi sao chép trong Cài đặt.',
@@ -699,7 +751,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.3',
+        'nav.download': 'Download v0.1.4',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows.',
@@ -707,6 +759,13 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v014.summary': 'Resolves updater download stall stuck on "Connecting...", enforces automatic Windows UAC elevation for NSIS installer to prevent accidental app self-deletion, and adds resilient error fallback for native Koffi bindings (Fixing Issue #2).',
+        'v014.item1.title': 'Auto-Trigger Background Download',
+        'v014.item1.desc': 'Fixes update check getting stuck indefinitely at 0% ("Connecting to download server...") until app restart. Background download now triggers immediately upon detecting a new release.',
+        'v014.item2.title': 'NSIS Installer UAC Elevation & Silent Update',
+        'v014.item2.desc': 'Configured perMachine & allowElevation in NSIS builder. Updater now automatically invokes elevate.exe for Administrator privileges in Program Files, eliminating self-deletion caused by uninstaller wiping files without write permissions. Switched to silent installation for conflict-free updates.',
+        'v014.item3.title': 'Resilient Native Koffi Loading (Issue #2 Fix)',
+        'v014.item3.desc': 'Converted Koffi native library imports to dynamic try/catch guarded calls across fullscreen, window, and clipboard format handlers. Completely prevents startup crashes from missing native bindings (ENOENT koffi/package.json).',
         'v013.summary': 'Introduces 1-click Clean URL (Tracker Stripper) preserving YouTube timestamps; smart Color Swatch detection and converter (HEX, RGB, HSL) with interactive format chips and Flyout Color Inspector; expands shelf panel width to 320px for roomy clip cards; resolves empty ClearMenu options and synchronizes 31 languages.',
         'v013.item1.title': 'Smart URL Tracker Stripper (Clean URL)',
         'v013.item1.desc': 'Automatically detects and removes tracking clutter (utm_*, fbclid, gclid, mc_eid, Shopee sp_atk/xptdk, Twitter & TikTok share tokens). Preserves YouTube playback timestamps (t=120s) while stripping si params. Features 1-click broom button 🧹 on hover and Flyout, footer clean badge, and an auto-clean upon copy setting.',

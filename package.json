@@ -1,6 +1,6 @@
 {
   "name": "t-drop",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "T-Drop — a clipboard manager that lives on the left edge of your screen and expands on hover.",
   "author": "TXAVLOG",
   "license": "Apache-2.0",
@@ -88,7 +88,8 @@
     },
     "nsis": {
       "oneClick": false,
-      "perMachine": false,
+      "perMachine": true,
+      "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
       "shortcutName": "T-Drop",
       "createDesktopShortcut": true,

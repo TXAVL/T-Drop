@@ -36,6 +36,11 @@ Bản kế hoạch chi tiết các giai đoạn phát triển tính năng cho **
 * [x] Mở rộng bề ngang panel từ `270px` lên `320px` (+50px không gian ngang, window width `430px`), thẻ clip rộng rãi và dễ nhìn hơn.
 * [x] Sửa lỗi menu **Xóa sạch** (ClearMenu) bị rỗng hộp đen do thiếu translation keys: bổ sung đầy đủ bản dịch 31 ngôn ngữ và safe fallbacks.
 
+### 1.4 Bản vá khẩn cấp: Tự động tải cập nhật & Quyền quản trị UAC (v0.1.4)
+* [x] Sửa lỗi tự động tải cập nhật bị treo ở 0% ("Đang kết nối..."): tự động kích hoạt tiến trình download trong chế độ auto mode.
+* [x] Cấu hình `perMachine` & `allowElevation` trong NSIS installer: yêu cầu quyền Administrator qua UAC (`elevate.exe`), ngăn lỗi gỡ cài đặt tự xóa app khi cập nhật trong `Program Files`.
+* [x] Nạp an toàn module gốc `koffi` (dynamic try/catch require): ngăn chặn lỗi crash `ENOENT koffi/package.json` (Issue #2).
+
 ---
 
 ## ⏳ Giai đoạn 2: Tiện ích Ảnh & Tệp tin (Image & File Power-Ups)
