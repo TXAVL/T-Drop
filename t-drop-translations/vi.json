@@ -75,7 +75,9 @@
     "newUpdateAvailable": "Có bản cập nhật mới {version}",
     "slideToRestart": "Kéo để khởi động lại",
     "restarting": "Đang khởi động lại...",
-    "restartFailed": "Khởi động lại thất bại"
+    "restartFailed": "Khởi động lại thất bại",
+    "cleanTrackingUrlsTitle": "Tự động làm sạch link theo dõi",
+    "cleanTrackingUrlsDesc": "Tự động loại bỏ các tham số theo dõi (UTM, fbclid, si...) khỏi liên kết khi sao chép"
   },
   "position": {
     "edgePlacementTitle": "Vị trí mép",
@@ -132,6 +134,11 @@
     "unpin": "Bỏ ghim",
     "delete": "Xóa",
     "clear": "Xóa sạch",
+    "clearLast1h": "Xóa 1 giờ qua",
+    "clearLast6h": "Xóa 6 giờ qua",
+    "clearLast24h": "Xóa 24 giờ qua",
+    "clearAll": "Xóa tất cả lịch sử",
+    "clearAllConfirm": "Nhấn lần nữa để xác nhận",
     "dropToSave": "Thả để lưu",
     "dropToSaveDesc": "Bất kỳ tệp, hình ảnh, liên kết hoặc văn bản nào",
     "justNow": "vừa xong",
@@ -156,7 +163,11 @@
     "clearLast6h": "Xóa 6 giờ qua",
     "clearLast24h": "Xóa 24 giờ qua",
     "clearAll": "Xóa toàn bộ lịch sử",
-    "clearAllConfirm": "Nhấn lại để xác nhận"
+    "clearAllConfirm": "Nhấn lại để xác nhận",
+    "cleanUrl": "Làm sạch liên kết (Bỏ theo dõi)",
+    "cleanUrlCopied": "Đã sao chép liên kết sạch!",
+    "convertColor": "Chuyển đổi & Sao chép mã màu",
+    "hasTracking": "Chứa tham số theo dõi"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -248,7 +259,11 @@
     "copyFile": "Sao chép Tệp",
     "clickToPasteDrag": "Nhấp để dán · Kéo để di chuyển",
     "openInExplorer": "Mở vị trí trong Explorer",
-    "current": "Hiện tại"
+    "current": "Hiện tại",
+    "colorFormats": "Định dạng màu",
+    "copyHex": "Sao chép HEX",
+    "copyRgb": "Sao chép RGB",
+    "copyHsl": "Sao chép HSL"
   },
   "toast": {
     "copiedToClipboard": "Đã sao chép vào bảng tạm",

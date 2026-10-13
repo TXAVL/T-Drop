@@ -75,7 +75,9 @@
     "newUpdateAvailable": "New update available {version}",
     "slideToRestart": "Slide to restart",
     "restarting": "Restarting...",
-    "restartFailed": "Restart failed"
+    "restartFailed": "Restart failed",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Edge Placement",
@@ -158,7 +160,11 @@
     "moreImages": "+{count} more images",
     "moreFiles": "+{count} more files",
     "singleFile": "1 file",
-    "scrollToTop": "Scroll to top"
+    "scrollToTop": "Scroll to top",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -250,7 +256,11 @@
     "copyFile": "Copy File",
     "clickToPasteDrag": "Click to paste · Drag to move",
     "openInExplorer": "Open location in Explorer",
-    "current": "Current"
+    "current": "Current",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copied to clipboard",

@@ -164,7 +164,7 @@ win.addEventListener('drop', (e: any) => {
   if (plainText) {
     e.preventDefault()
     const isUrl = /^(https?:\/\/|www\.)[^\s]+$/i.test(plainText)
-    const isColor = /^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(plainText)
+    const isColor = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$|^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*[\d.]+%?\s*)?\)$|^hsla?\(\s*\d{1,3}(?:deg)?\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(?:\s*,\s*[\d.]+%?\s*)?\)$/i.test(plainText)
     invoke('item:add-data', {
       kind: 'text',
       text: plainText,

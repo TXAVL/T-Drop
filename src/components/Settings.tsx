@@ -1392,6 +1392,25 @@ export function Settings({
                 </div>
               </div>
 
+              {/* Card 8b: Auto-clean Tracking URLs */}
+              <div className="settings-shelf-card rules-card behaviour-col">
+                <div className="shelf-card-top">
+                  <div className="setting-group-label">{t('groups.linkPrivacy') || 'LINK PRIVACY'}</div>
+                </div>
+                <div className="shelf-card-inline">
+                  <div className="shelf-card-inline-text">
+                    <div className="setting-title">{t('behaviour.cleanTrackingUrlsTitle')}</div>
+                    <div className="setting-desc">{t('behaviour.cleanTrackingUrlsDesc')}</div>
+                  </div>
+                  <div className="shelf-card-inline-action">
+                    <Toggle
+                      checked={settings.cleanTrackingUrls ?? false}
+                      onChange={(v) => patch({ cleanTrackingUrls: v })}
+                    />
+                  </div>
+                </div>
+              </div>
+
               {/* ── SUB-GROUP 4 DIVIDER: Storage & Retention ── */}
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('tabs.storageRetention') || 'STORAGE & RETENTION'}</span>
@@ -2157,6 +2176,25 @@ export function Settings({
                         <Toggle
                           checked={settings.clearUnpinnedOnRestart}
                           onChange={(v) => patch({ clearUnpinnedOnRestart: v })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 8b: Auto-clean Tracking URLs */}
+                  <div className="setting-card">
+                    <div className="shelf-card-top">
+                      <div className="setting-group-label">{t('groups.linkPrivacy') || 'LINK PRIVACY'}</div>
+                    </div>
+                    <div className="shelf-card-inline">
+                      <div className="shelf-card-inline-text">
+                        <div className="setting-title">{t('behaviour.cleanTrackingUrlsTitle')}</div>
+                        <div className="setting-desc">{t('behaviour.cleanTrackingUrlsDesc')}</div>
+                      </div>
+                      <div className="shelf-card-inline-action">
+                        <Toggle
+                          checked={settings.cleanTrackingUrls ?? false}
+                          onChange={(v) => patch({ cleanTrackingUrls: v })}
                         />
                       </div>
                     </div>

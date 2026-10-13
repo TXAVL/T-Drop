@@ -141,9 +141,18 @@ export interface TranslationKeys {
     ungroup: string
     copyFilePath: string
     moreImages: string
-    moreFiles: string
     singleFile: string
     scrollToTop: string
+    cleanUrl?: string
+    cleanUrlCopied?: string
+    convertColor?: string
+    hasTracking?: string
+    clearLast1h?: string
+    clearLast6h?: string
+    clearLast24h?: string
+    clearAll?: string
+    clearAllConfirm?: string
+    [key: string]: string | undefined
   }
   fileKinds: {
     pdf: string
@@ -237,6 +246,11 @@ export interface TranslationKeys {
     clickToPasteDrag: string
     openInExplorer: string
     current: string
+    colorFormats?: string
+    copyHex?: string
+    copyRgb?: string
+    copyHsl?: string
+    [key: string]: string | undefined
   }
   toast: {
     copiedToClipboard: string
@@ -536,7 +550,9 @@ export const en: TranslationKeys = {
     "downloadingWithPercent": "Downloading update ({percent}%)...",
     "download": "Download",
     "notifyModeSubtitle": "Notification mode · Click to download",
-    "newUpdateAvailable": "New update available {version}"
+    "newUpdateAvailable": "New update available {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Edge Placement",
@@ -593,6 +609,11 @@ export const en: TranslationKeys = {
     "unpin": "Unpin",
     "delete": "Delete",
     "clear": "Clear",
+    "clearLast1h": "Clear last hour",
+    "clearLast6h": "Clear last 6 hours",
+    "clearLast24h": "Clear last 24 hours",
+    "clearAll": "Clear all history",
+    "clearAllConfirm": "Tap again to confirm",
     "dropToSave": "Drop to save",
     "dropToSaveDesc": "Any file, image, link, or text",
     "justNow": "just now",
@@ -612,7 +633,11 @@ export const en: TranslationKeys = {
     "moreImages": "+{count} more images",
     "moreFiles": "+{count} more files",
     "singleFile": "1 file",
-    "scrollToTop": "Scroll to top"
+    "scrollToTop": "Scroll to top",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -704,7 +729,11 @@ export const en: TranslationKeys = {
     "copyFile": "Copy File",
     "clickToPasteDrag": "Click to paste · Drag to move",
     "openInExplorer": "Open location in Explorer",
-    "current": "Current"
+    "current": "Current",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copied to clipboard",
@@ -829,7 +858,9 @@ export const es: TranslationKeys = {
     "downloadingWithPercent": "Descargando actualización ({percent}%)...",
     "download": "Descargar",
     "notifyModeSubtitle": "Modo de notificación · Haz clic para descargar",
-    "newUpdateAvailable": "Nueva actualización disponible {version}"
+    "newUpdateAvailable": "Nueva actualización disponible {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Borde de la pantalla",
@@ -886,6 +917,11 @@ export const es: TranslationKeys = {
     "unpin": "Desfijar",
     "delete": "Eliminar",
     "clear": "Borrar",
+    "clearLast1h": "Borrar la última hora",
+    "clearLast6h": "Borrar las últimas 6 horas",
+    "clearLast24h": "Borrar las últimas 24 horas",
+    "clearAll": "Borrar todo el historial",
+    "clearAllConfirm": "Toca de nuevo para confirmar",
     "dropToSave": "Soltar para guardar",
     "dropToSaveDesc": "Cualquier archivo, imagen, enlace o texto",
     "justNow": "justo ahora",
@@ -905,7 +941,11 @@ export const es: TranslationKeys = {
     "moreImages": "+{count} imágenes más",
     "moreFiles": "+{count} archivos más",
     "singleFile": "1 archivo",
-    "scrollToTop": "Volver arriba"
+    "scrollToTop": "Volver arriba",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -997,7 +1037,11 @@ export const es: TranslationKeys = {
     "copyFile": "Copiar archivo",
     "clickToPasteDrag": "Haz clic para pegar · Arrastra para mover",
     "openInExplorer": "Abrir ubicación en el Explorador",
-    "current": "Actual"
+    "current": "Actual",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copiado al portapapeles",
@@ -1122,7 +1166,9 @@ export const fr: TranslationKeys = {
     "downloadingWithPercent": "Téléchargement de la mise à jour ({percent}%)...",
     "download": "Télécharger",
     "notifyModeSubtitle": "Mode notification · Cliquez pour télécharger",
-    "newUpdateAvailable": "Nouvelle mise à jour disponible {version}"
+    "newUpdateAvailable": "Nouvelle mise à jour disponible {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Bord de l'écran",
@@ -1179,6 +1225,11 @@ export const fr: TranslationKeys = {
     "unpin": "Désépingler",
     "delete": "Supprimer",
     "clear": "Effacer",
+    "clearLast1h": "Effacer la dernière heure",
+    "clearLast6h": "Effacer les 6 dernières heures",
+    "clearLast24h": "Effacer les 24 dernières heures",
+    "clearAll": "Effacer tout l’historique",
+    "clearAllConfirm": "Appuyez à nouveau pour confirmer",
     "dropToSave": "Déposer pour enregistrer",
     "dropToSaveDesc": "Tout fichier, image, lien ou texte",
     "justNow": "à l'instant",
@@ -1198,7 +1249,11 @@ export const fr: TranslationKeys = {
     "moreImages": "+{count} images de plus",
     "moreFiles": "+{count} fichiers de plus",
     "singleFile": "1 fichier",
-    "scrollToTop": "Remonter en haut"
+    "scrollToTop": "Remonter en haut",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1290,7 +1345,11 @@ export const fr: TranslationKeys = {
     "copyFile": "Copier le fichier",
     "clickToPasteDrag": "Cliquer pour coller · Glisser pour déplacer",
     "openInExplorer": "Ouvrir l'emplacement dans l'Explorateur",
-    "current": "Actuel"
+    "current": "Actuel",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copié dans le presse-papiers",
@@ -1415,7 +1474,9 @@ export const de: TranslationKeys = {
     "downloadingWithPercent": "Update wird heruntergeladen ({percent}%)...",
     "download": "Herunterladen",
     "notifyModeSubtitle": "Benachrichtigungsmodus · Klicken zum Herunterladen",
-    "newUpdateAvailable": "Neues Update verfügbar {version}"
+    "newUpdateAvailable": "Neues Update verfügbar {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Randplatzierung",
@@ -1472,6 +1533,11 @@ export const de: TranslationKeys = {
     "unpin": "Lösen",
     "delete": "Löschen",
     "clear": "Leeren",
+    "clearLast1h": "Letzte Stunde löschen",
+    "clearLast6h": "Letzte 6 Stunden löschen",
+    "clearLast24h": "Letzte 24 Stunden löschen",
+    "clearAll": "Gesamten Verlauf löschen",
+    "clearAllConfirm": "Zum Bestätigen erneut tippen",
     "dropToSave": "Ablegen zum Speichern",
     "dropToSaveDesc": "Beliebige Datei, Bild, Link oder Text",
     "justNow": "gerade eben",
@@ -1491,7 +1557,11 @@ export const de: TranslationKeys = {
     "moreImages": "+{count} weitere Bilder",
     "moreFiles": "+{count} weitere Dateien",
     "singleFile": "1 Datei",
-    "scrollToTop": "Nach oben scrollen"
+    "scrollToTop": "Nach oben scrollen",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1583,7 +1653,11 @@ export const de: TranslationKeys = {
     "copyFile": "Datei kopieren",
     "clickToPasteDrag": "Klicken zum Einfügen · Ziehen zum Verschieben",
     "openInExplorer": "Ort im Explorer öffnen",
-    "current": "Aktuell"
+    "current": "Aktuell",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "In Zwischenablage kopiert",
@@ -1708,7 +1782,9 @@ export const it: TranslationKeys = {
     "downloadingWithPercent": "Download aggiornamento in corso ({percent}%)...",
     "download": "Scarica",
     "notifyModeSubtitle": "Modalità notifica · Fai clic per scaricare",
-    "newUpdateAvailable": "Nuovo aggiornamento disponibile {version}"
+    "newUpdateAvailable": "Nuovo aggiornamento disponibile {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Posizionamento bordo",
@@ -1765,6 +1841,11 @@ export const it: TranslationKeys = {
     "unpin": "Sblocca",
     "delete": "Elimina",
     "clear": "Cancella",
+    "clearLast1h": "Cancella ultima ora",
+    "clearLast6h": "Cancella ultime 6 ore",
+    "clearLast24h": "Cancella ultime 24 ore",
+    "clearAll": "Cancella tutta la cronologia",
+    "clearAllConfirm": "Tocca di nuovo per confermare",
     "dropToSave": "Trascina per salvare",
     "dropToSaveDesc": "Qualsiasi file, immagine, link o testo",
     "justNow": "adesso",
@@ -1784,7 +1865,11 @@ export const it: TranslationKeys = {
     "moreImages": "+{count} altre immagini",
     "moreFiles": "+{count} altri file",
     "singleFile": "1 file",
-    "scrollToTop": "Torna in cima"
+    "scrollToTop": "Torna in cima",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -1876,7 +1961,11 @@ export const it: TranslationKeys = {
     "copyFile": "Copia file",
     "clickToPasteDrag": "Clic per incollare · Trascina per spostare",
     "openInExplorer": "Apri posizione in Explorer",
-    "current": "Corrente"
+    "current": "Corrente",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copiato negli appunti",
@@ -2001,7 +2090,9 @@ export const pt: TranslationKeys = {
     "downloadingWithPercent": "Baixando atualização ({percent}%)...",
     "download": "Baixar",
     "notifyModeSubtitle": "Modo de notificação · Clique para baixar",
-    "newUpdateAvailable": "Nova atualização disponível {version}"
+    "newUpdateAvailable": "Nova atualização disponível {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Posicionamento da borda",
@@ -2058,6 +2149,11 @@ export const pt: TranslationKeys = {
     "unpin": "Desafixar",
     "delete": "Excluir",
     "clear": "Limpar",
+    "clearLast1h": "Limpar última hora",
+    "clearLast6h": "Limpar últimas 6 horas",
+    "clearLast24h": "Limpar últimas 24 horas",
+    "clearAll": "Limpar todo o histórico",
+    "clearAllConfirm": "Toque novamente para confirmar",
     "dropToSave": "Solte para salvar",
     "dropToSaveDesc": "Qualquer arquivo, imagem, link ou texto",
     "justNow": "agora mesmo",
@@ -2077,7 +2173,11 @@ export const pt: TranslationKeys = {
     "moreImages": "+{count} imagens a mais",
     "moreFiles": "+{count} arquivos a mais",
     "singleFile": "1 arquivo",
-    "scrollToTop": "Voltar ao topo"
+    "scrollToTop": "Voltar ao topo",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2169,7 +2269,11 @@ export const pt: TranslationKeys = {
     "copyFile": "Copiar arquivo",
     "clickToPasteDrag": "Clique para colar · Arraste para mover",
     "openInExplorer": "Abrir local no Explorer",
-    "current": "Atual"
+    "current": "Atual",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copiado para a área de transferência",
@@ -2294,7 +2398,9 @@ export const ru: TranslationKeys = {
     "downloadingWithPercent": "Загрузка обновления ({percent}%)...",
     "download": "Скачать",
     "notifyModeSubtitle": "Режим уведомлений · Нажмите для загрузки",
-    "newUpdateAvailable": "Доступно новое обновление {version}"
+    "newUpdateAvailable": "Доступно новое обновление {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Размещение у края",
@@ -2351,6 +2457,11 @@ export const ru: TranslationKeys = {
     "unpin": "Открепить",
     "delete": "Удалить",
     "clear": "Очистить",
+    "clearLast1h": "Очистить за последний час",
+    "clearLast6h": "Очистить за последние 6 часов",
+    "clearLast24h": "Очистить за последние 24 часа",
+    "clearAll": "Очистить всю историю",
+    "clearAllConfirm": "Нажмите ещё раз для подтверждения",
     "dropToSave": "Перетащите для сохранения",
     "dropToSaveDesc": "Любой файл, изображение, ссылку или текст",
     "justNow": "только что",
@@ -2370,7 +2481,11 @@ export const ru: TranslationKeys = {
     "moreImages": "+{count} ещё изображений",
     "moreFiles": "+{count} ещё файлов",
     "singleFile": "1 файл",
-    "scrollToTop": "Прокрутить наверх"
+    "scrollToTop": "Прокрутить наверх",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2462,7 +2577,11 @@ export const ru: TranslationKeys = {
     "copyFile": "Копировать файл",
     "clickToPasteDrag": "Нажмите, чтобы вставить · Перетащите, чтобы переместить",
     "openInExplorer": "Открыть расположение в Проводнике",
-    "current": "Текущий"
+    "current": "Текущий",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Скопировано в буфер обмена",
@@ -2587,7 +2706,9 @@ export const ja: TranslationKeys = {
     "downloadingWithPercent": "アップデートをダウンロード中 ({percent}%)...",
     "download": "ダウンロード",
     "notifyModeSubtitle": "通知モード · クリックしてダウンロード",
-    "newUpdateAvailable": "新しいアップデートがあります {version}"
+    "newUpdateAvailable": "新しいアップデートがあります {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "画面端の配置",
@@ -2644,6 +2765,11 @@ export const ja: TranslationKeys = {
     "unpin": "ピン留め解除",
     "delete": "削除",
     "clear": "クリア",
+    "clearLast1h": "過去1時間を消去",
+    "clearLast6h": "過去6時間を消去",
+    "clearLast24h": "過去24時間を消去",
+    "clearAll": "履歴をすべて消去",
+    "clearAllConfirm": "もう一度押して確認します",
     "dropToSave": "ここにドロップして保存",
     "dropToSaveDesc": "任意のファイル、画像、リンク、テキストを保存できます",
     "justNow": "たった今",
@@ -2663,7 +2789,11 @@ export const ja: TranslationKeys = {
     "moreImages": "+{count} 枚の画像",
     "moreFiles": "+{count} 個のファイル",
     "singleFile": "1 個のファイル",
-    "scrollToTop": "先頭へスクロール"
+    "scrollToTop": "先頭へスクロール",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -2755,7 +2885,11 @@ export const ja: TranslationKeys = {
     "copyFile": "ファイルをコピー",
     "clickToPasteDrag": "クリックで貼り付け、ドラッグで移動",
     "openInExplorer": "エクスプローラーで開く",
-    "current": "現在"
+    "current": "現在",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "クリップボードにコピーしました",
@@ -2880,7 +3014,9 @@ export const ko: TranslationKeys = {
     "downloadingWithPercent": "업데이트 다운로드 중 ({percent}%)...",
     "download": "다운로드",
     "notifyModeSubtitle": "알림 모드 · 클릭하여 다운로드",
-    "newUpdateAvailable": "새 업데이트 이용 가능 {version}"
+    "newUpdateAvailable": "새 업데이트 이용 가능 {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "가장자리 배치",
@@ -2937,6 +3073,11 @@ export const ko: TranslationKeys = {
     "unpin": "고정 해제",
     "delete": "삭제",
     "clear": "지우기",
+    "clearLast1h": "최근 1시간 지우기",
+    "clearLast6h": "최근 6시간 지우기",
+    "clearLast24h": "최근 24시간 지우기",
+    "clearAll": "전체 기록 지우기",
+    "clearAllConfirm": "확인하려면 다시 탭하세요",
     "dropToSave": "드롭하여 저장",
     "dropToSaveDesc": "모든 파일, 이미지, 링크 또는 텍스트",
     "justNow": "방금",
@@ -2956,7 +3097,11 @@ export const ko: TranslationKeys = {
     "moreImages": "+{count}개 이미지 더",
     "moreFiles": "+{count}개 파일 더",
     "singleFile": "1개 파일",
-    "scrollToTop": "맨 위로 스크롤"
+    "scrollToTop": "맨 위로 스크롤",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3048,7 +3193,11 @@ export const ko: TranslationKeys = {
     "copyFile": "파일 복사",
     "clickToPasteDrag": "클릭하여 붙여넣기 · 드래그하여 이동",
     "openInExplorer": "탐색기에서 위치 열기",
-    "current": "현재"
+    "current": "현재",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "클립보드에 복사됨",
@@ -3173,7 +3322,9 @@ export const zhCN: TranslationKeys = {
     "downloadingWithPercent": "正在下载更新 ({percent}%)...",
     "download": "下载",
     "notifyModeSubtitle": "通知模式 · 点击下载",
-    "newUpdateAvailable": "发现新版本 {version}"
+    "newUpdateAvailable": "发现新版本 {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "边缘位置",
@@ -3230,6 +3381,11 @@ export const zhCN: TranslationKeys = {
     "unpin": "取消固定",
     "delete": "删除",
     "clear": "清除",
+    "clearLast1h": "清除最近 1 小时",
+    "clearLast6h": "清除最近 6 小时",
+    "clearLast24h": "清除最近 24 小时",
+    "clearAll": "清除所有历史记录",
+    "clearAllConfirm": "再次点击以确认",
     "dropToSave": "拖放以保存",
     "dropToSaveDesc": "任意文件、图片、链接或文本",
     "justNow": "刚刚",
@@ -3249,7 +3405,11 @@ export const zhCN: TranslationKeys = {
     "moreImages": "+{count} 张更多图片",
     "moreFiles": "+{count} 个更多文件",
     "singleFile": "1 个文件",
-    "scrollToTop": "滚动到顶部"
+    "scrollToTop": "滚动到顶部",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3341,7 +3501,11 @@ export const zhCN: TranslationKeys = {
     "copyFile": "复制文件",
     "clickToPasteDrag": "点击粘贴 · 拖动移动",
     "openInExplorer": "在资源管理器中打开位置",
-    "current": "当前"
+    "current": "当前",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "已复制到剪贴板",
@@ -3466,7 +3630,9 @@ export const zhTW: TranslationKeys = {
     "downloadingWithPercent": "正在下載更新 ({percent}%)...",
     "download": "下載",
     "notifyModeSubtitle": "通知模式 · 點擊下載",
-    "newUpdateAvailable": "有新版本可用 {version}"
+    "newUpdateAvailable": "有新版本可用 {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "邊緣位置",
@@ -3523,6 +3689,11 @@ export const zhTW: TranslationKeys = {
     "unpin": "取消固定",
     "delete": "刪除",
     "clear": "清除",
+    "clearLast1h": "清除最近 1 小時",
+    "clearLast6h": "清除最近 6 小時",
+    "clearLast24h": "清除最近 24 小時",
+    "clearAll": "清除所有歷史記錄",
+    "clearAllConfirm": "再次點擊以確認",
     "dropToSave": "拖放以儲存",
     "dropToSaveDesc": "任何檔案、圖片、連結或文字",
     "justNow": "剛剛",
@@ -3542,7 +3713,11 @@ export const zhTW: TranslationKeys = {
     "moreImages": "+{count} 張更多圖片",
     "moreFiles": "+{count} 個更多檔案",
     "singleFile": "1 個檔案",
-    "scrollToTop": "捲動到頂部"
+    "scrollToTop": "捲動到頂部",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3634,7 +3809,11 @@ export const zhTW: TranslationKeys = {
     "copyFile": "複製檔案",
     "clickToPasteDrag": "點擊貼上 · 拖動移動",
     "openInExplorer": "在檔案總管中開啟位置",
-    "current": "目前"
+    "current": "目前",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "已複製到剪貼簿",
@@ -3759,7 +3938,9 @@ export const hi: TranslationKeys = {
     "downloadingWithPercent": "अपडेट डाउनलोड हो रहा है ({percent}%)...",
     "download": "डाउनलोड करें",
     "notifyModeSubtitle": "सूचना मोड · डाउनलोड करने के लिए क्लिक करें",
-    "newUpdateAvailable": "नया अपडेट उपलब्ध है {version}"
+    "newUpdateAvailable": "नया अपडेट उपलब्ध है {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "किनारा प्लेसमेंट",
@@ -3816,6 +3997,11 @@ export const hi: TranslationKeys = {
     "unpin": "अनपिन करें",
     "delete": "हटाएँ",
     "clear": "साफ़ करें",
+    "clearLast1h": "पिछले 1 घंटे को साफ़ करें",
+    "clearLast6h": "पिछले 6 घंटे साफ़ करें",
+    "clearLast24h": "पिछले 24 घंटे साफ़ करें",
+    "clearAll": "पूरा इतिहास साफ़ करें",
+    "clearAllConfirm": "पुष्टि करने के लिए फिर से टैप करें",
     "dropToSave": "सहेजने के लिए ड्रॉप करें",
     "dropToSaveDesc": "कोई भी फ़ाइल, छवि, लिंक या टेक्स्ट",
     "justNow": "अभी",
@@ -3835,7 +4021,11 @@ export const hi: TranslationKeys = {
     "moreImages": "+{count} और छवियाँ",
     "moreFiles": "+{count} और फ़ाइलें",
     "singleFile": "1 फ़ाइल",
-    "scrollToTop": "शीर्ष पर स्क्रॉल करें"
+    "scrollToTop": "शीर्ष पर स्क्रॉल करें",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -3927,7 +4117,11 @@ export const hi: TranslationKeys = {
     "copyFile": "फ़ाइल कॉपी करें",
     "clickToPasteDrag": "पेस्ट करने के लिए क्लिक करें · खिसकाने के लिए खींचें",
     "openInExplorer": "एक्सप्लोरर में स्थान खोलें",
-    "current": "वर्तमान"
+    "current": "वर्तमान",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "क्लिपबोर्ड पर कॉपी किया गया",
@@ -4052,7 +4246,9 @@ export const ar: TranslationKeys = {
     "downloadingWithPercent": "جارٍ تنزيل التحديث ({percent}%)...",
     "download": "تنزيل",
     "notifyModeSubtitle": "وضع الإشعار · انقر للتنزيل",
-    "newUpdateAvailable": "يتوفر تحديث جديد {version}"
+    "newUpdateAvailable": "يتوفر تحديث جديد {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "موضع الحافة",
@@ -4109,6 +4305,11 @@ export const ar: TranslationKeys = {
     "unpin": "إلغاء التثبيت",
     "delete": "حذف",
     "clear": "مسح",
+    "clearLast1h": "مسح الساعة الأخيرة",
+    "clearLast6h": "مسح آخر 6 ساعات",
+    "clearLast24h": "مسح آخر 24 ساعة",
+    "clearAll": "مسح كل السجل",
+    "clearAllConfirm": "اضغط مرة أخرى للتأكيد",
     "dropToSave": "أفلِت للحفظ",
     "dropToSaveDesc": "أي ملف أو صورة أو رابط أو نص",
     "justNow": "الآن",
@@ -4128,7 +4329,11 @@ export const ar: TranslationKeys = {
     "moreImages": "+{count} صور أخرى",
     "moreFiles": "+{count} ملفات أخرى",
     "singleFile": "ملف واحد",
-    "scrollToTop": "التمرير للأعلى"
+    "scrollToTop": "التمرير للأعلى",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4220,7 +4425,11 @@ export const ar: TranslationKeys = {
     "copyFile": "نسخ الملف",
     "clickToPasteDrag": "انقر للّصق · اسحب للنقل",
     "openInExplorer": "فتح الموقع في المستكشف",
-    "current": "الحالي"
+    "current": "الحالي",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "نُسخ إلى الحافظة",
@@ -4345,7 +4554,9 @@ export const fa: TranslationKeys = {
     "downloadingWithPercent": "در حال دانلود به‌روزرسانی ({percent}%)...",
     "download": "دانلود",
     "notifyModeSubtitle": "حالت اعلان · برای دانلود کلیک کنید",
-    "newUpdateAvailable": "به‌روزرسانی جدید موجود است {version}"
+    "newUpdateAvailable": "به‌روزرسانی جدید موجود است {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "لبه برنامه",
@@ -4402,6 +4613,11 @@ export const fa: TranslationKeys = {
     "unpin": "سنجاق رو بردار",
     "delete": "پاک کن",
     "clear": "پاک کردن",
+    "clearLast1h": "پاک کردن یک ساعت گذشته",
+    "clearLast6h": "پاک کردن ۶ ساعت گذشته",
+    "clearLast24h": "پاک کردن ۲۴ ساعت گذشته",
+    "clearAll": "پاک کردن کل تاریخچه",
+    "clearAllConfirm": "برای تأیید دوباره ضربه بزنید",
     "dropToSave": "بنداز اینجا تا ذخیره بشه",
     "dropToSaveDesc": "فایل، عکس، لینک یا متن؛ هرچی",
     "justNow": "همین الان",
@@ -4421,7 +4637,11 @@ export const fa: TranslationKeys = {
     "moreImages": "+{count} عکس دیگه",
     "moreFiles": "+{count} فایل دیگه",
     "singleFile": "۱ فایل",
-    "scrollToTop": "برو بالا"
+    "scrollToTop": "برو بالا",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4513,7 +4733,11 @@ export const fa: TranslationKeys = {
     "copyFile": "فایل رو کپی کن",
     "clickToPasteDrag": "کلیک کن تا جای‌گذاری بشه · بکش تا جابه‌جا بشه",
     "openInExplorer": "توی File Explorer بازش کن",
-    "current": "فعلی"
+    "current": "فعلی",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "توی کلیپ‌بورد کپی شد",
@@ -4638,7 +4862,9 @@ export const bn: TranslationKeys = {
     "downloadingWithPercent": "আপডেট ডাউনলোড হচ্ছে ({percent}%)...",
     "download": "ডাউনলোড",
     "notifyModeSubtitle": "বিজ্ঞপ্তি মোড · ডাউনলোড করতে ক্লিক করুন",
-    "newUpdateAvailable": "নতুন আপডেট উপলব্ধ {version}"
+    "newUpdateAvailable": "নতুন আপডেট উপলব্ধ {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "প্রান্ত স্থাপনা",
@@ -4695,6 +4921,11 @@ export const bn: TranslationKeys = {
     "unpin": "আনপিন করুন",
     "delete": "মুছুন",
     "clear": "পরিষ্কার করুন",
+    "clearLast1h": "গত ১ ঘণ্টা মুছুন",
+    "clearLast6h": "গত ৬ ঘণ্টা মুছুন",
+    "clearLast24h": "গত ২৪ ঘণ্টা মুছুন",
+    "clearAll": "সব ইতিহাস মুছুন",
+    "clearAllConfirm": "নিশ্চিত করতে আবার ট্যাপ করুন",
     "dropToSave": "সংরক্ষণে ড্রপ করুন",
     "dropToSaveDesc": "যেকোনো ফাইল, ছবি, লিংক বা টেক্সট",
     "justNow": "এইমাত্র",
@@ -4714,7 +4945,11 @@ export const bn: TranslationKeys = {
     "moreImages": "+{count} টি অতিরিক্ত ছবি",
     "moreFiles": "+{count} টি অতিরিক্ত ফাইল",
     "singleFile": "১টি ফাইল",
-    "scrollToTop": "শীর্ষে স্ক্রোল করুন"
+    "scrollToTop": "শীর্ষে স্ক্রোল করুন",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -4806,7 +5041,11 @@ export const bn: TranslationKeys = {
     "copyFile": "ফাইল কপি করুন",
     "clickToPasteDrag": "পেস্ট করতে ক্লিক করুন · সরাতে টেনে আনুন",
     "openInExplorer": "এক্সপ্লোরারে অবস্থান খুলুন",
-    "current": "বর্তমান"
+    "current": "বর্তমান",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "ক্লিপবোর্ডে কপি করা হয়েছে",
@@ -4931,7 +5170,9 @@ export const tr: TranslationKeys = {
     "downloadingWithPercent": "Güncelleme indiriliyor ({percent}%)...",
     "download": "İndir",
     "notifyModeSubtitle": "Bildirim modu · İndirmek için tıklayın",
-    "newUpdateAvailable": "Yeni güncelleme mevcut {version}"
+    "newUpdateAvailable": "Yeni güncelleme mevcut {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Kenar Yerleşimi",
@@ -4988,6 +5229,11 @@ export const tr: TranslationKeys = {
     "unpin": "Sabitlemeyi kaldır",
     "delete": "Sil",
     "clear": "Temizle",
+    "clearLast1h": "Son 1 saati temizle",
+    "clearLast6h": "Son 6 saati temizle",
+    "clearLast24h": "Son 24 saati temizle",
+    "clearAll": "Tüm geçmişi temizle",
+    "clearAllConfirm": "Onaylamak için tekrar dokunun",
     "dropToSave": "Kaydetmek için bırak",
     "dropToSaveDesc": "Herhangi bir dosya, görsel, bağlantı veya metin",
     "justNow": "az önce",
@@ -5007,7 +5253,11 @@ export const tr: TranslationKeys = {
     "moreImages": "+{count} görsel daha",
     "moreFiles": "+{count} dosya daha",
     "singleFile": "1 dosya",
-    "scrollToTop": "Başa kaydır"
+    "scrollToTop": "Başa kaydır",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5099,7 +5349,11 @@ export const tr: TranslationKeys = {
     "copyFile": "Dosyayı Kopyala",
     "clickToPasteDrag": "Yapıştırmak için tıkla · Taşımak için sürükle",
     "openInExplorer": "Konumu Gezgyn'de aç",
-    "current": "Geçerli"
+    "current": "Geçerli",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Panoya kopyalandı",
@@ -5224,7 +5478,9 @@ export const vi: TranslationKeys = {
     "downloadingWithPercent": "Đang tải bản cập nhật ({percent}%)...",
     "download": "Tải về",
     "notifyModeSubtitle": "Chế độ thông báo · Bấm để tải về",
-    "newUpdateAvailable": "Có bản cập nhật mới {version}"
+    "newUpdateAvailable": "Có bản cập nhật mới {version}",
+    "cleanTrackingUrlsTitle": "Tự động làm sạch link theo dõi",
+    "cleanTrackingUrlsDesc": "Tự động loại bỏ các tham số theo dõi (UTM, fbclid, si...) khỏi liên kết khi sao chép"
   },
   "position": {
     "edgePlacementTitle": "Vị trí mép",
@@ -5281,6 +5537,11 @@ export const vi: TranslationKeys = {
     "unpin": "Bỏ ghim",
     "delete": "Xóa",
     "clear": "Xóa sạch",
+    "clearLast1h": "Xóa 1 giờ qua",
+    "clearLast6h": "Xóa 6 giờ qua",
+    "clearLast24h": "Xóa 24 giờ qua",
+    "clearAll": "Xóa toàn bộ lịch sử",
+    "clearAllConfirm": "Nhấn lại để xác nhận",
     "dropToSave": "Thả để lưu",
     "dropToSaveDesc": "Bất kỳ tệp, hình ảnh, liên kết hoặc văn bản nào",
     "justNow": "vừa xong",
@@ -5300,7 +5561,11 @@ export const vi: TranslationKeys = {
     "moreImages": "+{count} hình ảnh nữa",
     "moreFiles": "+{count} tệp nữa",
     "singleFile": "1 tệp",
-    "scrollToTop": "Cuộn lên đầu"
+    "scrollToTop": "Cuộn lên đầu",
+    "cleanUrl": "Làm sạch liên kết (Bỏ theo dõi)",
+    "cleanUrlCopied": "Đã sao chép liên kết sạch!",
+    "convertColor": "Chuyển đổi & Sao chép mã màu",
+    "hasTracking": "Chứa tham số theo dõi"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5392,7 +5657,11 @@ export const vi: TranslationKeys = {
     "copyFile": "Sao chép Tệp",
     "clickToPasteDrag": "Nhấp để dán · Kéo để di chuyển",
     "openInExplorer": "Mở vị trí trong Explorer",
-    "current": "Hiện tại"
+    "current": "Hiện tại",
+    "colorFormats": "Định dạng màu",
+    "copyHex": "Sao chép HEX",
+    "copyRgb": "Sao chép RGB",
+    "copyHsl": "Sao chép HSL"
   },
   "toast": {
     "copiedToClipboard": "Đã sao chép vào bảng tạm",
@@ -5517,7 +5786,9 @@ export const pl: TranslationKeys = {
     "downloadingWithPercent": "Pobieranie aktualizacji ({percent}%)...",
     "download": "Pobierz",
     "notifyModeSubtitle": "Tryb powiadomień · Kliknij, aby pobrać",
-    "newUpdateAvailable": "Dostępna nowa aktualizacja {version}"
+    "newUpdateAvailable": "Dostępna nowa aktualizacja {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Położenie krawędzi",
@@ -5574,6 +5845,11 @@ export const pl: TranslationKeys = {
     "unpin": "Odepnij",
     "delete": "Usuń",
     "clear": "Wyczyść",
+    "clearLast1h": "Wyczyść ostatnią godzinę",
+    "clearLast6h": "Wyczyść ostatnie 6 godzin",
+    "clearLast24h": "Wyczyść ostatnie 24 godziny",
+    "clearAll": "Wyczyść całą historię",
+    "clearAllConfirm": "Dotknij ponownie, aby potwierdzić",
     "dropToSave": "Upuść, aby zapisać",
     "dropToSaveDesc": "Dowolny plik, obraz, link lub tekst",
     "justNow": "przed chwilą",
@@ -5593,7 +5869,11 @@ export const pl: TranslationKeys = {
     "moreImages": "+{count} więcej obrazów",
     "moreFiles": "+{count} więcej plików",
     "singleFile": "1 plik",
-    "scrollToTop": "Przewiń na górę"
+    "scrollToTop": "Przewiń na górę",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5685,7 +5965,11 @@ export const pl: TranslationKeys = {
     "copyFile": "Kopiuj plik",
     "clickToPasteDrag": "Kliknij, aby wkleić · Przeciągnij, aby przenieść",
     "openInExplorer": "Otwórz lokalizację w Eksploratorze",
-    "current": "Bieżący"
+    "current": "Bieżący",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Skopiowano do schowka",
@@ -5810,7 +6094,9 @@ export const nl: TranslationKeys = {
     "downloadingWithPercent": "Update downloaden ({percent}%)...",
     "download": "Downloaden",
     "notifyModeSubtitle": "Meldingsmodus · Klik om te downloaden",
-    "newUpdateAvailable": "Nieuwe update beschikbaar {version}"
+    "newUpdateAvailable": "Nieuwe update beschikbaar {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Randplaatsing",
@@ -5867,6 +6153,11 @@ export const nl: TranslationKeys = {
     "unpin": "Losmaken",
     "delete": "Verwijderen",
     "clear": "Wissen",
+    "clearLast1h": "Laatste uur wissen",
+    "clearLast6h": "Laatste 6 uur wissen",
+    "clearLast24h": "Laatste 24 uur wissen",
+    "clearAll": "Volledige geschiedenis wissen",
+    "clearAllConfirm": "Tik opnieuw om te bevestigen",
     "dropToSave": "Neerzetten om op te slaan",
     "dropToSaveDesc": "Elk bestand, afbeelding, link of tekst",
     "justNow": "zojuist",
@@ -5886,7 +6177,11 @@ export const nl: TranslationKeys = {
     "moreImages": "+{count} afbeeldingen meer",
     "moreFiles": "+{count} bestanden meer",
     "singleFile": "1 bestand",
-    "scrollToTop": "Naar boven scrollen"
+    "scrollToTop": "Naar boven scrollen",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5978,7 +6273,11 @@ export const nl: TranslationKeys = {
     "copyFile": "Bestand kopiëren",
     "clickToPasteDrag": "Klik om te plakken · Slepen om te verplaatsen",
     "openInExplorer": "Locatie openen in Verkenner",
-    "current": "Huidig"
+    "current": "Huidig",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Gekopieerd naar klembord",
@@ -6103,7 +6402,9 @@ export const sv: TranslationKeys = {
     "downloadingWithPercent": "Laddar ner uppdatering ({percent}%)...",
     "download": "Ladda ner",
     "notifyModeSubtitle": "Aviseringsläge · Klicka för att ladda ner",
-    "newUpdateAvailable": "Ny uppdatering tillgänglig {version}"
+    "newUpdateAvailable": "Ny uppdatering tillgänglig {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Kantplacering",
@@ -6160,6 +6461,11 @@ export const sv: TranslationKeys = {
     "unpin": "Lösgör",
     "delete": "Ta bort",
     "clear": "Rensa",
+    "clearLast1h": "Rensa senaste timmen",
+    "clearLast6h": "Rensa senaste 6 timmarna",
+    "clearLast24h": "Rensa senaste 24 timmarna",
+    "clearAll": "Rensa all historik",
+    "clearAllConfirm": "Tryck igen för att bekräfta",
     "dropToSave": "Släpp för att spara",
     "dropToSaveDesc": "Valfri fil, bild, länk eller text",
     "justNow": "just nu",
@@ -6179,7 +6485,11 @@ export const sv: TranslationKeys = {
     "moreImages": "+{count} fler bilder",
     "moreFiles": "+{count} fler filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Scrolla till toppen"
+    "scrollToTop": "Scrolla till toppen",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6271,7 +6581,11 @@ export const sv: TranslationKeys = {
     "copyFile": "Kopiera fil",
     "clickToPasteDrag": "Klicka för att klistra in · Dra för att flytta",
     "openInExplorer": "Öppna plats i Utforskaren",
-    "current": "Aktuell"
+    "current": "Aktuell",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Kopierad till urklipp",
@@ -6396,7 +6710,9 @@ export const id: TranslationKeys = {
     "downloadingWithPercent": "Mengunduh pembaruan ({percent}%)...",
     "download": "Unduh",
     "notifyModeSubtitle": "Mode pemberitahuan · Klik untuk mengunduh",
-    "newUpdateAvailable": "Pembaruan baru tersedia {version}"
+    "newUpdateAvailable": "Pembaruan baru tersedia {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Penempatan Tepi",
@@ -6453,6 +6769,11 @@ export const id: TranslationKeys = {
     "unpin": "Lepas sematan",
     "delete": "Hapus",
     "clear": "Bersihkan",
+    "clearLast1h": "Hapus 1 jam terakhir",
+    "clearLast6h": "Hapus 6 jam terakhir",
+    "clearLast24h": "Hapus 24 jam terakhir",
+    "clearAll": "Hapus semua riwayat",
+    "clearAllConfirm": "Ketuk lagi untuk mengonfirmasi",
     "dropToSave": "Jatuhkan untuk menyimpan",
     "dropToSaveDesc": "Berkas, gambar, tautan, atau teks apa pun",
     "justNow": "baru saja",
@@ -6472,7 +6793,11 @@ export const id: TranslationKeys = {
     "moreImages": "+{count} gambar lagi",
     "moreFiles": "+{count} berkas lagi",
     "singleFile": "1 berkas",
-    "scrollToTop": "Gulir ke atas"
+    "scrollToTop": "Gulir ke atas",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6564,7 +6889,11 @@ export const id: TranslationKeys = {
     "copyFile": "Salin Berkas",
     "clickToPasteDrag": "Klik untuk menempel · Seret untuk memindahkan",
     "openInExplorer": "Buka lokasi di Explorer",
-    "current": "Saat ini"
+    "current": "Saat ini",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Disalin ke papan klip",
@@ -6689,7 +7018,9 @@ export const uk: TranslationKeys = {
     "downloadingWithPercent": "Завантаження оновлення ({percent}%)...",
     "download": "Завантажити",
     "notifyModeSubtitle": "Режим сповіщення · Натисніть для завантаження",
-    "newUpdateAvailable": "Доступне нове оновлення {version}"
+    "newUpdateAvailable": "Доступне нове оновлення {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Розміщення краю",
@@ -6746,6 +7077,11 @@ export const uk: TranslationKeys = {
     "unpin": "Відкріпити",
     "delete": "Видалити",
     "clear": "Очистити",
+    "clearLast1h": "Очистити за останню годину",
+    "clearLast6h": "Очистити за останні 6 годин",
+    "clearLast24h": "Очистити за останні 24 години",
+    "clearAll": "Очистити всю історію",
+    "clearAllConfirm": "Натисніть ще раз для підтвердження",
     "dropToSave": "Перетягніть для збереження",
     "dropToSaveDesc": "Будь-який файл, зображення, посилання або текст",
     "justNow": "щойно",
@@ -6765,7 +7101,11 @@ export const uk: TranslationKeys = {
     "moreImages": "+{count} більше зображень",
     "moreFiles": "+{count} більше файлів",
     "singleFile": "1 файл",
-    "scrollToTop": "Прокрутити вгору"
+    "scrollToTop": "Прокрутити вгору",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -6857,7 +7197,11 @@ export const uk: TranslationKeys = {
     "copyFile": "Копіювати файл",
     "clickToPasteDrag": "Натисніть, щоб вставити · Перетягніть, щоб перемістити",
     "openInExplorer": "Відкрити розташування в Провіднику",
-    "current": "Поточний"
+    "current": "Поточний",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Скопійовано в буфер обміну",
@@ -6982,7 +7326,9 @@ export const el: TranslationKeys = {
     "downloadingWithPercent": "Λήψη ενημέρωσης ({percent}%)...",
     "download": "Λήψη",
     "notifyModeSubtitle": "Λειτουργία ειδοποίησης · Κάντε κλικ για λήψη",
-    "newUpdateAvailable": "Νέα ενημέρωση διαθέσιμη {version}"
+    "newUpdateAvailable": "Νέα ενημέρωση διαθέσιμη {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Τοποθέτηση άκρης",
@@ -7039,6 +7385,11 @@ export const el: TranslationKeys = {
     "unpin": "Ξεκαρφίσωσε",
     "delete": "Διαγραφή",
     "clear": "Καθαρισμός",
+    "clearLast1h": "Εκκαθάριση τελευταίας ώρας",
+    "clearLast6h": "Εκκαθάριση τελευταίων 6 ωρών",
+    "clearLast24h": "Εκκαθάριση τελευταίων 24 ωρών",
+    "clearAll": "Εκκαθάριση όλου του ιστορικού",
+    "clearAllConfirm": "Πατήστε ξανά για επιβεβαίωση",
     "dropToSave": "Αφήστε για αποθήκευση",
     "dropToSaveDesc": "Οποιοδήποτε αρχείο, εικόνα, σύνδεσμος ή κείμενο",
     "justNow": "μόλις τώρα",
@@ -7058,7 +7409,11 @@ export const el: TranslationKeys = {
     "moreImages": "+{count} περισσότερες εικόνες",
     "moreFiles": "+{count} περισσότερα αρχεία",
     "singleFile": "1 αρχείο",
-    "scrollToTop": "Κύλιση στην κορυφή"
+    "scrollToTop": "Κύλιση στην κορυφή",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7150,7 +7505,11 @@ export const el: TranslationKeys = {
     "copyFile": "Αντιγραφή Αρχείου",
     "clickToPasteDrag": "Κλικ για επικόλληση · Σύρσιμο για μετακίνηση",
     "openInExplorer": "Άνοιγμα τοποθεσίας στην Εξερεύνηση",
-    "current": "Τρέχον"
+    "current": "Τρέχον",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Αντιγράφηκε στο πρόχειρο",
@@ -7275,7 +7634,9 @@ export const cs: TranslationKeys = {
     "downloadingWithPercent": "Stahování aktualizace ({percent}%)...",
     "download": "Stáhnout",
     "notifyModeSubtitle": "Režim oznámení · Klikněte pro stažení",
-    "newUpdateAvailable": "K dispozici je nová aktualizace {version}"
+    "newUpdateAvailable": "K dispozici je nová aktualizace {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Umístění na okraji",
@@ -7332,6 +7693,11 @@ export const cs: TranslationKeys = {
     "unpin": "Odepnout",
     "delete": "Smazat",
     "clear": "Vymazat",
+    "clearLast1h": "Vymazat poslední hodinu",
+    "clearLast6h": "Vymazat posledních 6 hodin",
+    "clearLast24h": "Vymazat posledních 24 hodin",
+    "clearAll": "Vymazat celou historii",
+    "clearAllConfirm": "Potvrďte dalším klepnutím",
     "dropToSave": "Přetáhněte pro uložení",
     "dropToSaveDesc": "Jakýkoli soubor, obrázek, odkaz nebo text",
     "justNow": "právě teď",
@@ -7351,7 +7717,11 @@ export const cs: TranslationKeys = {
     "moreImages": "+{count} dalších obrázků",
     "moreFiles": "+{count} dalších souborů",
     "singleFile": "1 soubor",
-    "scrollToTop": "Přejít nahoru"
+    "scrollToTop": "Přejít nahoru",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7443,7 +7813,11 @@ export const cs: TranslationKeys = {
     "copyFile": "Kopírovat soubor",
     "clickToPasteDrag": "Klikněte pro vložení · Přetáhněte pro přesun",
     "openInExplorer": "Otevřít umístění v Průzkumníkovi",
-    "current": "Aktuální"
+    "current": "Aktuální",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Zkopírováno do schránky",
@@ -7568,7 +7942,9 @@ export const ro: TranslationKeys = {
     "downloadingWithPercent": "Descărcare actualizare ({percent}%)...",
     "download": "Descarcă",
     "notifyModeSubtitle": "Mod notificare · Faceți clic pentru a descărca",
-    "newUpdateAvailable": "Actualizare nouă disponibilă {version}"
+    "newUpdateAvailable": "Actualizare nouă disponibilă {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Plasare margine",
@@ -7625,6 +8001,11 @@ export const ro: TranslationKeys = {
     "unpin": "Anulează",
     "delete": "Șterge",
     "clear": "Șterge",
+    "clearLast1h": "Șterge ultima oră",
+    "clearLast6h": "Șterge ultimele 6 ore",
+    "clearLast24h": "Șterge ultimele 24 de ore",
+    "clearAll": "Șterge tot istoricul",
+    "clearAllConfirm": "Atinge din nou pentru confirmare",
     "dropToSave": "Plasează pentru a salva",
     "dropToSaveDesc": "Orice fișier, imagine, link sau text",
     "justNow": "chiar acum",
@@ -7644,7 +8025,11 @@ export const ro: TranslationKeys = {
     "moreImages": "+{count} imagini mai mult",
     "moreFiles": "+{count} fișiere mai mult",
     "singleFile": "1 fișier",
-    "scrollToTop": "Derulează sus"
+    "scrollToTop": "Derulează sus",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -7736,7 +8121,11 @@ export const ro: TranslationKeys = {
     "copyFile": "Copiază fișier",
     "clickToPasteDrag": "Clic pentru a lipi · Trage pentru a muta",
     "openInExplorer": "Deschide locația în Explorer",
-    "current": "Curent"
+    "current": "Curent",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Copiat în clipboard",
@@ -7861,7 +8250,9 @@ export const hu: TranslationKeys = {
     "downloadingWithPercent": "Frissítés letöltése ({percent}%)...",
     "download": "Letöltés",
     "notifyModeSubtitle": "Értesítési mód · Kattintson a letöltéshez",
-    "newUpdateAvailable": "Új frissítés érhető el {version}"
+    "newUpdateAvailable": "Új frissítés érhető el {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Szél-elhelyezés",
@@ -7918,6 +8309,11 @@ export const hu: TranslationKeys = {
     "unpin": "Feloldás",
     "delete": "Törlés",
     "clear": "Tisztítás",
+    "clearLast1h": "Elmúlt óra törlése",
+    "clearLast6h": "Elmúlt 6 óra törlése",
+    "clearLast24h": "Elmúlt 24 óra törlése",
+    "clearAll": "Teljes előzmény törlése",
+    "clearAllConfirm": "Koppintson újra a megerősítéshez",
     "dropToSave": "Ejtés a mentéshez",
     "dropToSaveDesc": "Bármilyen fájl, kép, hivatkozás vagy szöveg",
     "justNow": "éppen most",
@@ -7937,7 +8333,11 @@ export const hu: TranslationKeys = {
     "moreImages": "+{count} további kép",
     "moreFiles": "+{count} további fájl",
     "singleFile": "1 fájl",
-    "scrollToTop": "Görgetés a tetejére"
+    "scrollToTop": "Görgetés a tetejére",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8029,7 +8429,11 @@ export const hu: TranslationKeys = {
     "copyFile": "Fájl másolása",
     "clickToPasteDrag": "Kattintson a beillesztéshez · Húzza a mozgatáshoz",
     "openInExplorer": "Hely megnyitása az Intézőben",
-    "current": "Jelenlegi"
+    "current": "Jelenlegi",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Vágólapra másolva",
@@ -8154,7 +8558,9 @@ export const da: TranslationKeys = {
     "downloadingWithPercent": "Downloader opdatering ({percent}%)...",
     "download": "Download",
     "notifyModeSubtitle": "Underretningstilstand · Klik for at downloade",
-    "newUpdateAvailable": "Ny opdatering tilgængelig {version}"
+    "newUpdateAvailable": "Ny opdatering tilgængelig {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Kantplacering",
@@ -8211,6 +8617,11 @@ export const da: TranslationKeys = {
     "unpin": "Frigør",
     "delete": "Slet",
     "clear": "Ryd",
+    "clearLast1h": "Ryd sidste time",
+    "clearLast6h": "Ryd sidste 6 timer",
+    "clearLast24h": "Ryd sidste 24 timer",
+    "clearAll": "Ryd hele historikken",
+    "clearAllConfirm": "Tryk igen for at bekræfte",
     "dropToSave": "Slip for at gemme",
     "dropToSaveDesc": "Enhver fil, billede, link eller tekst",
     "justNow": "lige nu",
@@ -8230,7 +8641,11 @@ export const da: TranslationKeys = {
     "moreImages": "+{count} flere billeder",
     "moreFiles": "+{count} flere filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Rul til toppen"
+    "scrollToTop": "Rul til toppen",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8322,7 +8737,11 @@ export const da: TranslationKeys = {
     "copyFile": "Kopier fil",
     "clickToPasteDrag": "Klik for at indsætte · Træk for at flytte",
     "openInExplorer": "Åbn placering i Stifinder",
-    "current": "Nuværende"
+    "current": "Nuværende",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Kopieret til udklipsholder",
@@ -8447,7 +8866,9 @@ export const fi: TranslationKeys = {
     "downloadingWithPercent": "Ladataan päivitystä ({percent}%)...",
     "download": "Lataa",
     "notifyModeSubtitle": "Ilmoitustila · Lataa napsauttamalla",
-    "newUpdateAvailable": "Uusi päivitys saatavilla {version}"
+    "newUpdateAvailable": "Uusi päivitys saatavilla {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Reunan sijoitus",
@@ -8504,6 +8925,11 @@ export const fi: TranslationKeys = {
     "unpin": "Irrota",
     "delete": "Poista",
     "clear": "Tyhjennä",
+    "clearLast1h": "Tyhjennä viimeinen tunti",
+    "clearLast6h": "Tyhjennä viimeiset 6 tuntia",
+    "clearLast24h": "Tyhjennä viimeiset 24 tuntia",
+    "clearAll": "Tyhjennä koko historia",
+    "clearAllConfirm": "Vahvista napauttamalla uudelleen",
     "dropToSave": "Pudota tallentaaksesi",
     "dropToSaveDesc": "Mikä tahansa tiedosto, kuva, linkki tai teksti",
     "justNow": "juuri nyt",
@@ -8523,7 +8949,11 @@ export const fi: TranslationKeys = {
     "moreImages": "+{count} kuvaa lisää",
     "moreFiles": "+{count} tiedostoa lisää",
     "singleFile": "1 tiedosto",
-    "scrollToTop": "Vieritä ylös"
+    "scrollToTop": "Vieritä ylös",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8615,7 +9045,11 @@ export const fi: TranslationKeys = {
     "copyFile": "Kopioi tiedosto",
     "clickToPasteDrag": "Napsauta liittääksesi · Vedä siirtääksesi",
     "openInExplorer": "Avaa sijainti Resurssienhallinnassa",
-    "current": "Nykyinen"
+    "current": "Nykyinen",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Kopioitu leikepöydälle",
@@ -8740,7 +9174,9 @@ export const th: TranslationKeys = {
     "downloadingWithPercent": "กำลังดาวน์โหลดการอัปเดต ({percent}%)...",
     "download": "ดาวน์โหลด",
     "notifyModeSubtitle": "โหมดการแจ้งเตือน · คลิกเพื่อดาวน์โหลด",
-    "newUpdateAvailable": "มีการอัปเดตใหม่ {version}"
+    "newUpdateAvailable": "มีการอัปเดตใหม่ {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "ตำแหน่งขอบ",
@@ -8797,6 +9233,11 @@ export const th: TranslationKeys = {
     "unpin": "ยกเลิกปักหมุด",
     "delete": "ลบ",
     "clear": "ล้าง",
+    "clearLast1h": "ล้างข้อมูล 1 ชั่วโมงล่าสุด",
+    "clearLast6h": "ล้างข้อมูล 6 ชั่วโมงล่าสุด",
+    "clearLast24h": "ล้างข้อมูล 24 ชั่วโมงล่าสุด",
+    "clearAll": "ล้างประวัติทั้งหมด",
+    "clearAllConfirm": "แตะอีกครั้งเพื่อยืนยัน",
     "dropToSave": "วางเพื่อบันทึก",
     "dropToSaveDesc": "ไฟล์ รูปภาพ ลิงก์ หรือข้อความใด ๆ",
     "justNow": "เมื่อสักครู่",
@@ -8816,7 +9257,11 @@ export const th: TranslationKeys = {
     "moreImages": "+{count} รูปภาพเพิ่มเติม",
     "moreFiles": "+{count} ไฟล์เพิ่มเติม",
     "singleFile": "1 ไฟล์",
-    "scrollToTop": "เลื่อนไปที่ด้านบน"
+    "scrollToTop": "เลื่อนไปที่ด้านบน",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -8908,7 +9353,11 @@ export const th: TranslationKeys = {
     "copyFile": "คัดลอกไฟล์",
     "clickToPasteDrag": "คลิกเพื่อวาง · ลากเพื่อย้าย",
     "openInExplorer": "เปิดตำแหน่งใน Explorer",
-    "current": "ปัจจุบัน"
+    "current": "ปัจจุบัน",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว",
@@ -9033,7 +9482,9 @@ export const he: TranslationKeys = {
     "downloadingWithPercent": "מוריד עדכון ({percent}%)...",
     "download": "הורד",
     "notifyModeSubtitle": "מצב התראה · לחץ להורדה",
-    "newUpdateAvailable": "עדכון חדש זמין {version}"
+    "newUpdateAvailable": "עדכון חדש זמין {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "מיקום קצה",
@@ -9090,6 +9541,11 @@ export const he: TranslationKeys = {
     "unpin": "בטל הצמדה",
     "delete": "מחק",
     "clear": "נקה",
+    "clearLast1h": "נקה את השעה האחרונה",
+    "clearLast6h": "נקה את 6 השעות האחרונות",
+    "clearLast24h": "נקה את 24 השעות האחרונות",
+    "clearAll": "נקה את כל ההיסטוריה",
+    "clearAllConfirm": "הקש שוב כדי לאשר",
     "dropToSave": "שחרר כדי לשמור",
     "dropToSaveDesc": "כל קובץ, תמונה, קישור או טקסט",
     "justNow": "עכשיו",
@@ -9109,7 +9565,11 @@ export const he: TranslationKeys = {
     "moreImages": "+{count} תמונות נוספות",
     "moreFiles": "+{count} קבצים נוספים",
     "singleFile": "קובץ 1",
-    "scrollToTop": "גלול לראש"
+    "scrollToTop": "גלול לראש",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -9201,7 +9661,11 @@ export const he: TranslationKeys = {
     "copyFile": "העתק קובץ",
     "clickToPasteDrag": "לחץ להדבקה · גרור להזזה",
     "openInExplorer": "פתח מיקום בסייר",
-    "current": "נוכחי"
+    "current": "נוכחי",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "הועתק ללוח",
@@ -9326,7 +9790,9 @@ export const no: TranslationKeys = {
     "downloadingWithPercent": "Laster ned oppdatering ({percent}%)...",
     "download": "Last ned",
     "notifyModeSubtitle": "Varslingsmodus · Klikk for å laste ned",
-    "newUpdateAvailable": "Ny oppdatering tilgjengelig {version}"
+    "newUpdateAvailable": "Ny oppdatering tilgjengelig {version}",
+    "cleanTrackingUrlsTitle": "Auto-clean tracking URLs",
+    "cleanTrackingUrlsDesc": "Automatically strip tracking parameters (UTM, fbclid, si...) from copied links"
   },
   "position": {
     "edgePlacementTitle": "Kant-plassering",
@@ -9383,6 +9849,11 @@ export const no: TranslationKeys = {
     "unpin": "Løsne",
     "delete": "Slett",
     "clear": "Tøm",
+    "clearLast1h": "Tøm siste time",
+    "clearLast6h": "Tøm siste 6 timer",
+    "clearLast24h": "Tøm siste 24 timer",
+    "clearAll": "Tøm all historikk",
+    "clearAllConfirm": "Trykk igjen for å bekrefte",
     "dropToSave": "Slipp for å lagre",
     "dropToSaveDesc": "Enhver fil, bilde, lenke eller tekst",
     "justNow": "akkurat nå",
@@ -9402,7 +9873,11 @@ export const no: TranslationKeys = {
     "moreImages": "+{count} flere bilder",
     "moreFiles": "+{count} flere filer",
     "singleFile": "1 fil",
-    "scrollToTop": "Rull til toppen"
+    "scrollToTop": "Rull til toppen",
+    "cleanUrl": "Clean URL (Remove tracking)",
+    "cleanUrlCopied": "Clean URL copied!",
+    "convertColor": "Convert & Copy color",
+    "hasTracking": "Contains tracking parameters"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -9494,7 +9969,11 @@ export const no: TranslationKeys = {
     "copyFile": "Kopier fil",
     "clickToPasteDrag": "Klikk for å lime inn · Dra for å flytte",
     "openInExplorer": "Åpne plassering i Utforsker",
-    "current": "Gjeldende"
+    "current": "Gjeldende",
+    "colorFormats": "Color Formats",
+    "copyHex": "Copy HEX",
+    "copyRgb": "Copy RGB",
+    "copyHsl": "Copy HSL"
   },
   "toast": {
     "copiedToClipboard": "Kopiert til utklippstavle",

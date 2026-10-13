@@ -11,6 +11,7 @@ import { loadSettings, saveSettings } from '../store/settings'
 import type { ClipboardItemDto, Settings } from '../../shared/types'
 import { MAX_STACK } from '../../shared/types'
 import { BrowserWindow, powerMonitor } from 'electron'
+import { cleanTrackingUrl } from '../../shared/urlTracking'
 import { isStagedTempPath } from '../store/paths'
 import { prefetchFileIcons } from './drag'
 import { forgetStagedItems, reconcileTempOnStartup } from './stagedTemp'
@@ -80,6 +81,9 @@ export function initState(): void {
     }
     if (data.kind === 'files' && data.paths) {
       prefetchFileIcons(data.paths)
+    }
+    if (data.kind === 'text' && data.isUrl && loadSettings().cleanTrackingUrls) {
+      data.text = cleanTrackingUrl(data.text)
     }
     store.add(data, loadSettings().historyLimit)
     pushState.items()

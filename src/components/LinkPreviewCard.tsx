@@ -37,8 +37,10 @@ export const LinkPreviewCard: React.FC<LinkPreviewCardProps> = ({
       onClick={onClick}
     >
       <div className="link-card-top">
-        <LinkIcon width={12} height={12} className="link-card-icon" />
-        <span className="link-card-domain">{domain}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 5, minWidth: 0, overflow: 'hidden' }}>
+          <LinkIcon width={12} height={12} className="link-card-icon" />
+          <span className="link-card-domain">{domain}</span>
+        </div>
       </div>
 
       <div className="link-card-body" title={info.cleanUrl}>

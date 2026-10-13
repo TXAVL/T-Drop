@@ -137,18 +137,21 @@ export function ClearMenu({
               zIndex: 350
             }}
           >
-            {WINDOWS.map((w) => (
-              <button
-                key={w.key}
-                type="button"
-                onClick={() => clearWindow(w.hours)}
-                style={menuItemStyle}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.07)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
-              >
-                {t(`item.clearLast${w.key}` as any)}
-              </button>
-            ))}
+            {WINDOWS.map((w) => {
+              const defaultLabel = w.key === '1h' ? 'Clear last hour' : w.key === '6h' ? 'Clear last 6 hours' : 'Clear last 24 hours'
+              return (
+                <button
+                  key={w.key}
+                  type="button"
+                  onClick={() => clearWindow(w.hours)}
+                  style={menuItemStyle}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.07)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
+                >
+                  {t(`item.clearLast${w.key}` as any) || defaultLabel}
+                </button>
+              )
+            })}
 
             <div style={{ height: 1, background: 'rgba(255, 255, 255, 0.1)', margin: '4px 2px' }} />
 
@@ -163,7 +166,9 @@ export function ClearMenu({
               onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.07)' }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
             >
-              {confirmAll ? t('item.clearAllConfirm') : t('item.clearAll')}
+              {confirmAll
+                ? (t('item.clearAllConfirm') || 'Tap again to confirm')
+                : (t('item.clearAll') || 'Clear all history')}
             </button>
           </motion.div>
         )}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseColor } from '../src/lib/colorUtils'
+import { parseColor, getColorFormats, cycleColorFormat } from '../src/lib/colorUtils'
 
 describe('colorUtils', () => {
   it('parses 6-digit hex colors and detects light vs dark contrast', () => {
@@ -77,5 +77,31 @@ describe('colorUtils', () => {
     expect(parseColor('123456')).toBeNull()
     expect(parseColor('#xyz')).toBeNull()
     expect(parseColor('')).toBeNull()
+  })
+
+  it('converts and cycles between color formats (HEX, RGB, HSL)', () => {
+    const color = parseColor('#3b82f6')
+    expect(color).not.toBeNull()
+    if (!color) return
+
+    const formats = getColorFormats(color)
+    expect(formats.hex).toBe('#3b82f6')
+    expect(formats.rgb).toBe('rgb(59, 130, 246)')
+    expect(formats.hsl).toBe('hsl(217, 91%, 60%)')
+    expect(formats.activeFormat).toBe('hex')
+
+    // Cycle from hex -> rgb -> hsl -> hex
+    const step1 = cycleColorFormat('#3b82f6')
+    expect(step1.format).toBe('rgb')
+    expect(step1.nextText).toBe('rgb(59, 130, 246)')
+
+    const step2 = cycleColorFormat(step1.nextText)
+    expect(step2.format).toBe('hsl')
+    expect(step2.nextText).toBe('hsl(217, 91%, 60%)')
+
+    const step3 = cycleColorFormat(step2.nextText)
+    expect(step3.format).toBe('hex')
+    // Integer HSL rounding (60%) quantizes 130 to 131 and 59 to 60 -> #3c83f6
+    expect(step3.nextText).toBe('#3c83f6')
   })
 })

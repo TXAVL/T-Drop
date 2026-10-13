@@ -160,3 +160,28 @@ export { CustomFileIcon, CustomFileIcon as FileKindIcon, FileStackPhoto }
 
 export const FileIcon = (p: P) => <CustomFileIcon width={p.width ?? 16} height={p.height ?? 16} {...(p as any)} />
 export const FileIconGlyph = FileIcon
+
+export const BroomIcon = (p: P) => {
+  const size = Number(p.width ?? p.height ?? 16)
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={size <= 14 ? 1.6 : 1.8} strokeLinecap="round" strokeLinejoin="round" {...(p as any)}>
+      <path d="m14 10 7-7" />
+      <path d="m20 2-2 2" />
+      <path d="M12.5 11.5a3.5 3.5 0 0 0-5 0l-.5.5a3.5 3.5 0 0 0 0 5l1.5 1.5a3.5 3.5 0 0 0 5 0l.5-.5a3.5 3.5 0 0 0 0-5z" />
+      <path d="m6 18-3 3" />
+      <path d="M3.5 14.5 5 13" />
+    </svg>
+  )
+}
+
+export const ColorConvertIcon = (p: P) => {
+  const size = Number(p.width ?? p.height ?? 16)
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={size <= 14 ? 1.55 : 1.7} strokeLinecap="round" strokeLinejoin="round" {...(p as any)}>
+      <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+      <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+      <path d="M16 16h5v5" />
+    </svg>
+  )
+}

@@ -330,14 +330,14 @@ const BRAND_DIRECTORY: Record<string, string> = {
 /* 3. Tracking Query Parameters to Strip                              */
 /* ------------------------------------------------------------------ */
 
-const TRACKING_PARAM_PREFIXES = ['utm_', 'ga_', 'mc_', 'hs_']
-const TRACKING_PARAMS = new Set([
-  'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_id',
-  'fbclid', 'gclid', 'dclid', 'msclkid', 'twclid', 'gbraid', 'wbraid',
-  'ref', 'ref_src', 'ref_url', 'source', 'si', 'igshid', 'feature', 'trk',
-  '_hsenc', '_hsmi', 'mc_cid', 'mc_eid', 'yclid', 'zanpid', 'sc_cid',
-  'mkt_tok', 'spReportId', '__twitter_impression', 'vero_id', 'vero_conv'
-])
+export {
+  TRACKING_PARAM_PREFIXES,
+  TRACKING_PARAMS,
+  isTrackingParam,
+  cleanTrackingUrl,
+  hasTrackingParams
+} from '../../shared/urlTracking'
+import { isTrackingParam } from '../../shared/urlTracking'
 
 /* ------------------------------------------------------------------ */
 /* 4. Common Acronyms & Short Words to Keep Upper-Cased               */
@@ -670,9 +670,7 @@ export function parseUrlPreview(rawUrl: string): UrlPreviewInfo {
   // 3. Clean Display Path (strip tracking query parameters)
   const cleanParams = new URLSearchParams()
   urlObj.searchParams.forEach((val, key) => {
-    const k = key.toLowerCase()
-    const isTracking = TRACKING_PARAMS.has(k) || TRACKING_PARAM_PREFIXES.some((p) => k.startsWith(p))
-    if (!isTracking) {
+    if (!isTrackingParam(key, displayHost)) {
       cleanParams.append(key, val)
     }
   })

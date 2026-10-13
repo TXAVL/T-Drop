@@ -521,6 +521,16 @@
   background: rgba(255, 255, 255, 0.25);
 }
 
+.act.act-clean-url {
+  color: #38bdf8;
+}
+.act.act-clean-url:hover {
+  color: #7dd3fc;
+}
+.act.act-clean-url:hover::before {
+  background: rgba(56, 189, 248, 0.22);
+}
+
 .act-divider {
   width: 1px;
   height: 14px;
@@ -1634,6 +1644,103 @@
 .list.horizontal .item.is-color-card .color-swatch-code {
   font-size: 17px;
   margin-bottom: 4px;
+}
+
+/* Color format converter chips */
+.color-swatch-pills {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  z-index: 2;
+}
+
+.color-pill-btn {
+  background: rgba(0, 0, 0, 0.22);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono, monospace);
+  line-height: 1.4;
+  opacity: 0.75;
+}
+
+.color-pill-btn:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.color-pill-btn.active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.item.is-color-card.is-light-color .color-pill-btn {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.18);
+  color: #000;
+}
+
+.item.is-color-card.is-light-color .color-pill-btn:hover {
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.item.is-color-card.is-light-color .color-pill-btn.active {
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(0, 0, 0, 0.4);
+  color: #000;
+}
+
+.color-pill-btn.copied {
+  background: #10b981 !important;
+  color: #fff !important;
+  border-color: #10b981 !important;
+  opacity: 1 !important;
+}
+
+.link-card-clean-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: auto;
+  line-height: 1.3;
+}
+
+.meta-clean-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.meta-clean-badge:hover {
+  background: rgba(56, 189, 248, 0.28);
+  border-color: rgba(56, 189, 248, 0.65);
+  color: #bae6fd;
 }
 
 /* ==========================================================================

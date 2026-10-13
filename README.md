@@ -218,6 +218,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 - **Versioned Screen Geometry & Probe:** Replaced asynchronous display queries with a pure geometric screen probe (`stickProbe.ts`) backed by versioned display-change caching, eliminating boundary seam jitter across mixed-DPI monitor arrays.
 - **Cross-Reboot Display Persistence:** T-Drop remembers your chosen monitor across device restarts. A 4-tier resolution pipeline silently re-identifies the correct physical monitor after Windows re-assigns numeric display IDs on reboot.
 - **Top screen edge dock:** Besides the left and right edges, the shelf can now live horizontally along the top of your screen (up to 1080px wide), with its own trigger zone, flares, preview flyout, and settings layouts.
+- **Roomy 320px Shelf Panel:** Expanded clipboard shelf width from 270px to 320px (+50px breathing room) providing plenty of space for long URLs, document titles, and action buttons without visual crowding.
 - **Smart Windows Fullscreen Game Detection:** Native Win32 `SHQueryUserNotificationState` OS detection (`fullscreen.ts`) combined with `GetForegroundWindow` + `GetClassNameA` filtering (`Progman`, `WorkerW`, `Shell_TrayWnd`) automatically suppresses edge hover during Direct3D games (*VALORANT*, *Cyberpunk*, *PowerPoint*) while allowing T-Drop to open smoothly on the Windows Home Screen / Desktop.
 - **Self-Healing Launch at Login (Quoted Paths):** Automatic Windows Registry synchronization (`HKCU\Software\Microsoft\Windows\CurrentVersion\Run`) strictly quotes executable paths, guaranteeing that usernames or installation paths with spaces launch cleanly on startup. Includes automatic migration and healing for unquoted keys across updates.
 - **RAM Footprint Stabilization (~130 MB):** Large text entries (>300 chars) are stored as disk payload files (`payloads/<id>.txt`), holding only 300-char preview snippets in memory. Locks operational RAM to ~130 MB–160 MB with a V8 ceiling cap of 512 MB.
@@ -231,7 +232,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 **Shelf Search**
 - Type-to-filter search box in the shelf (full row on the vertical blade, centered box on the horizontal dock). It searches your retained history — 100 to 1000 items, default 250, adjustable in Settings. Typing never steals focus from your active app, and clicking a result pastes straight into it.
 - **Elastic filter controls:** The filter chips and emoji category bar use a rubber-band control with momentum glide and squash-and-settle, fully keyboard navigable with reduced-motion support.
-- **Colors filter:** Copied color codes show up under their own Colors tab as swatch cards painted with the actual color, labeled with the hex code. They behave like text cards: click to paste, no drag-out.
+- **Colors filter & Multi-Format Converter:** Copied color codes show up under their own Colors tab as swatch cards painted with the actual color. Supports HEX, RGB/RGBA, and HSL/HSLA with interactive format chips (HEX | RGB | HSL) for instant 1-click format conversion and copying. Includes a cycling action button on card hover and a dedicated Color Inspector flyout with live swatch reflection, individual format copy rows, and RGB channel level meters.
 
 **Selective & Filter-Scoped History Clearing**
 - **Time-Based Preset Windows:** Clear history in convenient time windows (**Last 1 hour**, **6 hours**, **24 hours**, or **Clear all**).
@@ -285,6 +286,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 **Offline Rich URL Previews & One-Click Launch**
 - **Apple-Inspired URL Cards:** Full link destination displayed cleanly beneath the webpage title with domain tag, custom site favicon, and humanized headline.
 - **Zero-Cost Offline URL Previews:** Automatically parses website domain names, titles, and site favicons for copied URLs without external API overhead.
+- **Smart URL Tracker Stripper (Clean URL):** Automatically strips invasive marketing and tracking parameters (`utm_*`, `fbclid`, `gclid`, `mc_eid`, Shopee `sp_atk`/`xptdk`, Twitter & TikTok share tokens) while safely preserving YouTube timestamps (`t=120s`). Features a 1-click broom button 🧹 on card hover and in the preview flyout, a visual clean badge on sanitized link cards, and an optional setting to automatically strip tracking parameters whenever any link is copied to clipboard.
 - **Quick Action Links & Browser Launch:** Clicking the external link launcher button on URL cards or flyouts opens links directly in your default web browser. Click-outside dismisses the flyout without pasting.
 
 **Universal Native OS Drag & Drop Vault**

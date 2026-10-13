@@ -63,7 +63,9 @@ const masterEn = {
     downloadingWithPercent: 'Downloading update ({percent}%)...',
     download: 'Download',
     notifyModeSubtitle: 'Notification mode · Click to download',
-    newUpdateAvailable: 'New update available {version}'
+    newUpdateAvailable: 'New update available {version}',
+    cleanTrackingUrlsTitle: 'Auto-clean tracking URLs',
+    cleanTrackingUrlsDesc: 'Automatically strip tracking parameters (UTM, fbclid, si...) from copied links'
   },
   position: {
     edgePlacementTitle: 'Edge Placement',
@@ -120,6 +122,11 @@ const masterEn = {
     unpin: 'Unpin',
     delete: 'Delete',
     clear: 'Clear',
+    clearLast1h: 'Clear last hour',
+    clearLast6h: 'Clear last 6 hours',
+    clearLast24h: 'Clear last 24 hours',
+    clearAll: 'Clear all history',
+    clearAllConfirm: 'Tap again to confirm',
     dropToSave: 'Drop to save',
     dropToSaveDesc: 'Any file, image, link, or text',
     justNow: 'just now',
@@ -139,7 +146,11 @@ const masterEn = {
     moreImages: '+{count} more images',
     moreFiles: '+{count} more files',
     singleFile: '1 file',
-    scrollToTop: 'Scroll to top'
+    scrollToTop: 'Scroll to top',
+    cleanUrl: 'Clean URL (Remove tracking)',
+    cleanUrlCopied: 'Clean URL copied!',
+    convertColor: 'Convert & Copy color',
+    hasTracking: 'Contains tracking parameters'
   },
   fileKinds: {
     pdf: 'PDF',
@@ -231,7 +242,11 @@ const masterEn = {
     copyFile: 'Copy File',
     clickToPasteDrag: 'Click to paste · Drag to move',
     openInExplorer: 'Open in File Explorer',
-    current: 'Current'
+    current: 'Current',
+    colorFormats: 'Color Formats',
+    copyHex: 'Copy HEX',
+    copyRgb: 'Copy RGB',
+    copyHsl: 'Copy HSL'
   },
   toast: {
     copiedToClipboard: 'Copied to clipboard',
@@ -611,9 +626,18 @@ let fileContent = `export interface TranslationKeys {
     ungroup: string
     copyFilePath: string
     moreImages: string
-    moreFiles: string
     singleFile: string
     scrollToTop: string
+    cleanUrl?: string
+    cleanUrlCopied?: string
+    convertColor?: string
+    hasTracking?: string
+    clearLast1h?: string
+    clearLast6h?: string
+    clearLast24h?: string
+    clearAll?: string
+    clearAllConfirm?: string
+    [key: string]: string | undefined
   }
   fileKinds: {
     pdf: string
@@ -707,6 +731,11 @@ let fileContent = `export interface TranslationKeys {
     clickToPasteDrag: string
     openInExplorer: string
     current: string
+    colorFormats?: string
+    copyHex?: string
+    copyRgb?: string
+    copyHsl?: string
+    [key: string]: string | undefined
   }
   toast: {
     copiedToClipboard: string

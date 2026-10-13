@@ -58,6 +58,100 @@ function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   ]
 }
 
+export function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
+  r = clamp(r, 0, 255) / 255
+  g = clamp(g, 0, 255) / 255
+  b = clamp(b, 0, 255) / 255
+
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h = 0
+  let s = 0
+  const l = (max + min) / 2
+
+  if (max !== min) {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0)
+        break
+      case g:
+        h = (b - r) / d + 2
+        break
+      case b:
+        h = (r - g) / d + 4
+        break
+    }
+    h /= 6
+  }
+
+  return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)]
+}
+
+export type ColorFormat = 'hex' | 'rgb' | 'hsl'
+
+export function formatColorAsHex(r: number, g: number, b: number, a = 1): string {
+  const base = `#${toHex2(r)}${toHex2(g)}${toHex2(b)}`
+  return a < 1 ? `${base}${toHex2(Math.round(a * 255))}` : base
+}
+
+export function formatColorAsRgb(r: number, g: number, b: number, a = 1): string {
+  if (a < 1) {
+    const alphaStr = Math.round(a * 100) / 100
+    return `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${alphaStr})`
+  }
+  return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`
+}
+
+export function formatColorAsHsl(r: number, g: number, b: number, a = 1): string {
+  const [h, s, l] = rgbToHsl(r, g, b)
+  if (a < 1) {
+    const alphaStr = Math.round(a * 100) / 100
+    return `hsla(${h}, ${s}%, ${l}%, ${alphaStr})`
+  }
+  return `hsl(${h}, ${s}%, ${l}%)`
+}
+
+export function detectColorFormat(raw: string): ColorFormat {
+  const str = raw.trim().toLowerCase()
+  if (str.startsWith('#')) return 'hex'
+  if (str.startsWith('rgb')) return 'rgb'
+  if (str.startsWith('hsl')) return 'hsl'
+  return 'hex'
+}
+
+export interface ColorFormats {
+  hex: string
+  rgb: string
+  hsl: string
+  activeFormat: ColorFormat
+}
+
+export function getColorFormats(color: ColorInfo): ColorFormats {
+  const activeFormat = detectColorFormat(color.displayText)
+  return {
+    hex: formatColorAsHex(color.r, color.g, color.b, color.a),
+    rgb: formatColorAsRgb(color.r, color.g, color.b, color.a),
+    hsl: formatColorAsHsl(color.r, color.g, color.b, color.a),
+    activeFormat
+  }
+}
+
+export function cycleColorFormat(currentRaw: string): { nextText: string; format: ColorFormat } {
+  const info = parseColor(currentRaw)
+  if (!info) return { nextText: currentRaw, format: 'hex' }
+
+  const formats = getColorFormats(info)
+  if (formats.activeFormat === 'hex') {
+    return { nextText: formats.rgb, format: 'rgb' }
+  } else if (formats.activeFormat === 'rgb') {
+    return { nextText: formats.hsl, format: 'hsl' }
+  } else {
+    return { nextText: formats.hex, format: 'hex' }
+  }
+}
+
 /**
  * Attempts to parse a string as a recognized color code (hex, rgb, rgba, hsl, hsla).
  * Returns null if the string is not a pure color code.

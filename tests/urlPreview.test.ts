@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseUrlPreview, safeDecodeURIComponent, extractRootDomain, humanizeDomainName, humanizeSlug } from '../src/lib/urlPreview'
+import { parseUrlPreview, safeDecodeURIComponent, extractRootDomain, humanizeDomainName, humanizeSlug, cleanTrackingUrl, hasTrackingParams } from '../src/lib/urlPreview'
 
 describe('safeDecodeURIComponent', () => {
   it('decodes a complete sequence', () => {
@@ -137,5 +137,25 @@ describe('parseUrlPreview deep semantic path extractors', () => {
     const npm = parseUrlPreview('https://www.npmjs.com/package/@types/react')
     expect(npm.title).toBe('npm · @types/react')
     expect(npm.serviceName).toBe('npm')
+  })
+
+  it('detects tracking parameters and cleans URLs cleanly', () => {
+    const ytDirty = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&si=tracking_token_123&feature=share'
+    expect(hasTrackingParams(ytDirty)).toBe(true)
+    const ytClean = cleanTrackingUrl(ytDirty)
+    expect(ytClean).toBe('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    expect(hasTrackingParams(ytClean)).toBe(false)
+
+    const shopeeDirty = 'https://shopee.vn/product/123/456?sp_atk=abc-123&xptdk=def-456&utm_source=facebook'
+    expect(hasTrackingParams(shopeeDirty)).toBe(true)
+    expect(cleanTrackingUrl(shopeeDirty)).toBe('https://shopee.vn/product/123/456')
+
+    const twitterDirty = 'https://x.com/user/status/1234567890?s=20&t=token123'
+    expect(hasTrackingParams(twitterDirty)).toBe(true)
+    expect(cleanTrackingUrl(twitterDirty)).toBe('https://x.com/user/status/1234567890')
+
+    const normalUrl = 'https://github.com/TXAVLOG/T-Drop'
+    expect(hasTrackingParams(normalUrl)).toBe(false)
+    expect(cleanTrackingUrl(normalUrl)).toBe('https://github.com/TXAVLOG/T-Drop')
   })
 })

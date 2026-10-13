@@ -215,6 +215,8 @@ export interface Settings {
   v026UpgradeCleaned?: boolean
   /** Configurable global hotkey accelerator to toggle T-Drop shelf (e.g. 'Alt+C', 'Alt+Shift+C'). Default: 'Alt+C'. */
   toggleHotkey?: string
+  /** When true, automatically removes tracking parameters (UTM, fbclid, si...) from copied URLs. Default: false. */
+  cleanTrackingUrls?: boolean
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -249,7 +251,8 @@ export const DEFAULT_SETTINGS: Settings = {
   updateMode: 'auto',
   skippedUpdateVersion: undefined,
   language: 'system',
-  toggleHotkey: 'Alt+C'
+  toggleHotkey: 'Alt+C',
+  cleanTrackingUrls: false
 }
 
 

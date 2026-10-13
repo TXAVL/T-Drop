@@ -14,7 +14,7 @@
  * clamped preview; file items list names or bundle badge. Motion is handled by
  * the parent list (layout/AnimatePresence), so this component stays presentational.
  */
-import { memo, useState, useCallback, useEffect, useRef, forwardRef, type ReactNode } from 'react'
+import { memo, useState, useCallback, useEffect, useMemo, useRef, forwardRef, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import type { ClipboardItemDto } from '../../shared/types'
 import { MAX_STACK } from '../../shared/types'
@@ -25,11 +25,12 @@ import { itemRenderKey } from '../lib/itemSignature'
 import { basename, formatBytes, previewText, relativeTime, formatImageDisplayName } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
 import { playButtonClickSound, playToggleSound, playDeleteSound, playCardExpandSound } from '../lib/soundEffects'
-import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon } from './icons'
+import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon } from './icons'
 import { LinkPreviewCard } from './LinkPreviewCard'
 import '../styles/item.css'
 import { tryPaste } from '../lib/tryPaste'
-import { parseColor } from '../lib/colorUtils'
+import { parseColor, getColorFormats, cycleColorFormat } from '../lib/colorUtils'
+import { hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
 import { useTranslation, t } from '../i18n'
 import { useRelativeTimeTick } from '../hooks/useRelativeTimeTick'
 
@@ -336,6 +337,26 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item }, ref) => {
                     </span>
                   </>
                 )}
+                {item.data.kind === 'text' && item.data.isUrl && hasTrackingParams(item.data.text) && (
+                  <>
+                    <span>·</span>
+                    <span 
+                      className="meta-clean-badge" 
+                      title={t('item.cleanUrl') || 'Contains tracking parameters (click to clean)'}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        playButtonClickSound()
+                        const cleaned = cleanTrackingUrl((item.data as any).text)
+                        navigator.clipboard.writeText(cleaned)
+                        setCopied(true)
+                        window.setTimeout(() => setCopied(false), 900)
+                      }}
+                    >
+                      🧹 Clean
+                    </span>
+                  </>
+                )}
                 {copied && <span className="meta-copied">· {t('item.copied')}</span>}
               </div>
               <RelativeTime capturedAt={item.capturedAt} />
@@ -388,6 +409,24 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item }, ref) => {
           >
             <CopyIcon />
           </button>
+          {item.data.kind === 'text' && item.data.isUrl && hasTrackingParams(item.data.text) && (
+            <button
+              className="act act-clean-url"
+              title={t('item.cleanUrl') || 'Clean URL (Remove tracking)'}
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                e.currentTarget.blur()
+                playButtonClickSound()
+                const cleaned = cleanTrackingUrl((item.data as any).text)
+                navigator.clipboard.writeText(cleaned)
+                setCopied(true)
+                window.setTimeout(() => setCopied(false), 900)
+              }}
+            >
+              <BroomIcon />
+            </button>
+          )}
           {item.data.kind === 'text' && item.data.isUrl && (
             <button
               className="act"
@@ -401,6 +440,24 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item }, ref) => {
               }}
             >
               <ExternalLinkIcon />
+            </button>
+          )}
+          {item.data.kind === 'text' && (item.data.isColor || colorInfo) && (
+            <button
+              className="act"
+              title={t('item.convertColor') || 'Convert & Copy color'}
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                e.currentTarget.blur()
+                playButtonClickSound()
+                const cycled = cycleColorFormat((item.data as any).text)
+                navigator.clipboard.writeText(cycled.nextText)
+                setCopied(true)
+                window.setTimeout(() => setCopied(false), 900)
+              }}
+            >
+              <ColorConvertIcon />
             </button>
           )}
           <div className="act-divider" />
@@ -1025,6 +1082,46 @@ function BundleFluidPreview({
 /* Preview                                                             */
 /* ------------------------------------------------------------------ */
 
+function ColorSwatchPreview({ colorInfo }: { item: ClipboardItemDto; colorInfo: NonNullable<ReturnType<typeof parseColor>> }) {
+  const formats = useMemo(() => getColorFormats(colorInfo), [colorInfo])
+  const [activeFmt, setActiveFmt] = useState<'hex' | 'rgb' | 'hsl'>(formats.activeFormat)
+  const [copiedFmt, setCopiedFmt] = useState<string | null>(null)
+
+  const handleCopyFmt = (fmt: 'hex' | 'rgb' | 'hsl', e: React.MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
+    playButtonClickSound()
+    setActiveFmt(fmt)
+    const code = formats[fmt]
+    navigator.clipboard.writeText(code)
+    setCopiedFmt(fmt)
+    setTimeout(() => setCopiedFmt(null), 900)
+  }
+
+  return (
+    <div className="color-swatch-content">
+      <div className="color-swatch-code">{formats[activeFmt]}</div>
+      <div className="color-swatch-pills" onClick={(e) => e.stopPropagation()}>
+        {(['hex', 'rgb', 'hsl'] as const).map((fmt) => {
+          const isActive = activeFmt === fmt
+          const isCopied = copiedFmt === fmt
+          return (
+            <button
+              key={fmt}
+              type="button"
+              className={`color-pill-btn${isActive ? ' active' : ''}${isCopied ? ' copied' : ''}`}
+              title={`${fmt.toUpperCase()}: ${formats[fmt]}`}
+              onClick={(e) => handleCopyFmt(fmt, e)}
+            >
+              {isCopied ? '✓' : fmt.toUpperCase()}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function Preview({ item }: { item: ClipboardItemDto }) {
   switch (item.data.kind) {
     case 'text': {
@@ -1033,11 +1130,7 @@ function Preview({ item }: { item: ClipboardItemDto }) {
       }
       const colorInfo = parseColor(item.data.text)
       if (colorInfo) {
-        return (
-          <div className="color-swatch-content">
-            <div className="color-swatch-code">{colorInfo.displayText}</div>
-          </div>
-        )
+        return <ColorSwatchPreview item={item} colorInfo={colorInfo} />
       }
       return <div className="preview">{previewText(item.data.text)}</div>
     }

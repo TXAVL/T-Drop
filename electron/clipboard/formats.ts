@@ -200,7 +200,7 @@ export function buildFileListBuffer(paths: string[]): Buffer {
 }
 
 const URL_RE = /^(https?:\/\/|www\.)[^\s]+$/i
-const COLOR_HEX_RE = /^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i
+const COLOR_RE = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$|^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*[\d.]+%?\s*)?\)$|^hsla?\(\s*\d{1,3}(?:deg)?\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(?:\s*,\s*[\d.]+%?\s*)?\)$/i
 const FILE_URL_RE = /file:\/\/\/?([^\s"'<>]+)/i
 
 /** Turn a clipboard file:// URL into a local path if that file exists. */
@@ -573,7 +573,7 @@ export async function readClipboard(): Promise<ItemData | null> {
     const textToStore = normalizeClipboardText(rawText)
 
     const isUrl = URL_RE.test(trimmedText)
-    const isColor = COLOR_HEX_RE.test(trimmedText)
+    const isColor = COLOR_RE.test(trimmedText)
 
     return { kind: 'text', text: textToStore, html, isUrl, isColor }
   }

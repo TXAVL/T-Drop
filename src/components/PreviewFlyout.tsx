@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
 import { formatBytes, formatImageDisplayName } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
-import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon } from './icons'
-import { parseUrlPreview } from '../lib/urlPreview'
+import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon, BroomIcon } from './icons'
+import { parseUrlPreview, hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
+import { parseColor, getColorFormats } from '../lib/colorUtils'
 import { createPortal } from 'react-dom'
 import { useAdaptiveSpring } from '../hooks/useAdaptiveSpring'
 import { useDragOut } from '../hooks/useDragOut'
@@ -763,6 +764,22 @@ function PreviewContent({
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              {hasTrackingParams(activeText) && (
+                <QuickActionButton
+                  title={t('item.cleanUrl') || 'Clean URL (Remove tracking)'}
+                  icon={BroomIcon}
+                  onClick={() => {
+                    playButtonClickSound()
+                    const clean = cleanTrackingUrl(activeText)
+                    navigator.clipboard.writeText(clean)
+                    useStore.getState().pushToast({
+                      id: Date.now().toString(),
+                      message: t('item.cleanUrlCopied') || 'Clean URL copied!',
+                      tone: 'info'
+                    })
+                  }}
+                />
+              )}
               <QuickActionButton
                 title={t('flyout.openLink')}
                 icon={ExternalLinkIcon}
@@ -836,6 +853,128 @@ function PreviewContent({
             }}
           >
             {info.cleanUrl || activeText}
+          </div>
+        </div>
+      )
+    }
+
+    const colorInfo = parseColor(activeText)
+    if (colorInfo) {
+      const formats = getColorFormats(colorInfo)
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {/* Top Swatch Presentation Card */}
+          <div
+            style={{
+              width: '100%',
+              height: 110,
+              borderRadius: 12,
+              backgroundColor: colorInfo.cssColor,
+              boxShadow: 'inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 8px 24px rgba(0, 0, 0, 0.35)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
+              padding: 16,
+              boxSizing: 'border-box',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '45%',
+              background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)',
+              pointerEvents: 'none'
+            }} />
+            <div style={{
+              fontFamily: 'var(--font-mono, monospace)',
+              fontSize: 20,
+              fontWeight: 800,
+              letterSpacing: '0.02em',
+              color: colorInfo.isLight ? '#000000' : '#ffffff',
+              textShadow: colorInfo.isLight ? 'none' : '0 2px 8px rgba(0, 0, 0, 0.45)',
+              zIndex: 1
+            }}>
+              {colorInfo.displayText}
+            </div>
+          </div>
+
+          {/* Color Formats Selector Rows */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255, 255, 255, 0.4)', textTransform: 'uppercase', letterSpacing: '0.06em', marginLeft: 2 }}>
+              {t('flyout.colorFormats') || 'Color Formats'}
+            </div>
+            {(['hex', 'rgb', 'hsl'] as const).map((fmt) => (
+              <div
+                key={fmt}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '8px 12px',
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: 8,
+                  fontFamily: 'var(--font-mono, monospace)',
+                  fontSize: 13
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255, 255, 255, 0.45)', width: 34 }}>
+                    {fmt.toUpperCase()}
+                  </span>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.92)' }}>
+                    {formats[fmt]}
+                  </span>
+                </div>
+                <QuickActionButton
+                  title={`Copy ${fmt.toUpperCase()}`}
+                  icon={CopyIcon}
+                  onClick={() => {
+                    playButtonClickSound()
+                    navigator.clipboard.writeText(formats[fmt])
+                    useStore.getState().pushToast({
+                      id: Date.now().toString(),
+                      message: `Copied ${fmt.toUpperCase()}!`,
+                      tone: 'info'
+                    })
+                  }}
+                  size={24}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Color Metrics */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 8,
+            padding: '10px 12px',
+            background: 'rgba(0, 0, 0, 0.25)',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+            borderRadius: 8,
+            fontSize: 12
+          }}>
+            <div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>RED</div>
+              <div style={{ color: '#fff', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>{colorInfo.r}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>GREEN</div>
+              <div style={{ color: '#fff', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>{colorInfo.g}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>BLUE</div>
+              <div style={{ color: '#fff', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>{colorInfo.b}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>SURFACE</div>
+              <div style={{ color: '#fff', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>{colorInfo.isLight ? 'Light' : 'Dark'}</div>
+            </div>
           </div>
         </div>
       )

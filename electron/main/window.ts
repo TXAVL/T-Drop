@@ -113,7 +113,7 @@ export function registerClipboardUpdateListener(fn: () => void): void {
 
 const WM_CLIPBOARDUPDATE = 0x031D
 
-export const PANEL_WIDTH = 384
+export const PANEL_WIDTH = 430
 /** Visual width of the blade when collapsed (only used by the renderer). */
 export const COLLAPSED_WIDTH = 0
 
