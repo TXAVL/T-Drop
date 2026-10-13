@@ -5,15 +5,17 @@
  * renderer calls them through the typed preload bridge, so a signature mismatch
  * is a compile-time error rather than a runtime one.
  */
-import { app, ipcMain, clipboard, nativeImage, shell, net, dialog } from 'electron'
-import { existsSync } from 'node:fs'
+import { app, ipcMain, clipboard, nativeImage, shell, net, dialog, BrowserWindow } from 'electron'
+import { existsSync, writeFileSync } from 'node:fs'
+import { trimMemory } from './memory'
+import { getDeviceFingerprint, activateLicense, deactivateLicense, getLicenseState, TxaLicense } from './license'
 import { execFile } from 'node:child_process'
 import { psHost, getSystemPowerShellPath, getWritableCwd } from './powershell'
 import { filterValidPaths, isExistingFilePath } from './pathValidation'
 import { type InvokeMap, type InvokeChannel, type SendMap, type SendChannel } from '../../shared/ipc'
 import { getStore, loadSettings, saveSettings, pushState, addFiles, getWatcher } from './state'
 import { createTxaBackup, previewTxaBackup, restoreTxaBackup, isBackupBusy } from '../store/backup'
-import { sendToMainWindow, setInteractive, setHeartbeatPaused, setHotZoneWidth, repositionWindow, getDisplayListOptions, popUpAndRetract, setWindowFocusable, captureExternalForeground, traceFg, resolvePasteTarget } from './window'
+import { getMainWindow, sendToMainWindow, setInteractive, setHeartbeatPaused, setHotZoneWidth, repositionWindow, getDisplayListOptions, popUpAndRetract, setWindowFocusable, captureExternalForeground, traceFg, resolvePasteTarget } from './window'
 import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
 import { rebuildTrayMenu } from './tray'
@@ -839,6 +841,78 @@ export function registerIpc(): void {
       mode: res.mode,
       error: res.error
     }
+  })
+
+  handle('image:copy-dataurl', (dataUrl) => {
+    try {
+      const img = nativeImage.createFromDataURL(dataUrl)
+      if (!img.isEmpty()) {
+        clipboard.clear()
+        clipboard.writeImage(img)
+        return true
+      }
+    } catch (err) {
+      console.error('[IPC] image:copy-dataurl failed:', err)
+    }
+    return false
+  })
+
+  handle('image:save-file', async ({ dataUrl, defaultName }) => {
+    try {
+      const win = getMainWindow()
+      const extMatch = dataUrl.match(/^data:image\/([a-zA-Z0-9+]+);base64,/)
+      const rawExt = extMatch ? extMatch[1].toLowerCase().replace('jpeg', 'jpg') : 'png'
+      const filename = defaultName || `t-drop-image-${Date.now()}.${rawExt}`
+      const res = await dialog.showSaveDialog(win ?? (undefined as any), {
+        title: 'Save Converted Image',
+        defaultPath: filename,
+        filters: [
+          { name: 'Images', extensions: [rawExt, 'png', 'jpg', 'webp'] },
+          { name: 'All Files', extensions: ['*'] }
+        ]
+      })
+      if (!res.canceled && res.filePath) {
+        const base64Data = dataUrl.replace(/^data:image\/[a-zA-Z0-9+]+;base64,/, '')
+        const buf = Buffer.from(base64Data, 'base64')
+        writeFileSync(res.filePath, buf)
+        return { ok: true, filePath: res.filePath }
+      }
+      return { ok: false }
+    } catch (err: any) {
+      console.error('[IPC] image:save-file failed:', err)
+      return { ok: false, error: err?.message || String(err) }
+    }
+  })
+
+  handle('system:trim-memory', () => {
+    const wins = [getMainWindow(), getOnboardingWindow()].filter(Boolean) as BrowserWindow[]
+    return trimMemory(wins)
+  })
+
+  handle('license:get-device-info', () => {
+    const fp = getDeviceFingerprint()
+    const st = getLicenseState()
+    return {
+      hardwareId: fp.hardwareId,
+      pcName: fp.pcName,
+      hwHash: fp.hwHash,
+      isPro: st.isPro,
+      role: st.role,
+      key: st.key,
+      userName: st.userName
+    }
+  })
+
+  handle('license:activate', async (key) => {
+    return activateLicense(key)
+  })
+
+  handle('license:deactivate', () => {
+    return deactivateLicense()
+  })
+
+  handle('license:generate-key', (hwHash) => {
+    return TxaLicense.generateKey(hwHash)
   })
 }
 

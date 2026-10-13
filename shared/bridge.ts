@@ -71,6 +71,13 @@ export interface EdgeApi {
   createBackup: (suggestedPath?: string) => Promise<{ ok: boolean; filePath?: string; fileSizeBytes?: number; itemsCount?: number; imagesCount?: number; error?: string }>
   previewBackup: (filePath?: string) => Promise<{ ok: boolean; filePath?: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }; error?: string }>
   restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => Promise<{ ok: boolean; restoredItemsCount?: number; mode?: 'merge' | 'overwrite'; error?: string }>
+  copyImageDataUrl: (dataUrl: string) => Promise<boolean>
+  saveImageFile: (req: { dataUrl: string; defaultName?: string }) => Promise<{ ok: boolean; filePath?: string; error?: string }>
+  trimMemory: () => Promise<{ ok: boolean; mainRssMb: number }>
+  getLicenseDeviceInfo: () => Promise<{ hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string }>
+  activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string }>
+  deactivateLicense: () => Promise<boolean>
+  generateLicenseKey: (hwHash?: string) => Promise<string>
   onBackupFileOpened?: (cb: (info: { filePath: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number } }) => void) => () => void
 
   /* Main -> Renderer */

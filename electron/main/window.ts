@@ -23,6 +23,7 @@ import { WorkAreaCache } from './workAreaCache'
 import { probeSeamAware, isNearProximity, type SeamTickState } from './stickProbe'
 import { loadSettings, saveSettings } from '../store/settings'
 import { isFullscreenAppActive, registerFullscreenActiveListener } from './fullscreen'
+import { scheduleRetractMemoryTrim, cancelScheduledMemoryTrim } from './memory'
 
 type RegisterWindowMessageFn = (lpString: string) => number
 type SetWindowLongPtrFn = (hWnd: number | bigint, nIndex: number, dwNewLong: number | bigint) => number | bigint
@@ -347,8 +348,7 @@ export function setInteractive(value: boolean): void {
     // Panel is open: disable click-through so user can interact.
     // Remember who is in front BEFORE any search typing can steal focus.
     captureExternalForeground()
-    // Cancel any pending idle GC: collecting during the open animation is
-    // what made fast reopen-after-close hitch. The next close re-arms it.
+    cancelScheduledMemoryTrim()
     if (gcTimer !== null) {
       clearTimeout(gcTimer)
       gcTimer = null
@@ -366,16 +366,8 @@ export function setInteractive(value: boolean): void {
     mainWindow.setSkipTaskbar(true)
     applyNoActivateStyle(mainWindow, true)
 
-    // Trigger gentle idle memory cleanup 1.5s after panel closes to reclaim RAM
-    if (global.gc) {
-      if (gcTimer !== null) clearTimeout(gcTimer)
-      gcTimer = setTimeout(() => {
-        gcTimer = null
-        if (!interactive && global.gc) {
-          try { global.gc() } catch { /* ignore */ }
-        }
-      }, 1500)
-    }
+    // Trigger Win32 working set trim and memory cleanup 2.5s after panel closes to reclaim RAM
+    scheduleRetractMemoryTrim(() => [mainWindow].filter(Boolean) as BrowserWindow[], 2500)
   }
 }
 

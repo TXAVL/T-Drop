@@ -19,7 +19,8 @@ import { isStoreBuild, shouldStartHidden } from './config'
 import { prewarmDragIcons } from './drag'
 import { initState, getWatcher, loadSettings, saveSettings, pushState, stopStateTimers, getStore } from './state'
 import { initAutoUpdater } from './updater'
-import { createOnboardingWindow } from './onboardingWindow'
+import { createOnboardingWindow, getOnboardingWindow } from './onboardingWindow'
+import { startPeriodicMemoryManager, stopPeriodicMemoryManager } from './memory'
 import { startFullscreenMonitor, stopFullscreenMonitor, triggerFullscreenCheck } from './fullscreen'
 import { flushStagedTempRegistry } from './stagedTemp'
 import { extname, normalize } from 'node:path'
@@ -55,11 +56,8 @@ app.disableHardwareAcceleration()
 app.enableSandbox()
 
 // Keep V8's old-space heap bounded without starving a renderer that is loading
-// an existing clipboard history. This deliberately does not restore
-// --optimize-for-size: that flag made collections more aggressive and caused
-// visible animation hitches. Chromium image/compositor memory is handled by
-// the thumbnail path below rather than by this JavaScript heap limit.
-app.commandLine.appendSwitch('js-flags', '--max-old-space-size=512 --expose-gc')
+// an existing clipboard history. Bound to 256 MB with exposed GC.
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=256 --expose-gc')
 
 // ---- single instance -------------------------------------------------------
 const gotLock = app.requestSingleInstanceLock()
@@ -94,6 +92,7 @@ app.on('before-quit', () => {
   stopHeartbeat()
   stopStateTimers()
   stopFullscreenMonitor()
+  stopPeriodicMemoryManager()
   getWatcher().stop()
   try {
     getStore().persistSync()
@@ -189,6 +188,9 @@ app.whenReady().then(() => {
       }
     })
   }
+
+  // Start periodic memory manager to reclaim unused working set RAM
+  startPeriodicMemoryManager(() => [getMainWindow(), getOnboardingWindow()].filter(Boolean) as BrowserWindow[])
 
   // Keep the tray checkmarks in sync after settings change from the UI.
   // (Tray menu is rebuilt on each open, so no extra wiring is needed here.)

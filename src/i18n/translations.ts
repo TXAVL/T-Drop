@@ -152,6 +152,9 @@ export interface TranslationKeys {
     clearLast24h?: string
     clearAll?: string
     clearAllConfirm?: string
+    quickCompress?: string
+    compressBtn?: string
+    convertTo?: string
     [key: string]: string | undefined
   }
   fileKinds: {
@@ -302,6 +305,22 @@ export interface TranslationKeys {
     autoDetectedTitle: string
     previewTitle: string
     itemsUnit: string
+    [key: string]: string | undefined
+  }
+  imageStudio?: {
+    title: string
+    tabConvert: string
+    tabCompress: string
+    targetFormat: string
+    quality: string
+    convertCopy: string
+    saveAs: string
+    copied: string
+    saved: string
+    compressMode: string
+    compressHint: string
+    copyCompressed: string
+    saveCompressed: string
     [key: string]: string | undefined
   }
 }
@@ -637,7 +656,10 @@ export const en: TranslationKeys = {
     "cleanUrl": "Clean URL (Remove tracking)",
     "cleanUrlCopied": "Clean URL copied!",
     "convertColor": "Convert & Copy color",
-    "hasTracking": "Contains tracking parameters"
+    "hasTracking": "Contains tracking parameters",
+    "quickCompress": "Quick compress (WebP)",
+    "compressBtn": "Compress",
+    "convertTo": "Convert to"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -784,6 +806,21 @@ export const en: TranslationKeys = {
     "autoDetectedTitle": "Backup Archive Detected",
     "previewTitle": "Restore Preview",
     "itemsUnit": "items"
+  },
+  "imageStudio": {
+    "title": "Image Studio",
+    "tabConvert": "Convert Format",
+    "tabCompress": "Compress & Optimize",
+    "targetFormat": "Target format",
+    "quality": "Quality",
+    "convertCopy": "Copy as {format}",
+    "saveAs": "Save As...",
+    "copied": "Copied to clipboard!",
+    "saved": "File saved!",
+    "compressMode": "Compression level",
+    "compressHint": "WebP smart lossless/lossy compression for maximum size reduction",
+    "copyCompressed": "Copy Compressed",
+    "saveCompressed": "Save Compressed..."
   }
 }
 
@@ -5565,7 +5602,10 @@ export const vi: TranslationKeys = {
     "cleanUrl": "Làm sạch liên kết (Bỏ theo dõi)",
     "cleanUrlCopied": "Đã sao chép liên kết sạch!",
     "convertColor": "Chuyển đổi & Sao chép mã màu",
-    "hasTracking": "Chứa tham số theo dõi"
+    "hasTracking": "Chứa tham số theo dõi",
+    "quickCompress": "Nén nhanh (WebP)",
+    "compressBtn": "Nén",
+    "convertTo": "Chuyển sang"
   },
   "fileKinds": {
     "pdf": "PDF",
@@ -5712,6 +5752,21 @@ export const vi: TranslationKeys = {
     "autoDetectedTitle": "Phát hiện bản sao lưu T-Drop",
     "previewTitle": "Xem trước bản sao lưu",
     "itemsUnit": "mục"
+  },
+  "imageStudio": {
+    "title": "Tiện ích Hình ảnh",
+    "tabConvert": "Chuyển đổi định dạng",
+    "tabCompress": "Nén & Tối ưu dung lượng",
+    "targetFormat": "Định dạng đích",
+    "quality": "Chất lượng",
+    "convertCopy": "Sao chép dạng {format}",
+    "saveAs": "Lưu tệp...",
+    "copied": "Đã sao chép vào bảng tạm!",
+    "saved": "Đã lưu tệp!",
+    "compressMode": "Mức độ nén",
+    "compressHint": "Nén thông minh WebP giúp giảm tối đa dung lượng mà vẫn giữ độ nét",
+    "copyCompressed": "Sao chép ảnh đã nén",
+    "saveCompressed": "Lưu ảnh đã nén..."
   }
 }
 

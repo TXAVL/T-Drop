@@ -6,6 +6,7 @@ import { getFileKind } from '../lib/fileType'
 import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon, BroomIcon } from './icons'
 import { parseUrlPreview, hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
 import { parseColor, getColorFormats } from '../lib/colorUtils'
+import { ImageStudioPanel } from './ImageStudioPanel'
 import { createPortal } from 'react-dom'
 import { useAdaptiveSpring } from '../hooks/useAdaptiveSpring'
 import { useDragOut } from '../hooks/useDragOut'
@@ -1046,6 +1047,13 @@ function PreviewContent({
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', fontFamily: SYS_FONT, letterSpacing: '0.02em' }}>
           {item.data.width} × {item.data.height} · {formatBytes(item.data.bytes)}
         </div>
+        <ImageStudioPanel
+          imageSrc={`edgelocal://${item.data.imageId}`}
+          originalBytes={item.data.bytes}
+          defaultName={item.data.fileName || `image-${item.data.imageId}`}
+          width={item.data.width}
+          height={item.data.height}
+        />
       </div>
     )
   }
@@ -1172,6 +1180,11 @@ function PreviewContent({
             <span>{fileName}</span>
             {entry?.size ? <span>{formatBytes(entry.size)}</span> : null}
           </div>
+          <ImageStudioPanel
+            imageSrc={fullResUrl}
+            originalBytes={entry?.size}
+            defaultName={fileName}
+          />
         </div>
       )
     }

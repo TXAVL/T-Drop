@@ -22,6 +22,7 @@
   "include": [
     "electron/**/*.ts",
     "shared/**/*.ts",
+    "src/i18n/**/*.ts",
     "electron.vite.config.ts"
   ]
 }

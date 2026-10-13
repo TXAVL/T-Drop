@@ -218,6 +218,13 @@ const api = {
   createBackup: (suggestedPath?: string) => invoke('backup:create', suggestedPath),
   previewBackup: (filePath?: string) => invoke('backup:preview', filePath),
   restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => invoke('backup:restore', filePath, mode),
+  copyImageDataUrl: (dataUrl: string) => invoke('image:copy-dataurl', dataUrl),
+  saveImageFile: (req: { dataUrl: string; defaultName?: string }) => invoke('image:save-file', req),
+  trimMemory: () => invoke('system:trim-memory'),
+  getLicenseDeviceInfo: () => invoke('license:get-device-info'),
+  activateLicense: (key: string) => invoke('license:activate', key),
+  deactivateLicense: () => invoke('license:deactivate'),
+  generateLicenseKey: (hwHash?: string) => invoke('license:generate-key', hwHash),
 
   /* Main -> Renderer */
   onBackupFileOpened: (cb: (info: EventArgs<'backup:file-opened'>[0]) => void) => on('backup:file-opened', cb),

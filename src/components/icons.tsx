@@ -185,3 +185,48 @@ export const ColorConvertIcon = (p: P) => {
     </svg>
   )
 }
+
+export const ImageCompressIcon = (p: P) => {
+  const size = Number(p.width ?? p.height ?? 16)
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={size <= 14 ? 1.55 : 1.7} strokeLinecap="round" strokeLinejoin="round" {...(p as any)}>
+      <path d="M4 14h6m0 0v6m0-6L3 21" />
+      <path d="M20 10h-6m0 0V4m0 6 7-7" />
+    </svg>
+  )
+}
+
+export const ImageConvertIcon = (p: P) => {
+  const size = Number(p.width ?? p.height ?? 16)
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={size <= 14 ? 1.55 : 1.7} strokeLinecap="round" strokeLinejoin="round" {...(p as any)}>
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    </svg>
+  )
+}
+
+export const OcrIcon = (p: P) => {
+  const size = Number(p.width ?? p.height ?? 16)
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={size <= 14 ? 1.55 : 1.7} strokeLinecap="round" strokeLinejoin="round" {...(p as any)}>
+      <path d="M7 3H5a2 2 0 0 0-2 2v2" />
+      <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+      <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+      <path d="M3 17v2a2 2 0 0 0 2 2h2" />
+      <path d="M9 10h6" />
+      <path d="M12 10v7" />
+    </svg>
+  )
+}
+
+export const CrownIcon = (p: P) => {
+  const size = Number(p.width ?? p.height ?? 16)
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={size <= 14 ? 1.55 : 1.7} strokeLinecap="round" strokeLinejoin="round" {...(p as any)}>
+      <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+    </svg>
+  )
+}
+

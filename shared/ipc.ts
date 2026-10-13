@@ -119,6 +119,27 @@ export interface InvokeMap {
 
   /** Restore data from an encrypted .txa backup file. */
   'backup:restore': { args: [filePath: string, mode?: 'merge' | 'overwrite']; result: { ok: boolean; restoredItemsCount?: number; mode?: 'merge' | 'overwrite'; error?: string } }
+
+  /** Copy a base64/dataURL image directly to the native OS clipboard. */
+  'image:copy-dataurl': { args: [dataUrl: string]; result: boolean }
+
+  /** Save an image dataUrl to disk via native save dialog. */
+  'image:save-file': { args: [req: { dataUrl: string; defaultName?: string }]; result: { ok: boolean; filePath?: string; error?: string } }
+
+  /** Trigger Win32 working set trim and V8 garbage collection across processes. */
+  'system:trim-memory': { args: []; result: { ok: boolean; mainRssMb: number } }
+
+  /** Get device fingerprint & license state */
+  'license:get-device-info': { args: []; result: { hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string } }
+
+  /** Activate a license key with Supabase */
+  'license:activate': { args: [key: string]; result: { ok: boolean; code?: string; message: string; role?: string; userName?: string } }
+
+  /** Deactivate and clear current license key */
+  'license:deactivate': { args: []; result: boolean }
+
+  /** Generate a new license key (for admin / developer) */
+  'license:generate-key': { args: [hwHash?: string]; result: string }
 }
 
 /* ------------------------------------------------------------------ */

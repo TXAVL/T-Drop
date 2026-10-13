@@ -217,6 +217,16 @@ export interface Settings {
   toggleHotkey?: string
   /** When true, automatically removes tracking parameters (UTM, fbclid, si...) from copied URLs. Default: false. */
   cleanTrackingUrls?: boolean
+  /** Pro License key (e.g. 'TDR_...'). */
+  licenseKey?: string
+  /** Active License role ('FREE' | 'VIP' | 'PREMIUM'). Default: 'FREE'. */
+  licenseRole?: 'FREE' | 'VIP' | 'PREMIUM'
+  /** Pro/Premium activation status. */
+  isPro?: boolean
+  /** Name of license holder. */
+  licenseUserName?: string
+  /** Expiration timestamp/date (ISO string). Null for Free. */
+  licenseExpiresAt?: string | null
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -252,7 +262,9 @@ export const DEFAULT_SETTINGS: Settings = {
   skippedUpdateVersion: undefined,
   language: 'system',
   toggleHotkey: 'Alt+C',
-  cleanTrackingUrls: false
+  cleanTrackingUrls: false,
+  isPro: false,
+  licenseRole: 'FREE'
 }
 
 

@@ -77,6 +77,7 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
       'electron-updater',
       'koffi',
       'react',
+      'tesseract.js',
       'zustand'
     ])
   })

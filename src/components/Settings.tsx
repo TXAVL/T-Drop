@@ -9,7 +9,9 @@ import {
   CopyIndicatorIcon,
   SparkleIndicatorIcon
 } from './CopyIndicatorCurve'
-import { ChevronRightIcon, CloseIcon, LogOutIcon, StarIcon, InfoIcon, GithubOctocatLogo, MicrosoftStoreLogo } from './icons'
+import { ChevronRightIcon, CloseIcon, LogOutIcon, StarIcon, InfoIcon, GithubOctocatLogo, MicrosoftStoreLogo, CrownIcon } from './icons'
+import { getDaysRemaining, formatExpiryDate, type DeviceFingerprint } from '../../shared/license'
+import { PurchaseModal } from './PurchaseModal'
 import { HotkeyRecorder } from './HotkeyRecorder'
 import { SlideCommit } from './SlideCommit'
 import { WakeSlider } from './WakeSlider'
@@ -324,6 +326,290 @@ export function Settings({
     if (isShelf) {
       return (
         <div className="settings-shelf-card backup-card behaviour-col">
+          {content}
+        </div>
+      )
+    }
+
+    return (
+      <div className="setting-card">
+        {content}
+      </div>
+    )
+  }
+
+  // ── License & Pro Management ──
+  const [deviceInfo, setDeviceInfo] = useState<DeviceFingerprint | null>(null)
+  const [licenseInput, setLicenseInput] = useState<string>(settings.licenseKey || '')
+  const [licenseActivating, setLicenseActivating] = useState<boolean>(false)
+  const [copiedHw, setCopiedHw] = useState<boolean>(false)
+  const [purchaseModalOpen, setPurchaseModalOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    window.edge.getLicenseDeviceInfo?.().then((info) => {
+      setDeviceInfo(info)
+    }).catch(console.error)
+  }, [])
+
+  useEffect(() => {
+    if (settings.licenseKey) {
+      setLicenseInput(settings.licenseKey)
+    }
+  }, [settings.licenseKey])
+
+  const handleActivateLicense = async () => {
+    const trimmed = licenseInput.trim().toUpperCase()
+    if (!trimmed || licenseActivating) return
+    setLicenseActivating(true)
+    playButtonClickSound()
+    try {
+      const res = await window.edge.activateLicense(trimmed)
+      if (res.ok) {
+        pushToast({
+          id: Date.now().toString(),
+          message: res.message || 'Kích hoạt thành công!',
+          tone: 'info'
+        })
+      } else {
+        pushToast({
+          id: Date.now().toString(),
+          message: res.message || 'Kích hoạt thất bại',
+          tone: 'error'
+        })
+      }
+    } catch (err: any) {
+      pushToast({
+        id: Date.now().toString(),
+        message: `Lỗi kết nối: ${err?.message || String(err)}`,
+        tone: 'error'
+      })
+    } finally {
+      setLicenseActivating(false)
+    }
+  }
+
+  const handleDeactivateLicense = () => {
+    playButtonClickSound()
+    window.edge.deactivateLicense()
+    setLicenseInput('')
+    pushToast({
+      id: Date.now().toString(),
+      message: 'Đã hủy kích hoạt bản quyền, chuyển về gói FREE',
+      tone: 'info'
+    })
+  }
+
+  const handleCopyHardwareHash = () => {
+    if (!deviceInfo?.hwHash) return
+    playButtonClickSound()
+    navigator.clipboard.writeText(deviceInfo.hwHash)
+    setCopiedHw(true)
+    setTimeout(() => setCopiedHw(false), 2000)
+    pushToast({
+      id: Date.now().toString(),
+      message: 'Đã sao chép mã máy!',
+      tone: 'info'
+    })
+  }
+
+  const renderLicenseCard = (isShelf = false) => {
+    const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
+    const role = settings.licenseRole || 'FREE'
+    const daysLeft = getDaysRemaining(settings.licenseExpiresAt)
+
+    const content = (
+      <>
+        <div className="shelf-card-top">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <div className="setting-group-label" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <CrownIcon width={13} height={13} fill={isPro ? '#f59e0b' : 'rgba(255,255,255,0.4)'} />
+              <span>BẢN QUYỀN & TÍNH NĂNG PRO</span>
+            </div>
+            <span style={{
+              fontSize: 10,
+              fontWeight: 700,
+              padding: '2px 7px',
+              borderRadius: 99,
+              letterSpacing: '0.04em',
+              background: role === 'PREMIUM'
+                ? 'linear-gradient(135deg, #a855f7, #6366f1)'
+                : role === 'VIP'
+                ? 'linear-gradient(135deg, #f59e0b, #d97706)'
+                : 'rgba(255,255,255,0.1)',
+              color: '#ffffff'
+            }}>
+              {role === 'PREMIUM' ? 'PREMIUM (60 ngày)' : role === 'VIP' ? 'VIP (30 ngày)' : 'FREE (Mặc định)'}
+            </span>
+          </div>
+
+          <div className="setting-title" style={{ marginTop: 4 }}>
+            {isPro
+              ? `Tài khoản ${role}: Đang hoạt động`
+              : 'Gói Free (Mở khóa thêm tính năng với VIP & Premium)'}
+          </div>
+
+          <div className="setting-desc">
+            {isPro
+              ? `Chủ sở hữu: ${settings.licenseUserName || 'Khách hàng'} · Còn lại: ${daysLeft !== null ? `${daysLeft} ngày` : 'Đang hiệu lực'}`
+              : 'Kích hoạt VIP (hạn 30 ngày) hoặc PREMIUM (hạn 60 ngày) để dùng tính năng AI OCR trích chữ từ hình ảnh.'}
+          </div>
+
+          {settings.licenseExpiresAt && isPro && (
+            <div style={{
+              marginTop: 4,
+              fontSize: 11,
+              color: '#38bdf8',
+              background: 'rgba(56, 189, 248, 0.08)',
+              border: '1px solid rgba(56, 189, 248, 0.2)',
+              borderRadius: 6,
+              padding: '4px 8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <span>Hạn đến: <strong>{formatExpiryDate(settings.licenseExpiresAt)}</strong></span>
+              <span>Còn lại: <strong style={{ color: '#fff' }}>{daysLeft ?? 0} ngày</strong></span>
+            </div>
+          )}
+
+          {deviceInfo?.hwHash && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              background: 'rgba(0, 0, 0, 0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: 8,
+              padding: '5px 10px',
+              marginTop: 6
+            }}>
+              <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.55)' }}>
+                Mã máy (Machine ID): <strong style={{ color: '#fff', letterSpacing: '0.05em' }}>{deviceInfo.hwHash}</strong>
+              </span>
+              <button
+                type="button"
+                onClick={handleCopyHardwareHash}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: copiedHw ? '#10b981' : '#38bdf8',
+                  fontSize: 11,
+                  cursor: 'pointer',
+                  padding: 0
+                }}
+              >
+                {copiedHw ? 'Đã chép' : 'Sao chép'}
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="shelf-card-bottom" style={{ marginTop: 8 }}>
+          {isPro ? (
+            <div style={{ display: 'flex', gap: 6, width: '100%' }}>
+              <button
+                type="button"
+                className="pill"
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  height: 32,
+                  fontSize: 11.5,
+                  fontWeight: 600,
+                  background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2))',
+                  border: '1px solid rgba(56, 189, 248, 0.3)',
+                  color: '#38bdf8'
+                }}
+                onClick={() => setPurchaseModalOpen(true)}
+              >
+                ✨ Gia hạn thêm gói
+              </button>
+              <button
+                type="button"
+                className="pill danger"
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  height: 32,
+                  fontSize: 11.5,
+                  fontWeight: 600
+                }}
+                onClick={handleDeactivateLicense}
+              >
+                Hủy kích hoạt (Về Free)
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
+              <div style={{ display: 'flex', gap: 6, width: '100%' }}>
+                <input
+                  type="text"
+                  placeholder="Nhập mã key: TDR_XXXXXX_XXXXX"
+                  value={licenseInput}
+                  onChange={(e) => setLicenseInput(e.target.value.toUpperCase())}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleActivateLicense()
+                  }}
+                  style={{
+                    flex: 1,
+                    height: 32,
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    borderRadius: 8,
+                    padding: '0 10px',
+                    color: '#fff',
+                    fontSize: 12,
+                    fontFamily: 'var(--font-mono, monospace)',
+                    outline: 'none',
+                    letterSpacing: '0.04em'
+                  }}
+                />
+                <button
+                  type="button"
+                  className="pill active"
+                  style={{
+                    height: 32,
+                    padding: '0 14px',
+                    fontSize: 11.5,
+                    fontWeight: 600,
+                    whiteSpace: 'nowrap'
+                  }}
+                  disabled={licenseActivating || !licenseInput.trim()}
+                  onClick={handleActivateLicense}
+                >
+                  {licenseActivating ? '...' : 'Kích hoạt'}
+                </button>
+              </div>
+
+              <button
+                type="button"
+                className="pill active"
+                style={{
+                  width: '100%',
+                  height: 32,
+                  fontSize: 11.5,
+                  fontWeight: 600,
+                  justifyContent: 'center',
+                  background: 'linear-gradient(135deg, #0284c7, #6366f1)',
+                  color: '#ffffff',
+                  boxShadow: '0 2px 10px rgba(2, 132, 199, 0.3)'
+                }}
+                onClick={() => {
+                  playButtonClickSound()
+                  setPurchaseModalOpen(true)
+                }}
+              >
+                ✨ Mua bản quyền / Nâng cấp VIP & PREMIUM (VietQR)
+              </button>
+            </div>
+          )}
+        </div>
+      </>
+    )
+
+    if (isShelf) {
+      return (
+        <div className="settings-shelf-card license-card behaviour-col">
           {content}
         </div>
       )
@@ -1478,6 +1764,9 @@ export function Settings({
               {/* Card 10B: Backup & Restore (.txa) */}
               {renderBackupCard(true)}
 
+              {/* Card 10C: License & Pro Activation */}
+              {renderLicenseCard(true)}
+
               {/* ── SUB-GROUP 5 DIVIDER: Updates ── */}
               {!isStoreBuild && (
                 <div className="shelf-section-divider">
@@ -1578,6 +1867,9 @@ export function Settings({
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('footer.communityAndSupport') || 'COMMUNITY & SUPPORT'}</span>
               </div>
+
+              {/* Card 12B: License & Pro */}
+              {renderLicenseCard(true)}
 
               {/* Card 13: Community & Feedback */}
               {renderHorizontalCommunityCard()}
@@ -1947,6 +2239,11 @@ export function Settings({
         </div>
         {renderRestoreModal()}
         {renderDonateModal()}
+        <PurchaseModal
+          open={purchaseModalOpen}
+          onClose={() => setPurchaseModalOpen(false)}
+          machineId={deviceInfo?.hwHash || ''}
+        />
       </div>
     )
   }
@@ -2262,6 +2559,9 @@ export function Settings({
 
                   {/* Card 10B: Backup & Restore (.txa) */}
                   {renderBackupCard(false)}
+
+                  {/* Card 10C: License & Pro Activation */}
+                  {renderLicenseCard(false)}
 
                   {/* ── UPDATES SECTION (Consolidated above Community & Support) ── */}
                   {!isStoreBuild && (
@@ -2936,6 +3236,11 @@ export function Settings({
           </div>
           {renderRestoreModal()}
           {renderDonateModal()}
+          <PurchaseModal
+            open={purchaseModalOpen}
+            onClose={() => setPurchaseModalOpen(false)}
+            machineId={deviceInfo?.hwHash || ''}
+          />
         </div>
       )
     }
