@@ -20,6 +20,7 @@ import { prewarmDragIcons } from './drag'
 import { initState, getWatcher, loadSettings, saveSettings, pushState, stopStateTimers, getStore } from './state'
 import { initAutoUpdater } from './updater'
 import { createOnboardingWindow, getOnboardingWindow } from './onboardingWindow'
+import { getPurchaseWindow } from './purchaseWindow'
 import { startPeriodicMemoryManager, stopPeriodicMemoryManager } from './memory'
 import { startFullscreenMonitor, stopFullscreenMonitor, triggerFullscreenCheck } from './fullscreen'
 import { flushStagedTempRegistry } from './stagedTemp'
@@ -190,7 +191,7 @@ app.whenReady().then(() => {
   }
 
   // Start periodic memory manager to reclaim unused working set RAM
-  startPeriodicMemoryManager(() => [getMainWindow(), getOnboardingWindow()].filter(Boolean) as BrowserWindow[])
+  startPeriodicMemoryManager(() => [getMainWindow(), getOnboardingWindow(), getPurchaseWindow()].filter(Boolean) as BrowserWindow[])
 
   // Keep the tray checkmarks in sync after settings change from the UI.
   // (Tray menu is rebuilt on each open, so no extra wiring is needed here.)

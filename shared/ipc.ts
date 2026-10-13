@@ -140,6 +140,12 @@ export interface InvokeMap {
 
   /** Generate a new license key (for admin / developer) */
   'license:generate-key': { args: [hwHash?: string]; result: string }
+
+  /** Open standalone purchase & VietQR checkout window */
+  'license:open-purchase': { args: []; result: void }
+
+  /** Close standalone purchase & VietQR checkout window */
+  'license:close-purchase': { args: []; result: void }
 }
 
 /* ------------------------------------------------------------------ */

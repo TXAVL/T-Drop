@@ -45,7 +45,20 @@ export function quitAndInstallUpdate(): void {
   }
   console.log('[AutoUpdater] quitAndInstall triggered by renderer button.')
   try {
-    _autoUpdater.quitAndInstall(true, true)
+    // isSilent = false: launch the setup installer UI (avoids background silent uninstall wipes)
+    // isForceRunAfter = true: launch app after setup completes
+    _autoUpdater.quitAndInstall(false, true)
+
+    // Force-terminate all windows and kill app process shortly after launching installer to unlock files
+    setTimeout(() => {
+      try {
+        const { BrowserWindow } = require('electron')
+        BrowserWindow.getAllWindows().forEach((w: any) => {
+          if (!w.isDestroyed()) w.destroy()
+        })
+        app.exit(0)
+      } catch {}
+    }, 500)
   } catch (err) {
     console.error('[AutoUpdater] quitAndInstall failed:', err)
   }

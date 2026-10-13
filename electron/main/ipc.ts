@@ -18,6 +18,7 @@ import { createTxaBackup, previewTxaBackup, restoreTxaBackup, isBackupBusy } fro
 import { getMainWindow, sendToMainWindow, setInteractive, setHeartbeatPaused, setHotZoneWidth, repositionWindow, getDisplayListOptions, popUpAndRetract, setWindowFocusable, captureExternalForeground, traceFg, resolvePasteTarget } from './window'
 import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
+import { createPurchaseWindow, closePurchaseWindow, getPurchaseWindow } from './purchaseWindow'
 import { rebuildTrayMenu } from './tray'
 import { startDragOut, resolveDragData, prestageDrag, stageDragFile } from './drag'
 import { clipboardSignature, formatTabularDataForClipboard, signatureMatchesItem } from '../clipboard/formats'
@@ -885,7 +886,7 @@ export function registerIpc(): void {
   })
 
   handle('system:trim-memory', () => {
-    const wins = [getMainWindow(), getOnboardingWindow()].filter(Boolean) as BrowserWindow[]
+    const wins = [getMainWindow(), getOnboardingWindow(), getPurchaseWindow()].filter(Boolean) as BrowserWindow[]
     return trimMemory(wins)
   })
 
@@ -913,6 +914,14 @@ export function registerIpc(): void {
 
   handle('license:generate-key', (hwHash) => {
     return TxaLicense.generateKey(hwHash)
+  })
+
+  handle('license:open-purchase', () => {
+    createPurchaseWindow()
+  })
+
+  handle('license:close-purchase', () => {
+    closePurchaseWindow()
   })
 }
 

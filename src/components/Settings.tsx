@@ -357,9 +357,53 @@ export function Settings({
     }
   }, [settings.licenseKey])
 
+  const handleOpenPurchase = () => {
+    playButtonClickSound()
+    if (window.edge?.openPurchaseWindow) {
+      void window.edge.openPurchaseWindow()
+    } else {
+      setPurchaseModalOpen(true)
+    }
+  }
+
+  const handlePasteLicenseKey = async () => {
+    playButtonClickSound()
+    try {
+      const text = await navigator.clipboard.readText()
+      if (text && text.trim()) {
+        setLicenseInput(text.trim().toUpperCase())
+        pushToast({
+          id: Date.now().toString(),
+          message: 'Đã dán mã key từ clipboard!',
+          tone: 'info'
+        })
+      } else {
+        pushToast({
+          id: Date.now().toString(),
+          message: 'Clipboard trống hoặc không có văn bản',
+          tone: 'error'
+        })
+      }
+    } catch {
+      pushToast({
+        id: Date.now().toString(),
+        message: 'Không thể đọc clipboard',
+        tone: 'error'
+      })
+    }
+  }
+
   const handleActivateLicense = async () => {
     const trimmed = licenseInput.trim().toUpperCase()
-    if (!trimmed || licenseActivating) return
+    if (!trimmed) {
+      pushToast({
+        id: Date.now().toString(),
+        message: 'Vui lòng nhập hoặc bấm "Dán mã" trước khi xác minh!',
+        tone: 'error'
+      })
+      return
+    }
+    if (licenseActivating) return
     setLicenseActivating(true)
     playButtonClickSound()
     try {
@@ -373,7 +417,7 @@ export function Settings({
       } else {
         pushToast({
           id: Date.now().toString(),
-          message: res.message || 'Kích hoạt thất bại',
+          message: res.message || 'Mã bản quyền không hợp lệ hoặc đã hết hạn!',
           tone: 'error'
         })
       }
@@ -520,7 +564,7 @@ export function Settings({
                   border: '1px solid rgba(56, 189, 248, 0.3)',
                   color: '#38bdf8'
                 }}
-                onClick={() => setPurchaseModalOpen(true)}
+                onClick={handleOpenPurchase}
               >
                 ✨ Gia hạn thêm gói
               </button>
@@ -546,6 +590,8 @@ export function Settings({
                   type="text"
                   placeholder="Nhập mã key: TDR_XXXXXX_XXXXX"
                   value={licenseInput}
+                  onFocus={() => void window.edge?.focusWindow?.(true)}
+                  onBlur={() => void window.edge?.focusWindow?.(false)}
                   onChange={(e) => setLicenseInput(e.target.value.toUpperCase())}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleActivateLicense()
@@ -566,18 +612,34 @@ export function Settings({
                 />
                 <button
                   type="button"
+                  className="pill"
+                  onClick={handlePasteLicenseKey}
+                  style={{
+                    height: 32,
+                    padding: '0 10px',
+                    fontSize: 11,
+                    fontWeight: 600,
+                    whiteSpace: 'nowrap',
+                    background: 'rgba(255, 255, 255, 0.08)'
+                  }}
+                  title="Dán mã key từ clipboard"
+                >
+                  Dán mã
+                </button>
+                <button
+                  type="button"
                   className="pill active"
                   style={{
                     height: 32,
-                    padding: '0 14px',
+                    padding: '0 12px',
                     fontSize: 11.5,
                     fontWeight: 600,
                     whiteSpace: 'nowrap'
                   }}
-                  disabled={licenseActivating || !licenseInput.trim()}
+                  disabled={licenseActivating}
                   onClick={handleActivateLicense}
                 >
-                  {licenseActivating ? '...' : 'Kích hoạt'}
+                  {licenseActivating ? '...' : 'Xác minh'}
                 </button>
               </div>
 
@@ -594,10 +656,7 @@ export function Settings({
                   color: '#ffffff',
                   boxShadow: '0 2px 10px rgba(2, 132, 199, 0.3)'
                 }}
-                onClick={() => {
-                  playButtonClickSound()
-                  setPurchaseModalOpen(true)
-                }}
+                onClick={handleOpenPurchase}
               >
                 ✨ Mua bản quyền / Nâng cấp VIP & PREMIUM (VietQR)
               </button>
@@ -1867,9 +1926,6 @@ export function Settings({
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('footer.communityAndSupport') || 'COMMUNITY & SUPPORT'}</span>
               </div>
-
-              {/* Card 12B: License & Pro */}
-              {renderLicenseCard(true)}
 
               {/* Card 13: Community & Feedback */}
               {renderHorizontalCommunityCard()}

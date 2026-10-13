@@ -43,6 +43,15 @@ if (window.location.hash === '#onboarding' || window.location.hash === '#/onboar
       </StrictMode>
     )
   })
+} else if (window.location.hash === '#purchase' || window.location.hash === '#/purchase' || window.location.hash.includes('purchase')) {
+  // Standalone purchase & VietQR checkout window
+  void import('./components/PurchaseModal').then(({ PurchaseWindowView }) => {
+    root.render(
+      <StrictMode>
+        <PurchaseWindowView />
+      </StrictMode>
+    )
+  })
 } else {
   root.render(
     <StrictMode>

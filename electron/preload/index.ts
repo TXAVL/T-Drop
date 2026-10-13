@@ -225,6 +225,8 @@ const api = {
   activateLicense: (key: string) => invoke('license:activate', key),
   deactivateLicense: () => invoke('license:deactivate'),
   generateLicenseKey: (hwHash?: string) => invoke('license:generate-key', hwHash),
+  openPurchaseWindow: () => invoke('license:open-purchase'),
+  closePurchaseWindow: () => invoke('license:close-purchase'),
 
   /* Main -> Renderer */
   onBackupFileOpened: (cb: (info: EventArgs<'backup:file-opened'>[0]) => void) => on('backup:file-opened', cb),

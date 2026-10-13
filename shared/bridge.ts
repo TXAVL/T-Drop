@@ -78,6 +78,8 @@ export interface EdgeApi {
   activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string }>
   deactivateLicense: () => Promise<boolean>
   generateLicenseKey: (hwHash?: string) => Promise<string>
+  openPurchaseWindow?: () => Promise<void>
+  closePurchaseWindow?: () => Promise<void>
   onBackupFileOpened?: (cb: (info: { filePath: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number } }) => void) => () => void
 
   /* Main -> Renderer */
