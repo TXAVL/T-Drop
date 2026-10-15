@@ -77,9 +77,15 @@ export interface EdgeApi {
   getLicenseDeviceInfo: () => Promise<{ hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string }>
   activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string }>
   deactivateLicense: () => Promise<boolean>
+  readClipboardText?: () => Promise<string>
   generateLicenseKey: (hwHash?: string) => Promise<string>
   openPurchaseWindow?: () => Promise<void>
   closePurchaseWindow?: () => Promise<void>
+  getSystemLogs?: (maxLines?: number) => Promise<{ logs: string; path: string }>
+  openLogFolder?: () => Promise<boolean>
+  clearSystemLogs?: () => Promise<boolean>
+  writeSystemLog?: (level: 'INFO' | 'WARN' | 'ERROR', tag: string, message: string) => Promise<boolean>
+  generateDiagnostics?: () => Promise<{ ok: boolean; logs: string; path: string }>
   onBackupFileOpened?: (cb: (info: { filePath: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number } }) => void) => () => void
 
   /* Main -> Renderer */

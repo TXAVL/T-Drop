@@ -30,13 +30,15 @@
   <a href="https://github.com/TXAVL/T-Drop/releases/latest" target="_blank">
     <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="48" alt="Download .exe Installer" />
   </a>
+  <img src="https://img.shields.io/badge/macOS%20(Apple%20Silicon%20%26%20Intel)-D%E1%BB%B1%20ki%E1%BA%BFn%20%2F%20Coming%20Soon-f59e0b?style=for-the-badge&logo=apple&logoColor=white" height="48" alt="macOS Coming Soon" />
 </p>
 
 <p align="center">
   <a href="https://github.com/TXAVL/T-Drop/releases"><img alt="Release" src="https://img.shields.io/github/v/release/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=d2f4e8" /></a>
   <a href="https://github.com/TXAVL/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVL/T-Drop?style=flat-square&logo=github&labelColor=23272e&color=f6c7d6" /></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
-  <img src="https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-93a4fc?style=flat-square&logo=windows&logoColor=white&labelColor=23272e" alt="Platform" />
+  <img src="https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-93a4fc?style=flat-square&logo=windows&logoColor=white&labelColor=23272e" alt="Windows Platform" />
+  <img src="https://img.shields.io/badge/macOS-D%E1%BB%B1%20ki%E1%BA%BFn-f59e0b?style=flat-square&logo=apple&logoColor=white&labelColor=23272e" alt="macOS Planned" />
   <img src="https://img.shields.io/badge/RAM-15--35%20MB-56d364?style=flat-square&labelColor=23272e" alt="RAM Footprint" />
   <img src="https://img.shields.io/badge/Languages-31%20Supported-79c0ff?style=flat-square&labelColor=23272e" alt="i18n Languages" />
   <img src="https://img.shields.io/badge/Tests-457%20passed-3fb950?style=flat-square&labelColor=23272e" alt="Tests" />
@@ -213,7 +215,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 
 ## Features
 
-### 🤖 AI OCR, Image Suite & Encrypted Vault (New in v0.1.5)
+### 🤖 AI OCR, Image Suite & Encrypted Vault (Updated in v0.1.6)
 - **AI OCR Text Extraction:** Scan and copy text directly from clipboard images with 1 click. Full support for **Vietnamese** with diacritics and **English**. Completely offline and privacy-respecting.
 - **Fast Image Converter & Compressor:** Convert between **PNG**, **JPG**, and **WebP** on the fly without third-party web tools. Features a quick quality slider to compress file size by up to 70% before dragging out.
 - **Encrypted Vault & Backups (`.txa`):** Complete snapshot export and restore of all clipboard cards, pinned items, and categories into an encrypted archive protected with **PBKDF2-HMAC-SHA256 + AES-256-GCM**.

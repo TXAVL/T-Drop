@@ -1,0 +1,68 @@
+/* ── TxaTooltip Custom Tooltip System ── */
+.txa-tooltip-portal {
+  position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+  contain: layout style;
+  transition: opacity 0.14s cubic-bezier(0.16, 1, 0.3, 1), transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.txa-tooltip-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 300px;
+  padding: 5px 9px;
+  background: rgba(13, 16, 23, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 7px;
+  box-shadow: 0 10px 28px -3px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: #f1f5f9;
+  font-family: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: calc(11px * var(--font-scale, 1));
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Tooltip Arrow */
+.txa-tooltip-arrow {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: rgba(13, 16, 23, 0.95);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+/* Arrow orientation & border matching */
+.txa-tooltip-portal[data-placement="top"] .txa-tooltip-arrow {
+  bottom: -4px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.txa-tooltip-portal[data-placement="bottom"] .txa-tooltip-arrow {
+  top: -4px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.txa-tooltip-portal[data-placement="left"] .txa-tooltip-arrow {
+  right: -4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.txa-tooltip-portal[data-placement="right"] .txa-tooltip-arrow {
+  left: -4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}

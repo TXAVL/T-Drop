@@ -36,19 +36,23 @@ const root = createRoot(container)
 if (window.location.hash === '#onboarding' || window.location.hash === '#/onboarding' || window.location.hash.includes('onboarding')) {
   // The tutorial is only opened once. Keep its component (and its video UI)
   // out of the always-running panel renderer.
-  void import('./Onboarding').then(({ Onboarding }) => {
+  void import('./Onboarding').then(async ({ Onboarding }) => {
+    const { TxaTooltipProvider } = await import('./components/TxaTooltip')
     root.render(
       <StrictMode>
         <Onboarding />
+        <TxaTooltipProvider />
       </StrictMode>
     )
   })
 } else if (window.location.hash === '#purchase' || window.location.hash === '#/purchase' || window.location.hash.includes('purchase')) {
   // Standalone purchase & VietQR checkout window
-  void import('./components/PurchaseModal').then(({ PurchaseWindowView }) => {
+  void import('./components/PurchaseModal').then(async ({ PurchaseWindowView }) => {
+    const { TxaTooltipProvider } = await import('./components/TxaTooltip')
     root.render(
       <StrictMode>
         <PurchaseWindowView />
+        <TxaTooltipProvider />
       </StrictMode>
     )
   })

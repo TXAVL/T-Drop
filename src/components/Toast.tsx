@@ -19,7 +19,7 @@ export function ToastStack() {
   return (
     <div className="toast-stack">
       <AnimatePresence>
-        {toasts.map((toastMsg) => (
+        {toasts.slice(-3).map((toastMsg) => (
           <motion.button
             key={toastMsg.id}
             className={`toast ${toastMsg.tone === 'error' ? 'toast-error' : 'toast-info'}`}
@@ -37,7 +37,7 @@ export function ToastStack() {
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             )}
-            <span>{t(toastMsg.message, toastMsg.params)}</span>
+            <span>{t(toastMsg.message, toastMsg.params) || toastMsg.message}</span>
           </motion.button>
         ))}
       </AnimatePresence>

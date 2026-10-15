@@ -2,7 +2,7 @@
  * PurchaseModal & PurchaseWindowView — VietQR Payment & Key Order Flow.
  * Automatically saves order to Supabase tdrop_orders before rendering VietQR code.
  */
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   SUPABASE_CONFIG,
   VIETQR_CONFIG,
@@ -13,6 +13,7 @@ import {
 import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
 import { CloseIcon, CopyIcon, CheckIcon, CrownIcon } from './icons'
+import { ToastStack } from './Toast'
 
 interface PurchaseModalProps {
   open: boolean
@@ -45,9 +46,12 @@ export function PurchaseWindowView() {
         color: '#ffffff',
         fontFamily: 'var(--font-sans, system-ui, sans-serif)',
         overflow: 'hidden',
-        userSelect: 'none'
+        userSelect: 'none',
+        position: 'relative'
       }}
     >
+      {/* Toast notifications */}
+      <ToastStack />
       {/* Draggable Titlebar */}
       <header
         style={{
@@ -120,6 +124,29 @@ function PurchaseWindowContent({
   const [activatingKey, setActivatingKey] = useState(false)
   const [activationMsg, setActivationMsg] = useState<{ text: string; ok: boolean } | null>(null)
 
+  const emailInputRef = useRef<HTMLInputElement>(null)
+  const inlineKeyInputRef = useRef<HTMLInputElement>(null)
+
+  const handleFocusInput = (ref: React.RefObject<HTMLInputElement>) => {
+    try { window.focus() } catch {}
+    try {
+      const p = window.edge?.focusWindow?.(true) as unknown as Promise<void> | undefined
+      if (p && typeof p.then === 'function') {
+        p.then(() => {
+          ref.current?.focus()
+        }).catch(() => {})
+      } else {
+        ref.current?.focus()
+      }
+    } catch {}
+    try { window.edge?.pauseHotkey?.(true) } catch {}
+  }
+
+  const handleBlurInput = () => {
+    try { window.edge?.focusWindow?.(false) } catch {}
+    try { window.edge?.pauseHotkey?.(false) } catch {}
+  }
+
   const pushToast = useStore((s) => s.pushToast)
 
   useEffect(() => {
@@ -143,7 +170,12 @@ function PurchaseWindowContent({
 
   const handlePasteEmail = async () => {
     try {
-      const text = await navigator.clipboard.readText()
+      let text = ''
+      if (window.edge?.readClipboardText) {
+        text = await window.edge.readClipboardText()
+      } else {
+        text = await navigator.clipboard.readText()
+      }
       if (text) {
         handleValidateEmail(text.trim())
       }
@@ -158,8 +190,25 @@ function PurchaseWindowContent({
   }
 
   const handleCreateOrder = useCallback(async () => {
-    if (!email.trim() || !isValidEmailDomain(email)) {
+    if (!email.trim()) {
+      setEmailError('Vui lòng nhập địa chỉ email')
+      pushToast({
+        id: Date.now().toString(),
+        message: 'Vui lòng nhập email nhận bản quyền trước khi tạo mã QR!',
+        tone: 'error'
+      })
+      handleFocusInput(emailInputRef)
+      return
+    }
+
+    if (!isValidEmailDomain(email)) {
       setEmailError('Chỉ chấp nhận email: @gmail.com, @icloud.com, @outlook.com, @hotmail.com')
+      pushToast({
+        id: Date.now().toString(),
+        message: 'Email không hợp lệ. Vui lòng dùng @gmail.com, @icloud.com, @outlook.com hoặc @hotmail.com',
+        tone: 'error'
+      })
+      handleFocusInput(emailInputRef)
       return
     }
 
@@ -413,10 +462,14 @@ function PurchaseWindowContent({
               </button>
             </div>
             <input
+              ref={emailInputRef}
               type="email"
               autoFocus
               placeholder="Nhập email: ví dụ tenban@gmail.com"
               value={email}
+              onPointerDown={() => handleFocusInput(emailInputRef)}
+              onFocus={() => handleFocusInput(emailInputRef)}
+              onBlur={handleBlurInput}
               onChange={(e) => handleValidateEmail(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') void handleCreateOrder()
@@ -463,7 +516,7 @@ function PurchaseWindowContent({
           {/* Nút Tạo mã QR */}
           <button
             type="button"
-            disabled={submitting || Boolean(emailError) || !email.trim()}
+            disabled={submitting}
             onClick={handleCreateOrder}
             style={{
               width: '100%',
@@ -475,8 +528,8 @@ function PurchaseWindowContent({
               fontWeight: 700,
               borderRadius: 8,
               border: 'none',
-              cursor: submitting || Boolean(emailError) || !email.trim() ? 'not-allowed' : 'pointer',
-              opacity: submitting || Boolean(emailError) || !email.trim() ? 0.6 : 1,
+              cursor: submitting ? 'not-allowed' : 'pointer',
+              opacity: submitting ? 0.7 : 1,
               background: 'linear-gradient(135deg, #f59e0b, #d97706)',
               color: '#000000',
               boxShadow: '0 4px 14px rgba(245, 158, 11, 0.35)'
@@ -600,9 +653,13 @@ function PurchaseWindowContent({
             </span>
             <div style={{ display: 'flex', gap: 6 }}>
               <input
+                ref={inlineKeyInputRef}
                 type="text"
                 placeholder="Dán mã: TDR_XXXXXX_XXXXX"
                 value={inlineKey}
+                onPointerDown={() => handleFocusInput(inlineKeyInputRef)}
+                onFocus={() => handleFocusInput(inlineKeyInputRef)}
+                onBlur={handleBlurInput}
                 onChange={(e) => setInlineKey(e.target.value.toUpperCase())}
                 style={{
                   flex: 1,

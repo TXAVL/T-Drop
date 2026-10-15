@@ -14,6 +14,7 @@ import { useStore } from './store/appStore'
 import { edge } from './lib/edge'
 import { applyReduceMotion } from './lib/theme'
 import { useEdgeHover } from './hooks/useEdgeHover'
+import { TxaTooltipProvider } from './components/TxaTooltip'
 
 export default function App() {
   const hydrate = useStore((s) => s.hydrate)
@@ -338,5 +339,10 @@ export default function App() {
     return <div className="root" />
   }
 
-  return <Panel />
+  return (
+    <>
+      <Panel />
+      <TxaTooltipProvider />
+    </>
+  )
 }

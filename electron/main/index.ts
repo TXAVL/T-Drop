@@ -31,6 +31,7 @@ import { resolveStoredImage, resolveEmojiAsset, emojiAssetDir } from './imagePro
 import { getThumbnailPayload, thumbnailCacheControl } from './thumbnailCache'
 import { registerTxaAssociation } from './txaAssociation'
 import { previewTxaBackup, findAvailableTxaBackups } from '../store/backup'
+import { AppLogger } from './logger'
 
 function handleFileArg(args: string[]): void {
   const txaPath = args.find((arg) => typeof arg === 'string' && arg.toLowerCase().endsWith('.txa') && existsSync(arg))
@@ -56,9 +57,17 @@ app.disableHardwareAcceleration()
 // Restrict the renderer to a single webContents and forbid remote module usage.
 app.enableSandbox()
 
-// Keep V8's old-space heap bounded without starving a renderer that is loading
-// an existing clipboard history. Bound to 256 MB with exposed GC.
-app.commandLine.appendSwitch('js-flags', '--max-old-space-size=256 --expose-gc')
+// Keep V8's old-space heap bounded and optimize allocator for size.
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=128 --expose-gc --optimize-for-size --always-compact')
+
+// Chromium process & cache bounding flags to suppress background bloat
+app.commandLine.appendSwitch('renderer-process-limit', '1')
+app.commandLine.appendSwitch('disable-renderer-backgrounding')
+app.commandLine.appendSwitch('disable-background-timer-throttling')
+app.commandLine.appendSwitch('disable-component-update')
+app.commandLine.appendSwitch('disable-domain-reliability')
+app.commandLine.appendSwitch('disable-breakpad')
+app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion,Translate,InterestFeedContentSuggestions')
 
 // ---- single instance -------------------------------------------------------
 const gotLock = app.requestSingleInstanceLock()
@@ -88,6 +97,7 @@ protocol.registerSchemesAsPrivileged([
 
 // ---- app lifecycle ---------------------------------------------------------
 app.on('before-quit', () => {
+  AppLogger.write('INFO', 'System', '=== T-Drop Terminating Cleanly ===')
   runtime.quitting = true
   stopCursorPoll()
   stopHeartbeat()
@@ -108,6 +118,7 @@ app.on('before-quit', () => {
 })
 
 app.whenReady().then(() => {
+  AppLogger.init()
   // GitHub NSIS needs an explicit AUMID. Store packages already have one from
   // the AppX identity; overriding it breaks toasts and taskbar grouping.
   if (!isStoreBuild()) {

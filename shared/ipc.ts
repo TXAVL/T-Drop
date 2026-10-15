@@ -138,6 +138,9 @@ export interface InvokeMap {
   /** Deactivate and clear current license key */
   'license:deactivate': { args: []; result: boolean }
 
+  /** Read plain text directly from native OS clipboard, bypassing window focus restrictions. */
+  'clipboard:read-text': { args: []; result: string }
+
   /** Generate a new license key (for admin / developer) */
   'license:generate-key': { args: [hwHash?: string]; result: string }
 
@@ -146,6 +149,21 @@ export interface InvokeMap {
 
   /** Close standalone purchase & VietQR checkout window */
   'license:close-purchase': { args: []; result: void }
+
+  /** Read recent logs from disk and get log file path */
+  'system:get-logs': { args: [maxLines?: number]; result: { logs: string; path: string } }
+
+  /** Open log folder in Windows File Explorer */
+  'system:open-log-folder': { args: []; result: boolean }
+
+  /** Clear log files */
+  'system:clear-logs': { args: []; result: boolean }
+
+  /** Write a log line directly from renderer */
+  'system:write-log': { args: [level: 'INFO' | 'WARN' | 'ERROR', tag: string, message: string]; result: boolean }
+
+  /** Collect and generate deep system & Windows license diagnostics */
+  'system:generate-diagnostics': { args: []; result: { ok: boolean; logs: string; path: string } }
 }
 
 /* ------------------------------------------------------------------ */

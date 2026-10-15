@@ -92,7 +92,7 @@ export function t(path: string, params?: Record<string, string | number>, fallba
     val = getNestedProp(en, path)
   }
   if (!val) {
-    return fallback !== undefined ? fallback : ''
+    return fallback !== undefined ? fallback : path
   }
 
   if (params) {

@@ -9,6 +9,7 @@ import { app, ipcMain, clipboard, nativeImage, shell, net, dialog, BrowserWindow
 import { existsSync, writeFileSync } from 'node:fs'
 import { trimMemory } from './memory'
 import { getDeviceFingerprint, activateLicense, deactivateLicense, getLicenseState, TxaLicense } from './license'
+import { AppLogger } from './logger'
 import { execFile } from 'node:child_process'
 import { psHost, getSystemPowerShellPath, getWritableCwd } from './powershell'
 import { filterValidPaths, isExistingFilePath } from './pathValidation'
@@ -912,6 +913,10 @@ export function registerIpc(): void {
     return deactivateLicense()
   })
 
+  handle('clipboard:read-text', () => {
+    return clipboard.readText()
+  })
+
   handle('license:generate-key', (hwHash) => {
     return TxaLicense.generateKey(hwHash)
   })
@@ -922,6 +927,35 @@ export function registerIpc(): void {
 
   handle('license:close-purchase', () => {
     closePurchaseWindow()
+  })
+
+  handle('system:get-logs', (maxLines) => {
+    return {
+      logs: AppLogger.getRecentLogs(maxLines),
+      path: AppLogger.logFilePath()
+    }
+  })
+
+  handle('system:open-log-folder', () => {
+    return AppLogger.openFolder()
+  })
+
+  handle('system:clear-logs', () => {
+    return AppLogger.clearLogs()
+  })
+
+  handle('system:write-log', (level, tag, message) => {
+    AppLogger.write(level, tag, message)
+    return true
+  })
+
+  handle('system:generate-diagnostics', async () => {
+    await AppLogger.logFullSystemDiagnostics(false)
+    return {
+      ok: true,
+      logs: AppLogger.getRecentLogs(400),
+      path: AppLogger.logFilePath()
+    }
   })
 }
 

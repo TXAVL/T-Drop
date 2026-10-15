@@ -184,6 +184,64 @@
       max-width: 680px;
     }
 
+    .platforms-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+
+    .platform-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .platform-pill.windows:hover {
+      background: rgba(0, 210, 255, 0.1);
+      border-color: rgba(0, 210, 255, 0.35);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .platform-pill.macos {
+      cursor: default;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      color: var(--text-muted);
+    }
+
+    .platform-pill .pill-tag {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .platform-pill .pill-tag.win {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .platform-pill .pill-tag.mac-planned {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
     /* Timeline Releases */
     .release-card {
       position: relative;
@@ -377,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.5</span>
+          <span data-i18n="nav.download">Tải về v0.1.6</span>
         </a>
       </div>
     </div>
@@ -388,15 +446,82 @@
     <div class="hero">
       <div class="hero-badge" data-i18n="hero.badge">CẬP NHẬT &amp; NHẬT KÝ PHÁT HÀNH</div>
       <h1 class="hero-title" data-i18n="hero.title">Có gì mới trong T-Drop</h1>
-      <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.</p>
+      <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.</p>
+      <div class="platforms-wrap">
+        <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="platform-pill windows" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
+          <span>Windows 10 / 11</span>
+          <span class="pill-tag win" data-i18n="platform.win.tag">Sẵn sàng (.exe)</span>
+        </a>
+        <div class="platform-pill macos">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2.02.6-2.66 1.34-.56.64-1.06 1.71-.93 2.74 1.01.08 2.06-.48 2.67-1.23z"/></svg>
+          <span>macOS</span>
+          <span class="pill-tag mac-planned" data-i18n="platform.mac.tag">Dự kiến • Coming Soon</span>
+        </div>
+      </div>
     </div>
 
-    <!-- ── VERSION 0.1.5 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.6 ────────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.5</span>
+          <span>Version v0.1.6</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">15/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v016.summary">
+        Khắc phục triệt để lỗi không click được ô nhập mã bản quyền (focus issue), sửa lỗi thông báo Toast bị mất chữ (chỉ hiện icon đỏ), hoàn thiện kết nối cơ sở dữ liệu Supabase và cổng quản trị txastudio.click, đồng thời hỗ trợ đường dẫn changelog linh hoạt.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item1.title">Khắc Phục Lỗi Focus &amp; Nhập Mã Bản Quyền</h3>
+            <p data-i18n="v016.item1.desc">
+              Sửa lỗi không nhận tiêu điểm trên cửa sổ NOACTIVATE giúp người dùng click và gõ mã key dễ dàng, đồng thời hỗ trợ đọc clipboard trực tiếp từ Windows khi bấm "Dán mã".
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item2.title">Sửa Lỗi Thông Báo Lỗi Rỗng (Toast Empty Circles)</h3>
+            <p data-i18n="v016.item2.desc">
+              Khắc phục lỗi hệ thống dịch làm mất nội dung text trong thông báo lỗi (trước đây chỉ hiện icon đỏ không rõ nguyên nhân), giới hạn tối đa 3 thông báo hiển thị để tránh che khuất màn hình.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item3.title">Đồng Bộ Kết Nối Supabase &amp; Cổng Quản Trị txastudio.click</h3>
+            <p data-i18n="v016.item3.desc">
+              Đồng bộ mã máy (Machine ID) giữa ứng dụng T-Drop và hàm kích hoạt Supabase RPC, cho phép kích hoạt các mã key tạo từ cổng quản trị txastudio.click chuẩn xác.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item4.title">Hỗ Trợ Trang Changelog Đa Dạng</h3>
+            <p data-i18n="v016.item4.desc">
+              Cung cấp đầy đủ các đường dẫn truy cập /changelogs và /changelog trên GitHub Pages.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.5 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.5</span>
         </div>
         <div class="release-date">13/10/2026</div>
       </div>
@@ -747,14 +872,25 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.5',
+        'nav.download': 'Tải về v0.1.6',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
-        'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows.',
+        'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
+        'platform.win.tag': 'Sẵn sàng (.exe)',
+        'platform.mac.tag': 'Dự kiến • Sắp ra mắt',
         'tag.latest': 'MỚI NHẤT',
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v016.summary': 'Khắc phục triệt để lỗi không click được ô nhập mã bản quyền (focus issue), sửa lỗi thông báo Toast bị mất chữ (chỉ hiện icon đỏ), hoàn thiện kết nối cơ sở dữ liệu Supabase và cổng quản trị txastudio.click, đồng thời hỗ trợ đường dẫn changelog linh hoạt.',
+        'v016.item1.title': 'Khắc Phục Lỗi Focus & Nhập Mã Bản Quyền',
+        'v016.item1.desc': 'Sửa lỗi không nhận tiêu điểm trên cửa sổ NOACTIVATE giúp người dùng click và gõ mã key dễ dàng, đồng thời hỗ trợ đọc clipboard trực tiếp từ Windows khi bấm "Dán mã".',
+        'v016.item2.title': 'Sửa Lỗi Thông Báo Lỗi Rỗng (Toast Empty Circles)',
+        'v016.item2.desc': 'Khắc phục lỗi hệ thống dịch làm mất nội dung text trong thông báo lỗi (trước đây chỉ hiện icon đỏ không rõ nguyên nhân), giới hạn tối đa 3 thông báo hiển thị để tránh che khuất màn hình.',
+        'v016.item3.title': 'Đồng Bộ Kết Nối Supabase & Cổng Quản Trị txastudio.click',
+        'v016.item3.desc': 'Đồng bộ mã máy (Machine ID) giữa ứng dụng T-Drop và hàm kích hoạt Supabase RPC, cho phép kích hoạt các mã key tạo từ cổng quản trị txastudio.click chuẩn xác.',
+        'v016.item4.title': 'Hỗ Trợ Trang Changelog Đa Dạng',
+        'v016.item4.desc': 'Cung cấp đầy đủ các đường dẫn truy cập /changelogs và /changelog trên GitHub Pages.',
         'v015.summary': 'Bổ sung tính năng trích xuất chữ AI từ ảnh (hỗ trợ Tiếng Việt & Anh), nén và chuyển đổi định dạng ảnh nhanh, nâng cấp VIP/PREMIUM thuận tiện qua VietQR, siêu tối ưu chỉ còn 15-35MB RAM và khắc phục lỗi crash khi khởi động (#2).',
         'v015.item1.title': 'Trích Xuất Chữ Từ Ảnh (AI OCR) & Xử Lý Ảnh',
         'v015.item1.desc': 'Quét và sao chép văn bản từ hình ảnh cực nhanh (hỗ trợ Tiếng Việt & Tiếng Anh). Nén giảm dung lượng và chuyển đổi linh hoạt giữa PNG, JPG, WebP chỉ với 1 cú nhấp chuột.',
@@ -815,14 +951,25 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.5',
+        'nav.download': 'Download v0.1.6',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
-        'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows.',
+        'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
+        'platform.win.tag': 'Available (.exe)',
+        'platform.mac.tag': 'Planned • Coming Soon',
         'tag.latest': 'LATEST',
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v016.summary': 'Fixes license key input focus issues on NOACTIVATE windows, repairs empty toast notifications, synchronizes Supabase database activation with the txastudio.click admin portal, and provides versatile changelog URLs.',
+        'v016.item1.title': 'License Input Focus & Paste Fixes',
+        'v016.item1.desc': 'Resolved window focus drop on click, allowing users to type license keys and paste directly from native Windows clipboard.',
+        'v016.item2.title': 'Empty Toast Error Circles Fixed',
+        'v016.item2.desc': 'Fixed translation fallback stripping text from toasts, and limited on-screen toasts to 3 items to prevent visual stacking.',
+        'v016.item3.title': 'Supabase & txastudio.click Portal Sync',
+        'v016.item3.desc': 'Aligned Machine ID verification so license keys generated from the txastudio.click portal activate accurately in T-Drop.',
+        'v016.item4.title': 'Multi-URL Changelog Support',
+        'v016.item4.desc': 'Provides seamless access across /changelogs and /changelog on GitHub Pages.',
         'v015.summary': 'Introduces AI OCR text extraction (Vietnamese & English), fast image compression and conversion, convenient VietQR VIP/PREMIUM upgrades, ultra-low 15-35MB idle RAM usage, and fixes startup crash (#2).',
         'v015.item1.title': 'AI OCR Text Extraction & Image Tools',
         'v015.item1.desc': 'Extract text from images with high accuracy (supports Vietnamese & English). Easily compress and convert between PNG, JPG, and WebP with 1-click.',

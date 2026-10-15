@@ -224,9 +224,15 @@ const api = {
   getLicenseDeviceInfo: () => invoke('license:get-device-info'),
   activateLicense: (key: string) => invoke('license:activate', key),
   deactivateLicense: () => invoke('license:deactivate'),
+  readClipboardText: () => invoke('clipboard:read-text'),
   generateLicenseKey: (hwHash?: string) => invoke('license:generate-key', hwHash),
   openPurchaseWindow: () => invoke('license:open-purchase'),
   closePurchaseWindow: () => invoke('license:close-purchase'),
+  getSystemLogs: (maxLines?: number) => invoke('system:get-logs', maxLines),
+  openLogFolder: () => invoke('system:open-log-folder'),
+  clearSystemLogs: () => invoke('system:clear-logs'),
+  writeSystemLog: (level: 'INFO' | 'WARN' | 'ERROR', tag: string, message: string) => invoke('system:write-log', level, tag, message),
+  generateDiagnostics: () => invoke('system:generate-diagnostics'),
 
   /* Main -> Renderer */
   onBackupFileOpened: (cb: (info: EventArgs<'backup:file-opened'>[0]) => void) => on('backup:file-opened', cb),

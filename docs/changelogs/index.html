@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhật ký cập nhật | T-Drop - Trình quản lý Clipboard Windows</title>
+  <meta name="title" content="Nhật ký cập nhật | T-Drop - Trình quản lý Clipboard Windows" />
+  <meta name="description" content="Xem các tính năng mới, cải tiến và bản sửa lỗi mới nhất của T-Drop - Trình quản lý bảng tạm Windows mã nguồn mở." />
+  <meta name="theme-color" content="#09090b" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #09090b;
+      --card-bg: rgba(24, 24, 27, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(0, 210, 255, 0.35);
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent-cyan: #00d2ff;
+      --accent-purple: #9d4edd;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(0, 210, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(157, 78, 221, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(9, 9, 11, 0.75);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.45));
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .github-btn {
+      background: #ffffff;
+      color: #000000;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .github-btn:hover {
+      background: #e4e4e7;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Container */
+    .main-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 3.5rem;
+      text-align: left;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.85rem;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+    }
+
+    .platforms-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+
+    .platform-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .platform-pill.windows:hover {
+      background: rgba(0, 210, 255, 0.1);
+      border-color: rgba(0, 210, 255, 0.35);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .platform-pill.macos {
+      cursor: default;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      color: var(--text-muted);
+    }
+
+    .platform-pill .pill-tag {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .platform-pill .pill-tag.win {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .platform-pill .pill-tag.mac-planned {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Timeline Releases */
+    .release-card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 2.25rem;
+      margin-bottom: 2.5rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .release-card.latest {
+      border-color: rgba(0, 210, 255, 0.3);
+      box-shadow: 0 8px 32px -8px rgba(0, 210, 255, 0.12);
+    }
+
+    .release-card:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .release-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .release-version {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tag-latest {
+      background: linear-gradient(135deg, #00d2ff, #7928ca);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-upstream {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .release-date {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .release-summary {
+      font-size: 1rem;
+      color: #e4e4e7;
+      margin-bottom: 1.75rem;
+      line-height: 1.65;
+    }
+
+    /* Change Item Groups */
+    .change-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .change-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .badge {
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .badge.new {
+      background: rgba(0, 210, 255, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+
+    .badge.improved {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .badge.fixed {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .change-content h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+
+    .change-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      background: rgba(9, 9, 11, 0.9);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      .release-card {
+        padding: 1.5rem;
+      }
+      .change-item {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="https://github.com/TXAVL/T-Drop" class="brand">
+        <svg class="brand-logo" viewBox="0 0 1800 1800" preserveAspectRatio="xMidYMid meet">
+          <rect width="100%" height="100%" rx="360" fill="#141416" />
+          <g transform="translate(0,1800) scale(0.1,-0.1)" fill="#00d2ff">
+            <path d="M9005 14013 c-152 -19 -325 -52 -470 -89 -110 -29 -335 -99 -390 -123 -11 -5 -45 -19 -75 -31 -50 -20 -323 -153 -377 -184 -226 -128 -511 -348 -684 -527 -132 -136 -278 -319 -345 -432 -16 -27 -37 -61 -46 -75 -127 -202 -234 -494 -282 -768 -18 -104 -21 -364 -5 -434 6 -25 14 -65 19 -90 9 -50 36 -125 70 -193 45 -89 133 -164 229 -193 84 -25 233 -13 326 26 53 23 169 80 197 98 23 14 166 103 233 145 11 6 38 23 60 37 22 14 47 29 55 33 8 4 38 21 65 38 28 16 64 37 80 45 17 8 59 31 95 50 143 79 335 170 410 194 14 5 50 18 80 30 65 24 153 54 230 76 30 9 75 22 100 30 25 8 55 14 68 14 12 0 48 6 80 14 159 40 448 57 617 36 308 -38 435 -74 650 -181 193 -96 350 -224 464 -378 62 -84 151 -254 151 -289 0 -11 8 -37 17 -58 13 -31 17 -73 17 -204 1 -168 -6 -216 -51 -335 -150 -398 -550 -689 -1053 -765 -36 -5 -94 -14 -130 -20 -231 -35 -748 10 -1092 96 -153 38 -186 46 -228 60 -25 8 -53 14 -62 14 -10 0 -32 6 -50 14 -18 8 -80 29 -138 47 -143 44 -205 64 -270 89 -30 12 -68 26 -85 31 -16 5 -39 13 -50 18 -11 5 -42 16 -70 26 -27 9 -84 30 -125 47 -41 16 -92 36 -112 44 -21 8 -57 21 -80 30 -24 9 -59 22 -78 29 -19 7 -69 26 -110 43 -153 61 -356 135 -415 152 -28 8 -53 16 -135 45 -32 12 -83 27 -200 61 -66 19 -155 41 -235 58 -38 8 -102 22 -141 31 -40 8 -86 15 -103 15 -16 0 -76 7 -133 16 -80 13 -145 15 -307 11 -113 -3 -228 -10 -256 -16 -27 -6 -84 -18 -125 -27 -41 -9 -86 -21 -100 -26 -14 -6 -38 -14 -55 -19 -83 -22 -220 -88 -321 -155 -174 -115 -342 -310 -423 -489 -12 -27 -26 -58 -31 -67 -31 -57 -76 -233 -89 -344 -18 -154 -9 -299 30 -454 84 -341 313 -611 614 -723 120 -45 168 -52 335 -52 169 0 176 1 350 53 30 9 64 22 75 29 11 7 25 13 33 13 7 0 91 38 185 84 299 145 399 189 537 231 30 10 73 24 95 31 23 8 49 14 59 14 11 0 42 6 70 14 107 31 343 69 536 87 213 21 685 23 965 5 138 -9 338 -22 445 -28 449 -29 930 -7 1163 53 22 6 62 15 90 20 29 5 75 15 102 23 28 8 75 21 105 30 45 12 171 56 265 91 66 25 333 155 380 185 17 11 39 24 50 30 62 31 258 165 330 225 159 132 221 188 313 283 161 166 316 361 417 523 149 241 264 468 340 669 9 25 23 60 31 78 8 18 14 39 14 47 0 8 6 29 14 47 20 50 64 208 89 328 46 214 51 270 51 525 0 213 -4 268 -22 370 -32 172 -70 323 -91 364 -6 11 -11 27 -11 36 0 13 -45 118 -70 165 -5 8 -27 51 -50 95 -140 274 -377 541 -648 730 -136 95 -361 216 -502 270 -25 9 -60 23 -78 31 -18 8 -39 14 -47 14 -8 0 -29 6 -47 14 -90 38 -340 93 -548 121 -149 19 -596 19 -755 -2z"/>
+          </g>
+        </svg>
+        <span>T-Drop</span>
+      </a>
+      <div class="nav-actions">
+        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">
+          <span id="langFlag">🇬🇧</span>
+          <span id="langLabel">English</span>
+        </button>
+        <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          <span data-i18n="nav.download">Tải về v0.1.6</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrap">
+    <div class="hero">
+      <div class="hero-badge" data-i18n="hero.badge">CẬP NHẬT &amp; NHẬT KÝ PHÁT HÀNH</div>
+      <h1 class="hero-title" data-i18n="hero.title">Có gì mới trong T-Drop</h1>
+      <p class="hero-desc" data-i18n="hero.desc">Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.</p>
+      <div class="platforms-wrap">
+        <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="platform-pill windows" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
+          <span>Windows 10 / 11</span>
+          <span class="pill-tag win" data-i18n="platform.win.tag">Sẵn sàng (.exe)</span>
+        </a>
+        <div class="platform-pill macos">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2.02.6-2.66 1.34-.56.64-1.06 1.71-.93 2.74 1.01.08 2.06-.48 2.67-1.23z"/></svg>
+          <span>macOS</span>
+          <span class="pill-tag mac-planned" data-i18n="platform.mac.tag">Dự kiến • Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VERSION 0.1.6 ────────────────────────────────────────── -->
+    <article class="release-card latest">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.6</span>
+          <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">15/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v016.summary">
+        Khắc phục triệt để lỗi không click được ô nhập mã bản quyền (focus issue), sửa lỗi thông báo Toast bị mất chữ (chỉ hiện icon đỏ), hoàn thiện kết nối cơ sở dữ liệu Supabase và cổng quản trị txastudio.click, đồng thời hỗ trợ đường dẫn changelog linh hoạt.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item1.title">Khắc Phục Lỗi Focus &amp; Nhập Mã Bản Quyền</h3>
+            <p data-i18n="v016.item1.desc">
+              Sửa lỗi không nhận tiêu điểm trên cửa sổ NOACTIVATE giúp người dùng click và gõ mã key dễ dàng, đồng thời hỗ trợ đọc clipboard trực tiếp từ Windows khi bấm "Dán mã".
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item2.title">Sửa Lỗi Thông Báo Lỗi Rỗng (Toast Empty Circles)</h3>
+            <p data-i18n="v016.item2.desc">
+              Khắc phục lỗi hệ thống dịch làm mất nội dung text trong thông báo lỗi (trước đây chỉ hiện icon đỏ không rõ nguyên nhân), giới hạn tối đa 3 thông báo hiển thị để tránh che khuất màn hình.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item3.title">Đồng Bộ Kết Nối Supabase &amp; Cổng Quản Trị txastudio.click</h3>
+            <p data-i18n="v016.item3.desc">
+              Đồng bộ mã máy (Machine ID) giữa ứng dụng T-Drop và hàm kích hoạt Supabase RPC, cho phép kích hoạt các mã key tạo từ cổng quản trị txastudio.click chuẩn xác.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item4.title">Hỗ Trợ Trang Changelog Đa Dạng</h3>
+            <p data-i18n="v016.item4.desc">
+              Cung cấp đầy đủ các đường dẫn truy cập /changelogs và /changelog trên GitHub Pages.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.5 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.5</span>
+        </div>
+        <div class="release-date">13/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v015.summary">
+        Bổ sung tính năng trích xuất chữ AI từ ảnh (hỗ trợ Tiếng Việt &amp; Tiếng Anh), nén và chuyển đổi định dạng ảnh nhanh, nâng cấp VIP/PREMIUM thuận tiện qua VietQR, siêu tối ưu chỉ còn 15-35MB RAM và khắc phục lỗi crash khi khởi động (<a href="https://github.com/TXAVL/T-Drop/issues/2" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: underline;">#2</a>).
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v015.item1.title">Trích Xuất Chữ Từ Ảnh (AI OCR) &amp; Xử Lý Ảnh</h3>
+            <p data-i18n="v015.item1.desc">
+              Quét và sao chép văn bản từ hình ảnh cực nhanh (hỗ trợ Tiếng Việt &amp; Tiếng Anh). Nén giảm dung lượng và chuyển đổi linh hoạt giữa PNG, JPG, WebP chỉ với 1 cú nhấp chuột.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v015.item2.title">Nâng Cấp Gói VIP &amp; PREMIUM Thuận Tiện</h3>
+            <p data-i18n="v015.item2.desc">
+              Quét mã VietQR tự động để mở khóa tính năng nâng cao, theo dõi ngày hết hạn và số ngày còn lại rõ ràng ngay trong phần Cài đặt.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v015.item3.title">Tối Ưu Hóa Bộ Nhớ Siêu Nhẹ (15 - 35MB RAM)</h3>
+            <p data-i18n="v015.item3.desc">
+              Tự động giải phóng bộ nhớ khi chạy nền, đảm bảo máy tính của bạn luôn hoạt động mượt mà và mát mẻ.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v015.item4.title">Khắc Phục Lỗi Ứng Dụng Bị Văng Khi Mở Trên Windows (<a href="https://github.com/TXAVL/T-Drop/issues/2" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: underline;">#2</a>)</h3>
+            <p data-i18n="v015.item4.desc">
+              Sửa triệt để lỗi không khởi động được ứng dụng hoặc bị văng đột ngột trên một số máy tính Windows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.4 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.4</span>
+        </div>
+        <div class="release-date">13/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v014.summary">
+        Khắc phục sự cố tải ngầm bản cập nhật bị kẹt ở trạng thái "Đang kết nối...", nâng cấp quyền Administrator UAC tự động khi cài đặt giúp ngăn lỗi trình gỡ cài đặt NSIS xóa mất ứng dụng trên Windows, đồng thời tối ưu hóa việc nạp module gốc koffi tránh gây lỗi tắt ứng dụng đột ngột (Issue #2).
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v014.item1.title">Tự Động Kích Hoạt Tải Xuống Cập Nhật (Auto-Trigger Download)</h3>
+            <p data-i18n="v014.item1.desc">
+              Khắc phục lỗi kiểm tra cập nhật bị kẹt vô tận ở 0% ("Đang kết nối đến máy chủ tải về..."), chỉ tải sau khi khởi động lại ứng dụng. Giờ đây khi phát hiện bản mới, tiến trình tải ngầm được kích hoạt ngay lập tức mà không cần khởi động lại.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v014.item2.title">Phân Quyền UAC Cho Bộ Cài Đặt NSIS (UAC Elevation &amp; Silent Install)</h3>
+            <p data-i18n="v014.item2.desc">
+              Cấu hình phân quyền quản trị perMachine và allowElevation cho bộ cài đặt NSIS. Bộ cập nhật tự động gọi elevate.exe để yêu cầu quyền Administrator khi ghi đè tệp tin trong Program Files, loại bỏ hoàn toàn tình trạng bộ gỡ cài đặt xóa sạch ứng dụng và báo lỗi thiếu quyền. Đồng thời chuyển sang chế độ cài đặt im lặng giúp cập nhật an toàn, không xung đột giao diện.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v014.item3.title">Nạp An Toàn Module Hệ Thống Koffi (Resilient Koffi Loading - Issue #2)</h3>
+            <p data-i18n="v014.item3.desc">
+              Chuyển đổi toàn bộ việc nạp thư viện koffi sang cơ chế dynamic require với khối try/catch dự phòng trên toàn bộ ứng dụng (fullscreen, window, formats). Khắc phục triệt để lỗi ngoại lệ ENOENT koffi/package.json khiến ứng dụng không thể khởi động được nếu tệp tin gốc bị gián đoạn.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.3 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.3</span>
+        </div>
+        <div class="release-date">13/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v013.summary">
+        Bổ sung công cụ Tẩy Link Rác 1-click (Clean URL / Tracker Stripper) với bộ lọc thông minh bảo toàn mốc thời gian YouTube; nhận diện và chuyển đổi đa định dạng màu sắc (HEX, RGB, HSL) với format chips và Color Inspector chuyên sâu; mở rộng chiều ngang Panel lên 320px giúp thẻ clip thông thoáng; sửa triệt để lỗi menu Xóa sạch (ClearMenu) rỗng chữ và đồng bộ trọn vẹn 31 ngôn ngữ.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v013.item1.title">Tẩy Link Rác Thông Minh (URL Tracking Stripper)</h3>
+            <p data-i18n="v013.item1.desc">
+              Tự động nhận diện và gỡ bỏ mã theo dõi rác (utm_*, fbclid, gclid, mc_eid, Shopee sp_atk/xptdk, Twitter &amp; TikTok share tokens). Bảo tồn mốc thời gian xem video YouTube (t=120s) khi loại bỏ tham số si. Tích hợp nút cây chổi 🧹 trên thanh công cụ hover và Preview Flyout, huy hiệu làm sạch tức thì ở chân thẻ, cùng tùy chọn tự động làm sạch liên kết khi sao chép trong Cài đặt.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v013.item2.title">Bộ Nhận Diện &amp; Chuyển Đổi Mã Màu (Color Swatch &amp; Converter)</h3>
+            <p data-i18n="v013.item2.desc">
+              Hỗ trợ đầy đủ các định dạng màu sắc phổ biến: HEX, RGB/RGBA, HSL/HSLA. Thẻ màu tích hợp format chips tương tác trực tiếp (HEX | RGB | HSL) bấm là copy ngay. Bổ sung nút xoay vòng định dạng nhanh trên thanh công cụ và giao diện Color Inspector chi tiết trong Preview Flyout với ô màu phản chiếu, bảng sao chép từng định dạng và thước đo kênh RGB.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v013.item3.title">Mở Rộng Bề Ngang Panel &amp; Không Gian Thẻ Lịch Sử (320px Shelf)</h3>
+            <p data-i18n="v013.item3.desc">
+              Tăng bề ngang của kệ clipboard từ 270px lên 320px (+50px không gian ngang, cửa sổ Electron mở rộng 430px). Tiêu đề và liên kết dài được hiển thị thông thoáng hơn, các nút thao tác hover không còn chiếm trọn diện tích thẻ.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v013.item4.title">Khắc Phục Lỗi Hiển Thị Trống Menu Xóa Sạch (ClearMenu Text Restoration)</h3>
+            <p data-i18n="v013.item4.desc">
+              Bổ sung đầy đủ các khóa bản dịch còn thiếu cho menu xóa theo mốc thời gian (Xóa 1 giờ qua, 6 giờ qua, 24 giờ qua, Xóa tất cả lịch sử) trên cả 31 ngôn ngữ, loại bỏ hoàn toàn lỗi menu mở ra hộp đen trống trơn.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.2 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.2</span>
+        </div>
+        <div class="release-date">11/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v012.summary">
+        Ra mắt thanh Banner cập nhật động trực quan (UpdateBanner), tự động hiển thị tiến trình tải % và tốc độ MB/s thời gian thực; tối ưu hóa quy trình khôi phục bản sao lưu .txa và tích hợp liên kết tệp trực tiếp từ Windows; bổ sung giới thiệu Sao lưu trong Onboarding; đồng bộ trọn vẹn 31 ngôn ngữ và hỗ trợ DevTools tiện lợi.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item1.title">Thanh Banner Tiến Trình Cập Nhật Động (Update Banner &amp; Lifecycle)</h3>
+            <p data-i18n="v012.item1.desc">
+              Tích hợp thanh banner nổi bật gắn ngay đầu giá đồ khi có bản cập nhật mới. Hiển thị tiến trình tải xuống chi tiết thời gian thực (% dung lượng, MB/MB và tốc độ MB/s), kèm nút "Khởi động lại để cập nhật" với hiệu ứng chuyển trạng thái mượt mà. Hỗ trợ chế độ chỉ thông báo qua Windows Notification với nút Tải về và Bỏ qua.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item2.title">Khôi Phục Dữ Liệu Tự Động Từ Tệp .txa (Restore Modal &amp; File Association)</h3>
+            <p data-i18n="v012.item2.desc">
+              Hỗ trợ nhấp đúp mở trực tiếp tệp sao lưu .txa từ Windows Explorer. Tự động phát hiện tệp sao lưu khi cài mới và mở cửa sổ khôi phục dữ liệu trực quan với xem trước chi tiết (ngày tạo, số lượng mục/ảnh) cùng hai chế độ Gộp thông minh hoặc Ghi đè sạch sẽ.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item3.title">Giới Thiệu Sao Lưu &amp; Khôi Phục Trong Hướng Dẫn Ban Đầu (Onboarding)</h3>
+            <p data-i18n="v012.item3.desc">
+              Bổ sung slide giới thiệu tính năng Sao lưu &amp; Khôi phục dữ liệu (.txa) vào cửa sổ hướng dẫn lần đầu (Onboarding) với giao diện mô phỏng trực quan, các nút tương tác và hướng dẫn chi tiết.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item4.title">Đồng Bộ Toàn Diện 31 Ngôn Ngữ &amp; Chuẩn Hóa Thao Tác Kéo Trượt</h3>
+            <p data-i18n="v012.item4.desc">
+              Dịch và đồng bộ 100% tất cả các khóa ngôn ngữ mới trên toàn bộ 31 ngôn ngữ. Chuẩn hóa mô tả thao tác thanh trượt xác nhận từ "Nhấn" sang "Kéo" (Slide to restart) cho thanh SlideCommit và đảm bảo các chuỗi dự phòng (fallback) luôn là tiếng Anh chuẩn.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v012.item5.title">Tích Hợp Phím Tắt F12 &amp; Cửa Sổ DevTools Tách Rời Khi Phát Triển</h3>
+            <p data-i18n="v012.item5.desc">
+              Tự động mở cửa sổ DevTools dạng tách rời khi chạy ở chế độ dev (npm run dev), hỗ trợ phím tắt toàn cục F12 và menu chuột phải khay hệ thống (System Tray) giúp việc gỡ lỗi thuận tiện.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.1 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.1</span>
+        </div>
+        <div class="release-date">11/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v011.summary">
+        Nâng cấp giao diện UI/UX toàn diện cho giá đồ (Top-Edge Dock &amp; Shelf), mở rộng không gian hiển thị thẻ và cửa sổ hướng dẫn Onboarding, sửa lỗi bố cục bị bó hẹp khi đặt giá ở cạnh trên, khắc phục liên kết phản hồi GitHub Issues bị 404 và cải tiến thông báo kiểm tra cập nhật rõ ràng.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item1.title">Nâng cấp UI/UX Giá đồ &amp; Dock ngang cạnh trên</h3>
+            <p data-i18n="v011.item1.desc">
+              Tối ưu tỷ lệ chiều cao và lề đệm bên trong khay giá đồ, thiết kế thẻ nội dung rộng rãi và thông thoáng, loại bỏ hiện tượng bị che khuất dòng thời gian chân trang; bổ sung hiệu ứng viền sáng acrylic và đổ bóng chiều sâu mượt mà khi rê chuột.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item2.title">Bố cục thích ứng linh hoạt cho Bảng hướng dẫn lần đầu (Onboarding)</h3>
+            <p data-i18n="v011.item2.desc">
+              Mở rộng kích thước cửa sổ hướng dẫn ban đầu lên 980x680px. Tự động thích ứng bố cục khi người dùng chọn vị trí giá ở cạnh trên màn hình, giải phóng toàn bộ chiều ngang cho khay cài đặt mà không còn bị gò bó trong cột dọc hẹp.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item3.title">Khắc phục đường dẫn gửi phản hồi (Feedback) bị lỗi 404</h3>
+            <p data-i18n="v011.item3.desc">
+              Cập nhật đường dẫn nút "Gửi Phản hồi" trỏ thẳng đến trang GitHub Issues chính thức của kho mã nguồn T-Drop, sẵn sàng tiếp nhận đóng góp ý kiến và báo lỗi từ người dùng.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v011.item4.title">Thông báo trạng thái cập nhật rõ ràng &amp; chính xác</h3>
+            <p data-i18n="v011.item4.desc">
+              Chuyển đổi thông báo khi kiểm tra phiên bản từ "T-Drop đã cập nhật" gây hiểu nhầm thành "✓ Đã là phiên bản mới nhất", hiển thị thông tin phiên bản chi tiết và gửi thông báo Toast xác nhận khi kiểm tra thủ công.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.0 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.0</span>
+        </div>
+        <div class="release-date">10/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v010.summary">
+        Bản phát hành độc lập đầu tiên của T-Drop. Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item1.title">Sao lưu &amp; Khôi phục dữ liệu mã hóa (.txa)</h3>
+            <p data-i18n="v010.item1.desc">
+              Hỗ trợ đóng gói toàn bộ lịch sử bảng tạm, mục ghim và cài đặt thành tệp nhị phân nén Gzip được mã hóa an toàn AES-256-GCM. Tiêu đề tệp bắt đầu bằng chuẩn UTF-8 BOM giúp mở bằng Windows Notepad luôn hiển thị tiếng Việt rõ ràng, kèm 2 chế độ khôi phục: Gộp dữ liệu thông minh hoặc Ghi đè sạch sẽ.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item2.title">Tích hợp Font chữ UI Inter chuẩn quốc tế</h3>
+            <p data-i18n="v010.item2.desc">
+              Tích hợp bộ font Inter trọn gói (400, 500, 600, 700) tối ưu hóa tiếng Việt 100%, nét chữ rõ ràng với công nghệ ClearType trên Windows, loại bỏ hoàn toàn hiện tượng dính dấu hay vỡ nét glyph.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item3.title">Tối ưu hóa kích thước hiển thị chữ linh hoạt</h3>
+            <p data-i18n="v010.item3.desc">
+              Cỡ chữ mặc định toàn bộ ứng dụng được tăng nhẹ 4% (1.04) giúp giao diện thoáng mắt và dễ đọc hơn. Nấc Cỡ bé (Small) được nâng từ 0.85 lên 0.94 để không bị bé lí nhí. Hỗ trợ điều chỉnh cỡ chữ trên cả giao diện dock ngang (Shelf).
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item4.title">Sửa lỗi cắt chữ các nút thao tác sao lưu</h3>
+            <p data-i18n="v010.item4.desc">
+              Thiết kế lại các nút "Sao lưu (.txa)" và "Khôi phục (.txa)" vừa vặn hoàn hảo trong thẻ cấu hình, không còn bị dấu ba chấm (...) và bổ sung tooltip giải thích chi tiết.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v010.item5.title">Tích hợp Mã QR Donate &amp; Nhận diện T-Drop</h3>
+            <p data-i18n="v010.item5.desc">
+              Bổ sung popup hỗ trợ nhà phát triển với mã QR quét MoMo / ngân hàng nhanh và nút sao chép số tài khoản tức thì. Cập nhật nhận diện T-Drop, khoá phím tắt Alt + C và đồng bộ từ vựng trên toàn bộ 31 ngôn ngữ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/TXAVL/T-Drop" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/TXAVL/T-Drop/releases" target="_blank" rel="noopener" data-i18n="footer.releases">Bản phát hành</a>
+      <a href="https://github.com/TXAVL/T-Drop/issues" target="_blank" rel="noopener" data-i18n="footer.issues">Báo lỗi &amp; Góp ý</a>
+      <a href="https://github.com/TXAVL/T-Drop/blob/main/LICENSE" target="_blank" rel="noopener">Giấy phép Apache-2.0</a>
+    </div>
+    <p>&copy; 2026 T-Drop by TXAVL. Kế thừa mã nguồn mở từ Edge Drop bởi Deepender Yadav.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      vi: {
+        'nav.download': 'Tải về v0.1.6',
+        'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
+        'hero.title': 'Có gì mới trong T-Drop',
+        'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
+        'platform.win.tag': 'Sẵn sàng (.exe)',
+        'platform.mac.tag': 'Dự kiến • Sắp ra mắt',
+        'tag.latest': 'MỚI NHẤT',
+        'badge.new': 'Mới',
+        'badge.improved': 'Cải tiến',
+        'badge.fixed': 'Sửa lỗi',
+        'v016.summary': 'Khắc phục triệt để lỗi không click được ô nhập mã bản quyền (focus issue), sửa lỗi thông báo Toast bị mất chữ (chỉ hiện icon đỏ), hoàn thiện kết nối cơ sở dữ liệu Supabase và cổng quản trị txastudio.click, đồng thời hỗ trợ đường dẫn changelog linh hoạt.',
+        'v016.item1.title': 'Khắc Phục Lỗi Focus & Nhập Mã Bản Quyền',
+        'v016.item1.desc': 'Sửa lỗi không nhận tiêu điểm trên cửa sổ NOACTIVATE giúp người dùng click và gõ mã key dễ dàng, đồng thời hỗ trợ đọc clipboard trực tiếp từ Windows khi bấm "Dán mã".',
+        'v016.item2.title': 'Sửa Lỗi Thông Báo Lỗi Rỗng (Toast Empty Circles)',
+        'v016.item2.desc': 'Khắc phục lỗi hệ thống dịch làm mất nội dung text trong thông báo lỗi (trước đây chỉ hiện icon đỏ không rõ nguyên nhân), giới hạn tối đa 3 thông báo hiển thị để tránh che khuất màn hình.',
+        'v016.item3.title': 'Đồng Bộ Kết Nối Supabase & Cổng Quản Trị txastudio.click',
+        'v016.item3.desc': 'Đồng bộ mã máy (Machine ID) giữa ứng dụng T-Drop và hàm kích hoạt Supabase RPC, cho phép kích hoạt các mã key tạo từ cổng quản trị txastudio.click chuẩn xác.',
+        'v016.item4.title': 'Hỗ Trợ Trang Changelog Đa Dạng',
+        'v016.item4.desc': 'Cung cấp đầy đủ các đường dẫn truy cập /changelogs và /changelog trên GitHub Pages.',
+        'v015.summary': 'Bổ sung tính năng trích xuất chữ AI từ ảnh (hỗ trợ Tiếng Việt & Anh), nén và chuyển đổi định dạng ảnh nhanh, nâng cấp VIP/PREMIUM thuận tiện qua VietQR, siêu tối ưu chỉ còn 15-35MB RAM và khắc phục lỗi crash khi khởi động (#2).',
+        'v015.item1.title': 'Trích Xuất Chữ Từ Ảnh (AI OCR) & Xử Lý Ảnh',
+        'v015.item1.desc': 'Quét và sao chép văn bản từ hình ảnh cực nhanh (hỗ trợ Tiếng Việt & Tiếng Anh). Nén giảm dung lượng và chuyển đổi linh hoạt giữa PNG, JPG, WebP chỉ với 1 cú nhấp chuột.',
+        'v015.item2.title': 'Nâng Cấp Gói VIP & PREMIUM Thuận Tiện',
+        'v015.item2.desc': 'Quét mã VietQR tự động để mở khóa tính năng nâng cao, theo dõi ngày hết hạn và số ngày còn lại rõ ràng ngay trong phần Cài đặt.',
+        'v015.item3.title': 'Tối Ưu Hóa Bộ Nhớ Siêu Nhẹ (15 - 35MB RAM)',
+        'v015.item3.desc': 'Tự động giải phóng bộ nhớ khi chạy nền, đảm bảo máy tính của bạn luôn hoạt động mượt mà và mát mẻ.',
+        'v015.item4.title': 'Khắc Phục Lỗi Ứng Dụng Bị Văng Khi Mở Trên Windows (#2)',
+        'v015.item4.desc': 'Sửa triệt để lỗi không khởi động được ứng dụng hoặc bị văng đột ngột trên một số máy tính Windows.',
+        'v014.summary': 'Khắc phục sự cố tải ngầm bản cập nhật bị kẹt ở trạng thái "Đang kết nối...", nâng cấp quyền Administrator UAC tự động khi cài đặt giúp ngăn lỗi trình gỡ cài đặt NSIS xóa mất ứng dụng trên Windows, đồng thời tối ưu hóa việc nạp module gốc koffi tránh gây lỗi tắt ứng dụng đột ngột (Issue #2).',
+        'v014.item1.title': 'Tự Động Kích Hoạt Tải Xuống Cập Nhật (Auto-Trigger Download)',
+        'v014.item1.desc': 'Khắc phục lỗi kiểm tra cập nhật bị kẹt vô tận ở 0% ("Đang kết nối đến máy chủ tải về..."), chỉ tải sau khi khởi động lại ứng dụng. Giờ đây khi phát hiện bản mới, tiến trình tải ngầm được kích hoạt ngay lập tức mà không cần khởi động lại.',
+        'v014.item2.title': 'Phân Quyền UAC Cho Bộ Cài Đặt NSIS (UAC Elevation & Silent Install)',
+        'v014.item2.desc': 'Cấu hình phân quyền quản trị perMachine và allowElevation cho bộ cài đặt NSIS. Bộ cập nhật tự động gọi elevate.exe để yêu cầu quyền Administrator khi ghi đè tệp tin trong Program Files, loại bỏ hoàn toàn tình trạng bộ gỡ cài đặt xóa sạch ứng dụng và báo lỗi thiếu quyền. Đồng thời chuyển sang chế độ cài đặt im lặng giúp cập nhật an toàn, không xung đột giao diện.',
+        'v014.item3.title': 'Nạp An Toàn Module Hệ Thống Koffi (Resilient Koffi Loading - Issue #2)',
+        'v014.item3.desc': 'Chuyển đổi toàn bộ việc nạp thư viện koffi sang cơ chế dynamic require với khối try/catch dự phòng trên toàn bộ ứng dụng (fullscreen, window, formats). Khắc phục triệt để lỗi ngoại lệ ENOENT koffi/package.json khiến ứng dụng không thể khởi động được nếu tệp tin gốc bị gián đoạn.',
+        'v013.summary': 'Bổ sung công cụ Tẩy Link Rác 1-click (Clean URL / Tracker Stripper) với bộ lọc thông minh bảo toàn mốc thời gian YouTube; nhận diện và chuyển đổi đa định dạng màu sắc (HEX, RGB, HSL) với format chips và Color Inspector chuyên sâu; mở rộng chiều ngang Panel lên 320px giúp thẻ clip thông thoáng; sửa triệt để lỗi menu Xóa sạch (ClearMenu) rỗng chữ và đồng bộ trọn vẹn 31 ngôn ngữ.',
+        'v013.item1.title': 'Tẩy Link Rác Thông Minh (URL Tracking Stripper)',
+        'v013.item1.desc': 'Tự động nhận diện và gỡ bỏ mã theo dõi rác (utm_*, fbclid, gclid, mc_eid, Shopee sp_atk/xptdk, Twitter & TikTok share tokens). Bảo tồn mốc thời gian xem video YouTube (t=120s) khi loại bỏ tham số si. Tích hợp nút cây chổi 🧹 trên thanh công cụ hover và Preview Flyout, huy hiệu làm sạch tức thì ở chân thẻ, cùng tùy chọn tự động làm sạch liên kết khi sao chép trong Cài đặt.',
+        'v013.item2.title': 'Bộ Nhận Diện & Chuyển Đổi Mã Màu (Color Swatch & Converter)',
+        'v013.item2.desc': 'Hỗ trợ đầy đủ các định dạng màu sắc phổ biến: HEX, RGB/RGBA, HSL/HSLA. Thẻ màu tích hợp format chips tương tác trực tiếp (HEX | RGB | HSL) bấm là copy ngay. Bổ sung nút xoay vòng định dạng nhanh trên thanh công cụ và giao diện Color Inspector chi tiết trong Preview Flyout với ô màu phản chiếu, bảng sao chép từng định dạng và thước đo kênh RGB.',
+        'v013.item3.title': 'Mở Rộng Bề Ngang Panel & Không Gian Thẻ Lịch Sử (320px Shelf)',
+        'v013.item3.desc': 'Tăng bề ngang của kệ clipboard từ 270px lên 320px (+50px không gian ngang, cửa sổ Electron mở rộng 430px). Tiêu đề và liên kết dài được hiển thị thông thoáng hơn, các nút thao tác hover không còn chiếm trọn diện tích thẻ.',
+        'v013.item4.title': 'Khắc Phục Lỗi Hiển Thị Trống Menu Xóa Sạch (ClearMenu Text Restoration)',
+        'v013.item4.desc': 'Bổ sung đầy đủ các khóa bản dịch còn thiếu cho menu xóa theo mốc thời gian (Xóa 1 giờ qua, 6 giờ qua, 24 giờ qua, Xóa tất cả lịch sử) trên cả 31 ngôn ngữ, loại bỏ hoàn toàn lỗi menu mở ra hộp đen trống trơn.',
+        'v012.summary': 'Ra mắt thanh Banner cập nhật động trực quan (UpdateBanner), tự động hiển thị tiến trình tải % và tốc độ MB/s thời gian thực; tối ưu hóa quy trình khôi phục bản sao lưu .txa và tích hợp liên kết tệp trực tiếp từ Windows; bổ sung giới thiệu Sao lưu trong Onboarding; đồng bộ trọn vẹn 31 ngôn ngữ và hỗ trợ DevTools tiện lợi.',
+        'v012.item1.title': 'Thanh Banner Tiến Trình Cập Nhật Động (Update Banner & Lifecycle)',
+        'v012.item1.desc': 'Tích hợp thanh banner nổi bật gắn ngay đầu giá đồ khi có bản cập nhật mới. Hiển thị tiến trình tải xuống chi tiết thời gian thực (% dung lượng, MB/MB và tốc độ MB/s), kèm nút "Khởi động lại để cập nhật" với hiệu ứng chuyển trạng thái mượt mà. Hỗ trợ chế độ chỉ thông báo qua Windows Notification với nút Tải về và Bỏ qua.',
+        'v012.item2.title': 'Khôi Phục Dữ Liệu Tự Động Từ Tệp .txa (Restore Modal & File Association)',
+        'v012.item2.desc': 'Hỗ trợ nhấp đúp mở trực tiếp tệp sao lưu .txa từ Windows Explorer. Tự động phát hiện tệp sao lưu khi cài mới và mở cửa sổ khôi phục dữ liệu trực quan với xem trước chi tiết (ngày tạo, số lượng mục/ảnh) cùng hai chế độ Gộp thông minh hoặc Ghi đè sạch sẽ.',
+        'v012.item3.title': 'Giới Thiệu Sao Lưu & Khôi Phục Trong Hướng Dẫn Ban Đầu (Onboarding)',
+        'v012.item3.desc': 'Bổ sung slide giới thiệu tính năng Sao lưu & Khôi phục dữ liệu (.txa) vào cửa sổ hướng dẫn lần đầu (Onboarding) với giao diện mô phỏng trực quan, các nút tương tác và hướng dẫn chi tiết.',
+        'v012.item4.title': 'Đồng Bộ Toàn Diện 31 Ngôn Ngữ & Chuẩn Hóa Thao Tác Kéo Trượt',
+        'v012.item4.desc': 'Dịch và đồng bộ 100% tất cả các khóa ngôn ngữ mới trên toàn bộ 31 ngôn ngữ. Chuẩn hóa mô tả thao tác thanh trượt xác nhận từ "Nhấn" sang "Kéo" (Slide to restart) cho thanh SlideCommit và đảm bảo các chuỗi dự phòng (fallback) luôn là tiếng Anh chuẩn.',
+        'v012.item5.title': 'Tích Hợp Phím Tắt F12 & Cửa Sổ DevTools Tách Rời Khi Phát Triển',
+        'v012.item5.desc': 'Tự động mở cửa sổ DevTools dạng tách rời khi chạy ở chế độ dev (npm run dev), hỗ trợ phím tắt toàn cục F12 và menu chuột phải khay hệ thống (System Tray) giúp việc gỡ lỗi thuận tiện.',
+        'v011.summary': 'Nâng cấp giao diện UI/UX toàn diện cho giá đồ (Top-Edge Dock & Shelf), mở rộng không gian hiển thị thẻ và cửa sổ hướng dẫn Onboarding, sửa lỗi bố cục bị bó hẹp khi đặt giá ở cạnh trên, khắc phục liên kết phản hồi GitHub Issues bị 404 và cải tiến thông báo kiểm tra cập nhật rõ ràng.',
+        'v011.item1.title': 'Nâng cấp UI/UX Giá đồ & Dock ngang cạnh trên',
+        'v011.item1.desc': 'Tối ưu tỷ lệ chiều cao và lề đệm bên trong khay giá đồ, thiết kế thẻ nội dung rộng rãi và thông thoáng, loại bỏ hiện tượng bị che khuất dòng thời gian chân trang; bổ sung hiệu ứng viền sáng acrylic và đổ bóng chiều sâu mượt mà khi rê chuột.',
+        'v011.item2.title': 'Bố cục thích ứng linh hoạt cho Bảng hướng dẫn lần đầu (Onboarding)',
+        'v011.item2.desc': 'Mở rộng kích thước cửa sổ hướng dẫn ban đầu lên 980x680px. Tự động thích ứng bố cục khi người dùng chọn vị trí giá ở cạnh trên màn hình, giải phóng toàn bộ chiều ngang cho khay cài đặt mà không còn bị gò bó trong cột dọc hẹp.',
+        'v011.item3.title': 'Khắc phục đường dẫn gửi phản hồi (Feedback) bị lỗi 404',
+        'v011.item3.desc': 'Cập nhật đường dẫn nút "Gửi Phản hồi" trỏ thẳng đến trang GitHub Issues chính thức của kho mã nguồn T-Drop, sẵn sàng tiếp nhận đóng góp ý kiến và báo lỗi từ người dùng.',
+        'v011.item4.title': 'Thông báo trạng thái cập nhật rõ ràng & chính xác',
+        'v011.item4.desc': 'Chuyển đổi thông báo khi kiểm tra phiên bản từ "T-Drop đã cập nhật" gây hiểu nhầm thành "✓ Đã là phiên bản mới nhất", hiển thị thông tin phiên bản chi tiết và gửi thông báo Toast xác nhận khi kiểm tra thủ công.',
+        'v010.summary': 'Bản phát hành độc lập đầu tiên của T-Drop. Mang đến hệ thống sao lưu mã hóa bảo mật toàn diện (.txa), font chữ Inter sắc nét chuẩn tiếng Việt, tối ưu hóa các cỡ chữ hiển thị và tích hợp mã QR hỗ trợ nhà phát triển.',
+        'v010.item1.title': 'Sao lưu & Khôi phục dữ liệu mã hóa (.txa)',
+        'v010.item1.desc': 'Hỗ trợ đóng gói toàn bộ lịch sử bảng tạm, mục ghim và cài đặt thành tệp nhị phân nén Gzip được mã hóa an toàn AES-256-GCM. Tiêu đề tệp bắt đầu bằng chuẩn UTF-8 BOM giúp mở bằng Windows Notepad luôn hiển thị tiếng Việt rõ ràng, kèm 2 chế độ khôi phục: Gộp dữ liệu thông minh hoặc Ghi đè sạch sẽ.',
+        'v010.item2.title': 'Tích hợp Font chữ UI Inter chuẩn quốc tế',
+        'v010.item2.desc': 'Tích hợp bộ font Inter trọn gói (400, 500, 600, 700) tối ưu hóa tiếng Việt 100%, nét chữ rõ ràng với công nghệ ClearType trên Windows, loại bỏ hoàn toàn hiện tượng dính dấu hay vỡ nét glyph.',
+        'v010.item3.title': 'Tối ưu hóa kích thước hiển thị chữ linh hoạt',
+        'v010.item3.desc': 'Cỡ chữ mặc định toàn bộ ứng dụng được tăng nhẹ 4% (1.04) giúp giao diện thoáng mắt và dễ đọc hơn. Nấc Cỡ bé (Small) được nâng từ 0.85 lên 0.94 để không bị bé lí nhí. Hỗ trợ điều chỉnh cỡ chữ trên cả giao diện dock ngang (Shelf).',
+        'v010.item4.title': 'Sửa lỗi cắt chữ các nút thao tác sao lưu',
+        'v010.item4.desc': 'Thiết kế lại các nút "Sao lưu (.txa)" và "Khôi phục (.txa)" vừa vặn hoàn hảo trong thẻ cấu hình, không còn bị dấu ba chấm (...) và bổ sung tooltip giải thích chi tiết.',
+        'v010.item5.title': 'Tích hợp Mã QR Donate & Nhận diện T-Drop',
+        'v010.item5.desc': 'Bổ sung popup hỗ trợ nhà phát triển với mã QR quét MoMo / ngân hàng nhanh và nút sao chép số tài khoản tức thì. Cập nhật nhận diện T-Drop, khoá phím tắt Alt + C và đồng bộ từ vựng trên toàn bộ 31 ngôn ngữ.',
+        'footer.releases': 'Bản phát hành',
+        'footer.issues': 'Báo lỗi & Góp ý'
+      },
+      en: {
+        'nav.download': 'Download v0.1.6',
+        'hero.badge': 'UPDATES & RELEASE CHANGELOG',
+        'hero.title': "What's New in T-Drop",
+        'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
+        'platform.win.tag': 'Available (.exe)',
+        'platform.mac.tag': 'Planned • Coming Soon',
+        'tag.latest': 'LATEST',
+        'badge.new': 'New',
+        'badge.improved': 'Improved',
+        'badge.fixed': 'Fixed',
+        'v016.summary': 'Fixes license key input focus issues on NOACTIVATE windows, repairs empty toast notifications, synchronizes Supabase database activation with the txastudio.click admin portal, and provides versatile changelog URLs.',
+        'v016.item1.title': 'License Input Focus & Paste Fixes',
+        'v016.item1.desc': 'Resolved window focus drop on click, allowing users to type license keys and paste directly from native Windows clipboard.',
+        'v016.item2.title': 'Empty Toast Error Circles Fixed',
+        'v016.item2.desc': 'Fixed translation fallback stripping text from toasts, and limited on-screen toasts to 3 items to prevent visual stacking.',
+        'v016.item3.title': 'Supabase & txastudio.click Portal Sync',
+        'v016.item3.desc': 'Aligned Machine ID verification so license keys generated from the txastudio.click portal activate accurately in T-Drop.',
+        'v016.item4.title': 'Multi-URL Changelog Support',
+        'v016.item4.desc': 'Provides seamless access across /changelogs and /changelog on GitHub Pages.',
+        'v015.summary': 'Introduces AI OCR text extraction (Vietnamese & English), fast image compression and conversion, convenient VietQR VIP/PREMIUM upgrades, ultra-low 15-35MB idle RAM usage, and fixes startup crash (#2).',
+        'v015.item1.title': 'AI OCR Text Extraction & Image Tools',
+        'v015.item1.desc': 'Extract text from images with high accuracy (supports Vietnamese & English). Easily compress and convert between PNG, JPG, and WebP with 1-click.',
+        'v015.item2.title': 'Simple VIP & PREMIUM Upgrades',
+        'v015.item2.desc': 'Convenient automated VietQR checkout for Pro features, with a clear countdown and expiration date display in Settings.',
+        'v015.item3.title': 'Ultra-Lightweight Memory Footprint (15 - 35MB RAM)',
+        'v015.item3.desc': 'Automatically trims unneeded memory while running in the background, keeping your PC responsive and cool.',
+        'v015.item4.title': 'Fix Startup Crash on Windows (#2)',
+        'v015.item4.desc': 'Resolved startup failure and crash errors on select Windows systems.',
+        'v014.summary': 'Resolves updater download stall stuck on "Connecting...", enforces automatic Windows UAC elevation for NSIS installer to prevent accidental app self-deletion, and adds resilient error fallback for native Koffi bindings (Fixing Issue #2).',
+        'v014.item1.title': 'Auto-Trigger Background Download',
+        'v014.item1.desc': 'Fixes update check getting stuck indefinitely at 0% ("Connecting to download server...") until app restart. Background download now triggers immediately upon detecting a new release.',
+        'v014.item2.title': 'NSIS Installer UAC Elevation & Silent Update',
+        'v014.item2.desc': 'Configured perMachine & allowElevation in NSIS builder. Updater now automatically invokes elevate.exe for Administrator privileges in Program Files, eliminating self-deletion caused by uninstaller wiping files without write permissions. Switched to silent installation for conflict-free updates.',
+        'v014.item3.title': 'Resilient Native Koffi Loading (Issue #2 Fix)',
+        'v014.item3.desc': 'Converted Koffi native library imports to dynamic try/catch guarded calls across fullscreen, window, and clipboard format handlers. Completely prevents startup crashes from missing native bindings (ENOENT koffi/package.json).',
+        'v013.summary': 'Introduces 1-click Clean URL (Tracker Stripper) preserving YouTube timestamps; smart Color Swatch detection and converter (HEX, RGB, HSL) with interactive format chips and Flyout Color Inspector; expands shelf panel width to 320px for roomy clip cards; resolves empty ClearMenu options and synchronizes 31 languages.',
+        'v013.item1.title': 'Smart URL Tracker Stripper (Clean URL)',
+        'v013.item1.desc': 'Automatically detects and removes tracking clutter (utm_*, fbclid, gclid, mc_eid, Shopee sp_atk/xptdk, Twitter & TikTok share tokens). Preserves YouTube playback timestamps (t=120s) while stripping si params. Features 1-click broom button 🧹 on hover and Flyout, footer clean badge, and an auto-clean upon copy setting.',
+        'v013.item2.title': 'Color Swatch & Multi-Format Converter (HEX, RGB, HSL)',
+        'v013.item2.desc': 'Comprehensive recognition and conversion across HEX, RGB/RGBA, and HSL/HSLA color models. Interactive chips on item cards allow instant format copying. Includes cycling quick-action hover button and in-depth Color Inspector inside Preview Flyout with live swatch preview, individual format copy rows, and RGB channel level meters.',
+        'v013.item3.title': 'Roomy 320px Shelf Width & Expanded Card Horizon',
+        'v013.item3.desc': 'Increased clipboard shelf width from 270px to 320px (+50px breathing room, Electron container 430px). Longer URLs and titles are displayed with greater clarity without being truncated or crowded by hover action buttons.',
+        'v013.item4.title': 'Restored Clear History Menu Text (ClearMenu Fix)',
+        'v013.item4.desc': 'Added missing localization keys for the time-range clear dropdown (Last 1 hour, Last 6 hours, Last 24 hours, Clear all history) across all 31 languages, eliminating blank black dropdown boxes.',
+        'v012.summary': 'Introduces visual dynamic UpdateBanner with real-time download percentage and speed; streamlined .txa backup restoration with Windows Explorer file association; new Backup slide in Onboarding; full 31-language synchronization and handy DevTools integration.',
+        'v012.item1.title': 'Dynamic Update Banner & Progress Lifecycle',
+        'v012.item1.desc': 'Visual update banner docked at the top of the shelf upon update detection. Displays real-time download progress (percentage %, transferred/total size, and download speed in MB/s), with a sleek "Restart to Update" button and Windows system notification support.',
+        'v012.item2.title': 'Automated .txa Backup Restoration & Windows File Association',
+        'v012.item2.desc': 'Support for opening .txa backup files directly from Windows Explorer. Features automatic archive detection on startup and an intuitive restore modal with complete metadata previews (creation date, item/image counts, Smart Merge, or Clean Overwrite).',
+        'v012.item3.title': 'Backup & Restore Introduction in Onboarding',
+        'v012.item3.desc': 'Added dedicated Backup & Restore (.txa) slide to the first-run onboarding tutorial, featuring interactive mockups and clear explanations of archive transfer capabilities.',
+        'v012.item4.title': 'Comprehensive 31-Language Sync & Slide Prompt Standardization',
+        'v012.item4.desc': 'Full synchronization across all 31 supported languages for all new feature keys. Accurately updated restart confirmation prompts from "Click" to "Slide to restart" to match the interactive swipe capsule, with clean English fallbacks.',
+        'v012.item5.title': 'F12 Hotkey & Detached DevTools Integration',
+        'v012.item5.desc': 'Automated detached DevTools window in development mode, complete with global F12 hotkey and System Tray context menu toggle for effortless developer debugging.',
+        'v011.summary': 'Comprehensive UI/UX overhaul for the Shelf and Top-Edge Dock, adaptive layout for first-run Onboarding, fixed 404 feedback link, and clarified up-to-date notifications.',
+        'v011.item1.title': 'Top-Edge Dock & Shelf UI/UX Redesign',
+        'v011.item1.desc': 'Refined vertical budget and card layout in horizontal mode. Enlarged item card breathing space to prevent timestamp footer cut-off, with acrylic elevation and glowing borders on hover.',
+        'v011.item2.title': 'Adaptive Onboarding Window Layout',
+        'v011.item2.desc': 'Expanded onboarding window to 980x680px. Slide 6 now dynamically adapts to a wide horizontal presentation when top-edge dock is chosen, removing the cramped vertical container restriction.',
+        'v011.item3.title': 'Fixed 404 Feedback Link',
+        'v011.item3.desc': 'Directs the Submit Feedback action to the official GitHub Issues page for seamless bug reporting and feature requests.',
+        'v011.item4.title': 'Accurate Up-to-Date Status',
+        'v011.item4.desc': 'Replaced ambiguous "T-Drop updated" wording with clear "✓ Already on the latest version" and instant confirmation toasts upon manual check.',
+        'v010.summary': 'The inaugural standalone release of T-Drop. Introduces an encrypted backup and restore system (.txa), crisp Inter UI typography with full Vietnamese support, refined typography scaling, and integrated donation QR support.',
+        'v010.item1.title': 'Encrypted Backup & Restore System (.txa)',
+        'v010.item1.desc': 'Export clipboard history, pinned items, and settings into Gzip-compressed archives encrypted with AES-256-GCM. Features UTF-8 BOM headers for clean rendering in Windows Notepad, plus two restore modes: Smart Merge or Clean Overwrite.',
+        'v010.item2.title': 'Inter UI Font Integration',
+        'v010.item2.desc': 'Bundles the international Inter font family (400, 500, 600, 700) with flawless Vietnamese typography, crisp ClearType subpixel rendering on Windows, and zero glyph collision.',
+        'v010.item3.title': 'Responsive Typography Scaling',
+        'v010.item3.desc': 'Default UI font scale increased to 1.04 for improved legibility. Small size raised from 0.85 to 0.94 to avoid overly tiny text. Full text size selector now also available on horizontal shelf dock.',
+        'v010.item4.title': 'Fixed Backup Button Label Truncation',
+        'v010.item4.desc': 'Redesigned backup and restore action buttons to cleanly display full labels without ellipsis clipping, complete with informative hover tooltips.',
+        'v010.item5.title': 'Donation QR Code & T-Drop Identity',
+        'v010.item5.desc': 'Integrated developer support modal with instant MoMo / Bank transfer QR scanning and copy-to-clipboard account details. Polished brand identity and synchronized 31-language translations.',
+        'footer.releases': 'Releases',
+        'footer.issues': 'Issues & Feedback'
+      }
+    };
+
+    let currentLang = 'vi';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      const t = translations[lang] || translations.vi;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.textContent = t[key];
+        }
+      });
+
+      const langFlag = document.getElementById('langFlag');
+      const langLabel = document.getElementById('langLabel');
+      if (lang === 'vi') {
+        langFlag.textContent = '🇻🇳';
+        langLabel.textContent = 'Tiếng Việt';
+      } else {
+        langFlag.textContent = '🇬🇧';
+        langLabel.textContent = 'English';
+      }
+    }
+
+    function toggleLanguage() {
+      setLanguage(currentLang === 'vi' ? 'en' : 'vi');
+    }
+
+    // Auto-detect browser language if English
+    if (!navigator.language.startsWith('vi')) {
+      setLanguage('en');
+    }
+  </script>
+</body>
+</html>

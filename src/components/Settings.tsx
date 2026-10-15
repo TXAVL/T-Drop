@@ -192,6 +192,27 @@ export function Settings({
   const [isExporting, setIsExporting] = useState(false)
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [copiedStk, setCopiedStk] = useState(false)
+  type LogFilterType = 'ALL' | 'SYSTEM' | 'ERROR' | 'WARN' | 'INFO'
+  const [logsModalOpen, setLogsModalOpen] = useState(false)
+  const [rawLogs, setRawLogs] = useState('')
+  const [logFilePath, setLogFilePath] = useState('')
+  const [logsFilter, setLogsFilter] = useState<LogFilterType>('ALL')
+  const [logsLoading, setLogsLoading] = useState(false)
+  const [copiedLogs, setCopiedLogs] = useState(false)
+  const [diagnosing, setDiagnosing] = useState(false)
+  const logsTerminalRef = useRef<HTMLDivElement>(null)
+  const logsBottomRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (logsModalOpen && logsTerminalRef.current) {
+      const tm = setTimeout(() => {
+        if (logsTerminalRef.current) {
+          logsTerminalRef.current.scrollTop = logsTerminalRef.current.scrollHeight
+        }
+      }, 60)
+      return () => clearTimeout(tm)
+    }
+  }, [logsModalOpen, rawLogs, logsFilter])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.edge?.onBackupFileOpened) return
@@ -344,6 +365,27 @@ export function Settings({
   const [licenseActivating, setLicenseActivating] = useState<boolean>(false)
   const [copiedHw, setCopiedHw] = useState<boolean>(false)
   const [purchaseModalOpen, setPurchaseModalOpen] = useState<boolean>(false)
+  const licenseInputRef = useRef<HTMLInputElement>(null)
+
+  const handleFocusLicenseInput = () => {
+    try { window.focus() } catch {}
+    try {
+      const p = window.edge?.focusWindow?.(true) as unknown as Promise<void> | undefined
+      if (p && typeof p.then === 'function') {
+        p.then(() => {
+          licenseInputRef.current?.focus()
+        }).catch(() => {})
+      } else {
+        licenseInputRef.current?.focus()
+      }
+    } catch {}
+    try { window.edge?.pauseHotkey?.(true) } catch {}
+  }
+
+  const handleBlurLicenseInput = () => {
+    try { window.edge?.focusWindow?.(false) } catch {}
+    try { window.edge?.pauseHotkey?.(false) } catch {}
+  }
 
   useEffect(() => {
     window.edge.getLicenseDeviceInfo?.().then((info) => {
@@ -369,7 +411,12 @@ export function Settings({
   const handlePasteLicenseKey = async () => {
     playButtonClickSound()
     try {
-      const text = await navigator.clipboard.readText()
+      let text = ''
+      if (window.edge?.readClipboardText) {
+        text = await window.edge.readClipboardText()
+      } else {
+        text = await navigator.clipboard.readText()
+      }
       if (text && text.trim()) {
         setLicenseInput(text.trim().toUpperCase())
         pushToast({
@@ -441,6 +488,93 @@ export function Settings({
       message: 'Đã hủy kích hoạt bản quyền, chuyển về gói FREE',
       tone: 'info'
     })
+  }
+
+  const loadSystemLogs = async (triggerDiagIfMissing = false) => {
+    if (!window.edge?.getSystemLogs) return
+    setLogsLoading(true)
+    try {
+      const res = await window.edge.getSystemLogs(450)
+      setRawLogs(res.logs || '')
+      setLogFilePath(res.path || '')
+
+      if (triggerDiagIfMissing && !res.logs?.includes('[WinOS]') && window.edge?.generateDiagnostics) {
+        setDiagnosing(true)
+        const diagRes = await window.edge.generateDiagnostics()
+        if (diagRes.ok) {
+          setRawLogs(diagRes.logs)
+          setLogFilePath(diagRes.path)
+        }
+        setDiagnosing(false)
+      }
+    } catch (err: any) {
+      setRawLogs(`Lỗi khi đọc file log: ${err?.message || String(err)}`)
+    } finally {
+      setLogsLoading(false)
+    }
+  }
+
+  const handleOpenLogsModal = () => {
+    playButtonClickSound()
+    setLogsModalOpen(true)
+    void loadSystemLogs(true)
+  }
+
+  const handleCopyLogs = () => {
+    playButtonClickSound()
+    if (!rawLogs) return
+    navigator.clipboard.writeText(rawLogs)
+    setCopiedLogs(true)
+    setTimeout(() => setCopiedLogs(false), 2000)
+    pushToast({
+      id: Date.now().toString(),
+      message: 'Đã sao chép toàn bộ logs! Hãy dán để gửi cho A.I.',
+      tone: 'info'
+    })
+  }
+
+  const handleClearLogs = async () => {
+    playButtonClickSound()
+    if (window.edge?.clearSystemLogs) {
+      await window.edge.clearSystemLogs()
+      await loadSystemLogs()
+      pushToast({
+        id: Date.now().toString(),
+        message: 'Đã xóa trắng file nhật ký!',
+        tone: 'info'
+      })
+    }
+  }
+
+  const handleOpenLogFolder = () => {
+    playButtonClickSound()
+    window.edge?.openLogFolder?.()
+  }
+
+  const handleGenerateDiagnostics = async () => {
+    if (!window.edge?.generateDiagnostics) return
+    playButtonClickSound()
+    setDiagnosing(true)
+    try {
+      const res = await window.edge.generateDiagnostics()
+      if (res.ok) {
+        setRawLogs(res.logs)
+        setLogFilePath(res.path)
+        pushToast({
+          id: Date.now().toString(),
+          message: 'Đã hoàn tất chẩn đoán sâu hệ thống & bản quyền Windows!',
+          tone: 'info'
+        })
+      }
+    } catch (err: any) {
+      pushToast({
+        id: Date.now().toString(),
+        message: `Lỗi chẩn đoán: ${err?.message || String(err)}`,
+        tone: 'error'
+      })
+    } finally {
+      setDiagnosing(false)
+    }
   }
 
   const handleCopyHardwareHash = () => {
@@ -587,11 +721,13 @@ export function Settings({
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
               <div style={{ display: 'flex', gap: 6, width: '100%' }}>
                 <input
+                  ref={licenseInputRef}
                   type="text"
                   placeholder="Nhập mã key: TDR_XXXXXX_XXXXX"
                   value={licenseInput}
-                  onFocus={() => void window.edge?.focusWindow?.(true)}
-                  onBlur={() => void window.edge?.focusWindow?.(false)}
+                  onPointerDown={handleFocusLicenseInput}
+                  onFocus={handleFocusLicenseInput}
+                  onBlur={handleBlurLicenseInput}
                   onChange={(e) => setLicenseInput(e.target.value.toUpperCase())}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleActivateLicense()
@@ -662,6 +798,24 @@ export function Settings({
               </button>
             </div>
           )}
+          <button
+            type="button"
+            className="pill"
+            style={{
+              width: '100%',
+              height: 30,
+              fontSize: 11,
+              fontWeight: 550,
+              justifyContent: 'center',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              color: 'rgba(255, 255, 255, 0.85)',
+              marginTop: 6
+            }}
+            onClick={handleOpenLogsModal}
+          >
+            📋 Xem Nhật ký & Gỡ lỗi (System Logs)
+          </button>
         </div>
       </>
     )
@@ -764,6 +918,246 @@ export function Settings({
               onClick={() => setDonateModalOpen(false)}
             >
               {t('common.close') || 'Đóng'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const renderLogsModal = () => {
+    if (!logsModalOpen) return null
+
+    const allLines = rawLogs.split(/\r?\n/).filter(Boolean)
+    const winOsLine = allLines.find((l) => l.includes('[WinOS]') && l.includes('Phiên bản:'))
+    const winBuildLine = allLines.find((l) => l.includes('[WinOS]') && l.includes('Số hiệu bản dựng:'))
+    const winInsiderLine = allLines.find((l) => l.includes('[WinOS]') && l.includes('Kênh Windows Insider:'))
+    const winLicStatusLine = allLines.find((l) => l.includes('[WinLic]') && l.includes('Trạng thái bản quyền Windows:'))
+
+    const filteredLines = allLines.filter((line) => {
+      if (logsFilter === 'SYSTEM') return line.includes('[WinOS]') || line.includes('[WinLic]') || line.includes('[Hardware]') || line.includes('[Diag]') || line.includes('[Runtime]') || line.includes('[TD-License]')
+      if (logsFilter === 'ERROR') return line.includes('[ERROR]') || line.includes('UncaughtException') || line.includes('UnhandledRejection')
+      if (logsFilter === 'WARN') return line.includes('[WARN')
+      if (logsFilter === 'INFO') return line.includes('[INFO')
+      return true
+    })
+
+    return (
+      <div
+        className="txa-modal-overlay"
+        onClick={() => setLogsModalOpen(false)}
+      >
+        <div
+          className="txa-modal-card logs-modal-card"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="txa-modal-header">
+            <div className="txa-modal-title-group">
+              <div className="txa-modal-icon-badge" style={{ background: 'rgba(56, 189, 248, 0.15)', borderColor: 'rgba(56, 189, 248, 0.35)', color: '#38bdf8' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="4 17 10 11 4 5"/>
+                  <line x1="12" y1="19" x2="20" y2="19"/>
+                </svg>
+              </div>
+              <div className="txa-modal-title-text">
+                <span className="txa-modal-title">Nhật ký & Gỡ lỗi hệ thống</span>
+                <span className="txa-modal-subtitle">Ghi lại toàn bộ hoạt động & lỗi để chia sẻ với A.I hoặc Dev</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="txa-modal-close"
+              onClick={() => setLogsModalOpen(false)}
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="logs-path-bar">
+            <span className="logs-path-text" title={logFilePath || 'T-Drop Logs'}>
+              {logFilePath || 'Đang tải đường dẫn logs...'}
+            </span>
+            <button
+              type="button"
+              className="logs-folder-btn"
+              onClick={handleOpenLogFolder}
+              title="Mở thư mục chứa file log trong Windows Explorer"
+            >
+              📂 Mở thư mục
+            </button>
+          </div>
+
+          {winOsLine && (
+            <div className="logs-system-summary-card">
+              <div className="summary-col">
+                <span className="summary-title">🖥️ Windows OS</span>
+                <span className="summary-value" title={winOsLine.split('Phiên bản: ')[1] || 'Windows'}>
+                  {winOsLine.split('Phiên bản: ')[1] || 'Windows'}
+                </span>
+              </div>
+              <div className="summary-col">
+                <span className="summary-title">🔨 Bản dựng (Build)</span>
+                <span className="summary-value" title={winBuildLine ? winBuildLine.split('Số hiệu bản dựng: ')[1] : ''}>
+                  {winBuildLine ? winBuildLine.split('Số hiệu bản dựng: ')[1] : 'Đang quét...'}
+                </span>
+              </div>
+              <div className="summary-col">
+                <span className="summary-title">🚀 Kênh phát hành</span>
+                <span className="summary-value" title={winInsiderLine ? winInsiderLine.split('Kênh Windows Insider: ')[1] : 'Retail / GA'}>
+                  {winInsiderLine ? winInsiderLine.split('Kênh Windows Insider: ')[1] : 'Retail / GA'}
+                </span>
+              </div>
+              <div className="summary-col">
+                <span className="summary-title">🔑 Bản quyền Windows</span>
+                <span className="summary-value" title={winLicStatusLine ? winLicStatusLine.split('Trạng thái bản quyền Windows: ')[1] : ''}>
+                  {winLicStatusLine ? winLicStatusLine.split('Trạng thái bản quyền Windows: ')[1] : 'Đang kiểm tra...'}
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="logs-filter-bar">
+            <div className="logs-filter-group">
+              {([
+                { key: 'ALL', label: 'Tất cả' },
+                { key: 'SYSTEM', label: '🖥️ Windows & Bản quyền' },
+                { key: 'ERROR', label: '❌ Lỗi' },
+                { key: 'WARN', label: '⚠️ Cảnh báo' },
+                { key: 'INFO', label: 'ℹ️ Thông tin' }
+              ] as const).map(({ key, label }) => (
+                <button
+                  key={key}
+                  type="button"
+                  className={`logs-filter-chip ${key === 'SYSTEM' ? 'system' : key === 'ERROR' ? 'error' : key === 'WARN' ? 'warn' : ''} ${logsFilter === key ? 'active' : ''}`}
+                  onClick={() => {
+                    playButtonClickSound()
+                    setLogsFilter(key)
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              <button
+                type="button"
+                className="logs-folder-btn"
+                style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#cbd5e1' }}
+                onClick={() => {
+                  if (logsTerminalRef.current) logsTerminalRef.current.scrollTop = 0
+                }}
+                title="Cuộn lên đầu trang"
+              >
+                ⬆️ Đầu
+              </button>
+              <button
+                type="button"
+                className="logs-folder-btn"
+                style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#cbd5e1' }}
+                onClick={() => {
+                  if (logsTerminalRef.current) logsTerminalRef.current.scrollTop = logsTerminalRef.current.scrollHeight
+                }}
+                title="Cuộn xuống dòng mới nhất"
+              >
+                ⬇️ Cuối
+              </button>
+              <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.45)', fontFamily: 'var(--font-mono, monospace)' }}>
+                {filteredLines.length}/{allLines.length} dòng
+              </span>
+            </div>
+          </div>
+
+          <div className="logs-terminal-viewport" ref={logsTerminalRef}>
+            {logsLoading ? (
+              <div style={{ color: 'rgba(255, 255, 255, 0.5)', padding: '16px 0', textAlign: 'center' }}>
+                Đang đọc dữ liệu logs từ đĩa...
+              </div>
+            ) : filteredLines.length === 0 ? (
+              <div style={{ color: 'rgba(255, 255, 255, 0.4)', padding: '16px 0', textAlign: 'center' }}>
+                Không có dòng log nào phù hợp bộ lọc.
+              </div>
+            ) : (
+              filteredLines.map((line, idx) => {
+                const isErr = line.includes('[ERROR]') || line.includes('UncaughtException') || line.includes('UnhandledRejection')
+                const isWarn = line.includes('[WARN')
+                const isWinLic = line.includes('[WinLic]')
+                const isWinOS = line.includes('[WinOS]')
+                const isTDLic = line.includes('[TD-License]')
+                const isDiag = line.includes('[Diag]')
+                const isInfo = line.includes('[INFO')
+
+                const levelClass = isErr
+                  ? 'level-ERROR'
+                  : isWarn
+                  ? 'level-WARN'
+                  : isWinLic
+                  ? 'level-WINLIC'
+                  : isWinOS
+                  ? 'level-WINOS'
+                  : isTDLic
+                  ? 'level-TDLIC'
+                  : isDiag
+                  ? 'level-DIAG'
+                  : isInfo
+                  ? 'level-INFO'
+                  : ''
+
+                return (
+                  <div key={idx} className={`logs-line ${levelClass}`}>
+                    {line}
+                  </div>
+                )
+              })
+            )}
+            <div ref={logsBottomRef} />
+          </div>
+
+          <div style={{ marginTop: 8, width: '100%' }}>
+            <button
+              type="button"
+              className="pill"
+              style={{
+                width: '100%',
+                height: 32,
+                fontSize: 11.5,
+                fontWeight: 600,
+                justifyContent: 'center',
+                background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.25))',
+                border: '1px solid rgba(168, 85, 247, 0.45)',
+                color: '#e9d5ff'
+              }}
+              disabled={diagnosing}
+              onClick={handleGenerateDiagnostics}
+            >
+              {diagnosing ? '⏳ Đang phân tích bản quyền Windows & phần cứng...' : '🔍 Quét chẩn đoán sâu (Bản quyền Windows & Phần cứng)'}
+            </button>
+          </div>
+
+          <div className="txa-modal-actions" style={{ marginTop: 6 }}>
+            <button
+              type="button"
+              className="txa-btn txa-btn-primary"
+              style={{ flex: 1.5, background: copiedLogs ? '#10b981' : undefined }}
+              onClick={handleCopyLogs}
+            >
+              {copiedLogs ? '✓ Đã sao chép vào Clipboard!' : '📋 Sao chép Logs (Gửi A.I)'}
+            </button>
+            <button
+              type="button"
+              className="txa-btn ttxa-btn-secondary"
+              style={{ flex: 0.8 }}
+              onClick={() => void loadSystemLogs()}
+              disabled={logsLoading || diagnosing}
+            >
+              🔄 Làm mới
+            </button>
+            <button
+              type="button"
+              className="txa-btn ttxa-btn-secondary"
+              style={{ flex: 0.8, color: '#f87171' }}
+              onClick={handleClearLogs}
+            >
+              🗑️ Xóa logs
             </button>
           </div>
         </div>
@@ -2295,6 +2689,7 @@ export function Settings({
         </div>
         {renderRestoreModal()}
         {renderDonateModal()}
+        {renderLogsModal()}
         <PurchaseModal
           open={purchaseModalOpen}
           onClose={() => setPurchaseModalOpen(false)}
@@ -3292,6 +3687,7 @@ export function Settings({
           </div>
           {renderRestoreModal()}
           {renderDonateModal()}
+          {renderLogsModal()}
           <PurchaseModal
             open={purchaseModalOpen}
             onClose={() => setPurchaseModalOpen(false)}

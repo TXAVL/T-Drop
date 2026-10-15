@@ -11,13 +11,14 @@ import { execSync } from 'node:child_process'
 import { SUPABASE_CONFIG, type DeviceFingerprint, type LicenseActivationResult, type LicenseState } from '../../shared/license'
 import { loadSettings, saveSettings } from '../store/settings'
 import { pushState } from './state'
+import { AppLogger } from './logger'
 
 let cachedFingerprint: DeviceFingerprint | null = null
 
 function getRawMachineGuid(): string {
   if (process.platform === 'win32') {
     try {
-      const stdout = execSync('reg query HKLM\\SOFTWARE\\Microsoft\\Cryptography /v MachineGuid', {
+      const stdout = execSync('reg query "HKLM\\SOFTWARE\\Microsoft\\Cryptography" /v MachineGuid', {
         windowsHide: true,
         encoding: 'utf-8',
         stdio: ['ignore', 'pipe', 'ignore']
@@ -84,10 +85,12 @@ export class TxaLicense {
 export async function activateLicense(key: string): Promise<LicenseActivationResult> {
   const trimmed = key.trim().toUpperCase()
   if (!trimmed) {
+    AppLogger.write('WARN', 'License', 'Kích hoạt thất bại: mã bản quyền rỗng')
     return { ok: false, code: 'NOT_FOUND', message: 'Vui lòng nhập mã bản quyền' }
   }
 
-  const { hardwareId, pcName } = getDeviceFingerprint()
+  const { hardwareId, pcName, hwHash } = getDeviceFingerprint()
+  AppLogger.write('INFO', 'License', `Gửi yêu cầu kích hoạt: key=${trimmed}, hwHash=${hwHash}, device=${pcName}`)
 
   try {
     const url = `${SUPABASE_CONFIG.url}/rest/v1/rpc/activate_tdrop_license`
@@ -101,12 +104,14 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
       body: JSON.stringify({
         p_key: trimmed,
         p_hardware_id: hardwareId,
+        p_hw_hash: hwHash,
         p_device_name: pcName
       })
     })
 
     if (!res.ok) {
       const errText = await res.text()
+      AppLogger.write('ERROR', 'License', `Supabase trả về lỗi HTTP ${res.status}: ${errText}`)
       return { ok: false, code: 'NETWORK_ERROR', message: `Lỗi kết nối máy chủ (${res.status}): ${errText}` }
     }
 
@@ -121,6 +126,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
 
     if (data.ok) {
       const role = data.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
+      AppLogger.write('INFO', 'License', `Kích hoạt THÀNH CÔNG: role=${role}, user=${data.user_name || 'Khách hàng'}, expires=${data.expires_at || 'vô thời hạn'}`)
       saveSettings({
         isPro: true,
         licenseKey: trimmed,
@@ -129,6 +135,8 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
         licenseExpiresAt: data.expires_at || null
       })
       pushState.settings(loadSettings())
+    } else {
+      AppLogger.write('WARN', 'License', `Máy chủ từ chối kích hoạt: code=${data.code}, message=${data.message}`)
     }
 
     return {
@@ -140,6 +148,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
       expiresAt: data.expires_at
     }
   } catch (err: any) {
+    AppLogger.write('ERROR', 'License', `Ngoại lệ khi gọi Supabase: ${err?.message || String(err)}`)
     return {
       ok: false,
       code: 'NETWORK_ERROR',
@@ -152,6 +161,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
  * Remove active license key and revert to Free.
  */
 export function deactivateLicense(): boolean {
+  AppLogger.write('INFO', 'License', 'Người dùng đã hủy kích hoạt bản quyền, chuyển về gói FREE')
   saveSettings({
     isPro: false,
     licenseKey: undefined,

@@ -32,17 +32,19 @@ export function createPurchaseWindow(): void {
   })
 
   if (process.env.ELECTRON_RENDERER_URL) {
-    purchaseWindow.loadURL(process.env.ELECTRON_RENDERER_URL + '#/purchase')
+    const base = process.env.ELECTRON_RENDERER_URL.endsWith('/')
+      ? process.env.ELECTRON_RENDERER_URL
+      : `${process.env.ELECTRON_RENDERER_URL}/`
+    purchaseWindow.loadURL(`${base}#/purchase`)
   } else {
     purchaseWindow.loadFile(join(__dirname, '../renderer/index.html'), { hash: 'purchase' })
   }
 
   purchaseWindow.once('ready-to-show', () => {
     if (!purchaseWindow || purchaseWindow.isDestroyed()) return
-    purchaseWindow.setAlwaysOnTop(true)
+    purchaseWindow.setAlwaysOnTop(true, 'screen-saver')
     purchaseWindow.show()
     purchaseWindow.focus()
-    purchaseWindow.setAlwaysOnTop(false)
   })
 
   purchaseWindow.on('closed', () => {

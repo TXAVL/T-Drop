@@ -36,7 +36,7 @@ T-Drop is maintained by one person and is in active beta. To keep the project he
 
 ## Enforcement Responsibilities
 
-The project maintainer (Deepender Yadav) is responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that is deemed inappropriate, threatening, offensive, or harmful.
+The project maintainer (TXAVL) is responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that is deemed inappropriate, threatening, offensive, or harmful.
 
 The maintainer has the right and responsibility to remove, edit, or reject comments, commits, code, issues, and other contributions that are not aligned with this Code of Conduct, and to ban temporarily or permanently any contributor for other behaviors deemed inappropriate, threatening, offensive, or harmful.
 
@@ -46,7 +46,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Reporting
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the maintainer at hi@contact.edgedrop.app. All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the maintainer at xuananhdepzai9@gmail.com. All complaints will be reviewed and investigated promptly and fairly.
 
 The maintainer is obligated to respect the privacy and security of the reporter of any incident.
 

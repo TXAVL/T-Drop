@@ -111,19 +111,19 @@ export function trimMemory(windows: BrowserWindow[] = []): { ok: boolean; mainRs
   // 2. Drop hot thumbnail LRU items
   clearThumbnailCache()
 
-  // 3. Trim main process Windows working set
-  let trimmedMain = false
-  if (process.platform === 'win32') {
-    try {
-      const hMain = getCurrentProcessFn ? getCurrentProcessFn() : null
-      if (hMain) {
-        trimmedMain = emptyProcessHandle(hMain)
-      }
-    } catch { /* ignore */ }
+  // 3. Clear session ephemeral HTTP cache
+  try {
+    session.defaultSession.clearCache().catch(() => {})
+  } catch { /* ignore */ }
 
-    // 4. Trim renderer process(es)
-    for (const win of windows) {
-      if (win && !win.isDestroyed()) {
+  // 4. Trim renderer process(es) and invoke renderer V8 GC
+  for (const win of windows) {
+    if (win && !win.isDestroyed()) {
+      try {
+        win.webContents.executeJavaScript('if (typeof window.gc === "function") window.gc();', true).catch(() => {})
+      } catch { /* ignore */ }
+
+      if (process.platform === 'win32') {
         try {
           const pid = win.webContents.getOSProcessId()
           if (pid > 0 && pid !== process.pid) {
@@ -132,6 +132,17 @@ export function trimMemory(windows: BrowserWindow[] = []): { ok: boolean; mainRs
         } catch { /* ignore */ }
       }
     }
+  }
+
+  // 5. Trim main process Windows working set
+  let trimmedMain = false
+  if (process.platform === 'win32') {
+    try {
+      const hMain = getCurrentProcessFn ? getCurrentProcessFn() : null
+      if (hMain) {
+        trimmedMain = emptyProcessHandle(hMain)
+      }
+    } catch { /* ignore */ }
   }
 
   const rssMb = Math.round(process.memoryUsage().rss / (1024 * 1024))

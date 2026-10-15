@@ -2348,7 +2348,6 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  vertical-align: middle;
   font-family: inherit;
 }
 
@@ -3077,6 +3076,224 @@
   line-height: 1.4;
   margin: 0;
 }
+
+/* ── System Logs Modal ── */
+.logs-modal-card {
+  max-width: 580px;
+  width: 95%;
+  max-height: calc(100vh - 20px);
+  padding: 16px 18px;
+}
+
+.logs-system-summary-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-top: 6px;
+  backdrop-filter: blur(12px);
+}
+
+.logs-system-summary-card .summary-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.logs-system-summary-card .summary-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #38bdf8;
+}
+
+.logs-system-summary-card .summary-value {
+  font-size: 11px;
+  font-weight: 550;
+  color: #f1f5f9;
+  font-family: var(--font-mono, monospace);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logs-path-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+.logs-path-text {
+  font-family: var(--font-mono, monospace);
+  color: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: rtl;
+  text-align: left;
+  user-select: all;
+}
+
+.logs-folder-btn {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.logs-folder-btn:hover {
+  background: rgba(56, 189, 248, 0.28);
+  color: #ffffff;
+}
+
+.logs-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.logs-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.logs-filter-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2.5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.logs-filter-chip.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.logs-filter-chip.system.active {
+  background: rgba(56, 189, 248, 0.22);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.logs-filter-chip.error.active {
+  background: rgba(239, 68, 68, 0.22);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.logs-filter-chip.warn.active {
+  background: rgba(234, 179, 8, 0.22);
+  color: #fde047;
+  border-color: rgba(234, 179, 8, 0.45);
+}
+
+.logs-terminal-viewport {
+  background: #080a0f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  max-height: 310px;
+  min-height: 180px;
+  overflow-y: auto;
+  overflow-x: auto;
+  font-family: var(--font-mono, Consolas, monospace);
+  font-size: 11px;
+  line-height: 1.6;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.7);
+  scrollbar-width: thin;
+}
+
+.logs-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.logs-line.level-ERROR {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 2px solid #ef4444;
+  padding-left: 5px;
+}
+
+.logs-line.level-WARN {
+  color: #fde047;
+  background: rgba(234, 179, 8, 0.08);
+  border-left: 2px solid #eab308;
+  padding-left: 5px;
+}
+
+.logs-line.level-INFO {
+  color: #cbd5e1;
+}
+
+.logs-line.level-WINLIC {
+  color: #e9d5ff;
+  background: rgba(168, 85, 247, 0.12);
+  border-left: 2px solid #a855f7;
+  padding-left: 5px;
+  font-weight: 550;
+}
+
+.logs-line.level-WINOS {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.09);
+  border-left: 2px solid #3b82f6;
+  padding-left: 5px;
+}
+
+.logs-line.level-TDLIC {
+  color: #fde047;
+  background: rgba(245, 158, 11, 0.09);
+  border-left: 2px solid #f59e0b;
+  padding-left: 5px;
+}
+
+.logs-line.level-DIAG {
+  color: #38bdf8;
+  font-weight: 600;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.logs-time {
+  color: #64748b;
+  margin-right: 6px;
+}
+
+.logs-tag {
+  color: #38bdf8;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
 
 
 
