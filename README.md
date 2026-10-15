@@ -115,10 +115,8 @@ It is built for the developer and creative workflow where you constantly juggle 
   If T-Drop speeds up your daily workflow, consider supporting ongoing development!
 </p>
 
-<table align="center" border="0" style="border-collapse: collapse; border: none;">
-  <tr>
-    <th align="center" width="50%" style="border: none; padding: 10px 15px 5px;">
-<table align="center" style="border: none; border-collapse: collapse;">
+<div align="center">
+<table style="border: none; border-collapse: collapse;">
   <tr>
     <th align="center" style="border: none; padding: 10px 15px 5px;">
       <h3>💳 Ủng hộ qua Ngân hàng Quân Đội (MB Bank)</h3>
@@ -142,6 +140,7 @@ It is built for the developer and creative workflow where you constantly juggle 
     </td>
   </tr>
 </table>
+</div>
 
 ### Project Sponsors & Featured Products
 
@@ -152,7 +151,7 @@ A huge thank you to the incredible sponsors and products actively sponsoring T-D
 | <a href="https://elitistreview.com/" target="_blank"><img src="https://unavatar.io/x/Elitistreview" width="32" height="32" style="border-radius: 50%; vertical-align: middle;" alt="Elitistreview" /></a> &nbsp; **[Elitistreview](https://elitistreview.com/)** | [Website](https://elitistreview.com/) &nbsp;·&nbsp; [X](https://x.com/Elitistreview) &nbsp;·&nbsp; [Bluesky](https://bsky.app/profile/elitistreview.com) | *When it comes to wine, there is an objective reality out there, and it is on Elitistreview.com.* |
 
 <p align="center">
-  <sub>💡 <em>Muốn đưa sản phẩm, dự án hoặc website của bạn lên đây? Liên hệ hoặc <a href="#-support--sponsor-t-drop">Ủng hộ qua MB Bank</a> và gửi thông tin nhé!</em></sub>
+  <sub>💡 <em>Muốn đưa sản phẩm, dự án hoặc website của bạn lên đây? Liên hệ hoặc <a href="#support--sponsor">Ủng hộ qua MB Bank</a> và gửi thông tin nhé!</em></sub>
 </p>
 
 ---
@@ -489,5 +488,5 @@ Apache License 2.0 — see [LICENSE](LICENSE). Commercial and non-commercial use
 ---
 
 <p align="center">
-  <sub>Ủng hộ tác giả qua <a href="#-support--sponsor-t-drop">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVL/T-Drop" target="_blank">GitHub ⭐</a></sub>
+  <sub>Ủng hộ tác giả qua <a href="#support--sponsor">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVL/T-Drop" target="_blank">GitHub ⭐</a></sub>
 </p>
