@@ -1,0 +1,34 @@
+name: ✨ Feature Request
+description: Suggest a new idea or enhancement for T-Drop
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We are excited to hear your ideas! Please check the [Roadmap](https://github.com/TXAVL/T-Drop#roadmap) first to see if it is already planned.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Workflow Goal
+      description: Is this feature related to a specific problem or workflow bottleneck?
+      placeholder: I frequently need to... and it would be much faster if...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution / Feature
+      description: Explain how you would like this feature to work.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative workarounds or other tools?
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context or UI Mockups
+      description: Attach UI sketches, reference screenshots, or other context.

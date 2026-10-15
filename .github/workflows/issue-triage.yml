@@ -1,0 +1,53 @@
+name: Issue Triage & Welcome
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-label and welcome
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const labelsToAdd = [];
+
+            if (title.includes('[bug]')) {
+              labelsToAdd.push('bug');
+            } else if (title.includes('[feature]')) {
+              labelsToAdd.push('enhancement');
+            } else if (title.includes('[i18n]') || title.includes('translation')) {
+              labelsToAdd.push('translation', 'i18n');
+            } else {
+              labelsToAdd.push('triage');
+            }
+
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labelsToAdd
+              });
+            }
+
+            const welcomeMessage = `👋 Hi @${issue.user.login}, thank you for opening this issue!
+
+- 📖 **Documentation & User Guide:** [https://txavl.github.io/T-Drop/](https://txavl.github.io/T-Drop/)
+- 📜 **Latest Changelog:** [https://txavl.github.io/T-Drop/changelog](https://txavl.github.io/T-Drop/changelog)
+
+Our maintainer will review your submission shortly. If you have additional logs, screenshots, or reproduction steps, feel free to add them below.`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: welcomeMessage
+            });

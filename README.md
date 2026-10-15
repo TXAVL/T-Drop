@@ -17,8 +17,9 @@
   <a href="#why">Why</a> •
   <a href="#demos">Demos</a> •
   <a href="#features">Features</a> •
+  <a href="#keyboard-shortcuts">Shortcuts</a> •
   <a href="#quick-start">Quick Start</a> •
-  <a href="#codebase-architecture">Architecture</a> •
+  <a href="#codebase--architecture">Architecture</a> •
   <a href="#support--sponsor">Sponsor</a> •
   <a href="#contributing">Contributing</a>
 </p>
@@ -34,6 +35,9 @@
   <a href="https://github.com/TXAVL/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=f6c7d6" /></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-93a4fc?style=flat-square&logo=windows&logoColor=white&labelColor=23272e" alt="Platform" />
+  <img src="https://img.shields.io/badge/RAM-15--35%20MB-56d364?style=flat-square&labelColor=23272e" alt="RAM Footprint" />
+  <img src="https://img.shields.io/badge/Languages-31%20Supported-79c0ff?style=flat-square&labelColor=23272e" alt="i18n Languages" />
+  <img src="https://img.shields.io/badge/Tests-457%20passed-3fb950?style=flat-square&labelColor=23272e" alt="Tests" />
 </p>
 
 ---
@@ -205,8 +209,14 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 
 ## Features
 
-**Zero-click edge hover**
-- Frameless, transparent, always-on-top `BrowserWindow` anchored at `x=0` or right screen edge
+### 🤖 AI OCR, Image Suite & Encrypted Vault (New in v0.1.5)
+- **AI OCR Text Extraction:** Scan and copy text directly from clipboard images with 1 click. Full support for **Vietnamese** with diacritics and **English**. Completely offline and privacy-respecting.
+- **Fast Image Converter & Compressor:** Convert between **PNG**, **JPG**, and **WebP** on the fly without third-party web tools. Features a quick quality slider to compress file size by up to 70% before dragging out.
+- **Encrypted Vault & Backups (`.txa`):** Complete snapshot export and restore of all clipboard cards, pinned items, and categories into an encrypted archive protected with **PBKDF2-HMAC-SHA256 + AES-256-GCM**.
+- **VIP & Supporter VietQR Integration:** Quick VietQR generation for supporting the author and unlocking premium custom badge aesthetics.
+
+### 🪟 Zero-Click Edge Hover Shelf
+- Frameless, transparent, always-on-top `BrowserWindow` anchored at `x=0`, right edge, or top screen dock
 - 100% click-through when collapsed — desktop stays fully usable
 - Configurable hot-zone height (25% / 40% / 60% of screen) and blade height (50% – 80%)
 - **Edge Trigger Proximity Slider:** Range slider (1px – 7px) allowing precise pixel calibration of the edge sensor region.
@@ -220,7 +230,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 - **Roomy 320px Shelf Panel:** Expanded clipboard shelf width from 270px to 320px (+50px breathing room) providing plenty of space for long URLs, document titles, and action buttons without visual crowding.
 - **Smart Windows Fullscreen Game Detection:** Native Win32 `SHQueryUserNotificationState` OS detection (`fullscreen.ts`) combined with `GetForegroundWindow` + `GetClassNameA` filtering (`Progman`, `WorkerW`, `Shell_TrayWnd`) automatically suppresses edge hover during Direct3D games (*VALORANT*, *Cyberpunk*, *PowerPoint*) while allowing T-Drop to open smoothly on the Windows Home Screen / Desktop.
 - **Self-Healing Launch at Login (Quoted Paths):** Automatic Windows Registry synchronization (`HKCU\Software\Microsoft\Windows\CurrentVersion\Run`) strictly quotes executable paths, guaranteeing that usernames or installation paths with spaces launch cleanly on startup. Includes automatic migration and healing for unquoted keys across updates.
-- **RAM Footprint Stabilization (~130 MB):** Large text entries (>300 chars) are stored as disk payload files (`payloads/<id>.txt`), holding only 300-char preview snippets in memory. Locks operational RAM to ~130 MB–160 MB with a V8 ceiling cap of 512 MB.
+- **Ultra-Low RAM Footprint (~15 MB – 35 MB):** Real-time Win32 working set trimmer via `koffi` (`SetProcessWorkingSetSize`), lazy thumbnail protocol streaming, and external disk payloads (`payloads/<id>.txt`) lock idle memory consumption to just 15-35 MB RAM.
 - **High-Performance Image Thumbnailing Protocol (`edgelocal://thumb/`):** Custom Electron protocol streams 240px thumbnails for history cards instead of loading multi-megapixel raw image files into memory, preventing GPU memory bloat.
 
 **Configurable Global Toggle Shortcut**
@@ -344,6 +354,18 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 
 ---
 
+## Keyboard Shortcuts
+
+| Shortcut | Context | Function |
+| :--- | :--- | :--- |
+| <kbd>Alt</kbd> + <kbd>C</kbd> | Global (System-wide) | Toggle T-Drop Shelf open / closed (rebindable in Settings) |
+| <kbd>Ctrl</kbd> + <kbd>F</kbd> | In Shelf | Focus the in-shelf search box to quickly filter items |
+| <kbd>Esc</kbd> | In Shelf / Flyout | Close preview flyout or collapse shelf back to screen edge |
+| <kbd>Enter</kbd> | In Search Box | Copy top matching search result into clipboard |
+| <kbd>Delete</kbd> / <kbd>Backspace</kbd> | Hovered Card | Remove selected item from clipboard history |
+
+---
+
 ## Codebase & Architecture
 
 ### Process Isolation & IPC Contract
@@ -441,6 +463,9 @@ T-Drop is in **public beta**. The following are planned, in rough priority order
 
 - [ ] **AI semantic self-organization** — embed text/URL/HTML items, auto-cluster into named groups, replace manual pinning
 - [ ] **AI summarization** — condense multi-file bundles and long HTML copies into one-line summaries + tags
+- [x] **AI OCR Text Extraction** — extract text from clipboard images (Vietnamese & English)
+- [x] **Quick Image Converter & Compressor** — convert between PNG/JPG/WebP and compress in-place
+- [x] **Encrypted Backup Vault (.txa)** — PBKDF2 + AES-256-GCM export & import
 - [x] **Multi-monitor support** — anchor to any display edge, not just primary
 - [x] **Silent background auto-updates** — background download and 1-click update installation
 - [x] **Configurable global toggle hotkey** — interactive keycap recorder UI in Settings

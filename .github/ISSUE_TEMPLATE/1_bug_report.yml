@@ -1,0 +1,70 @@
+name: 🐛 Bug Report
+description: Create a bug report to help us improve T-Drop
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue! Before submitting, please check if your issue has already been reported.
+  - type: input
+    id: version
+    attributes:
+      label: T-Drop Version
+      description: What version of T-Drop are you running? (e.g. v0.1.5)
+      placeholder: v0.1.5
+    validations:
+      required: true
+  - type: dropdown
+    id: install_type
+    attributes:
+      label: Installation Source
+      description: How did you install or run T-Drop?
+      options:
+        - GitHub Direct Installer (.exe)
+        - Microsoft Store (MSIX / AppX)
+        - Built from source (npm run dev / build)
+    validations:
+      required: true
+  - type: dropdown
+    id: os_version
+    attributes:
+      label: Operating System
+      options:
+        - Windows 11 (24H2)
+        - Windows 11 (23H2 / 22H2)
+        - Windows 10 (22H2)
+        - Other Windows version
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what happened.
+      placeholder: When copying an image and hovering over the screen edge...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Step by step how to trigger this problem.
+      placeholder: |
+        1. Copy text or file in app X
+        2. Hover over the screen edge
+        3. Observe behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs Actual Behavior
+      description: What did you expect to happen, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: logs_screenshots
+    attributes:
+      label: Screenshots or Developer Console Logs
+      description: Drag & drop screenshots, video recordings, or paste error logs from Developer Tools (Ctrl+Shift+I).

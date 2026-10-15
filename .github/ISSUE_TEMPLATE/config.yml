@@ -1,1 +1,11 @@
 blank_issues_enabled: false
+contact_links:
+  - name: 📖 T-Drop Documentation & Guides
+    url: https://txavl.github.io/T-Drop/
+    about: Read user manuals, feature documentation, and troubleshooting guides.
+  - name: 📜 Release Changelog
+    url: https://txavl.github.io/T-Drop/changelog
+    about: Explore what's new in the latest release of T-Drop.
+  - name: 💡 General Feedback & Discussions
+    url: https://github.com/TXAVL/T-Drop/discussions
+    about: Share ideas, discuss workflows, and ask general questions.

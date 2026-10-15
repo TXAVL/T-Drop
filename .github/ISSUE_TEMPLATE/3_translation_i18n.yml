@@ -1,0 +1,37 @@
+name: 🌍 Translation & Localization (i18n)
+description: Report an incorrect translation or suggest improvements for your language
+title: "[i18n]: "
+labels: ["translation", "i18n"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        T-Drop supports over 30 languages. Your help polishing localization is immensely appreciated!
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Type of Contribution
+      options:
+        - Correct an existing translation
+        - Request a completely new language
+        - Add missing translation keys
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Target Language
+      placeholder: e.g. Vietnamese, Japanese, Spanish, French, German
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Translation Details
+      description: Provide the current text and your recommended translation.
+      placeholder: |
+        - Current text: ...
+        - Suggested improvement: ...
+        - Context / UI location: ...
+    validations:
+      required: true
