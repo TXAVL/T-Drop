@@ -40,6 +40,7 @@
   <img src="https://img.shields.io/badge/RAM-15--35%20MB-56d364?style=flat-square&labelColor=23272e" alt="RAM Footprint" />
   <img src="https://img.shields.io/badge/Languages-31%20Supported-79c0ff?style=flat-square&labelColor=23272e" alt="i18n Languages" />
   <img src="https://img.shields.io/badge/Tests-457%20passed-3fb950?style=flat-square&labelColor=23272e" alt="Tests" />
+  <a href="https://discord.gg/skKMc823Sv"><img alt="Discord" src="https://img.shields.io/badge/Discord-Động%20Mê%20Phim-5865F2?style=flat-square&logo=discord&logoColor=white&labelColor=23272e" /></a>
 </p>
 
 ---
@@ -157,7 +158,8 @@ A huge thank you to the incredible sponsors and products actively sponsoring T-D
 | <a href="https://elitistreview.com/" target="_blank"><img src="https://unavatar.io/x/Elitistreview" width="32" height="32" style="border-radius: 50%; vertical-align: middle;" alt="Elitistreview" /></a> &nbsp; **[Elitistreview](https://elitistreview.com/)** | [Website](https://elitistreview.com/) &nbsp;·&nbsp; [X](https://x.com/Elitistreview) &nbsp;·&nbsp; [Bluesky](https://bsky.app/profile/elitistreview.com) | *When it comes to wine, there is an objective reality out there, and it is on Elitistreview.com.* |
 
 <p align="center">
-  <sub>💡 <em>Muốn đưa sản phẩm, dự án hoặc website của bạn lên đây? Liên hệ hoặc <a href="#support--sponsor">Ủng hộ qua MB Bank</a> và gửi thông tin nhé!</em></sub>
+  <sub>💡 <em>Muốn đưa sản phẩm, dự án hoặc website của bạn lên đây? Liên hệ hoặc <a href="#support--sponsor">Ủng hộ qua MB Bank</a> và gửi thông tin nhé!</em></sub><br/>
+  <sub>💬 Tham gia giao lưu & thảo luận tại server Discord: <a href="https://discord.gg/skKMc823Sv" target="_blank"><strong>Động Mê Phim 🎬</strong></a></sub>
 </p>
 
 ---
@@ -543,5 +545,5 @@ Apache License 2.0 — see [LICENSE](LICENSE). Commercial and non-commercial use
 ---
 
 <p align="center">
-  <sub>Ủng hộ tác giả qua <a href="#support--sponsor">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVL/T-Drop" target="_blank">GitHub ⭐</a></sub>
+  <sub>Ủng hộ tác giả qua <a href="#support--sponsor">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVL/T-Drop" target="_blank">GitHub ⭐</a> &nbsp;·&nbsp; Discord: <a href="https://discord.gg/skKMc823Sv" target="_blank">Động Mê Phim 🎬</a></sub>
 </p>

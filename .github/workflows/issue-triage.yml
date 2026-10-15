@@ -56,6 +56,7 @@ jobs:
               '',
               '- 📖 **Documentation & User Guide:** [https://txavl.github.io/T-Drop/](https://txavl.github.io/T-Drop/)',
               '- 📜 **Latest Changelog:** [https://txavl.github.io/T-Drop/changelog](https://txavl.github.io/T-Drop/changelog)',
+              '- 💬 **Discord Community (Động Mê Phim):** [https://discord.gg/skKMc823Sv](https://discord.gg/skKMc823Sv)',
               '',
               'Our team will review your submission shortly. If you have any additional logs, screenshots, or reproduction steps, feel free to leave them below.'
             ].join('\n');
