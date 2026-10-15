@@ -4,6 +4,7 @@ on:
   issues:
     types:
       - opened
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,6 +19,11 @@ jobs:
         with:
           script: |
             const issue = context.payload.issue;
+            if (!issue) {
+              console.log('No issue context found (manual dispatch test completed successfully).');
+              return;
+            }
+
             const title = (issue.title || '').toLowerCase();
             const labelsToAdd = [];
 
