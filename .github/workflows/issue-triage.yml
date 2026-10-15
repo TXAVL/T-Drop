@@ -2,9 +2,11 @@ name: Issue Triage & Welcome
 
 on:
   issues:
-    types: [opened]
+    types:
+      - opened
 
 permissions:
+  contents: read
   issues: write
 
 jobs:
@@ -16,7 +18,7 @@ jobs:
         with:
           script: |
             const issue = context.payload.issue;
-            const title = issue.title.toLowerCase();
+            const title = (issue.title || '').toLowerCase();
             const labelsToAdd = [];
 
             if (title.includes('[bug]')) {
@@ -30,24 +32,35 @@ jobs:
             }
 
             if (labelsToAdd.length > 0) {
-              await github.rest.issues.addLabels({
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: labelsToAdd
+                });
+              } catch (e) {
+                console.log('Label add error:', e);
+              }
+            }
+
+            const author = issue.user ? issue.user.login : 'friend';
+            const welcomeMessage = [
+              '👋 Hi @' + author + ', thank you for opening this issue!',
+              '',
+              '- 📖 **Documentation & User Guide:** [https://txavl.github.io/T-Drop/](https://txavl.github.io/T-Drop/)',
+              '- 📜 **Latest Changelog:** [https://txavl.github.io/T-Drop/changelog](https://txavl.github.io/T-Drop/changelog)',
+              '',
+              'Our team will review your submission shortly. If you have any additional logs, screenshots, or reproduction steps, feel free to leave them below.'
+            ].join('\n');
+
+            try {
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
-                labels: labelsToAdd
+                body: welcomeMessage
               });
+            } catch (e) {
+              console.log('Comment create error:', e);
             }
-
-            const welcomeMessage = `👋 Hi @${issue.user.login}, thank you for opening this issue!
-
-- 📖 **Documentation & User Guide:** [https://txavl.github.io/T-Drop/](https://txavl.github.io/T-Drop/)
-- 📜 **Latest Changelog:** [https://txavl.github.io/T-Drop/changelog](https://txavl.github.io/T-Drop/changelog)
-
-Our maintainer will review your submission shortly. If you have additional logs, screenshots, or reproduction steps, feel free to add them below.`;
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              body: welcomeMessage
-            });
