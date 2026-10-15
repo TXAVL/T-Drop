@@ -471,16 +471,36 @@
         <div class="release-date">15/10/2026</div>
       </div>
       <p class="release-summary" data-i18n="v016.summary">
-        Khắc phục triệt để lỗi không click được ô nhập mã bản quyền (focus issue), sửa lỗi thông báo Toast bị mất chữ (chỉ hiện icon đỏ), hoàn thiện kết nối cơ sở dữ liệu Supabase và cổng quản trị txastudio.click, đồng thời hỗ trợ đường dẫn changelog linh hoạt.
+        Bổ sung hệ thống TxaTooltip tùy chỉnh mượt mà tương thích mọi góc màn hình, tối ưu hóa giải phóng RAM Chromium chuyên sâu, nâng cấp trình ghi chẩn đoán Logs chi tiết và hoàn thiện trải nghiệm kích hoạt bản quyền trực tuyến cùng sửa lỗi hiển thị thông báo.
       </p>
 
       <div class="change-group">
         <div class="change-item">
-          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <span class="badge new" data-i18n="badge.new">Mới</span>
           <div class="change-content">
-            <h3 data-i18n="v016.item1.title">Khắc Phục Lỗi Focus &amp; Nhập Mã Bản Quyền</h3>
+            <h3 data-i18n="v016.item1.title">Hệ Thống TxaTooltip Tùy Chỉnh Hiện Đại</h3>
             <p data-i18n="v016.item1.desc">
-              Sửa lỗi không nhận tiêu điểm trên cửa sổ NOACTIVATE giúp người dùng click và gõ mã key dễ dàng, đồng thời hỗ trợ đọc clipboard trực tiếp từ Windows khi bấm "Dán mã".
+              Thay thế hoàn toàn tooltip mặc định của trình duyệt bằng thiết kế hiện đại, tự động căn chỉnh vị trí thông minh theo 4 góc màn hình để không bao giờ bị tràn viền hay che khuất nội dung.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item2.title">Tối Ưu Hóa Sâu Bộ Nhớ RAM Chromium</h3>
+            <p data-i18n="v016.item2.desc">
+              Cơ chế tự động dọn dẹp tài nguyên và giải phóng bộ nhớ khi đóng/mở panel hoặc chuyển tab, giúp ứng dụng luôn hoạt động cực nhẹ và mượt mà.
+            </p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v016.item3.title">Nhật Ký Chẩn Đoán Hệ Thống Chi Tiết</h3>
+            <p data-i18n="v016.item3.desc">
+              Bổ sung tab Logs thông minh giúp ghi nhận chính xác phiên bản Windows (22H2 - 26H2, Insider) và tình trạng hệ thống, kèm bộ lọc tìm kiếm và nút sao chép nhanh khi cần hỗ trợ kỹ thuật.
             </p>
           </div>
         </div>
@@ -488,29 +508,9 @@
         <div class="change-item">
           <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
           <div class="change-content">
-            <h3 data-i18n="v016.item2.title">Sửa Lỗi Thông Báo Lỗi Rỗng (Toast Empty Circles)</h3>
-            <p data-i18n="v016.item2.desc">
-              Khắc phục lỗi hệ thống dịch làm mất nội dung text trong thông báo lỗi (trước đây chỉ hiện icon đỏ không rõ nguyên nhân), giới hạn tối đa 3 thông báo hiển thị để tránh che khuất màn hình.
-            </p>
-          </div>
-        </div>
-
-        <div class="change-item">
-          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
-          <div class="change-content">
-            <h3 data-i18n="v016.item3.title">Đồng Bộ Kết Nối Supabase &amp; Cổng Quản Trị txastudio.click</h3>
-            <p data-i18n="v016.item3.desc">
-              Đồng bộ mã máy (Machine ID) giữa ứng dụng T-Drop và hàm kích hoạt Supabase RPC, cho phép kích hoạt các mã key tạo từ cổng quản trị txastudio.click chuẩn xác.
-            </p>
-          </div>
-        </div>
-
-        <div class="change-item">
-          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
-          <div class="change-content">
-            <h3 data-i18n="v016.item4.title">Hỗ Trợ Trang Changelog Đa Dạng</h3>
+            <h3 data-i18n="v016.item4.title">Nâng Cấp Kích Hoạt Bản Quyền &amp; Sửa Lỗi Thông Báo</h3>
             <p data-i18n="v016.item4.desc">
-              Cung cấp đầy đủ các đường dẫn truy cập /changelogs và /changelog trên GitHub Pages.
+              Khắc phục hoàn toàn lỗi click ô nhập mã bản quyền, hỗ trợ dán mã trực tiếp từ bộ nhớ tạm và đồng bộ kích hoạt trực tuyến ổn định; đồng thời sửa lỗi hiển thị nội dung thông báo Toast.
             </p>
           </div>
         </div>
@@ -882,15 +882,15 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
-        'v016.summary': 'Khắc phục triệt để lỗi không click được ô nhập mã bản quyền (focus issue), sửa lỗi thông báo Toast bị mất chữ (chỉ hiện icon đỏ), hoàn thiện kết nối cơ sở dữ liệu Supabase và cổng quản trị txastudio.click, đồng thời hỗ trợ đường dẫn changelog linh hoạt.',
-        'v016.item1.title': 'Khắc Phục Lỗi Focus & Nhập Mã Bản Quyền',
-        'v016.item1.desc': 'Sửa lỗi không nhận tiêu điểm trên cửa sổ NOACTIVATE giúp người dùng click và gõ mã key dễ dàng, đồng thời hỗ trợ đọc clipboard trực tiếp từ Windows khi bấm "Dán mã".',
-        'v016.item2.title': 'Sửa Lỗi Thông Báo Lỗi Rỗng (Toast Empty Circles)',
-        'v016.item2.desc': 'Khắc phục lỗi hệ thống dịch làm mất nội dung text trong thông báo lỗi (trước đây chỉ hiện icon đỏ không rõ nguyên nhân), giới hạn tối đa 3 thông báo hiển thị để tránh che khuất màn hình.',
-        'v016.item3.title': 'Đồng Bộ Kết Nối Supabase & Cổng Quản Trị txastudio.click',
-        'v016.item3.desc': 'Đồng bộ mã máy (Machine ID) giữa ứng dụng T-Drop và hàm kích hoạt Supabase RPC, cho phép kích hoạt các mã key tạo từ cổng quản trị txastudio.click chuẩn xác.',
-        'v016.item4.title': 'Hỗ Trợ Trang Changelog Đa Dạng',
-        'v016.item4.desc': 'Cung cấp đầy đủ các đường dẫn truy cập /changelogs và /changelog trên GitHub Pages.',
+        'v016.summary': 'Bổ sung hệ thống TxaTooltip tùy chỉnh mượt mà tương thích mọi góc màn hình, tối ưu hóa giải phóng RAM Chromium chuyên sâu, nâng cấp trình ghi chẩn đoán Logs chi tiết và hoàn thiện trải nghiệm kích hoạt bản quyền trực tuyến cùng sửa lỗi hiển thị thông báo.',
+        'v016.item1.title': 'Hệ Thống TxaTooltip Tùy Chỉnh Hiện Đại',
+        'v016.item1.desc': 'Thay thế hoàn toàn tooltip mặc định của trình duyệt bằng thiết kế hiện đại, tự động căn chỉnh vị trí thông minh theo 4 góc màn hình để không bao giờ bị tràn viền hay che khuất nội dung.',
+        'v016.item2.title': 'Tối Ưu Hóa Sâu Bộ Nhớ RAM Chromium',
+        'v016.item2.desc': 'Cơ chế tự động dọn dẹp tài nguyên và giải phóng bộ nhớ khi đóng/mở panel hoặc chuyển tab, giúp ứng dụng luôn hoạt động cực nhẹ và mượt mà.',
+        'v016.item3.title': 'Nhật Ký Chẩn Đoán Hệ Thống Chi Tiết',
+        'v016.item3.desc': 'Bổ sung tab Logs thông minh giúp ghi nhận chính xác phiên bản Windows (22H2 - 26H2, Insider) và tình trạng hệ thống, kèm bộ lọc tìm kiếm và nút sao chép nhanh khi cần hỗ trợ kỹ thuật.',
+        'v016.item4.title': 'Nâng Cấp Kích Hoạt Bản Quyền & Sửa Lỗi Thông Báo',
+        'v016.item4.desc': 'Khắc phục hoàn toàn lỗi click ô nhập mã bản quyền, hỗ trợ dán mã trực tiếp từ bộ nhớ tạm và đồng bộ kích hoạt trực tuyến ổn định; đồng thời sửa lỗi hiển thị nội dung thông báo Toast.',
         'v015.summary': 'Bổ sung tính năng trích xuất chữ AI từ ảnh (hỗ trợ Tiếng Việt & Anh), nén và chuyển đổi định dạng ảnh nhanh, nâng cấp VIP/PREMIUM thuận tiện qua VietQR, siêu tối ưu chỉ còn 15-35MB RAM và khắc phục lỗi crash khi khởi động (#2).',
         'v015.item1.title': 'Trích Xuất Chữ Từ Ảnh (AI OCR) & Xử Lý Ảnh',
         'v015.item1.desc': 'Quét và sao chép văn bản từ hình ảnh cực nhanh (hỗ trợ Tiếng Việt & Tiếng Anh). Nén giảm dung lượng và chuyển đổi linh hoạt giữa PNG, JPG, WebP chỉ với 1 cú nhấp chuột.',
@@ -961,15 +961,15 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
-        'v016.summary': 'Fixes license key input focus issues on NOACTIVATE windows, repairs empty toast notifications, synchronizes Supabase database activation with the txastudio.click admin portal, and provides versatile changelog URLs.',
-        'v016.item1.title': 'License Input Focus & Paste Fixes',
-        'v016.item1.desc': 'Resolved window focus drop on click, allowing users to type license keys and paste directly from native Windows clipboard.',
-        'v016.item2.title': 'Empty Toast Error Circles Fixed',
-        'v016.item2.desc': 'Fixed translation fallback stripping text from toasts, and limited on-screen toasts to 3 items to prevent visual stacking.',
-        'v016.item3.title': 'Supabase & txastudio.click Portal Sync',
-        'v016.item3.desc': 'Aligned Machine ID verification so license keys generated from the txastudio.click portal activate accurately in T-Drop.',
-        'v016.item4.title': 'Multi-URL Changelog Support',
-        'v016.item4.desc': 'Provides seamless access across /changelogs and /changelog on GitHub Pages.',
+        'v016.summary': 'Introduces adaptive custom TxaTooltip, deep Chromium RAM optimization, comprehensive system diagnostic logging, and smoother online license activation with notification fixes.',
+        'v016.item1.title': 'Adaptive Modern TxaTooltip System',
+        'v016.item1.desc': 'Replaced default browser tooltips with a sleek custom UI that dynamically adjusts positioning across all screen corners without clipping or overflowing.',
+        'v016.item2.title': 'Deep Chromium Memory & RAM Optimization',
+        'v016.item2.desc': 'Automated resource cleanup and cache trimming when toggling panels or switching tabs, keeping T-Drop lightweight and responsive.',
+        'v016.item3.title': 'Comprehensive Diagnostic Log Viewer',
+        'v016.item3.desc': 'Added an intuitive Logs tab with detailed Windows release detection (22H2 - 26H2, Insider) and system info, equipped with log level filters and one-click copy.',
+        'v016.item4.title': 'Smoother License Activation & Notification Fixes',
+        'v016.item4.desc': 'Resolved license key input focus and clipboard paste issues with reliable online validation, and repaired toast notifications to always display clear message text.',
         'v015.summary': 'Introduces AI OCR text extraction (Vietnamese & English), fast image compression and conversion, convenient VietQR VIP/PREMIUM upgrades, ultra-low 15-35MB idle RAM usage, and fixes startup crash (#2).',
         'v015.item1.title': 'AI OCR Text Extraction & Image Tools',
         'v015.item1.desc': 'Extract text from images with high accuracy (supports Vietnamese & English). Easily compress and convert between PNG, JPG, and WebP with 1-click.',
