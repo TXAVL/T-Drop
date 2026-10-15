@@ -9,7 +9,7 @@
 <p align="center">
   <strong>Zero-click, hover-activated clipboard shelf and desktop file-transfer hub with native OS integration.</strong><br/>
   <em>Lives invisibly on the screen edge. Approach it, and it springs open. Drag anything out — anywhere.</em><br/>
-  <a href="https://txavlog.github.io/T-Drop/"><strong>Trang giới thiệu: txavlog.github.io/T-Drop</strong></a>
+  <a href="https://txavl.github.io/T-Drop/"><strong>Trang giới thiệu: txavl.github.io/T-Drop</strong></a>
 </p>
 
 <p align="center">
@@ -24,15 +24,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
+  <a href="https://github.com/TXAVL/T-Drop/releases/latest" target="_blank">
     <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="48" alt="Download .exe Installer" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/TXAVLOG/T-Drop/releases"><img alt="Release" src="https://img.shields.io/github/v/release/TXAVLOG/T-Drop?style=flat-square&labelColor=23272e&color=d2f4e8" /></a>
-  <a href="https://github.com/TXAVLOG/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVLOG/T-Drop?style=flat-square&labelColor=23272e&color=f6c7d6" /></a>
-  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/TXAVLOG/T-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
+  <a href="https://github.com/TXAVL/T-Drop/releases"><img alt="Release" src="https://img.shields.io/github/v/release/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=d2f4e8" /></a>
+  <a href="https://github.com/TXAVL/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=f6c7d6" /></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-93a4fc?style=flat-square&logo=windows&logoColor=white&labelColor=23272e" alt="Platform" />
 </p>
 
@@ -164,12 +164,12 @@ A huge thank you to the incredible sponsors and products actively sponsoring T-D
 </p>
 
 <p align="center">
-  <a href="https://github.com/TXAVLOG/T-Drop/releases/latest" target="_blank">
+  <a href="https://github.com/TXAVL/T-Drop/releases/latest" target="_blank">
     <img src="https://img.shields.io/badge/Download-.exe%20Installer-107C41?style=for-the-badge&logo=windows&logoColor=white" height="52" alt="Download .exe Installer" style="border-radius: 8px;" />
   </a>
   <br/><br/>
   <sub>Cài đặt độc lập với tính năng tự động cập nhật nền · Hỗ trợ Windows 10 & 11</sub><br/>
-  <sub>Tải file cài đặt <code>T-Drop-Setup-x.x.x.exe</code> từ <a href="https://github.com/TXAVLOG/T-Drop/releases/latest">GitHub Releases</a>.</sub>
+  <sub>Tải file cài đặt <code>T-Drop-Setup-x.x.x.exe</code> từ <a href="https://github.com/TXAVL/T-Drop/releases/latest">GitHub Releases</a>.</sub>
 </p>
 
 ---
@@ -182,7 +182,7 @@ A huge thank you to the incredible sponsors and products actively sponsoring T-D
 
 ### Run from source
 ```bash
-git clone https://github.com/TXAVLOG/T-Drop.git
+git clone https://github.com/TXAVL/T-Drop.git
 cd T-Drop
 npm install
 npm run dev          # launches Electron + Vite HMR
@@ -489,5 +489,5 @@ Apache License 2.0 — see [LICENSE](LICENSE). Commercial and non-commercial use
 ---
 
 <p align="center">
-  <sub>Ủng hộ tác giả qua <a href="#-support--sponsor-t-drop">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVLOG/T-Drop" target="_blank">GitHub ⭐</a></sub>
+  <sub>Ủng hộ tác giả qua <a href="#-support--sponsor-t-drop">VietQR / MB Bank ☕</a> &nbsp;·&nbsp; Star on <a href="https://github.com/TXAVL/T-Drop" target="_blank">GitHub ⭐</a></sub>
 </p>

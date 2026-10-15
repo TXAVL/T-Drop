@@ -861,7 +861,7 @@ export function Settings({
             style={{ width: '100%', justifyContent: 'center', padding: '7px 14px', cursor: 'pointer', whiteSpace: 'nowrap', fontSize: '12.5px' }}
             onClick={() => {
               playButtonClickSound()
-              window.open('https://github.com/TXAVLOG/T-Drop/issues/new/choose', '_blank')
+              window.open('https://github.com/TXAVL/T-Drop/issues/new/choose', '_blank')
             }}
           >
             {t('footer.submitFeedback')}
@@ -911,7 +911,7 @@ export function Settings({
                 className="github-promo-btn"
                 onClick={() => {
                   playButtonClickSound()
-                  window.open('https://github.com/TXAVLOG/T-Drop', '_blank')
+                  window.open('https://github.com/TXAVL/T-Drop', '_blank')
                 }}
               >
                 <GithubOctocatLogo width={14} height={14} className="github-octocat-icon" />
@@ -931,7 +931,7 @@ export function Settings({
                 if (currentVersion) {
                   patch({ lastSeenChangelogVersion: currentVersion })
                 }
-                window.open('https://txavlog.github.io/T-Drop/changelog', '_blank')
+                window.open('https://txavl.github.io/T-Drop/changelog', '_blank')
               }}
             >
               <span>{t('header.whatsNew')}</span>
@@ -963,7 +963,7 @@ export function Settings({
     if (targetVersion) {
       patch({ lastSeenChangelogVersion: targetVersion })
     }
-    window.open('https://txavlog.github.io/T-Drop/changelog', '_blank')
+    window.open('https://txavl.github.io/T-Drop/changelog', '_blank')
   }
 
   // ── Promoted Top Update Card Renderer (Vertical Layout) ────────────────────
@@ -1452,7 +1452,7 @@ export function Settings({
               className="shelf-github-btn"
               onClick={() => {
                 playButtonClickSound()
-                window.open('https://github.com/TXAVLOG/T-Drop', '_blank')
+                window.open('https://github.com/TXAVL/T-Drop', '_blank')
               }}
             >
               <GithubOctocatLogo width={13} height={13} className="github-octocat-icon" />
@@ -1478,7 +1478,7 @@ export function Settings({
             style={{ width: '100%', justifyContent: 'center', height: 30, fontSize: 11.5, fontWeight: 550, borderRadius: 999 }}
             onClick={() => {
               playButtonClickSound()
-              window.open('https://github.com/TXAVLOG/T-Drop/issues/new/choose', '_blank')
+              window.open('https://github.com/TXAVL/T-Drop/issues/new/choose', '_blank')
             }}
           >
             {t('footer.submitFeedback')}
@@ -1492,7 +1492,7 @@ export function Settings({
               onClick={() => {
                 playButtonClickSound()
                 if (currentVersion) patch({ lastSeenChangelogVersion: currentVersion })
-                window.open('https://txavlog.github.io/T-Drop/changelog', '_blank')
+                window.open('https://txavl.github.io/T-Drop/changelog', '_blank')
               }}
             >
               {t('header.whatsNew')} ↗

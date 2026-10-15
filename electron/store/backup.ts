@@ -31,7 +31,7 @@ const TXA_MAGIC_HEADER =
   'Tệp này là bản sao lưu dữ liệu đã được mã hóa của ứng dụng T-Drop (.txa).\r\n' +
   'Nếu mở bằng Notepad hoặc trình soạn thảo văn bản, phần dữ liệu bên dưới sẽ là mã nhị phân mã hóa.\r\n' +
   'Để xem và khôi phục lịch sử bảng tạm, vui lòng mở tệp này bằng ứng dụng T-Drop.\r\n' +
-  'This is an encrypted T-Drop archive. Open with T-Drop: https://github.com/TXAVLOG/T-Drop\r\n' +
+  'This is an encrypted T-Drop archive. Open with T-Drop: https://github.com/TXAVL/T-Drop\r\n' +
   '================================================================================\r\n' +
   '\x00TXA_BINARY_PAYLOAD_START\x00\r\n'
 

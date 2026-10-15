@@ -149,7 +149,7 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
   it('keeps GitHub Releases as the NSIS publish source and NSIS artifact name', () => {
     expect(pkg.build.publish).toEqual({
       provider: 'github',
-      owner: 'TXAVLOG',
+      owner: 'TXAVL',
       repo: 'T-Drop'
     })
     expect(pkg.build.nsis.artifactName).toContain('${version}')
@@ -194,7 +194,7 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
     expect(src).toContain('store-review-promo-btn')
     expect(src).toContain('ms-windows-store://review/?ProductId=9P3JMHN9M4NR')
     expect(src).toContain('github-promo-btn')
-    expect(src).toContain('https://github.com/TXAVLOG/T-Drop')
+    expect(src).toContain('https://github.com/TXAVL/T-Drop')
   })
 
   it('updater module hard-returns on Store for every public entry', () => {

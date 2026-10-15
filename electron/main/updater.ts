@@ -137,7 +137,7 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
     try {
       const request = net.request({
         method: 'GET',
-        url: 'https://api.github.com/repos/TXAVLOG/T-Drop/releases/latest'
+        url: 'https://api.github.com/repos/TXAVL/T-Drop/releases/latest'
       })
       request.setHeader('User-Agent', 'T-Drop-App')
       request.setHeader('Accept', 'application/vnd.github.v3+json')

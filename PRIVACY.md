@@ -34,4 +34,4 @@ T-Drop does not collect any personal information from anyone, including children
 
 ### 5. Contact
 If you have any questions or feedback regarding this Privacy Policy, you can open an issue or discussion on the official GitHub repository:
-https://github.com/TXAVLOG/T-Drop
+https://github.com/TXAVL/T-Drop

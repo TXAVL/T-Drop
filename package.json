@@ -2,7 +2,7 @@
   "name": "t-drop",
   "version": "0.1.5",
   "description": "T-Drop — a clipboard manager that lives on the left edge of your screen and expands on hover.",
-  "author": "TXAVLOG",
+  "author": "TXAVL",
   "license": "Apache-2.0",
   "private": true,
   "main": "out/main/index.js",
@@ -66,7 +66,7 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "TXAVLOG",
+      "owner": "TXAVL",
       "repo": "T-Drop"
     },
     "win": {

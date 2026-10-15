@@ -154,8 +154,8 @@ describe('parseUrlPreview deep semantic path extractors', () => {
     expect(hasTrackingParams(twitterDirty)).toBe(true)
     expect(cleanTrackingUrl(twitterDirty)).toBe('https://x.com/user/status/1234567890')
 
-    const normalUrl = 'https://github.com/TXAVLOG/T-Drop'
+    const normalUrl = 'https://github.com/TXAVL/T-Drop'
     expect(hasTrackingParams(normalUrl)).toBe(false)
-    expect(cleanTrackingUrl(normalUrl)).toBe('https://github.com/TXAVLOG/T-Drop')
+    expect(cleanTrackingUrl(normalUrl)).toBe('https://github.com/TXAVL/T-Drop')
   })
 })

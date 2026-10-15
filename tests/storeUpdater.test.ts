@@ -118,7 +118,7 @@ describe('auto-updater isolation', () => {
       await checkForUpdatesManual()
       expect(mocks.netRequest).toHaveBeenCalledWith(expect.objectContaining({
         method: 'GET',
-        url: 'https://api.github.com/repos/TXAVLOG/T-Drop/releases/latest'
+        url: 'https://api.github.com/repos/TXAVL/T-Drop/releases/latest'
       }))
     })
   })
