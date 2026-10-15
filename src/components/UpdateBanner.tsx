@@ -282,7 +282,8 @@ export function UpdateBanner({ isHorizontal = false }: { isHorizontal?: boolean 
             {/* Dismiss X button */}
             <button
               type="button"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation()
                 playButtonClickSound()
                 dismissUpdate()
               }}

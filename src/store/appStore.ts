@@ -312,6 +312,7 @@ export const useStore = create<AppState>((set, get) => ({
   manualUpdateActive: false,
 
   startManualCheck: async () => {
+    sessionSkippedVersion = null
     set({ manualCheckState: { status: 'checking' }, manualUpdateActive: true })
     try {
       const res = await edge.checkForUpdatesManual()
@@ -346,6 +347,7 @@ export const useStore = create<AppState>((set, get) => ({
   },
 
   startManualDownload: async () => {
+    sessionSkippedVersion = null
     set({ manualCheckState: { status: 'downloading' }, manualUpdateActive: true })
     try {
       await edge.startUpdateDownload()
@@ -361,11 +363,11 @@ export const useStore = create<AppState>((set, get) => ({
     // background pushes, but WILL prompt again after the next launch (the
     // "remind me next restart" contract). A different version clears the
     // session skip and surfaces normally. Manual checks bypass this.
-    if (sessionSkippedVersion && info.version === sessionSkippedVersion) {
+    if (sessionSkippedVersion && (info.version === sessionSkippedVersion || sessionSkippedVersion === 'dismissed')) {
       console.log(`[Updater] Suppressing prompt for session-skipped v${info.version}`)
       return
     }
-    if (sessionSkippedVersion && info.version !== sessionSkippedVersion) {
+    if (sessionSkippedVersion && info.version !== sessionSkippedVersion && sessionSkippedVersion !== 'dismissed') {
       sessionSkippedVersion = null
     }
     // A background find arriving while no manual flow owns the UI resets the
@@ -391,15 +393,9 @@ export const useStore = create<AppState>((set, get) => ({
 
   setUpdateProgress: (progress) => {
     const current = get().updateInfo
-    if (!current) {
-      set({
-        updateInfo: {
-          hasUpdate: true,
-          latestVersion: '',
-          downloaded: false,
-          downloadProgress: progress
-        }
-      })
+    // If the banner was dismissed or updateInfo is not active, never resurrect it!
+    if (!current) return
+    if (sessionSkippedVersion && (current.latestVersion === sessionSkippedVersion || sessionSkippedVersion === 'dismissed')) {
       return
     }
     set({
@@ -411,6 +407,9 @@ export const useStore = create<AppState>((set, get) => ({
   },
 
   setUpdateDownloaded: (info) => {
+    if (sessionSkippedVersion && (info.version === sessionSkippedVersion || sessionSkippedVersion === 'dismissed')) {
+      return
+    }
     set({
       updateInfo: {
         hasUpdate: true,
@@ -426,8 +425,9 @@ export const useStore = create<AppState>((set, get) => ({
     // Skip = "not now": remember for this session only. The next launch
     // re-prompts (nothing persisted), a newer version always surfaces.
     const skipped = get().updateInfo?.latestVersion || get().manualCheckState.version
-    sessionSkippedVersion = skipped || null
+    sessionSkippedVersion = skipped || 'dismissed'
     set({ updateInfo: null, manualCheckState: { status: 'idle' }, manualUpdateActive: false })
+    void edge.dismissUpdate?.()
   },
 
   async installUpdate() {

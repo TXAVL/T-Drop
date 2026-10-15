@@ -18,6 +18,7 @@ export interface CachedUpdateInfo {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let _autoUpdater: any = null
 let _cachedUpdateInfo: CachedUpdateInfo | null = null
+let _downloadCancellationToken: any = null
 
 let periodicCheckTimer: ReturnType<typeof setInterval> | null = null
 let bgCheckTimer: ReturnType<typeof setTimeout> | null = null
@@ -36,6 +37,38 @@ export function getCachedUpdateState(): CachedUpdateInfo | null {
 
 export function clearCachedUpdateState(): void {
   _cachedUpdateInfo = null
+}
+
+export function cancelUpdateDownload(): void {
+  console.log('[AutoUpdater] Cancelling update download...')
+  if (_downloadCancellationToken) {
+    try {
+      _downloadCancellationToken.cancel()
+      _downloadCancellationToken.dispose()
+    } catch (err) {
+      console.warn('[AutoUpdater] Error disposing download token:', err)
+    }
+    _downloadCancellationToken = null
+  }
+
+  if (_autoUpdater) {
+    try {
+      const providerToken = (_autoUpdater as any).updateInfoAndProvider?.cancellationToken
+      if (providerToken && !providerToken.cancelled) {
+        providerToken.cancel()
+        providerToken.dispose?.()
+      }
+    } catch {}
+    try {
+      const internalToken = (_autoUpdater as any).cancellationToken
+      if (internalToken && !internalToken.cancelled) {
+        internalToken.cancel()
+        internalToken.dispose?.()
+      }
+    } catch {}
+  }
+
+  clearCachedUpdateState()
 }
 
 function getNotificationIcon(): string | undefined {
@@ -481,19 +514,50 @@ export async function startUpdateDownload(): Promise<void> {
     _cachedUpdateInfo.downloadProgress = { percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 }
   }
   pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
+
+  // Initialize fresh CancellationToken
+  if (_downloadCancellationToken) {
+    try {
+      _downloadCancellationToken.cancel()
+      _downloadCancellationToken.dispose()
+    } catch {}
+    _downloadCancellationToken = null
+  }
+
+  try {
+    const { CancellationToken } = require('electron-updater')
+    _downloadCancellationToken = new CancellationToken()
+  } catch {
+    _downloadCancellationToken = null
+  }
+
   try {
     try {
       await _autoUpdater.checkForUpdates()
     } catch {
       /* ignore pre-check error, attempt download */
     }
-    await _autoUpdater.downloadUpdate()
-  } catch (err) {
+    if (_downloadCancellationToken && !_downloadCancellationToken.cancelled) {
+      await _autoUpdater.downloadUpdate(_downloadCancellationToken)
+    }
+  } catch (err: any) {
+    const msg = typeof err === 'string' ? err : err?.message || ''
+    if (msg.includes('cancelled') || msg.includes('CancellationError')) {
+      console.log('[AutoUpdater] Download was cancelled.')
+      return
+    }
     console.warn('[AutoUpdater] downloadUpdate failed, retrying with checkForUpdates first:', err)
     try {
       await _autoUpdater.checkForUpdates()
-      await _autoUpdater.downloadUpdate()
-    } catch (retryErr) {
+      if (_downloadCancellationToken && !_downloadCancellationToken.cancelled) {
+        await _autoUpdater.downloadUpdate(_downloadCancellationToken)
+      }
+    } catch (retryErr: any) {
+      const retryMsg = typeof retryErr === 'string' ? retryErr : retryErr?.message || ''
+      if (retryMsg.includes('cancelled') || retryMsg.includes('CancellationError')) {
+        console.log('[AutoUpdater] Download was cancelled on retry.')
+        return
+      }
       console.error('[AutoUpdater] downloadUpdate retry failed:', retryErr)
     }
   }
@@ -560,15 +624,16 @@ export function initAutoUpdater(): void {
     })
 
     autoUpdater.on('download-progress', (progressObj: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }) => {
+      if (!_cachedUpdateInfo || _downloadCancellationToken?.cancelled) {
+        return
+      }
       const percent = Math.min(100, Math.max(0, Math.round(progressObj.percent || 0)))
       console.log(`[AutoUpdater] Download progress: ${percent}%`)
-      if (_cachedUpdateInfo) {
-        _cachedUpdateInfo.downloadProgress = {
-          percent,
-          bytesPerSecond: progressObj.bytesPerSecond,
-          transferred: progressObj.transferred,
-          total: progressObj.total
-        }
+      _cachedUpdateInfo.downloadProgress = {
+        percent,
+        bytesPerSecond: progressObj.bytesPerSecond,
+        transferred: progressObj.transferred,
+        total: progressObj.total
       }
       pushState.updateProgress({
         percent,
@@ -579,6 +644,10 @@ export function initAutoUpdater(): void {
     })
 
     autoUpdater.on('update-downloaded', (info: { version: string }) => {
+      if (!_cachedUpdateInfo || _downloadCancellationToken?.cancelled) {
+        console.log('[AutoUpdater] Download was cancelled; ignoring update-downloaded event.')
+        return
+      }
       console.log('[AutoUpdater] Update downloaded and ready to install:', info.version)
       _cachedUpdateInfo = { hasUpdate: true, latestVersion: info.version, downloaded: true }
       pushState.updateDownloaded({ version: info.version })
@@ -587,6 +656,10 @@ export function initAutoUpdater(): void {
 
     autoUpdater.on('error', (err: Error | string) => {
       const msg = typeof err === 'string' ? err : err?.message || ''
+      if (msg.includes('cancelled') || msg.includes('CancellationError')) {
+        console.log('[AutoUpdater] Update/download cancelled.')
+        return
+      }
       if (msg.includes('No published versions on GitHub') || msg.includes('404')) {
         console.log('[AutoUpdater] No published releases on GitHub yet.')
       } else {

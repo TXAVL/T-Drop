@@ -32,6 +32,7 @@ vi.mock('../electron/store/settings', () => ({
 }))
 
 import {
+  cancelUpdateDownload,
   checkForUpdatesManual,
   initAutoUpdater,
   quitAndInstallUpdate,
@@ -88,9 +89,10 @@ describe('auto-updater isolation', () => {
       expect(mocks.updateAvailable).not.toHaveBeenCalled()
     })
 
-    it('quitAndInstallUpdate / startUpdateDownload / sync / init are no-ops', async () => {
+    it('quitAndInstallUpdate / startUpdateDownload / cancelUpdateDownload / sync / init are no-ops', async () => {
       expect(() => quitAndInstallUpdate()).not.toThrow()
       await expect(startUpdateDownload()).resolves.toBeUndefined()
+      expect(() => cancelUpdateDownload()).not.toThrow()
       expect(() => syncAutoUpdaterState()).not.toThrow()
       expect(() => initAutoUpdater()).not.toThrow()
       expect(mocks.netRequest).not.toHaveBeenCalled()

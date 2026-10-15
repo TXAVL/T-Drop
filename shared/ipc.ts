@@ -95,6 +95,9 @@ export interface InvokeMap {
   /** Start background download of an update in manual mode. */
   'updater:start-download': { args: []; result: void }
 
+  /** Dismiss active update prompt and cancel any in-progress download. */
+  'updater:dismiss': { args: []; result: void }
+
   /**
    * Current update state snapshot (background findings so far). Lets a
    * freshly subscribed renderer recover pushes it missed (slow load after

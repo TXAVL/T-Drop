@@ -24,7 +24,7 @@ import { rebuildTrayMenu } from './tray'
 import { startDragOut, resolveDragData, prestageDrag, stageDragFile } from './drag'
 import { clipboardSignature, formatTabularDataForClipboard, signatureMatchesItem } from '../clipboard/formats'
 import type { ClipboardItem, ItemData, MergeResult } from '../../shared/types'
-import { quitAndInstallUpdate, checkForUpdatesManual, startUpdateDownload, syncAutoUpdaterState, getCachedUpdateState, triggerBackgroundCheck } from './updater'
+import { quitAndInstallUpdate, checkForUpdatesManual, startUpdateDownload, cancelUpdateDownload, syncAutoUpdaterState, getCachedUpdateState, triggerBackgroundCheck } from './updater'
 import { createId } from '../store/ids'
 import { isStoreBuild } from './config'
 import { applyLaunchAtLogin, refreshLaunchAtLoginFromOs } from './loginItems'
@@ -217,6 +217,11 @@ export function registerIpc(): void {
   handle('updater:start-download', async () => {
     if (isStoreBuild()) return
     await startUpdateDownload()
+  })
+
+  handle('updater:dismiss', async () => {
+    if (isStoreBuild()) return
+    cancelUpdateDownload()
   })
 
   handle('updater:get-state', async () => {

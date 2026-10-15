@@ -36,6 +36,7 @@ export interface EdgeApi {
   installUpdate: () => Promise<void>
   checkForUpdatesManual: () => Promise<{ status: string; version?: string; error?: string }>
   startUpdateDownload: () => Promise<void>
+  dismissUpdate: () => Promise<void>
   getUpdateState: () => Promise<{
     hasUpdate: boolean
     latestVersion: string

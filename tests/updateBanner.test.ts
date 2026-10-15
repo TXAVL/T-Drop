@@ -48,4 +48,21 @@ describe('UpdateBanner contracts and lifecycle behavior', () => {
     expect(resolveUpdateMode({ updateMode: 'notify' })).toBe('notify')
     expect(resolveUpdateMode({ autoUpdates: false })).toBe('notify')
   })
+
+  it('dismiss button properly cancels download and prevents banner resurrection', () => {
+    const bannerSrc = read('src/components/UpdateBanner.tsx')
+    const storeSrc = read('src/store/appStore.ts')
+
+    // Banner stopPropagation & dismissUpdate call
+    expect(bannerSrc).toContain('e.stopPropagation()')
+    expect(bannerSrc).toContain('dismissUpdate()')
+
+    // appStore invokes edge.dismissUpdate to cancel backend download
+    expect(storeSrc).toContain('void edge.dismissUpdate?.()')
+
+    // setUpdateProgress prevents resurrection of dismissed updateInfo
+    expect(storeSrc).toContain('if (!current) return')
+    expect(storeSrc).toContain('sessionSkippedVersion')
+  })
 })
+
