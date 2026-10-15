@@ -21,6 +21,8 @@
   <a href="#quick-start">Quick Start</a> •
   <a href="#codebase--architecture">Architecture</a> •
   <a href="#support--sponsor">Sponsor</a> •
+  <a href="#star-history--growth">Growth</a> •
+  <a href="#contributors">Contributors</a> •
   <a href="#contributing">Contributing</a>
 </p>
 
@@ -32,7 +34,7 @@
 
 <p align="center">
   <a href="https://github.com/TXAVL/T-Drop/releases"><img alt="Release" src="https://img.shields.io/github/v/release/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=d2f4e8" /></a>
-  <a href="https://github.com/TXAVL/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=f6c7d6" /></a>
+  <a href="https://github.com/TXAVL/T-Drop/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/TXAVL/T-Drop?style=flat-square&logo=github&labelColor=23272e&color=f6c7d6" /></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/TXAVL/T-Drop?style=flat-square&labelColor=23272e&color=ffe6b3" /></a>
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-93a4fc?style=flat-square&logo=windows&logoColor=white&labelColor=23272e" alt="Platform" />
   <img src="https://img.shields.io/badge/RAM-15--35%20MB-56d364?style=flat-square&labelColor=23272e" alt="RAM Footprint" />
@@ -503,6 +505,34 @@ npm run typecheck    # tsc --noEmit (node + web configs)
 npm run build:github # build Windows NSIS installer for GitHub
 npm run build:store  # build Windows MSIX package for Microsoft Store
 ```
+
+---
+
+## Star History & Growth
+
+<p align="center">
+  <a href="https://star-history.com/#txavl/t-drop&Date" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=txavl/t-drop&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=txavl/t-drop&type=Date" />
+      <img alt="T-Drop Star History Chart" src="https://api.star-history.com/svg?repos=txavl/t-drop&type=Date" width="100%" style="max-width: 760px;" />
+    </picture>
+  </a>
+</p>
+
+---
+
+## Contributors
+
+Thank you to everyone who has contributed code, bug reports, translation, and ideas to T-Drop!
+
+<p align="center">
+  <a href="https://github.com/TXAVL/T-Drop/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=TXAVL/T-Drop" alt="T-Drop Contributors" style="max-width: 100%; border-radius: 8px;" />
+  </a>
+</p>
+
+Contributions of any kind (features, bug reports, documentation, translation) are warmly welcomed! Please read [Contributing](#contributing) and our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
