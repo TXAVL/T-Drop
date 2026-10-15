@@ -192,7 +192,7 @@ export function Settings({
   const [isExporting, setIsExporting] = useState(false)
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [copiedStk, setCopiedStk] = useState(false)
-  type LogFilterType = 'ALL' | 'SYSTEM' | 'ERROR' | 'WARN' | 'INFO'
+  type LogFilterType = 'ALL' | 'ERROR' | 'WARN' | 'INFO'
   const [logsModalOpen, setLogsModalOpen] = useState(false)
   const [rawLogs, setRawLogs] = useState('')
   const [logFilePath, setLogFilePath] = useState('')
@@ -929,13 +929,21 @@ export function Settings({
     if (!logsModalOpen) return null
 
     const allLines = rawLogs.split(/\r?\n/).filter(Boolean)
-    const winOsLine = allLines.find((l) => l.includes('[WinOS]') && l.includes('Phiên bản:'))
-    const winBuildLine = allLines.find((l) => l.includes('[WinOS]') && l.includes('Số hiệu bản dựng:'))
-    const winInsiderLine = allLines.find((l) => l.includes('[WinOS]') && l.includes('Kênh Windows Insider:'))
-    const winLicStatusLine = allLines.find((l) => l.includes('[WinLic]') && l.includes('Trạng thái bản quyền Windows:'))
 
-    const filteredLines = allLines.filter((line) => {
-      if (logsFilter === 'SYSTEM') return line.includes('[WinOS]') || line.includes('[WinLic]') || line.includes('[Hardware]') || line.includes('[Diag]') || line.includes('[Runtime]') || line.includes('[TD-License]')
+    // User rule: Diagnostic / Windows OS / License details are ONLY visible when copying logs
+    // or viewing the log file on disk. Never expose them directly on the Logs tab UI!
+    const isHiddenDiagLine = (line: string) =>
+      line.includes('[WinOS]') ||
+      line.includes('[WinLic]') ||
+      line.includes('[Hardware]') ||
+      line.includes('[Diag]') ||
+      line.includes('[Runtime]') ||
+      line.includes('[TD-License]') ||
+      line.includes('THÔNG TIN CHẨN ĐOÁN')
+
+    const visibleLines = allLines.filter((line) => !isHiddenDiagLine(line))
+
+    const filteredLines = visibleLines.filter((line) => {
       if (logsFilter === 'ERROR') return line.includes('[ERROR]') || line.includes('UncaughtException') || line.includes('UnhandledRejection')
       if (logsFilter === 'WARN') return line.includes('[WARN')
       if (logsFilter === 'INFO') return line.includes('[INFO')
@@ -987,40 +995,10 @@ export function Settings({
             </button>
           </div>
 
-          {winOsLine && (
-            <div className="logs-system-summary-card">
-              <div className="summary-col">
-                <span className="summary-title">🖥️ Windows OS</span>
-                <span className="summary-value" title={winOsLine.split('Phiên bản: ')[1] || 'Windows'}>
-                  {winOsLine.split('Phiên bản: ')[1] || 'Windows'}
-                </span>
-              </div>
-              <div className="summary-col">
-                <span className="summary-title">🔨 Bản dựng (Build)</span>
-                <span className="summary-value" title={winBuildLine ? winBuildLine.split('Số hiệu bản dựng: ')[1] : ''}>
-                  {winBuildLine ? winBuildLine.split('Số hiệu bản dựng: ')[1] : 'Đang quét...'}
-                </span>
-              </div>
-              <div className="summary-col">
-                <span className="summary-title">🚀 Kênh phát hành</span>
-                <span className="summary-value" title={winInsiderLine ? winInsiderLine.split('Kênh Windows Insider: ')[1] : 'Retail / GA'}>
-                  {winInsiderLine ? winInsiderLine.split('Kênh Windows Insider: ')[1] : 'Retail / GA'}
-                </span>
-              </div>
-              <div className="summary-col">
-                <span className="summary-title">🔑 Bản quyền Windows</span>
-                <span className="summary-value" title={winLicStatusLine ? winLicStatusLine.split('Trạng thái bản quyền Windows: ')[1] : ''}>
-                  {winLicStatusLine ? winLicStatusLine.split('Trạng thái bản quyền Windows: ')[1] : 'Đang kiểm tra...'}
-                </span>
-              </div>
-            </div>
-          )}
-
           <div className="logs-filter-bar">
             <div className="logs-filter-group">
               {([
                 { key: 'ALL', label: 'Tất cả' },
-                { key: 'SYSTEM', label: '🖥️ Windows & Bản quyền' },
                 { key: 'ERROR', label: '❌ Lỗi' },
                 { key: 'WARN', label: '⚠️ Cảnh báo' },
                 { key: 'INFO', label: 'ℹ️ Thông tin' }
@@ -1028,7 +1006,7 @@ export function Settings({
                 <button
                   key={key}
                   type="button"
-                  className={`logs-filter-chip ${key === 'SYSTEM' ? 'system' : key === 'ERROR' ? 'error' : key === 'WARN' ? 'warn' : ''} ${logsFilter === key ? 'active' : ''}`}
+                  className={`logs-filter-chip ${key === 'ERROR' ? 'error' : key === 'WARN' ? 'warn' : ''} ${logsFilter === key ? 'active' : ''}`}
                   onClick={() => {
                     playButtonClickSound()
                     setLogsFilter(key)
@@ -1062,7 +1040,7 @@ export function Settings({
                 ⬇️ Cuối
               </button>
               <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.45)', fontFamily: 'var(--font-mono, monospace)' }}>
-                {filteredLines.length}/{allLines.length} dòng
+                {filteredLines.length}/{visibleLines.length} dòng
               </span>
             </div>
           </div>
@@ -1080,24 +1058,12 @@ export function Settings({
               filteredLines.map((line, idx) => {
                 const isErr = line.includes('[ERROR]') || line.includes('UncaughtException') || line.includes('UnhandledRejection')
                 const isWarn = line.includes('[WARN')
-                const isWinLic = line.includes('[WinLic]')
-                const isWinOS = line.includes('[WinOS]')
-                const isTDLic = line.includes('[TD-License]')
-                const isDiag = line.includes('[Diag]')
                 const isInfo = line.includes('[INFO')
 
                 const levelClass = isErr
                   ? 'level-ERROR'
                   : isWarn
                   ? 'level-WARN'
-                  : isWinLic
-                  ? 'level-WINLIC'
-                  : isWinOS
-                  ? 'level-WINOS'
-                  : isTDLic
-                  ? 'level-TDLIC'
-                  : isDiag
-                  ? 'level-DIAG'
                   : isInfo
                   ? 'level-INFO'
                   : ''
