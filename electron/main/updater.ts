@@ -1,4 +1,6 @@
-import { app, net, Notification } from 'electron'
+import { app, net } from 'electron'
+import * as path from 'path'
+import * as fs from 'fs'
 import { isStoreBuild } from './config'
 import { pushState } from './state'
 import { getSettings } from '../store/settings'
@@ -17,12 +19,113 @@ export interface CachedUpdateInfo {
 let _autoUpdater: any = null
 let _cachedUpdateInfo: CachedUpdateInfo | null = null
 
+let periodicCheckTimer: ReturnType<typeof setInterval> | null = null
+let bgCheckTimer: ReturnType<typeof setTimeout> | null = null
+let lastCheckTimestamp = 0
+let isCheckingInProgress = false
+
+let lastNotifiedAvailableVersion: string | null = null
+let lastNotifiedDownloadedVersion: string | null = null
+
+// Periodic check interval: every 20 minutes
+const PERIODIC_CHECK_INTERVAL_MS = 20 * 60 * 1000
+
 export function getCachedUpdateState(): CachedUpdateInfo | null {
   return _cachedUpdateInfo
 }
 
 export function clearCachedUpdateState(): void {
   _cachedUpdateInfo = null
+}
+
+function getNotificationIcon(): string | undefined {
+  try {
+    const candidates = [
+      path.join(app.getAppPath(), 'resources', 'icon.png'),
+      path.join(process.resourcesPath || '', 'icon.png'),
+      path.join(process.cwd(), 'resources', 'icon.png')
+    ]
+    for (const c of candidates) {
+      if (fs.existsSync(c)) return c
+    }
+  } catch {
+    /* ignore */
+  }
+  return undefined
+}
+
+/**
+ * Shows a Windows desktop notification when an update is found on GitHub.
+ */
+export function showUpdateAvailableNotification(version: string, isAuto: boolean): void {
+  if (isStoreBuild()) return
+  if (lastNotifiedAvailableVersion === version) return
+  lastNotifiedAvailableVersion = version
+
+  try {
+    const ElectronNotification = (require('electron') as any).Notification
+    if (ElectronNotification && typeof ElectronNotification.isSupported === 'function' && ElectronNotification.isSupported()) {
+      const notif = new ElectronNotification({
+        title: `T-Drop — Có bản cập nhật mới v${version}!`,
+        body: isAuto
+          ? `Đang tự động tải ngầm bản cập nhật v${version}. Bạn có thể tiếp tục sử dụng bình thường.`
+          : `Phiên bản mới v${version} đã sẵn sàng trên GitHub. Nhấn vào đây để tải về và cập nhật.`,
+        icon: getNotificationIcon(),
+        silent: false
+      })
+      notif.on('click', () => {
+        try {
+          setVisible(true)
+          const win = getMainWindow()
+          if (win && !win.isDestroyed()) {
+            win.show()
+            win.focus()
+          }
+          pushState.togglePanel(true)
+        } catch {
+          /* ignore */
+        }
+        if (!isAuto) {
+          void startUpdateDownload()
+        }
+      })
+      notif.show()
+    }
+  } catch (err) {
+    console.warn('[AutoUpdater] Failed to show update available notification:', err)
+  }
+}
+
+/**
+ * Shows a Windows desktop notification when the update download completes.
+ */
+export function showUpdateDownloadedNotification(version: string): void {
+  if (isStoreBuild()) return
+  if (lastNotifiedDownloadedVersion === version) return
+  lastNotifiedDownloadedVersion = version
+
+  try {
+    const ElectronNotification = (require('electron') as any).Notification
+    if (ElectronNotification && typeof ElectronNotification.isSupported === 'function' && ElectronNotification.isSupported()) {
+      const notif = new ElectronNotification({
+        title: `T-Drop — Bản cập nhật v${version} đã tải xong!`,
+        body: `Bản cập nhật v${version} đã sẵn sàng. Nhấn vào đây để khởi động lại và áp dụng ngay.`,
+        icon: getNotificationIcon(),
+        silent: false
+      })
+      notif.on('click', () => {
+        quitAndInstallUpdate()
+      })
+      notif.show()
+    }
+  } catch (err) {
+    console.warn('[AutoUpdater] Failed to show update downloaded notification:', err)
+  }
+}
+
+// Backward-compatible alias
+export function showUpdateSystemNotification(version: string): void {
+  showUpdateAvailableNotification(version, false)
 }
 
 /**
@@ -64,6 +167,24 @@ export function quitAndInstallUpdate(): void {
   }
 }
 
+export function stopPeriodicUpdateCheck(): void {
+  if (periodicCheckTimer !== null) {
+    clearInterval(periodicCheckTimer)
+    periodicCheckTimer = null
+  }
+}
+
+export function startPeriodicUpdateCheck(): void {
+  if (isStoreBuild()) return
+  stopPeriodicUpdateCheck()
+  const mode = resolveUpdateMode(getSettings())
+  if (mode === 'off') return
+
+  periodicCheckTimer = setInterval(() => {
+    void runBackgroundUpdateCheck()
+  }, PERIODIC_CHECK_INTERVAL_MS)
+}
+
 /**
  * Syncs the download flags on electron-updater whenever user changes settings.
  * Only 'auto' mode downloads; 'notify' checks without downloading.
@@ -75,16 +196,18 @@ export function syncAutoUpdaterState(): void {
   _autoUpdater.autoDownload = autoDownload
   _autoUpdater.autoInstallOnAppQuit = false
   console.log('[AutoUpdater] Synced mode =', mode, 'autoDownload =', autoDownload)
-}
 
-let bgCheckTimer: ReturnType<typeof setTimeout> | null = null
+  if (mode === 'off') {
+    stopPeriodicUpdateCheck()
+  } else {
+    startPeriodicUpdateCheck()
+    triggerBackgroundCheck(1000)
+  }
+}
 
 /**
  * Run a background check outside startup — e.g. right after the user switches
- * into 'auto' or 'notify' mode. Previously switching modes only flipped flags
- * and nothing happened until the next restart, which read as "notify never
- * shows anything". Debounced; switching to 'off' cancels a pending check so
- * off stays fully network-silent.
+ * into 'auto' or 'notify' mode.
  */
 export function triggerBackgroundCheck(delayMs = 3000): void {
   if (isStoreBuild()) return
@@ -98,22 +221,11 @@ export function triggerBackgroundCheck(delayMs = 3000): void {
   } catch {
     return
   }
-  if (mode === 'off' || !_autoUpdater) return
+  if (mode === 'off') return
   console.log('[AutoUpdater] Background check scheduled (mode switch).')
   bgCheckTimer = setTimeout(() => {
     bgCheckTimer = null
-    try {
-      const r = _autoUpdater.checkForUpdates() as unknown
-      const p = r as Promise<unknown> | undefined
-      if (p && typeof p.catch === 'function') {
-        p.catch((err: unknown) => {
-          const msg = typeof err === 'string' ? err : (err as { message?: string })?.message
-          console.warn('[AutoUpdater] triggered check failed:', msg)
-        })
-      }
-    } catch (err) {
-      console.warn('[AutoUpdater] triggered check threw:', err)
-    }
+    void runBackgroundUpdateCheck()
   }, Math.max(0, delayMs))
 }
 
@@ -131,6 +243,7 @@ function semverCompare(v1: string, v2: string): number {
 
 /**
  * Fast direct check against GitHub Releases API (< 0.5s) with a 4s max timeout.
+ * Employs cache-control headers to prevent stale 304 caching.
  */
 function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
   return new Promise((resolve) => {
@@ -141,6 +254,8 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
       })
       request.setHeader('User-Agent', 'T-Drop-App')
       request.setHeader('Accept', 'application/vnd.github.v3+json')
+      request.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+      request.setHeader('Pragma', 'no-cache')
 
       const timer = setTimeout(() => {
         try { request.abort() } catch { /* ignore */ }
@@ -174,6 +289,87 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
       resolve(null)
     }
   })
+}
+
+/**
+ * Checks GitHub for updates in the background.
+ * Uses fast GitHub API query first (< 0.5s), falling back to electron-updater.
+ */
+export async function runBackgroundUpdateCheck(): Promise<void> {
+  if (isStoreBuild()) return
+  const mode = resolveUpdateMode(getSettings())
+  if (mode === 'off') return
+  if (isCheckingInProgress) return
+
+  isCheckingInProgress = true
+  lastCheckTimestamp = Date.now()
+  console.log('[AutoUpdater] Executing background update check (mode =', mode, ')...')
+
+  try {
+    // 1. Fast direct GitHub check
+    const fastResult = await checkGitHubReleaseFast()
+    if (fastResult && fastResult.tag_name) {
+      const latestVersion = fastResult.tag_name.replace(/^v/i, '')
+      const currentVersion = app.getVersion()
+      if (semverCompare(latestVersion, currentVersion) > 0) {
+        console.log(`[AutoUpdater] Background check found new version: v${latestVersion} (current: v${currentVersion})`)
+        const isDownloaded = _cachedUpdateInfo?.downloaded && _cachedUpdateInfo.latestVersion === latestVersion
+        if (!isDownloaded) {
+          _cachedUpdateInfo = {
+            hasUpdate: true,
+            latestVersion,
+            downloaded: false,
+            downloadProgress: mode === 'auto' ? { percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 } : undefined
+          }
+          pushState.updateAvailable({ version: latestVersion })
+          showUpdateAvailableNotification(latestVersion, mode === 'auto')
+
+          if (mode === 'auto') {
+            void startUpdateDownload()
+          }
+        }
+        return
+      } else {
+        console.log(`[AutoUpdater] Background check confirms app is up to date: v${currentVersion}`)
+        return
+      }
+    }
+
+    // 2. Fallback to electron-updater
+    if (_autoUpdater) {
+      const r = _autoUpdater.checkForUpdates() as unknown
+      const p = r as Promise<unknown> | undefined
+      if (p && typeof p.catch === 'function') {
+        p.catch((err: unknown) => {
+          const msg = typeof err === 'string' ? err : (err as { message?: string })?.message || ''
+          if (!msg.includes('No published versions on GitHub') && !msg.includes('404')) {
+            console.warn('[AutoUpdater] Fallback background check failed:', msg)
+          }
+        })
+      }
+    }
+  } catch (err: any) {
+    console.warn('[AutoUpdater] Background update check error:', err?.message || err)
+  } finally {
+    isCheckingInProgress = false
+  }
+}
+
+/**
+ * Called when the panel opens or user hovers.
+ * Throttled to at most once every 10 minutes so it never floods GitHub.
+ */
+export function checkUpdateOnPanelOpen(): void {
+  if (isStoreBuild()) return
+  const mode = resolveUpdateMode(getSettings())
+  if (mode === 'off') return
+
+  const now = Date.now()
+  if (now - lastCheckTimestamp < 10 * 60 * 1000) {
+    return
+  }
+
+  void runBackgroundUpdateCheck()
 }
 
 /**
@@ -213,7 +409,10 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
       pushState.updateAvailable({ version: latestVersion })
       const mode = resolveUpdateMode(getSettings())
       if (mode === 'auto') {
+        showUpdateAvailableNotification(latestVersion, true)
         void startUpdateDownload()
+      } else {
+        showUpdateAvailableNotification(latestVersion, false)
       }
       return { status: 'available', version: latestVersion }
     } else {
@@ -235,7 +434,10 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
         pushState.updateAvailable({ version: result.updateInfo.version })
         const mode = resolveUpdateMode(getSettings())
         if (mode === 'auto') {
+          showUpdateAvailableNotification(result.updateInfo.version, true)
           void startUpdateDownload()
+        } else {
+          showUpdateAvailableNotification(result.updateInfo.version, false)
         }
         return { status: 'available', version: result.updateInfo.version }
       }
@@ -266,8 +468,6 @@ export async function startUpdateDownload(): Promise<void> {
     try {
       const { autoUpdater } = require('electron-updater')
       _autoUpdater = autoUpdater
-      // Match manual-check semantics: never auto-download as a side effect.
-      // An explicit downloadUpdate() call below is unaffected by these flags.
       _autoUpdater.autoDownload = false
       _autoUpdater.autoInstallOnAppQuit = false
       if (!app.isPackaged) {
@@ -300,38 +500,6 @@ export async function startUpdateDownload(): Promise<void> {
 }
 
 /**
- * Displays a Windows system desktop notification in 'notify' mode.
- * Clicking the notification focuses T-Drop, reveals the shelf, and begins the download.
- */
-export function showUpdateSystemNotification(version: string): void {
-  try {
-    if (typeof Notification !== 'undefined' && Notification.isSupported && Notification.isSupported()) {
-      const notif = new Notification({
-        title: 'T-Drop - Có bản cập nhật mới!',
-        body: `Phiên bản mới v${version} đã sẵn sàng. Bấm vào đây để tải về và cập nhật.`
-      })
-      notif.on('click', () => {
-        try {
-          setVisible(true)
-          const win = getMainWindow()
-          if (win && !win.isDestroyed()) {
-            win.show()
-            win.focus()
-          }
-          pushState.togglePanel(true)
-        } catch {
-          /* ignore */
-        }
-        void startUpdateDownload()
-      })
-      notif.show()
-    }
-  } catch (err) {
-    console.warn('[AutoUpdater] Failed to show system notification:', err)
-  }
-}
-
-/**
  * Initializes electron-updater for GitHub release auto-updates.
  * Completely disabled on Microsoft Store (MSIX) builds to comply with Store policies.
  */
@@ -348,8 +516,6 @@ export function initAutoUpdater(): void {
     const settings = getSettings()
     const mode = resolveUpdateMode(settings)
     const autoDownload = mode === 'auto'
-    // 'notify' still checks at launch (tiny version query) but never downloads
-    // on its own; 'off' stays fully network-silent.
     const shouldCheck = mode !== 'off'
 
     autoUpdater.logger = console
@@ -383,9 +549,9 @@ export function initAutoUpdater(): void {
 
       if (isAuto) {
         pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
+        showUpdateAvailableNotification(info.version, true)
       } else {
-        // 'notify' mode: only send system notification, do not download in background
-        showUpdateSystemNotification(info.version)
+        showUpdateAvailableNotification(info.version, false)
       }
     })
 
@@ -416,6 +582,7 @@ export function initAutoUpdater(): void {
       console.log('[AutoUpdater] Update downloaded and ready to install:', info.version)
       _cachedUpdateInfo = { hasUpdate: true, latestVersion: info.version, downloaded: true }
       pushState.updateDownloaded({ version: info.version })
+      showUpdateDownloadedNotification(info.version)
     })
 
     autoUpdater.on('error', (err: Error | string) => {
@@ -427,23 +594,15 @@ export function initAutoUpdater(): void {
       }
     })
 
-    // Background check runs in 'auto' and 'notify' modes; only 'off' stays
-    // fully network-silent. In 'notify' mode autoDownload is off, so a found
-    // update only surfaces the Download/Skip prompt — nothing downloads.
+    // Start background checks and periodic timer if updates are not off
     if (shouldCheck) {
       if (!autoDownload) {
         console.log('[AutoUpdater] Notify mode: background check without auto-download.')
       }
       setTimeout(() => {
-        autoUpdater.checkForUpdates().catch((err: Error | string) => {
-          const msg = typeof err === 'string' ? err : err?.message || ''
-          if (msg.includes('No published versions on GitHub') || msg.includes('404')) {
-            console.log('[AutoUpdater] No published releases on GitHub yet.')
-          } else {
-            console.warn('[AutoUpdater] checkForUpdates failed:', msg)
-          }
-        })
+        void runBackgroundUpdateCheck()
       }, 3000)
+      startPeriodicUpdateCheck()
     } else {
       console.log('[AutoUpdater] Updates disabled by user setting. Staying network-silent on startup.')
     }

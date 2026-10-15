@@ -340,11 +340,19 @@ export async function resolvePasteTarget(normalDelayMs: number): Promise<number>
  *   captures all clicks.
  */
 let gcTimer: ReturnType<typeof setTimeout> | null = null
+let onPanelInteractiveListener: ((interactive: boolean) => void) | null = null
+
+export function registerPanelInteractiveListener(listener: (interactive: boolean) => void): void {
+  onPanelInteractiveListener = listener
+}
 
 export function setInteractive(value: boolean): void {
   if (!mainWindow || value === interactive) return
   interactive = value
   if (value) {
+    // Notify registered listeners (e.g. background update check on panel open)
+    try { onPanelInteractiveListener?.(true) } catch { /* ignore */ }
+
     // Panel is open: disable click-through so user can interact.
     // Remember who is in front BEFORE any search typing can steal focus.
     captureExternalForeground()

@@ -11,14 +11,14 @@
 import { app, BrowserWindow, protocol, session } from 'electron'
 import { APP_CONFIG, runtime } from './config'
 import { ensureDirs, PATHS } from '../store/paths'
-import { createWindow, getMainWindow, setInteractive, setVisible, startCursorPoll, stopCursorPoll, stopHeartbeat, setHotZoneWidth, registerTaskbarCreatedListener, sendToMainWindow } from './window'
+import { createWindow, getMainWindow, setInteractive, setVisible, startCursorPoll, stopCursorPoll, stopHeartbeat, setHotZoneWidth, registerTaskbarCreatedListener, sendToMainWindow, registerPanelInteractiveListener } from './window'
 import { createTray, registerIncognitoApplier, refreshTray } from './tray'
 import { registerIpc, registerSendListeners } from './ipc'
 import { reconcileLaunchAtLoginOnStartup } from './loginItems'
 import { isStoreBuild, shouldStartHidden } from './config'
 import { prewarmDragIcons } from './drag'
 import { initState, getWatcher, loadSettings, saveSettings, pushState, stopStateTimers, getStore } from './state'
-import { initAutoUpdater } from './updater'
+import { initAutoUpdater, checkUpdateOnPanelOpen } from './updater'
 import { createOnboardingWindow, getOnboardingWindow } from './onboardingWindow'
 import { getPurchaseWindow } from './purchaseWindow'
 import { startPeriodicMemoryManager, stopPeriodicMemoryManager } from './memory'
@@ -176,6 +176,11 @@ app.whenReady().then(() => {
   getWatcher().setPaused(settings.incognito)
   pushState.settings(settings)
   initAutoUpdater()
+  registerPanelInteractiveListener((interactive) => {
+    if (interactive) {
+      checkUpdateOnPanelOpen()
+    }
+  })
 
   // Register .txa association for Windows Explorer and process initial startup argv
   registerTxaAssociation()
