@@ -12,6 +12,7 @@ import {
 } from '../../shared/license'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
+import { t } from '../i18n'
 import { CloseIcon, CopyIcon, CheckIcon, CrownIcon } from './icons'
 import { ToastStack } from './Toast'
 
@@ -158,9 +159,9 @@ function PurchaseWindowContent({
   const handleValidateEmail = (val: string) => {
     setEmail(val)
     if (!val.trim()) {
-      setEmailError('Vui lòng nhập địa chỉ email')
+      setEmailError(t('purchase.emailRequired'))
     } else if (!isValidEmailDomain(val)) {
-      setEmailError('Chỉ chấp nhận email: @gmail.com, @icloud.com, @outlook.com, @hotmail.com')
+      setEmailError(t('purchase.emailInvalid'))
     } else {
       setEmailError('')
     }
@@ -189,10 +190,10 @@ function PurchaseWindowContent({
 
   const handleCreateOrder = useCallback(async () => {
     if (!email.trim()) {
-      setEmailError('Vui lòng nhập địa chỉ email')
+      setEmailError(t('purchase.emailRequired'))
       pushToast({
         id: Date.now().toString(),
-        message: 'Vui lòng nhập email nhận bản quyền trước khi tạo mã QR!',
+        message: t('purchase.emailRequired'),
         tone: 'error'
       })
       emailInputRef.current?.focus()
@@ -200,10 +201,10 @@ function PurchaseWindowContent({
     }
 
     if (!isValidEmailDomain(email)) {
-      setEmailError('Chỉ chấp nhận email: @gmail.com, @icloud.com, @outlook.com, @hotmail.com')
+      setEmailError(t('purchase.emailInvalid'))
       pushToast({
         id: Date.now().toString(),
-        message: 'Email không hợp lệ. Vui lòng dùng @gmail.com, @icloud.com, @outlook.com hoặc @hotmail.com',
+        message: t('purchase.emailInvalid'),
         tone: 'error'
       })
       emailInputRef.current?.focus()
@@ -244,7 +245,7 @@ function PurchaseWindowContent({
         console.error('[Purchase] Supabase order insert failed:', errText)
         pushToast({
           id: Date.now().toString(),
-          message: 'Không thể tạo đơn hàng trên máy chủ. Vui lòng thử lại!',
+          message: t('purchase.orderFailed'),
           tone: 'error'
         })
         return
@@ -253,14 +254,14 @@ function PurchaseWindowContent({
       setOrder(newOrder)
       pushToast({
         id: Date.now().toString(),
-        message: 'Đã tạo đơn hàng thành công! Quét mã QR để hoàn tất thanh toán.',
+        message: t('purchase.orderSuccess'),
         tone: 'info'
       })
     } catch (err: any) {
       console.error('[Purchase] Order creation error:', err)
       pushToast({
         id: Date.now().toString(),
-        message: `Lỗi kết nối: ${err?.message || String(err)}`,
+        message: t('license.connectionError', { error: err?.message || String(err) }),
         tone: 'error'
       })
     } finally {
@@ -285,22 +286,22 @@ function PurchaseWindowContent({
           licenseExpiresAt: res.expiresAt || null
         })
         setActivationMsg({
-          text: `🎉 Kích hoạt thành công gói ${activatedRole}!`,
+          text: res.message || t('purchase.activatedSuccess', { role: activatedRole }),
           ok: true
         })
         pushToast({
           id: Date.now().toString(),
-          message: `🎉 Kích hoạt thành công gói ${activatedRole}! Đang mở khóa tính năng...`,
+          message: res.message || t('purchase.activatedSuccess', { role: activatedRole }),
           tone: 'info'
         })
         setTimeout(() => {
           onClose()
         }, 1800)
       } else {
-        setActivationMsg({ text: res.message || 'Mã bản quyền không hợp lệ!', ok: false })
+        setActivationMsg({ text: res.message || t('license.activateFailed'), ok: false })
       }
     } catch (err: any) {
-      setActivationMsg({ text: `Lỗi: ${err?.message || String(err)}`, ok: false })
+      setActivationMsg({ text: t('license.connectionError', { error: err?.message || String(err) }), ok: false })
     } finally {
       setActivatingKey(false)
     }
@@ -347,7 +348,7 @@ function PurchaseWindowContent({
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <CrownIcon width={20} height={20} fill="#f59e0b" />
             <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#fff' }}>
-              Nâng cấp T-Drop VIP & PREMIUM
+              {t('purchase.title')}
             </h3>
           </div>
           <button
@@ -372,7 +373,7 @@ function PurchaseWindowContent({
           {/* Chọn gói */}
           <div>
             <label style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600, display: 'block', marginBottom: 6 }}>
-              1. CHỌN GÓI BẢN QUYỀN
+              {t('purchase.choosePlan')}
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               <button
@@ -391,8 +392,8 @@ function PurchaseWindowContent({
                   transition: 'all 0.2s ease'
                 }}
               >
-                <strong style={{ fontSize: 13.5, color: role === 'VIP' ? '#f59e0b' : '#fff' }}>GÓI VIP</strong>
-                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>30 Ngày · 29.000đ</span>
+                <strong style={{ fontSize: 13.5, color: role === 'VIP' ? '#f59e0b' : '#fff' }}>{t('purchase.vipTitle')}</strong>
+                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>{t('purchase.vipSub')}</span>
               </button>
 
               <button
@@ -411,8 +412,8 @@ function PurchaseWindowContent({
                   transition: 'all 0.2s ease'
                 }}
               >
-                <strong style={{ fontSize: 13.5, color: role === 'PREMIUM' ? '#c084fc' : '#fff' }}>GÓI PREMIUM</strong>
-                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>60 Ngày · 49.000đ</span>
+                <strong style={{ fontSize: 13.5, color: role === 'PREMIUM' ? '#c084fc' : '#fff' }}>{t('purchase.premiumTitle')}</strong>
+                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>{t('purchase.premiumSub')}</span>
               </button>
             </div>
           </div>
@@ -421,7 +422,7 @@ function PurchaseWindowContent({
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
               <label style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600 }}>
-                2. MÃ MÁY CỦA BẠN (MACHINE ID)
+                {t('purchase.machineIdLabel')}
               </label>
               <button
                 type="button"
@@ -435,7 +436,7 @@ function PurchaseWindowContent({
                   padding: 0
                 }}
               >
-                {copiedMachineId ? '✓ Đã chép' : 'Sao chép'}
+                {copiedMachineId ? t('purchase.copied') : t('purchase.copy')}
               </button>
             </div>
             <div style={{
@@ -448,7 +449,7 @@ function PurchaseWindowContent({
               color: '#38bdf8',
               letterSpacing: '0.05em'
             }}>
-              {machineId || 'Đang lấy mã máy...'}
+              {machineId || t('purchase.gettingMachineId')}
             </div>
           </div>
 
@@ -456,7 +457,7 @@ function PurchaseWindowContent({
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
               <label style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600 }}>
-                3. EMAIL NHẬN MÃ BẢN QUYỀN
+                {t('purchase.emailLabel')}
               </label>
               <button
                 type="button"
@@ -470,13 +471,13 @@ function PurchaseWindowContent({
                   padding: 0
                 }}
               >
-                Dán từ clipboard
+                {t('purchase.pasteClipboard')}
               </button>
             </div>
             <input
               ref={emailInputRef}
               type="email"
-              placeholder="Nhập email: ví dụ tenban@gmail.com"
+              placeholder={t('purchase.emailInputPlaceholder')}
               value={email}
               onChange={(e) => handleValidateEmail(e.target.value)}
               onKeyDown={(e) => {
@@ -501,7 +502,7 @@ function PurchaseWindowContent({
               </span>
             ) : (
               <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.45)', marginTop: 4, display: 'block' }}>
-                Hệ thống chấp nhận: @gmail.com, @icloud.com, @outlook.com, @hotmail.com
+                {t('purchase.emailHelp')}
               </span>
             )}
           </div>
@@ -516,9 +517,9 @@ function PurchaseWindowContent({
             lineHeight: 1.55,
             color: 'rgba(255, 255, 255, 0.8)'
           }}>
-            ✓ Mở khóa AI OCR trích xuất chữ Tiếng Việt & Tiếng Anh từ ảnh.<br />
-            ✓ Không giới hạn số lần sử dụng trong thời gian hiệu lực.<br />
-            ✓ Đơn hàng lưu trên CSDL; Admin gửi license key về mail sau khi duyệt.
+            {t('purchase.benefit1')}<br />
+            {t('purchase.benefit2')}<br />
+            {t('purchase.benefit3')}
           </div>
 
           {/* Nút Tạo mã QR */}
@@ -543,7 +544,7 @@ function PurchaseWindowContent({
               boxShadow: '0 4px 14px rgba(245, 158, 11, 0.35)'
             }}
           >
-            {submitting ? 'Đang tạo đơn hàng...' : `Tạo mã QR thanh toán ${priceFormatted}`}
+            {submitting ? t('purchase.creatingOrder') : t('purchase.createOrder', { price: priceFormatted })}
           </button>
         </div>
       ) : (
@@ -556,7 +557,7 @@ function PurchaseWindowContent({
               style={{ width: '100%', maxWidth: 260, height: 'auto', display: 'block', margin: '0 auto', borderRadius: 8 }}
             />
             <span style={{ fontSize: 11, color: '#666', marginTop: 6, display: 'block' }}>
-              Quét mã bằng app ngân hàng bất kỳ để tự động điền STK & số tiền
+              {t('purchase.scanQrHint')}
             </span>
           </div>
 
@@ -572,12 +573,12 @@ function PurchaseWindowContent({
             fontSize: 12
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Ngân hàng:</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.bank')}</span>
               <strong style={{ color: '#fff' }}>{VIETQR_CONFIG.bankName}</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Số tài khoản:</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.accountNumber')}</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <strong style={{ color: '#38bdf8', fontFamily: 'var(--font-mono)' }}>{VIETQR_CONFIG.accountNo}</strong>
                 <button
@@ -595,17 +596,17 @@ function PurchaseWindowContent({
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Chủ tài khoản:</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.accountHolder')}</span>
               <strong style={{ color: '#fff' }}>{VIETQR_CONFIG.accountName}</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Số tiền:</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.amount')}</span>
               <strong style={{ color: '#f59e0b', fontSize: 13 }}>{order.amount.toLocaleString('vi-VN')} VNĐ</strong>
             </div>
 
             <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: 6 }}>
-              <div style={{ color: 'rgba(255, 255, 255, 0.55)', marginBottom: 2 }}>Nội dung chuyển khoản (bắt buộc đúng):</div>
+              <div style={{ color: 'rgba(255, 255, 255, 0.55)', marginBottom: 2 }}>{t('purchase.transferContent')}</div>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -643,7 +644,7 @@ function PurchaseWindowContent({
             color: 'rgba(255, 255, 255, 0.85)',
             lineHeight: 1.45
           }}>
-            📧 Đơn hàng <strong>{order.order_code}</strong> đã được lưu. Sau khi bạn chuyển khoản, Admin sẽ duyệt và gửi mã kích hoạt trực tiếp vào email <strong>{order.email}</strong>.
+            {t('purchase.transferNotice')}
           </div>
 
           {/* Nhập mã kích hoạt nhanh */}
@@ -665,7 +666,7 @@ function PurchaseWindowContent({
                 </span>
               </div>
               <span style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.8)' }}>
-                Đã mở khóa toàn bộ tính năng cao cấp. Đang tự động đóng cửa sổ...
+                {t('purchase.activatedDesc')}
               </span>
               <button
                 type="button"
@@ -682,7 +683,7 @@ function PurchaseWindowContent({
                   marginTop: 4
                 }}
               >
-                🚀 Bắt đầu sử dụng ngay
+                {t('purchase.startUsing')}
               </button>
             </div>
           ) : (
@@ -696,13 +697,13 @@ function PurchaseWindowContent({
               gap: 6
             }}>
               <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600 }}>
-                ĐÃ CÓ MÃ LICENSE? KÍCH HOẠT NGAY:
+                {t('purchase.hasKeyLabel')}
               </span>
               <div style={{ display: 'flex', gap: 6 }}>
                 <input
                   ref={inlineKeyInputRef}
                   type="text"
-                  placeholder="Dán mã: TDR_XXXXXX_XXXXX"
+                  placeholder={t('purchase.keyPlaceholder')}
                   value={inlineKey}
                   onChange={(e) => setInlineKey(e.target.value.toUpperCase())}
                   style={{
@@ -734,7 +735,7 @@ function PurchaseWindowContent({
                     cursor: activatingKey || !inlineKey.trim() ? 'not-allowed' : 'pointer'
                   }}
                 >
-                  {activatingKey ? '...' : 'Kích hoạt'}
+                  {activatingKey ? '...' : t('purchase.activateBtn')}
                 </button>
               </div>
               {activationMsg && !activationMsg.ok && (
@@ -763,7 +764,7 @@ function PurchaseWindowContent({
               cursor: 'pointer'
             }}
           >
-            Đóng cửa sổ
+            {t('purchase.closeWindow')}
           </button>
         </div>
       )}

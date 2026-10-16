@@ -444,20 +444,20 @@ export function Settings({
         setTimeout(() => licenseInputRef.current?.focus(), 50)
         pushToast({
           id: Date.now().toString(),
-          message: 'Đã dán mã key từ clipboard!',
+          message: t('license.copiedKey'),
           tone: 'info'
         })
       } else {
         pushToast({
           id: Date.now().toString(),
-          message: 'Clipboard trống hoặc không có văn bản',
+          message: t('license.emptyClipboard'),
           tone: 'error'
         })
       }
     } catch {
       pushToast({
         id: Date.now().toString(),
-        message: 'Không thể đọc clipboard',
+        message: t('license.cannotReadClipboard'),
         tone: 'error'
       })
     }
@@ -472,7 +472,7 @@ export function Settings({
     if (!trimmed) {
       pushToast({
         id: Date.now().toString(),
-        message: 'Vui lòng nhập hoặc bấm "Dán mã" trước khi xác minh!',
+        message: t('license.pastePrompt'),
         tone: 'error'
       })
       return
@@ -494,20 +494,20 @@ export function Settings({
         setLicenseInput('')
         pushToast({
           id: Date.now().toString(),
-          message: `🎉 ${res.message || `Kích hoạt thành công gói ${activatedRole}!`}`,
+          message: res.message || t('license.activateSuccess', { role: activatedRole }),
           tone: 'info'
         })
       } else {
         pushToast({
           id: Date.now().toString(),
-          message: res.message || 'Mã bản quyền không hợp lệ hoặc đã hết hạn!',
+          message: res.message || t('license.activateFailed'),
           tone: 'error'
         })
       }
     } catch (err: any) {
       pushToast({
         id: Date.now().toString(),
-        message: `Lỗi kết nối: ${err?.message || String(err)}`,
+        message: t('license.connectionError', { error: err?.message || String(err) }),
         tone: 'error'
       })
     } finally {
@@ -528,7 +528,7 @@ export function Settings({
     setLicenseInput('')
     pushToast({
       id: Date.now().toString(),
-      message: 'Đã hủy kích hoạt bản quyền, chuyển về gói FREE',
+      message: t('license.deactivateSuccess'),
       tone: 'info'
     })
   }
@@ -645,7 +645,7 @@ export function Settings({
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
             <div className="setting-group-label" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <CrownIcon width={13} height={13} fill={isPro ? '#f59e0b' : 'rgba(255,255,255,0.4)'} />
-              <span>BẢN QUYỀN & TÍNH NĂNG PRO</span>
+              <span>{t('license.title')}</span>
             </div>
             <span style={{
               fontSize: 10,
@@ -660,20 +660,20 @@ export function Settings({
                 : 'rgba(255,255,255,0.1)',
               color: '#ffffff'
             }}>
-              {role === 'PREMIUM' ? 'PREMIUM (60 ngày)' : role === 'VIP' ? 'VIP (30 ngày)' : 'FREE (Mặc định)'}
+              {role === 'PREMIUM' ? t('license.premiumBadge') : role === 'VIP' ? t('license.vipBadge') : t('license.freeBadge')}
             </span>
           </div>
 
           <div className="setting-title" style={{ marginTop: 4 }}>
             {isPro
-              ? `Tài khoản ${role}: Đang hoạt động`
-              : 'Gói Free (Mở khóa thêm tính năng với VIP & Premium)'}
+              ? t('license.activeStatus', { role })
+              : t('license.freeStatus')}
           </div>
 
           <div className="setting-desc">
             {isPro
-              ? `Chủ sở hữu: ${settings.licenseUserName || 'Khách hàng'} · ${countdownStr ? `${countdownStr}` : daysLeft !== null ? `Còn ${daysLeft} ngày` : 'Đang hiệu lực'}`
-              : 'Kích hoạt VIP (hạn 30 ngày) hoặc PREMIUM (hạn 60 ngày) để dùng tính năng AI OCR trích chữ từ hình ảnh.'}
+              ? t('license.ownerInfo', { name: settings.licenseUserName || 'Khách hàng', time: countdownStr ? `${countdownStr}` : daysLeft !== null ? `${daysLeft} ngày` : 'Active' })
+              : t('license.freeDesc')}
           </div>
 
           {settings.licenseExpiresAt && isPro && (
@@ -689,8 +689,8 @@ export function Settings({
               alignItems: 'center',
               justifyContent: 'space-between'
             }}>
-              <span>Hạn đến: <strong>{formatExpiryDate(settings.licenseExpiresAt)}</strong></span>
-              <span>Thời hạn: <strong style={{ color: '#fff' }}>{countdownStr || `${daysLeft ?? 0} ngày`}</strong></span>
+              <span>{t('license.expiresAt')} <strong>{formatExpiryDate(settings.licenseExpiresAt)}</strong></span>
+              <span>{t('license.duration')} <strong style={{ color: '#fff' }}>{countdownStr || `${daysLeft ?? 0} ngày`}</strong></span>
             </div>
           )}
 
@@ -706,7 +706,7 @@ export function Settings({
               marginTop: 6
             }}>
               <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.55)' }}>
-                Mã máy (Machine ID): <strong style={{ color: '#fff', letterSpacing: '0.05em' }}>{deviceInfo.hwHash}</strong>
+                {t('license.machineId')} <strong style={{ color: '#fff', letterSpacing: '0.05em' }}>{deviceInfo.hwHash}</strong>
               </span>
               <button
                 type="button"
@@ -720,7 +720,7 @@ export function Settings({
                   padding: 0
                 }}
               >
-                {copiedHw ? 'Đã chép' : 'Sao chép'}
+                {copiedHw ? t('license.copied') : t('license.copy')}
               </button>
             </div>
           )}
@@ -744,7 +744,7 @@ export function Settings({
                 }}
                 onClick={handleOpenPurchase}
               >
-                ✨ Gia hạn thêm gói
+                {t('license.extend')}
               </button>
               <button
                 type="button"
@@ -758,7 +758,7 @@ export function Settings({
                 }}
                 onClick={handleDeactivateLicense}
               >
-                Hủy kích hoạt (Về Free)
+                {t('license.deactivate')}
               </button>
             </div>
           ) : (
@@ -767,7 +767,7 @@ export function Settings({
                 <input
                   ref={licenseInputRef}
                   type="text"
-                  placeholder="Nhập mã key: TDR_XXXXXX_XXXXX"
+                  placeholder={t('license.keyPlaceholder')}
                   value={licenseInput}
                   onFocus={handleFocusLicenseInput}
                   onBlur={handleBlurLicenseInput}
@@ -808,9 +808,9 @@ export function Settings({
                     whiteSpace: 'nowrap',
                     background: 'rgba(255, 255, 255, 0.08)'
                   }}
-                  title="Dán mã key từ clipboard"
+                  title={t('license.pasteBtn')}
                 >
-                  Dán mã
+                  {t('license.pasteBtn')}
                 </button>
                 <button
                   type="button"
@@ -825,7 +825,7 @@ export function Settings({
                   disabled={licenseActivating}
                   onClick={handleActivateLicense}
                 >
-                  {licenseActivating ? '...' : 'Xác minh'}
+                  {licenseActivating ? t('license.activating') : t('license.verify')}
                 </button>
               </div>
 
@@ -844,7 +844,7 @@ export function Settings({
                 }}
                 onClick={handleOpenPurchase}
               >
-                ✨ Mua bản quyền / Nâng cấp VIP & PREMIUM (VietQR)
+                {t('license.buyUpgrade')}
               </button>
             </div>
           )}
@@ -864,7 +864,7 @@ export function Settings({
             }}
             onClick={handleOpenLogsModal}
           >
-            📋 Xem Nhật ký & Gỡ lỗi (System Logs)
+            {t('license.viewLogs')}
           </button>
         </div>
       </>
