@@ -8,6 +8,7 @@
 import { app, ipcMain, clipboard, nativeImage, shell, net, dialog, BrowserWindow } from 'electron'
 import { existsSync, writeFileSync, readFileSync, mkdirSync } from 'node:fs'
 import { extname, normalize, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { resolveStoredImage } from './imageProtocol'
 import { APP_CONFIG } from './config'
 import { PATHS } from '../store/paths'
@@ -856,7 +857,12 @@ export function registerIpc(): void {
 
   handle('image:copy-dataurl', (dataUrl) => {
     try {
-      const img = nativeImage.createFromDataURL(dataUrl)
+      let img = nativeImage.createFromDataURL(dataUrl)
+      if (img.isEmpty()) {
+        const base64Data = dataUrl.replace(/^data:image\/[a-zA-Z0-9+]+;base64,/, '')
+        const buf = Buffer.from(base64Data, 'base64')
+        img = nativeImage.createFromBuffer(buf)
+      }
       if (!img.isEmpty()) {
         clipboard.clear()
         clipboard.writeImage(img)
@@ -870,11 +876,10 @@ export function registerIpc(): void {
 
   handle('image:save-file', async ({ dataUrl, defaultName }) => {
     try {
-      const win = getMainWindow()
       const extMatch = dataUrl.match(/^data:image\/([a-zA-Z0-9+]+);base64,/)
       const rawExt = extMatch ? extMatch[1].toLowerCase().replace('jpeg', 'jpg') : 'png'
       const filename = defaultName || `t-drop-image-${Date.now()}.${rawExt}`
-      const res = await dialog.showSaveDialog(win ?? (undefined as any), {
+      const res = await dialog.showSaveDialog({
         title: 'Save Converted Image',
         defaultPath: filename,
         filters: [
@@ -897,9 +902,8 @@ export function registerIpc(): void {
 
   handle('text:save-file', async ({ content, defaultName }) => {
     try {
-      const win = getMainWindow()
       const filename = defaultName || `t-drop-ocr-${Date.now()}.txt`
-      const res = await dialog.showSaveDialog(win ?? (undefined as any), {
+      const res = await dialog.showSaveDialog({
         title: 'Save Extracted Text',
         defaultPath: filename,
         filters: [
@@ -935,6 +939,12 @@ export function registerIpc(): void {
       } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://`)) {
         const imageId = new URL(imageSrc).hostname
         filePath = resolveStoredImage(PATHS.imagesDir(), imageId)?.filePath ?? null
+      } else if (imageSrc.startsWith('file://')) {
+        try {
+          filePath = fileURLToPath(imageSrc)
+        } catch {
+          filePath = decodeURIComponent(imageSrc.replace(/^file:\/\/\/?/, ''))
+        }
       } else if (existsSync(imageSrc)) {
         filePath = imageSrc
       }
@@ -973,6 +983,12 @@ export function registerIpc(): void {
       } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://`)) {
         const imageId = new URL(imageSrc).hostname
         resolvedTarget = resolveStoredImage(PATHS.imagesDir(), imageId)?.filePath ?? null
+      } else if (imageSrc.startsWith('file://')) {
+        try {
+          resolvedTarget = fileURLToPath(imageSrc)
+        } catch {
+          resolvedTarget = decodeURIComponent(imageSrc.replace(/^file:\/\/\/?/, ''))
+        }
       } else if (existsSync(imageSrc)) {
         resolvedTarget = imageSrc
       }
