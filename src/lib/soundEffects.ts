@@ -6,6 +6,38 @@
 import { useStore } from '../store/appStore'
 
 let audioCtx: any = null
+let masterGain: any = null
+
+function getSoundVolume(): number {
+  try {
+    const vol = useStore.getState().settings.soundVolume
+    if (typeof vol === 'number' && !isNaN(vol)) {
+      return Math.max(0.05, Math.min(1.0, vol))
+    }
+  } catch {}
+  return 0.8
+}
+
+export function setMasterSoundVolume(vol: number): void {
+  try {
+    if (masterGain && audioCtx) {
+      const v = Math.max(0.05, Math.min(1.0, vol))
+      masterGain.gain.setValueAtTime(v, audioCtx.currentTime)
+    }
+  } catch {}
+}
+
+function getDest(ctx: any): any {
+  if (!ctx) return null
+  if (!masterGain) {
+    masterGain = ctx.createGain()
+    masterGain.gain.setValueAtTime(getSoundVolume(), ctx.currentTime)
+    masterGain.connect(ctx.destination)
+  } else {
+    masterGain.gain.setValueAtTime(getSoundVolume(), ctx.currentTime)
+  }
+  return masterGain
+}
 
 function isSoundEnabled(): boolean {
   const win = typeof globalThis !== 'undefined' ? (globalThis as any).window : undefined
@@ -92,7 +124,7 @@ export function playDialTickSound(): void {
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.01)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
 
       osc.start(now)
       osc.stop(now + 0.01)
@@ -109,7 +141,7 @@ export function playDialTickSound(): void {
       bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.012)
 
       bodyOsc.connect(bodyGain)
-      bodyGain.connect(ctx.destination)
+      bodyGain.connect(getDest(ctx))
 
       bodyOsc.start(now)
       bodyOsc.stop(now + 0.012)
@@ -152,7 +184,7 @@ export function playToggleSound(enabled: boolean): void {
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.014)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
 
       osc.start(now)
       osc.stop(now + 0.014)
@@ -169,7 +201,7 @@ export function playToggleSound(enabled: boolean): void {
       bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.016)
 
       bodyOsc.connect(bodyGain)
-      bodyGain.connect(ctx.destination)
+      bodyGain.connect(getDest(ctx))
 
       bodyOsc.start(now)
       bodyOsc.stop(now + 0.016)
@@ -208,7 +240,7 @@ export function playButtonClickSound(): void {
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.009)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
 
       osc.start(now)
       osc.stop(now + 0.009)
@@ -249,7 +281,7 @@ export function playDeleteSound(): void {
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.014)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
 
       osc.start(now)
       osc.stop(now + 0.014)
@@ -266,7 +298,7 @@ export function playDeleteSound(): void {
       bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.016)
 
       bodyOsc.connect(bodyGain)
-      bodyGain.connect(ctx.destination)
+      bodyGain.connect(getDest(ctx))
 
       bodyOsc.start(now)
       bodyOsc.stop(now + 0.016)
@@ -308,7 +340,7 @@ export function playExpandSound(expanding: boolean): void {
       gain.gain.exponentialRampToValueAtTime(0.001, now + dur)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
 
       osc.start(now)
       osc.stop(now + dur)
@@ -324,7 +356,7 @@ export function playExpandSound(expanding: boolean): void {
       bodyGain.gain.exponentialRampToValueAtTime(0.001, now + dur + 0.004)
 
       bodyOsc.connect(bodyGain)
-      bodyGain.connect(ctx.destination)
+      bodyGain.connect(getDest(ctx))
 
       bodyOsc.start(now)
       bodyOsc.stop(now + dur + 0.004)
@@ -367,7 +399,7 @@ export function playCardExpandSound(expanding: boolean): void {
       gain.gain.exponentialRampToValueAtTime(0.001, now + dur)
 
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
 
       osc.start(now)
       osc.stop(now + dur)
@@ -384,7 +416,7 @@ export function playCardExpandSound(expanding: boolean): void {
       harmonicGain.gain.exponentialRampToValueAtTime(0.001, now + dur * 0.8)
 
       harmonicOsc.connect(harmonicGain)
-      harmonicGain.connect(ctx.destination)
+      harmonicGain.connect(getDest(ctx))
 
       harmonicOsc.start(now)
       harmonicOsc.stop(now + dur * 0.8)
@@ -420,7 +452,7 @@ export function playEdgeRetractSound(): void {
       gain.gain.setValueAtTime(0.09, now)
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08)
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
       osc.start(now)
       osc.stop(now + 0.08)
 
@@ -433,7 +465,7 @@ export function playEdgeRetractSound(): void {
       bodyGain.gain.setValueAtTime(0.08, now + 0.06)
       bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.11)
       bodyOsc.connect(bodyGain)
-      bodyGain.connect(ctx.destination)
+      bodyGain.connect(getDest(ctx))
       bodyOsc.start(now + 0.06)
       bodyOsc.stop(now + 0.11)
     }
@@ -467,7 +499,7 @@ export function playEdgeBeaconAppearSound(): void {
       gain.gain.setValueAtTime(0.07, now)
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045)
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
       osc.start(now)
       osc.stop(now + 0.045)
     }
@@ -502,7 +534,7 @@ export function playEdgeExpandSound(): void {
       gain.gain.setValueAtTime(0.08, now)
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06)
       osc.connect(gain)
-      gain.connect(ctx.destination)
+      gain.connect(getDest(ctx))
       osc.start(now)
       osc.stop(now + 0.06)
 
@@ -515,7 +547,7 @@ export function playEdgeExpandSound(): void {
       snapGain.gain.setValueAtTime(0.10, now + 0.02)
       snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.07)
       snapOsc.connect(snapGain)
-      snapGain.connect(ctx.destination)
+      snapGain.connect(getDest(ctx))
       snapOsc.start(now + 0.02)
       snapOsc.stop(now + 0.07)
     }

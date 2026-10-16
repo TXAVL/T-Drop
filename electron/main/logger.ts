@@ -10,6 +10,7 @@ import os from 'node:os'
 import { execSync, execFile } from 'node:child_process'
 import { existsSync, mkdirSync, appendFileSync, statSync, renameSync, readFileSync, writeFileSync } from 'node:fs'
 import { SUPABASE_CONFIG } from '../../shared/license'
+import { getDeviceFingerprint, getLicenseState } from './license'
 
 const MAX_LOG_SIZE = 2 * 1024 * 1024 // 2 MB
 
@@ -236,7 +237,7 @@ $selfUI = Get-ItemProperty 'HKLM:\\SOFTWARE\\Microsoft\\WindowsSelfHost\\UI\\Sel
   private static async testBackendPing(): Promise<{ ok: boolean; status: number; latencyMs: number; error?: string }> {
     const t0 = Date.now()
     try {
-      const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/`, {
+      const res = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/health`, {
         method: 'GET',
         headers: {
           apikey: SUPABASE_CONFIG.publishableKey,
@@ -378,8 +379,6 @@ $selfUI = Get-ItemProperty 'HKLM:\\SOFTWARE\\Microsoft\\WindowsSelfHost\\UI\\Sel
 
       // 6. T-Drop License Fingerprint
       try {
-        // Dynamic import to avoid any circular dependency at load time
-        const { getDeviceFingerprint, getLicenseState } = require('./license')
         const fp = getDeviceFingerprint()
         const st = getLicenseState()
         const maskedKey = st.key ? `${st.key.substring(0, 10)}*****` : 'Chưa có'

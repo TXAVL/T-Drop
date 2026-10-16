@@ -129,10 +129,17 @@ const BUILTIN_FALLBACKS: Record<string, { en: string; vi: string }> = {
 
   'common.close': { en: 'Close', vi: 'Đóng' },
   'common.dismiss': { en: 'Dismiss', vi: 'Bỏ qua' },
+  'common.undo': { en: 'Undo', vi: 'Hoàn tác' },
 
   'toast.shortcutUpdated': { en: 'Shortcut updated: {shortcut}', vi: 'Đã cập nhật phím tắt: {shortcut}' },
+  'toast.itemDeleted': { en: 'Item deleted', vi: 'Đã xóa mục' },
   'toast.deleteFailed': { en: 'Failed to delete item', vi: 'Không thể xóa mục' },
   'toast.clearFailed': { en: 'Failed to clear items', vi: 'Không thể dọn dẹp mục' },
+
+  'appearance.soundVolumeTitle': { en: 'Sound Volume', vi: 'Âm lượng hiệu ứng' },
+  'appearance.showQuickKeysTitle': { en: 'Quick Number Paste (1–9)', vi: 'Phím số dán nhanh (1–9)' },
+  'appearance.showQuickKeysDesc': { en: 'Display 1–9 badges on recent items to paste instantly with number keys', vi: 'Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì' },
+  'item.quickBadgeTitle': { en: 'Press {index} to paste', vi: 'Nhấn {index} để dán' },
 
   'tabs.generalStartup': { en: 'General & Startup', vi: 'Cài đặt chung & Khởi động' },
   'tabs.activationShortcuts': { en: 'Activation & Shortcuts', vi: 'Kích hoạt & Phím tắt' },

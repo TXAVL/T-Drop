@@ -16,7 +16,8 @@ import { ClipboardItemCard } from './ClipboardItem'
 import { EmptyState } from './EmptyState'
 import { ChevronDownIcon, PinFillIcon } from './icons'
 import { playExpandSound, playButtonClickSound } from '../lib/soundEffects'
-
+import { tryPaste } from '../lib/tryPaste'
+import { edge } from '../lib/edge'
 import { useTranslation } from '../i18n'
 
 const getVerticalPinnedLabelStyle = (text: string): React.CSSProperties => {
@@ -302,6 +303,24 @@ export function ItemList() {
 
   const filterKey = `${typeFilter}:${query}`
 
+  useEffect(() => {
+    const handleQuickPaste = (ev: Event) => {
+      const customEv = ev as CustomEvent<{ number: number }>
+      const targetIdx = (customEv.detail?.number ?? 0) - 1
+      if (targetIdx < 0) return
+      const visibleItems = [...(pinnedCollapsed ? [] : pinned), ...recent]
+      const targetItem = visibleItems[targetIdx]
+      if (targetItem) {
+        playButtonClickSound()
+        tryPaste(() => edge.pasteItem(targetItem.id))
+      }
+    }
+    window.addEventListener('quick-paste-number', handleQuickPaste)
+    return () => window.removeEventListener('quick-paste-number', handleQuickPaste)
+  }, [pinned, recent, pinnedCollapsed])
+
+  let quickCounter = 0
+
   return (
     <div
       className={`list${isHorizontal ? ' horizontal' : ''}`}
@@ -358,9 +377,11 @@ export function ItemList() {
                   </button>
                 </div>
               </div>
-              {!pinnedCollapsed && pinned.map((it) => (
-                <ClipboardItemCard key={it.id} item={it} />
-              ))}
+              {!pinnedCollapsed && pinned.map((it) => {
+                quickCounter++
+                const qIndex = quickCounter <= 9 ? quickCounter : undefined
+                return <ClipboardItemCard key={it.id} item={it} quickIndex={qIndex} />
+              })}
             </section>
           )}
 
@@ -371,9 +392,11 @@ export function ItemList() {
                   <span className="recent-label-text">{t('item.recent')}</span>
                 </div>
               )}
-              {recent.map((it) => (
-                <ClipboardItemCard key={it.id} item={it} />
-              ))}
+              {recent.map((it) => {
+                quickCounter++
+                const qIndex = quickCounter <= 9 ? quickCounter : undefined
+                return <ClipboardItemCard key={it.id} item={it} quickIndex={qIndex} />
+              })}
             </section>
           )}
         </motion.div>

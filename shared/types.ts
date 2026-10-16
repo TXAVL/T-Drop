@@ -191,6 +191,10 @@ export interface Settings {
   showEdgeLocationHint?: boolean
   /** When true, plays tactile audio sound effects for sliders, buttons, and switches. Default: true. */
   soundEffects?: boolean
+  /** Sound effects volume (0.1 - 1.0). Default: 0.8. */
+  soundVolume?: number
+  /** When true, shows subtle quick-order numeric badges (1-9) on items for instant visual order & quick paste. Default: true. */
+  showQuickKeys?: boolean
   /** Last version for which the user opened/viewed the What's New changelog panel. */
   lastSeenChangelogVersion?: string
   /** When true, hovering cursor near edge activates the panel. When false, panel opens exclusively via Alt + C. Default: true. */
@@ -254,6 +258,8 @@ export const DEFAULT_SETTINGS: Settings = {
   triggerAlignment: 'center',
   showEdgeLocationHint: false,
   soundEffects: true,
+  soundVolume: 0.8,
+  showQuickKeys: true,
   lastSeenChangelogVersion: undefined,
   hoverActivation: true,
   fontSizeScale: 1.04,

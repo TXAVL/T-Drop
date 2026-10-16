@@ -66,6 +66,14 @@ export function ShelfSearch() {
     disengage()
   }, [disengage])
 
+  useEffect(() => {
+    const handleFocusSearch = () => {
+      engage()
+    }
+    window.addEventListener('focus-shelf-search', handleFocusSearch)
+    return () => window.removeEventListener('focus-shelf-search', handleFocusSearch)
+  }, [engage])
+
   return (
     <div className="search">
       <SearchIcon className="search-icon" width={14} height={14} />

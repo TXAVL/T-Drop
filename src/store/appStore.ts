@@ -43,6 +43,10 @@ export interface ToastMsg {
   message: string
   tone: 'info' | 'error'
   params?: Record<string, string | number>
+  action?: {
+    label: string
+    onClick: () => void
+  }
 }
 
 export interface UpdateProgress {
@@ -557,12 +561,32 @@ export const useStore = create<AppState>((set, get) => ({
 
   async remove(id) {
     const previousItems = get().items
+    const removedItem = previousItems.find((it) => it.id === id)
     set({ items: previousItems.filter((it) => it.id !== id) })
     try {
       const items = await edge.deleteItem(id)
       const current = get().items
       if (items.length !== current.length || items.some((it, i) => it.id !== current[i]?.id)) {
         set({ items })
+      }
+      if (removedItem) {
+        get().pushToast({
+          id: `undo-${Date.now()}`,
+          message: t('toast.itemDeleted') || 'Đã xóa mục',
+          tone: 'info',
+          action: {
+            label: t('common.undo') || 'Hoàn tác',
+            onClick: async () => {
+              try {
+                const restored = await edge.addItemData(removedItem.data)
+                set({ items: restored })
+                playButtonClickSound()
+              } catch (err) {
+                console.error('Failed to undo delete:', err)
+              }
+            }
+          }
+        })
       }
     } catch {
       // Do not leave the UI claiming an item was deleted when the main-process

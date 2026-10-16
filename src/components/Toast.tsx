@@ -38,6 +38,19 @@ export function ToastStack() {
               </svg>
             )}
             <span>{t(toastMsg.message, toastMsg.params) || toastMsg.message}</span>
+            {toastMsg.action && (
+              <span
+                role="button"
+                className="toast-action-btn"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toastMsg.action?.onClick()
+                  dismiss(toastMsg.id)
+                }}
+              >
+                {toastMsg.action.label}
+              </span>
+            )}
           </motion.button>
         ))}
       </AnimatePresence>

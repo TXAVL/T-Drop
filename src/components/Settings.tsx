@@ -2638,6 +2638,50 @@ export function Settings({
                     />
                   </div>
                 </div>
+
+                {(settings.soundEffects ?? true) && (
+                  <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                      <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 12, fontWeight: 600 }}>
+                        {t('appearance.soundVolumeTitle') || 'Âm lượng hiệu ứng'}
+                      </span>
+                      <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.5)' }}>
+                        {Math.round((settings.soundVolume ?? 0.8) * 100)}%
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="0.1"
+                      max="1"
+                      step="0.05"
+                      value={settings.soundVolume ?? 0.8}
+                      style={{ width: '100%', accentColor: 'var(--accent, #6366f1)', cursor: 'pointer' }}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value)
+                        patch({ soundVolume: val })
+                      }}
+                      onMouseUp={() => {
+                        playDialTickSound()
+                      }}
+                    />
+                  </div>
+                )}
+
+                <div className="shelf-card-inline" style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div className="shelf-card-inline-text">
+                    <div className="setting-title">{t('appearance.showQuickKeysTitle') || 'Phím số dán nhanh (1–9)'}</div>
+                    <div className="setting-desc">{t('appearance.showQuickKeysDesc') || 'Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì'}</div>
+                  </div>
+                  <div className="shelf-card-inline-action">
+                    <Toggle
+                      checked={settings.showQuickKeys ?? true}
+                      onChange={(v) => {
+                        playToggleSound(v)
+                        patch({ showQuickKeys: v })
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* ── SUB-GROUP 3 DIVIDER: Community & Support ── */}
@@ -3639,6 +3683,50 @@ export function Settings({
                           onChange={(v) => {
                             if (v) playToggleSound(true)
                             patch({ soundEffects: v })
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {(settings.soundEffects ?? true) && (
+                      <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                          <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 12, fontWeight: 600 }}>
+                            {t('appearance.soundVolumeTitle') || 'Âm lượng hiệu ứng'}
+                          </span>
+                          <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.5)' }}>
+                            {Math.round((settings.soundVolume ?? 0.8) * 100)}%
+                          </span>
+                        </div>
+                        <input
+                          type="range"
+                          min="0.1"
+                          max="1"
+                          step="0.05"
+                          value={settings.soundVolume ?? 0.8}
+                          style={{ width: '100%', accentColor: 'var(--accent, #6366f1)', cursor: 'pointer' }}
+                          onChange={(e) => {
+                            const val = parseFloat(e.target.value)
+                            patch({ soundVolume: val })
+                          }}
+                          onMouseUp={() => {
+                            playDialTickSound()
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    <div className="shelf-card-inline" style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                      <div className="shelf-card-inline-text">
+                        <div className="setting-title">{t('appearance.showQuickKeysTitle') || 'Phím số dán nhanh (1–9)'}</div>
+                        <div className="setting-desc">{t('appearance.showQuickKeysDesc') || 'Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì'}</div>
+                      </div>
+                      <div className="shelf-card-inline-action">
+                        <Toggle
+                          checked={settings.showQuickKeys ?? true}
+                          onChange={(v) => {
+                            playToggleSound(v)
+                            patch({ showQuickKeys: v })
                           }}
                         />
                       </div>

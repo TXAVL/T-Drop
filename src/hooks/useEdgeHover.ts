@@ -642,7 +642,24 @@ export function useEdgeHover(): void {
       // (search owns Escape: clear, then blur).
       const t = e.target as HTMLElement | null
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return
-      if (e.key === 'Escape' && useStore.getState().open) scheduleClose(0)
+      if (e.key === 'Escape' && useStore.getState().open) {
+        scheduleClose(0)
+        return
+      }
+
+      // Quick Search Hotkey: '/' or 'Ctrl+F' engages and focuses shelf search
+      if (useStore.getState().open && (e.key === '/' || ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')))) {
+        e.preventDefault()
+        window.dispatchEvent(new CustomEvent('focus-shelf-search'))
+        return
+      }
+
+      // Quick Number Key Paste (1-9)
+      if (useStore.getState().open && !e.ctrlKey && !e.metaKey && !e.altKey && e.key >= '1' && e.key <= '9') {
+        const num = parseInt(e.key, 10)
+        e.preventDefault()
+        window.dispatchEvent(new CustomEvent('quick-paste-number', { detail: { number: num } }))
+      }
     }
 
     // ── window blur (Alt+Tab / OS focus stolen) ────────────────────────────

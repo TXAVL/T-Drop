@@ -789,6 +789,29 @@
   filter: brightness(1.1);
 }
 
+.toast-action-btn {
+  margin-left: 6px;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  color: #fff;
+  font-size: calc(11.5px * var(--font-scale, 1));
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+.toast-action-btn:hover {
+  background: #38bdf8;
+  color: #0f172a;
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
 /* Quick Type Segmented Control (Jelly Radio Physics) */
 .filter-segmented-track {
   background: transparent;

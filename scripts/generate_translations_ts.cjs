@@ -138,6 +138,9 @@ const masterEn = {
     typography: 'Typography',
     textSizeTitle: 'Text size',
     textSizeDesc: 'Adjust UI typography scale across T-Drop',
+    soundVolumeTitle: 'Sound Volume',
+    showQuickKeysTitle: 'Quick Number Paste (1–9)',
+    showQuickKeysDesc: 'Display 1–9 badges on recent items to paste instantly with number keys',
     audioAndFeedback: 'Audio & Feedback',
     small: 'Small',
     normal: 'Normal',
@@ -153,6 +156,7 @@ const masterEn = {
     sparkleStyle: 'Sparkle'
   },
   item: {
+    quickBadgeTitle: 'Press {index} to paste',
     copy: 'Copy',
     pinned: 'PINNED',
     pin: 'Pin',
@@ -531,6 +535,14 @@ const overrides = {
       hotkeyRecording: 'Nhấn tổ hợp phím...',
       hotkeyCancel: 'Hủy',
       hotkeyReset: 'Đặt lại về mặc định ({shortcut})'
+    },
+    appearance: {
+      soundVolumeTitle: 'Âm lượng hiệu ứng',
+      showQuickKeysTitle: 'Phím số dán nhanh (1–9)',
+      showQuickKeysDesc: 'Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì'
+    },
+    item: {
+      quickBadgeTitle: 'Nhấn {index} để dán'
     }
   }
 };
@@ -711,6 +723,10 @@ let fileContent = `export interface TranslationKeys {
     tickStyle: string
     copyStyle: string
     sparkleStyle: string
+    soundVolumeTitle?: string
+    showQuickKeysTitle?: string
+    showQuickKeysDesc?: string
+    [key: string]: string | undefined
   }
   item: {
     copy: string
@@ -726,6 +742,7 @@ let fileContent = `export interface TranslationKeys {
     expand: string
     textItem: string
     imageItem: string
+    quickBadgeTitle?: string
     fileItem: string
     linkItem: string
     items: string

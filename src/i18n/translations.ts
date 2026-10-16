@@ -148,6 +148,10 @@ export interface TranslationKeys {
     tickStyle: string
     copyStyle: string
     sparkleStyle: string
+    soundVolumeTitle?: string
+    showQuickKeysTitle?: string
+    showQuickKeysDesc?: string
+    [key: string]: string | undefined
   }
   item: {
     copy: string
@@ -163,6 +167,7 @@ export interface TranslationKeys {
     expand: string
     textItem: string
     imageItem: string
+    quickBadgeTitle?: string
     fileItem: string
     linkItem: string
     items: string
@@ -657,6 +662,9 @@ export const en: TranslationKeys = {
     "typography": "Typography",
     "textSizeTitle": "Text size",
     "textSizeDesc": "Adjust UI typography scale across T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio & Feedback",
     "small": "Small",
     "normal": "Normal",
@@ -672,6 +680,7 @@ export const en: TranslationKeys = {
     "sparkleStyle": "Sparkle"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Copy",
     "pinned": "PINNED",
     "pin": "Pin",
@@ -1002,6 +1011,9 @@ export const es: TranslationKeys = {
     "typography": "Tipografía",
     "textSizeTitle": "Tamaño del texto",
     "textSizeDesc": "Ajusta la escala tipográfica de la interfaz en T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio y respuesta",
     "small": "Pequeño",
     "normal": "Normal",
@@ -1017,6 +1029,7 @@ export const es: TranslationKeys = {
     "sparkleStyle": "Destello"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Copiar",
     "pinned": "FIJADO",
     "pin": "Fijar",
@@ -1347,6 +1360,9 @@ export const fr: TranslationKeys = {
     "typography": "Typographie",
     "textSizeTitle": "Taille du texte",
     "textSizeDesc": "Ajuster l'échelle typographique de l'interface dans T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio et retour",
     "small": "Petit",
     "normal": "Normal",
@@ -1362,6 +1378,7 @@ export const fr: TranslationKeys = {
     "sparkleStyle": "Étincelle"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Copier",
     "pinned": "ÉPINGLÉ",
     "pin": "Épingler",
@@ -1692,6 +1709,9 @@ export const de: TranslationKeys = {
     "typography": "Typografie",
     "textSizeTitle": "Textgröße",
     "textSizeDesc": "Typografieskala der Benutzeroberfläche in T-Drop anpassen",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio & Feedback",
     "small": "Klein",
     "normal": "Normal",
@@ -1707,6 +1727,7 @@ export const de: TranslationKeys = {
     "sparkleStyle": "Funke"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopieren",
     "pinned": "ANGEPINNT",
     "pin": "Anpinnen",
@@ -2037,6 +2058,9 @@ export const it: TranslationKeys = {
     "typography": "Tipografia",
     "textSizeTitle": "Dimensione testo",
     "textSizeDesc": "Regola la scala tipografica dell'interfaccia in T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio e feedback",
     "small": "Piccolo",
     "normal": "Normale",
@@ -2052,6 +2076,7 @@ export const it: TranslationKeys = {
     "sparkleStyle": "Scintilla"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Copia",
     "pinned": "BLOCCATO",
     "pin": "Blocca",
@@ -2382,6 +2407,9 @@ export const pt: TranslationKeys = {
     "typography": "Tipografia",
     "textSizeTitle": "Tamanho do texto",
     "textSizeDesc": "Ajustar escala tipográfica da interface no T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Áudio e feedback",
     "small": "Pequeno",
     "normal": "Normal",
@@ -2397,6 +2425,7 @@ export const pt: TranslationKeys = {
     "sparkleStyle": "Cintilação"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Copiar",
     "pinned": "FIXADO",
     "pin": "Fixar",
@@ -2727,6 +2756,9 @@ export const ru: TranslationKeys = {
     "typography": "Типографика",
     "textSizeTitle": "Размер текста",
     "textSizeDesc": "Настройте масштаб типографики интерфейса T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Аудио и отклик",
     "small": "Малый",
     "normal": "Нормальный",
@@ -2742,6 +2774,7 @@ export const ru: TranslationKeys = {
     "sparkleStyle": "Искра"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Копировать",
     "pinned": "ЗАКРЕПЛЕНО",
     "pin": "Закрепить",
@@ -3072,6 +3105,9 @@ export const ja: TranslationKeys = {
     "typography": "タイポグラフィ",
     "textSizeTitle": "文字サイズ",
     "textSizeDesc": "T-Drop 全体のUIテキストサイズを調整",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "オーディオとフィードバック",
     "small": "小",
     "normal": "標準",
@@ -3087,6 +3123,7 @@ export const ja: TranslationKeys = {
     "sparkleStyle": "スパークル"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "コピー",
     "pinned": "ピン留め",
     "pin": "ピン留め",
@@ -3417,6 +3454,9 @@ export const ko: TranslationKeys = {
     "typography": "글꼴",
     "textSizeTitle": "텍스트 크기",
     "textSizeDesc": "T-Drop 전체의 UI 글꼴 배율 조정",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "오디오 및 피드백",
     "small": "작게",
     "normal": "보통",
@@ -3432,6 +3472,7 @@ export const ko: TranslationKeys = {
     "sparkleStyle": "반짝임"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "복사",
     "pinned": "고정됨",
     "pin": "고정",
@@ -3762,6 +3803,9 @@ export const zhCN: TranslationKeys = {
     "typography": "排版",
     "textSizeTitle": "文字大小",
     "textSizeDesc": "调整 T-Drop 整体的界面排版比例",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "音频和反馈",
     "small": "小",
     "normal": "正常",
@@ -3777,6 +3821,7 @@ export const zhCN: TranslationKeys = {
     "sparkleStyle": "闪光"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "复制",
     "pinned": "已固定",
     "pin": "固定",
@@ -4107,6 +4152,9 @@ export const zhTW: TranslationKeys = {
     "typography": "字體排版",
     "textSizeTitle": "文字大小",
     "textSizeDesc": "調整 T-Drop 整體的介面字體比例",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "音訊和回饋",
     "small": "小",
     "normal": "正常",
@@ -4122,6 +4170,7 @@ export const zhTW: TranslationKeys = {
     "sparkleStyle": "閃光"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "複製",
     "pinned": "已固定",
     "pin": "固定",
@@ -4452,6 +4501,9 @@ export const hi: TranslationKeys = {
     "typography": "टाइपोग्राफी",
     "textSizeTitle": "टेक्स्ट आकार",
     "textSizeDesc": "T-Drop में UI टाइपोग्राफी स्केल समायोजित करें",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "ऑडियो और फ़ीडबैक",
     "small": "छोटा",
     "normal": "सामान्य",
@@ -4467,6 +4519,7 @@ export const hi: TranslationKeys = {
     "sparkleStyle": "स्पार्कल"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "कॉपी",
     "pinned": "पिन किया गया",
     "pin": "पिन करें",
@@ -4797,6 +4850,9 @@ export const ar: TranslationKeys = {
     "typography": "الطباعة",
     "textSizeTitle": "حجم النص",
     "textSizeDesc": "ضبط مقياس طباعة الواجهة في T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "الصوت والاستجابة",
     "small": "صغير",
     "normal": "عادي",
@@ -4812,6 +4868,7 @@ export const ar: TranslationKeys = {
     "sparkleStyle": "وميض"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "نسخ",
     "pinned": "مثبّت",
     "pin": "تثبيت",
@@ -5142,6 +5199,9 @@ export const fa: TranslationKeys = {
     "typography": "نوشته‌ها",
     "textSizeTitle": "اندازه متن",
     "textSizeDesc": "اندازه نوشته‌های T-Drop رو تنظیم کن",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "صدا و بازخورد",
     "small": "کوچیک",
     "normal": "معمولی",
@@ -5157,6 +5217,7 @@ export const fa: TranslationKeys = {
     "sparkleStyle": "درخشش"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "کپی",
     "pinned": "سنجاق‌شده‌ها",
     "pin": "سنجاق کن",
@@ -5487,6 +5548,9 @@ export const bn: TranslationKeys = {
     "typography": "টাইপোগ্রাফি",
     "textSizeTitle": "টেক্সট আকার",
     "textSizeDesc": "T-Drop জুড়ে UI টাইপোগ্রাফি স্কেল সমন্বয় করুন",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "অডিও ও প্রতিক্রিয়া",
     "small": "ছোট",
     "normal": "স্বাভাবিক",
@@ -5502,6 +5566,7 @@ export const bn: TranslationKeys = {
     "sparkleStyle": "স্পার্কল"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "কপি",
     "pinned": "পিন করা",
     "pin": "পিন করুন",
@@ -5832,6 +5897,9 @@ export const tr: TranslationKeys = {
     "typography": "Tipografi",
     "textSizeTitle": "Metin boyutu",
     "textSizeDesc": "T-Drop genelinde arayüz tipografi ölçeğini ayarla",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Ses ve Geri Bildirim",
     "small": "Küçük",
     "normal": "Normal",
@@ -5847,6 +5915,7 @@ export const tr: TranslationKeys = {
     "sparkleStyle": "Kıvılcım"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopyala",
     "pinned": "SABİTLENDİ",
     "pin": "Sabitle",
@@ -6177,6 +6246,9 @@ export const vi: TranslationKeys = {
     "typography": "Kiểu chữ",
     "textSizeTitle": "Cỡ chữ",
     "textSizeDesc": "Điều chỉnh tỷ lệ kiểu chữ giao diện trên T-Drop",
+    "soundVolumeTitle": "Âm lượng hiệu ứng",
+    "showQuickKeysTitle": "Phím số dán nhanh (1–9)",
+    "showQuickKeysDesc": "Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì",
     "audioAndFeedback": "Âm thanh & Phản hồi",
     "small": "Nhỏ",
     "normal": "Thường",
@@ -6192,6 +6264,7 @@ export const vi: TranslationKeys = {
     "sparkleStyle": "Lấp lánh"
   },
   "item": {
+    "quickBadgeTitle": "Nhấn {index} để dán",
     "copy": "Sao chép",
     "pinned": "ĐÃ GHIM",
     "pin": "Ghim",
@@ -6522,6 +6595,9 @@ export const pl: TranslationKeys = {
     "typography": "Typografia",
     "textSizeTitle": "Rozmiar tekstu",
     "textSizeDesc": "Dostosuj skalę typografii interfejsu w T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio i sprzężenie",
     "small": "Mały",
     "normal": "Normalny",
@@ -6537,6 +6613,7 @@ export const pl: TranslationKeys = {
     "sparkleStyle": "Iskra"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopiuj",
     "pinned": "PRZYPINIĘTE",
     "pin": "Przypnij",
@@ -6867,6 +6944,9 @@ export const nl: TranslationKeys = {
     "typography": "Typografie",
     "textSizeTitle": "Tekstgrootte",
     "textSizeDesc": "Typografieschaal van de UI in T-Drop aanpassen",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio en feedback",
     "small": "Klein",
     "normal": "Normaal",
@@ -6882,6 +6962,7 @@ export const nl: TranslationKeys = {
     "sparkleStyle": "Sprankel"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopiëren",
     "pinned": "VASTGEZET",
     "pin": "Vastzetten",
@@ -7212,6 +7293,9 @@ export const sv: TranslationKeys = {
     "typography": "Typografi",
     "textSizeTitle": "Textstorlek",
     "textSizeDesc": "Justera typografiskala för gränssnittet i T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Ljud och återkoppling",
     "small": "Liten",
     "normal": "Normal",
@@ -7227,6 +7311,7 @@ export const sv: TranslationKeys = {
     "sparkleStyle": "Gnista"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopiera",
     "pinned": "FÄST",
     "pin": "Fäst",
@@ -7557,6 +7642,9 @@ export const id: TranslationKeys = {
     "typography": "Tipografi",
     "textSizeTitle": "Ukuran teks",
     "textSizeDesc": "Sesuaikan skala tipografi antarmuka di T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio & Umpan Balik",
     "small": "Kecil",
     "normal": "Normal",
@@ -7572,6 +7660,7 @@ export const id: TranslationKeys = {
     "sparkleStyle": "Kilau"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Salin",
     "pinned": "DISEMATKAN",
     "pin": "Sematkan",
@@ -7902,6 +7991,9 @@ export const uk: TranslationKeys = {
     "typography": "Типографіка",
     "textSizeTitle": "Розмір тексту",
     "textSizeDesc": "Налаштуйте масштаб типографіки інтерфейсу в T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Аудіо та відгук",
     "small": "Малий",
     "normal": "Звичайний",
@@ -7917,6 +8009,7 @@ export const uk: TranslationKeys = {
     "sparkleStyle": "Іскра"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Копіювати",
     "pinned": "ПРИКРІПЛЕНО",
     "pin": "Прикріпити",
@@ -8247,6 +8340,9 @@ export const el: TranslationKeys = {
     "typography": "Τυπογραφία",
     "textSizeTitle": "Μέγεθος κειμένου",
     "textSizeDesc": "Προσαρμογή κλίμακας τυπογραφίας διεπαφής σε όλο το T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Ήχος και ανάδραση",
     "small": "Μικρό",
     "normal": "Κανονικό",
@@ -8262,6 +8358,7 @@ export const el: TranslationKeys = {
     "sparkleStyle": "Σπίθα"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Αντιγραφή",
     "pinned": "ΚΑΡΦΙΤΣΩΜΕΝΟ",
     "pin": "Καρφίσωσε",
@@ -8592,6 +8689,9 @@ export const cs: TranslationKeys = {
     "typography": "Typografie",
     "textSizeTitle": "Velikost textu",
     "textSizeDesc": "Upravit měřítko typografie rozhraní v T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Zvuk a odezva",
     "small": "Malý",
     "normal": "Normální",
@@ -8607,6 +8707,7 @@ export const cs: TranslationKeys = {
     "sparkleStyle": "Jiskra"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopírovat",
     "pinned": "PŘIPNUTO",
     "pin": "Připnout",
@@ -8937,6 +9038,9 @@ export const ro: TranslationKeys = {
     "typography": "Tipografie",
     "textSizeTitle": "Dimensiune text",
     "textSizeDesc": "Ajustează scara tipografică a interfeței în T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Audio și feedback",
     "small": "Mic",
     "normal": "Normal",
@@ -8952,6 +9056,7 @@ export const ro: TranslationKeys = {
     "sparkleStyle": "Scânteie"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Copiază",
     "pinned": "PINAT",
     "pin": "Păstrează",
@@ -9282,6 +9387,9 @@ export const hu: TranslationKeys = {
     "typography": "Tipográfia",
     "textSizeTitle": "Szövegméret",
     "textSizeDesc": "Az T-Drop felület tipográfiai skálájának beállítása",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Hang és visszacsatolás",
     "small": "Kicsi",
     "normal": "Normál",
@@ -9297,6 +9405,7 @@ export const hu: TranslationKeys = {
     "sparkleStyle": "Szikra"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Másolás",
     "pinned": "RÖGZÍTETT",
     "pin": "Rögzítés",
@@ -9627,6 +9736,9 @@ export const da: TranslationKeys = {
     "typography": "Typografi",
     "textSizeTitle": "Tekststørrelse",
     "textSizeDesc": "Juster UI-typografiskala på tværs af T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Lyd og feedback",
     "small": "Lille",
     "normal": "Normal",
@@ -9642,6 +9754,7 @@ export const da: TranslationKeys = {
     "sparkleStyle": "Gnist"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopier",
     "pinned": "FASTGJORT",
     "pin": "Fastgør",
@@ -9972,6 +10085,9 @@ export const fi: TranslationKeys = {
     "typography": "Typografia",
     "textSizeTitle": "Tekstin koko",
     "textSizeDesc": "Säädä käyttöliittymän typografia-asteikkoa T-Dropissa",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Ääni ja palaute",
     "small": "Pieni",
     "normal": "Normaali",
@@ -9987,6 +10103,7 @@ export const fi: TranslationKeys = {
     "sparkleStyle": "Kipinä"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopioi",
     "pinned": "KIINNITETTY",
     "pin": "Kiinnitä",
@@ -10317,6 +10434,9 @@ export const th: TranslationKeys = {
     "typography": "การพิมพ์",
     "textSizeTitle": "ขนาดข้อความ",
     "textSizeDesc": "ปรับสเกลการพิมพ์ของส่วนติดต่อใน T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "เสียงและการตอบสนอง",
     "small": "เล็ก",
     "normal": "ปกติ",
@@ -10332,6 +10452,7 @@ export const th: TranslationKeys = {
     "sparkleStyle": "ประกาย"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "คัดลอก",
     "pinned": "ปักหมุดแล้ว",
     "pin": "ปักหมุด",
@@ -10662,6 +10783,9 @@ export const he: TranslationKeys = {
     "typography": "טיפוגרפיה",
     "textSizeTitle": "גודל טקסט",
     "textSizeDesc": "כוון סקלת טיפוגרפיה של ממשק המשתמש ב-T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "אודיו ומשוב",
     "small": "קטן",
     "normal": "רגיל",
@@ -10677,6 +10801,7 @@ export const he: TranslationKeys = {
     "sparkleStyle": "ניצוץ"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "העתק",
     "pinned": "מוצמד",
     "pin": "הצמד",
@@ -11007,6 +11132,9 @@ export const no: TranslationKeys = {
     "typography": "Typografi",
     "textSizeTitle": "Tekststørrelse",
     "textSizeDesc": "Juster UI-typografiskala på tvers av T-Drop",
+    "soundVolumeTitle": "Sound Volume",
+    "showQuickKeysTitle": "Quick Number Paste (1–9)",
+    "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys",
     "audioAndFeedback": "Lyd og tilbakemelding",
     "small": "Liten",
     "normal": "Normal",
@@ -11022,6 +11150,7 @@ export const no: TranslationKeys = {
     "sparkleStyle": "Gnist"
   },
   "item": {
+    "quickBadgeTitle": "Press {index} to paste",
     "copy": "Kopier",
     "pinned": "FESTET",
     "pin": "Fest",

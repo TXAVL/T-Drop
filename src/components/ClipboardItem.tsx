@@ -42,6 +42,7 @@ export const RelativeTime = memo(function RelativeTime({ capturedAt }: { capture
 
 interface Props {
   item: ClipboardItemDto
+  quickIndex?: number
 }
 
 /**
@@ -58,7 +59,7 @@ export function fileStreamUrl(filePath: string): string {
 /* Main item card                                                      */
 /* ------------------------------------------------------------------ */
 
-const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item }, ref) => {
+const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex }, ref) => {
   const { t } = useTranslation()
   const copy = useStore.getState().copy
   const paste = useStore.getState().paste
@@ -347,6 +348,11 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item }, ref) => {
         }}
         onClick={handleCardClick}
       >
+        {Boolean(quickIndex && (settings.showQuickKeys ?? true)) && (
+          <span className="item-quick-badge" title={t('item.quickBadgeTitle', { index: quickIndex ?? 0 }) || `#${quickIndex}`}>
+            {quickIndex}
+          </span>
+        )}
         <div className="body">
           <div className="item-content">
             {isBundle ? (
