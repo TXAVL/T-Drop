@@ -11,6 +11,7 @@ import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
 import { CopyIcon, FolderOpenIcon, CheckIcon, OcrIcon, CrownIcon } from './icons'
 import { t } from '../i18n'
+import { formatCountdownRemaining } from '../../shared/license'
 
 interface ImageStudioPanelProps {
   imageSrc: string
@@ -51,6 +52,7 @@ export function ImageStudioPanel({
   const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
   const isPremium = Boolean(settings.isPro && settings.licenseRole === 'PREMIUM')
   const role = settings.licenseRole || 'FREE'
+  const countdownStr = formatCountdownRemaining(settings.licenseExpiresAt)
 
   const [autoOcr, setAutoOcr] = useState<boolean>(() => {
     return localStorage.getItem('tdrop_auto_ocr') === 'true'
@@ -568,9 +570,17 @@ export function ImageStudioPanel({
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <CrownIcon width={13} height={13} fill={isPremium ? '#c084fc' : '#f59e0b'} />
                   <span style={{ fontSize: 11, fontWeight: 700, color: isPremium ? '#c084fc' : '#f59e0b' }}>
-                    {isPremium
-                      ? (t('imageStudio.premiumActive') || 'Gói PREMIUM (60 ngày)')
-                      : (t('imageStudio.vipActive') || 'Gói VIP (30 ngày)')}
+                    {role === 'PREMIUM' ? 'Gói PREMIUM' : 'Gói VIP'}
+                  </span>
+                  <span style={{
+                    fontSize: 9.5,
+                    fontWeight: 700,
+                    padding: '1px 6px',
+                    borderRadius: 4,
+                    background: isPremium ? 'rgba(168, 85, 247, 0.3)' : 'rgba(245, 158, 11, 0.25)',
+                    color: isPremium ? '#e9d5ff' : '#fef08a'
+                  }}>
+                    {countdownStr || (role === 'PREMIUM' ? 'Còn 60 ngày' : 'Còn 30 ngày')}
                   </span>
                 </div>
                 {!isPremium ? (

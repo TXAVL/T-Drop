@@ -10,7 +10,7 @@ import {
   SparkleIndicatorIcon
 } from './CopyIndicatorCurve'
 import { ChevronRightIcon, CloseIcon, LogOutIcon, StarIcon, InfoIcon, GithubOctocatLogo, MicrosoftStoreLogo, CrownIcon } from './icons'
-import { getDaysRemaining, formatExpiryDate, type DeviceFingerprint } from '../../shared/license'
+import { getDaysRemaining, formatCountdownRemaining, formatExpiryDate, type DeviceFingerprint } from '../../shared/license'
 import { PurchaseModal } from './PurchaseModal'
 import { HotkeyRecorder } from './HotkeyRecorder'
 import { SlideCommit } from './SlideCommit'
@@ -586,6 +586,7 @@ export function Settings({
     const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
     const role = settings.licenseRole || 'FREE'
     const daysLeft = getDaysRemaining(settings.licenseExpiresAt)
+    const countdownStr = formatCountdownRemaining(settings.licenseExpiresAt)
 
     const content = (
       <>
@@ -620,7 +621,7 @@ export function Settings({
 
           <div className="setting-desc">
             {isPro
-              ? `Chủ sở hữu: ${settings.licenseUserName || 'Khách hàng'} · Còn lại: ${daysLeft !== null ? `${daysLeft} ngày` : 'Đang hiệu lực'}`
+              ? `Chủ sở hữu: ${settings.licenseUserName || 'Khách hàng'} · ${countdownStr ? `${countdownStr}` : daysLeft !== null ? `Còn ${daysLeft} ngày` : 'Đang hiệu lực'}`
               : 'Kích hoạt VIP (hạn 30 ngày) hoặc PREMIUM (hạn 60 ngày) để dùng tính năng AI OCR trích chữ từ hình ảnh.'}
           </div>
 
@@ -638,7 +639,7 @@ export function Settings({
               justifyContent: 'space-between'
             }}>
               <span>Hạn đến: <strong>{formatExpiryDate(settings.licenseExpiresAt)}</strong></span>
-              <span>Còn lại: <strong style={{ color: '#fff' }}>{daysLeft ?? 0} ngày</strong></span>
+              <span>Thời hạn: <strong style={{ color: '#fff' }}>{countdownStr || `${daysLeft ?? 0} ngày`}</strong></span>
             </div>
           )}
 

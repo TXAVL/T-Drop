@@ -44,6 +44,24 @@ export function getDaysRemaining(expiresAt?: string | null): number | null {
 }
 
 /**
+ * Format remaining countdown string (e.g. "Còn 29 ngày 14h", "Còn 5 giờ 30p", "Đã hết hạn").
+ */
+export function formatCountdownRemaining(expiresAt?: string | null): string | null {
+  if (!expiresAt) return null
+  const expiry = new Date(expiresAt).getTime()
+  if (isNaN(expiry)) return null
+  const diff = expiry - Date.now()
+  if (diff <= 0) return 'Đã hết hạn'
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  if (days > 0) {
+    return hours > 0 ? `Còn ${days} ngày ${hours}h` : `Còn ${days} ngày`
+  }
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  return hours > 0 ? `Còn ${hours} giờ ${mins}p` : `Còn ${Math.max(1, mins)} phút`
+}
+
+/**
  * Validate allowed email domains: Gmail, iCloud, Outlook, Hotmail.
  */
 export function isValidEmailDomain(email: string): boolean {
