@@ -483,9 +483,18 @@ export function Settings({
     try {
       const res = await window.edge.activateLicense(trimmed)
       if (res.ok) {
+        const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
+        useStore.getState().updateSettings({
+          isPro: true,
+          licenseKey: trimmed,
+          licenseRole: activatedRole,
+          licenseUserName: res.userName || 'Khách hàng',
+          licenseExpiresAt: res.expiresAt || null
+        })
+        setLicenseInput('')
         pushToast({
           id: Date.now().toString(),
-          message: res.message || 'Kích hoạt thành công!',
+          message: `🎉 ${res.message || `Kích hoạt thành công gói ${activatedRole}!`}`,
           tone: 'info'
         })
       } else {
@@ -509,6 +518,13 @@ export function Settings({
   const handleDeactivateLicense = () => {
     playButtonClickSound()
     window.edge.deactivateLicense()
+    useStore.getState().updateSettings({
+      isPro: false,
+      licenseKey: '',
+      licenseRole: 'FREE',
+      licenseUserName: '',
+      licenseExpiresAt: null
+    })
     setLicenseInput('')
     pushToast({
       id: Date.now().toString(),

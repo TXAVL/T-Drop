@@ -276,12 +276,26 @@ function PurchaseWindowContent({
     try {
       const res = await window.edge.activateLicense(trimmed)
       if (res.ok) {
-        setActivationMsg({ text: res.message || 'Kích hoạt bản quyền thành công!', ok: true })
+        const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
+        useStore.getState().updateSettings({
+          isPro: true,
+          licenseKey: trimmed,
+          licenseRole: activatedRole,
+          licenseUserName: res.userName || 'Khách hàng',
+          licenseExpiresAt: res.expiresAt || null
+        })
+        setActivationMsg({
+          text: `🎉 Kích hoạt thành công gói ${activatedRole}!`,
+          ok: true
+        })
         pushToast({
           id: Date.now().toString(),
-          message: res.message || 'Kích hoạt bản quyền thành công!',
+          message: `🎉 Kích hoạt thành công gói ${activatedRole}! Đang mở khóa tính năng...`,
           tone: 'info'
         })
+        setTimeout(() => {
+          onClose()
+        }, 1800)
       } else {
         setActivationMsg({ text: res.message || 'Mã bản quyền không hợp lệ!', ok: false })
       }
@@ -633,63 +647,103 @@ function PurchaseWindowContent({
           </div>
 
           {/* Nhập mã kích hoạt nhanh */}
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: 8,
-            padding: 10,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 6
-          }}>
-            <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600 }}>
-              ĐÃ CÓ MÃ LICENSE? KÍCH HOẠT NGAY:
-            </span>
-            <div style={{ display: 'flex', gap: 6 }}>
-              <input
-                ref={inlineKeyInputRef}
-                type="text"
-                placeholder="Dán mã: TDR_XXXXXX_XXXXX"
-                value={inlineKey}
-                onChange={(e) => setInlineKey(e.target.value.toUpperCase())}
-                style={{
-                  flex: 1,
-                  height: 32,
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                  borderRadius: 6,
-                  padding: '0 8px',
-                  color: '#fff',
-                  fontSize: 11.5,
-                  fontFamily: 'var(--font-mono, monospace)',
-                  outline: 'none'
-                }}
-              />
+          {activationMsg?.ok ? (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1))',
+              border: '1px solid rgba(16, 185, 129, 0.4)',
+              borderRadius: 10,
+              padding: '12px 14px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8,
+              textAlign: 'center'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <CrownIcon width={18} height={18} fill="#10b981" />
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#10b981' }}>
+                  {activationMsg.text}
+                </span>
+              </div>
+              <span style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.8)' }}>
+                Đã mở khóa toàn bộ tính năng cao cấp. Đang tự động đóng cửa sổ...
+              </span>
               <button
                 type="button"
-                disabled={activatingKey || !inlineKey.trim()}
-                onClick={handleActivateInlineKey}
+                onClick={onClose}
                 style={{
                   height: 32,
-                  padding: '0 12px',
-                  borderRadius: 6,
-                  border: 'none',
                   background: '#10b981',
+                  border: 'none',
+                  borderRadius: 6,
                   color: '#000',
-                  fontWeight: 600,
-                  fontSize: 11.5,
-                  cursor: activatingKey || !inlineKey.trim() ? 'not-allowed' : 'pointer'
+                  fontSize: 12,
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  marginTop: 4
                 }}
               >
-                {activatingKey ? '...' : 'Kích hoạt'}
+                🚀 Bắt đầu sử dụng ngay
               </button>
             </div>
-            {activationMsg && (
-              <span style={{ fontSize: 11, color: activationMsg.ok ? '#10b981' : '#ef4444' }}>
-                {activationMsg.text}
+          ) : (
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.03)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: 8,
+              padding: 10,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 6
+            }}>
+              <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600 }}>
+                ĐÃ CÓ MÃ LICENSE? KÍCH HOẠT NGAY:
               </span>
-            )}
-          </div>
+              <div style={{ display: 'flex', gap: 6 }}>
+                <input
+                  ref={inlineKeyInputRef}
+                  type="text"
+                  placeholder="Dán mã: TDR_XXXXXX_XXXXX"
+                  value={inlineKey}
+                  onChange={(e) => setInlineKey(e.target.value.toUpperCase())}
+                  style={{
+                    flex: 1,
+                    height: 32,
+                    background: 'rgba(0, 0, 0, 0.5)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    borderRadius: 6,
+                    padding: '0 8px',
+                    color: '#fff',
+                    fontSize: 11.5,
+                    fontFamily: 'var(--font-mono, monospace)',
+                    outline: 'none'
+                  }}
+                />
+                <button
+                  type="button"
+                  disabled={activatingKey || !inlineKey.trim()}
+                  onClick={handleActivateInlineKey}
+                  style={{
+                    height: 32,
+                    padding: '0 12px',
+                    borderRadius: 6,
+                    border: 'none',
+                    background: '#10b981',
+                    color: '#000',
+                    fontWeight: 600,
+                    fontSize: 11.5,
+                    cursor: activatingKey || !inlineKey.trim() ? 'not-allowed' : 'pointer'
+                  }}
+                >
+                  {activatingKey ? '...' : 'Kích hoạt'}
+                </button>
+              </div>
+              {activationMsg && !activationMsg.ok && (
+                <span style={{ fontSize: 11, color: '#ef4444' }}>
+                  {activationMsg.text}
+                </span>
+              )}
+            </div>
+          )}
 
           <button
             type="button"
