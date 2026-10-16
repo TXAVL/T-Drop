@@ -65,7 +65,44 @@ const masterEn = {
     notifyModeSubtitle: 'Notification mode · Click to download',
     newUpdateAvailable: 'New update available {version}',
     cleanTrackingUrlsTitle: 'Auto-clean tracking URLs',
-    cleanTrackingUrlsDesc: 'Automatically strip tracking parameters (UTM, fbclid, si...) from copied links'
+    cleanTrackingUrlsDesc: 'Automatically strip tracking parameters (UTM, fbclid, si...) from copied links',
+    toggleHotkeyTitle: 'Global Toggle Shortcut',
+    toggleHotkeyDesc: 'Set custom key combination to open or close shelf from anywhere',
+    hotkeyEdit: 'Edit',
+    hotkeyRecording: 'Press key combination...',
+    hotkeyCancel: 'Cancel',
+    hotkeyReset: 'Reset to default ({shortcut})'
+  },
+  groups: {
+    keyboardShortcut: 'Keyboard Shortcut',
+    toggleHotkeyPressDesc: 'Press anywhere to toggle T-Drop',
+    fullscreenProtection: 'Fullscreen Protection',
+    general: 'General',
+    languageSelectDesc: 'Select your preferred language',
+    startup: 'Startup',
+    privacy: 'Privacy',
+    hoverActivation: 'Hover Activation',
+    clipboardBehaviour: 'Clipboard Rules',
+    restartCleanup: 'Restart Cleanup',
+    linkPrivacy: 'Link Privacy',
+    storageCapacity: 'Storage Capacity',
+    autoDelete: 'Auto Delete',
+    updates: 'Updates',
+    placement: 'Placement',
+    displayMonitor: 'Display Monitor',
+    locationHint: 'Location Hint',
+    edgeHintPulseDesc: 'Subtle illumination along screen edge',
+    hoverZoneLength: 'Hover Zone Length',
+    triggerThickness: 'Trigger Thickness',
+    copyBeacon: 'Copy Beacon',
+    beaconStyle: 'Beacon Style',
+    textSize: 'Text Size',
+    audioFeedback: 'Audio Feedback',
+    alignment: 'Alignment',
+    triggerPosition: 'Trigger Position',
+    panelHeight: 'Panel Height',
+    aboutEdgeDrop: 'About T-Drop',
+    feedback: 'Feedback'
   },
   position: {
     edgePlacementTitle: 'Edge Placement',
@@ -454,6 +491,47 @@ const overrides = {
     tabs: { behaviour: 'Oppførsel', position: 'Posisjon', appearance: 'Utseende' },
     header: { searchPlaceholder: 'Søk i historikk...', settings: 'Innstillinger', close: 'Lukk', whatsNew: 'Hva er nytt' },
     item: { copy: 'Kopier', pinned: 'FESTET', pin: 'Fest', unpin: 'Løsne', delete: 'Slett', clear: 'Tøm', expand: 'Utvid', textItem: 'Tekst', imageItem: 'Bilde', fileItem: 'Fil', linkItem: 'Lenke', recent: 'NYLIGE' }
+  },
+  vi: {
+    groups: {
+      keyboardShortcut: 'Phím tắt bàn phím',
+      toggleHotkeyPressDesc: 'Nhấn tổ hợp phím bất kỳ lúc nào để đóng/mở T-Drop',
+      fullscreenProtection: 'Bảo vệ toàn màn hình',
+      general: 'Chung',
+      languageSelectDesc: 'Chọn ngôn ngữ giao diện',
+      startup: 'Khởi động',
+      privacy: 'Quyền riêng tư',
+      hoverActivation: 'Kích hoạt rê chuột',
+      clipboardBehaviour: 'Quy tắc bộ nhớ tạm',
+      restartCleanup: 'Dọn dẹp khi khởi động lại',
+      linkPrivacy: 'Bảo mật liên kết',
+      storageCapacity: 'Dung lượng lưu trữ',
+      autoDelete: 'Tự động xóa',
+      updates: 'Cập nhật',
+      placement: 'Vị trí hiển thị',
+      displayMonitor: 'Màn hình hiển thị',
+      locationHint: 'Gợi ý vị trí',
+      edgeHintPulseDesc: 'Hiệu ứng nhấp nháy định vị mép màn hình',
+      hoverZoneLength: 'Độ dài vùng rê chuột',
+      triggerThickness: 'Độ dày vùng kích hoạt',
+      copyBeacon: 'Hiệu ứng sao chép',
+      beaconStyle: 'Kiểu hiệu ứng',
+      textSize: 'Cỡ chữ',
+      audioFeedback: 'Âm thanh phản hồi',
+      alignment: 'Căn lề',
+      triggerPosition: 'Vị trí kích hoạt',
+      panelHeight: 'Chiều cao bảng điều khiển',
+      aboutEdgeDrop: 'Về T-Drop',
+      feedback: 'Góp ý & Phản hồi'
+    },
+    behaviour: {
+      toggleHotkeyTitle: 'Phím tắt toàn cục',
+      toggleHotkeyDesc: 'Nhấn tổ hợp phím bất kỳ lúc nào để đóng/mở nhanh bảng nhớ tạm',
+      hotkeyEdit: 'Chỉnh sửa',
+      hotkeyRecording: 'Nhấn tổ hợp phím...',
+      hotkeyCancel: 'Hủy',
+      hotkeyReset: 'Đặt lại về mặc định ({shortcut})'
+    }
   }
 };
 
@@ -552,6 +630,38 @@ let fileContent = `export interface TranslationKeys {
     download?: string
     notifyModeSubtitle?: string
     newUpdateAvailable?: string
+    [key: string]: string | undefined
+  }
+  groups?: {
+    keyboardShortcut?: string
+    toggleHotkeyPressDesc?: string
+    fullscreenProtection?: string
+    general?: string
+    languageSelectDesc?: string
+    startup?: string
+    privacy?: string
+    hoverActivation?: string
+    clipboardBehaviour?: string
+    restartCleanup?: string
+    linkPrivacy?: string
+    storageCapacity?: string
+    autoDelete?: string
+    updates?: string
+    placement?: string
+    displayMonitor?: string
+    locationHint?: string
+    edgeHintPulseDesc?: string
+    hoverZoneLength?: string
+    triggerThickness?: string
+    copyBeacon?: string
+    beaconStyle?: string
+    textSize?: string
+    audioFeedback?: string
+    alignment?: string
+    triggerPosition?: string
+    panelHeight?: string
+    aboutEdgeDrop?: string
+    feedback?: string
     [key: string]: string | undefined
   }
   position: {

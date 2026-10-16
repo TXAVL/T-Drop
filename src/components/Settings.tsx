@@ -2012,8 +2012,8 @@ export function Settings({
               <div className="settings-shelf-card hotkey-card behaviour-col">
                 <div className="shelf-card-top">
                   <div className="setting-group-label">{t('groups.keyboardShortcut') || 'KEYBOARD SHORTCUT'}</div>
-                  <div className="setting-title">{t('behaviour.toggleHotkeyTitle')}</div>
-                  <div className="setting-desc">{t('groups.toggleHotkeyPressDesc') || 'Press anywhere to toggle T-Drop'}</div>
+                  <div className="setting-title">{t('behaviour.toggleHotkeyTitle') || 'Global Toggle Shortcut'}</div>
+                  <div className="setting-desc">{t('behaviour.toggleHotkeyDesc') || t('groups.toggleHotkeyPressDesc') || 'Press anywhere to toggle T-Drop'}</div>
                 </div>
                 <div className="shelf-card-bottom">
                   <HotkeyRecorder
@@ -2810,8 +2810,8 @@ export function Settings({
                   <div className="setting-card">
                     <div className="shelf-card-top">
                       <div className="setting-group-label">{t('groups.keyboardShortcut') || 'KEYBOARD SHORTCUT'}</div>
-                      <div className="setting-title">{t('behaviour.toggleHotkeyTitle')}</div>
-                      <div className="setting-desc">{t('behaviour.toggleHotkeyDesc')}</div>
+                      <div className="setting-title">{t('behaviour.toggleHotkeyTitle') || 'Global Toggle Shortcut'}</div>
+                      <div className="setting-desc">{t('behaviour.toggleHotkeyDesc') || 'Press anywhere to toggle T-Drop'}</div>
                     </div>
                     <div className="shelf-card-bottom">
                       <HotkeyRecorder
