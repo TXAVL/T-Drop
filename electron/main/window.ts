@@ -1091,9 +1091,6 @@ export function setWindowFocusable(focusable: boolean): void {
       // Skip redundant native writes: even "no-op" style/focusability calls
       // have disturbed the foreground in traces, so never repeat them.
       if (focusabilityApplied === focusable) {
-        if (focusable) {
-          try { mainWindow.focus() } catch { /* ignore */ }
-        }
         return
       }
       if (!focusable) {

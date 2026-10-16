@@ -127,25 +127,23 @@ function PurchaseWindowContent({
   const emailInputRef = useRef<HTMLInputElement>(null)
   const inlineKeyInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFocusInput = (ref: React.RefObject<HTMLInputElement>) => {
-    try { window.focus() } catch {}
+  // Keep window focusable and hotkeys paused cleanly for the entire duration the modal/view is open
+  useEffect(() => {
     try {
-      const p = window.edge?.focusWindow?.(true) as unknown as Promise<void> | undefined
-      if (p && typeof p.then === 'function') {
-        p.then(() => {
-          ref.current?.focus()
-        }).catch(() => {})
-      } else {
-        ref.current?.focus()
-      }
+      void window.edge?.focusWindow?.(true)
+      void window.edge?.pauseHotkey?.(true)
     } catch {}
-    try { window.edge?.pauseHotkey?.(true) } catch {}
-  }
-
-  const handleBlurInput = () => {
-    try { window.edge?.focusWindow?.(false) } catch {}
-    try { window.edge?.pauseHotkey?.(false) } catch {}
-  }
+    const focusTimer = setTimeout(() => {
+      emailInputRef.current?.focus()
+    }, 120)
+    return () => {
+      clearTimeout(focusTimer)
+      try {
+        void window.edge?.focusWindow?.(false)
+        void window.edge?.pauseHotkey?.(false)
+      } catch {}
+    }
+  }, [])
 
   const pushToast = useStore((s) => s.pushToast)
 
@@ -197,7 +195,7 @@ function PurchaseWindowContent({
         message: 'Vui lòng nhập email nhận bản quyền trước khi tạo mã QR!',
         tone: 'error'
       })
-      handleFocusInput(emailInputRef)
+      emailInputRef.current?.focus()
       return
     }
 
@@ -208,7 +206,7 @@ function PurchaseWindowContent({
         message: 'Email không hợp lệ. Vui lòng dùng @gmail.com, @icloud.com, @outlook.com hoặc @hotmail.com',
         tone: 'error'
       })
-      handleFocusInput(emailInputRef)
+      emailInputRef.current?.focus()
       return
     }
 
@@ -464,12 +462,8 @@ function PurchaseWindowContent({
             <input
               ref={emailInputRef}
               type="email"
-              autoFocus
               placeholder="Nhập email: ví dụ tenban@gmail.com"
               value={email}
-              onPointerDown={() => handleFocusInput(emailInputRef)}
-              onFocus={() => handleFocusInput(emailInputRef)}
-              onBlur={handleBlurInput}
               onChange={(e) => handleValidateEmail(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') void handleCreateOrder()
@@ -657,9 +651,6 @@ function PurchaseWindowContent({
                 type="text"
                 placeholder="Dán mã: TDR_XXXXXX_XXXXX"
                 value={inlineKey}
-                onPointerDown={() => handleFocusInput(inlineKeyInputRef)}
-                onFocus={() => handleFocusInput(inlineKeyInputRef)}
-                onBlur={handleBlurInput}
                 onChange={(e) => setInlineKey(e.target.value.toUpperCase())}
                 style={{
                   flex: 1,

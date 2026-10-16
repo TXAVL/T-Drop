@@ -367,15 +367,41 @@ export function Settings({
   const [purchaseModalOpen, setPurchaseModalOpen] = useState<boolean>(false)
   const licenseInputRef = useRef<HTMLInputElement>(null)
 
+  const licenseEngagedRef = useRef(false)
+  const blurTimeoutRef = useRef<number | undefined>(undefined)
+
   const handleFocusLicenseInput = () => {
-    try { window.edge?.focusWindow?.(true) } catch {}
-    try { window.edge?.pauseHotkey?.(true) } catch {}
+    if (blurTimeoutRef.current) {
+      window.clearTimeout(blurTimeoutRef.current)
+      blurTimeoutRef.current = undefined
+    }
+    if (!licenseEngagedRef.current) {
+      licenseEngagedRef.current = true
+      try { void window.edge?.focusWindow?.(true) } catch {}
+      try { void window.edge?.pauseHotkey?.(true) } catch {}
+    }
   }
 
   const handleBlurLicenseInput = () => {
-    try { window.edge?.focusWindow?.(false) } catch {}
-    try { window.edge?.pauseHotkey?.(false) } catch {}
+    if (blurTimeoutRef.current) window.clearTimeout(blurTimeoutRef.current)
+    blurTimeoutRef.current = window.setTimeout(() => {
+      blurTimeoutRef.current = undefined
+      licenseEngagedRef.current = false
+      try { void window.edge?.focusWindow?.(false) } catch {}
+      try { void window.edge?.pauseHotkey?.(false) } catch {}
+    }, 350)
   }
+
+  useEffect(() => {
+    return () => {
+      if (blurTimeoutRef.current) window.clearTimeout(blurTimeoutRef.current)
+      if (licenseEngagedRef.current) {
+        licenseEngagedRef.current = false
+        try { void window.edge?.focusWindow?.(false) } catch {}
+        try { void window.edge?.pauseHotkey?.(false) } catch {}
+      }
+    }
+  }, [])
 
   useEffect(() => {
     window.edge.getLicenseDeviceInfo?.().then((info) => {
@@ -400,6 +426,11 @@ export function Settings({
 
   const handlePasteLicenseKey = async () => {
     playButtonClickSound()
+    if (blurTimeoutRef.current) {
+      window.clearTimeout(blurTimeoutRef.current)
+      blurTimeoutRef.current = undefined
+    }
+    handleFocusLicenseInput()
     try {
       let text = ''
       if (window.edge?.readClipboardText) {
@@ -433,6 +464,10 @@ export function Settings({
   }
 
   const handleActivateLicense = async () => {
+    if (blurTimeoutRef.current) {
+      window.clearTimeout(blurTimeoutRef.current)
+      blurTimeoutRef.current = undefined
+    }
     const trimmed = licenseInput.trim().toUpperCase()
     if (!trimmed) {
       pushToast({

@@ -79,7 +79,7 @@ export const VIETQR_CONFIG = {
   bankId: 'MB',
   bankName: 'MBBank (Ngân hàng Quân Đội)',
   accountNo: '2211231106',
-  accountName: 'NGUYEN VAN A',
+  accountName: 'TANG XUAN ANH',
   prices: {
     VIP: 29000,
     PREMIUM: 49000
