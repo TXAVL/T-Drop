@@ -162,7 +162,7 @@ const BUILTIN_FALLBACKS: Record<string, { en: string; vi: string }> = {
   'item.copied': { en: 'Copied!', vi: 'Đã sao chép!' },
   'item.copiedTimes': { en: 'Copied {count} times', vi: 'Đã sao chép {count} lần' },
   'item.imagePlaceholder': { en: 'Image', vi: 'Hình ảnh' },
-  'item.extractText': { en: 'Extract Text (OCR)', vi: 'Trích xuất chữ (OCR)' },
+  'item.extractText': { en: 'Image Studio (Convert, Compress, OCR)', vi: 'Xử lý hình ảnh (Đổi đuôi, Nén, OCR)' },
   'item.convertTo': { en: 'Convert to...', vi: 'Chuyển đổi sang...' },
   'item.compressBtn': { en: 'Compress', vi: 'Nén ảnh' },
   'item.quickCompress': { en: 'Quick Compress', vi: 'Nén nhanh' },

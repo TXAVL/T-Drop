@@ -25,13 +25,12 @@ import { itemRenderKey } from '../lib/itemSignature'
 import { basename, formatBytes, previewText, relativeTime, formatImageDisplayName } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
 import { playButtonClickSound, playToggleSound, playDeleteSound, playCardExpandSound } from '../lib/soundEffects'
-import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon, ImageCompressIcon, OcrIcon } from './icons'
+import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon, OcrIcon } from './icons'
 import { LinkPreviewCard } from './LinkPreviewCard'
 import '../styles/item.css'
 import { tryPaste } from '../lib/tryPaste'
 import { parseColor, getColorFormats, cycleColorFormat } from '../lib/colorUtils'
 import { hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
-import { convertImage, compressImage } from '../lib/imageTools'
 import { useTranslation, t } from '../i18n'
 import { useRelativeTimeTick } from '../hooks/useRelativeTimeTick'
 
@@ -85,31 +84,6 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
     }
     return ''
   }, [item.data])
-
-  const [compressing, setCompressing] = useState(false)
-  const [compressDone, setCompressDone] = useState(false)
-
-  const handleQuickCompress = useCallback(async (e: React.MouseEvent) => {
-    e.stopPropagation()
-    e.preventDefault()
-    if (!singleImageSrc || compressing) return
-    playButtonClickSound()
-    setCompressing(true)
-    try {
-      const res = await compressImage(singleImageSrc, 0, 0.75, true)
-      await window.edge.copyImageDataUrl(res.dataUrl)
-      setCompressDone(true)
-      setCopied(true)
-      window.setTimeout(() => {
-        setCompressDone(false)
-        setCopied(false)
-      }, 1200)
-    } catch (err) {
-      console.error('Failed to quick compress:', err)
-    } finally {
-      setCompressing(false)
-    }
-  }, [singleImageSrc, compressing])
 
   // Accordion expansion: ONE stack open at a time, coordinated store-wide
   // (expanding another stack collapses this one; Escape / outside click /
@@ -506,31 +480,21 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
             </button>
           )}
           {Boolean(singleImageSrc) && (
-            <>
-              <button
-                className={`act act-compress-img${compressDone ? ' active' : ''}`}
-                title={t('item.quickCompress') || 'Quick compress (WebP)'}
-                onClick={handleQuickCompress}
-                disabled={compressing}
-              >
-                <ImageCompressIcon />
-              </button>
-              <button
-                className="act act-ocr-img"
-                title={t('item.extractText') || 'Trích chữ (OCR)'}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  e.preventDefault()
-                  e.currentTarget.blur()
-                  playCardExpandSound(true)
-                  const rect = e.currentTarget.closest('.item-main')?.getBoundingClientRect()
-                  const rectData = rect ? { x: rect.x, y: rect.y, width: rect.width, height: rect.height } : undefined
-                  useStore.getState().setPreviewItemId(item.id, rectData)
-                }}
-              >
-                <OcrIcon width={13} height={13} />
-              </button>
-            </>
+            <button
+              className="act act-ocr-img"
+              title={t('item.extractText') || 'Xử lý hình ảnh (Đổi đuôi, Nén, OCR)'}
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                e.currentTarget.blur()
+                playCardExpandSound(true)
+                const rect = e.currentTarget.closest('.item-main')?.getBoundingClientRect()
+                const rectData = rect ? { x: rect.x, y: rect.y, width: rect.width, height: rect.height } : undefined
+                useStore.getState().setPreviewItemId(item.id, rectData)
+              }}
+            >
+              <OcrIcon width={13} height={13} />
+            </button>
           )}
           <div className="act-divider" />
           <button
@@ -1194,76 +1158,6 @@ function ColorSwatchPreview({ colorInfo }: { item: ClipboardItemDto; colorInfo: 
   )
 }
 
-function ImageToolsBar({ src }: { src: string }) {
-  const [activeFmt, setActiveFmt] = useState<'png' | 'jpeg' | 'webp' | null>(null)
-  const [compressing, setCompressing] = useState(false)
-  const [compressDone, setCompressDone] = useState(false)
-
-  const handleConvert = async (fmt: 'png' | 'jpeg' | 'webp', e: React.MouseEvent) => {
-    e.stopPropagation()
-    e.preventDefault()
-    playButtonClickSound()
-    setActiveFmt(fmt)
-    try {
-      const converted = await convertImage(src, fmt, 0.9)
-      await window.edge.copyImageDataUrl(converted.dataUrl)
-    } catch (err) {
-      console.error('Failed to convert image:', err)
-    } finally {
-      setTimeout(() => setActiveFmt(null), 1000)
-    }
-  }
-
-  const handleCompress = async (e: React.MouseEvent) => {
-    e.stopPropagation()
-    e.preventDefault()
-    playButtonClickSound()
-    setCompressing(true)
-    try {
-      const res = await compressImage(src, 0, 0.75, true)
-      await window.edge.copyImageDataUrl(res.dataUrl)
-      setCompressDone(true)
-    } catch (err) {
-      console.error('Failed to compress image:', err)
-    } finally {
-      setCompressing(false)
-      setTimeout(() => setCompressDone(false), 1200)
-    }
-  }
-
-  return (
-    <div className="image-tools-bar" onClick={(e) => e.stopPropagation()}>
-      <div className="image-format-pills">
-        {(['png', 'jpeg', 'webp'] as const).map((fmt) => {
-          const isCopied = activeFmt === fmt
-          const label = fmt === 'jpeg' ? 'JPG' : fmt.toUpperCase()
-          return (
-            <button
-              key={fmt}
-              type="button"
-              className={`image-tool-btn${isCopied ? ' copied' : ''}`}
-              title={`${t('item.convertTo') || 'Convert to'} ${label}`}
-              onClick={(e) => handleConvert(fmt, e)}
-            >
-              {isCopied ? '✓' : label}
-            </button>
-          )
-        })}
-      </div>
-      <button
-        type="button"
-        className={`image-tool-btn compress-btn${compressDone ? ' saved' : ''}`}
-        title={t('item.quickCompress') || 'Quick compress (WebP)'}
-        onClick={handleCompress}
-        disabled={compressing}
-      >
-        <ImageCompressIcon width={10} height={10} />
-        <span>{compressDone ? '✓' : compressing ? '...' : (t('item.compressBtn') || 'Nén')}</span>
-      </button>
-    </div>
-  )
-}
-
 function Preview({ item }: { item: ClipboardItemDto }) {
   switch (item.data.kind) {
     case 'text': {
@@ -1295,7 +1189,6 @@ function Preview({ item }: { item: ClipboardItemDto }) {
               <div className="preview">[{t('item.imageItem')}]</div>
             )}
           </div>
-          {src && <ImageToolsBar src={src} />}
         </div>
       )
     }
@@ -1310,7 +1203,6 @@ function Preview({ item }: { item: ClipboardItemDto }) {
 
       // Single image file — show its thumbnail.
       if (item.data.paths.length === 1 && isImage) {
-        const src = entry?.preview || fileStreamUrl(first)
         return (
           <div className="image-preview-tile">
             <div className="thumb-wrap">
@@ -1338,7 +1230,6 @@ function Preview({ item }: { item: ClipboardItemDto }) {
                 {displayName}
               </div>
             )}
-            {src && <ImageToolsBar src={src} />}
           </div>
         )
       }
