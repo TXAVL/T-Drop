@@ -221,6 +221,7 @@ const api = {
   restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => invoke('backup:restore', filePath, mode),
   copyImageDataUrl: (dataUrl: string) => invoke('image:copy-dataurl', dataUrl),
   saveImageFile: (req: { dataUrl: string; defaultName?: string }) => invoke('image:save-file', req),
+  saveTextFile: (req: { content: string; defaultName?: string }) => invoke('text:save-file', req),
   getImageDataUrl: (imageSrc: string) => invoke('image:get-dataurl', imageSrc),
   extractOcrText: (req: { imageSrc: string; lang?: string }) => invoke('image:ocr', req),
   onOcrProgress: (cb: (info: EventArgs<'ocr:progress'>[0]) => void) => on('ocr:progress', cb),

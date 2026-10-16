@@ -3,7 +3,7 @@
  * Features 1-click format conversion (PNG, JPG, WebP), smart image compression,
  * and AI OCR Text Extraction (VIP 30-day / PREMIUM 60-day feature).
  */
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { convertImage, compressImage, type CompressResult } from '../lib/imageTools'
 import { extractTextFromImage, type OcrResult } from '../lib/ocr'
 import { formatBytes } from '../lib/format'
@@ -43,10 +43,18 @@ export function ImageStudioPanel({
   const [ocrStatus, setOcrStatus] = useState('')
   const [ocrResult, setOcrResult] = useState<OcrResult | null>(null)
   const [ocrCopied, setOcrCopied] = useState(false)
+  const [ocrCopiedMarkdown, setOcrCopiedMarkdown] = useState(false)
+  const [ocrSavedTxt, setOcrSavedTxt] = useState(false)
   const [ocrAddedToHistory, setOcrAddedToHistory] = useState(false)
 
   const settings = useStore((s) => s.settings)
   const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
+  const isPremium = Boolean(settings.isPro && settings.licenseRole === 'PREMIUM')
+  const role = settings.licenseRole || 'FREE'
+
+  const [autoOcr, setAutoOcr] = useState<boolean>(() => {
+    return localStorage.getItem('tdrop_auto_ocr') === 'true'
+  })
 
   // Handle Format Convert & Copy
   const handleConvertAndCopy = useCallback(async () => {
@@ -228,6 +236,112 @@ export function ImageStudioPanel({
     }
   }, [ocrResult])
 
+  // Toggle Auto-OCR (PREMIUM Exclusive)
+  const handleToggleAutoOcr = useCallback(() => {
+    if (!isPremium) {
+      playButtonClickSound()
+      useStore.getState().pushToast({
+        id: `premium-auto-ocr-${Date.now()}`,
+        message: t('imageStudio.premiumRequired') || 'Tính năng Auto-OCR tự động dành riêng cho gói PREMIUM!',
+        tone: 'error'
+      })
+      useStore.getState().setSettingsOpen(true)
+      return
+    }
+    playButtonClickSound()
+    setAutoOcr((prev) => {
+      const next = !prev
+      localStorage.setItem('tdrop_auto_ocr', String(next))
+      return next
+    })
+  }, [isPremium])
+
+  // Smart Clean / Unwrap lines (PREMIUM Exclusive)
+  const handleUnwrapLines = useCallback(() => {
+    if (!ocrResult?.text) return
+    if (!isPremium) {
+      playButtonClickSound()
+      useStore.getState().pushToast({
+        id: `premium-unwrap-${Date.now()}`,
+        message: t('imageStudio.premiumRequired') || 'Tính năng làm sạch ngắt dòng dành riêng cho gói PREMIUM!',
+        tone: 'error'
+      })
+      useStore.getState().setSettingsOpen(true)
+      return
+    }
+    playButtonClickSound()
+    const unwrapped = ocrResult.text
+      .split(/\n{2,}/)
+      .map((p) => p.replace(/([^\.\?\!\:\n])\n([^\.\?\!\:\n])/g, '$1 $2'))
+      .join('\n\n')
+    setOcrResult({ ...ocrResult, text: unwrapped })
+    useStore.getState().pushToast({
+      id: `unwrap-ok-${Date.now()}`,
+      message: t('imageStudio.ocrUnwrapped') || 'Đã nối dòng thành đoạn văn!',
+      tone: 'info'
+    })
+  }, [ocrResult, isPremium])
+
+  // Copy as Markdown (PREMIUM Exclusive)
+  const handleCopyMarkdown = useCallback(() => {
+    if (!ocrResult?.text) return
+    if (!isPremium) {
+      playButtonClickSound()
+      useStore.getState().pushToast({
+        id: `premium-md-${Date.now()}`,
+        message: t('imageStudio.premiumRequired') || 'Tính năng sao chép Markdown dành riêng cho gói PREMIUM!',
+        tone: 'error'
+      })
+      useStore.getState().setSettingsOpen(true)
+      return
+    }
+    playButtonClickSound()
+    navigator.clipboard.writeText(ocrResult.text.trim())
+    useStore.getState().triggerCopyFlare()
+    setOcrCopiedMarkdown(true)
+    setTimeout(() => setOcrCopiedMarkdown(false), 1500)
+    useStore.getState().pushToast({
+      id: `md-ok-${Date.now()}`,
+      message: t('imageStudio.ocrCopiedMarkdown') || 'Đã sao chép Markdown!',
+      tone: 'info'
+    })
+  }, [ocrResult, isPremium])
+
+  // Save Text File (PREMIUM Exclusive)
+  const handleSaveTxtFile = useCallback(async () => {
+    if (!ocrResult?.text) return
+    if (!isPremium) {
+      playButtonClickSound()
+      useStore.getState().pushToast({
+        id: `premium-save-${Date.now()}`,
+        message: t('imageStudio.premiumRequired') || 'Tính năng xuất file .TXT dành riêng cho gói PREMIUM!',
+        tone: 'error'
+      })
+      useStore.getState().setSettingsOpen(true)
+      return
+    }
+    playButtonClickSound()
+    const base = defaultName.replace(/\.[a-zA-Z0-9]+$/, '')
+    const fileName = `${base}-ocr.txt`
+    const res = await window.edge.saveTextFile({ content: ocrResult.text, defaultName: fileName })
+    if (res.ok) {
+      setOcrSavedTxt(true)
+      setTimeout(() => setOcrSavedTxt(false), 2000)
+      useStore.getState().pushToast({
+        id: `save-txt-${Date.now()}`,
+        message: t('imageStudio.ocrSavedTxt') || 'Đã lưu file .TXT thành công!',
+        tone: 'info'
+      })
+    }
+  }, [ocrResult, isPremium, defaultName])
+
+  // Auto-OCR on open if Premium enabled
+  useEffect(() => {
+    if (activeTab === 'ocr' && isPremium && autoOcr && !ocrResult && !ocrRunning && imageSrc) {
+      handleStartOcr()
+    }
+  }, [activeTab, isPremium, autoOcr, ocrResult, ocrRunning, imageSrc, handleStartOcr])
+
   return (
     <div className="image-studio-wrap" onClick={(e) => e.stopPropagation()}>
       <div className="image-studio-header">
@@ -260,8 +374,10 @@ export function ImageStudioPanel({
           <span>{t('imageStudio.tabOcr') || 'Trích chữ (OCR)'}</span>
           {!isPro ? (
             <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #f59e0b, #ef4444)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>PRO</span>
+          ) : role === 'PREMIUM' ? (
+            <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #a855f7, #6366f1)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>PREMIUM</span>
           ) : (
-            <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #38bdf8, #818cf8)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>AI</span>
+            <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #f59e0b, #d97706)', padding: '1px 5px', borderRadius: 99, color: '#000', fontWeight: 700 }}>VIP</span>
           )}
         </button>
       </div>
@@ -408,11 +524,11 @@ export function ImageStudioPanel({
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <CrownIcon width={16} height={16} fill="#f59e0b" />
                 <span style={{ fontSize: 12.5, fontWeight: 700, color: '#f59e0b' }}>
-                  Tính năng VIP & PREMIUM: Trích chữ AI (OCR)
+                  {t('imageStudio.ocrProTitle') || 'Tính năng VIP & PREMIUM: Trích chữ AI (OCR)'}
                 </span>
               </div>
               <p style={{ margin: 0, fontSize: 11.5, color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
-                Tự động nhận diện chữ tiếng Việt & tiếng Anh từ hình ảnh bằng mô hình AI client-side nhanh chóng và bảo mật.
+                {t('imageStudio.ocrProDesc') || 'Tự động nhận diện chữ tiếng Việt & tiếng Anh từ hình ảnh bằng mô hình AI client-side nhanh chóng và bảo mật.'}
               </p>
               <button
                 type="button"
@@ -430,14 +546,64 @@ export function ImageStudioPanel({
                   useStore.getState().setSettingsOpen(true)
                 }}
               >
-                Kích hoạt mã bản quyền trong Cài đặt
+                {t('imageStudio.ocrProBtn') || 'Kích hoạt mã bản quyền trong Cài đặt'}
               </button>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div className="image-studio-row">
+              {/* License Status Bar */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '6px 10px',
+                borderRadius: 8,
+                background: isPremium
+                  ? 'linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(99, 102, 241, 0.12))'
+                  : 'linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(217, 119, 6, 0.08))',
+                border: isPremium
+                  ? '1px solid rgba(168, 85, 247, 0.35)'
+                  : '1px solid rgba(245, 158, 11, 0.28)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <CrownIcon width={13} height={13} fill={isPremium ? '#c084fc' : '#f59e0b'} />
+                  <span style={{ fontSize: 11, fontWeight: 700, color: isPremium ? '#c084fc' : '#f59e0b' }}>
+                    {isPremium
+                      ? (t('imageStudio.premiumActive') || 'Gói PREMIUM (60 ngày)')
+                      : (t('imageStudio.vipActive') || 'Gói VIP (30 ngày)')}
+                  </span>
+                </div>
+                {!isPremium ? (
+                  <button
+                    type="button"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#c084fc',
+                      fontSize: 10.5,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      padding: 0,
+                      textDecoration: 'underline'
+                    }}
+                    onClick={() => {
+                      playButtonClickSound()
+                      useStore.getState().setSettingsOpen(true)
+                    }}
+                  >
+                    Nâng cấp PREMIUM
+                  </button>
+                ) : (
+                  <span style={{ fontSize: 9.5, color: '#e9d5ff', background: 'rgba(168, 85, 247, 0.25)', padding: '1px 6px', borderRadius: 4, fontWeight: 600 }}>
+                    Auto-OCR & Xuất File
+                  </span>
+                )}
+              </div>
+
+              {/* Language Selection */}
+              <div className="image-studio-row">
                 <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-                  Ngôn ngữ nhận diện:
+                  {t('imageStudio.ocrLangLabel') || 'Ngôn ngữ nhận diện:'}
                 </span>
                 <div style={{ display: 'flex', gap: 4 }}>
                   {[
@@ -457,6 +623,38 @@ export function ImageStudioPanel({
                 </div>
               </div>
 
+              {/* Auto-OCR Toggle (PREMIUM Exclusive) */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '4px 6px',
+                background: 'rgba(255, 255, 255, 0.03)',
+                borderRadius: 6
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)' }}>
+                    {t('imageStudio.autoOcr') || 'Tự động trích chữ khi mở ảnh'}
+                  </span>
+                  <span style={{
+                    fontSize: 8.5,
+                    fontWeight: 700,
+                    padding: '1px 5px',
+                    borderRadius: 4,
+                    background: isPremium ? 'linear-gradient(135deg, #a855f7, #6366f1)' : 'rgba(255, 255, 255, 0.12)',
+                    color: '#ffffff'
+                  }}>
+                    PREMIUM
+                  </span>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={isPremium && autoOcr}
+                  onChange={handleToggleAutoOcr}
+                  style={{ cursor: 'pointer', accentColor: '#a855f7' }}
+                />
+              </div>
+
               {!ocrResult && !ocrRunning && (
                 <button
                   type="button"
@@ -465,14 +663,14 @@ export function ImageStudioPanel({
                   onClick={handleStartOcr}
                 >
                   <OcrIcon width={14} height={14} />
-                  <span>Bắt đầu trích xuất chữ</span>
+                  <span>{t('imageStudio.ocrStartBtn') || 'Bắt đầu trích xuất chữ'}</span>
                 </button>
               )}
 
               {ocrRunning && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: '6px 0' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>
-                    <span>{ocrStatus || 'Đang nhận diện chữ...'}</span>
+                    <span>{ocrStatus || (t('imageStudio.ocrExtracting') || 'Đang nhận diện chữ...')}</span>
                     <strong style={{ color: '#38bdf8' }}>{ocrProgress}%</strong>
                   </div>
                   <div style={{ height: 4, background: 'rgba(255,255,255,0.1)', borderRadius: 2, overflow: 'hidden' }}>
@@ -492,7 +690,7 @@ export function ImageStudioPanel({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.45)' }}>
-                      {ocrResult.linesCount} dòng · {ocrResult.wordsCount} từ · Độ tin cậy ~{ocrResult.confidence}%
+                      {ocrResult.linesCount} dòng · {ocrResult.wordsCount} từ · ~{ocrResult.confidence}% tin cậy
                     </span>
                     <button
                       type="button"
@@ -506,13 +704,13 @@ export function ImageStudioPanel({
                       }}
                       onClick={handleStartOcr}
                     >
-                      Quét lại
+                      {t('imageStudio.ocrRefresh') || 'Quét lại'}
                     </button>
                   </div>
 
                   <textarea
                     readOnly
-                    value={ocrResult.text || '(Không phát hiện thấy văn bản rõ ràng)'}
+                    value={ocrResult.text || (t('imageStudio.ocrNotFound') || '(Không phát hiện thấy văn bản rõ ràng)')}
                     rows={4}
                     style={{
                       width: '100%',
@@ -530,6 +728,61 @@ export function ImageStudioPanel({
                     }}
                   />
 
+                  {/* PREMIUM Tools row: Unwrap & Markdown & Save TXT */}
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    <button
+                      type="button"
+                      className="image-tool-btn"
+                      onClick={handleUnwrapLines}
+                      disabled={!ocrResult.text}
+                      style={{
+                        flex: 1,
+                        fontSize: 10.5,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 4
+                      }}
+                    >
+                      <span>{t('imageStudio.ocrUnwrap') || 'Bỏ ngắt dòng'}</span>
+                      <span style={{ fontSize: 8, background: isPremium ? '#a855f7' : 'rgba(255,255,255,0.15)', color: '#fff', padding: '0 3px', borderRadius: 3, fontWeight: 700 }}>PRO+</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="image-tool-btn"
+                      onClick={handleCopyMarkdown}
+                      disabled={!ocrResult.text}
+                      style={{
+                        flex: 1,
+                        fontSize: 10.5,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 4
+                      }}
+                    >
+                      <span>{ocrCopiedMarkdown ? (t('imageStudio.ocrCopiedMarkdown') || 'Đã chép MD!') : (t('imageStudio.ocrCopyMarkdown') || 'Chép Markdown')}</span>
+                      <span style={{ fontSize: 8, background: isPremium ? '#a855f7' : 'rgba(255,255,255,0.15)', color: '#fff', padding: '0 3px', borderRadius: 3, fontWeight: 700 }}>PRO+</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="image-tool-btn"
+                      onClick={handleSaveTxtFile}
+                      disabled={!ocrResult.text}
+                      style={{
+                        flex: 1,
+                        fontSize: 10.5,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 4
+                      }}
+                    >
+                      <span>{ocrSavedTxt ? (t('imageStudio.ocrSavedTxt') || 'Đã lưu!') : (t('imageStudio.ocrSaveTxt') || 'Lưu .TXT')}</span>
+                      <span style={{ fontSize: 8, background: isPremium ? '#a855f7' : 'rgba(255,255,255,0.15)', color: '#fff', padding: '0 3px', borderRadius: 3, fontWeight: 700 }}>PRO+</span>
+                    </button>
+                  </div>
+
                   <div className="image-studio-actions">
                     <button
                       type="button"
@@ -538,7 +791,7 @@ export function ImageStudioPanel({
                       disabled={!ocrResult.text}
                     >
                       {ocrCopied ? <CheckIcon width={13} height={13} /> : <CopyIcon width={13} height={13} />}
-                      {ocrCopied ? 'Đã sao chép chữ!' : 'Sao chép văn bản'}
+                      {ocrCopied ? (t('imageStudio.ocrCopiedText') || 'Đã sao chép chữ!') : (t('imageStudio.ocrCopyText') || 'Sao chép văn bản')}
                     </button>
                     <button
                       type="button"
@@ -547,7 +800,7 @@ export function ImageStudioPanel({
                       disabled={!ocrResult.text}
                     >
                       {ocrAddedToHistory ? <CheckIcon width={13} height={13} /> : <span>+</span>}
-                      {ocrAddedToHistory ? 'Đã thêm vào lịch sử!' : 'Thêm vào danh sách'}
+                      {ocrAddedToHistory ? (t('imageStudio.ocrAddedToHistory') || 'Đã thêm vào lịch sử!') : (t('imageStudio.ocrAddToHistory') || 'Thêm vào danh sách')}
                     </button>
                   </div>
                 </div>

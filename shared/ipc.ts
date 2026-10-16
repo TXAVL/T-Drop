@@ -129,6 +129,9 @@ export interface InvokeMap {
   /** Save an image dataUrl to disk via native save dialog. */
   'image:save-file': { args: [req: { dataUrl: string; defaultName?: string }]; result: { ok: boolean; filePath?: string; error?: string } }
 
+  /** Save a text string or markdown file to disk via native save dialog. */
+  'text:save-file': { args: [req: { content: string; defaultName?: string }]; result: { ok: boolean; filePath?: string; error?: string } }
+
   /** Read full-fidelity image data URL directly from disk or protocol. */
   'image:get-dataurl': { args: [imageSrc: string]; result: string | null }
 

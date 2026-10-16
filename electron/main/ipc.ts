@@ -895,6 +895,30 @@ export function registerIpc(): void {
     }
   })
 
+  handle('text:save-file', async ({ content, defaultName }) => {
+    try {
+      const win = getMainWindow()
+      const filename = defaultName || `t-drop-ocr-${Date.now()}.txt`
+      const res = await dialog.showSaveDialog(win ?? (undefined as any), {
+        title: 'Save Extracted Text',
+        defaultPath: filename,
+        filters: [
+          { name: 'Text Documents', extensions: ['txt'] },
+          { name: 'Markdown', extensions: ['md'] },
+          { name: 'All Files', extensions: ['*'] }
+        ]
+      })
+      if (!res.canceled && res.filePath) {
+        writeFileSync(res.filePath, content, 'utf8')
+        return { ok: true, filePath: res.filePath }
+      }
+      return { ok: false }
+    } catch (err: any) {
+      console.error('[IPC] text:save-file failed:', err)
+      return { ok: false, error: err?.message || String(err) }
+    }
+  })
+
   handle('image:get-dataurl', async (imageSrc: string) => {
     try {
       if (imageSrc.startsWith('data:')) return imageSrc

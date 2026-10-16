@@ -207,7 +207,32 @@ const BUILTIN_FALLBACKS: Record<string, { en: string; vi: string }> = {
   'imageStudio.saveAs': { en: 'Save As...', vi: 'Lưu dưới dạng...' },
   'imageStudio.saveCompressed': { en: 'Save Compressed...', vi: 'Lưu ảnh đã nén...' },
   'imageStudio.copied': { en: 'Image copied to clipboard', vi: 'Đã sao chép ảnh vào bộ nhớ tạm' },
-  'imageStudio.saved': { en: 'Image saved successfully', vi: 'Đã lưu ảnh thành công' }
+  'imageStudio.saved': { en: 'Image saved successfully', vi: 'Đã lưu ảnh thành công' },
+  'imageStudio.ocrProTitle': { en: 'VIP & PREMIUM Feature: AI Text OCR', vi: 'Tính năng VIP & PREMIUM: Trích chữ AI (OCR)' },
+  'imageStudio.ocrProDesc': { en: 'Extract Vietnamese & English text from images using private, fast client-side AI.', vi: 'Tự động nhận diện chữ tiếng Việt & tiếng Anh từ hình ảnh bằng mô hình AI client-side nhanh chóng và bảo mật.' },
+  'imageStudio.ocrProBtn': { en: 'Activate License in Settings', vi: 'Kích hoạt mã bản quyền trong Cài đặt' },
+  'imageStudio.ocrLangLabel': { en: 'Language:', vi: 'Ngôn ngữ nhận diện:' },
+  'imageStudio.ocrStartBtn': { en: 'Extract Text Now', vi: 'Bắt đầu trích xuất chữ' },
+  'imageStudio.ocrExtracting': { en: 'Extracting text...', vi: 'Đang nhận diện chữ...' },
+  'imageStudio.ocrPreparing': { en: 'Preparing AI model...', vi: 'Đang chuẩn bị mô hình nhận diện...' },
+  'imageStudio.ocrResultSummary': { en: 'Extracted: {count} words ({conf}% confidence)', vi: 'Trích xuất: {count} từ ({conf}% tin cậy)' },
+  'imageStudio.ocrRefresh': { en: 'Reset', vi: 'Làm mới' },
+  'imageStudio.ocrCopyText': { en: 'Copy Text', vi: 'Sao chép văn bản' },
+  'imageStudio.ocrCopiedText': { en: 'Copied text!', vi: 'Đã sao chép chữ!' },
+  'imageStudio.ocrCopyMarkdown': { en: 'Copy Markdown', vi: 'Sao chép Markdown' },
+  'imageStudio.ocrCopiedMarkdown': { en: 'Copied Markdown!', vi: 'Đã sao chép Markdown!' },
+  'imageStudio.ocrSaveTxt': { en: 'Save .TXT', vi: 'Lưu file .TXT' },
+  'imageStudio.ocrSavedTxt': { en: 'Saved .TXT!', vi: 'Đã lưu .TXT!' },
+  'imageStudio.ocrUnwrap': { en: 'Clean Lines', vi: 'Bỏ ngắt dòng thừa' },
+  'imageStudio.ocrUnwrapped': { en: 'Cleaned into smooth paragraphs!', vi: 'Đã nối dòng thành đoạn văn!' },
+  'imageStudio.ocrAddToHistory': { en: 'Add to History', vi: 'Thêm vào danh sách' },
+  'imageStudio.ocrAddedToHistory': { en: 'Added to history!', vi: 'Đã thêm vào lịch sử!' },
+  'imageStudio.ocrNotFound': { en: 'No clear text detected in image.', vi: 'Không tìm thấy văn bản rõ ràng trong ảnh.' },
+  'imageStudio.autoOcr': { en: 'Auto-OCR on open', vi: 'Tự động trích chữ' },
+  'imageStudio.premiumExclusive': { en: 'Exclusive PREMIUM Feature', vi: 'Đặc quyền gói PREMIUM' },
+  'imageStudio.premiumRequired': { en: 'This advanced feature requires a PREMIUM license.', vi: 'Tính năng nâng cao này yêu cầu gói bản quyền PREMIUM.' },
+  'imageStudio.vipActive': { en: 'VIP License Active', vi: 'Gói VIP đang hoạt động' },
+  'imageStudio.premiumActive': { en: 'PREMIUM Suite Active', vi: 'Gói PREMIUM đang hoạt động' }
 }
 
 /**
