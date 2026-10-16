@@ -9,7 +9,7 @@ import { extractTextFromImage, type OcrResult } from '../lib/ocr'
 import { formatBytes } from '../lib/format'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
-import { CopyIcon, FolderOpenIcon, CheckIcon, OcrIcon, CrownIcon } from './icons'
+import { CopyIcon, FolderOpenIcon, CheckIcon, OcrIcon } from './icons'
 import { t } from '../i18n'
 
 interface ImageStudioPanelProps {
@@ -45,9 +45,6 @@ export function ImageStudioPanel({
   const [ocrCopied, setOcrCopied] = useState(false)
   const [ocrAddedToHistory, setOcrAddedToHistory] = useState(false)
 
-  const settings = useStore((s) => s.settings)
-  const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
-
   // Handle Format Convert & Copy
   const handleConvertAndCopy = useCallback(async () => {
     if (converting) return
@@ -59,8 +56,18 @@ export function ImageStudioPanel({
       useStore.getState().triggerCopyFlare()
       setCopiedSuccess('convert')
       setTimeout(() => setCopiedSuccess(null), 1500)
-    } catch (err) {
+      useStore.getState().pushToast({
+        id: `convert-copy-${Date.now()}`,
+        message: `Đã chuyển đổi và sao chép ảnh (${convertFormat === 'jpeg' ? 'JPG' : convertFormat.toUpperCase()})!`,
+        tone: 'info'
+      })
+    } catch (err: any) {
       console.error('[ImageStudio] Convert & Copy failed:', err)
+      useStore.getState().pushToast({
+        id: `convert-err-${Date.now()}`,
+        message: 'Chuyển đổi ảnh thất bại: ' + (err?.message || 'Lỗi không xác định'),
+        tone: 'error'
+      })
     } finally {
       setConverting(false)
     }
@@ -80,9 +87,19 @@ export function ImageStudioPanel({
       if (saveRes.ok) {
         setSavedSuccess(true)
         setTimeout(() => setSavedSuccess(false), 2000)
+        useStore.getState().pushToast({
+          id: `save-ok-${Date.now()}`,
+          message: 'Đã lưu tệp ảnh thành công!',
+          tone: 'info'
+        })
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('[ImageStudio] Save failed:', err)
+      useStore.getState().pushToast({
+        id: `save-err-${Date.now()}`,
+        message: 'Lưu tệp thất bại: ' + (err?.message || 'Lỗi không xác định'),
+        tone: 'error'
+      })
     } finally {
       setConverting(false)
     }
@@ -96,8 +113,18 @@ export function ImageStudioPanel({
     try {
       const res = await compressImage(imageSrc, originalBytes, compressQuality, true)
       setCompressResult(res)
-    } catch (err) {
+      useStore.getState().pushToast({
+        id: `compress-ok-${Date.now()}`,
+        message: `Đã nén ảnh thành công: Giảm ${res.percentSaved}% dung lượng!`,
+        tone: 'info'
+      })
+    } catch (err: any) {
       console.error('[ImageStudio] Compress failed:', err)
+      useStore.getState().pushToast({
+        id: `compress-err-${Date.now()}`,
+        message: 'Nén ảnh thất bại: ' + (err?.message || 'Lỗi không xác định'),
+        tone: 'error'
+      })
     } finally {
       setCompressing(false)
     }
@@ -131,7 +158,7 @@ export function ImageStudioPanel({
     if (ocrRunning || !imageSrc) return
     setOcrRunning(true)
     setOcrProgress(5)
-    setOcrStatus('Đang tải mô hình nhận diện...')
+    setOcrStatus('Đang chuẩn bị mô hình nhận diện...')
     playButtonClickSound()
 
     try {
@@ -140,9 +167,23 @@ export function ImageStudioPanel({
         setOcrStatus(s)
       })
       setOcrResult(result)
-    } catch (err) {
+      if (result.text) {
+        useStore.getState().pushToast({
+          id: `ocr-ok-${Date.now()}`,
+          message: `Đã trích xuất ${result.wordsCount} từ thành công!`,
+          tone: 'info'
+        })
+      } else {
+        setOcrStatus('Không tìm thấy văn bản rõ ràng trong ảnh.')
+      }
+    } catch (err: any) {
       console.error('[ImageStudio] OCR failed:', err)
-      setOcrStatus('Nhận diện thất bại hoặc lỗi tải dữ liệu.')
+      setOcrStatus('Nhận diện thất bại: ' + (err?.message || 'Lỗi tải mô hình.'))
+      useStore.getState().pushToast({
+        id: `ocr-err-${Date.now()}`,
+        message: 'Trích xuất chữ thất bại!',
+        tone: 'error'
+      })
     } finally {
       setOcrRunning(false)
     }
@@ -205,7 +246,7 @@ export function ImageStudioPanel({
         >
           <OcrIcon width={12} height={12} />
           <span>{t('imageStudio.tabOcr') || 'Trích chữ (OCR)'}</span>
-          {!isPro && <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #f59e0b, #ef4444)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>PRO</span>}
+          <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #38bdf8, #818cf8)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>AI</span>
         </button>
       </div>
 
@@ -337,48 +378,8 @@ export function ImageStudioPanel({
       )}
 
       {activeTab === 'ocr' && (
-        <>
-          {!isPro ? (
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(239, 68, 68, 0.08) 100%)',
-              border: '1px solid rgba(245, 158, 11, 0.25)',
-              borderRadius: 10,
-              padding: '12px 14px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 8
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <CrownIcon width={16} height={16} fill="#f59e0b" />
-                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#f59e0b' }}>
-                  Tính năng VIP & PREMIUM: Trích chữ AI (OCR)
-                </span>
-              </div>
-              <p style={{ margin: 0, fontSize: 11.5, color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
-                Tự động nhận diện chữ tiếng Việt & tiếng Anh từ hình ảnh chụp màn hình bằng mô hình AI WebAssembly client-side nhanh chóng và bảo mật.
-              </p>
-              <button
-                type="button"
-                className="image-studio-btn primary"
-                style={{
-                  background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                  color: '#000',
-                  fontWeight: 700,
-                  fontSize: 11.5,
-                  alignSelf: 'flex-start',
-                  marginTop: 4
-                }}
-                onClick={() => {
-                  playButtonClickSound()
-                  useStore.getState().setSettingsOpen(true)
-                }}
-              >
-                Kích hoạt mã bản quyền trong Cài đặt
-              </button>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div className="image-studio-row">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="image-studio-row">
                 <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
                   Ngôn ngữ nhận diện:
                 </span>
@@ -495,10 +496,9 @@ export function ImageStudioPanel({
                   </div>
                 </div>
               )}
-            </div>
-          )}
-        </>
+        </div>
       )}
     </div>
   )
 }
+

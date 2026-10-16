@@ -129,6 +129,12 @@ export interface InvokeMap {
   /** Save an image dataUrl to disk via native save dialog. */
   'image:save-file': { args: [req: { dataUrl: string; defaultName?: string }]; result: { ok: boolean; filePath?: string; error?: string } }
 
+  /** Read full-fidelity image data URL directly from disk or protocol. */
+  'image:get-dataurl': { args: [imageSrc: string]; result: string | null }
+
+  /** Perform AI OCR text extraction from an image using Node backend. */
+  'image:ocr': { args: [req: { imageSrc: string; lang?: string }]; result: { ok: boolean; text?: string; confidence?: number; linesCount?: number; wordsCount?: number; error?: string } }
+
   /** Trigger Win32 working set trim and V8 garbage collection across processes. */
   'system:trim-memory': { args: []; result: { ok: boolean; mainRssMb: number } }
 
@@ -200,6 +206,8 @@ export interface EventMap {
   'ui:toast': [toast: { id: string; message: string; tone: 'info' | 'error'; params?: Record<string, string | number> }]
   /** Fired when an OS copy event (Ctrl+C) is detected by the main process watcher. */
   'ui:copy-flare': []
+  /** Fired when OCR progress updates */
+  'ocr:progress': [info: { progress: number; status: string }]
   /** Fired by electron-updater when a new update is available for GitHub builds. */
   'app:update-available': [info: { version: string }]
   /** Fired by electron-updater with download progress for GitHub builds. */

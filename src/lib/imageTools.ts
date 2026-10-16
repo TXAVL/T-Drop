@@ -19,15 +19,51 @@ export interface CompressResult extends ConvertedImageResult {
 }
 
 /**
- * Load an image from a URL or data URI into an HTMLImageElement.
+ * Load an image from a URL, custom protocol, or data URI into an HTMLImageElement safely without canvas tainting.
  */
-export function loadImage(src: string): Promise<HTMLImageElement> {
+export async function loadImage(src: string): Promise<HTMLImageElement> {
+  let loadSrc = src
+  let blobUrl: string | null = null
+
+  // 1. Try to obtain pristine base64 data URL via Electron IPC first
+  if (typeof window !== 'undefined' && (window as any).edge?.getImageDataUrl) {
+    try {
+      const dataUrl = await (window as any).edge.getImageDataUrl(src)
+      if (dataUrl) {
+        loadSrc = dataUrl
+      }
+    } catch {
+      // Continue to fetch fallback
+    }
+  }
+
+  // 2. If still a custom protocol or external URL, fetch and convert to same-origin Blob URL
+  if (!loadSrc.startsWith('data:') && (loadSrc.startsWith('edgelocal://') || loadSrc.startsWith('file://') || loadSrc.startsWith('http://') || loadSrc.startsWith('https://'))) {
+    try {
+      const resp = await fetch(loadSrc)
+      if (resp.ok) {
+        const blob = await resp.blob()
+        blobUrl = URL.createObjectURL(blob)
+        loadSrc = blobUrl
+      }
+    } catch (e) {
+      console.warn('[imageTools] Failed to fetch image as blob:', e)
+    }
+  }
+
   return new Promise((resolve, reject) => {
     const img = new Image()
-    img.crossOrigin = 'anonymous'
-    img.onload = () => resolve(img)
-    img.onerror = (err) => reject(new Error('Failed to load image: ' + err))
-    img.src = src
+    if (!loadSrc.startsWith('blob:') && !loadSrc.startsWith('data:')) {
+      img.crossOrigin = 'anonymous'
+    }
+    img.onload = () => {
+      resolve(img)
+    }
+    img.onerror = (err) => {
+      if (blobUrl) URL.revokeObjectURL(blobUrl)
+      reject(new Error('Failed to load image: ' + err))
+    }
+    img.src = loadSrc
   })
 }
 

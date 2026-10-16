@@ -20,4 +20,5 @@ scripts/generate_showcase.mjs
 electron-clipboard-search-implementation/
 scratch/verify-*.cjs
 scratch/release_notes*.md
+*.traineddata
 

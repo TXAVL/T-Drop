@@ -11,7 +11,7 @@
 import { app, BrowserWindow, protocol, session } from 'electron'
 import { APP_CONFIG, runtime } from './config'
 import { ensureDirs, PATHS } from '../store/paths'
-import { createWindow, getMainWindow, setInteractive, setVisible, startCursorPoll, stopCursorPoll, stopHeartbeat, setHotZoneWidth, registerTaskbarCreatedListener, sendToMainWindow, registerPanelInteractiveListener } from './window'
+import { createWindow, getMainWindow, setInteractive, setVisible, startCursorPoll, stopCursorPoll, stopHeartbeat, setHotZoneWidth, registerTaskbarCreatedListener, sendToMainWindow, registerPanelInteractiveListener, popUpAndRetract } from './window'
 import { createTray, registerIncognitoApplier, refreshTray } from './tray'
 import { registerIpc, registerSendListeners } from './ipc'
 import { reconcileLaunchAtLoginOnStartup } from './loginItems'
@@ -77,6 +77,8 @@ if (!gotLock) {
   app.on('second-instance', (_event, argv) => {
     // If a second copy launches, reveal the existing panel and handle any opened .txa file.
     setVisible(true)
+    popUpAndRetract()
+    sendToMainWindow('window:toggle', true)
     getMainWindow()?.focus()
     handleFileArg(argv)
   })
@@ -91,7 +93,7 @@ if (!gotLock) {
 protocol.registerSchemesAsPrivileged([
   {
     scheme: APP_CONFIG.imageProtocol,
-    privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true }
+    privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true, corsEnabled: true, bypassCSP: true }
   }
 ])
 
@@ -225,6 +227,17 @@ app.on('activate', () => {
 function registerImageProtocol(): void {
   protocol.handle(APP_CONFIG.imageProtocol, async (request) => {
     try {
+      if (request.method === 'OPTIONS') {
+        return new Response(null, {
+          status: 204,
+          headers: new Headers({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS, HEAD',
+            'Access-Control-Allow-Headers': '*'
+          })
+        })
+      }
+
       if (request.url.startsWith(`${APP_CONFIG.imageProtocol}://emoji/`)) {
         const fileName = decodeURIComponent(request.url.slice(`${APP_CONFIG.imageProtocol}://emoji/`.length).split('?')[0] ?? '')
         const dir = emojiAssetDir({
@@ -241,7 +254,8 @@ function registerImageProtocol(): void {
           status: 200,
           headers: new Headers({
             'Content-Type': 'image/png',
-            'Cache-Control': 'public, max-age=31536000, immutable'
+            'Cache-Control': 'public, max-age=31536000, immutable',
+            'Access-Control-Allow-Origin': '*'
           })
         })
       }
@@ -279,7 +293,8 @@ function registerImageProtocol(): void {
             status: 200,
             headers: new Headers({
               'Content-Type': contentType,
-              'Cache-Control': 'max-age=3600'
+              'Cache-Control': 'max-age=3600',
+              'Access-Control-Allow-Origin': '*'
             })
           })
         }
@@ -301,7 +316,8 @@ function registerImageProtocol(): void {
       const headers = new Headers({
         'Content-Type': storedImage.contentType,
         'Cache-Control': 'no-cache',
-        'ETag': `"${createHash('sha256').update(storedImage.filePath).digest('hex')}"`
+        'ETag': `"${createHash('sha256').update(storedImage.filePath).digest('hex')}"`,
+        'Access-Control-Allow-Origin': '*'
       })
       return new Response(body, { status: 200, headers })
     } catch {
@@ -338,7 +354,8 @@ function createThumbnailResponse(filePath: string, isStoredCapture: boolean, req
   const headers = new Headers({
     'Content-Type': payload.contentType,
     'Cache-Control': thumbnailCacheControl(isStoredCapture),
-    'ETag': payload.etag
+    'ETag': payload.etag,
+    'Access-Control-Allow-Origin': '*'
   })
 
   const inm = request?.headers.get('if-none-match')

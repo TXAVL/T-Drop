@@ -74,6 +74,9 @@ export interface EdgeApi {
   restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => Promise<{ ok: boolean; restoredItemsCount?: number; mode?: 'merge' | 'overwrite'; error?: string }>
   copyImageDataUrl: (dataUrl: string) => Promise<boolean>
   saveImageFile: (req: { dataUrl: string; defaultName?: string }) => Promise<{ ok: boolean; filePath?: string; error?: string }>
+  getImageDataUrl?: (imageSrc: string) => Promise<string | null>
+  extractOcrText?: (req: { imageSrc: string; lang?: string }) => Promise<{ ok: boolean; text?: string; confidence?: number; linesCount?: number; wordsCount?: number; error?: string }>
+  onOcrProgress?: (cb: (info: { progress: number; status: string }) => void) => () => void
   trimMemory: () => Promise<{ ok: boolean; mainRssMb: number }>
   getLicenseDeviceInfo: () => Promise<{ hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string }>
   activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string }>

@@ -51,8 +51,45 @@ export async function extractTextFromImage(
   lang = 'vie+eng',
   onProgress?: (percent: number, status: string) => void
 ): Promise<OcrResult> {
+  // 1. Try Native Electron Main Process IPC first (fast, reliable, zero CSP/worker hurdles)
+  if (typeof window !== 'undefined' && (window as any).edge?.extractOcrText) {
+    let unsub: (() => void) | null = null
+    if (onProgress && (window as any).edge?.onOcrProgress) {
+      unsub = (window as any).edge.onOcrProgress((info: { progress: number; status: string }) => {
+        onProgress(info.progress, info.status)
+      })
+    }
+    try {
+      const res = await (window as any).edge.extractOcrText({ imageSrc, lang })
+      if (res && res.ok && typeof res.text === 'string') {
+        return {
+          text: res.text,
+          confidence: res.confidence ?? 0,
+          linesCount: res.linesCount ?? 0,
+          wordsCount: res.wordsCount ?? 0
+        }
+      }
+      if (res && !res.ok) {
+        console.warn('[OCR] IPC OCR returned error, falling back to client worker:', res.error)
+      }
+    } catch (err) {
+      console.warn('[OCR] IPC OCR call threw, falling back to client worker:', err)
+    } finally {
+      if (unsub) unsub()
+    }
+  }
+
+  // 2. Client-side Tesseract.js WebAssembly Fallback
+  let targetSrc = imageSrc
+  if (imageSrc.startsWith('edgelocal://') && typeof window !== 'undefined' && (window as any).edge?.getImageDataUrl) {
+    try {
+      const dataUrl = await (window as any).edge.getImageDataUrl(imageSrc)
+      if (dataUrl) targetSrc = dataUrl
+    } catch {}
+  }
+
   const worker = await getOcrWorker(lang, onProgress)
-  const ret = await worker.recognize(imageSrc)
+  const ret = await worker.recognize(targetSrc)
 
   const rawText = ret.data?.text || ''
   const confidence = Math.round(ret.data?.confidence || 0)

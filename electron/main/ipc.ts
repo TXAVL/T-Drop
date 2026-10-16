@@ -6,7 +6,11 @@
  * is a compile-time error rather than a runtime one.
  */
 import { app, ipcMain, clipboard, nativeImage, shell, net, dialog, BrowserWindow } from 'electron'
-import { existsSync, writeFileSync } from 'node:fs'
+import { existsSync, writeFileSync, readFileSync, mkdirSync } from 'node:fs'
+import { extname, normalize, join } from 'node:path'
+import { resolveStoredImage } from './imageProtocol'
+import { APP_CONFIG } from './config'
+import { PATHS } from '../store/paths'
 import { trimMemory } from './memory'
 import { getDeviceFingerprint, activateLicense, deactivateLicense, getLicenseState, TxaLicense } from './license'
 import { AppLogger } from './logger'
@@ -887,6 +891,121 @@ export function registerIpc(): void {
       return { ok: false }
     } catch (err: any) {
       console.error('[IPC] image:save-file failed:', err)
+      return { ok: false, error: err?.message || String(err) }
+    }
+  })
+
+  handle('image:get-dataurl', async (imageSrc: string) => {
+    try {
+      if (imageSrc.startsWith('data:')) return imageSrc
+
+      let filePath: string | null = null
+      if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://file/`)) {
+        const rawPath = imageSrc.slice(`${APP_CONFIG.imageProtocol}://file/`.length)
+        filePath = normalize(decodeURIComponent(rawPath))
+      } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://thumb/`)) {
+        const rawTarget = imageSrc.slice(`${APP_CONFIG.imageProtocol}://thumb/`.length)
+        filePath = rawTarget.startsWith('file/')
+          ? normalize(decodeURIComponent(rawTarget.slice('file/'.length)))
+          : resolveStoredImage(PATHS.imagesDir(), rawTarget)?.filePath ?? null
+      } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://`)) {
+        const imageId = new URL(imageSrc).hostname
+        filePath = resolveStoredImage(PATHS.imagesDir(), imageId)?.filePath ?? null
+      } else if (existsSync(imageSrc)) {
+        filePath = imageSrc
+      }
+
+      if (filePath && existsSync(filePath)) {
+        const img = nativeImage.createFromPath(filePath)
+        if (!img.isEmpty()) {
+          return img.toDataURL()
+        }
+        const ext = extname(filePath).slice(1).toLowerCase()
+        const mime = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : ext === 'webp' ? 'image/webp' : ext === 'svg' ? 'image/svg+xml' : 'image/png'
+        const buf = readFileSync(filePath)
+        return `data:${mime};base64,${buf.toString('base64')}`
+      }
+    } catch (err) {
+      console.error('[IPC] image:get-dataurl failed:', err)
+    }
+    return null
+  })
+
+  handle('image:ocr', async ({ imageSrc, lang = 'vie+eng' }) => {
+    try {
+      let resolvedTarget: string | Buffer | null = null
+
+      if (imageSrc.startsWith('data:')) {
+        const base64Data = imageSrc.replace(/^data:image\/[a-zA-Z0-9+]+;base64,/, '')
+        resolvedTarget = Buffer.from(base64Data, 'base64')
+      } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://file/`)) {
+        const rawPath = imageSrc.slice(`${APP_CONFIG.imageProtocol}://file/`.length)
+        resolvedTarget = normalize(decodeURIComponent(rawPath))
+      } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://thumb/`)) {
+        const rawTarget = imageSrc.slice(`${APP_CONFIG.imageProtocol}://thumb/`.length)
+        resolvedTarget = rawTarget.startsWith('file/')
+          ? normalize(decodeURIComponent(rawTarget.slice('file/'.length)))
+          : resolveStoredImage(PATHS.imagesDir(), rawTarget)?.filePath ?? null
+      } else if (imageSrc.startsWith(`${APP_CONFIG.imageProtocol}://`)) {
+        const imageId = new URL(imageSrc).hostname
+        resolvedTarget = resolveStoredImage(PATHS.imagesDir(), imageId)?.filePath ?? null
+      } else if (existsSync(imageSrc)) {
+        resolvedTarget = imageSrc
+      }
+
+      if (!resolvedTarget) {
+        return { ok: false, error: 'Cannot resolve image source for OCR' }
+      }
+
+      const langList = lang === 'vie+eng' ? ['vie', 'eng'] : lang === 'vie' ? ['vie'] : ['eng']
+      const { createWorker } = await import('tesseract.js')
+      const win = getMainWindow()
+      const tessdataPath = join(app.getPath('userData'), 'tessdata')
+      if (!existsSync(tessdataPath)) {
+        try { mkdirSync(tessdataPath, { recursive: true }) } catch {}
+      }
+      const worker = await createWorker(langList, 1, {
+        cachePath: tessdataPath,
+        logger: (m: any) => {
+          if (m && typeof m.progress === 'number' && win) {
+            sendToMainWindow('ocr:progress', {
+              progress: Math.round(m.progress * 100),
+              status: m.status || 'Đang xử lý...'
+            })
+          }
+        }
+      })
+
+      try {
+        const ret = await worker.recognize(resolvedTarget)
+        const rawText = ret.data?.text || ''
+        const confidence = Math.round(ret.data?.confidence || 0)
+
+        const cleanedText = rawText
+          .split('\n')
+          .map((l: string) => l.trim())
+          .filter((l: string, idx: number, arr: string[]) => {
+            if (l === '' && arr[idx - 1] === '') return false
+            return true
+          })
+          .join('\n')
+          .trim()
+
+        const wordsCount = cleanedText ? cleanedText.split(/\s+/).filter(Boolean).length : 0
+        const linesCount = cleanedText ? cleanedText.split('\n').filter(Boolean).length : 0
+
+        return {
+          ok: true,
+          text: cleanedText,
+          confidence,
+          linesCount,
+          wordsCount
+        }
+      } finally {
+        await worker.terminate()
+      }
+    } catch (err: any) {
+      console.error('[IPC] image:ocr failed:', err)
       return { ok: false, error: err?.message || String(err) }
     }
   })

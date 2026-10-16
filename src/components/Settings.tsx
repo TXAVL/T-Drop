@@ -368,17 +368,7 @@ export function Settings({
   const licenseInputRef = useRef<HTMLInputElement>(null)
 
   const handleFocusLicenseInput = () => {
-    try { window.focus() } catch {}
-    try {
-      const p = window.edge?.focusWindow?.(true) as unknown as Promise<void> | undefined
-      if (p && typeof p.then === 'function') {
-        p.then(() => {
-          licenseInputRef.current?.focus()
-        }).catch(() => {})
-      } else {
-        licenseInputRef.current?.focus()
-      }
-    } catch {}
+    try { window.edge?.focusWindow?.(true) } catch {}
     try { window.edge?.pauseHotkey?.(true) } catch {}
   }
 
@@ -418,7 +408,9 @@ export function Settings({
         text = await navigator.clipboard.readText()
       }
       if (text && text.trim()) {
-        setLicenseInput(text.trim().toUpperCase())
+        const clean = text.trim().toUpperCase().replace(/\s+/g, '')
+        setLicenseInput(clean)
+        setTimeout(() => licenseInputRef.current?.focus(), 50)
         pushToast({
           id: Date.now().toString(),
           message: 'Đã dán mã key từ clipboard!',
@@ -725,10 +717,16 @@ export function Settings({
                   type="text"
                   placeholder="Nhập mã key: TDR_XXXXXX_XXXXX"
                   value={licenseInput}
-                  onPointerDown={handleFocusLicenseInput}
                   onFocus={handleFocusLicenseInput}
                   onBlur={handleBlurLicenseInput}
-                  onChange={(e) => setLicenseInput(e.target.value.toUpperCase())}
+                  onChange={(e) => setLicenseInput(e.target.value.toUpperCase().replace(/\s+/g, ''))}
+                  onPaste={(e) => {
+                    e.preventDefault()
+                    const text = e.clipboardData.getData('text')
+                    if (text) {
+                      setLicenseInput(text.trim().toUpperCase().replace(/\s+/g, ''))
+                    }
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleActivateLicense()
                   }}
