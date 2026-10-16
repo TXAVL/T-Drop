@@ -9,7 +9,7 @@ import { extractTextFromImage, type OcrResult } from '../lib/ocr'
 import { formatBytes } from '../lib/format'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
-import { CopyIcon, FolderOpenIcon, CheckIcon, OcrIcon } from './icons'
+import { CopyIcon, FolderOpenIcon, CheckIcon, OcrIcon, CrownIcon } from './icons'
 import { t } from '../i18n'
 
 interface ImageStudioPanelProps {
@@ -44,6 +44,9 @@ export function ImageStudioPanel({
   const [ocrResult, setOcrResult] = useState<OcrResult | null>(null)
   const [ocrCopied, setOcrCopied] = useState(false)
   const [ocrAddedToHistory, setOcrAddedToHistory] = useState(false)
+
+  const settings = useStore((s) => s.settings)
+  const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
 
   // Handle Format Convert & Copy
   const handleConvertAndCopy = useCallback(async () => {
@@ -155,6 +158,15 @@ export function ImageStudioPanel({
 
   // Handle OCR Extraction
   const handleStartOcr = useCallback(async () => {
+    if (!isPro) {
+      useStore.getState().pushToast({
+        id: `ocr-pro-required-${Date.now()}`,
+        message: 'Tính năng trích chữ OCR yêu cầu kích hoạt bản quyền VIP hoặc PREMIUM!',
+        tone: 'error'
+      })
+      useStore.getState().setSettingsOpen(true)
+      return
+    }
     if (ocrRunning || !imageSrc) return
     setOcrRunning(true)
     setOcrProgress(5)
@@ -187,7 +199,7 @@ export function ImageStudioPanel({
     } finally {
       setOcrRunning(false)
     }
-  }, [imageSrc, ocrLang, ocrRunning])
+  }, [imageSrc, ocrLang, ocrRunning, isPro])
 
   // Copy OCR Text
   const handleCopyOcrText = useCallback(() => {
@@ -246,7 +258,11 @@ export function ImageStudioPanel({
         >
           <OcrIcon width={12} height={12} />
           <span>{t('imageStudio.tabOcr') || 'Trích chữ (OCR)'}</span>
-          <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #38bdf8, #818cf8)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>AI</span>
+          {!isPro ? (
+            <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #f59e0b, #ef4444)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>PRO</span>
+          ) : (
+            <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #38bdf8, #818cf8)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>AI</span>
+          )}
         </button>
       </div>
 
@@ -378,7 +394,47 @@ export function ImageStudioPanel({
       )}
 
       {activeTab === 'ocr' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <>
+          {!isPro ? (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(239, 68, 68, 0.08) 100%)',
+              border: '1px solid rgba(245, 158, 11, 0.25)',
+              borderRadius: 10,
+              padding: '12px 14px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <CrownIcon width={16} height={16} fill="#f59e0b" />
+                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#f59e0b' }}>
+                  Tính năng VIP & PREMIUM: Trích chữ AI (OCR)
+                </span>
+              </div>
+              <p style={{ margin: 0, fontSize: 11.5, color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
+                Tự động nhận diện chữ tiếng Việt & tiếng Anh từ hình ảnh bằng mô hình AI client-side nhanh chóng và bảo mật.
+              </p>
+              <button
+                type="button"
+                className="image-studio-btn primary"
+                style={{
+                  background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                  color: '#000',
+                  fontWeight: 700,
+                  fontSize: 11.5,
+                  alignSelf: 'flex-start',
+                  marginTop: 4
+                }}
+                onClick={() => {
+                  playButtonClickSound()
+                  useStore.getState().setSettingsOpen(true)
+                }}
+              >
+                Kích hoạt mã bản quyền trong Cài đặt
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div className="image-studio-row">
                 <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
                   Ngôn ngữ nhận diện:
@@ -496,7 +552,9 @@ export function ImageStudioPanel({
                   </div>
                 </div>
               )}
-        </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   )
