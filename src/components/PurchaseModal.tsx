@@ -278,7 +278,7 @@ function PurchaseWindowContent({
       const res = await window.edge.activateLicense(trimmed)
       if (res.ok) {
         const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
-        useStore.getState().updateSettings({
+        void useStore.getState().patchSettings({
           isPro: true,
           licenseKey: trimmed,
           licenseRole: activatedRole,

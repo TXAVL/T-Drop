@@ -484,7 +484,7 @@ export function Settings({
       const res = await window.edge.activateLicense(trimmed)
       if (res.ok) {
         const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
-        useStore.getState().updateSettings({
+        void useStore.getState().patchSettings({
           isPro: true,
           licenseKey: trimmed,
           licenseRole: activatedRole,
@@ -518,7 +518,7 @@ export function Settings({
   const handleDeactivateLicense = () => {
     playButtonClickSound()
     window.edge.deactivateLicense()
-    useStore.getState().updateSettings({
+    void useStore.getState().patchSettings({
       isPro: false,
       licenseKey: '',
       licenseRole: 'FREE',

@@ -80,7 +80,7 @@ export interface EdgeApi {
   onOcrProgress?: (cb: (info: { progress: number; status: string }) => void) => () => void
   trimMemory: () => Promise<{ ok: boolean; mainRssMb: number }>
   getLicenseDeviceInfo: () => Promise<{ hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string }>
-  activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string }>
+  activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string; expiresAt?: string | null }>
   deactivateLicense: () => Promise<boolean>
   readClipboardText?: () => Promise<string>
   generateLicenseKey: (hwHash?: string) => Promise<string>
