@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.7</span>
+          <span data-i18n="nav.download">Tải về v0.1.8</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,56 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.1.7 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.8 ────────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.7</span>
+          <span>Version v0.1.8</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">16/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v018.summary">
+        Ra mắt phân quyền tính năng đặc quyền cho gói PREMIUM (Tự động nhận diện chữ AI OCR khi mở ảnh, làm phẳng dòng thông minh, sao chép Markdown và xuất tệp .TXT), bổ sung hiển thị số ngày đếm ngược trực quan cho gói VIP và PREMIUM, tối ưu hóa toàn diện độ ổn định của bộ công cụ Image Studio và hỗ trợ đa ngôn ngữ đầy đủ.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v018.feat1.title">Đặc quyền gói PREMIUM: Tự động OCR, Làm phẳng dòng &amp; Xuất tệp .TXT</h3>
+            <p data-i18n="v018.feat1.desc">Mở khóa bộ công cụ năng suất cao cho gói PREMIUM: Tự động chạy quét AI OCR ngay khi mở ảnh, làm phẳng ngắt dòng văn bản thông minh (Unwrap lines), sao chép định dạng Markdown và lưu văn bản trực tiếp ra tệp .TXT qua hộp thoại Windows.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v018.feat2.title">Hiển thị số ngày đếm ngược thời hạn bản quyền VIP &amp; PREMIUM</h3>
+            <p data-i18n="v018.feat2.desc">Đồng hồ đếm ngược thời gian thực (ngày, giờ, phút) hiển thị trực tiếp tại thanh trạng thái OCR trong Image Studio và thẻ Bản quyền trong Cài đặt, kèm huy hiệu VIP vàng ánh kim và PREMIUM tím gradient.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v018.feat3.title">Tối ưu hóa độ tin cậy Bộ công cụ Xử lý ảnh &amp; AI OCR</h3>
+            <p data-i18n="v018.feat3.desc">Nâng cấp độ ổn định cho tính năng nén ảnh, chuyển đổi định dạng (PNG, JPG, WebP), xử lý an toàn đường dẫn tệp file://, bổ sung cơ chế sao chép clipboard dự phòng và hộp thoại lưu tệp không phong tỏa giao diện.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v018.feat4.title">Đồng bộ bản dịch đa ngôn ngữ cho Image Studio</h3>
+            <p data-i18n="v018.feat4.desc">Bổ sung hoàn chỉnh hệ thống từ điển i18n cho toàn bộ các nút bấm, huy hiệu, tooltip và thông báo trong Image Studio cho cả Tiếng Việt và Tiếng Anh.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.7 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.7</span>
         </div>
         <div class="release-date">16/10/2026</div>
       </div>
@@ -916,7 +960,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.7',
+        'nav.download': 'Tải về v0.1.8',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
@@ -926,6 +970,24 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v018.summary': 'Ra mắt phân quyền tính năng đặc quyền cho gói PREMIUM (Tự động nhận diện chữ AI OCR khi mở ảnh, làm phẳng dòng thông minh, sao chép Markdown và xuất tệp .TXT), bổ sung hiển thị số ngày đếm ngược trực quan cho gói VIP và PREMIUM, tối ưu hóa toàn diện độ ổn định của bộ công cụ Image Studio và hỗ trợ đa ngôn ngữ đầy đủ.',
+        'v018.feat1.title': 'Đặc quyền gói PREMIUM: Tự động OCR, Làm phẳng dòng & Xuất tệp .TXT',
+        'v018.feat1.desc': 'Mở khóa bộ công cụ năng suất cao cho gói PREMIUM: Tự động chạy quét AI OCR ngay khi mở ảnh, làm phẳng ngắt dòng văn bản thông minh (Unwrap lines), sao chép định dạng Markdown và lưu văn bản trực tiếp ra tệp .TXT qua hộp thoại Windows.',
+        'v018.feat2.title': 'Hiển thị số ngày đếm ngược thời hạn bản quyền VIP & PREMIUM',
+        'v018.feat2.desc': 'Đồng hồ đếm ngược thời gian thực (ngày, giờ, phút) hiển thị trực tiếp tại thanh trạng thái OCR trong Image Studio và thẻ Bản quyền trong Cài đặt, kèm huy hiệu VIP vàng ánh kim và PREMIUM tím gradient.',
+        'v018.feat3.title': 'Tối ưu hóa độ tin cậy Bộ công cụ Xử lý ảnh & AI OCR',
+        'v018.feat3.desc': 'Nâng cấp độ ổn định cho tính năng nén ảnh, chuyển đổi định dạng (PNG, JPG, WebP), xử lý an toàn đường dẫn tệp file://, bổ sung cơ chế sao chép clipboard dự phòng và hộp thoại lưu tệp không phong tỏa giao diện.',
+        'v018.feat4.title': 'Đồng bộ bản dịch đa ngôn ngữ cho Image Studio',
+        'v018.feat4.desc': 'Bổ sung hoàn chỉnh hệ thống từ điển i18n cho toàn bộ các nút bấm, huy hiệu, tooltip và thông báo trong Image Studio cho cả Tiếng Việt và Tiếng Anh.',
+        'v017.summary': 'Ra mắt hệ thống phím số dán nhanh 1–9 kèm huy hiệu số trực quan, phím tắt tìm kiếm bàn phím (/ và Ctrl+F), thanh trượt điều chỉnh âm lượng âm thanh xúc giác mượt mà và tính năng Hoàn tác (Undo) tức thì khi xóa mục.',
+        'v017.feat1.title': 'Phím số dán nhanh 1–9 & Huy hiệu trực quan',
+        'v017.feat1.desc': 'Hiển thị huy hiệu số thứ tự thanh lịch trên 9 mục gần nhất. Người dùng có thể nhấn phím 1–9 trên bàn phím để dán nhanh tức thì vào ứng dụng đang làm việc mà không cần click chuột.',
+        'v017.feat2.title': 'Thanh trượt điều chỉnh âm lượng hiệu ứng âm thanh',
+        'v017.feat2.desc': 'Tùy biến âm lượng âm thanh phản hồi xúc giác linh hoạt từ 10% đến 100% trong Cài đặt Giao diện, có phản hồi âm thanh xem trước tức thì.',
+        'v017.feat3.title': 'Khôi phục nhanh với nút Hoàn tác (Undo) khi xóa mục',
+        'v017.feat3.desc': 'Khi xóa một thẻ clipboard, thông báo nổi hiển thị nút Hoàn tác cho phép khôi phục lại dữ liệu nguyên vẹn chỉ với 1 click.',
+        'v017.feat4.title': 'Phím tắt tìm kiếm nhanh trên giá đồ (/ hoặc Ctrl+F)',
+        'v017.feat4.desc': 'Tự động kích hoạt tiêu điểm vào ô tìm kiếm khi nhấn phím / hoặc tổ hợp Ctrl+F, nâng cao tốc độ thao tác bàn phím cho người dùng chuyên nghiệp.',
         'v016.summary': 'Bổ sung hệ thống TxaTooltip tùy chỉnh mượt mà tương thích mọi góc màn hình, tối ưu hóa giải phóng RAM Chromium chuyên sâu, nâng cấp trình ghi chẩn đoán Logs chi tiết và hoàn thiện trải nghiệm kích hoạt bản quyền trực tuyến cùng sửa lỗi hiển thị thông báo.',
         'v016.item1.title': 'Hệ Thống TxaTooltip Tùy Chỉnh Hiện Đại',
         'v016.item1.desc': 'Thay thế hoàn toàn tooltip mặc định của trình duyệt bằng thiết kế hiện đại, tự động căn chỉnh vị trí thông minh theo 4 góc màn hình để không bao giờ bị tràn viền hay che khuất nội dung.',
@@ -995,7 +1057,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.7',
+        'nav.download': 'Download v0.1.8',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
@@ -1005,6 +1067,24 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v018.summary': 'Introduces exclusive PREMIUM features in Image Studio (Auto-OCR on open, smart line unwrapping, Markdown copy, and native TXT file export), real-time countdown timer for VIP and PREMIUM licenses, enhanced Image Studio reliability, and full i18n localization.',
+        'v018.feat1.title': 'Exclusive PREMIUM Features: Auto-OCR, Line Unwrap & TXT Export',
+        'v018.feat1.desc': 'Unlocks dedicated productivity tools for PREMIUM users: instant Auto-OCR upon opening images, Smart Unwrap lines to seamlessly join fragmented text, Copy as clean Markdown, and export text directly to native Windows .TXT files.',
+        'v018.feat2.title': 'VIP & PREMIUM Real-Time License Countdown Timer',
+        'v018.feat2.desc': 'Track license validity at a glance with a real-time countdown timer (days, hours, minutes) shown directly on the Image Studio OCR banner and Settings license card, accompanied by distinctive gold VIP and purple PREMIUM badges.',
+        'v018.feat3.title': 'Hardened Image Studio & AI OCR Reliability',
+        'v018.feat3.desc': 'Polished image compression and format conversion (PNG, JPG, WebP), added robust support for file:// URI paths, introduced fallback nativeImage buffer clipboard copying, and decoupled native save dialogs to prevent modal stalls.',
+        'v018.feat4.title': 'Full Image Studio Multilingual (i18n) Synchronization',
+        'v018.feat4.desc': 'Complete localization of all tool buttons, badges, tooltips, and status notifications across both Vietnamese and English.',
+        'v017.summary': 'Introduces quick 1–9 number key paste with visual item badges, keyboard search shortcuts (/ and Ctrl+F), smooth haptic sound volume slider, and instant Undo for deleted clips.',
+        'v017.feat1.title': 'Quick 1–9 Number Paste & Visual Badges',
+        'v017.feat1.desc': 'Displays numbered badge indicators on the 9 most recent items. Press keys 1 through 9 on your keyboard to instantly paste into your active app without clicking.',
+        'v017.feat2.title': 'Sound Effects Volume Slider',
+        'v017.feat2.desc': 'Freely adjust haptic sound effects volume from 10% to 100% in Appearance Settings, complete with live audio preview.',
+        'v017.feat3.title': 'Instant Undo Recovery for Deleted Items',
+        'v017.feat3.desc': 'Whenever a clip card is removed, the toast notification offers an instant Undo action to restore your content with 1 click.',
+        'v017.feat4.title': 'Quick Search Hotkey on Shelf (/ or Ctrl+F)',
+        'v017.feat4.desc': 'Quickly focus the search bar by pressing / or Ctrl+F, boosting productivity for power keyboard users.',
         'v016.summary': 'Introduces adaptive custom TxaTooltip, deep Chromium RAM optimization, comprehensive system diagnostic logging, and smoother online license activation with notification fixes.',
         'v016.item1.title': 'Adaptive Modern TxaTooltip System',
         'v016.item1.desc': 'Replaced default browser tooltips with a sleek custom UI that dynamically adjusts positioning across all screen corners without clipping or overflowing.',
