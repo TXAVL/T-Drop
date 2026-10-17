@@ -46,7 +46,8 @@ import {
   Lightbulb,
   Shapes,
   Flag,
-  Palette
+  Palette,
+  QrCode
 } from 'lucide-react'
 
 type P = SVGProps<SVGSVGElement>
@@ -229,4 +230,6 @@ export const CrownIcon = (p: P) => {
     </svg>
   )
 }
+
+export const QrCodeIcon = uiIcon(QrCode)
 

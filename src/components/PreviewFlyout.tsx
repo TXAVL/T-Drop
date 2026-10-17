@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
-import { formatBytes, formatImageDisplayName } from '../lib/format'
+import { formatBytes, formatImageDisplayName, previewText } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
-import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon, BroomIcon } from './icons'
+import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon, BroomIcon, QrCodeIcon } from './icons'
 import { parseUrlPreview, hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
 import { parseColor, getColorFormats } from '../lib/colorUtils'
+import { toUpper, toLower, toTitleCase, toCamelCase, toCleanSpace, getTextStats } from '../lib/textTransform'
 import { ImageStudioPanel } from './ImageStudioPanel'
 import { createPortal } from 'react-dom'
 import { useAdaptiveSpring } from '../hooks/useAdaptiveSpring'
@@ -787,6 +788,17 @@ function PreviewContent({
                 onClick={() => window.open(activeText, '_blank')}
               />
               <QuickActionButton
+                title={t('qr.title') || 'Chia sẻ mã QR'}
+                icon={QrCodeIcon}
+                onClick={() => {
+                  playButtonClickSound()
+                  useStore.getState().setQrModal({
+                    text: activeText,
+                    title: info.title || info.domain
+                  })
+                }}
+              />
+              <QuickActionButton
                 title={t('flyout.copyText')}
                 icon={CopyIcon}
                 onClick={() => navigator.clipboard.writeText(info.cleanUrl || activeText)}
@@ -981,6 +993,19 @@ function PreviewContent({
       )
     }
 
+    const stats = getTextStats(activeText)
+
+    const handleTransform = (transformer: (s: string) => string, toastMsg: string) => {
+      playButtonClickSound()
+      const result = transformer(activeText)
+      navigator.clipboard.writeText(result)
+      useStore.getState().pushToast({
+        id: Date.now().toString(),
+        message: toastMsg,
+        tone: 'info'
+      })
+    }
+
     return (
       <div
         onClick={(e) => {
@@ -990,15 +1015,167 @@ function PreviewContent({
           tryPaste(() => useStore.getState().paste(item.id))
         }}
         title={t('flyout.clickToPaste')}
-        style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 10, cursor: 'pointer' }}
+        style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 12, cursor: 'pointer' }}
       >
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, position: 'sticky', top: 0, zIndex: 2 }}>
-          <QuickActionButton
-            title={t('flyout.copyText')}
-            icon={CopyIcon}
-            onClick={() => useStore.getState().copy(item.id)}
-          />
+        {/* Top Header: Text Metrics & Action Buttons */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, position: 'sticky', top: 0, zIndex: 2 }}>
+          {/* Metrics Chip */}
+          <div style={{
+            fontSize: 11,
+            fontWeight: 600,
+            color: 'rgba(255, 255, 255, 0.65)',
+            background: 'rgba(255, 255, 255, 0.06)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: 999,
+            padding: '3px 10px',
+            fontFamily: SYS_FONT,
+            letterSpacing: '0.02em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6
+          }}>
+            <span>{stats.characters.toLocaleString()} {t('text.chars') || 'ký tự'}</span>
+            <span style={{ opacity: 0.4 }}>·</span>
+            <span>{stats.words.toLocaleString()} {t('text.words') || 'từ'}</span>
+            <span style={{ opacity: 0.4 }}>·</span>
+            <span>{stats.lines.toLocaleString()} {t('text.lines') || 'dòng'}</span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <QuickActionButton
+              title={t('qr.title') || 'Chia sẻ mã QR'}
+              icon={QrCodeIcon}
+              onClick={() => {
+                playButtonClickSound()
+                useStore.getState().setQrModal({
+                  text: activeText,
+                  title: previewText(activeText, 40)
+                })
+              }}
+            />
+            <QuickActionButton
+              title={t('flyout.copyText')}
+              icon={CopyIcon}
+              onClick={() => useStore.getState().copy(item.id)}
+            />
+          </div>
         </div>
+
+        {/* Text Transformers Chips Bar */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 6,
+            padding: '8px 10px',
+            background: 'rgba(0, 0, 0, 0.28)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: 10
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            type="button"
+            title={t('text.upperTip') || 'Chuyển sang IN HOA và sao chép'}
+            onClick={() => handleTransform(toUpper, t('text.copiedUpper') || 'Đã sao chép chữ IN HOA!')}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: 'rgba(255, 255, 255, 0.85)',
+              borderRadius: 6,
+              padding: '3px 8px',
+              fontSize: 11,
+              fontWeight: 700,
+              fontFamily: 'var(--font-mono, monospace)',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            UPPER
+          </button>
+
+          <button
+            type="button"
+            title={t('text.lowerTip') || 'Chuyển sang chữ thường và sao chép'}
+            onClick={() => handleTransform(toLower, t('text.copiedLower') || 'Đã sao chép chữ thường!')}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: 'rgba(255, 255, 255, 0.85)',
+              borderRadius: 6,
+              padding: '3px 8px',
+              fontSize: 11,
+              fontWeight: 600,
+              fontFamily: 'var(--font-mono, monospace)',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            lower
+          </button>
+
+          <button
+            type="button"
+            title={t('text.titleTip') || 'Chuyển sang In Hoa Đầu Từ và sao chép'}
+            onClick={() => handleTransform(toTitleCase, t('text.copiedTitle') || 'Đã sao chép In Hoa Đầu Từ!')}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: 'rgba(255, 255, 255, 0.85)',
+              borderRadius: 6,
+              padding: '3px 8px',
+              fontSize: 11,
+              fontWeight: 600,
+              fontFamily: SYS_FONT,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            Title Case
+          </button>
+
+          <button
+            type="button"
+            title={t('text.camelTip') || 'Chuyển sang camelCase và sao chép'}
+            onClick={() => handleTransform(toCamelCase, t('text.copiedCamel') || 'Đã sao chép dạng camelCase!')}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: 'rgba(255, 255, 255, 0.85)',
+              borderRadius: 6,
+              padding: '3px 8px',
+              fontSize: 11,
+              fontWeight: 600,
+              fontFamily: 'var(--font-mono, monospace)',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            camelCase
+          </button>
+
+          <button
+            type="button"
+            title={t('text.cleanSpaceTip') || 'Làm sạch khoảng trắng thừa, xóa dòng trống thừa'}
+            onClick={() => handleTransform(toCleanSpace, t('text.copiedClean') || 'Đã làm sạch khoảng trắng!')}
+            style={{
+              background: 'rgba(0, 210, 255, 0.1)',
+              border: '1px solid rgba(0, 210, 255, 0.25)',
+              color: '#38bdf8',
+              borderRadius: 6,
+              padding: '3px 8px',
+              fontSize: 11,
+              fontWeight: 600,
+              fontFamily: SYS_FONT,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            🧹 Clean Space
+          </button>
+        </div>
+
+        {/* Text Body */}
         <div style={{
           color: 'rgba(255,255,255,0.88)',
           whiteSpace: 'pre-wrap',

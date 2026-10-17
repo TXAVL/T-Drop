@@ -25,7 +25,7 @@ import { itemRenderKey } from '../lib/itemSignature'
 import { basename, formatBytes, previewText, relativeTime, formatImageDisplayName } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
 import { playButtonClickSound, playToggleSound, playDeleteSound, playCardExpandSound } from '../lib/soundEffects'
-import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon, OcrIcon } from './icons'
+import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon, OcrIcon, QrCodeIcon } from './icons'
 import { LinkPreviewCard } from './LinkPreviewCard'
 import '../styles/item.css'
 import { tryPaste } from '../lib/tryPaste'
@@ -477,6 +477,24 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
               }}
             >
               <ColorConvertIcon />
+            </button>
+          )}
+          {item.data.kind === 'text' && (
+            <button
+              className="act act-qr"
+              title={t('qr.title') || 'Chia sẻ mã QR (Quét bằng điện thoại)'}
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                e.currentTarget.blur()
+                playButtonClickSound()
+                useStore.getState().setQrModal({
+                  text: (item.data as any).text,
+                  title: (item.data as any).isUrl ? previewText((item.data as any).text, 40) : undefined
+                })
+              }}
+            >
+              <QrCodeIcon width={13} height={13} />
             </button>
           )}
           {Boolean(singleImageSrc) && (

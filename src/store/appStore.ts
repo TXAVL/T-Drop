@@ -56,6 +56,11 @@ export interface UpdateProgress {
   total?: number
 }
 
+export interface QrModalState {
+  text: string
+  title?: string
+}
+
 export interface RestoreModalState {
   open: boolean
   filePath: string
@@ -110,6 +115,8 @@ interface AppState {
   previewItemRect: { x?: number; y?: number; width?: number; height?: number } | null
   restoreModal: RestoreModalState | null
   setRestoreModal: (modal: RestoreModalState | null) => void
+  qrModal: QrModalState | null
+  setQrModal: (qrModal: QrModalState | null) => void
 
   sliderActive: boolean
   sliderReleasedTime: number
@@ -244,6 +251,8 @@ export const useStore = create<AppState>((set, get) => ({
   previewItemRect: null,
   restoreModal: null,
   setRestoreModal: (restoreModal) => set({ restoreModal }),
+  qrModal: null,
+  setQrModal: (qrModal) => set({ qrModal }),
   sliderActive: false,
   sliderReleasedTime: 0,
   setSliderActive: (active) => set({
@@ -484,7 +493,7 @@ export const useStore = create<AppState>((set, get) => ({
       // NOTE: Do NOT reset styleFlyoutOpen here — closePanel() handles the
       // sequencing so the flyout exit animation completes before the panel closes.
       // Only reset previewItemId so the normal preview flyout clears correctly.
-      set({ settingsOpen: false, previewItemId: null, previewItemRect: null, expandedStackId: null })
+      set({ settingsOpen: false, previewItemId: null, previewItemRect: null, expandedStackId: null, qrModal: null })
       edge.setPreviewMode(false)
     }
   },

@@ -314,7 +314,28 @@ const BUILTIN_FALLBACKS: Record<string, { en: string; vi: string }> = {
   'purchase.emailInvalid': { en: 'Only accepts: @gmail.com, @icloud.com, @outlook.com, @hotmail.com', vi: 'Chỉ chấp nhận email: @gmail.com, @icloud.com, @outlook.com, @hotmail.com' },
   'purchase.createOrderBtn': { en: 'Generate VietQR Payment Code', vi: 'Tạo mã thanh toán VietQR' },
   'purchase.orderSuccess': { en: 'Order created! Scan QR code to complete payment.', vi: 'Đã tạo đơn hàng thành công! Quét mã QR để hoàn tất thanh toán.' },
-  'purchase.orderFailed': { en: 'Failed to create order on server. Please try again!', vi: 'Không thể tạo đơn hàng trên máy chủ. Vui lòng thử lại!' }
+  'purchase.orderFailed': { en: 'Failed to create order on server. Please try again!', vi: 'Không thể tạo đơn hàng trên máy chủ. Vui lòng thử lại!' },
+
+  // Instant QR Code & Text Studio
+  'qr.title': { en: 'Share via QR Code', vi: 'Chia sẻ mã QR' },
+  'qr.scanTip': { en: 'Open camera on your phone (iOS / Android) to scan and receive content instantly without cables.', vi: 'Mở camera trên điện thoại (iOS / Android) để quét và nhận nội dung tức thì không cần dây cáp.' },
+  'qr.copyImage': { en: 'Copy Image', vi: 'Chép ảnh' },
+  'qr.imageCopied': { en: 'QR Code image copied to clipboard!', vi: 'Đã sao chép ảnh mã QR vào clipboard!' },
+  'qr.download': { en: 'Save PNG', vi: 'Tải ảnh PNG' },
+  'qr.downloadSuccess': { en: 'Saved QR Code image (.PNG)!', vi: 'Đã lưu ảnh mã QR (.PNG)!' },
+  'text.chars': { en: 'chars', vi: 'ký tự' },
+  'text.words': { en: 'words', vi: 'từ' },
+  'text.lines': { en: 'lines', vi: 'dòng' },
+  'text.upperTip': { en: 'Convert to UPPERCASE and copy', vi: 'Chuyển sang IN HOA và sao chép' },
+  'text.lowerTip': { en: 'Convert to lowercase and copy', vi: 'Chuyển sang chữ thường và sao chép' },
+  'text.titleTip': { en: 'Convert to Title Case and copy', vi: 'Chuyển sang In Hoa Đầu Từ và sao chép' },
+  'text.camelTip': { en: 'Convert to camelCase and copy', vi: 'Chuyển sang camelCase và sao chép' },
+  'text.cleanSpaceTip': { en: 'Clean spaces and redundant blank lines', vi: 'Làm sạch khoảng trắng thừa, xóa dòng trống thừa' },
+  'text.copiedUpper': { en: 'Copied UPPERCASE text!', vi: 'Đã sao chép chữ IN HOA!' },
+  'text.copiedLower': { en: 'Copied lowercase text!', vi: 'Đã sao chép chữ thường!' },
+  'text.copiedTitle': { en: 'Copied Title Case text!', vi: 'Đã sao chép In Hoa Đầu Từ!' },
+  'text.copiedCamel': { en: 'Copied camelCase text!', vi: 'Đã sao chép dạng camelCase!' },
+  'text.copiedClean': { en: 'Cleaned spaces and copied text!', vi: 'Đã làm sạch khoảng trắng và sao chép!' }
 }
 
 /**

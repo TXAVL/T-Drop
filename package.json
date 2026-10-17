@@ -1,6 +1,6 @@
 {
   "name": "t-drop",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "T-Drop — a clipboard manager that lives on the left edge of your screen and expands on hover.",
   "author": "TXAVL",
   "license": "Apache-2.0",
@@ -46,6 +46,7 @@
       "!**/node_modules/@radix-ui/**",
       "!**/node_modules/svg-path-bbox/**",
       "!**/node_modules/react-dom/**",
+      "!**/node_modules/qrcode/**",
       "!**/node_modules/koffi/doc/**"
     ],
     "extraResources": [
@@ -138,6 +139,8 @@
     "framer-motion": "^11.0.24",
     "gsap": "^3.15.0",
     "lucide-react": "^1.26.0",
+    "@types/qrcode": "^1.5.6",
+    "qrcode": "^1.5.4",
     "react-dom": "^18.2.0",
     "svg-path-bbox": "^2.1.0",
     "typescript": "^5.4.3",

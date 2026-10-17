@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.8</span>
+          <span data-i18n="nav.download">Tải về v0.1.9</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,56 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.1.8 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.9 ────────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.8</span>
+          <span>Version v0.1.9</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">17/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v019.summary">
+        Ra mắt tính năng chia sẻ tức thì sang điện thoại qua Mã QR (Instant QR Code), tích hợp bộ công cụ Text Studio trong Preview Flyout (chuyển đổi chữ HOA/thường, Title Case, camelCase, làm sạch khoảng trắng), bổ sung thanh thống kê số từ/ký tự/dòng thời gian thực và loại bỏ triệt để hiện tượng giật lag, tối ưu hóa tốc độ đóng mở panel.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v019.feat1.title">Chia sẻ tức thì sang điện thoại qua Mã QR (Instant QR Code)</h3>
+            <p data-i18n="v019.feat1.desc">Tự động tạo mã QR 1-click cho mọi đường dẫn liên kết (Link) và văn bản (Text). Người dùng chỉ cần giơ camera điện thoại quét để mở link hoặc nhận văn bản ngay lập tức mà không cần dây cáp hay cài thêm app phụ trợ. Hỗ trợ sao chép ảnh QR vào clipboard và tải ảnh QR (.PNG).</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v019.feat2.title">Bộ công cụ xử lý văn bản Text Studio &amp; Chuyển đổi kiểu chữ</h3>
+            <p data-i18n="v019.feat2.desc">Tích hợp trực tiếp thanh công cụ biến đổi văn bản trong Preview Flyout: 1-click chuyển đổi nhanh sang UPPERCASE, lowercase, Title Case, camelCase hoặc 🧹 Clean Space (tự động làm sạch khoảng trắng thừa và dòng trống lặp lại).</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v019.feat3.title">Thống kê văn bản trực quan thời gian thực (Text Metrics)</h3>
+            <p data-i18n="v019.feat3.desc">Hiển thị huy hiệu thống kê chi tiết số ký tự, số từ và số dòng của nội dung văn bản ngay tại tiêu đề thẻ xem trước, nâng cao hiệu suất cho người dùng làm việc với văn bản.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v019.feat4.title">Siêu mượt mà &amp; Triệt tiêu hoàn toàn giật lag</h3>
+            <p data-i18n="v019.feat4.desc">Loại bỏ polling Registry Windows ngầm định kỳ 2 giây, tối ưu hóa hiệu năng render DOM cho thanh trượt vị trí và khắc phục lỗi không tự ẩn panel khi bấm ra ngoài.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.8 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.8</span>
         </div>
         <div class="release-date">16/10/2026</div>
       </div>
@@ -960,7 +1004,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.8',
+        'nav.download': 'Tải về v0.1.9',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
@@ -970,6 +1014,15 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v019.summary': 'Ra mắt tính năng chia sẻ tức thì sang điện thoại qua Mã QR (Instant QR Code), tích hợp bộ công cụ Text Studio trong Preview Flyout (chuyển đổi chữ HOA/thường, Title Case, camelCase, làm sạch khoảng trắng), bổ sung thanh thống kê số từ/ký tự/dòng thời gian thực và loại bỏ triệt để hiện tượng giật lag, tối ưu hóa tốc độ đóng mở panel.',
+        'v019.feat1.title': 'Chia sẻ tức thì sang điện thoại qua Mã QR (Instant QR Code)',
+        'v019.feat1.desc': 'Tự động tạo mã QR 1-click cho mọi đường dẫn liên kết (Link) và văn bản (Text). Người dùng chỉ cần giơ camera điện thoại quét để mở link hoặc nhận văn bản ngay lập tức mà không cần dây cáp hay cài thêm app phụ trợ. Hỗ trợ sao chép ảnh QR vào clipboard và tải ảnh QR (.PNG).',
+        'v019.feat2.title': 'Bộ công cụ xử lý văn bản Text Studio & Chuyển đổi kiểu chữ',
+        'v019.feat2.desc': 'Tích hợp trực tiếp thanh công cụ biến đổi văn bản trong Preview Flyout: 1-click chuyển đổi nhanh sang UPPERCASE, lowercase, Title Case, camelCase hoặc 🧹 Clean Space (tự động làm sạch khoảng trắng thừa và dòng trống lặp lại).',
+        'v019.feat3.title': 'Thống kê văn bản trực quan thời gian thực (Text Metrics)',
+        'v019.feat3.desc': 'Hiển thị huy hiệu thống kê chi tiết số ký tự, số từ và số dòng của nội dung văn bản ngay tại tiêu đề thẻ xem trước, nâng cao hiệu suất cho người dùng làm việc với văn bản.',
+        'v019.feat4.title': 'Siêu mượt mà & Triệt tiêu hoàn toàn giật lag',
+        'v019.feat4.desc': 'Loại bỏ polling Registry Windows ngầm định kỳ 2 giây, tối ưu hóa hiệu năng render DOM cho thanh trượt vị trí và khắc phục lỗi không tự ẩn panel khi bấm ra ngoài.',
         'v018.summary': 'Ra mắt phân quyền tính năng đặc quyền cho gói PREMIUM (Tự động nhận diện chữ AI OCR khi mở ảnh, làm phẳng dòng thông minh, sao chép Markdown và xuất tệp .TXT), bổ sung hiển thị số ngày đếm ngược trực quan cho gói VIP và PREMIUM, tối ưu hóa toàn diện độ ổn định của bộ công cụ Image Studio và hỗ trợ đa ngôn ngữ đầy đủ.',
         'v018.feat1.title': 'Đặc quyền gói PREMIUM: Tự động OCR, Làm phẳng dòng & Xuất tệp .TXT',
         'v018.feat1.desc': 'Mở khóa bộ công cụ năng suất cao cho gói PREMIUM: Tự động chạy quét AI OCR ngay khi mở ảnh, làm phẳng ngắt dòng văn bản thông minh (Unwrap lines), sao chép định dạng Markdown và lưu văn bản trực tiếp ra tệp .TXT qua hộp thoại Windows.',
@@ -1057,7 +1110,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.8',
+        'nav.download': 'Download v0.1.9',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
@@ -1067,6 +1120,15 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v019.summary': 'Introduces Instant QR Code sharing to mobile devices (iOS / Android), built-in Text Studio in Preview Flyout (UPPERCASE, lowercase, Title Case, camelCase, Clean Spaces), real-time text metrics counter (words/chars/lines), and completely eliminated background polling lag and stutter.',
+        'v019.feat1.title': 'Instant QR Code Sharing to Phone (Instant QR Code)',
+        'v019.feat1.desc': 'Generate instant 1-click QR codes for links and text snippets. Simply scan with your phone camera to open links or receive content immediately with zero cables or apps. Supports copying QR image and saving .PNG files.',
+        'v019.feat2.title': 'Text Studio & Case Conversion Power-Ups',
+        'v019.feat2.desc': 'Transform text with 1 click in Preview Flyout: UPPERCASE, lowercase, Title Case, camelCase, or 🧹 Clean Space (removes redundant spacing and empty lines).',
+        'v019.feat3.title': 'Real-Time Text Metrics (Words, Chars & Lines)',
+        'v019.feat3.desc': 'Dynamic text counter badge displaying accurate character count, word count, and line count directly on the preview card header.',
+        'v019.feat4.title': 'Silky Smooth & Zero Stutter Performance',
+        'v019.feat4.desc': 'Removed 2-second background Windows Registry polling, throttled position slider DOM repaints, and fixed click-outside dismissal behavior in all views.',
         'v018.summary': 'Introduces exclusive PREMIUM features in Image Studio (Auto-OCR on open, smart line unwrapping, Markdown copy, and native TXT file export), real-time countdown timer for VIP and PREMIUM licenses, enhanced Image Studio reliability, and full i18n localization.',
         'v018.feat1.title': 'Exclusive PREMIUM Features: Auto-OCR, Line Unwrap & TXT Export',
         'v018.feat1.desc': 'Unlocks dedicated productivity tools for PREMIUM users: instant Auto-OCR upon opening images, Smart Unwrap lines to seamlessly join fragmented text, Copy as clean Markdown, and export text directly to native Windows .TXT files.',

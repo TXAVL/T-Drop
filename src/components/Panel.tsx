@@ -18,6 +18,7 @@ import { EmojiPicker } from './EmojiPicker'
 import { Settings } from './Settings'
 import { ToastStack } from './Toast'
 import { RestoreModal } from './RestoreModal'
+import { QrModal } from './QrModal'
 import { UpdateBanner } from './UpdateBanner'
 import { ClearMenu } from './ClearMenu'
 import { PreviewFlyout } from './PreviewFlyout'
@@ -464,6 +465,7 @@ export function Panel() {
 
           <ToastStack />
           <RestoreModal />
+          <QrModal />
           <UpdateBanner isHorizontal={isHorizontal} />
           {!isHorizontal && !emojiOpen && !settingsOpen && <ShelfSearch />}
           <div style={{ flex: 1, display: 'grid', gridTemplate: '1fr / 1fr', overflow: 'hidden', position: 'relative' }}>
