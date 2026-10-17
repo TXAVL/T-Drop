@@ -477,10 +477,14 @@ export const useStore = create<AppState>((set, get) => ({
           void edge.pauseHotkey(false)?.catch?.(() => {})
         }
       } catch { /* ignore */ }
+      try {
+        void edge.focusWindow(false)?.catch?.(() => {})
+        void edge.pauseHotkey(false)?.catch?.(() => {})
+      } catch { /* ignore */ }
       // NOTE: Do NOT reset styleFlyoutOpen here — closePanel() handles the
       // sequencing so the flyout exit animation completes before the panel closes.
       // Only reset previewItemId so the normal preview flyout clears correctly.
-      set({ previewItemId: null, previewItemRect: null, expandedStackId: null })
+      set({ settingsOpen: false, previewItemId: null, previewItemRect: null, expandedStackId: null })
       edge.setPreviewMode(false)
     }
   },

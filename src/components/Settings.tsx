@@ -161,16 +161,11 @@ export function Settings({
   }, [])
 
   useEffect(() => {
-    let timer: number
     const pullTimer = window.setTimeout(() => {
       void useStore.getState().refreshLaunchAtLogin()
-      timer = window.setInterval(() => {
-        void useStore.getState().refreshLaunchAtLogin()
-      }, 2000)
     }, 300)
     return () => {
       window.clearTimeout(pullTimer)
-      if (timer) window.clearInterval(timer)
     }
   }, [])
 

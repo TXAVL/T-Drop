@@ -139,7 +139,7 @@ export function WakeSlider({
   useMotionValueEvent(speed, 'change', schedule)
   useLayoutEffect(() => {
     paintRef.current(true)
-  })
+  }, [pct])
 
   const commit = (next: number) => {
     const clean = snap(next, min, max, step)

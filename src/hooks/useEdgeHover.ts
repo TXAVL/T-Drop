@@ -216,6 +216,7 @@ export function useEdgeHover(): void {
       const s = useStore.getState()
       if (s.styleFlyoutOpen) s.setStyleFlyoutOpen(false)
       if (s.languageFlyoutOpen) s.setLanguageFlyoutOpen(false)
+      if (s.settingsOpen) s.setSettingsOpen(false)
       s.setOpen(false)
       if (interactiveTimer !== undefined) window.clearTimeout(interactiveTimer)
       interactiveTimer = window.setTimeout(() => {
@@ -227,7 +228,6 @@ export function useEdgeHover(): void {
     const closePanel = () => {
       const state = useStore.getState()
       if (!state.open) return
-      if (state.settingsOpen) return
       if (state.sliderActive || state.edgeTransition?.active) return
       if (state.dragActive && !state.internalDragReq) return
 
@@ -264,7 +264,6 @@ export function useEdgeHover(): void {
 
     const scheduleClose = (delay = GRACE_MS) => {
       const state = useStore.getState()
-      if (state.settingsOpen) return
       if (state.sliderActive || state.edgeTransition?.active) return
       if (state.dragActive && !state.internalDragReq) return
       if (graceTimer !== undefined) return // already closing
@@ -350,7 +349,6 @@ export function useEdgeHover(): void {
     // if the last known pointer position is genuinely outside the blade.
     const isInsideBlade = () => {
       const state = useStore.getState()
-      if (state.settingsOpen) return true
       if (state.sliderActive || state.edgeTransition?.active) return true
       const timeSincePositionChange = state.sliderReleasedTime > 0 ? Date.now() - state.sliderReleasedTime : Infinity
       if (timeSincePositionChange < 1750) return true
@@ -609,10 +607,6 @@ export function useEdgeHover(): void {
           }
 
           if (!state.open) return
-          if (state.settingsOpen) {
-            cancelClose()
-            return
-          }
 
           if (state.edgeHintActive) state.setEdgeHintActive(false)
 
@@ -684,7 +678,6 @@ export function useEdgeHover(): void {
     const onWindowBlur = () => {
       const state = useStore.getState()
       if (!state.open) return
-      if (state.settingsOpen) return
       // Don't close during an external OS file drag — the drag surface may
       // temporarily shift focus to the OS drag-ghost or file manager.
       if (state.dragActive && !state.internalDragReq) return
