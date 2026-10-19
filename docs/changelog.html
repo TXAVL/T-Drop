@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.9</span>
+          <span data-i18n="nav.download">Tải về v0.1.10</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,63 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.1.9 ────────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.10 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.9</span>
+          <span>Version v0.1.10</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">19/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v0110.summary">
+        Bản cập nhật tập trung vào độ mượt: mở T-Drop, cuộn danh sách, rê chuột xem trước và tìm kiếm đều nhanh hơn rõ rệt, kể cả khi bạn đã lưu hàng trăm mục. Việc cập nhật ứng dụng cũng đáng tin cậy hơn và dễ hiểu hơn.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v0110.feat1.title">Mở và cuộn danh sách mượt hơn nhiều</h3>
+            <p data-i18n="v0110.feat1.desc">T-Drop giờ chỉ hiển thị trước những mục bạn nhìn thấy, phần còn lại được tải dần khi bạn cuộn xuống. Nhờ vậy panel bật ra gần như tức thì và không còn khựng khi lịch sử dài.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v0110.feat2.title">Rê chuột xem trước và gõ tìm kiếm không còn giật</h3>
+            <p data-i18n="v0110.feat2.desc">Trước đây mỗi lần rê chuột lên một mục hay mở một nhóm tệp, cả danh sách bị vẽ lại khiến máy chậm đi. Nay chỉ mục bạn đang tương tác thay đổi. Ô tìm kiếm cũng phản hồi ngay từng phím gõ.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v0110.feat3.title">Cập nhật ứng dụng đáng tin cậy hơn</h3>
+            <p data-i18n="v0110.feat3.desc">T-Drop chỉ báo có phiên bản mới khi bản đó đã sẵn sàng để tải về, nên không còn tình trạng thông báo xong rồi đứng mãi ở "Đang kết nối…". Mỗi phiên bản chỉ được thông báo một lần, không làm phiền bạn sau mỗi lần khởi động lại máy.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v0110.feat4.title">Thanh thông báo cập nhật mới, rõ ràng hơn</h3>
+            <p data-i18n="v0110.feat4.desc">Hiển thị phần trăm, tốc độ tải và thời gian còn lại. Nếu mạng lỗi, bạn sẽ thấy thông báo rõ ràng kèm nút "Thử lại" thay vì phải chờ vô ích. Có thêm liên kết "Có gì mới" để xem nội dung phiên bản trước khi cài.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v0110.feat5.title">Sửa lỗi số thứ tự dán nhanh bị lệch</h3>
+            <p data-i18n="v0110.feat5.desc">Số thứ tự (1–9) dùng để dán nhanh giờ luôn cập nhật đúng khi có mục mới được thêm vào đầu danh sách.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.9 ────────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.9</span>
         </div>
         <div class="release-date">17/10/2026</div>
       </div>
@@ -1004,7 +1055,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.9',
+        'nav.download': 'Tải về v0.1.10',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
@@ -1014,6 +1065,17 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v0110.summary': 'Bản cập nhật tập trung vào độ mượt: mở T-Drop, cuộn danh sách, rê chuột xem trước và tìm kiếm đều nhanh hơn rõ rệt, kể cả khi bạn đã lưu hàng trăm mục. Việc cập nhật ứng dụng cũng đáng tin cậy hơn và dễ hiểu hơn.',
+        'v0110.feat1.title': 'Mở và cuộn danh sách mượt hơn nhiều',
+        'v0110.feat1.desc': 'T-Drop giờ chỉ hiển thị trước những mục bạn nhìn thấy, phần còn lại được tải dần khi bạn cuộn xuống. Nhờ vậy panel bật ra gần như tức thì và không còn khựng khi lịch sử dài.',
+        'v0110.feat2.title': 'Rê chuột xem trước và gõ tìm kiếm không còn giật',
+        'v0110.feat2.desc': 'Trước đây mỗi lần rê chuột lên một mục hay mở một nhóm tệp, cả danh sách bị vẽ lại khiến máy chậm đi. Nay chỉ mục bạn đang tương tác thay đổi. Ô tìm kiếm cũng phản hồi ngay từng phím gõ.',
+        'v0110.feat3.title': 'Cập nhật ứng dụng đáng tin cậy hơn',
+        'v0110.feat3.desc': 'T-Drop chỉ báo có phiên bản mới khi bản đó đã sẵn sàng để tải về, nên không còn tình trạng thông báo xong rồi đứng mãi ở "Đang kết nối…". Mỗi phiên bản chỉ được thông báo một lần, không làm phiền bạn sau mỗi lần khởi động lại máy.',
+        'v0110.feat4.title': 'Thanh thông báo cập nhật mới, rõ ràng hơn',
+        'v0110.feat4.desc': 'Hiển thị phần trăm, tốc độ tải và thời gian còn lại. Nếu mạng lỗi, bạn sẽ thấy thông báo rõ ràng kèm nút "Thử lại" thay vì phải chờ vô ích. Có thêm liên kết "Có gì mới" để xem nội dung phiên bản trước khi cài.',
+        'v0110.feat5.title': 'Sửa lỗi số thứ tự dán nhanh bị lệch',
+        'v0110.feat5.desc': 'Số thứ tự (1–9) dùng để dán nhanh giờ luôn cập nhật đúng khi có mục mới được thêm vào đầu danh sách.',
         'v019.summary': 'Ra mắt tính năng chia sẻ tức thì sang điện thoại qua Mã QR (Instant QR Code), tích hợp bộ công cụ Text Studio trong Preview Flyout (chuyển đổi chữ HOA/thường, Title Case, camelCase, làm sạch khoảng trắng), bổ sung thanh thống kê số từ/ký tự/dòng thời gian thực và loại bỏ triệt để hiện tượng giật lag, tối ưu hóa tốc độ đóng mở panel.',
         'v019.feat1.title': 'Chia sẻ tức thì sang điện thoại qua Mã QR (Instant QR Code)',
         'v019.feat1.desc': 'Tự động tạo mã QR 1-click cho mọi đường dẫn liên kết (Link) và văn bản (Text). Người dùng chỉ cần giơ camera điện thoại quét để mở link hoặc nhận văn bản ngay lập tức mà không cần dây cáp hay cài thêm app phụ trợ. Hỗ trợ sao chép ảnh QR vào clipboard và tải ảnh QR (.PNG).',
@@ -1110,7 +1172,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.9',
+        'nav.download': 'Download v0.1.10',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
@@ -1120,6 +1182,17 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v0110.summary': 'A smoothness-focused update: opening T-Drop, scrolling, hover previews and search are all noticeably faster, even with hundreds of saved items. Updating the app is also more reliable and easier to follow.',
+        'v0110.feat1.title': 'Much smoother opening and scrolling',
+        'v0110.feat1.desc': 'T-Drop now shows the items you can see first and loads the rest as you scroll. The panel pops open almost instantly and no longer stutters with a long history.',
+        'v0110.feat2.title': 'No more lag when hovering previews or typing a search',
+        'v0110.feat2.desc': 'Previously, hovering an item or opening a file stack redrew the whole list and slowed things down. Now only the item you are using changes, and the search box keeps up with every keystroke.',
+        'v0110.feat3.title': 'More reliable app updates',
+        'v0110.feat3.desc': 'T-Drop only tells you about a new version once it is actually ready to download, so it no longer gets stuck on "Connecting…". Each version is announced just once, not again after every restart.',
+        'v0110.feat4.title': 'A clearer update bar',
+        'v0110.feat4.desc': 'See the percentage, download speed and time remaining. If your connection drops, you get a clear message and a "Retry" button instead of waiting forever. A "What\'s new" link lets you read about the version before installing.',
+        'v0110.feat5.title': 'Fixed quick-paste numbers getting out of order',
+        'v0110.feat5.desc': 'The 1–9 quick-paste numbers now always update correctly when a new item lands at the top of the list.',
         'v019.summary': 'Introduces Instant QR Code sharing to mobile devices (iOS / Android), built-in Text Studio in Preview Flyout (UPPERCASE, lowercase, Title Case, camelCase, Clean Spaces), real-time text metrics counter (words/chars/lines), and completely eliminated background polling lag and stutter.',
         'v019.feat1.title': 'Instant QR Code Sharing to Phone (Instant QR Code)',
         'v019.feat1.desc': 'Generate instant 1-click QR codes for links and text snippets. Simply scan with your phone camera to open links or receive content immediately with zero cables or apps. Supports copying QR image and saving .PNG files.',
