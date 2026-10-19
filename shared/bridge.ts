@@ -19,6 +19,7 @@ export interface EdgeApi {
       hasUpdate: boolean
       latestVersion: string
       downloaded: boolean
+      notesUrl?: string
       downloadProgress?: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }
     } | null
   }>
@@ -112,7 +113,8 @@ export interface EdgeApi {
   onToast: (cb: (toast: { id: string; message: string; tone: 'info' | 'error'; params?: Record<string, string | number> }) => void) => () => void
   onCopyFlare: (cb: () => void) => () => void
   onTutorialStep: (cb: (step: number) => void) => () => void
-  onUpdateAvailable: (cb: (info: { version: string }) => void) => () => void
+  onUpdateAvailable: (cb: (info: { version: string; notesUrl?: string }) => void) => () => void
   onUpdateProgress: (cb: (progress: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }) => void) => () => void
   onUpdateDownloaded: (cb: (info: { version: string }) => void) => () => void
+  onUpdateError: (cb: (info: { message: string; version?: string; phase: 'check' | 'download' | 'install' }) => void) => () => void
 }

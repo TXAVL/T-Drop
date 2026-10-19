@@ -256,9 +256,10 @@ const api = {
   onToast: (cb: (toast: { id: string; message: string; tone: 'info' | 'error' }) => void) => on('ui:toast', cb),
   onCopyFlare: (cb: () => void) => on('ui:copy-flare', cb),
   onTutorialStep: (cb: (step: number) => void) => on('tutorial:step', cb),
-  onUpdateAvailable: (cb: (info: { version: string }) => void) => on('app:update-available', cb),
+  onUpdateAvailable: (cb: (info: { version: string; notesUrl?: string }) => void) => on('app:update-available', cb),
   onUpdateProgress: (cb: (progress: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }) => void) => on('app:update-progress', cb),
   onUpdateDownloaded: (cb: (info: { version: string }) => void) => on('app:update-downloaded', cb),
+  onUpdateError: (cb: (info: { message: string; version?: string; phase: 'check' | 'download' | 'install' }) => void) => on('app:update-error', cb),
 
   /* Drag helpers */
   // (Handled natively by capturing drop event above)

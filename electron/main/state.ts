@@ -170,7 +170,7 @@ export const pushState = {
     console.log('[Main] Sending window:open-settings event to renderer')
     send('window:open-settings')
   },
-  updateAvailable(info: { version: string }): void {
+  updateAvailable(info: { version: string; notesUrl?: string }): void {
     console.log('[Main] Sending app:update-available event to renderer:', info)
     send('app:update-available', info)
   },
@@ -180,6 +180,10 @@ export const pushState = {
   updateDownloaded(info: { version: string }): void {
     console.log('[Main] Sending app:update-downloaded event to renderer:', info)
     send('app:update-downloaded', info)
+  },
+  updateError(info: { message: string; version?: string; phase: 'check' | 'download' | 'install' }): void {
+    console.warn('[Main] Sending app:update-error event to renderer:', info)
+    send('app:update-error', info)
   }
 }
 

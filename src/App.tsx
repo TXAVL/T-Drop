@@ -284,6 +284,9 @@ export default function App() {
     const offUpdateDownloaded = edge.onUpdateDownloaded((info) => {
       useStore.getState().setUpdateDownloaded(info)
     })
+    const offUpdateError = edge.onUpdateError((info) => {
+      useStore.getState().setUpdateError(info)
+    })
     const offCopyFlare = edge.onCopyFlare(() => {
       if (useStore.getState().isInternalCopying) return
       useStore.getState().triggerCopyFlare()
@@ -323,6 +326,7 @@ export default function App() {
       offUpdateAvailable()
       offUpdateProgress()
       offUpdateDownloaded()
+      offUpdateError()
       offCopyFlare()
       offBackupOpened?.()
     }

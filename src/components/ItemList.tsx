@@ -9,7 +9,7 @@
  * dragged over the panel so the edge-hover hook knows not to close mid-drag.
  */
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRef, useEffect, useLayoutEffect, useState } from 'react'
+import { useRef, useEffect, useLayoutEffect, useState, useCallback } from 'react'
 import { useStore } from '../store/appStore'
 import { useFilteredItems } from '../hooks/useFilteredItems'
 import { ClipboardItemCard } from './ClipboardItem'
@@ -19,6 +19,9 @@ import { playExpandSound, playButtonClickSound } from '../lib/soundEffects'
 import { tryPaste } from '../lib/tryPaste'
 import { edge } from '../lib/edge'
 import { useTranslation } from '../i18n'
+
+const RENDER_PAGE = 30
+const GROW_THRESHOLD_PX = 900
 
 const getVerticalPinnedLabelStyle = (text: string): React.CSSProperties => {
   const len = text.length
@@ -37,8 +40,9 @@ export function ItemList() {
   const total = pinned.length + recent.length
   
   const isDraggingAny = useStore((s) => !!s.dragActive || !!s.internalDragReq)
-  const settings = useStore((s) => s.settings)
-  const isHorizontal = settings.stickPosition === 'top'
+  const stickPosition = useStore((s) => s.settings.stickPosition)
+  const reduceMotion = useStore((s) => !!s.settings.reduceMotion)
+  const isHorizontal = stickPosition === 'top'
   
   const typeFilter = useStore((s) => s.typeFilter) || 'all'
   const filterScrollMap = useRef<Record<string, { top: number; left: number }>>({})
@@ -175,17 +179,17 @@ export function ItemList() {
   }, [query, isHorizontal])
 
   // Reset scroll map when switching dock position
-  const prevStickPos = useRef(settings.stickPosition)
+  const prevStickPos = useRef(stickPosition)
   useLayoutEffect(() => {
-    if (prevStickPos.current !== settings.stickPosition) {
-      prevStickPos.current = settings.stickPosition
+    if (prevStickPos.current !== stickPosition) {
+      prevStickPos.current = stickPosition
       filterScrollMap.current = {}
       if (listRef.current) {
         listRef.current.scrollTop = 0
         listRef.current.scrollLeft = 0
       }
     }
-  }, [settings.stickPosition])
+  }, [stickPosition])
 
   useEffect(() => {
     if (!isDraggingAny) {
@@ -193,8 +197,42 @@ export function ItemList() {
     }
   }, [isDraggingAny])
 
+  // ── Progressive rendering ───────────────────────────────────────────────
+  // Mounting all (up to 250) heavy cards at once is what made opening the
+  // panel / switching filters hitch. Render one page, grow as the user nears
+  // the end of the scroll range.
+  const visiblePinned = pinnedCollapsed ? [] : pinned
+  const visibleTotal = visiblePinned.length + recent.length
+  const [renderLimit, setRenderLimit] = useState(RENDER_PAGE)
+  // Reset only on a new search: filter tabs restore their own scroll offset,
+  // which a shrunken page would clamp.
+  const prevRenderQuery = useRef(query)
+  if (prevRenderQuery.current !== query) {
+    prevRenderQuery.current = query
+    if (renderLimit !== RENDER_PAGE) setRenderLimit(RENDER_PAGE)
+  }
+  const growIfNearEnd = useCallback(() => {
+    const el = listRef.current
+    if (!el) return
+    const remaining = isHorizontal
+      ? el.scrollWidth - el.scrollLeft - el.clientWidth
+      : el.scrollHeight - el.scrollTop - el.clientHeight
+    if (remaining < GROW_THRESHOLD_PX) {
+      setRenderLimit((l) => (l < visibleTotal ? l + RENDER_PAGE : l))
+    }
+  }, [isHorizontal, visibleTotal])
+  // Content shorter than the viewport never scrolls — keep filling until it does.
+  useEffect(() => {
+    if (renderLimit >= visibleTotal) return
+    const id = requestAnimationFrame(growIfNearEnd)
+    return () => cancelAnimationFrame(id)
+  }, [renderLimit, visibleTotal, growIfNearEnd])
+  const shownPinned = visiblePinned.slice(0, renderLimit)
+  const shownRecent = recent.slice(0, Math.max(0, renderLimit - shownPinned.length))
+
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const el = e.currentTarget
+    growIfNearEnd()
     filterScrollMap.current[typeFilter] = {
       top: el.scrollTop,
       left: el.scrollLeft
@@ -377,7 +415,7 @@ export function ItemList() {
                   </button>
                 </div>
               </div>
-              {!pinnedCollapsed && pinned.map((it) => {
+              {shownPinned.map((it) => {
                 quickCounter++
                 const qIndex = quickCounter <= 9 ? quickCounter : undefined
                 return <ClipboardItemCard key={it.id} item={it} quickIndex={qIndex} />
@@ -392,7 +430,7 @@ export function ItemList() {
                   <span className="recent-label-text">{t('item.recent')}</span>
                 </div>
               )}
-              {recent.map((it) => {
+              {shownRecent.map((it) => {
                 quickCounter++
                 const qIndex = quickCounter <= 9 ? quickCounter : undefined
                 return <ClipboardItemCard key={it.id} item={it} quickIndex={qIndex} />
@@ -408,7 +446,7 @@ export function ItemList() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.85 }}
-            transition={{ duration: settings.reduceMotion ? 0.01 : 0.14, ease: 'easeOut' }}
+            transition={{ duration: reduceMotion ? 0.01 : 0.14, ease: 'easeOut' }}
             className={`scroll-top-btn${isHorizontal ? ' horizontal' : ''}`}
             onClick={scrollToTop}
             title={t('item.scrollToTop')}

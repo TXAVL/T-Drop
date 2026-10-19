@@ -40,7 +40,9 @@ import {
   syncAutoUpdaterState
 } from '../electron/main/updater'
 
-function mockGithubRelease(tag: string, statusCode = 200): void {
+const INSTALLABLE_ASSETS = [{ name: 'latest.yml' }, { name: 'T-Drop-Setup.exe' }, { name: 'T-Drop-Setup.exe.blockmap' }]
+
+function mockGithubRelease(tag: string, statusCode = 200, assets: { name: string }[] = INSTALLABLE_ASSETS): void {
   mocks.netRequest.mockImplementation(() => {
     const handlers: Record<string, Array<(...a: unknown[]) => void>> = {}
     return {
@@ -53,7 +55,7 @@ function mockGithubRelease(tag: string, statusCode = 200): void {
         const response = {
           statusCode,
           on: (ev: string, cb: (chunk?: string) => void) => {
-            if (ev === 'data') cb(JSON.stringify({ tag_name: tag }))
+            if (ev === 'data') cb(JSON.stringify({ tag_name: tag, html_url: `https://github.com/TXAVL/T-Drop/releases/tag/${tag}`, assets }))
             if (ev === 'end') cb()
           }
         }
@@ -105,7 +107,17 @@ describe('auto-updater isolation', () => {
       const result = await checkForUpdatesManual()
       expect(result).toEqual({ status: 'available', version: '0.3.2' })
       expect(mocks.netRequest).toHaveBeenCalled()
-      expect(mocks.updateAvailable).toHaveBeenCalledWith({ version: '0.3.2' })
+      expect(mocks.updateAvailable).toHaveBeenCalledWith({
+        version: '0.3.2',
+        notesUrl: 'https://github.com/TXAVL/T-Drop/releases/tag/v0.3.2'
+      })
+    })
+
+    it('does not offer a newer tag whose installer assets are not uploaded yet', async () => {
+      mockGithubRelease('v0.3.3', 200, [])
+      const result = await checkForUpdatesManual()
+      expect(result).toEqual({ status: 'up-to-date', version: '0.3.1' })
+      expect(mocks.updateAvailable).not.toHaveBeenCalled()
     })
 
     it('checkForUpdatesManual reports up-to-date when GitHub latest matches', async () => {

@@ -202,7 +202,7 @@ describe('GitHub vs Store packaging contracts (on-disk, not assumed)', () => {
     expect(src).toMatch(/export function quitAndInstallUpdate[\s\S]*if \(isStoreBuild\(\)\) return/)
     expect(src).toMatch(/export function syncAutoUpdaterState[\s\S]*if \(isStoreBuild\(\)/)
     expect(src).toMatch(/export async function checkForUpdatesManual[\s\S]*if \(isStoreBuild\(\)\)/)
-    expect(src).toMatch(/export async function startUpdateDownload[\s\S]*if \(isStoreBuild\(\)/)
+    expect(src).toMatch(/export (async )?function startUpdateDownload[\s\S]*if \(isStoreBuild\(\)/)
     expect(src).toMatch(/export function initAutoUpdater[\s\S]*if \(isStoreBuild\(\)\)/)
   })
 })

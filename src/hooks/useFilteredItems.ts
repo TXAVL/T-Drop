@@ -4,7 +4,7 @@
  * Split into Pinned (favorites) and Recent (everything else), then apply the
  * search query. Kept as a selector so components stay presentational.
  */
-import { useMemo } from 'react'
+import { useDeferredValue, useMemo } from 'react'
 import { useStore } from '../store/appStore'
 import type { ClipboardItemDto, TypeFilter } from '../../shared/types'
 import { basename, isImagePath } from '../lib/format'
@@ -63,7 +63,9 @@ export interface GroupedItems {
 
 export function useFilteredItems(): GroupedItems {
   const items = useStore((s) => s.items)
-  const query = useStore((s) => s.query)
+  // Deferred so typing in search stays responsive: the input updates at
+  // once, the (possibly long) filtered list catches up at lower priority.
+  const query = useDeferredValue(useStore((s) => s.query))
   const typeFilter = useStore((s) => s.typeFilter)
   const tutorialStep = useStore((s) => s.tutorialStep)
 
@@ -89,8 +91,9 @@ export function useFilteredItems(): GroupedItems {
       }
     })
 
+    const q = query.trim()
     for (const it of filteredByTutorial) {
-      if (!matches(it, query.trim())) continue
+      if (!matches(it, q)) continue
       if (!itemMatchesTypeFilter(it, typeFilter)) continue
       ;(it.pinned ? pinned : recent).push(it)
     }

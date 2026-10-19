@@ -82,6 +82,11 @@ function getNestedProp(obj: any, path: string): string | undefined {
  * so that missing keys NEVER leak raw paths like 'behaviour.toggleHotkeyTitle'.
  */
 const BUILTIN_FALLBACKS: Record<string, { en: string; vi: string }> = {
+  'behaviour.whatsNew': { en: "What's new", vi: 'Có gì mới' },
+  'behaviour.retry': { en: 'Retry', vi: 'Thử lại' },
+  'behaviour.updateDownloadFailed': { en: 'Update download failed', vi: 'Tải bản cập nhật thất bại' },
+  'behaviour.updateInstallFailed': { en: 'Could not start the installer', vi: 'Không khởi chạy được trình cài đặt' },
+  'behaviour.updateEta': { en: '{eta} left', vi: 'còn {eta}' },
   'groups.keyboardShortcut': { en: 'Keyboard Shortcut', vi: 'Phím tắt bàn phím' },
   'groups.toggleHotkeyPressDesc': { en: 'Press anywhere to toggle T-Drop', vi: 'Nhấn tổ hợp phím bất kỳ lúc nào để đóng/mở T-Drop' },
   'groups.fullscreenProtection': { en: 'Fullscreen Protection', vi: 'Bảo vệ toàn màn hình' },

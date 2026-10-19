@@ -11,6 +11,8 @@ export interface CachedUpdateInfo {
   hasUpdate: boolean
   latestVersion: string
   downloaded: boolean
+  /** GitHub release page — shown as "What's new" in the banner. */
+  notesUrl?: string
   downloadProgress?: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }
 }
 
@@ -25,11 +27,64 @@ let bgCheckTimer: ReturnType<typeof setTimeout> | null = null
 let lastCheckTimestamp = 0
 let isCheckingInProgress = false
 
-let lastNotifiedAvailableVersion: string | null = null
-let lastNotifiedDownloadedVersion: string | null = null
+// Version electron-updater has already resolved via checkForUpdates(); a
+// download for that version can skip the extra pre-check round trip.
+let updaterResolvedVersion: string | null = null
+let downloadInFlight: Promise<void> | null = null
+let lastProgressPushAt = 0
 
-// Periodic check interval: every 20 minutes
-const PERIODIC_CHECK_INTERVAL_MS = 20 * 60 * 1000
+// Periodic background check. GitHub API allows 60 unauthenticated req/h per
+// IP; 20 min polling plus panel-open checks could burn through that on a
+// shared NAT. 3 h matches how often releases actually ship.
+const PERIODIC_CHECK_INTERVAL_MS = 3 * 60 * 60 * 1000
+const PANEL_OPEN_CHECK_THROTTLE_MS = 30 * 60 * 1000
+const PROGRESS_PUSH_INTERVAL_MS = 250
+
+// Persisted "notify once per version" (as VietTelex's lastNotifiedUpdateVersion).
+// In-memory flags re-toasted the same version after every restart.
+interface NotifyState {
+  available?: string
+  downloaded?: string
+}
+let notifyState: NotifyState | null = null
+
+function notifyStatePath(): string {
+  return path.join(app.getPath('userData'), 'update-notify.json')
+}
+
+function readNotifyState(): NotifyState {
+  if (notifyState) return notifyState
+  try {
+    notifyState = JSON.parse(fs.readFileSync(notifyStatePath(), 'utf8')) as NotifyState
+  } catch {
+    notifyState = {}
+  }
+  return notifyState
+}
+
+function markNotified(kind: keyof NotifyState, version: string): boolean {
+  const st = readNotifyState()
+  if (st[kind] === version) return false
+  st[kind] = version
+  try {
+    fs.writeFileSync(notifyStatePath(), JSON.stringify(st))
+  } catch {
+    /* best effort */
+  }
+  return true
+}
+
+function errorMessage(err: unknown): string {
+  return typeof err === 'string' ? err : (err as { message?: string })?.message || ''
+}
+
+function isCancelError(msg: string): boolean {
+  return msg.includes('cancelled') || msg.includes('CancellationError')
+}
+
+function isNoReleaseError(msg: string): boolean {
+  return msg.includes('No published versions on GitHub') || msg.includes('404')
+}
 
 export function getCachedUpdateState(): CachedUpdateInfo | null {
   return _cachedUpdateInfo
@@ -92,8 +147,7 @@ function getNotificationIcon(): string | undefined {
  */
 export function showUpdateAvailableNotification(version: string, isAuto: boolean): void {
   if (isStoreBuild()) return
-  if (lastNotifiedAvailableVersion === version) return
-  lastNotifiedAvailableVersion = version
+  if (!markNotified('available', version)) return
 
   try {
     const ElectronNotification = (require('electron') as any).Notification
@@ -134,8 +188,7 @@ export function showUpdateAvailableNotification(version: string, isAuto: boolean
  */
 export function showUpdateDownloadedNotification(version: string): void {
   if (isStoreBuild()) return
-  if (lastNotifiedDownloadedVersion === version) return
-  lastNotifiedDownloadedVersion = version
+  if (!markNotified('downloaded', version)) return
 
   try {
     const ElectronNotification = (require('electron') as any).Notification
@@ -194,9 +247,14 @@ export function quitAndInstallUpdate(): void {
         })
         app.exit(0)
       } catch {}
-    }, 500)
+    }, 2000)
   } catch (err) {
     console.error('[AutoUpdater] quitAndInstall failed:', err)
+    pushState.updateError({
+      message: errorMessage(err) || 'Could not start the installer',
+      version: _cachedUpdateInfo?.latestVersion,
+      phase: 'install'
+    })
   }
 }
 
@@ -225,10 +283,11 @@ export function startPeriodicUpdateCheck(): void {
 export function syncAutoUpdaterState(): void {
   if (isStoreBuild() || !_autoUpdater) return
   const mode = resolveUpdateMode(getSettings())
-  const autoDownload = mode === 'auto'
-  _autoUpdater.autoDownload = autoDownload
+  // Downloads are always driven by startUpdateDownload(); letting
+  // electron-updater auto-download as well raced two downloads of one file.
+  _autoUpdater.autoDownload = false
   _autoUpdater.autoInstallOnAppQuit = false
-  console.log('[AutoUpdater] Synced mode =', mode, 'autoDownload =', autoDownload)
+  console.log('[AutoUpdater] Synced mode =', mode)
 
   if (mode === 'off') {
     stopPeriodicUpdateCheck()
@@ -278,7 +337,26 @@ function semverCompare(v1: string, v2: string): number {
  * Fast direct check against GitHub Releases API (< 0.5s) with a 4s max timeout.
  * Employs cache-control headers to prevent stale 304 caching.
  */
-function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
+interface GitHubRelease {
+  tag_name?: string
+  html_url?: string
+  draft?: boolean
+  prerelease?: boolean
+  assets?: { name?: string }[]
+}
+
+/**
+ * A tag can be published minutes before CI uploads the installer. Advertising
+ * it then left the banner stuck on "Connecting..." because latest.yml 404'd.
+ * Like VietTelex's isTrustedDownloadUrl gate: only offer what can be installed.
+ */
+function releaseIsInstallable(rel: GitHubRelease): boolean {
+  if (rel.draft || rel.prerelease) return false
+  const names = (rel.assets || []).map((a) => (a.name || '').toLowerCase())
+  return names.includes('latest.yml') && names.some((n) => n.endsWith('.exe'))
+}
+
+function checkGitHubReleaseFast(): Promise<GitHubRelease | null> {
   return new Promise((resolve) => {
     try {
       const request = net.request({
@@ -304,6 +382,8 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
             if (response.statusCode === 200) {
               resolve(JSON.parse(body))
             } else {
+              // 403 = API rate limit; the caller falls back to latest.yml via electron-updater.
+              console.warn('[AutoUpdater] GitHub API returned', response.statusCode)
               resolve(null)
             }
           } catch {
@@ -324,6 +404,48 @@ function checkGitHubReleaseFast(): Promise<{ tag_name?: string } | null> {
   })
 }
 
+type FastCheckOutcome =
+  | { kind: 'available'; version: string; notesUrl?: string }
+  | { kind: 'up-to-date' }
+  | { kind: 'unknown' }
+
+async function fastCheck(): Promise<FastCheckOutcome> {
+  const rel = await checkGitHubReleaseFast()
+  if (!rel || !rel.tag_name) return { kind: 'unknown' }
+  const latestVersion = rel.tag_name.replace(/^v/i, '')
+  const currentVersion = app.getVersion()
+  if (semverCompare(latestVersion, currentVersion) <= 0) {
+    console.log(`[AutoUpdater] Fast check confirms app is up to date: v${currentVersion}`)
+    return { kind: 'up-to-date' }
+  }
+  if (!releaseIsInstallable(rel)) {
+    console.log(`[AutoUpdater] v${latestVersion} is tagged but its installer assets are not uploaded yet.`)
+    return { kind: 'up-to-date' }
+  }
+  return { kind: 'available', version: latestVersion, notesUrl: rel.html_url }
+}
+
+/** Records a found update, notifies the UI once, and starts the download in auto mode. */
+function announceUpdate(version: string, notesUrl: string | undefined): void {
+  const mode = resolveUpdateMode(getSettings())
+  const alreadyDownloaded = _cachedUpdateInfo?.downloaded && _cachedUpdateInfo.latestVersion === version
+  if (alreadyDownloaded) {
+    pushState.updateDownloaded({ version })
+    return
+  }
+  const sameAsCached = _cachedUpdateInfo?.latestVersion === version
+  _cachedUpdateInfo = {
+    hasUpdate: true,
+    latestVersion: version,
+    downloaded: false,
+    notesUrl: notesUrl || (sameAsCached ? _cachedUpdateInfo?.notesUrl : undefined),
+    downloadProgress: sameAsCached ? _cachedUpdateInfo?.downloadProgress : undefined
+  }
+  pushState.updateAvailable({ version, notesUrl: _cachedUpdateInfo.notesUrl })
+  showUpdateAvailableNotification(version, mode === 'auto')
+  if (mode === 'auto') void startUpdateDownload()
+}
+
 /**
  * Checks GitHub for updates in the background.
  * Uses fast GitHub API query first (< 0.5s), falling back to electron-updater.
@@ -340,33 +462,12 @@ export async function runBackgroundUpdateCheck(): Promise<void> {
 
   try {
     // 1. Fast direct GitHub check
-    const fastResult = await checkGitHubReleaseFast()
-    if (fastResult && fastResult.tag_name) {
-      const latestVersion = fastResult.tag_name.replace(/^v/i, '')
-      const currentVersion = app.getVersion()
-      if (semverCompare(latestVersion, currentVersion) > 0) {
-        console.log(`[AutoUpdater] Background check found new version: v${latestVersion} (current: v${currentVersion})`)
-        const isDownloaded = _cachedUpdateInfo?.downloaded && _cachedUpdateInfo.latestVersion === latestVersion
-        if (!isDownloaded) {
-          _cachedUpdateInfo = {
-            hasUpdate: true,
-            latestVersion,
-            downloaded: false,
-            downloadProgress: mode === 'auto' ? { percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 } : undefined
-          }
-          pushState.updateAvailable({ version: latestVersion })
-          showUpdateAvailableNotification(latestVersion, mode === 'auto')
-
-          if (mode === 'auto') {
-            void startUpdateDownload()
-          }
-        }
-        return
-      } else {
-        console.log(`[AutoUpdater] Background check confirms app is up to date: v${currentVersion}`)
-        return
-      }
+    const fast = await fastCheck()
+    if (fast.kind === 'available') {
+      announceUpdate(fast.version, fast.notesUrl)
+      return
     }
+    if (fast.kind === 'up-to-date') return
 
     // 2. Fallback to electron-updater
     if (_autoUpdater) {
@@ -398,7 +499,7 @@ export function checkUpdateOnPanelOpen(): void {
   if (mode === 'off') return
 
   const now = Date.now()
-  if (now - lastCheckTimestamp < 10 * 60 * 1000) {
+  if (now - lastCheckTimestamp < PANEL_OPEN_CHECK_THROTTLE_MS) {
     return
   }
 
@@ -432,26 +533,14 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
   }
 
   // 1. Fast path: Direct GitHub API query (returns in ~300ms)
-  const fastResult = await checkGitHubReleaseFast()
-  if (fastResult && fastResult.tag_name) {
-    const latestVersion = fastResult.tag_name.replace(/^v/i, '')
-    const currentVersion = app.getVersion()
-    if (semverCompare(latestVersion, currentVersion) > 0) {
-      console.log(`[AutoUpdater] Fast check found new version: v${latestVersion} (current: v${currentVersion})`)
-      _cachedUpdateInfo = { hasUpdate: true, latestVersion, downloaded: false }
-      pushState.updateAvailable({ version: latestVersion })
-      const mode = resolveUpdateMode(getSettings())
-      if (mode === 'auto') {
-        showUpdateAvailableNotification(latestVersion, true)
-        void startUpdateDownload()
-      } else {
-        showUpdateAvailableNotification(latestVersion, false)
-      }
-      return { status: 'available', version: latestVersion }
-    } else {
-      console.log(`[AutoUpdater] Fast check confirms app is up to date: v${currentVersion}`)
-      return { status: 'up-to-date', version: currentVersion }
-    }
+  lastCheckTimestamp = Date.now()
+  const fast = await fastCheck()
+  if (fast.kind === 'available') {
+    announceUpdate(fast.version, fast.notesUrl)
+    return { status: 'available', version: fast.version }
+  }
+  if (fast.kind === 'up-to-date') {
+    return { status: 'up-to-date', version: app.getVersion() }
   }
 
   // 2. Fallback path: electron-updater check with 5-second race timeout
@@ -463,15 +552,7 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
       )
       const result = await Promise.race([checkPromise, timeoutPromise])
       if (result && result.updateInfo && semverCompare(result.updateInfo.version, app.getVersion()) > 0) {
-        _cachedUpdateInfo = { hasUpdate: true, latestVersion: result.updateInfo.version, downloaded: false }
-        pushState.updateAvailable({ version: result.updateInfo.version })
-        const mode = resolveUpdateMode(getSettings())
-        if (mode === 'auto') {
-          showUpdateAvailableNotification(result.updateInfo.version, true)
-          void startUpdateDownload()
-        } else {
-          showUpdateAvailableNotification(result.updateInfo.version, false)
-        }
+        announceUpdate(result.updateInfo.version, undefined)
         return { status: 'available', version: result.updateInfo.version }
       }
       return { status: 'up-to-date', version: app.getVersion() }
@@ -494,9 +575,18 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
 
 /**
  * Trigger download of the update when user clicks "Download & Update" in manual mode.
+ * Re-entrant calls share the in-flight download instead of starting another.
  */
-export async function startUpdateDownload(): Promise<void> {
-  if (isStoreBuild()) return
+export function startUpdateDownload(): Promise<void> {
+  if (isStoreBuild()) return Promise.resolve()
+  if (downloadInFlight) return downloadInFlight
+  downloadInFlight = runDownload().finally(() => {
+    downloadInFlight = null
+  })
+  return downloadInFlight
+}
+
+async function runDownload(): Promise<void> {
   if (!_autoUpdater) {
     try {
       const { autoUpdater } = require('electron-updater')
@@ -515,7 +605,6 @@ export async function startUpdateDownload(): Promise<void> {
   }
   pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
 
-  // Initialize fresh CancellationToken
   if (_downloadCancellationToken) {
     try {
       _downloadCancellationToken.cancel()
@@ -523,7 +612,6 @@ export async function startUpdateDownload(): Promise<void> {
     } catch {}
     _downloadCancellationToken = null
   }
-
   try {
     const { CancellationToken } = require('electron-updater')
     _downloadCancellationToken = new CancellationToken()
@@ -531,34 +619,41 @@ export async function startUpdateDownload(): Promise<void> {
     _downloadCancellationToken = null
   }
 
-  try {
-    try {
+  const target = _cachedUpdateInfo?.latestVersion
+  const attempt = async (forceCheck: boolean): Promise<void> => {
+    // downloadUpdate() needs electron-updater's own resolved release info;
+    // skip the extra round trip when it already resolved this version.
+    if (forceCheck || !target || updaterResolvedVersion !== target) {
       await _autoUpdater.checkForUpdates()
-    } catch {
-      /* ignore pre-check error, attempt download */
     }
-    if (_downloadCancellationToken && !_downloadCancellationToken.cancelled) {
-      await _autoUpdater.downloadUpdate(_downloadCancellationToken)
-    }
-  } catch (err: any) {
-    const msg = typeof err === 'string' ? err : err?.message || ''
-    if (msg.includes('cancelled') || msg.includes('CancellationError')) {
+    if (_downloadCancellationToken && _downloadCancellationToken.cancelled) return
+    await _autoUpdater.downloadUpdate(_downloadCancellationToken ?? undefined)
+  }
+
+  try {
+    await attempt(false)
+  } catch (err: unknown) {
+    const msg = errorMessage(err)
+    if (isCancelError(msg)) {
       console.log('[AutoUpdater] Download was cancelled.')
       return
     }
-    console.warn('[AutoUpdater] downloadUpdate failed, retrying with checkForUpdates first:', err)
+    console.warn('[AutoUpdater] downloadUpdate failed, retrying with a fresh check:', msg)
     try {
-      await _autoUpdater.checkForUpdates()
-      if (_downloadCancellationToken && !_downloadCancellationToken.cancelled) {
-        await _autoUpdater.downloadUpdate(_downloadCancellationToken)
-      }
-    } catch (retryErr: any) {
-      const retryMsg = typeof retryErr === 'string' ? retryErr : retryErr?.message || ''
-      if (retryMsg.includes('cancelled') || retryMsg.includes('CancellationError')) {
+      await attempt(true)
+    } catch (retryErr: unknown) {
+      const retryMsg = errorMessage(retryErr)
+      if (isCancelError(retryMsg)) {
         console.log('[AutoUpdater] Download was cancelled on retry.')
         return
       }
-      console.error('[AutoUpdater] downloadUpdate retry failed:', retryErr)
+      console.error('[AutoUpdater] downloadUpdate retry failed:', retryMsg)
+      if (_cachedUpdateInfo) _cachedUpdateInfo.downloadProgress = undefined
+      pushState.updateError({
+        message: retryMsg || 'Download failed',
+        version: target,
+        phase: 'download'
+      })
     }
   }
 }
@@ -579,11 +674,10 @@ export function initAutoUpdater(): void {
 
     const settings = getSettings()
     const mode = resolveUpdateMode(settings)
-    const autoDownload = mode === 'auto'
     const shouldCheck = mode !== 'off'
 
     autoUpdater.logger = console
-    autoUpdater.autoDownload = autoDownload
+    autoUpdater.autoDownload = false
     autoUpdater.autoInstallOnAppQuit = false
 
     if (!app.isPackaged) {
@@ -597,26 +691,10 @@ export function initAutoUpdater(): void {
 
     autoUpdater.on('update-available', (info: { version: string }) => {
       console.log('[AutoUpdater] New update available on GitHub:', info.version)
-      const currentMode = resolveUpdateMode(getSettings())
-      const isAuto = currentMode === 'auto'
-
-      _cachedUpdateInfo = {
-        hasUpdate: true,
-        latestVersion: info.version,
-        downloaded: false,
-        downloadProgress: isAuto
-          ? { percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 }
-          : undefined
-      }
-
-      pushState.updateAvailable({ version: info.version })
-
-      if (isAuto) {
-        pushState.updateProgress({ percent: 0, transferred: 0, total: 0, bytesPerSecond: 0 })
-        showUpdateAvailableNotification(info.version, true)
-      } else {
-        showUpdateAvailableNotification(info.version, false)
-      }
+      updaterResolvedVersion = info.version
+      // Already announced (fast path / download pre-check): keep its progress.
+      if (_cachedUpdateInfo?.latestVersion === info.version) return
+      announceUpdate(info.version, undefined)
     })
 
     autoUpdater.on('update-not-available', (info: { version: string }) => {
@@ -628,7 +706,11 @@ export function initAutoUpdater(): void {
         return
       }
       const percent = Math.min(100, Math.max(0, Math.round(progressObj.percent || 0)))
-      console.log(`[AutoUpdater] Download progress: ${percent}%`)
+      // electron-updater emits per chunk; pushing every one re-rendered the
+      // banner dozens of times a second. 4 Hz is plenty for a progress bar.
+      const now = Date.now()
+      if (percent < 100 && now - lastProgressPushAt < PROGRESS_PUSH_INTERVAL_MS) return
+      lastProgressPushAt = now
       _cachedUpdateInfo.downloadProgress = {
         percent,
         bytesPerSecond: progressObj.bytesPerSecond,
@@ -649,7 +731,7 @@ export function initAutoUpdater(): void {
         return
       }
       console.log('[AutoUpdater] Update downloaded and ready to install:', info.version)
-      _cachedUpdateInfo = { hasUpdate: true, latestVersion: info.version, downloaded: true }
+      _cachedUpdateInfo = { hasUpdate: true, latestVersion: info.version, downloaded: true, notesUrl: _cachedUpdateInfo.notesUrl }
       pushState.updateDownloaded({ version: info.version })
       showUpdateDownloadedNotification(info.version)
     })
@@ -660,7 +742,7 @@ export function initAutoUpdater(): void {
         console.log('[AutoUpdater] Update/download cancelled.')
         return
       }
-      if (msg.includes('No published versions on GitHub') || msg.includes('404')) {
+      if (isNoReleaseError(msg)) {
         console.log('[AutoUpdater] No published releases on GitHub yet.')
       } else {
         console.warn('[AutoUpdater] Update check error:', msg)
@@ -669,9 +751,6 @@ export function initAutoUpdater(): void {
 
     // Start background checks and periodic timer if updates are not off
     if (shouldCheck) {
-      if (!autoDownload) {
-        console.log('[AutoUpdater] Notify mode: background check without auto-download.')
-      }
       setTimeout(() => {
         void runBackgroundUpdateCheck()
       }, 3000)

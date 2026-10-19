@@ -103,7 +103,7 @@ export interface InvokeMap {
    * freshly subscribed renderer recover pushes it missed (slow load after
    * the startup check already fired). Null when nothing is known.
    */
-  'updater:get-state': { args: []; result: { hasUpdate: boolean; latestVersion: string; downloaded: boolean; downloadProgress?: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number } } | null }
+  'updater:get-state': { args: []; result: { hasUpdate: boolean; latestVersion: string; downloaded: boolean; notesUrl?: string; downloadProgress?: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number } } | null }
 
   /** Quit the application process. */
   'app:quit': { args: []; result: void }
@@ -212,11 +212,13 @@ export interface EventMap {
   /** Fired when OCR progress updates */
   'ocr:progress': [info: { progress: number; status: string }]
   /** Fired by electron-updater when a new update is available for GitHub builds. */
-  'app:update-available': [info: { version: string }]
+  'app:update-available': [info: { version: string; notesUrl?: string }]
   /** Fired by electron-updater with download progress for GitHub builds. */
   'app:update-progress': [progress: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }]
   /** Fired by electron-updater when the update has been fully downloaded and is ready to install. */
   'app:update-downloaded': [info: { version: string }]
+  /** Fired when a check or download fails, so the UI never hangs on "Connecting…". */
+  'app:update-error': [info: { message: string; version?: string; phase: 'check' | 'download' | 'install' }]
   /**
    * Main-process cursor poll signals: fired when the cursor enters/leaves
    * the screen-edge hot zone. The renderer uses this to open/close the panel

@@ -108,6 +108,10 @@ interface AppState {
     hasUpdate: boolean
     latestVersion: string
     downloaded: boolean
+    /** GitHub release page for "What's new". */
+    notesUrl?: string
+    /** Last failure (check/download/install); the banner offers a retry. */
+    error?: { message: string; phase: 'check' | 'download' | 'install' }
     downloadProgress?: UpdateProgress
   } | null
   /** Item ID currently being previewed in the flyout. */
@@ -142,9 +146,10 @@ interface AppState {
    * render in place where clicked; background finds promote to the top.
    */
   manualUpdateActive: boolean
-  setUpdateAvailable: (info: { version: string }) => void
+  setUpdateAvailable: (info: { version: string; notesUrl?: string }) => void
   setUpdateProgress: (progress: UpdateProgress) => void
   setUpdateDownloaded: (info: { version: string }) => void
+  setUpdateError: (info: { message: string; version?: string; phase: 'check' | 'download' | 'install' }) => void
   dismissUpdate: () => void
   installUpdate: () => Promise<void>
   setItems: (items: ClipboardItemDto[], meta?: { reason?: 'usage' | 'capture' }) => void
@@ -361,7 +366,12 @@ export const useStore = create<AppState>((set, get) => ({
 
   startManualDownload: async () => {
     sessionSkippedVersion = null
-    set({ manualCheckState: { status: 'downloading' }, manualUpdateActive: true })
+    const current = get().updateInfo
+    set({
+      manualCheckState: { status: 'downloading' },
+      manualUpdateActive: true,
+      ...(current ? { updateInfo: { ...current, error: undefined } } : {})
+    })
     try {
       await edge.startUpdateDownload()
     } catch {
@@ -395,11 +405,16 @@ export const useStore = create<AppState>((set, get) => ({
     if ((mc.status === 'available' || mc.status === 'up-to-date' || mc.status === 'error') && mc.version && mc.version !== info.version) {
       set({ manualCheckState: { status: 'idle' }, manualUpdateActive: false })
     }
+    const prev = get().updateInfo
+    const same = prev?.latestVersion === info.version
     set({
       updateInfo: {
         hasUpdate: true,
         latestVersion: info.version,
-        downloaded: false
+        downloaded: false,
+        notesUrl: info.notesUrl || (same ? prev?.notesUrl : undefined),
+        // A repeat announcement of the same version must not wipe live progress.
+        downloadProgress: same ? prev?.downloadProgress : undefined
       }
     })
   },
@@ -414,6 +429,7 @@ export const useStore = create<AppState>((set, get) => ({
     set({
       updateInfo: {
         ...current,
+        error: undefined,
         downloadProgress: progress
       }
     })
@@ -428,9 +444,26 @@ export const useStore = create<AppState>((set, get) => ({
         hasUpdate: true,
         latestVersion: info.version,
         downloaded: true,
+        notesUrl: get().updateInfo?.notesUrl,
         downloadProgress: undefined
       },
       manualCheckState: { status: 'idle' }
+    })
+  },
+
+  setUpdateError: (info) => {
+    const current = get().updateInfo
+    const mc = get().manualCheckState
+    if (mc.status === 'downloading' || mc.status === 'checking') {
+      set({ manualCheckState: { status: 'error', error: info.message, version: info.version ?? mc.version } })
+    }
+    if (!current) return
+    set({
+      updateInfo: {
+        ...current,
+        downloadProgress: undefined,
+        error: { message: info.message, phase: info.phase }
+      }
     })
   },
 

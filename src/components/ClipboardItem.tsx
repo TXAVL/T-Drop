@@ -68,8 +68,10 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
   const startDrag = useDragOut()
   const [copied, setCopied] = useState(false)
 
-  const settings = useStore((s) => s.settings)
-  const isHorizontal = settings.stickPosition === 'top'
+  // Narrow selectors: subscribing to the whole settings object (or to the raw
+  // preview/expanded ids) re-rendered EVERY card on each hover/expand.
+  const isHorizontal = useStore((s) => s.settings.stickPosition === 'top')
+  const showQuickKeys = useStore((s) => s.settings.showQuickKeys ?? true)
   const colorInfo = item.data.kind === 'text' ? parseColor(item.data.text) : null
 
   const singleImageSrc = useMemo(() => {
@@ -88,13 +90,12 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
   // Accordion expansion: ONE stack open at a time, coordinated store-wide
   // (expanding another stack collapses this one; Escape / outside click /
   // filter or settings switches collapse via the same store field).
-  const expandedStackId = useStore((s) => s.expandedStackId)
-  const expanded = expandedStackId === item.id
+  const expanded = useStore((s) => s.expandedStackId === item.id)
   const setExpandedFlag = useCallback((v: boolean) => {
     useStore.getState().setExpandedStackId(v ? item.id : null)
   }, [item.id])
 
-  const isPreviewing = useStore((s) => s.previewItemId) === item.id
+  const isPreviewing = useStore((s) => s.previewItemId === item.id)
   const isBundle = (item.data.kind === 'files' && item.data.paths.length > 1) || item.data.kind === 'image-collection'
 
   const bundleCount = item.data.kind === 'image-collection'
@@ -322,7 +323,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
         }}
         onClick={handleCardClick}
       >
-        {Boolean(quickIndex && (settings.showQuickKeys ?? true)) && (
+        {Boolean(quickIndex && showQuickKeys) && (
           <span className="item-quick-badge" title={t('item.quickBadgeTitle', { index: quickIndex ?? 0 }) || `#${quickIndex}`}>
             {quickIndex}
           </span>
@@ -1382,6 +1383,7 @@ export const ClipboardItemCard = memo(
     const prev = prevProps.item
     const next = nextProps.item
     return (
+      prevProps.quickIndex === nextProps.quickIndex &&
       prev.id === next.id &&
       prev.pinned === next.pinned &&
       prev.hitCount === next.hitCount &&

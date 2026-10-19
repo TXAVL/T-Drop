@@ -16,22 +16,22 @@ describe('UpdateBanner contracts and lifecycle behavior', () => {
     expect(panelSrc).toContain('<UpdateBanner isHorizontal={isHorizontal} />')
   })
 
-  it('handles all 3 update lifecycle states: downloading, notify prompt, and ready to restart', () => {
+  it('handles all update lifecycle states: downloading, notify prompt, error, and ready to restart', () => {
     const bannerSrc = read('src/components/UpdateBanner.tsx')
 
     // Gate checks
-    expect(bannerSrc).toContain('if (isStoreBuild || settingsOpen || !updateInfo?.hasUpdate) return null')
-    expect(bannerSrc).toContain('const isDownloaded = !!updateInfo.downloaded')
-    expect(bannerSrc).toContain('const isDownloading =')
-    expect(bannerSrc).toContain('const isNotifyPrompt = !isDownloaded && !isDownloading && updateMode === \'notify\'')
+    expect(bannerSrc).toContain('const visible = !isStoreBuild && !settingsOpen && !!updateInfo?.hasUpdate')
+    expect(bannerSrc).toContain("if (updateInfo.downloaded) tone = 'ready'")
+    expect(bannerSrc).toContain("else if (updateInfo.error) tone = 'error'")
+    expect(bannerSrc).toContain("else if (updateMode === 'notify') tone = 'notify'")
 
     // Downloading state: surfaces live metrics and progress bar
-    expect(bannerSrc).toContain('formatBytes(progress.transferred)')
-    expect(bannerSrc).toContain('formatSpeed(progress?.bytesPerSecond)')
-    expect(bannerSrc).toContain('isDownloading && (')
+    expect(bannerSrc).toContain('formatBytes(transferred)')
+    expect(bannerSrc).toContain('formatSpeed(speed)')
+    expect(bannerSrc).toContain("tone === 'downloading' && (")
 
-    // Notify state: surfaces download action button
-    expect(bannerSrc).toContain('isNotifyPrompt ? (')
+    // Notify / error states: surface download (or retry) action button
+    expect(bannerSrc).toContain("(tone === 'notify' || tone === 'error') && (")
     expect(bannerSrc).toContain('useStore.getState().startManualDownload()')
 
     // Downloaded state: surfaces interactive restart button without silent background quit
