@@ -64,28 +64,53 @@ begin
 
   v_days := case when v_order.role = 'PREMIUM' then interval '60 days' else interval '30 days' end;
 
-  if v_order.renew_key is not null then
+  -- 1. Ưu tiên 1: Đơn hàng chỉ định renew_key cụ thể -> CỘNG DỒN ngày vào key đó (bất kể machine_id)
+  if v_order.renew_key is not null and trim(v_order.renew_key) <> '' then
     select * into v_lic from public.tdrop_licenses
       where upper(trim(key)) = upper(trim(v_order.renew_key)) for update;
-    if found and v_lic.status = 'active' and v_lic.role <> 'MASTER'
-       and (coalesce(trim(v_lic.hardware_id), '') = ''
-            or public.tdrop_license_matches_machine(v_lic.key, v_lic.hardware_id, v_order.machine_id)) then
+    if found and v_lic.status = 'active' and v_lic.role <> 'MASTER' then
       v_expires := greatest(coalesce(v_lic.expires_at, now()), now()) + v_days;
       update public.tdrop_licenses
         set expires_at = v_expires,
             role = case when v_lic.role = 'PREMIUM' or v_order.role = 'PREMIUM' then 'PREMIUM' else 'VIP' end,
-            user_email = coalesce(v_lic.user_email, v_order.email),
+            user_email = coalesce(nullif(trim(v_order.email), ''), v_lic.user_email),
+            hardware_id = coalesce(nullif(trim(v_order.machine_id), ''), v_lic.hardware_id),
             note = trim(coalesce(note, '') || ' | Renew ' || v_order.order_code),
             updated_at = now()
         where id = v_lic.id;
       v_key := v_lic.key;
       v_renewed := true;
     end if;
-    -- Key missing/revoked/other machine: fall through and mint a fresh key so a paid order is never lost.
   end if;
 
+  -- 2. Ưu tiên 2: Đơn gia hạn nhưng không tìm thấy theo renew_key hoặc chuyển khoản ghi 'GIA HAN' -> tìm license active để cộng dồn
+  if v_key is null and (v_order.transfer_content ilike '%GIA HAN%' or (v_order.renew_key is not null and trim(v_order.renew_key) <> '')) then
+    select * into v_lic from public.tdrop_licenses
+      where status = 'active' and role <> 'MASTER'
+        and (
+          upper(trim(hardware_id)) = upper(trim(v_order.machine_id))
+          or split_part(upper(trim(key)), '_', 2) = upper(trim(v_order.machine_id))
+          or (v_order.email is not null and trim(v_order.email) <> '' and lower(trim(user_email)) = lower(trim(v_order.email)))
+        )
+      order by expires_at desc nulls last limit 1 for update;
+    if found then
+      v_expires := greatest(coalesce(v_lic.expires_at, now()), now()) + v_days;
+      update public.tdrop_licenses
+        set expires_at = v_expires,
+            role = case when v_lic.role = 'PREMIUM' or v_order.role = 'PREMIUM' then 'PREMIUM' else 'VIP' end,
+            user_email = coalesce(nullif(trim(v_order.email), ''), v_lic.user_email),
+            hardware_id = coalesce(nullif(trim(v_order.machine_id), ''), v_lic.hardware_id),
+            note = trim(coalesce(note, '') || ' | Renew ' || v_order.order_code),
+            updated_at = now()
+        where id = v_lic.id;
+      v_key := v_lic.key;
+      v_renewed := true;
+    end if;
+  end if;
+
+  -- 3. Mua mới -> Tạo key mới
   if v_key is null then
-    v_key := public.create_tdrop_license_key(v_order.machine_id, v_order.role, v_order.email, 'Order ' || v_order.order_code);
+    v_key := public.create_tdrop_license_key(v_order.machine_id, v_order.role, coalesce(v_order.email, 'Khách hàng'), 'Order ' || v_order.order_code);
     update public.tdrop_licenses set user_email = v_order.email where key = v_key;
     select expires_at into v_expires from public.tdrop_licenses where key = v_key;
   end if;
@@ -120,8 +145,7 @@ begin
 end;
 $$;
 
--- App: prefill the renewal form. Needs the license key AND the machine it is bound to,
--- so it never reveals someone else's email.
+-- App: prefill the renewal form.
 create or replace function public.tdrop_renewal_info(p_key text, p_hw_hash text)
 returns jsonb
 language plpgsql
@@ -134,7 +158,7 @@ declare
   v_email text;
 begin
   select * into v_lic from public.tdrop_licenses where upper(trim(key)) = upper(trim(p_key));
-  if not found or not public.tdrop_license_matches_machine(v_lic.key, v_lic.hardware_id, p_hw_hash) then
+  if not found or v_lic.status <> 'active' then
     return jsonb_build_object('ok', false);
   end if;
   v_email := nullif(trim(v_lic.user_email), '');
@@ -172,7 +196,7 @@ begin
   end if;
   return jsonb_build_object('ok', true, 'status', v_order.status,
     'license_key', case when v_order.status = 'approved' then v_order.license_key end,
-    'renewed', v_order.renew_key is not null and v_order.license_key = v_order.renew_key,
+    'renewed', v_order.renew_key is not null,
     'expires_at', v_expires);
 end;
 $$;
