@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.11</span>
+          <span data-i18n="nav.download">Tải về v0.1.12</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,49 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.1.11 ───────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.12 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.11</span>
+          <span>Version v0.1.12</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">27/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v0112.summary">
+        Sau khi thanh toán, bạn có thể in hoặc lưu biên nhận thanh toán dạng PDF, trình bày giống chứng từ ngân hàng, có chữ ký tay và họ tên của bạn.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v0112.feat1.title">In / Lưu biên nhận thanh toán (PDF)</h3>
+            <p data-i18n="v0112.feat1.desc">Trên màn "Thanh toán thành công" có thêm nút In / Lưu biên nhận. Biên nhận khổ A4 ghi rõ số đơn, ngày giờ, gói, số tiền bằng số và bằng chữ, mã bản quyền, hạn dùng và dấu "ĐÃ THANH TOÁN". File được lưu vào thư mục Downloads và mở ra để bạn in ngay.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v0112.feat2.title">Ký tên bằng tay ngay trên máy</h3>
+            <p data-i18n="v0112.feat2.desc">Trước khi tạo biên nhận, bạn có thể ký tên bằng chuột, bằng ngón tay trên màn hình cảm ứng hoặc bằng bút. Sau đó nhập họ tên đầy đủ, tên sẽ được in hoa ngay dưới chữ ký. Không muốn ký thì bấm Bỏ qua.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v0112.feat3.title">Biên nhận gửi kèm email</h3>
+            <p data-i18n="v0112.feat3.desc">Email xác nhận thanh toán giờ có đính kèm biên nhận, mở bằng trình duyệt và bấm Ctrl+P để in hoặc lưu PDF.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.11 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.11</span>
         </div>
         <div class="release-date">27/10/2026</div>
       </div>
@@ -1106,7 +1143,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.11',
+        'nav.download': 'Tải về v0.1.12',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
@@ -1116,6 +1153,13 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v0112.summary': 'Sau khi thanh toán, bạn có thể in hoặc lưu biên nhận thanh toán dạng PDF, trình bày giống chứng từ ngân hàng, có chữ ký tay và họ tên của bạn.',
+        'v0112.feat1.title': 'In / Lưu biên nhận thanh toán (PDF)',
+        'v0112.feat1.desc': 'Trên màn "Thanh toán thành công" có thêm nút In / Lưu biên nhận. Biên nhận khổ A4 ghi rõ số đơn, ngày giờ, gói, số tiền bằng số và bằng chữ, mã bản quyền, hạn dùng và dấu "ĐÃ THANH TOÁN". File được lưu vào thư mục Downloads và mở ra để bạn in ngay.',
+        'v0112.feat2.title': 'Ký tên bằng tay ngay trên máy',
+        'v0112.feat2.desc': 'Trước khi tạo biên nhận, bạn có thể ký tên bằng chuột, bằng ngón tay trên màn hình cảm ứng hoặc bằng bút. Sau đó nhập họ tên đầy đủ, tên sẽ được in hoa ngay dưới chữ ký. Không muốn ký thì bấm Bỏ qua.',
+        'v0112.feat3.title': 'Biên nhận gửi kèm email',
+        'v0112.feat3.desc': 'Email xác nhận thanh toán giờ có đính kèm biên nhận, mở bằng trình duyệt và bấm Ctrl+P để in hoặc lưu PDF.',
         'v0111.summary': 'Mua và gia hạn bản quyền giờ nhanh và tự động: chuyển khoản xong là T-Drop tự kích hoạt trong vài giây, không phải chờ duyệt hay nhập mã. Gia hạn có màn hình riêng, giữ nguyên mã cũ và cộng dồn thêm ngày.',
         'v0111.feat1.title': 'Tự kích hoạt ngay khi thanh toán xong',
         'v0111.feat1.desc': 'Sau khi quét mã QR và chuyển khoản, bạn chỉ cần để cửa sổ mở. T-Drop tự nhận ra khi tiền đã đến và chuyển sang màn "Thanh toán thành công", hiện rõ gói, hạn dùng và mã bản quyền. Không cần chờ admin duyệt hay tự nhập mã.',
@@ -1234,7 +1278,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.11',
+        'nav.download': 'Download v0.1.12',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
@@ -1244,6 +1288,13 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v0112.summary': 'After paying you can now print or save a bank-style payment receipt as a PDF, with your handwritten signature and full name.',
+        'v0112.feat1.title': 'Print / save a payment receipt (PDF)',
+        'v0112.feat1.desc': 'The "Payment successful" screen has a new Print / save receipt button. The A4 receipt shows the order number, date and time, plan, amount in figures and in words, license key, expiry and a "PAID" stamp. It is saved to your Downloads folder and opened so you can print it right away.',
+        'v0112.feat2.title': 'Sign by hand on your computer',
+        'v0112.feat2.desc': 'Before the receipt is created you can sign with the mouse, your finger on a touchscreen or a pen, then type your full name, printed in capitals under your signature. Prefer not to sign? Just tap Skip.',
+        'v0112.feat3.title': 'Receipt attached to the email',
+        'v0112.feat3.desc': 'The payment confirmation email now includes the receipt; open it in your browser and press Ctrl+P to print or save it as PDF.',
         'v0111.summary': 'Buying and renewing a license is now fast and automatic: once your transfer goes through, T-Drop activates within seconds, with no waiting for approval and no code to type. Renewal has its own screen, keeps your existing key and stacks the extra days.',
         'v0111.feat1.title': 'Activates automatically as soon as you pay',
         'v0111.feat1.desc': 'After scanning the QR code and transferring, just keep the window open. T-Drop detects the payment and switches to a "Payment successful" screen showing your plan, expiry date and license key. No waiting for approval, no typing codes.',
