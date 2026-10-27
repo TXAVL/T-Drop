@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.1.10</span>
+          <span data-i18n="nav.download">Tải về v0.1.11</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,63 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.1.10 ───────────────────────────────────────── -->
+    <!-- ── VERSION 0.1.11 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.1.10</span>
+          <span>Version v0.1.11</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">27/10/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v0111.summary">
+        Mua và gia hạn bản quyền giờ nhanh và tự động: chuyển khoản xong là T-Drop tự kích hoạt trong vài giây, không phải chờ duyệt hay nhập mã. Gia hạn có màn hình riêng, giữ nguyên mã cũ và cộng dồn thêm ngày.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v0111.feat1.title">Tự kích hoạt ngay khi thanh toán xong</h3>
+            <p data-i18n="v0111.feat1.desc">Sau khi quét mã QR và chuyển khoản, bạn chỉ cần để cửa sổ mở. T-Drop tự nhận ra khi tiền đã đến và chuyển sang màn "Thanh toán thành công", hiện rõ gói, hạn dùng và mã bản quyền. Không cần chờ admin duyệt hay tự nhập mã.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v0111.feat2.title">Màn hình gia hạn riêng, cộng dồn thời gian</h3>
+            <p data-i18n="v0111.feat2.desc">Nút "Gia hạn thêm gói" mở màn hình riêng, hiện gói đang dùng, hạn hiện tại và hạn mới sau khi gia hạn. Số ngày còn lại không bị mất mà được cộng thêm 30 ngày (VIP) hoặc 60 ngày (PREMIUM). Bạn vẫn dùng mã cũ, không phải nhập mã mới.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v0111.feat3.title">Email tự điền khi gia hạn</h3>
+            <p data-i18n="v0111.feat3.desc">Khi gia hạn, T-Drop tự điền email bạn đã dùng lúc mua trên máy này, nên không cần nhập lại.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v0111.feat4.title">Nhận mã bản quyền qua email tự động</h3>
+            <p data-i18n="v0111.feat4.desc">Ngay khi thanh toán thành công, mã bản quyền và hạn dùng được gửi về email của bạn để lưu lại khi cần.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v0111.feat5.title">Bảo vệ bản quyền chặt chẽ hơn</h3>
+            <p data-i18n="v0111.feat5.desc">Tăng cường bảo mật cho hệ thống bản quyền và đơn hàng, giúp mã của bạn và thông tin đơn hàng được giữ an toàn.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.1.10 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.1.10</span>
         </div>
         <div class="release-date">19/10/2026</div>
       </div>
@@ -1055,7 +1106,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.1.10',
+        'nav.download': 'Tải về v0.1.11',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
@@ -1065,6 +1116,17 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v0111.summary': 'Mua và gia hạn bản quyền giờ nhanh và tự động: chuyển khoản xong là T-Drop tự kích hoạt trong vài giây, không phải chờ duyệt hay nhập mã. Gia hạn có màn hình riêng, giữ nguyên mã cũ và cộng dồn thêm ngày.',
+        'v0111.feat1.title': 'Tự kích hoạt ngay khi thanh toán xong',
+        'v0111.feat1.desc': 'Sau khi quét mã QR và chuyển khoản, bạn chỉ cần để cửa sổ mở. T-Drop tự nhận ra khi tiền đã đến và chuyển sang màn "Thanh toán thành công", hiện rõ gói, hạn dùng và mã bản quyền. Không cần chờ admin duyệt hay tự nhập mã.',
+        'v0111.feat2.title': 'Màn hình gia hạn riêng, cộng dồn thời gian',
+        'v0111.feat2.desc': 'Nút "Gia hạn thêm gói" mở màn hình riêng, hiện gói đang dùng, hạn hiện tại và hạn mới sau khi gia hạn. Số ngày còn lại không bị mất mà được cộng thêm 30 ngày (VIP) hoặc 60 ngày (PREMIUM). Bạn vẫn dùng mã cũ, không phải nhập mã mới.',
+        'v0111.feat3.title': 'Email tự điền khi gia hạn',
+        'v0111.feat3.desc': 'Khi gia hạn, T-Drop tự điền email bạn đã dùng lúc mua trên máy này, nên không cần nhập lại.',
+        'v0111.feat4.title': 'Nhận mã bản quyền qua email tự động',
+        'v0111.feat4.desc': 'Ngay khi thanh toán thành công, mã bản quyền và hạn dùng được gửi về email của bạn để lưu lại khi cần.',
+        'v0111.feat5.title': 'Bảo vệ bản quyền chặt chẽ hơn',
+        'v0111.feat5.desc': 'Tăng cường bảo mật cho hệ thống bản quyền và đơn hàng, giúp mã của bạn và thông tin đơn hàng được giữ an toàn.',
         'v0110.summary': 'Bản cập nhật tập trung vào độ mượt: mở T-Drop, cuộn danh sách, rê chuột xem trước và tìm kiếm đều nhanh hơn rõ rệt, kể cả khi bạn đã lưu hàng trăm mục. Việc cập nhật ứng dụng cũng đáng tin cậy hơn và dễ hiểu hơn.',
         'v0110.feat1.title': 'Mở và cuộn danh sách mượt hơn nhiều',
         'v0110.feat1.desc': 'T-Drop giờ chỉ hiển thị trước những mục bạn nhìn thấy, phần còn lại được tải dần khi bạn cuộn xuống. Nhờ vậy panel bật ra gần như tức thì và không còn khựng khi lịch sử dài.',
@@ -1172,7 +1234,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.1.10',
+        'nav.download': 'Download v0.1.11',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
@@ -1182,6 +1244,17 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v0111.summary': 'Buying and renewing a license is now fast and automatic: once your transfer goes through, T-Drop activates within seconds, with no waiting for approval and no code to type. Renewal has its own screen, keeps your existing key and stacks the extra days.',
+        'v0111.feat1.title': 'Activates automatically as soon as you pay',
+        'v0111.feat1.desc': 'After scanning the QR code and transferring, just keep the window open. T-Drop detects the payment and switches to a "Payment successful" screen showing your plan, expiry date and license key. No waiting for approval, no typing codes.',
+        'v0111.feat2.title': 'A dedicated renewal screen that stacks your time',
+        'v0111.feat2.desc': '"Extend License" now opens its own screen with your current plan, current expiry and the new expiry after renewing. Remaining days are kept and 30 (VIP) or 60 (PREMIUM) days are added on top. You keep your existing key.',
+        'v0111.feat3.title': 'Email filled in for you when renewing',
+        'v0111.feat3.desc': 'When renewing, T-Drop fills in the email you used when you bought on this computer, so there is nothing to retype.',
+        'v0111.feat4.title': 'License key emailed to you automatically',
+        'v0111.feat4.desc': 'As soon as payment succeeds, your license key and expiry date are emailed to you for safekeeping.',
+        'v0111.feat5.title': 'Stronger license protection',
+        'v0111.feat5.desc': 'Hardened security for the license and order system, keeping your key and order details safe.',
         'v0110.summary': 'A smoothness-focused update: opening T-Drop, scrolling, hover previews and search are all noticeably faster, even with hundreds of saved items. Updating the app is also more reliable and easier to follow.',
         'v0110.feat1.title': 'Much smoother opening and scrolling',
         'v0110.feat1.desc': 'T-Drop now shows the items you can see first and loads the rest as you scroll. The panel pops open almost instantly and no longer stutters with a long history.',
