@@ -1098,3 +1098,20 @@
 @media (prefers-reduced-motion: reduce) {
   .update-banner__track.is-indeterminate .update-banner__fill { animation: none; }
 }
+
+/* Checkout: "waiting for transfer" live indicator */
+.purchase-pulse {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  animation: purchase-pulse 1.6s ease-out infinite;
+}
+@keyframes purchase-pulse {
+  to { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .purchase-pulse { animation: none; }
+}

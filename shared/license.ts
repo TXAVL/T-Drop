@@ -96,9 +96,33 @@ export interface TdropOrder {
   transfer_content: string
   bill_image?: string
   status: 'pending' | 'approved' | 'rejected'
+  /** Set on renewals: the key whose expiry the payment extends. */
+  renew_key?: string | null
   license_key?: string
   created_at?: string
   approved_at?: string
+}
+
+/**
+ * Bank transfer note. Starts with the order code (hyphen dropped, since many banks
+ * strip punctuation) so the SePay webhook can match the payment to the order
+ * automatically. ASCII only and short: some banks truncate notes ~50 chars.
+ */
+export function buildTransferContent(orderCode: string, role: 'VIP' | 'PREMIUM', renew: boolean): string {
+  return `${orderCode.replace(/-/g, '')} ${renew ? 'GIA HAN' : 'MUA'} ${role}`
+}
+
+/** Days a plan adds: VIP 30, PREMIUM 60. */
+export const PLAN_DAYS = { VIP: 30, PREMIUM: 60 } as const
+
+/**
+ * Expiry after a renewal: days stack on the current expiry, or on now if it already lapsed.
+ * Mirrors tdrop_fulfill_order on the server.
+ */
+export function renewedExpiry(currentExpiresAt: string | null | undefined, role: 'VIP' | 'PREMIUM', now = Date.now()): Date {
+  const cur = currentExpiresAt ? new Date(currentExpiresAt).getTime() : NaN
+  const base = Number.isFinite(cur) && cur > now ? cur : now
+  return new Date(base + PLAN_DAYS[role] * 24 * 60 * 60 * 1000)
 }
 
 /**

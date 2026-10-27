@@ -45,13 +45,14 @@ if (window.location.hash === '#onboarding' || window.location.hash === '#/onboar
       </StrictMode>
     )
   })
-} else if (window.location.hash === '#purchase' || window.location.hash === '#/purchase' || window.location.hash.includes('purchase')) {
-  // Standalone purchase & VietQR checkout window
+} else if (window.location.hash.includes('purchase') || window.location.hash.includes('renew')) {
+  // Standalone checkout window: #purchase = buy a plan, #renew = extend the current key
+  const mode = window.location.hash.includes('renew') ? 'renew' : 'buy'
   void import('./components/PurchaseModal').then(async ({ PurchaseWindowView }) => {
     const { TxaTooltipProvider } = await import('./components/TxaTooltip')
     root.render(
       <StrictMode>
-        <PurchaseWindowView />
+        <PurchaseWindowView mode={mode} />
         <TxaTooltipProvider />
       </StrictMode>
     )

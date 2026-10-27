@@ -410,14 +410,18 @@ export function Settings({
     }
   }, [settings.licenseKey])
 
-  const handleOpenPurchase = () => {
+  const [purchaseMode, setPurchaseMode] = useState<'buy' | 'renew'>('buy')
+  const openCheckout = (mode: 'buy' | 'renew') => {
     playButtonClickSound()
     if (window.edge?.openPurchaseWindow) {
-      void window.edge.openPurchaseWindow()
+      void window.edge.openPurchaseWindow(mode)
     } else {
+      setPurchaseMode(mode)
       setPurchaseModalOpen(true)
     }
   }
+  const handleOpenPurchase = () => openCheckout('buy')
+  const handleOpenRenew = () => openCheckout('renew')
 
   const handlePasteLicenseKey = async () => {
     playButtonClickSound()
@@ -737,7 +741,7 @@ export function Settings({
                   border: '1px solid rgba(56, 189, 248, 0.3)',
                   color: '#38bdf8'
                 }}
-                onClick={handleOpenPurchase}
+                onClick={handleOpenRenew}
               >
                 {t('license.extend')}
               </button>
@@ -2749,6 +2753,7 @@ export function Settings({
           open={purchaseModalOpen}
           onClose={() => setPurchaseModalOpen(false)}
           machineId={deviceInfo?.hwHash || ''}
+          mode={purchaseMode}
         />
       </div>
     )
@@ -3791,6 +3796,7 @@ export function Settings({
             open={purchaseModalOpen}
             onClose={() => setPurchaseModalOpen(false)}
             machineId={deviceInfo?.hwHash || ''}
+            mode={purchaseMode}
           />
         </div>
       )

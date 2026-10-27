@@ -23,7 +23,7 @@ Dưới đây là toàn bộ đặc tả kỹ thuật, schema CSDL và các API/
    - `hardware_id`: text (Mã máy cố định của người dùng)
    - `device_name`: text
    - `status`: text (`active` | `revoked`)
-   - `expires_at`: timestamptz (VIP: 30 ngày, PREMIUM: 60 ngày, **KHÔNG cộng dồn** nếu mua thêm)
+   - `expires_at`: timestamptz (VIP: 30 ngày, PREMIUM: 60 ngày; **gia hạn thì cộng dồn** vào hạn hiện tại)
    - `created_at`, `updated_at`: timestamptz
 
 2. **Bảng `public.tdrop_orders` (Đơn hàng VietQR):**
@@ -36,20 +36,27 @@ Dưới đây là toàn bộ đặc tả kỹ thuật, schema CSDL và các API/
    - `transfer_content`: text (`Thanh toan VIP cho machine ID: ...`)
    - `status`: text (`pending` | `approved` | `rejected`)
    - `license_key`: text (Mã key được cấp phát sau khi duyệt)
+   - `renew_key`: text (có giá trị = đơn gia hạn key này)
+   - `paid_amount`, `payment_ref` (`sepay:<id>` khi tự duyệt, `manual` khi admin duyệt), `emailed_at`
    - `created_at`, `approved_at`: timestamptz
 
-3. **Bảng `public.txa_system_configs`:**
-   - Chứa cấu hình PIN Admin: `config_key = 'admin_portal_pin'`, `config_value = '888888'` (hoặc session admin hiện tại của dự án).
+3. **Xác thực admin (KHÔNG còn mã PIN):**
+   - `txa_web_login(p_email, p_password)` trả thêm `session_token` (hạn 7 ngày).
+   - Truyền token này vào tham số `p_pin` của mọi hàm admin bên dưới. Chỉ tài khoản `role = 'admin'` trong `txa_web_users` mới được chấp nhận.
+   - `txa_web_logout(p_token)` để thu hồi token.
+   - Đơn hàng được **SePay webhook tự duyệt** (`supabase/functions/sepay-webhook`), admin chỉ duyệt tay khi khách chuyển sai nội dung.
 
 ---
 
 ### 2. Các hàm Database RPC đã tạo sẵn (Gọi qua Supabase REST API):
 Bạn có thể gọi trực tiếp các RPC này từ client/backend:
 
+> `p_pin` = `session_token` lấy từ `txa_web_login` (không phải mã PIN).
+
 1. **`admin_list_orders(p_pin text, p_status text DEFAULT 'all')`**
    - Lấy danh sách đơn hàng VietQR từ `tdrop_orders`.
 2. **`admin_approve_order(p_pin text, p_order_code text)`**
-   - Tự động kiểm tra đơn, sinh mã key format `TDR_{hwHash}_{rand5}` gắn đúng `machine_id` của khách, lưu vào `tdrop_licenses`, đổi trạng thái đơn thành `approved` và trả về `{ ok: true, license_key: '...' }`.
+   - Duyệt tay (cùng logic với tự duyệt): đơn mua mới → sinh key `TDR_{hwHash}_{rand5}`; đơn gia hạn (`renew_key`) → cộng thêm ngày vào key cũ. Trả về `{ ok: true, license_key, renewed, expires_at }`.
 3. **`admin_list_licenses(p_pin text, p_search text DEFAULT '', p_role text DEFAULT 'all')`**
    - Lấy danh sách toàn bộ license key T-Drop, tìm kiếm theo Key hoặc Machine ID.
 4. **`create_tdrop_license_key(p_pin text, p_hardware_id text, p_role text, p_device_name text)`**

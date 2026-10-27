@@ -1065,7 +1065,8 @@ export function registerIpc(): void {
       isPro: st.isPro,
       role: st.role,
       key: st.key,
-      userName: st.userName
+      userName: st.userName,
+      expiresAt: st.expiresAt ?? null
     }
   })
 
@@ -1085,8 +1086,8 @@ export function registerIpc(): void {
     return TxaLicense.generateKey(hwHash)
   })
 
-  handle('license:open-purchase', () => {
-    createPurchaseWindow()
+  handle('license:open-purchase', (mode) => {
+    createPurchaseWindow(mode === 'renew' ? 'renew' : 'buy')
   })
 
   handle('license:close-purchase', () => {

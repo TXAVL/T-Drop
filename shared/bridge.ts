@@ -80,12 +80,12 @@ export interface EdgeApi {
   extractOcrText?: (req: { imageSrc: string; lang?: string }) => Promise<{ ok: boolean; text?: string; confidence?: number; linesCount?: number; wordsCount?: number; error?: string }>
   onOcrProgress?: (cb: (info: { progress: number; status: string }) => void) => () => void
   trimMemory: () => Promise<{ ok: boolean; mainRssMb: number }>
-  getLicenseDeviceInfo: () => Promise<{ hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string }>
+  getLicenseDeviceInfo: () => Promise<{ hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string; expiresAt?: string | null }>
   activateLicense: (key: string) => Promise<{ ok: boolean; code?: string; message: string; role?: string; userName?: string; expiresAt?: string | null }>
   deactivateLicense: () => Promise<boolean>
   readClipboardText?: () => Promise<string>
   generateLicenseKey: (hwHash?: string) => Promise<string>
-  openPurchaseWindow?: () => Promise<void>
+  openPurchaseWindow?: (mode?: 'buy' | 'renew') => Promise<void>
   closePurchaseWindow?: () => Promise<void>
   getSystemLogs?: (maxLines?: number) => Promise<{ logs: string; path: string }>
   openLogFolder?: () => Promise<boolean>

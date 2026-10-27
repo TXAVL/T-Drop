@@ -1,33 +1,52 @@
 /**
  * PurchaseModal & PurchaseWindowView — VietQR Payment & Key Order Flow.
  * Automatically saves order to Supabase tdrop_orders before rendering VietQR code.
+ *
+ * Two screens share the payment step:
+ *  - mode 'buy'   : pick a plan, enter email, get a new key.
+ *  - mode 'renew' : extend the key already active on this machine; email is
+ *                   filled from the server and days stack onto the current expiry.
+ * After the QR is shown the order is polled; once the SePay webhook (or an admin)
+ * approves it, the key is activated / re-verified automatically.
  */
 import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   SUPABASE_CONFIG,
   VIETQR_CONFIG,
+  PLAN_DAYS,
   isValidEmailDomain,
   getVietQrImageUrl,
+  buildTransferContent,
+  renewedExpiry,
+  formatExpiryDate,
+  getDaysRemaining,
   type TdropOrder
 } from '../../shared/license'
+import { fetchOrderStatus, fetchRenewalInfo } from '../lib/licenseApi'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
 import { t } from '../i18n'
 import { CloseIcon, CopyIcon, CheckIcon, CrownIcon } from './icons'
 import { ToastStack } from './Toast'
 
+type CheckoutMode = 'buy' | 'renew'
+
+const ORDER_POLL_MS = 5000
+const ORDER_POLL_MAX_MS = 30 * 60 * 1000
+
 interface PurchaseModalProps {
   open: boolean
   onClose: () => void
   machineId?: string
+  mode?: CheckoutMode
 }
 
-export function PurchaseModal({ open, onClose, machineId: propMachineId }: PurchaseModalProps) {
+export function PurchaseModal({ open, onClose, machineId: propMachineId, mode = 'buy' }: PurchaseModalProps) {
   if (!open) return null
-  return <PurchaseWindowContent onClose={onClose} initialMachineId={propMachineId} isModal={true} />
+  return <PurchaseWindowContent onClose={onClose} initialMachineId={propMachineId} isModal={true} mode={mode} />
 }
 
-export function PurchaseWindowView() {
+export function PurchaseWindowView({ mode = 'buy' }: { mode?: CheckoutMode }) {
   const handleClose = () => {
     if (window.edge?.closePurchaseWindow) {
       void window.edge.closePurchaseWindow()
@@ -69,7 +88,7 @@ export function PurchaseWindowView() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 600 }}>
           <CrownIcon width={16} height={16} fill="#f59e0b" />
-          <span>T-Drop — Nâng Cấp Bản Quyền VIP & PREMIUM</span>
+          <span>{mode === 'renew' ? t('renew.windowTitle') : 'T-Drop — Nâng Cấp Bản Quyền VIP & PREMIUM'}</span>
         </div>
         <button
           type="button"
@@ -97,22 +116,37 @@ export function PurchaseWindowView() {
 
       {/* Main Content Area */}
       <div style={{ flex: 1, overflowY: 'auto', padding: 20 }}>
-        <PurchaseWindowContent onClose={handleClose} isModal={false} />
+        <PurchaseWindowContent onClose={handleClose} isModal={false} mode={mode} />
       </div>
     </div>
   )
 }
 
+interface CurrentLicense {
+  key: string
+  role: 'VIP' | 'PREMIUM'
+  expiresAt: string | null
+}
+
 function PurchaseWindowContent({
   onClose,
   initialMachineId,
-  isModal = false
+  isModal = false,
+  mode = 'buy'
 }: {
   onClose: () => void
   initialMachineId?: string
   isModal?: boolean
+  mode?: CheckoutMode
 }) {
   const [role, setRole] = useState<'VIP' | 'PREMIUM'>('VIP')
+  // Renew: the license active on this machine (null while loading / none found).
+  const [current, setCurrent] = useState<CurrentLicense | null>(null)
+  const [currentLoaded, setCurrentLoaded] = useState(mode !== 'renew')
+  const [emailPrefilled, setEmailPrefilled] = useState(false)
+  const [payment, setPayment] = useState<'waiting' | 'done' | 'manual'>('waiting')
+  // A renew request with no key on this machine falls back to the normal purchase.
+  const isRenew = mode === 'renew' && !!current
   const [machineId, setMachineId] = useState(initialMachineId || '')
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -149,12 +183,42 @@ function PurchaseWindowContent({
   const pushToast = useStore((s) => s.pushToast)
 
   useEffect(() => {
-    if (!machineId && window.edge?.getLicenseDeviceInfo) {
-      window.edge.getLicenseDeviceInfo().then((info) => {
-        if (info?.hwHash) setMachineId(info.hwHash)
-      }).catch(console.error)
+    if (!window.edge?.getLicenseDeviceInfo) {
+      setCurrentLoaded(true)
+      return
     }
-  }, [machineId])
+    let cancelled = false
+    window.edge.getLicenseDeviceInfo().then(async (info) => {
+      if (cancelled) return
+      if (info?.hwHash) setMachineId((prev) => prev || info.hwHash)
+      if (mode !== 'renew') return
+      if (!info?.isPro || !info.key) {
+        setCurrentLoaded(true)
+        return
+      }
+      const curRole = info.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
+      setCurrent({ key: info.key, role: curRole, expiresAt: info.expiresAt ?? null })
+      setRole(curRole)
+      setCurrentLoaded(true)
+      // The customer already bought once: fill the email they used, looked up by key + machine.
+      const remote = await fetchRenewalInfo(info.key, info.hwHash)
+      if (cancelled || !remote?.ok) return
+      if (remote.email) {
+        setEmail((prev) => prev || remote.email || '')
+        setEmailPrefilled(true)
+        setEmailError('')
+      }
+      if (remote.expires_at) {
+        setCurrent((c) => (c ? { ...c, expiresAt: remote.expires_at ?? c.expiresAt } : c))
+      }
+    }).catch((err) => {
+      console.error(err)
+      setCurrentLoaded(true)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [mode])
 
   const handleValidateEmail = (val: string) => {
     setEmail(val)
@@ -216,7 +280,7 @@ function PurchaseWindowContent({
 
     const orderCode = `TDR-${Date.now().toString(36).toUpperCase()}`
     const amount = VIETQR_CONFIG.prices[role]
-    const transferContent = `Thanh toan ${role} cho machine ID: ${machineId || 'UNKNOWN'}`
+    const transferContent = buildTransferContent(orderCode, role, isRenew)
 
     const newOrder: TdropOrder = {
       order_code: orderCode,
@@ -225,20 +289,30 @@ function PurchaseWindowContent({
       amount,
       email: email.trim().toLowerCase(),
       transfer_content: transferContent,
-      status: 'pending'
+      status: 'pending',
+      ...(isRenew && current ? { renew_key: current.key } : {})
     }
 
-    try {
-      const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/tdrop_orders`, {
+    const postOrder = (body: TdropOrder) =>
+      fetch(`${SUPABASE_CONFIG.url}/rest/v1/tdrop_orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': SUPABASE_CONFIG.publishableKey,
           'Authorization': `Bearer ${SUPABASE_CONFIG.publishableKey}`,
-          'Prefer': 'return=representation'
+          'Prefer': 'return=minimal'
         },
-        body: JSON.stringify(newOrder)
+        body: JSON.stringify(body)
       })
+
+    try {
+      let res = await postOrder(newOrder)
+      // Server without the renewal migration rejects the unknown column. Keep the
+      // order (the "GIA HAN" note tells the admin) rather than blocking the customer.
+      if (!res.ok && newOrder.renew_key && res.status === 400) {
+        const { renew_key: _drop, ...legacy } = newOrder
+        res = await postOrder(legacy)
+      }
 
       if (!res.ok) {
         const errText = await res.text()
@@ -251,6 +325,7 @@ function PurchaseWindowContent({
         return
       }
 
+      setPayment('waiting')
       setOrder(newOrder)
       pushToast({
         id: Date.now().toString(),
@@ -267,7 +342,72 @@ function PurchaseWindowContent({
     } finally {
       setSubmitting(false)
     }
-  }, [email, role, machineId, pushToast])
+  }, [email, role, machineId, pushToast, isRenew, current])
+
+  // Ref so the polling effect does not restart when the parent re-creates onClose.
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
+
+  // ── Auto-detect payment ────────────────────────────────────────────────
+  // Poll the order; once approved (SePay webhook or admin), activate the new key —
+  // or re-verify the existing one for a renewal, which pulls the extended expiry.
+  useEffect(() => {
+    if (!order || payment !== 'waiting' || !machineId) return
+    let cancelled = false
+    let timer: number | undefined
+    const startedAt = Date.now()
+
+    const finish = async (key: string) => {
+      const res = await window.edge.activateLicense(key)
+      if (cancelled) return
+      if (res.ok) {
+        const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
+        void useStore.getState().patchSettings({
+          isPro: true,
+          licenseKey: key,
+          licenseRole: activatedRole,
+          licenseUserName: res.userName || 'Khách hàng',
+          licenseExpiresAt: res.expiresAt || null
+        })
+        const text = isRenew
+          ? t('renew.success', { date: formatExpiryDate(res.expiresAt) })
+          : res.message || t('purchase.activatedSuccess', { role: activatedRole })
+        setActivationMsg({ text, ok: true })
+        setPayment('done')
+        pushToast({ id: Date.now().toString(), message: text, tone: 'info' })
+        window.setTimeout(() => onCloseRef.current(), 4000)
+      } else {
+        // Approved but activation failed (e.g. offline): show the key path instead.
+        setInlineKey(key)
+        setActivationMsg({ text: res.message || t('license.activateFailed'), ok: false })
+        setPayment('manual')
+      }
+    }
+
+    const tick = async () => {
+      const st = await fetchOrderStatus(order.order_code, machineId)
+      if (cancelled) return
+      if (!st) {
+        // Server has no status RPC yet: stay on the manual "key by email" flow.
+        setPayment('manual')
+        return
+      }
+      if (st.status === 'approved' && st.license_key) {
+        await finish(st.license_key)
+        return
+      }
+      if (st.status === 'rejected' || Date.now() - startedAt > ORDER_POLL_MAX_MS) {
+        setPayment('manual')
+        return
+      }
+      timer = window.setTimeout(() => void tick(), ORDER_POLL_MS)
+    }
+    timer = window.setTimeout(() => void tick(), ORDER_POLL_MS)
+    return () => {
+      cancelled = true
+      if (timer) window.clearTimeout(timer)
+    }
+  }, [order, payment, machineId, isRenew, pushToast])
 
   const handleActivateInlineKey = async () => {
     const trimmed = inlineKey.trim().toUpperCase()
@@ -308,6 +448,8 @@ function PurchaseWindowContent({
   }
 
   const priceFormatted = (VIETQR_CONFIG.prices[role]).toLocaleString('vi-VN') + ' đ'
+  const daysLeft = current ? getDaysRemaining(current.expiresAt) : null
+  const newExpiry = current ? renewedExpiry(current.expiresAt, role) : null
   const qrUrl = order ? getVietQrImageUrl(order.amount, order.transfer_content) : ''
 
   const containerStyle: React.CSSProperties = isModal
@@ -348,7 +490,7 @@ function PurchaseWindowContent({
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <CrownIcon width={20} height={20} fill="#f59e0b" />
             <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#fff' }}>
-              {t('purchase.title')}
+              {isRenew ? t('renew.title') : t('purchase.title')}
             </h3>
           </div>
           <button
@@ -370,10 +512,48 @@ function PurchaseWindowContent({
       {!order ? (
         /* Bước 1: Chọn gói và nhập Email */
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {mode === 'renew' && !currentLoaded && (
+            <div style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.6)' }}>{t('renew.loading')}</div>
+          )}
+          {mode === 'renew' && currentLoaded && !current && (
+            <div style={{
+              background: 'rgba(245, 158, 11, 0.1)',
+              border: '1px solid rgba(245, 158, 11, 0.3)',
+              borderRadius: 8,
+              padding: '8px 12px',
+              fontSize: 11.5,
+              color: '#fcd34d'
+            }}>
+              {t('renew.noLicense')}
+            </div>
+          )}
+          {isRenew && current && (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(99, 102, 241, 0.12))',
+              border: '1px solid rgba(56, 189, 248, 0.3)',
+              borderRadius: 10,
+              padding: '10px 12px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4,
+              fontSize: 12
+            }}>
+              <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600 }}>{t('renew.currentPlan')}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
+                <strong style={{ color: current.role === 'PREMIUM' ? '#c084fc' : '#f59e0b', fontSize: 13.5 }}>{current.role}</strong>
+                <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                  {t('renew.expiresOn', { date: formatExpiryDate(current.expiresAt) })}
+                  {daysLeft !== null && <span style={{ color: daysLeft <= 3 ? '#f87171' : '#7dd3fc' }}> · {t('renew.daysLeft', { days: daysLeft })}</span>}
+                </span>
+              </div>
+              <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, color: 'rgba(255, 255, 255, 0.5)' }}>{current.key}</span>
+            </div>
+          )}
+
           {/* Chọn gói */}
           <div>
             <label style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.6)', fontWeight: 600, display: 'block', marginBottom: 6 }}>
-              {t('purchase.choosePlan')}
+              {isRenew ? t('renew.choosePlan') : t('purchase.choosePlan')}
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               <button
@@ -393,7 +573,9 @@ function PurchaseWindowContent({
                 }}
               >
                 <strong style={{ fontSize: 13.5, color: role === 'VIP' ? '#f59e0b' : '#fff' }}>{t('purchase.vipTitle')}</strong>
-                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>{t('purchase.vipSub')}</span>
+                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>
+                  {isRenew ? t('renew.planSub', { days: PLAN_DAYS.VIP, price: VIETQR_CONFIG.prices.VIP.toLocaleString('vi-VN') }) : t('purchase.vipSub')}
+                </span>
               </button>
 
               <button
@@ -413,9 +595,19 @@ function PurchaseWindowContent({
                 }}
               >
                 <strong style={{ fontSize: 13.5, color: role === 'PREMIUM' ? '#c084fc' : '#fff' }}>{t('purchase.premiumTitle')}</strong>
-                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>{t('purchase.premiumSub')}</span>
+                <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)', marginTop: 2 }}>
+                  {isRenew ? t('renew.planSub', { days: PLAN_DAYS.PREMIUM, price: VIETQR_CONFIG.prices.PREMIUM.toLocaleString('vi-VN') }) : t('purchase.premiumSub')}
+                </span>
               </button>
             </div>
+            {isRenew && newExpiry && (
+              <div style={{ marginTop: 6, fontSize: 11.5, color: '#6ee7b7' }}>
+                {t('renew.newExpiry', { date: formatExpiryDate(newExpiry.toISOString()) })}
+                {current?.role === 'PREMIUM' && role === 'VIP' && (
+                  <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}> · {t('renew.keepsPremium')}</span>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Machine ID */}
@@ -500,6 +692,10 @@ function PurchaseWindowContent({
               <span style={{ fontSize: 11, color: '#ef4444', marginTop: 4, display: 'block' }}>
                 {emailError}
               </span>
+            ) : emailPrefilled ? (
+              <span style={{ fontSize: 10.5, color: '#6ee7b7', marginTop: 4, display: 'block' }}>
+                {t('renew.emailPrefilled')}
+              </span>
             ) : (
               <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.45)', marginTop: 4, display: 'block' }}>
                 {t('purchase.emailHelp')}
@@ -525,7 +721,7 @@ function PurchaseWindowContent({
           {/* Nút Tạo mã QR */}
           <button
             type="button"
-            disabled={submitting}
+            disabled={submitting || !currentLoaded}
             onClick={handleCreateOrder}
             style={{
               width: '100%',
@@ -544,7 +740,11 @@ function PurchaseWindowContent({
               boxShadow: '0 4px 14px rgba(245, 158, 11, 0.35)'
             }}
           >
-            {submitting ? t('purchase.creatingOrder') : t('purchase.createOrder', { price: priceFormatted })}
+            {submitting
+              ? t('purchase.creatingOrder')
+              : isRenew
+                ? t('renew.createOrder', { price: priceFormatted })
+                : t('purchase.createOrder', { price: priceFormatted })}
           </button>
         </div>
       ) : (
@@ -644,7 +844,14 @@ function PurchaseWindowContent({
             color: 'rgba(255, 255, 255, 0.85)',
             lineHeight: 1.45
           }}>
-            {t('purchase.transferNotice')}
+            {payment === 'waiting' ? (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span className="purchase-pulse" aria-hidden />
+                {t('renew.waitingPayment')}
+              </span>
+            ) : (
+              t('purchase.transferNotice')
+            )}
           </div>
 
           {/* Nhập mã kích hoạt nhanh */}

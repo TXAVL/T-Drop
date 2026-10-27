@@ -142,7 +142,7 @@ export interface InvokeMap {
   'system:trim-memory': { args: []; result: { ok: boolean; mainRssMb: number } }
 
   /** Get device fingerprint & license state */
-  'license:get-device-info': { args: []; result: { hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string } }
+  'license:get-device-info': { args: []; result: { hardwareId: string; pcName: string; hwHash: string; isPro: boolean; role: string; key?: string; userName?: string; expiresAt?: string | null } }
 
   /** Activate a license key with Supabase */
   'license:activate': { args: [key: string]; result: { ok: boolean; code?: string; message: string; role?: string; userName?: string } }
@@ -157,7 +157,7 @@ export interface InvokeMap {
   'license:generate-key': { args: [hwHash?: string]; result: string }
 
   /** Open standalone purchase & VietQR checkout window */
-  'license:open-purchase': { args: []; result: void }
+  'license:open-purchase': { args: [mode?: 'buy' | 'renew']; result: void }
 
   /** Close standalone purchase & VietQR checkout window */
   'license:close-purchase': { args: []; result: void }
