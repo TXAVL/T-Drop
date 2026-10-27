@@ -87,6 +87,7 @@ export interface EdgeApi {
   generateLicenseKey: (hwHash?: string) => Promise<string>
   openPurchaseWindow?: (mode?: 'buy' | 'renew') => Promise<void>
   closePurchaseWindow?: () => Promise<void>
+  saveReceipt?: (data: import('./receipt').ReceiptData) => Promise<{ ok: boolean; path?: string; error?: string }>
   getSystemLogs?: (maxLines?: number) => Promise<{ logs: string; path: string }>
   openLogFolder?: () => Promise<boolean>
   clearSystemLogs?: () => Promise<boolean>

@@ -162,6 +162,9 @@ export interface InvokeMap {
   /** Close standalone purchase & VietQR checkout window */
   'license:close-purchase': { args: []; result: void }
 
+  /** Render the payment receipt to a PDF in Downloads and open it. */
+  'license:save-receipt': { args: [data: import('./receipt').ReceiptData]; result: { ok: boolean; path?: string; error?: string } }
+
   /** Read recent logs from disk and get log file path */
   'system:get-logs': { args: [maxLines?: number]; result: { logs: string; path: string } }
 

@@ -1115,3 +1115,33 @@
 @media (prefers-reduced-motion: reduce) {
   .purchase-pulse { animation: none; }
 }
+
+/* Checkout: receipt signing buttons */
+.purchase-ghost-btn,
+.purchase-primary-btn {
+  flex: 1;
+  height: 34px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+.purchase-ghost-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.purchase-ghost-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); }
+.purchase-primary-btn {
+  background: #10b981;
+  border: none;
+  color: #000;
+  font-weight: 700;
+}
+.purchase-primary-btn:hover:not(:disabled) { filter: brightness(1.1); }
+.purchase-ghost-btn:disabled,
+.purchase-primary-btn:disabled { opacity: 0.5; cursor: default; }
+.purchase-ghost-btn:focus-visible,
+.purchase-primary-btn:focus-visible { outline: 2px solid #10b981; outline-offset: 2px; }

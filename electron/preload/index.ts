@@ -233,6 +233,7 @@ const api = {
   generateLicenseKey: (hwHash?: string) => invoke('license:generate-key', hwHash),
   openPurchaseWindow: (mode?: 'buy' | 'renew') => invoke('license:open-purchase', mode),
   closePurchaseWindow: () => invoke('license:close-purchase'),
+  saveReceipt: (data: import('../../shared/receipt').ReceiptData) => invoke('license:save-receipt', data),
   getSystemLogs: (maxLines?: number) => invoke('system:get-logs', maxLines),
   openLogFolder: () => invoke('system:open-log-folder'),
   clearSystemLogs: () => invoke('system:clear-logs'),

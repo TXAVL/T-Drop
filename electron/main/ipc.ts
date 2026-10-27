@@ -25,6 +25,8 @@ import { getMainWindow, sendToMainWindow, setInteractive, setHeartbeatPaused, se
 import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
 import { createPurchaseWindow, closePurchaseWindow, getPurchaseWindow } from './purchaseWindow'
+import { saveReceiptPdf } from './receipt'
+import { isSignatureDataUrl, normalizeBuyerName } from '../../shared/receipt'
 import { rebuildTrayMenu } from './tray'
 import { startDragOut, resolveDragData, prestageDrag, stageDragFile } from './drag'
 import { clipboardSignature, formatTabularDataForClipboard, signatureMatchesItem } from '../clipboard/formats'
@@ -1092,6 +1094,18 @@ export function registerIpc(): void {
 
   handle('license:close-purchase', () => {
     closePurchaseWindow()
+  })
+
+  handle('license:save-receipt', async (data) => {
+    if (!data || typeof data.orderCode !== 'string' || typeof data.amount !== 'number') {
+      return { ok: false, error: 'invalid receipt data' }
+    }
+    return saveReceiptPdf({
+      ...data,
+      // The renderer is not trusted with markup: only a bounded PNG data URL survives.
+      buyerSignature: isSignatureDataUrl(data.buyerSignature) ? data.buyerSignature : null,
+      buyerName: normalizeBuyerName(data.buyerName) || null
+    })
   })
 
   handle('system:get-logs', (maxLines) => {

@@ -169,7 +169,10 @@ Deno.serve(async (req) => {
     role: res.role,
     license_key: res.license_key,
     renewed: !!res.renewed,
-    expires_at: res.expires_at
+    expires_at: res.expires_at,
+    machine_id: res.machine_id,
+    amount,
+    payment_ref: `sepay:${p.id}${p.referenceCode ? `:${p.referenceCode}` : ''}`
   })
   if (mail === 'sent') {
     await db.from('tdrop_orders').update({ emailed_at: new Date().toISOString() }).eq('order_code', orderCode)

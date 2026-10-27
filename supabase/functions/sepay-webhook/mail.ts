@@ -13,6 +13,8 @@
 // With neither set, mail is skipped: the app still auto-activates, so the
 // e-mail is only a receipt / backup.
 import nodemailer from 'npm:nodemailer@6.9.16'
+// Copy of shared/receipt.ts (tests/receipt.test.ts keeps them identical).
+import { buildReceiptHtml, receiptFileName } from './receipt.ts'
 
 export interface FulfilledOrder {
   order_code: string
@@ -21,6 +23,28 @@ export interface FulfilledOrder {
   license_key: string
   renewed: boolean
   expires_at?: string | null
+  machine_id: string
+  amount: number
+  payment_ref?: string | null
+}
+
+/** The printable receipt, attached to the e-mail as an .html file. */
+function receiptAttachment(o: FulfilledOrder): { filename: string; content: string } {
+  const role = o.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
+  const html = buildReceiptHtml({
+    orderCode: o.order_code,
+    paidAt: new Date().toISOString(),
+    buyerEmail: o.email,
+    machineId: o.machine_id,
+    role,
+    days: role === 'PREMIUM' ? 60 : 30,
+    amount: o.amount,
+    renewed: o.renewed,
+    licenseKey: o.license_key,
+    expiresAt: o.expires_at ?? null,
+    paymentRef: o.payment_ref ?? null
+  })
+  return { filename: `${receiptFileName(o.order_code)}.html`, content: html }
 }
 
 const esc = (s: string) =>
@@ -66,7 +90,7 @@ export function buildLicenseMail(o: FulfilledOrder): { subject: string; html: st
       <div style="font-size:13px;margin-top:8px">Gói: <b>${esc(o.role)}</b> · Hạn dùng đến: <b>${esc(expiry)}</b></div>
     </div>
     ${steps}
-    <p style="margin:16px 0 0;font-size:12px;color:#888">Mã đơn: ${esc(o.order_code)}. Vui lòng giữ e-mail này để tra cứu khi cần.</p>
+    <p style="margin:16px 0 0;font-size:12px;color:#888">Mã đơn: ${esc(o.order_code)}. Biên nhận thanh toán được đính kèm (mở file và bấm In / Ctrl+P để in hoặc lưu PDF). Vui lòng giữ e-mail này để tra cứu khi cần.</p>
   </div></body></html>`
 
   const text = [
@@ -94,7 +118,15 @@ async function sendViaGmail(o: FulfilledOrder, user: string, pass: string): Prom
       secure: true,
       auth: { user, pass: pass.replace(/\s+/g, '') }
     })
-    await transport.sendMail({ from: `"T-Drop" <${user}>`, to: o.email, subject, html, text })
+    const receipt = receiptAttachment(o)
+    await transport.sendMail({
+      from: `"T-Drop" <${user}>`,
+      to: o.email,
+      subject,
+      html,
+      text,
+      attachments: [{ filename: receipt.filename, content: receipt.content, contentType: 'text/html; charset=utf-8' }]
+    })
     return 'sent'
   } catch (err) {
     return `error_gmail: ${(err as Error).message}`.slice(0, 240)
@@ -112,7 +144,11 @@ async function sendViaResend(o: FulfilledOrder, apiKey: string): Promise<string>
         to: [o.email],
         subject,
         html,
-        text
+        text,
+        attachments: [(() => {
+          const r = receiptAttachment(o)
+          return { filename: r.filename, content: btoa(unescape(encodeURIComponent(r.content))) }
+        })()]
       })
     })
     if (res.ok) return 'sent'

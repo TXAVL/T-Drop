@@ -28,6 +28,8 @@ import { useStore } from '../store/appStore'
 import { t } from '../i18n'
 import { CloseIcon, CopyIcon, CheckIcon, CrownIcon } from './icons'
 import { ToastStack } from './Toast'
+import { SignaturePad, type SignaturePadHandle } from './SignaturePad'
+import { normalizeBuyerName } from '../../shared/receipt'
 
 type CheckoutMode = 'buy' | 'renew'
 
@@ -159,7 +161,23 @@ function PurchaseWindowContent({
   const [activatingKey, setActivatingKey] = useState(false)
   const [activationMsg, setActivationMsg] = useState<{ text: string; ok: boolean } | null>(null)
   // Set once the license is active: replaces the QR/payment details with a success screen.
-  const [paidInfo, setPaidInfo] = useState<{ key: string; role: 'VIP' | 'PREMIUM'; expiresAt: string | null; renewed: boolean } | null>(null)
+  // fromPayment: confirmed by the order itself (not a key typed in), so a receipt can be issued.
+  const [paidInfo, setPaidInfo] = useState<{
+    key: string
+    role: 'VIP' | 'PREMIUM'
+    expiresAt: string | null
+    renewed: boolean
+    fromPayment: boolean
+    paidAt: string
+  } | null>(null)
+  const [savingReceipt, setSavingReceipt] = useState(false)
+  // Receipt flow: draw a signature, then type the full name printed under it.
+  const [receiptStep, setReceiptStep] = useState<'idle' | 'sign' | 'name'>('idle')
+  const [signature, setSignature] = useState<string | null>(null)
+  const [signEmpty, setSignEmpty] = useState(true)
+  const [buyerName, setBuyerName] = useState('')
+  const signRef = useRef<SignaturePadHandle>(null)
+  const nameInputRef = useRef<HTMLInputElement>(null)
 
   const emailInputRef = useRef<HTMLInputElement>(null)
   const inlineKeyInputRef = useRef<HTMLInputElement>(null)
@@ -371,7 +389,14 @@ function PurchaseWindowContent({
           ? t('renew.success', { date: formatExpiryDate(res.expiresAt) })
           : res.message || t('purchase.activatedSuccess', { role: activatedRole })
         setActivationMsg({ text, ok: true })
-        setPaidInfo({ key, role: activatedRole, expiresAt: res.expiresAt ?? null, renewed: isRenew })
+        setPaidInfo({
+          key,
+          role: activatedRole,
+          expiresAt: res.expiresAt ?? null,
+          renewed: isRenew,
+          fromPayment: true,
+          paidAt: new Date().toISOString()
+        })
         setPayment('done')
         pushToast({ id: Date.now().toString(), message: text, tone: 'info' })
       } else {
@@ -407,6 +432,42 @@ function PurchaseWindowContent({
     }
   }, [order, payment, machineId, isRenew, pushToast])
 
+  const handleSaveReceipt = async () => {
+    if (!order || !paidInfo || savingReceipt || !window.edge?.saveReceipt) return
+    const name = normalizeBuyerName(buyerName)
+    if (signature && !name) {
+      nameInputRef.current?.focus()
+      return
+    }
+    setSavingReceipt(true)
+    playButtonClickSound()
+    try {
+      const res = await window.edge.saveReceipt({
+        orderCode: order.order_code,
+        paidAt: paidInfo.paidAt,
+        buyerEmail: order.email,
+        machineId: order.machine_id,
+        role: order.role,
+        days: PLAN_DAYS[order.role],
+        amount: order.amount,
+        renewed: paidInfo.renewed,
+        licenseKey: paidInfo.key,
+        expiresAt: paidInfo.expiresAt,
+        paymentRef: null,
+        buyerSignature: signature,
+        buyerName: name || null
+      })
+      if (res.ok) setReceiptStep('idle')
+      pushToast({
+        id: Date.now().toString(),
+        message: res.ok ? t('purchase.receiptSaved') : t('purchase.receiptFailed', { error: res.error || '' }),
+        tone: res.ok ? 'info' : 'error'
+      })
+    } finally {
+      setSavingReceipt(false)
+    }
+  }
+
   const handleActivateInlineKey = async () => {
     const trimmed = inlineKey.trim().toUpperCase()
     if (!trimmed || activatingKey) return
@@ -427,7 +488,14 @@ function PurchaseWindowContent({
           text: res.message || t('purchase.activatedSuccess', { role: activatedRole }),
           ok: true
         })
-        setPaidInfo({ key: trimmed, role: activatedRole, expiresAt: res.expiresAt ?? null, renewed: false })
+        setPaidInfo({
+          key: trimmed,
+          role: activatedRole,
+          expiresAt: res.expiresAt ?? null,
+          renewed: false,
+          fromPayment: false,
+          paidAt: new Date().toISOString()
+        })
         setPayment('done')
         pushToast({
           id: Date.now().toString(),
@@ -806,6 +874,121 @@ function PurchaseWindowContent({
                   <strong style={{ color: '#fff', fontFamily: 'var(--font-mono, monospace)' }}>{paidInfo.key}</strong>
                 </div>
               </div>
+              {paidInfo.fromPayment && window.edge?.saveReceipt && receiptStep === 'sign' && (
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 8, textAlign: 'left' }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>{t('receipt.signTitle')}</span>
+                  <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.65)' }}>{t('receipt.signHint')}</span>
+                  <SignaturePad ref={signRef} onChange={setSignEmpty} label={t('receipt.signHere')} />
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button type="button" className="purchase-ghost-btn" onClick={() => signRef.current?.clear()} disabled={signEmpty}>
+                      {t('receipt.clear')}
+                    </button>
+                    <button
+                      type="button"
+                      className="purchase-ghost-btn"
+                      onClick={() => {
+                        setSignature(null)
+                        setReceiptStep('name')
+                      }}
+                    >
+                      {t('receipt.skipSign')}
+                    </button>
+                    <button
+                      type="button"
+                      className="purchase-primary-btn"
+                      disabled={signEmpty}
+                      onClick={() => {
+                        setSignature(signRef.current?.toDataUrl() ?? null)
+                        setReceiptStep('name')
+                        window.setTimeout(() => nameInputRef.current?.focus(), 50)
+                      }}
+                    >
+                      {t('receipt.next')}
+                    </button>
+                  </div>
+                </div>
+              )}
+              {paidInfo.fromPayment && window.edge?.saveReceipt && receiptStep === 'name' && (
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 8, textAlign: 'left' }}>
+                  {signature && (
+                    <img
+                      src={signature}
+                      alt=""
+                      style={{ width: '100%', maxHeight: 90, objectFit: 'contain', background: '#fff', borderRadius: 8 }}
+                    />
+                  )}
+                  <label htmlFor="receipt-buyer-name" style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>
+                    {t('receipt.nameLabel')}
+                  </label>
+                  <input
+                    id="receipt-buyer-name"
+                    ref={nameInputRef}
+                    type="text"
+                    autoComplete="name"
+                    maxLength={60}
+                    placeholder={t('receipt.namePlaceholder')}
+                    value={buyerName}
+                    onChange={(e) => setBuyerName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') void handleSaveReceipt()
+                    }}
+                    style={{
+                      height: 36,
+                      background: 'rgba(0, 0, 0, 0.5)',
+                      border: signature && !normalizeBuyerName(buyerName) ? '1px solid #f59e0b' : '1px solid rgba(255, 255, 255, 0.2)',
+                      borderRadius: 8,
+                      padding: '0 12px',
+                      color: '#fff',
+                      fontSize: 13,
+                      outline: 'none',
+                      textTransform: 'uppercase'
+                    }}
+                  />
+                  <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.55)' }}>
+                    {signature ? t('receipt.nameHintSigned') : t('receipt.nameHintOptional')}
+                  </span>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button type="button" className="purchase-ghost-btn" onClick={() => setReceiptStep('sign')}>
+                      {t('receipt.back')}
+                    </button>
+                    <button
+                      type="button"
+                      className="purchase-primary-btn"
+                      disabled={savingReceipt || (!!signature && !normalizeBuyerName(buyerName))}
+                      onClick={() => void handleSaveReceipt()}
+                    >
+                      {savingReceipt ? t('purchase.receiptSaving') : t('receipt.create')}
+                    </button>
+                  </div>
+                </div>
+              )}
+              {paidInfo.fromPayment && window.edge?.saveReceipt && receiptStep === 'idle' && (
+                <button
+                  type="button"
+                  disabled={savingReceipt}
+                  onClick={() => {
+                    playButtonClickSound()
+                    setSignature(null)
+                    setSignEmpty(true)
+                    setReceiptStep('sign')
+                  }}
+                  style={{
+                    width: '100%',
+                    height: 34,
+                    marginTop: 4,
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    borderRadius: 8,
+                    color: '#fff',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    cursor: savingReceipt ? 'default' : 'pointer',
+                    opacity: savingReceipt ? 0.7 : 1
+                  }}
+                >
+                  {savingReceipt ? t('purchase.receiptSaving') : t('purchase.receiptButton')}
+                </button>
+              )}
               <button
                 type="button"
                 onClick={onClose}
