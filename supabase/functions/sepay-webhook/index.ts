@@ -7,8 +7,8 @@
 // Secrets (Supabase → Edge Functions → Secrets):
 //   SEPAY_API_KEY        required — the API key you set on the SePay webhook (fail-closed if missing)
 //   SEPAY_ACCOUNT_NUMBER optional — only accept transfers into this account (e.g. 2211231106)
-//   RESEND_API_KEY       optional — e-mail the key/receipt to the buyer (see mail.ts)
-//   MAIL_FROM            optional — sender, default "T-Drop <noreply@txastudio.click>"
+//   GMAIL_USER + GMAIL_APP_PASSWORD  optional — e-mail the key via Gmail SMTP (see mail.ts)
+//   RESEND_API_KEY (+ MAIL_FROM)     optional — alternative mail provider
 // Deploy with verify_jwt = false: SePay cannot send a Supabase JWT; the Apikey check is the auth.
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { sendLicenseMail } from './mail.ts'

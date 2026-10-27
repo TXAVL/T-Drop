@@ -1,4 +1,4 @@
-# Hướng dẫn: Tự duyệt đơn T-Drop (SePay) + Gửi email miễn phí (Resend)
+# Hướng dẫn: Tự duyệt đơn T-Drop (SePay) + Gửi email miễn phí (Gmail)
 
 Sau khi làm xong, quy trình sẽ là:
 
@@ -49,30 +49,33 @@ Vào Supabase Dashboard → project **camnragrlqzmcxtgvukj** → **Edge Function
 |---|---|---|
 | `SEPAY_API_KEY` | đúng chuỗi API Key bạn đặt ở Bước 2 | ✅ |
 | `SEPAY_ACCOUNT_NUMBER` | `2211231106` | Nên có (chặn tiền vào tài khoản khác) |
-| `RESEND_API_KEY` | xem Bước 4 | Để gửi email |
-| `MAIL_FROM` | `T-Drop <noreply@txastudio.click>` | Không bắt buộc |
+| `GMAIL_USER`, `GMAIL_APP_PASSWORD` | xem Bước 4 | Để gửi email |
 
 Secret có hiệu lực ngay, không cần deploy lại.
 
-## Bước 4 — Gửi email miễn phí với Resend
+## Bước 4 — Gửi email miễn phí bằng Gmail (không cần tên miền)
 
 **Vì sao trước đây không gửi được mail:** hệ thống chưa từng tự gửi mail. Nút "Gửi Email" trên trang admin chỉ mở ứng dụng mail trên điện thoại của bạn (`mailto:`), và bạn phải tự bấm gửi.
 
-**Resend** miễn phí **3.000 email/tháng (100/ngày)**, gửi bằng tên miền riêng nên ít bị vào Spam.
+**Khuyên dùng: Gmail SMTP + Mật khẩu ứng dụng (App Password).**
+- Miễn phí, khoảng 500 mail/ngày.
+- Không cần xác minh tên miền.
+- Mail gửi từ chính Gmail của bạn nên ít vào Spam.
+- App Password chỉ dùng được để gửi mail, **không** đăng nhập được tài khoản Google, và có thể thu hồi bất cứ lúc nào. Nó được lưu trong Supabase Secrets, không nằm trong code hay app.
+- Nên dùng một Gmail riêng cho việc bán hàng (ví dụ `txastudio.shop@gmail.com`) thay vì Gmail cá nhân.
 
-1. Đăng ký tại <https://resend.com>.
-2. Vào **Domains → Add Domain**, nhập `txastudio.click`.
-3. Resend hiện ra vài bản ghi DNS (TXT/MX cho SPF và DKIM). Thêm đúng các bản ghi đó ở nơi bạn quản lý tên miền `txastudio.click` (Cloudflare, Tenten, Namecheap…).
-4. Quay lại Resend bấm **Verify**. Thường mất vài phút đến vài giờ.
-5. Vào **API Keys → Create API Key** (quyền *Sending access*), rồi copy key bắt đầu bằng `re_`.
-6. Dán vào secret `RESEND_API_KEY` ở Bước 3.
+1. Vào <https://myaccount.google.com/security>, bật **Xác minh 2 bước** (bắt buộc mới tạo được App Password).
+2. Vào <https://myaccount.google.com/apppasswords>, đặt tên `T-Drop` rồi bấm **Tạo**. Google hiện mật khẩu 16 ký tự, copy lại.
+3. Supabase → **Edge Functions → Secrets**, thêm:
 
-Nếu chưa có `RESEND_API_KEY`, hệ thống vẫn tự duyệt và app vẫn tự kích hoạt, chỉ là không gửi email.
+   | Tên | Giá trị |
+   |---|---|
+   | `GMAIL_USER` | địa chỉ Gmail, ví dụ `txastudio.shop@gmail.com` |
+   | `GMAIL_APP_PASSWORD` | mật khẩu 16 ký tự vừa tạo (có hay không có dấu cách đều được) |
 
-**Phương án miễn phí khác** (nếu không muốn dùng Resend):
+Nếu chưa cấu hình mail, hệ thống vẫn tự duyệt và app vẫn tự kích hoạt, chỉ là không gửi email.
 
-- **Brevo** (300 email/ngày): có thể xác minh một địa chỉ Gmail làm người gửi mà không cần tên miền, nhưng mail dễ vào Spam hơn. Cần sửa `mail.ts` sang API của Brevo.
-- **Gmail SMTP**: không khuyến nghị, vì Supabase Edge Functions chặn các cổng SMTP thông dụng.
+**Phương án khác: Resend** (3.000 mail/tháng, gửi từ `noreply@txastudio.click`, chuyên nghiệp hơn nhưng phải thêm bản ghi DNS để xác minh tên miền). Thêm `RESEND_API_KEY` (và tùy chọn `MAIL_FROM`). Nếu có cả hai thì Gmail được ưu tiên.
 
 ## Bước 5 — Thử toàn bộ quy trình
 
@@ -146,4 +149,4 @@ select public.txa_promote_to_admin('email@gmail.com');
 - `supabase/migrations/20261027_tdrop_renewal_and_auto_approval.sql`: gia hạn cộng dồn, `tdrop_fulfill_order`, RPC cho app
 - `supabase/migrations/20261027_tdrop_security_lockdown.sql`: session token, khoá quyền
 - `supabase/migrations/20261027_tdrop_pin_search_path.sql`: cố định `search_path`
-- `supabase/functions/sepay-webhook/`: webhook (`index.ts`) và email (`mail.ts`)
+- `supabase/functions/sepay-webhook/`: webhook (`index.ts`) và email (`mail.ts`, Gmail SMTP hoặc Resend)

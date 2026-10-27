@@ -1,10 +1,18 @@
-// License e-mail via Resend (free tier: 3,000 mails/month, 100/day).
+// License e-mail. Two free providers, picked by which secrets are set:
 //
-// Secrets:
-//   RESEND_API_KEY  required to send; without it mail is skipped (the app still
-//                   auto-activates, so the e-mail is only a receipt / backup).
-//   MAIL_FROM       optional, default "T-Drop <noreply@txastudio.click>".
-//                   The domain must be verified in Resend.
+// 1) Gmail SMTP (preferred: no domain to verify, ~500 mails/day, lands in Inbox
+//    because it really comes from your Gmail):
+//      GMAIL_USER          your Gmail address, e.g. txastudio@gmail.com
+//      GMAIL_APP_PASSWORD  16-char App Password (Google account > Security >
+//                          2-Step Verification > App passwords). NOT your normal password.
+//    Uses port 465 (implicit TLS): Supabase Edge Functions block 25 and 587.
+//
+// 2) Resend (3,000/month, needs a verified domain):
+//      RESEND_API_KEY, MAIL_FROM (default "T-Drop <noreply@txastudio.click>")
+//
+// With neither set, mail is skipped: the app still auto-activates, so the
+// e-mail is only a receipt / backup.
+import nodemailer from 'npm:nodemailer@6.9.16'
 
 export interface FulfilledOrder {
   order_code: string
@@ -77,10 +85,23 @@ export function buildLicenseMail(o: FulfilledOrder): { subject: string; html: st
   return { subject, html, text }
 }
 
-/** Returns 'sent', 'skipped' (no API key) or an error string. Never throws. */
-export async function sendLicenseMail(o: FulfilledOrder): Promise<string> {
-  const apiKey = Deno.env.get('RESEND_API_KEY')
-  if (!apiKey) return 'skipped'
+async function sendViaGmail(o: FulfilledOrder, user: string, pass: string): Promise<string> {
+  const { subject, html, text } = buildLicenseMail(o)
+  try {
+    const transport = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: { user, pass: pass.replace(/\s+/g, '') }
+    })
+    await transport.sendMail({ from: `"T-Drop" <${user}>`, to: o.email, subject, html, text })
+    return 'sent'
+  } catch (err) {
+    return `error_gmail: ${(err as Error).message}`.slice(0, 240)
+  }
+}
+
+async function sendViaResend(o: FulfilledOrder, apiKey: string): Promise<string> {
   const { subject, html, text } = buildLicenseMail(o)
   try {
     const res = await fetch('https://api.resend.com/emails', {
@@ -95,8 +116,18 @@ export async function sendLicenseMail(o: FulfilledOrder): Promise<string> {
       })
     })
     if (res.ok) return 'sent'
-    return `error_${res.status}: ${(await res.text()).slice(0, 200)}`
+    return `error_resend_${res.status}: ${(await res.text()).slice(0, 200)}`
   } catch (err) {
-    return `error: ${(err as Error).message}`
+    return `error_resend: ${(err as Error).message}`
   }
+}
+
+/** Returns 'sent', 'skipped' (no provider configured) or an error string. Never throws. */
+export function sendLicenseMail(o: FulfilledOrder): Promise<string> {
+  const gmailUser = Deno.env.get('GMAIL_USER')
+  const gmailPass = Deno.env.get('GMAIL_APP_PASSWORD')
+  if (gmailUser && gmailPass) return sendViaGmail(o, gmailUser, gmailPass)
+  const resendKey = Deno.env.get('RESEND_API_KEY')
+  if (resendKey) return sendViaResend(o, resendKey)
+  return Promise.resolve('skipped')
 }

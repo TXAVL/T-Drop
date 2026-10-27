@@ -158,6 +158,8 @@ function PurchaseWindowContent({
   const [inlineKey, setInlineKey] = useState('')
   const [activatingKey, setActivatingKey] = useState(false)
   const [activationMsg, setActivationMsg] = useState<{ text: string; ok: boolean } | null>(null)
+  // Set once the license is active: replaces the QR/payment details with a success screen.
+  const [paidInfo, setPaidInfo] = useState<{ key: string; role: 'VIP' | 'PREMIUM'; expiresAt: string | null; renewed: boolean } | null>(null)
 
   const emailInputRef = useRef<HTMLInputElement>(null)
   const inlineKeyInputRef = useRef<HTMLInputElement>(null)
@@ -344,10 +346,6 @@ function PurchaseWindowContent({
     }
   }, [email, role, machineId, pushToast, isRenew, current])
 
-  // Ref so the polling effect does not restart when the parent re-creates onClose.
-  const onCloseRef = useRef(onClose)
-  onCloseRef.current = onClose
-
   // ── Auto-detect payment ────────────────────────────────────────────────
   // Poll the order; once approved (SePay webhook or admin), activate the new key —
   // or re-verify the existing one for a renewal, which pulls the extended expiry.
@@ -373,9 +371,9 @@ function PurchaseWindowContent({
           ? t('renew.success', { date: formatExpiryDate(res.expiresAt) })
           : res.message || t('purchase.activatedSuccess', { role: activatedRole })
         setActivationMsg({ text, ok: true })
+        setPaidInfo({ key, role: activatedRole, expiresAt: res.expiresAt ?? null, renewed: isRenew })
         setPayment('done')
         pushToast({ id: Date.now().toString(), message: text, tone: 'info' })
-        window.setTimeout(() => onCloseRef.current(), 4000)
       } else {
         // Approved but activation failed (e.g. offline): show the key path instead.
         setInlineKey(key)
@@ -429,14 +427,13 @@ function PurchaseWindowContent({
           text: res.message || t('purchase.activatedSuccess', { role: activatedRole }),
           ok: true
         })
+        setPaidInfo({ key: trimmed, role: activatedRole, expiresAt: res.expiresAt ?? null, renewed: false })
+        setPayment('done')
         pushToast({
           id: Date.now().toString(),
           message: res.message || t('purchase.activatedSuccess', { role: activatedRole }),
           tone: 'info'
         })
-        setTimeout(() => {
-          onClose()
-        }, 1800)
       } else {
         setActivationMsg({ text: res.message || t('license.activateFailed'), ok: false })
       }
@@ -748,8 +745,88 @@ function PurchaseWindowContent({
           </button>
         </div>
       ) : (
-        /* Bước 2: Hiển thị VietQR và thông tin chuyển khoản */
+        /* Bước 2: VietQR + chuyển khoản; sau khi nhận tiền thì thay bằng màn thành công */
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {paidInfo ? (
+            <div
+              role="status"
+              aria-live="polite"
+              style={{
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.08))',
+                border: '1px solid rgba(16, 185, 129, 0.45)',
+                borderRadius: 14,
+                padding: '22px 16px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 10,
+                textAlign: 'center'
+              }}
+            >
+              <div style={{
+                width: 56,
+                height: 56,
+                borderRadius: '50%',
+                background: '#10b981',
+                color: '#000',
+                display: 'grid',
+                placeItems: 'center',
+                boxShadow: '0 0 24px rgba(16, 185, 129, 0.55)'
+              }}>
+                <CheckIcon width={30} height={30} />
+              </div>
+              <strong style={{ fontSize: 16, color: '#fff' }}>
+                {paidInfo.renewed ? t('renew.paidTitle') : t('purchase.paidTitle')}
+              </strong>
+              <span style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1.5 }}>
+                {t('purchase.activatedDesc')}
+              </span>
+              <div style={{
+                width: '100%',
+                background: 'rgba(0, 0, 0, 0.35)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 10,
+                padding: '10px 12px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6,
+                fontSize: 12,
+                textAlign: 'left'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.paidPlan')}</span>
+                  <strong style={{ color: paidInfo.role === 'PREMIUM' ? '#c084fc' : '#f59e0b' }}>{paidInfo.role}</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.paidExpiry')}</span>
+                  <strong style={{ color: '#6ee7b7' }}>{formatExpiryDate(paidInfo.expiresAt)}</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.paidKey')}</span>
+                  <strong style={{ color: '#fff', fontFamily: 'var(--font-mono, monospace)' }}>{paidInfo.key}</strong>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                style={{
+                  width: '100%',
+                  height: 36,
+                  marginTop: 4,
+                  background: '#10b981',
+                  border: 'none',
+                  borderRadius: 8,
+                  color: '#000',
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                {t('purchase.startUsing')}
+              </button>
+            </div>
+          ) : (
+          <>
           <div style={{ textAlign: 'center', background: '#ffffff', padding: 12, borderRadius: 12 }}>
             <img
               src={qrUrl}
@@ -854,46 +931,10 @@ function PurchaseWindowContent({
             )}
           </div>
 
-          {/* Nhập mã kích hoạt nhanh */}
-          {activationMsg?.ok ? (
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1))',
-              border: '1px solid rgba(16, 185, 129, 0.4)',
-              borderRadius: 10,
-              padding: '12px 14px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 8,
-              textAlign: 'center'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                <CrownIcon width={18} height={18} fill="#10b981" />
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#10b981' }}>
-                  {activationMsg.text}
-                </span>
-              </div>
-              <span style={{ fontSize: 11.5, color: 'rgba(255, 255, 255, 0.8)' }}>
-                {t('purchase.activatedDesc')}
-              </span>
-              <button
-                type="button"
-                onClick={onClose}
-                style={{
-                  height: 32,
-                  background: '#10b981',
-                  border: 'none',
-                  borderRadius: 6,
-                  color: '#000',
-                  fontSize: 12,
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  marginTop: 4
-                }}
-              >
-                {t('purchase.startUsing')}
-              </button>
-            </div>
-          ) : (
+          </>
+          )}
+
+          {/* Nhập mã kích hoạt nhanh: luôn hiện, kể cả sau khi thanh toán thành công */}
             <div style={{
               background: 'rgba(255, 255, 255, 0.03)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -951,7 +992,6 @@ function PurchaseWindowContent({
                 </span>
               )}
             </div>
-          )}
 
           <button
             type="button"
