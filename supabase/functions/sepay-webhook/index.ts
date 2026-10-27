@@ -39,11 +39,18 @@ function timingSafeEqual(a: string, b: string): boolean {
 Deno.serve(async (req) => {
   if (req.method !== 'POST') return json({ success: false, error: 'method' }, 405)
 
-  const expected = Deno.env.get('SEPAY_API_KEY') ?? ''
+  const expected = (Deno.env.get('SEPAY_API_KEY') ?? '').trim()
   const auth = req.headers.get('authorization') ?? ''
   const given = auth.replace(/^Apikey\s+/i, '').trim()
   if (!expected || !timingSafeEqual(given, expected)) {
-    return json({ success: false, error: 'unauthorized' }, 401)
+    // Diagnostics only — never log the key itself.
+    console.warn('[sepay] 401', {
+      secretConfigured: !!expected,
+      headerScheme: auth.split(' ')[0] || '(none)',
+      givenLength: given.length,
+      expectedLength: expected.length
+    })
+    return json({ success: false, error: expected ? 'unauthorized' : 'SEPAY_API_KEY not configured' }, 401)
   }
 
   let p: SepayPayload
