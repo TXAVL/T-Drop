@@ -259,13 +259,19 @@ T-Drop is built to strict enterprise desktop security standards:
 |---|---|---|
 | **Activation** | Zero-Click Edge Hover | Hovers into view from 0px edge width; click-through when hidden. |
 | **Activation** | Hysteresis Hiding | Dual-threshold dead band (255px / 290px) prevents boundary oscillation. |
+| **Activation** | Instant Key Activation Engine | Zero-lag license verification, 0ms cached hardware fingerprinting, timeout guards & animated spinner. |
 | **Capture** | Multi-Format Support | Captures plain text, rich URLs, bitmaps/PNGs, and multi-file paths. |
 | **Capture** | Smart Deduplication | Elevates existing items and increments `hitCount` badge on re-copy. |
+| **UI/UX** | Glassmorphism & Depth Elevation | Dual-layer specular border highlights, 3D acrylic drop shadows, and hover micro-elevation. |
 | **UI/UX** | Elastic Overshoot Bounce | Entire panel and connection arcs scale +5% with spring physics on reveal. |
 | **UI/UX** | Monochrome Aesthetics | Frosted deep black macOS-style panels with subtle white/silver badges. |
 | **UI/UX** | Fluid Bundles | Groups multi-file/image copies into expandable 3D card stacks. |
+| **Organization** | Dedicated Pinned Filter Tab | 1-click ⭐ / 📌 tab on the Header to isolate and manage pinned snippets & templates. |
+| **Manipulation** | Text Studio & Case Transformer | 1-click `Aa` case cycling (UPPER ⇄ lower ⇄ Title), whitespace cleaning, and character/word analytics. |
 | **Manipulation** | Granular Sub-Item Actions | Drag out, copy, or split individual files directly from inside a bundle. |
 | **Manipulation** | Interactive Merging | Drag and drop shelf items onto one another to combine them into stacks. |
+| **Search** | Quick Search Enter-to-Paste | Press `Enter` in the shelf search bar to instantly paste the top matching result. |
+| **Sharing** | Quick QR Drop Code | 1-click QR code generator modal on any text or link card to scan from mobile phones. |
 | **OS Transfer** | OLE Native Drag-Out | Direct OS file handle generation for dragging into Word, Explorer, etc. |
 | **OS Transfer** | Protected Drag-In | Shelf stays locked open when dragging OS files over the target drop zone. |
 | **Configuration** | Pill Selector Settings | Instant, slider-free configuration for capacity, hot zones, and timers. |

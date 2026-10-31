@@ -21,7 +21,8 @@ function getRawMachineGuid(): string {
       const stdout = execSync('reg query "HKLM\\SOFTWARE\\Microsoft\\Cryptography" /v MachineGuid', {
         windowsHide: true,
         encoding: 'utf-8',
-        stdio: ['ignore', 'pipe', 'ignore']
+        stdio: ['ignore', 'pipe', 'ignore'],
+        timeout: 1000
       })
       const match = stdout.match(/MachineGuid\s+REG_SZ\s+([a-fA-F0-9-]+)/)
       if (match && match[1]) return match[1].trim()
@@ -44,6 +45,13 @@ export function getDeviceFingerprint(): DeviceFingerprint {
   cachedFingerprint = { hardwareId, pcName, hwHash }
   return cachedFingerprint
 }
+
+// Pre-warm fingerprint in background so user interactions never hitch
+setTimeout(() => {
+  try {
+    getDeviceFingerprint()
+  } catch {}
+}, 50)
 
 export class TxaLicense {
   /**
@@ -96,6 +104,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
     const url = `${SUPABASE_CONFIG.url}/rest/v1/rpc/activate_tdrop_license`
     const res = await fetch(url, {
       method: 'POST',
+      signal: AbortSignal.timeout(8000),
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_CONFIG.publishableKey,
@@ -148,11 +157,15 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
       expiresAt: data.expires_at
     }
   } catch (err: any) {
+    const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('aborted')
+    const msg = isTimeout
+      ? 'Hết thời gian chờ phản hồi từ máy chủ (quá 8 giây). Vui lòng kiểm tra lại kết nối mạng.'
+      : `Không thể kết nối đến máy chủ xác minh: ${err?.message || String(err)}`
     AppLogger.write('ERROR', 'License', `Ngoại lệ khi gọi Supabase: ${err?.message || String(err)}`)
     return {
       ok: false,
       code: 'NETWORK_ERROR',
-      message: `Không thể kết nối đến máy chủ xác minh: ${err?.message || String(err)}`
+      message: msg
     }
   }
 }

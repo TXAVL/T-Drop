@@ -363,13 +363,8 @@ export function Settings({
   const licenseInputRef = useRef<HTMLInputElement>(null)
 
   const licenseEngagedRef = useRef(false)
-  const blurTimeoutRef = useRef<number | undefined>(undefined)
 
   const handleFocusLicenseInput = () => {
-    if (blurTimeoutRef.current) {
-      window.clearTimeout(blurTimeoutRef.current)
-      blurTimeoutRef.current = undefined
-    }
     if (!licenseEngagedRef.current) {
       licenseEngagedRef.current = true
       try { void window.edge?.focusWindow?.(true) } catch {}
@@ -377,19 +372,8 @@ export function Settings({
     }
   }
 
-  const handleBlurLicenseInput = () => {
-    if (blurTimeoutRef.current) window.clearTimeout(blurTimeoutRef.current)
-    blurTimeoutRef.current = window.setTimeout(() => {
-      blurTimeoutRef.current = undefined
-      licenseEngagedRef.current = false
-      try { void window.edge?.focusWindow?.(false) } catch {}
-      try { void window.edge?.pauseHotkey?.(false) } catch {}
-    }, 350)
-  }
-
   useEffect(() => {
     return () => {
-      if (blurTimeoutRef.current) window.clearTimeout(blurTimeoutRef.current)
       if (licenseEngagedRef.current) {
         licenseEngagedRef.current = false
         try { void window.edge?.focusWindow?.(false) } catch {}
@@ -425,10 +409,6 @@ export function Settings({
 
   const handlePasteLicenseKey = async () => {
     playButtonClickSound()
-    if (blurTimeoutRef.current) {
-      window.clearTimeout(blurTimeoutRef.current)
-      blurTimeoutRef.current = undefined
-    }
     handleFocusLicenseInput()
     try {
       let text = ''
@@ -463,11 +443,7 @@ export function Settings({
   }
 
   const handleActivateLicense = async () => {
-    if (blurTimeoutRef.current) {
-      window.clearTimeout(blurTimeoutRef.current)
-      blurTimeoutRef.current = undefined
-    }
-    const trimmed = licenseInput.trim().toUpperCase()
+    const trimmed = licenseInput.trim().toUpperCase().replace(/\s+/g, '')
     if (!trimmed) {
       pushToast({
         id: Date.now().toString(),
@@ -483,14 +459,18 @@ export function Settings({
       const res = await window.edge.activateLicense(trimmed)
       if (res.ok) {
         const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
-        void useStore.getState().patchSettings({
-          isPro: true,
-          licenseKey: trimmed,
-          licenseRole: activatedRole,
-          licenseUserName: res.userName || 'Khách hàng',
-          licenseExpiresAt: res.expiresAt || null
-        })
+        useStore.setState((s) => ({
+          settings: {
+            ...s.settings,
+            isPro: true,
+            licenseKey: trimmed,
+            licenseRole: activatedRole,
+            licenseUserName: res.userName || 'Khách hàng',
+            licenseExpiresAt: res.expiresAt || null
+          }
+        }))
         setLicenseInput('')
+        playToggleSound(true)
         pushToast({
           id: Date.now().toString(),
           message: res.message || t('license.activateSuccess', { role: activatedRole }),
@@ -517,13 +497,16 @@ export function Settings({
   const handleDeactivateLicense = () => {
     playButtonClickSound()
     window.edge.deactivateLicense()
-    void useStore.getState().patchSettings({
-      isPro: false,
-      licenseKey: '',
-      licenseRole: 'FREE',
-      licenseUserName: '',
-      licenseExpiresAt: null
-    })
+    useStore.setState((s) => ({
+      settings: {
+        ...s.settings,
+        isPro: false,
+        licenseKey: '',
+        licenseRole: 'FREE',
+        licenseUserName: '',
+        licenseExpiresAt: null
+      }
+    }))
     setLicenseInput('')
     pushToast({
       id: Date.now().toString(),
@@ -761,46 +744,76 @@ export function Settings({
               </button>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
-              <div style={{ display: 'flex', gap: 6, width: '100%' }}>
-                <input
-                  ref={licenseInputRef}
-                  type="text"
-                  placeholder={t('license.keyPlaceholder')}
-                  value={licenseInput}
-                  onFocus={handleFocusLicenseInput}
-                  onBlur={handleBlurLicenseInput}
-                  onChange={(e) => setLicenseInput(e.target.value.toUpperCase().replace(/\s+/g, ''))}
-                  onPaste={(e) => {
-                    e.preventDefault()
-                    const text = e.clipboardData.getData('text')
-                    if (text) {
-                      setLicenseInput(text.trim().toUpperCase().replace(/\s+/g, ''))
-                    }
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleActivateLicense()
-                  }}
-                  style={{
-                    flex: 1,
-                    height: 32,
-                    background: 'rgba(0, 0, 0, 0.4)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    borderRadius: 8,
-                    padding: '0 10px',
-                    color: '#fff',
-                    fontSize: 12,
-                    fontFamily: 'var(--font-mono, monospace)',
-                    outline: 'none',
-                    letterSpacing: '0.04em'
-                  }}
-                />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 7, width: '100%' }}>
+              <div style={{ display: 'flex', gap: 6, width: '100%', alignItems: 'center' }}>
+                <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                  <input
+                    ref={licenseInputRef}
+                    type="text"
+                    placeholder={t('license.keyPlaceholder')}
+                    value={licenseInput}
+                    disabled={licenseActivating}
+                    onFocus={handleFocusLicenseInput}
+                    onChange={(e) => setLicenseInput(e.target.value.toUpperCase().replace(/\s+/g, ''))}
+                    onPaste={(e) => {
+                      e.preventDefault()
+                      const text = e.clipboardData.getData('text')
+                      if (text) {
+                        setLicenseInput(text.trim().toUpperCase().replace(/\s+/g, ''))
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleActivateLicense()
+                    }}
+                    style={{
+                      width: '100%',
+                      height: 34,
+                      background: 'rgba(0, 0, 0, 0.45)',
+                      border: licenseActivating ? '1px solid rgba(56, 189, 248, 0.5)' : '1px solid rgba(255, 255, 255, 0.16)',
+                      borderRadius: 8,
+                      padding: '0 28px 0 10px',
+                      color: '#fff',
+                      fontSize: 12,
+                      fontFamily: 'var(--font-mono, monospace)',
+                      outline: 'none',
+                      letterSpacing: '0.04em',
+                      transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                      boxShadow: licenseActivating ? '0 0 12px rgba(56, 189, 248, 0.25)' : 'none'
+                    }}
+                  />
+                  {licenseInput && !licenseActivating && (
+                    <button
+                      type="button"
+                      onClick={() => setLicenseInput('')}
+                      style={{
+                        position: 'absolute',
+                        right: 6,
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'none',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.45)',
+                        cursor: 'pointer',
+                        padding: 2,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: 14,
+                        lineHeight: 1
+                      }}
+                      title="Xóa mã"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
                 <button
                   type="button"
                   className="pill"
                   onClick={handlePasteLicenseKey}
+                  disabled={licenseActivating}
                   style={{
-                    height: 32,
+                    height: 34,
                     padding: '0 10px',
                     fontSize: 11,
                     fontWeight: 600,
@@ -815,16 +828,35 @@ export function Settings({
                   type="button"
                   className="pill active"
                   style={{
-                    height: 32,
-                    padding: '0 12px',
+                    height: 34,
+                    padding: '0 14px',
                     fontSize: 11.5,
                     fontWeight: 600,
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'nowrap',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    background: licenseActivating ? 'linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(99, 102, 241, 0.3))' : undefined
                   }}
                   disabled={licenseActivating}
                   onClick={handleActivateLicense}
                 >
-                  {licenseActivating ? t('license.activating') : t('license.verify')}
+                  {licenseActivating ? (
+                    <>
+                      <span style={{
+                        width: 12,
+                        height: 12,
+                        border: '2px solid rgba(255, 255, 255, 0.3)',
+                        borderTopColor: '#ffffff',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        animation: 'spin 0.6s linear infinite'
+                      }} />
+                      <span>{t('license.activating')}</span>
+                    </>
+                  ) : (
+                    t('license.verify')
+                  )}
                 </button>
               </div>
 
@@ -833,7 +865,7 @@ export function Settings({
                 className="pill active"
                 style={{
                   width: '100%',
-                  height: 32,
+                  height: 34,
                   fontSize: 11.5,
                   fontWeight: 600,
                   justifyContent: 'center',

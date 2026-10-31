@@ -9,7 +9,7 @@ Bản kế hoạch chi tiết các giai đoạn phát triển tính năng cho **
 | Giai đoạn | Nội dung chính | Trạng thái | Phiên bản |
 | :--- | :--- | :---: | :---: |
 | **Giai đoạn 1** | Quick Actions & Tiện ích Văn bản, Link, Màu sắc | ✅ **Đã hoàn thành** | `v0.1.3` |
-| **Giai đoạn 2** | Tiện ích Ảnh & Tệp tin (Image Converter, Compressor & OCR) | ⏳ **Sẵn sàng triển khai** | `v0.2.0` |
+| **Giai đoạn 2** | Tiện ích Ảnh, Tệp tin, Tối ưu Bản quyền & Giao diện | ✅ **Đã hoàn thành** | `v0.2.0` |
 | **Giai đoạn 3** | QR Drop (Chia sẻ nội mạng LAN giữa PC ⇄ Điện thoại) | 📋 **Kế hoạch** | `v0.3.0` |
 | **Giai đoạn 4** | Smart Snippets & Tự động hóa Mẫu văn bản (Quick Templates) | 📋 **Kế hoạch** | `v0.4.0` |
 | **Giai đoạn 5** | AI Clipboard Assistant & Tìm kiếm Ngữ nghĩa (Semantic Search) | 📋 **Kế hoạch** | `v0.5.0` |
@@ -51,9 +51,9 @@ Bản kế hoạch chi tiết các giai đoạn phát triển tính năng cho **
 
 ---
 
-## ⏳ Giai đoạn 2: Tiện ích Ảnh & Tệp tin (Image & File Power-Ups)
-> **Dự kiến phiên bản:** `v0.2.0`  
-> **Mục tiêu:** Tối ưu hóa xử lý ảnh chụp màn hình và ảnh copy trước khi gửi/sử dụng.
+## ✅ Giai đoạn 2: Tiện ích Ảnh, Tệp tin, Tối ưu Bản quyền & Nâng cấp Giao diện (v0.2.0)
+> **Trạng thái:** Hoàn tất 100% · Đã kiểm thử 49/49 suites (486 tests pass) · Bộ cài chuẩn `v0.2.0`.
+> **Mục tiêu:** Tối ưu hóa xử lý ảnh chụp màn hình, ảnh copy, giải quyết dứt điểm lag kích hoạt key và nâng cấp giao diện chuẩn Glassmorphism.
 
 ### 2.1 Bộ chuyển đổi định dạng ảnh nhanh (Image Format Converter)
 * [x] Chuyển đổi định dạng 1-click: **PNG ⇄ JPEG ⇄ WebP** xử lý native trên Canvas Chromium (không cần sharp cồng kềnh).
@@ -72,15 +72,26 @@ Bản kế hoạch chi tiết các giai đoạn phát triển tính năng cho **
 * [x] Nút **"Trích chữ (OCR)"** tiện ích trực tiếp trên thanh tác vụ nhanh của thẻ ảnh và tab OCR bên trong **Image Studio Panel**.
 * [x] Thống kê độ chính xác, số dòng, số từ; cho phép sao chép 1-click hoặc đưa trực tiếp vào lịch sử clipboard của T-Drop.
 
-### 2.4 Hệ thống Bản quyền TxaLicense & Supabase Activation
+### 2.4 Hệ thống Bản quyền TxaLicense & Fix triệt để lag kích hoạt Key
 * [x] Format mã kích hoạt ngắn gọn, thẩm mỹ: `TDR_[hwHash]_[random5]` (~16 ký tự, vd: `TDR_A8B9C1_X8K2M`).
-* [x] Tích hợp trực tiếp vào dự án Supabase chứa `Quantumshift` & `ShieldBlock` (Project: `camnragrlqzmcxtgvukj`), bảng `public.tdrop_licenses`.
-* [x] Hỗ trợ đúng 3 loại gói:
-  - `FREE`: Mặc định, miễn phí vĩnh viễn.
-  - `VIP`: Có hạn 30 ngày từ lúc kích hoạt (không cộng dồn nếu nhập nhiều key).
-  - `PREMIUM`: Có hạn 60 ngày từ lúc kích hoạt (không cộng dồn nếu nhập nhiều key).
-* [x] Gắn chặt bản quyền với Hardware ID + PC Name; chống sao chép key sang máy khác; RPC `public.activate_tdrop_license` tự động kiểm tra hạn và gia hạn theo mốc mới.
-* [x] Giao diện quản lý bản quyền chuyên nghiệp trong **Cài đặt**: hiển thị mã máy, trạng thái gói, số ngày còn lại, nút hủy kích hoạt và bộ sinh mã mẫu để test nhanh.
+* [x] Tích hợp trực tiếp vào dự án Supabase, bảng `public.tdrop_licenses`.
+* [x] Hỗ trợ 3 loại gói: `FREE` (vĩnh viễn), `VIP` (30 ngày), `PREMIUM` (60 ngày).
+* [x] **Xóa bỏ dứt điểm hiện tượng khựng/lag khi kích hoạt key:**
+  - Loại bỏ focus thrashing giữa Node và Win32 `setWindowFocusable` khi bấm nút hoặc blur.
+  - Pre-warm và cache Hardware ID ngầm khi khởi động, phản hồi 0ms.
+  - Bổ sung `AbortSignal.timeout(8000)` chống treo kết nối mạng Supabase.
+  - Tối ưu state sync nội bộ không gây ghi đĩa/vẽ lại Tray icon trùng lặp.
+  - Thêm hiệu ứng loading spinner mượt mà trên nút bấm, nút xóa nhanh `✕` và hỗ trợ phím `Enter`.
+
+### 2.5 Nâng cấp Giao diện Glassmorphism & Tiện ích Văn bản Thông minh
+* [x] **Nâng cấp Glassmorphism 3D cho Blade & Thẻ Clipboard:**
+  - Viền specular light reflection và ambient acrylic drop shadow (`box-shadow: 14px 0 40px rgba(0, 0, 0, 0.75)`).
+  - Thẻ clipboard nổi khối mượt mà với viền neon tinh tế (`transform: translateY(-1px)` khi hover).
+* [x] **Tab Bộ lọc Đã ghim (Pinned Filter Tab):** Nút ⭐ / 📌 ngay trên thanh Header cho phép xem nhanh danh sách thẻ đã ghim / snippet template.
+* [x] **Bộ chuyển đổi kiểu chữ nhanh (Case Transformer):** Nút `Aa` 1-click trên thẻ văn bản: IN HOA ⇄ in thường ⇄ Viết Hoa Đầu Từ.
+* [x] **Text Analytics & Nhận diện Mã nguồn:** Tự động đếm ký tự & từ (`128 ký tự · 24 từ`), tự động gắn chip `JSON` / `CODE`.
+* [x] **Quick Search Enter:** Nhấn `Enter` ngay trong ô tìm kiếm để dán kết quả đầu tiên tức thì.
+* [x] **Trạng thái Trống (Empty State) Mới:** Icon phát sáng nổi khối và bảng gợi ý phím tắt (`Ctrl+C`, `/`).
 
 ---
 

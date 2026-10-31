@@ -102,10 +102,39 @@ export function ShelfSearch() {
             } else {
               inputRef.current?.blur()
             }
+          } else if (e.key === 'Enter' && query.trim()) {
+            e.preventDefault()
+            const needle = query.trim().toLowerCase()
+            const items = useStore.getState().items
+            const match = items.find((it) => {
+              if (it.data.kind === 'text') return it.data.text.toLowerCase().includes(needle)
+              if (it.data.kind === 'files') return it.data.paths.some((p) => p.toLowerCase().includes(needle))
+              return false
+            })
+            if (match) {
+              void useStore.getState().paste(match.id)
+            }
           }
         }}
         spellCheck={false}
       />
+      {query ? (
+        <button
+          type="button"
+          tabIndex={-1}
+          onClick={(e) => {
+            e.stopPropagation()
+            setQuery('')
+            inputRef.current?.focus()
+          }}
+          className="search-clear-btn"
+          title="Xóa tìm kiếm (Esc)"
+        >
+          ✕
+        </button>
+      ) : (
+        <span className="search-kbd-hint">/</span>
+      )}
     </div>
   )
 }

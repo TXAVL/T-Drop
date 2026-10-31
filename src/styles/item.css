@@ -9,12 +9,28 @@
   flex-direction: column;
   margin-bottom: 8px;
   background: var(--bg-card);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-card);
   user-select: none;
   -webkit-user-select: none;
-  transition: background 0.14s ease;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+.meta-code-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  letter-spacing: 0.04em;
+  margin-left: 4px;
+  line-height: 1.2;
 }
 
 /* Specular light-reflection 1px border.
@@ -62,6 +78,9 @@
 
 .item:hover {
   background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.42), 0 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 .item:hover .preview {
@@ -69,11 +88,15 @@
 }
 
 .item.pinned {
-  background: #181818;
+  background: linear-gradient(135deg, rgba(28, 26, 36, 0.95), rgba(20, 20, 26, 0.95));
+  border-color: rgba(139, 92, 246, 0.28);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.08);
 }
 
 .item.pinned:hover {
-  background: var(--bg-card-hover);
+  background: linear-gradient(135deg, rgba(34, 32, 44, 0.98), rgba(24, 24, 32, 0.98));
+  border-color: rgba(139, 92, 246, 0.42);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.15);
 }
 
 /* Compact UI Density Mode */

@@ -378,13 +378,16 @@ function PurchaseWindowContent({
       if (cancelled) return
       if (res.ok) {
         const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
-        void useStore.getState().patchSettings({
-          isPro: true,
-          licenseKey: key,
-          licenseRole: activatedRole,
-          licenseUserName: res.userName || 'Khách hàng',
-          licenseExpiresAt: res.expiresAt || null
-        })
+        useStore.setState((s) => ({
+          settings: {
+            ...s.settings,
+            isPro: true,
+            licenseKey: key,
+            licenseRole: activatedRole,
+            licenseUserName: res.userName || 'Khách hàng',
+            licenseExpiresAt: res.expiresAt || null
+          }
+        }))
         const text = isRenew
           ? t('renew.success', { date: formatExpiryDate(res.expiresAt) })
           : res.message || t('purchase.activatedSuccess', { role: activatedRole })
@@ -477,13 +480,16 @@ function PurchaseWindowContent({
       const res = await window.edge.activateLicense(trimmed)
       if (res.ok) {
         const activatedRole = res.role === 'PREMIUM' ? 'PREMIUM' : 'VIP'
-        void useStore.getState().patchSettings({
-          isPro: true,
-          licenseKey: trimmed,
-          licenseRole: activatedRole,
-          licenseUserName: res.userName || 'Khách hàng',
-          licenseExpiresAt: res.expiresAt || null
-        })
+        useStore.setState((s) => ({
+          settings: {
+            ...s.settings,
+            isPro: true,
+            licenseKey: trimmed,
+            licenseRole: activatedRole,
+            licenseUserName: res.userName || 'Khách hàng',
+            licenseExpiresAt: res.expiresAt || null
+          }
+        }))
         setActivationMsg({
           text: res.message || t('purchase.activatedSuccess', { role: activatedRole }),
           ok: true

@@ -92,4 +92,13 @@ describe('type filters: image files live in Images only', () => {
     expect(itemMatchesTypeFilter(colorHex, 'all')).toBe(true)
     expect(itemMatchesTypeFilter(colorRgb, 'all')).toBe(true)
   })
+
+  it('pinned: matches only pinned items regardless of data kind', () => {
+    const pinnedNote = { ...note, pinned: true }
+    const unpinnedNote = { ...note, pinned: false }
+    const pinnedImg = { ...screenshot, pinned: true }
+    expect(itemMatchesTypeFilter(pinnedNote, 'pinned')).toBe(true)
+    expect(itemMatchesTypeFilter(pinnedImg, 'pinned')).toBe(true)
+    expect(itemMatchesTypeFilter(unpinnedNote, 'pinned')).toBe(false)
+  })
 })

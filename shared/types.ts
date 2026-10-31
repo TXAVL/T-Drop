@@ -55,7 +55,7 @@ export type ItemData =
 
 export type ItemKind = ItemData['kind']
 
-export type TypeFilter = 'all' | 'text' | 'links' | 'images' | 'files' | 'colors'
+export type TypeFilter = 'all' | 'pinned' | 'text' | 'links' | 'images' | 'files' | 'colors'
 
 /**
  * A single clipboard entry. `id` is stable across the lifetime of the entry;

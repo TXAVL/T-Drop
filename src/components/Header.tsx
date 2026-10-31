@@ -1,6 +1,6 @@
 import { useStore } from '../store/appStore'
 import RubberSegment from './RubberSegment'
-import { GearIcon, CloseIcon, InfoIcon, ClockIcon, TypeIcon, LinkIcon, ImageIcon, FilesIcon, PaletteIcon, EmojiSmileIcon } from './icons'
+import { GearIcon, CloseIcon, InfoIcon, ClockIcon, TypeIcon, LinkIcon, ImageIcon, FilesIcon, PaletteIcon, EmojiSmileIcon, PinFillIcon } from './icons'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { loadEmojiCatalog } from '../lib/emoji/load'
 import { ShelfSearch } from './ShelfSearch'
@@ -57,6 +57,7 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
     Icon: typeof ClockIcon
   }[] = [
     { id: 'all', label: t('filters.all'), Icon: ClockIcon },
+    { id: 'pinned', label: t('filters.pinned') || 'Ghim', Icon: PinFillIcon },
     { id: 'text', label: t('filters.text'), Icon: TypeIcon },
     { id: 'links', label: t('filters.links'), Icon: LinkIcon },
     { id: 'images', label: t('filters.images'), Icon: ImageIcon },

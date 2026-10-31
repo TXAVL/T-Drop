@@ -31,6 +31,7 @@ import '../styles/item.css'
 import { tryPaste } from '../lib/tryPaste'
 import { parseColor, getColorFormats, cycleColorFormat } from '../lib/colorUtils'
 import { hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
+import { toUpper, toLower, toTitleCase } from '../lib/textTransform'
 import { useTranslation, t } from '../i18n'
 import { useRelativeTimeTick } from '../hooks/useRelativeTimeTick'
 
@@ -478,6 +479,37 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
               }}
             >
               <ColorConvertIcon />
+            </button>
+          )}
+          {item.data.kind === 'text' && !item.data.isUrl && !item.data.isColor && !colorInfo && (
+            <button
+              className="act act-text-transform"
+              title={t('item.transformCase') || 'Đổi kiểu chữ (HOA / thường / Viết Hoa Đầu Từ)'}
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                e.currentTarget.blur()
+                playButtonClickSound()
+                const current = (item.data as any).text || ''
+                let nextText = ''
+                if (current === current.toUpperCase() && current !== current.toLowerCase()) {
+                  nextText = toLower(current)
+                } else if (current === current.toLowerCase() && current !== current.toUpperCase()) {
+                  nextText = toTitleCase(current)
+                } else {
+                  nextText = toUpper(current)
+                }
+                navigator.clipboard.writeText(nextText)
+                setCopied(true)
+                useStore.getState().pushToast({
+                  id: Date.now().toString(),
+                  message: 'Đã đổi kiểu chữ & sao chép vào clipboard!',
+                  tone: 'info'
+                })
+                window.setTimeout(() => setCopied(false), 900)
+              }}
+            >
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: -0.5 }}>Aa</span>
             </button>
           )}
           {item.data.kind === 'text' && (
@@ -1339,7 +1371,20 @@ function ItemDetails({ item }: { item: ClipboardItemDto }) {
         return null
       }
 
-      return null
+      const text = item.data.text
+      const trimmed = text.trim()
+      const len = text.length
+      const words = trimmed ? trimmed.split(/\s+/).length : 0
+      const isJson = (trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']'))
+      const isCode = !isJson && (text.includes('\n') && (text.includes('function ') || text.includes('const ') || text.includes('import ') || text.includes('class ') || text.includes('def ')))
+
+      return (
+        <>
+          {isJson && <span className="meta-code-tag">JSON</span>}
+          {isCode && <span className="meta-code-tag">CODE</span>}
+          <span className="meta-detail">· {len} {t('stats.chars') || 'ký tự'}{words > 1 ? ` · ${words} ${t('stats.words') || 'từ'}` : ''}</span>
+        </>
+      )
     }
 
     case 'image': {

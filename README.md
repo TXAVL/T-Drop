@@ -41,7 +41,7 @@
   <img src="https://img.shields.io/badge/macOS-D%E1%BB%B1%20ki%E1%BA%BFn-f59e0b?style=flat-square&logo=apple&logoColor=white&labelColor=23272e" alt="macOS Planned" />
   <img src="https://img.shields.io/badge/RAM-15--35%20MB-56d364?style=flat-square&labelColor=23272e" alt="RAM Footprint" />
   <img src="https://img.shields.io/badge/Languages-31%20Supported-79c0ff?style=flat-square&labelColor=23272e" alt="i18n Languages" />
-  <img src="https://img.shields.io/badge/Tests-457%20passed-3fb950?style=flat-square&labelColor=23272e" alt="Tests" />
+  <img src="https://img.shields.io/badge/Tests-486%20passed-3fb950?style=flat-square&labelColor=23272e" alt="Tests" />
   <a href="https://discord.gg/skKMc823Sv"><img alt="Discord" src="https://img.shields.io/badge/Discord-Động%20Mê%20Phim-5865F2?style=flat-square&logo=discord&logoColor=white&labelColor=23272e" /></a>
 </p>
 
@@ -215,7 +215,16 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 
 ## Features
 
-### 🤖 AI OCR, Image Suite & Encrypted Vault (Updated in v0.1.6)
+### ✨ Glassmorphism 3D Aesthetics, Text Studio & Ultra-Fast Activation (New in v0.2.0)
+- **Zero-Lag License Activation Engine:** Eliminated Win32 focus-thrashing during key activation. Pre-warms hardware fingerprints in 0ms, adds an 8s connection timeout guard, and renders an animated spinner with instant feedback.
+- **Modern Glassmorphism & Depth Elevation:** The edge shelf and clipboard cards feature specular light highlights, subtle acrylic drop shadows (`box-shadow: 14px 0 40px rgba(0, 0, 0, 0.75)`), and smooth hover lift animations (`translateY(-1px)`).
+- **Dedicated Pinned Filter Tab (Favorites & Templates):** 1-click ⭐/📌 tab in the header filters only pinned items, transforming your shelf into a quick snippet vault.
+- **Instant Case Transformer (`Aa`):** 1-click cycle directly on any text card: **UPPERCASE ⇄ lowercase ⇄ Title Case** with immediate clipboard update and toast confirmation.
+- **Smart Text Analytics & Code Recognition:** Automatically displays character & word counts on text cards (`128 chars · 24 words`) and highlights `JSON` or `CODE` blocks with custom tags.
+- **Quick Search Enter-to-Paste:** Press `Enter` inside the shelf search bar to instantly paste the first matching result.
+- **Refined Empty State & Shortcut Cheatsheet:** Beautiful illuminated icon with keyboard shortcut guides (`Ctrl+C` to copy, `/` to search).
+
+### 🤖 AI OCR, Image Suite & Encrypted Vault
 - **AI OCR Text Extraction:** Scan and copy text directly from clipboard images with 1 click. Full support for **Vietnamese** with diacritics and **English**. Completely offline and privacy-respecting.
 - **Fast Image Converter & Compressor:** Convert between **PNG**, **JPG**, and **WebP** on the fly without third-party web tools. Features a quick quality slider to compress file size by up to 70% before dragging out.
 - **Encrypted Vault & Backups (`.txa`):** Complete snapshot export and restore of all clipboard cards, pinned items, and categories into an encrypted archive protected with **PBKDF2-HMAC-SHA256 + AES-256-GCM**.
