@@ -9,7 +9,7 @@ Bản kế hoạch chi tiết các giai đoạn phát triển tính năng cho **
 | Giai đoạn | Nội dung chính | Trạng thái | Phiên bản |
 | :--- | :--- | :---: | :---: |
 | **Giai đoạn 1** | Quick Actions & Tiện ích Văn bản, Link, Màu sắc | ✅ **Đã hoàn thành** | `v0.1.3` |
-| **Giai đoạn 2** | Tiện ích Ảnh, Tệp tin, Tối ưu Bản quyền & Giao diện | ✅ **Đã hoàn thành** | `v0.1.13` |
+| **Giai đoạn 2** | Tiện ích Ảnh, Tệp tin, Tối ưu Bản quyền & Giao diện | ✅ **Đã hoàn thành** | `v0.2.0` |
 | **Giai đoạn 3** | QR Drop (Chia sẻ nội mạng LAN giữa PC ⇄ Điện thoại) | 📋 **Kế hoạch** | `v0.3.0` |
 | **Giai đoạn 4** | Smart Snippets & Tự động hóa Mẫu văn bản (Quick Templates) | 📋 **Kế hoạch** | `v0.4.0` |
 | **Giai đoạn 5** | AI Clipboard Assistant & Tìm kiếm Ngữ nghĩa (Semantic Search) | 📋 **Kế hoạch** | `v0.5.0` |
@@ -51,8 +51,8 @@ Bản kế hoạch chi tiết các giai đoạn phát triển tính năng cho **
 
 ---
 
-## ✅ Giai đoạn 2: Tiện ích Ảnh, Tệp tin, Tối ưu Bản quyền & Nâng cấp Giao diện (v0.1.13)
-> **Trạng thái:** Hoàn tất 100% · Đã kiểm thử 49/49 suites (486 tests pass) · Bộ cài chuẩn `v0.1.13`.
+## ✅ Giai đoạn 2: Tiện ích Ảnh, Tệp tin, Tối ưu Bản quyền & Nâng cấp Giao diện (v0.2.0)
+> **Trạng thái:** Hoàn tất 100% · Đã kiểm thử 49/49 suites (486 tests pass) · Bộ cài chuẩn `v0.2.0`.
 > **Mục tiêu:** Tối ưu hóa xử lý ảnh chụp màn hình, ảnh copy, giải quyết dứt điểm lag kích hoạt key và nâng cấp giao diện chuẩn Glassmorphism.
 
 ### 2.1 Bộ chuyển đổi định dạng ảnh nhanh (Image Format Converter)
