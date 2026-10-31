@@ -215,7 +215,7 @@ npm run build:store  # outputs an MSIX package for Microsoft Store submission
 
 ## Features
 
-### ✨ Glassmorphism 3D Aesthetics, Text Studio & Ultra-Fast Activation (New in v0.2.0)
+### ✨ Glassmorphism 3D Aesthetics, Text Studio & Ultra-Fast Activation (New in v0.1.13)
 - **Zero-Lag License Activation Engine:** Eliminated Win32 focus-thrashing during key activation. Pre-warms hardware fingerprints in 0ms, adds an 8s connection timeout guard, and renders an animated spinner with instant feedback.
 - **Modern Glassmorphism & Depth Elevation:** The edge shelf and clipboard cards feature specular light highlights, subtle acrylic drop shadows (`box-shadow: 14px 0 40px rgba(0, 0, 0, 0.75)`), and smooth hover lift animations (`translateY(-1px)`).
 - **Dedicated Pinned Filter Tab (Favorites & Templates):** 1-click ⭐/📌 tab in the header filters only pinned items, transforming your shelf into a quick snippet vault.
