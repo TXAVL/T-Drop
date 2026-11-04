@@ -23,3 +23,5 @@ scratch/release_notes*.md
 *.traineddata
 .env.i18n
 .claude/
+.agents/
+skills-lock.json
