@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Bu lisans anahtarı başka bir cihazda zaten etkinleştirilmiş",
         "ACTIVATED": "{role} paketi başarıyla etkinleştirildi!",
         "VERIFIED": "{role} lisansı geçerli"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Lisans güncellendi",
+      "syncUpdatedBody": "Paketiniz artık {role}, {date} tarihine kadar geçerli.",
+      "syncUpdatedForever": "Paketiniz artık {role}, son kullanma tarihi yok.",
+      "syncRevokedTitle": "T-Drop — Lisans artık etkin değil",
+      "syncRevokedBody": "Bu lisans iptal edildi veya süresi doldu, bu yüzden T-Drop ücretsiz pakete döndü.",
+      "expiringTitle": "T-Drop — Paketiniz yakında bitiyor",
+      "expiringBody": "{role} paketi, kalan gün: {days}. Yenilemek için Ayarlar'ı açın."
     }
   }
 }

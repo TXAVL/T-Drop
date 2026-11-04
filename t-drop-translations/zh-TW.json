@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "此授權金鑰已在另一部裝置上啟用",
         "ACTIVATED": "{role} 方案啟用成功！",
         "VERIFIED": "{role} 授權有效"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — 授權已更新",
+      "syncUpdatedBody": "您的方案現在是 {role}，有效期限至 {date}。",
+      "syncUpdatedForever": "您的方案現在是 {role}，永久有效。",
+      "syncRevokedTitle": "T-Drop — 授權已失效",
+      "syncRevokedBody": "此授權已被撤銷或已過期，T-Drop 已回到免費方案。",
+      "expiringTitle": "T-Drop — 您的方案即將到期",
+      "expiringBody": "{role} 方案，剩餘天數：{days}。開啟設定即可續期。"
     }
   }
 }

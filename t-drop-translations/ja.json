@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "このライセンスキーはすでに別のデバイスで有効化されています",
         "ACTIVATED": "{role}プランを有効にしました！",
         "VERIFIED": "{role}ライセンスは有効です"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — ライセンスを更新しました",
+      "syncUpdatedBody": "プランが {role} になりました。{date} までご利用いただけます。",
+      "syncUpdatedForever": "プランが {role} になりました。有効期限はありません。",
+      "syncRevokedTitle": "T-Drop — ライセンスが無効になりました",
+      "syncRevokedBody": "このライセンスは取り消されたか期限切れのため、T-Drop は無料プランに戻りました。",
+      "expiringTitle": "T-Drop — まもなくプランが終了します",
+      "expiringBody": "{role} プラン、残り日数: {days}。更新するには設定を開いてください。"
     }
   }
 }

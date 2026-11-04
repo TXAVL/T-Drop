@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.2.1</span>
+          <span data-i18n="nav.download">Tải về v0.2.2</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,49 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.2.1 ───────────────────────────────────────── -->
+    <!-- ── VERSION 0.2.2 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.2.1</span>
+          <span>Version v0.2.2</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">05/11/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v022.summary">
+        Gói của bạn giờ tự cập nhật: nâng cấp, gia hạn hay thu hồi trên hệ thống đều hiện ngay trong app mà không cần nhập lại key. Thêm nhắc hết hạn và bảo vệ lịch sử clipboard tốt hơn.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v022.feat1.title">Tự đồng bộ bản quyền mỗi 15 phút</h3>
+            <p data-i18n="v022.feat1.desc">Khi bạn được nâng gói (ví dụ VIP lên PREMIUM) hoặc được cộng thêm ngày, app tự nhận trong tối đa 15 phút, kể cả lúc máy vừa thức dậy từ chế độ ngủ, và báo bằng một thông báo nhỏ. Mất mạng thì app giữ nguyên gói hiện tại, không bao giờ khóa nhầm bạn.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v022.feat2.title">Nhắc trước khi gói hết hạn</h3>
+            <p data-i18n="v022.feat2.desc">Trong 3 ngày cuối của gói, T-Drop nhắc bạn một lần mỗi ngày kèm số ngày còn lại để kịp gia hạn, không bị gián đoạn công việc.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v022.feat3.title">Lịch sử clipboard an toàn hơn</h3>
+            <p data-i18n="v022.feat3.desc">Nếu file lịch sử bị khóa hoặc không đọc được trong lúc khởi động, T-Drop sẽ giữ nguyên dữ liệu cũ thay vì ghi đè, nên bạn không mất những gì đã lưu.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.2.1 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.2.1</span>
         </div>
         <div class="release-date">05/11/2026</div>
       </div>
@@ -1231,7 +1268,7 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.2.1',
+        'nav.download': 'Tải về v0.2.2',
         'hero.badge': 'CẬP NHẬT & NHẬT KÝ PHÁT HÀNH',
         'hero.title': 'Có gì mới trong T-Drop',
         'hero.desc': 'Theo dõi các phiên bản mới nhất, tính năng độc quyền, cải tiến hiệu năng và bản vá lỗi của T-Drop dành cho Windows và dự kiến cho macOS.',
@@ -1241,6 +1278,13 @@
         'badge.new': 'Mới',
         'badge.improved': 'Cải tiến',
         'badge.fixed': 'Sửa lỗi',
+        'v022.summary': 'Gói của bạn giờ tự cập nhật: nâng cấp, gia hạn hay thu hồi trên hệ thống đều hiện ngay trong app mà không cần nhập lại key. Thêm nhắc hết hạn và bảo vệ lịch sử clipboard tốt hơn.',
+        'v022.feat1.title': 'Tự đồng bộ bản quyền mỗi 15 phút',
+        'v022.feat1.desc': 'Khi bạn được nâng gói (ví dụ VIP lên PREMIUM) hoặc được cộng thêm ngày, app tự nhận trong tối đa 15 phút, kể cả lúc máy vừa thức dậy từ chế độ ngủ, và báo bằng một thông báo nhỏ. Mất mạng thì app giữ nguyên gói hiện tại, không bao giờ khóa nhầm bạn.',
+        'v022.feat2.title': 'Nhắc trước khi gói hết hạn',
+        'v022.feat2.desc': 'Trong 3 ngày cuối của gói, T-Drop nhắc bạn một lần mỗi ngày kèm số ngày còn lại để kịp gia hạn, không bị gián đoạn công việc.',
+        'v022.feat3.title': 'Lịch sử clipboard an toàn hơn',
+        'v022.feat3.desc': 'Nếu file lịch sử bị khóa hoặc không đọc được trong lúc khởi động, T-Drop sẽ giữ nguyên dữ liệu cũ thay vì ghi đè, nên bạn không mất những gì đã lưu.',
         'v021.summary': 'T-Drop giờ nói đúng ngôn ngữ của bạn ở mọi ngóc ngách, dễ dùng hơn bằng bàn phím, và màn mua gói gọn gàng, dễ nhìn hơn.',
         'v021.feat1.title': 'Đủ 31 ngôn ngữ, không còn chữ lẫn',
         'v021.feat1.desc': 'Từ thông báo cập nhật, màn gia hạn, biên nhận, nhật ký hệ thống đến Image Studio, mọi dòng chữ đều hiện đúng ngôn ngữ bạn chọn. Bản dịch được viết tay theo ngữ cảnh nên đọc tự nhiên, không còn cảm giác máy dịch.',
@@ -1384,7 +1428,7 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.2.1',
+        'nav.download': 'Download v0.2.2',
         'hero.badge': 'UPDATES & RELEASE CHANGELOG',
         'hero.title': "What's New in T-Drop",
         'hero.desc': 'Follow the latest releases, exclusive features, performance enhancements, and bug fixes for T-Drop on Windows and upcoming for macOS.',
@@ -1394,6 +1438,13 @@
         'badge.new': 'New',
         'badge.improved': 'Improved',
         'badge.fixed': 'Fixed',
+        'v022.summary': 'Your plan now updates itself: upgrades, extensions and revocations made on the server show up in the app without re-entering your key. Plus expiry reminders and safer clipboard history.',
+        'v022.feat1.title': 'License auto-sync every 15 minutes',
+        'v022.feat1.desc': 'When your plan is upgraded (for example VIP to PREMIUM) or extended, the app picks it up within 15 minutes, even right after your PC wakes from sleep, and tells you with a small notification. If you are offline the app keeps your current plan and never locks you out by mistake.',
+        'v022.feat2.title': 'Reminder before your plan ends',
+        'v022.feat2.desc': 'During the last 3 days of your plan, T-Drop reminds you once a day with the number of days left, so you can renew without any interruption.',
+        'v022.feat3.title': 'Safer clipboard history',
+        'v022.feat3.desc': 'If the history file is locked or unreadable at startup, T-Drop now keeps the existing data instead of overwriting it, so nothing you saved is lost.',
         'v021.summary': 'T-Drop now speaks your language everywhere, is easier to use from the keyboard, and the purchase screen is calmer and easier to read.',
         'v021.feat1.title': 'All 31 languages, no more mixed-in text',
         'v021.feat1.desc': 'From update notifications, the renewal screen and receipts to system logs and Image Studio, every line now shows in the language you chose. The translations were written by hand with context, so they read naturally instead of like machine output.',

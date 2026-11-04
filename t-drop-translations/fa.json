@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "این کلید لایسنس از قبل روی دستگاه دیگری فعال شده است",
         "ACTIVATED": "بستهٔ {role} با موفقیت فعال شد!",
         "VERIFIED": "لایسنس {role} معتبر است"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — لایسنس به‌روز شد",
+      "syncUpdatedBody": "بستهٔ شما اکنون {role} است و تا {date} اعتبار دارد.",
+      "syncUpdatedForever": "بستهٔ شما اکنون {role} است و تاریخ انقضا ندارد.",
+      "syncRevokedTitle": "T-Drop — لایسنس دیگر فعال نیست",
+      "syncRevokedBody": "این لایسنس لغو یا منقضی شده است، پس T-Drop به بستهٔ رایگان برگشت.",
+      "expiringTitle": "T-Drop — بستهٔ شما به‌زودی تمام می‌شود",
+      "expiringBody": "بستهٔ {role}، روزهای باقی‌مانده: {days}. برای تمدید، تنظیمات را باز کنید."
     }
   }
 }

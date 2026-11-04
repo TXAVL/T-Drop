@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "Mã bản quyền đã được kích hoạt trên thiết bị khác",
         "ACTIVATED": "Kích hoạt gói {role} thành công!",
         "VERIFIED": "Bản quyền {role} hợp lệ"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Bản quyền đã được cập nhật",
+      "syncUpdatedBody": "Gói của bạn giờ là {role}, dùng được đến {date}.",
+      "syncUpdatedForever": "Gói của bạn giờ là {role}, không giới hạn thời gian.",
+      "syncRevokedTitle": "T-Drop — Bản quyền không còn hiệu lực",
+      "syncRevokedBody": "Bản quyền này đã bị thu hồi hoặc hết hạn, nên T-Drop đã trở về gói Miễn phí.",
+      "expiringTitle": "T-Drop — Gói của bạn sắp hết hạn",
+      "expiringBody": "Gói {role}, còn lại: {days} ngày. Mở Cài đặt để gia hạn."
     }
   }
 }

@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "Denne licensnøgle er allerede aktiveret på en anden enhed",
         "ACTIVATED": "Planen {role} er aktiveret!",
         "VERIFIED": "{role}-licensen er gyldig"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Licensen er opdateret",
+      "syncUpdatedBody": "Dit abonnement er nu {role} og gælder til {date}.",
+      "syncUpdatedForever": "Dit abonnement er nu {role}, uden udløbsdato.",
+      "syncRevokedTitle": "T-Drop — Licensen er ikke længere aktiv",
+      "syncRevokedBody": "Denne licens er blevet tilbagekaldt eller er udløbet, så T-Drop er tilbage på det gratis abonnement.",
+      "expiringTitle": "T-Drop — Dit abonnement udløber snart",
+      "expiringBody": "{role}-abonnement, dage tilbage: {days}. Åbn Indstillinger for at forny."
     }
   }
 }

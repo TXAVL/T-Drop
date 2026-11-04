@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "이 라이선스 키는 이미 다른 기기에서 활성화되어 있어요",
         "ACTIVATED": "{role} 요금제를 활성화했어요!",
         "VERIFIED": "{role} 라이선스가 유효해요"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — 라이선스가 업데이트되었습니다",
+      "syncUpdatedBody": "요금제가 {role}(으)로 변경되었으며 {date}까지 사용할 수 있습니다.",
+      "syncUpdatedForever": "요금제가 {role}(으)로 변경되었으며 만료일이 없습니다.",
+      "syncRevokedTitle": "T-Drop — 라이선스가 더 이상 유효하지 않습니다",
+      "syncRevokedBody": "이 라이선스가 취소되었거나 만료되어 T-Drop이 무료 요금제로 돌아갔습니다.",
+      "expiringTitle": "T-Drop — 요금제가 곧 종료됩니다",
+      "expiringBody": "{role} 요금제, 남은 일수: {days}. 설정을 열어 갱신하세요."
     }
   }
 }

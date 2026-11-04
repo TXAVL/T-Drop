@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Ez a licenckulcs már aktiválva van egy másik eszközön",
         "ACTIVATED": "A(z) {role} csomag sikeresen aktiválva!",
         "VERIFIED": "A(z) {role} licenc érvényes"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — A licenc frissült",
+      "syncUpdatedBody": "A csomagod mostantól {role}, érvényes eddig: {date}.",
+      "syncUpdatedForever": "A csomagod mostantól {role}, lejárati dátum nélkül.",
+      "syncRevokedTitle": "T-Drop — A licenc már nem aktív",
+      "syncRevokedBody": "Ezt a licencet visszavonták vagy lejárt, ezért a T-Drop visszaváltott az ingyenes csomagra.",
+      "expiringTitle": "T-Drop — A csomagod hamarosan lejár",
+      "expiringBody": "{role} csomag, hátralévő napok: {days}. A megújításhoz nyisd meg a Beállításokat."
     }
   }
 }

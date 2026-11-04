@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "Questa chiave di licenza è già attiva su un altro dispositivo",
         "ACTIVATED": "Piano {role} attivato con successo!",
         "VERIFIED": "La licenza {role} è valida"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Licenza aggiornata",
+      "syncUpdatedBody": "Il tuo piano ora è {role}, valido fino al {date}.",
+      "syncUpdatedForever": "Il tuo piano ora è {role}, senza scadenza.",
+      "syncRevokedTitle": "T-Drop — Licenza non più attiva",
+      "syncRevokedBody": "Questa licenza è stata revocata o è scaduta, quindi T-Drop è tornato al piano gratuito.",
+      "expiringTitle": "T-Drop — Il tuo piano sta per scadere",
+      "expiringBody": "Piano {role}, giorni rimasti: {days}. Apri Impostazioni per rinnovarlo."
     }
   }
 }

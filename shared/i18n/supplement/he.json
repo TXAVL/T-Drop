@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "מפתח הרישיון הזה כבר מופעל במכשיר אחר",
         "ACTIVATED": "החבילה {role} הופעלה בהצלחה!",
         "VERIFIED": "רישיון {role} תקין"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — הרישיון עודכן",
+      "syncUpdatedBody": "החבילה שלך היא עכשיו {role} ובתוקף עד {date}.",
+      "syncUpdatedForever": "החבילה שלך היא עכשיו {role}, ללא תאריך תפוגה.",
+      "syncRevokedTitle": "T-Drop — הרישיון כבר אינו פעיל",
+      "syncRevokedBody": "הרישיון הזה בוטל או שתוקפו פג, ולכן T-Drop חזר לחבילה החינמית.",
+      "expiringTitle": "T-Drop — החבילה שלך עומדת לפוג",
+      "expiringBody": "חבילת {role}, ימים שנותרו: {days}. פתחו את ההגדרות כדי לחדש."
     }
   }
 }

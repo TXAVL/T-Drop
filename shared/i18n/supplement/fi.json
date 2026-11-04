@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Tämä lisenssiavain on jo aktivoitu toisella laitteella",
         "ACTIVATED": "{role}-paketti aktivoitu onnistuneesti!",
         "VERIFIED": "{role}-lisenssi on voimassa"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Lisenssi päivitetty",
+      "syncUpdatedBody": "Pakettisi on nyt {role}, voimassa {date} asti.",
+      "syncUpdatedForever": "Pakettisi on nyt {role}, ilman päättymispäivää.",
+      "syncRevokedTitle": "T-Drop — Lisenssi ei ole enää aktiivinen",
+      "syncRevokedBody": "Tämä lisenssi on peruutettu tai vanhentunut, joten T-Drop palasi ilmaiseen pakettiin.",
+      "expiringTitle": "T-Drop — Pakettisi päättyy pian",
+      "expiringBody": "{role}-paketti, päiviä jäljellä: {days}. Uusi avaamalla Asetukset."
     }
   }
 }

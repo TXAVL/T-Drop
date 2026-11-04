@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Tento licenční klíč je již aktivován na jiném zařízení",
         "ACTIVATED": "Tarif {role} byl úspěšně aktivován!",
         "VERIFIED": "Licence {role} je platná"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Licence aktualizována",
+      "syncUpdatedBody": "Váš tarif je nyní {role}, platný do {date}.",
+      "syncUpdatedForever": "Váš tarif je nyní {role}, bez data vypršení.",
+      "syncRevokedTitle": "T-Drop — Licence již není aktivní",
+      "syncRevokedBody": "Tato licence byla zrušena nebo vypršela, proto se T-Drop vrátil k bezplatnému tarifu.",
+      "expiringTitle": "T-Drop — Váš tarif brzy skončí",
+      "expiringBody": "Tarif {role}, zbývá dní: {days}. Pro prodloužení otevřete Nastavení."
     }
   }
 }

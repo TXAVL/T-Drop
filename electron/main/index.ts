@@ -8,6 +8,7 @@
  *   3. On 'window-all-closed' we DON'T quit (the panel is hidden, not closed).
  *   4. Quit from the tray menu tears everything down cleanly.
  */
+import { startLicenseSync } from './licenseSync'
 import { app, BrowserWindow, protocol, session } from 'electron'
 import { APP_CONFIG, runtime } from './config'
 import { ensureDirs, PATHS } from '../store/paths'
@@ -151,6 +152,7 @@ app.whenReady().then(() => {
   registerSendListeners()
   initState()
   prewarmDragIcons()
+  startLicenseSync()
 
   // Reflect settings immediately.
   let settings = loadSettings()

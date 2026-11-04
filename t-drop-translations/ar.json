@@ -707,7 +707,14 @@
         "HARDWARE_MISMATCH": "مفتاح الترخيص هذا مفعّل بالفعل على جهاز آخر",
         "ACTIVATED": "تم تفعيل باقة {role} بنجاح!",
         "VERIFIED": "ترخيص {role} صالح"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — تم تحديث الترخيص",
+      "syncUpdatedBody": "باقتك الآن {role}، وهي صالحة حتى {date}.",
+      "syncUpdatedForever": "باقتك الآن {role}، دون تاريخ انتهاء.",
+      "syncRevokedTitle": "T-Drop — الترخيص لم يعد نشطًا",
+      "syncRevokedBody": "تم إلغاء هذا الترخيص أو انتهت صلاحيته، لذا عاد T-Drop إلى الباقة المجانية.",
+      "expiringTitle": "T-Drop — باقتك على وشك الانتهاء",
+      "expiringBody": "باقة {role}، الأيام المتبقية: {days}. افتح الإعدادات للتجديد."
     }
   }
 }

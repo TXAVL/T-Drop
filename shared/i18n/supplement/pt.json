@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Esta chave de licença já está ativada em outro computador",
         "ACTIVATED": "Plano {role} ativado com sucesso!",
         "VERIFIED": "A licença {role} é válida"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Licença atualizada",
+      "syncUpdatedBody": "O seu plano agora é {role}, válido até {date}.",
+      "syncUpdatedForever": "O seu plano agora é {role}, sem data de validade.",
+      "syncRevokedTitle": "T-Drop — A licença já não está ativa",
+      "syncRevokedBody": "Esta licença foi revogada ou expirou, por isso o T-Drop voltou ao plano gratuito.",
+      "expiringTitle": "T-Drop — O seu plano termina em breve",
+      "expiringBody": "Plano {role}, dias restantes: {days}. Abra as Definições para renovar."
     }
   }
 }

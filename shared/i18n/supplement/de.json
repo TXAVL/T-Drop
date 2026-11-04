@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Dieser Lizenzschlüssel ist bereits auf einem anderen Gerät aktiviert",
         "ACTIVATED": "Tarif {role} erfolgreich aktiviert!",
         "VERIFIED": "{role}-Lizenz ist gültig"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Lizenz aktualisiert",
+      "syncUpdatedBody": "Dein Tarif ist jetzt {role} und gilt bis {date}.",
+      "syncUpdatedForever": "Dein Tarif ist jetzt {role}, ohne Ablaufdatum.",
+      "syncRevokedTitle": "T-Drop — Lizenz nicht mehr aktiv",
+      "syncRevokedBody": "Diese Lizenz wurde widerrufen oder ist abgelaufen, daher nutzt T-Drop wieder den kostenlosen Tarif.",
+      "expiringTitle": "T-Drop — Dein Tarif läuft bald ab",
+      "expiringBody": "Tarif {role}, verbleibende Tage: {days}. Zum Verlängern die Einstellungen öffnen."
     }
   }
 }

@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Cette clé de licence est déjà activée sur un autre appareil",
         "ACTIVATED": "Forfait {role} activé avec succès !",
         "VERIFIED": "La licence {role} est valide"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Licence mise à jour",
+      "syncUpdatedBody": "Votre forfait est maintenant {role}, valable jusqu’au {date}.",
+      "syncUpdatedForever": "Votre forfait est maintenant {role}, sans date d’expiration.",
+      "syncRevokedTitle": "T-Drop — La licence n’est plus active",
+      "syncRevokedBody": "Cette licence a été révoquée ou a expiré, T-Drop repasse donc au forfait gratuit.",
+      "expiringTitle": "T-Drop — Votre forfait se termine bientôt",
+      "expiringBody": "Forfait {role}, jours restants : {days}. Ouvrez les Réglages pour le renouveler."
     }
   }
 }

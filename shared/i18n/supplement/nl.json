@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "Deze licentiesleutel is al geactiveerd op een ander apparaat",
         "ACTIVATED": "Abonnement {role} succesvol geactiveerd!",
         "VERIFIED": "{role}-licentie is geldig"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — Licentie bijgewerkt",
+      "syncUpdatedBody": "Je abonnement is nu {role}, geldig tot {date}.",
+      "syncUpdatedForever": "Je abonnement is nu {role}, zonder einddatum.",
+      "syncRevokedTitle": "T-Drop — Licentie niet meer actief",
+      "syncRevokedBody": "Deze licentie is ingetrokken of verlopen, dus T-Drop is terug op het gratis abonnement.",
+      "expiringTitle": "T-Drop — Je abonnement loopt binnenkort af",
+      "expiringBody": "{role}-abonnement, resterende dagen: {days}. Open Instellingen om te verlengen."
     }
   }
 }

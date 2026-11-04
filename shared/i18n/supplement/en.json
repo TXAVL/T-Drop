@@ -385,7 +385,14 @@
         "HARDWARE_MISMATCH": "This license key is already activated on another device",
         "ACTIVATED": "{role} plan activated successfully!",
         "VERIFIED": "{role} license is valid"
-      }
+      },
+      "syncUpdatedTitle": "T-Drop — License updated",
+      "syncUpdatedBody": "Your plan is now {role}, valid until {date}.",
+      "syncUpdatedForever": "Your plan is now {role}, with no expiry date.",
+      "syncRevokedTitle": "T-Drop — License no longer active",
+      "syncRevokedBody": "This license was revoked or has expired, so T-Drop is back on the Free plan.",
+      "expiringTitle": "T-Drop — Your plan ends soon",
+      "expiringBody": "{role} plan, days left: {days}. Open Settings to renew."
     }
   }
 }
