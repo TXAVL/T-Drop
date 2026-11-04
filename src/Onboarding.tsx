@@ -1,512 +1,645 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import logoUrl from './assets/logo.svg'
-import { Settings } from './components/Settings'
-import { useTranslation } from './i18n'
+/**
+ * Onboarding — the first-run tour, played by the real app.
+ *
+ * Sequence: "edgedrop" is written in glass over the out-of-focus welcome
+ * screen, then a focus pull lands on it. The welcome shows the cloud wallpaper
+ * across the whole window with a laptop frame laid over it; "Take the tour"
+ * flies the frame out past the window edges, and each step then plays the
+ * real shelf (Panel, cards, stacks, edge light, preview) on example items.
+ * The last step brings the frame back: the real shelf plays on each edge of
+ * the laptop, then the user picks theirs (and the few settings that matter).
+ *
+ * The example items live only in this window's store. The user's history is
+ * never loaded here, and the shelf is inert (no clicks reach it), so nothing
+ * in the tour can paste, copy, merge or delete anything real. Only the
+ * settings step writes, and only the settings the user picks.
+ */
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Panel } from './components/Panel'
 import { useStore } from './store/appStore'
 import { edge } from './lib/edge'
+import { applyReduceMotion } from './lib/theme'
+import { useTranslation } from './i18n'
+import { DEFAULT_SETTINGS, type Settings, type StickPosition } from '../shared/types'
+import { ONBOARDING_VERSION } from '../shared/onboarding'
+import { PEN_PATH, PEN_TRANSFORM, PEN_WIDTH, GLASS_BOX, SHADOW_BOX, BLUR_BOX, penProgress } from './onboarding/lettering'
+import { CHOICE_VIEW, DEMOS, PREVIEW_PAN, Run, STOP, demoEdges, itemsFor, playLooped, resetDemoState, showEdge, watchActivity, type Stage } from './onboarding/tour'
+import { realScreenTransform, realSidePanel, tourBar, shelfTransform, topBarLength, SHELF_SCALE, TOUR_SCREEN_TOP } from './onboarding/edgeBar'
+import { otherFiles, pageLines, pageTitle, stackFiles } from './onboarding/demoItems'
+import { Autoplay, readingMs } from './onboarding/autoplay'
+import { fileIconUrl, fileKindOf } from './lib/fileKind'
+import skyUrl from './assets/onboarding/sky.png'
+import glassUrl from './assets/onboarding/glass.png'
+import glassShadowUrl from './assets/onboarding/glass-shadow.png'
+import glassBlurUrl from './assets/onboarding/glass-blur.png'
+import fogHeavyUrl from './assets/onboarding/welcome-blur-heavy.png'
+import fogMidUrl from './assets/onboarding/welcome-blur-mid.png'
+import './styles/onboarding.css'
 
-function BackupMockupView() {
-  const { t } = useTranslation()
-  return (
-    <div style={{
-      width: '100%',
-      height: '100%',
-      background: 'radial-gradient(ellipse at 50% 30%, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.08) 50%, rgba(18, 18, 20, 0.95) 100%)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      boxSizing: 'border-box',
-      position: 'relative'
-    }}>
-      <motion.div
-        initial={{ scale: 0.94, opacity: 0, y: 10 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        style={{
-          width: '380px',
-          background: 'rgba(24, 24, 28, 0.94)',
-          border: '1px solid rgba(16, 185, 129, 0.35)',
-          borderRadius: '16px',
-          padding: '18px 20px',
-          boxShadow: '0 16px 36px rgba(0,0,0,0.5), 0 0 24px rgba(16, 185, 129, 0.15)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '10px',
-            background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
-            display: 'grid',
-            placeItems: 'center',
-            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.35)',
-            flexShrink: 0
-          }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="M9 12l2 2 4-4"/>
-            </svg>
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '14px', fontWeight: 700, color: '#fff' }}>backup_tdrop.txa</span>
-              <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', fontWeight: 600 }}>
-                ENCRYPTED
-              </span>
-            </div>
-            <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
-              156 {t('backup.itemsUnit') || 'items'} · {t('backup.title') || 'Backup & Restore'}
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '2px' }}>
-          <div style={{
-            background: 'rgba(16, 185, 129, 0.08)',
-            border: '1px solid rgba(16, 185, 129, 0.25)',
-            borderRadius: '10px',
-            padding: '8px 10px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2px'
-          }}>
-            <div style={{ fontSize: '11.5px', fontWeight: 650, color: '#34d399', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <span>🔄</span> {t('backup.modeMerge') || 'Merge (Recommended)'}
-            </div>
-            <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-              {t('backup.modeMergeDesc') || 'Keep current items and add non-duplicate items from the backup.'}
-            </div>
-          </div>
-
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '10px',
-            padding: '8px 10px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2px'
-          }}>
-            <div style={{ fontSize: '11.5px', fontWeight: 650, color: 'rgba(255,255,255,0.85)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <span>⚡</span> {t('backup.modeOverwrite') || 'Overwrite All'}
-            </div>
-            <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-              {t('backup.modeOverwriteDesc') || 'Completely replace current history and settings with the backup.'}
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
-          <div style={{
-            flex: 1,
-            height: '28px',
-            borderRadius: '8px',
-            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-            color: '#000',
-            fontSize: '11px',
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            padding: '0 4px'
-          }}>
-            {t('backup.exportBtn') || 'Export Backup (.txa)'}
-          </div>
-          <div style={{
-            flex: 1,
-            height: '28px',
-            borderRadius: '8px',
-            background: 'rgba(255, 255, 255, 0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
-            fontSize: '11px',
-            fontWeight: 600,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            padding: '0 4px'
-          }}>
-            {t('backup.importBtn') || 'Restore Backup (.txa)'}
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  )
+interface Step {
+  key: string
+  /** 'frame': the whole laptop; 'full': the camera pushed in on its top edge, the real shelf plays. */
+  view: 'frame' | 'full'
+  open: boolean
+  title: string
+  body: string
 }
 
-export function Onboarding() {
-  const { t } = useTranslation()
-  const [currentIndex, setCurrentIndex] = useState(0)
+// The intro's timing: the pen touches down, writes, the word holds, then the focus pull.
+const TOUCH_MS = 450
+const WRITE_MS = 3200
+const HOLD_MS = 600
 
+/** The demo taskbar's clock: a fixed moment, written the way the language writes it (24-hour, as it fits). */
+const taskbarClock = (lang: string): [string, string] => {
+  if (lang === 'en') return ['12:01', '27-10-2026']
+  const at = new Date(2026, 9, 27, 12, 1)
+  return [at.toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }), at.toLocaleDateString(lang)]
+}
+
+/** A Windows 11 window's caption buttons: minimize, maximize, close. */
+const Caption = () => (
+  <svg width="76" height="10" viewBox="0 0 76 10" fill="none" stroke="currentColor" strokeWidth="1">
+    <path d="M2 5.5h9" />
+    <rect x="33.5" y="1.5" width="8" height="8" rx="1.5" />
+    <path d="M65 1.5l7 7M72 1.5l-7 7" />
+  </svg>
+)
+
+export function Onboarding() {
+  const { t, resolvedLang } = useTranslation()
+  const steps: Step[] = [
+    { key: 'welcome', view: 'frame', open: false, title: t('onboarding.welcomeTitle'), body: t('onboarding.welcomeDesc') },
+    { key: 'collect', view: 'full', open: false, title: t('onboarding.collectTitle'), body: t('onboarding.collectDesc') },
+    { key: 'dropin', view: 'full', open: false, title: t('onboarding.dropInTitle'), body: t('onboarding.dropInDesc') },
+    { key: 'drag', view: 'full', open: true, title: t('onboarding.dragTitle'), body: t('onboarding.dragDesc') },
+    { key: 'stacks', view: 'full', open: true, title: t('onboarding.stacksTitle'), body: t('onboarding.stacksDesc') },
+    { key: 'preview', view: 'full', open: true, title: t('onboarding.previewTitle'), body: t('onboarding.previewDesc') },
+    { key: 'find', view: 'full', open: true, title: t('onboarding.findTitle'), body: t('onboarding.findDesc') },
+    { key: 'settings', view: 'frame', open: false, title: t('onboarding.configTitle'), body: t('onboarding.configDesc') }
+  ]
+  const last = steps.length - 1
+
+  const [ready, setReady] = useState(false)
+  const [at, setAt] = useState(0)
+  const [intro, setIntro] = useState<'writing' | 'focus' | 'done'>('writing')
+  /** The camera: the whole laptop ('frame'), or pushed in on its top edge for the tour ('tour'). */
+  const [cam, setCam] = useState<'frame' | 'tour'>('frame')
+  /** The real shelf shows only in the tour (it stays mounted, so it is warm and its launch intro is done). */
+  const [shelf, setShelf] = useState(false)
+  /** The drawn edge bar on the laptop's top edge; hidden while the real shelf's bar is in its place. */
+  const [barShown, setBarShown] = useState(true)
+  /** The last step: the shelf has shown every edge, and the choice is up. */
+  const [asking, setAsking] = useState(false)
+  const [real, setReal] = useState<Settings | null>(null)
+  /** Autoplay: on unless the user asked for reduced motion; the button by the progress dots toggles it. */
+  const [playing, setPlaying] = useState(true)
+
+  const stageRef = useRef<HTMLDivElement>(null)
+  const cursorRef = useRef<HTMLDivElement>(null)
+  const keysRef = useRef<HTMLDivElement>(null)
+  const keysLabelRef = useRef<HTMLSpanElement>(null)
+  const notesRef = useRef<HTMLDivElement>(null)
+  const notesImageRef = useRef<HTMLDivElement>(null)
+  const browserRef = useRef<HTMLDivElement>(null)
+  const explorerRef = useRef<HTMLDivElement>(null)
+  const lensRef = useRef<HTMLDivElement>(null)
+  const penRef = useRef<SVGPathElement>(null)
+  const lettersRef = useRef<HTMLDivElement>(null)
+  const shadowRef = useRef<SVGImageElement>(null)
+  const runRef = useRef<Run | null>(null)
+  /** The last step: the shelf showing the edge just picked. */
+  const pickRunRef = useRef<Run | null>(null)
+  /** The user's settings, for the demos (which outlive a render). */
+  const realRef = useRef<Settings | null>(null)
+  const timers = useRef<number[]>([])
+
+  const later = (ms: number, fn: () => void) => timers.current.push(window.setTimeout(fn, ms))
+
+  // Autoplay moves on from whichever step is up, with the latest go (see below).
+  const atRef = useRef(0)
+  const goRef = useRef<(i: number) => void>(() => {})
+  const autoplay = useRef<Autoplay | null>(null)
+  if (!autoplay.current) {
+    autoplay.current = new Autoplay(() => {
+      const i = atRef.current
+      // it never ends the tour: the last step (the user's own choices) waits for Get Started
+      if (i < last) goRef.current(i + 1)
+    }, true)
+  }
+  const attachFill = useCallback((el: HTMLElement | null) => autoplay.current!.attach(el), [])
+  useEffect(() => autoplay.current!.setPlaying(playing), [playing])
   useEffect(() => {
-    void useStore.getState().hydrate()
-    const offSettings = edge.onSettings((next) => {
-      useStore.getState().setSettings(next)
-    })
+    const vis = () => autoplay.current!.setHidden(document.visibilityState === 'hidden')
+    vis()
+    document.addEventListener('visibilitychange', vis)
     return () => {
-      offSettings()
+      document.removeEventListener('visibilitychange', vis)
+      // held, not torn down: in development React runs this and then the effect again on the same
+      // elements (the step's fill is attached once, by its ref), and autoplay must carry on from there
+      autoplay.current!.setHidden(true)
     }
   }, [])
 
-  const slides = [
-    {
-      id: 'slide-1',
-      title: t('onboarding.welcomeTitle'),
-      description: t('onboarding.welcomeDesc'),
-      videoSrc: 'welcome.webm',
-      placeholderColor: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)'
-    },
-    {
-      id: 'slide-2',
-      title: t('onboarding.collectTitle'),
-      description: t('onboarding.collectDesc'),
-      videoSrc: 'copy.webm',
-      placeholderColor: 'linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%)'
-    },
-    {
-      id: 'slide-3',
-      title: t('onboarding.dragTitle'),
-      description: t('onboarding.dragDesc'),
-      videoSrc: 'drag.webm',
-      placeholderColor: 'linear-gradient(135deg, #43E97B 0%, #38F9D7 100%)'
-    },
-    {
-      id: 'slide-4',
-      title: t('onboarding.stacksTitle'),
-      description: t('onboarding.stacksDesc'),
-      videoSrc: 'stack.webm',
-      placeholderColor: 'linear-gradient(135deg, #FA709A 0%, #FEE140 100%)'
-    },
-    {
-      id: 'slide-5-ungroup',
-      title: t('onboarding.ungroupTitle'),
-      description: t('onboarding.ungroupDesc'),
-      videoSrc: 'ungroup.webm',
-      placeholderColor: 'linear-gradient(135deg, #FAD961 0%, #F76B1C 100%)'
-    },
-    {
-      id: 'slide-5',
-      title: t('onboarding.mergeTitle'),
-      description: t('onboarding.mergeDesc'),
-      videoSrc: 'merge.webm',
-      placeholderColor: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)'
-    },
-    {
-      id: 'slide-preview',
-      title: t('onboarding.previewTitle'),
-      description: t('onboarding.previewDesc'),
-      videoSrc: 'preview.webm',
-      placeholderColor: 'linear-gradient(135deg, #A855F7 0%, #EC4899 100%)'
-    },
-    {
-      id: 'slide-backup',
-      title: t('onboarding.backupTitle') || 'Backup & Restore Archive (.txa)',
-      description: t('onboarding.backupDesc') || 'Export your clipboard history, pinned items, and settings into an encrypted .txa archive. Seamlessly transfer to a new PC or restore anytime with Merge or Overwrite modes.',
-      videoSrc: '',
-      placeholderColor: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(6, 182, 212, 0.2) 100%)'
-    },
-    {
-      id: 'slide-6',
-      title: t('onboarding.configTitle'),
-      description: t('onboarding.configDesc'),
-      videoSrc: '',
-      placeholderColor: 'transparent'
+  const stage = (): Stage => ({
+    root: stageRef.current!,
+    cursor: cursorRef.current!,
+    keys: keysRef.current!,
+    keysLabel: keysLabelRef.current!,
+    notes: notesRef.current!,
+    notesImage: notesImageRef.current!,
+    browser: browserRef.current!,
+    explorer: explorerRef.current!,
+    lens: lensRef.current!,
+    showShelf: (on) => {
+      setShelf(on)
+      setBarShown(!on)
     }
-  ]
+  })
 
-  const handleNext = async () => {
-    if (currentIndex < slides.length - 1) {
-      setCurrentIndex(currentIndex + 1)
-    } else {
-      await useStore.getState().patchSettings({ tutorialCompleted: true })
-      window.close()
+  /** Plays step i's demo after `delay` ms, again and again while the step is up. */
+  const play = (run: Run, i: number, delay: number) => {
+    const s = steps[i]
+    if (s.key === 'settings') {
+      // once: every edge, then the choice stays up
+      run.sleep(delay)
+        .then(() => demoEdges(run, stage(), realRef.current?.stickPosition ?? 'left'))
+        .then(() => { if (!run.dead) setAsking(true) })
+        .catch((e) => { if (e !== STOP) console.error(e) })
+      return
     }
+    const demo = DEMOS[s.key]
+    if (!demo) return
+    run.sleep(delay)
+      .then(() => playLooped(run, stage(), s.key, s.open, demo, () => autoplay.current!.played(), () => autoplay.current!.advancing))
+      .catch((e) => { if (e !== STOP) console.error(e) })
   }
 
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
+  // The tour's own store: the user's settings (motion, accent) in the device's own
+  // language, the shelf docked at the top for the demo, and no items of the user's.
+  // The language is the tour's alone: the user's saved choice is never changed by it.
+  useEffect(() => {
+    let cancelled = false
+    // Marks the page for shelf parts portaled outside the tour's scaled layer (see .ob-tour).
+    document.body.classList.add('ob-tour')
+    const unwatch = watchActivity()
+    document.body.style.setProperty('--ob-shelf-scale', String(SHELF_SCALE))
+    document.body.style.setProperty('--ob-shelf-top', `${TOUR_SCREEN_TOP}px`)
+    document.body.style.setProperty('--ob-preview-pan', `${-PREVIEW_PAN}px`)
+    document.body.style.setProperty('--ob-choice-zoom', String(CHOICE_VIEW.k))
+    document.body.style.setProperty('--ob-choice-move', `translate(${CHOICE_VIEW.x / CHOICE_VIEW.k}px, ${CHOICE_VIEW.y / CHOICE_VIEW.k}px)`)
+    void edge.loadState().then(async ({ settings }) => {
+      if (cancelled) return
+      setReal(settings)
+      useStore.setState({
+        settings: {
+          ...settings,
+          language: 'system',
+          stickPosition: 'top',
+          triggerAlignment: 'center',
+          horizontalOffset: DEFAULT_SETTINGS.horizontalOffset,
+          hotZoneHeight: DEFAULT_SETTINGS.hotZoneHeight,
+          showEdgeLocationHint: false,
+          showCopyIndicator: true
+        },
+        items: [],
+        hydrated: true,
+        open: false,
+        demo: true
+      })
+      applyReduceMotion(settings.reduceMotion)
+      if (settings.reduceMotion) setPlaying(false)
+      // Start once every image is decoded, so the first frame is already the blurred scene.
+      const decode = (src: string) => { const im = new Image(); im.src = src; return im.decode().catch(() => {}) }
+      await Promise.all([skyUrl, glassUrl, glassShadowUrl, glassBlurUrl, fogHeavyUrl, fogMidUrl].map(decode))
+      if (!cancelled) setReady(true)
+    })
+    return () => {
+      cancelled = true
+      unwatch()
+      document.body.classList.remove('ob-tour')
+      document.body.style.removeProperty('--ob-shelf-scale')
+      document.body.style.removeProperty('--ob-shelf-top')
+      document.body.style.removeProperty('--ob-preview-pan')
+      document.body.style.removeProperty('--ob-menu-scale')
+      document.body.style.removeProperty('--ob-choice-zoom')
+      document.body.style.removeProperty('--ob-choice-move')
+      runRef.current?.cancel()
+      timers.current.forEach(clearTimeout)
     }
-  }
+  }, [])
 
-  const handleSkip = async () => {
-    await useStore.getState().patchSettings({ tutorialCompleted: true })
+  // ---------- the intro: pen touch-down, writing, hold, focus pull ----------
+  useEffect(() => {
+    if (!ready) return
+    const pen = penRef.current!
+    const letters = lettersRef.current!
+    const draw = (f: number) => {
+      pen.style.strokeDashoffset = String(1 - f)
+      shadowRef.current?.setAttribute('opacity', f >= 1 ? '1' : '0')
+    }
+    let raf = 0
+    const focus = () => {
+      setIntro('focus')
+      later(900, () => setIntro('done'))
+      // The welcome's demo follows the focus pull without a pause.
+      const run = new Run()
+      runRef.current = run
+      play(run, 0, 1200)
+    }
+    if (useStore.getState().settings.reduceMotion) {
+      draw(1)
+      letters.style.opacity = '1'
+      later(700, focus)
+      return
+    }
+    later(300, () => {
+      draw(0.0005)
+      letters.style.transition = 'opacity .18s ease-out'
+      letters.style.opacity = '1'
+      const t0 = performance.now() + TOUCH_MS
+      const step = (now: number) => {
+        const k = Math.max(0, (now - t0) / WRITE_MS)
+        draw(Math.max(0.0005, penProgress(k)))
+        if (k < 1) raf = requestAnimationFrame(step)
+        else later(HOLD_MS, focus)
+      }
+      raf = requestAnimationFrame(step)
+    })
+    return () => cancelAnimationFrame(raf)
+  }, [ready])
+
+  // ---------- moving between steps ----------
+  const go = useCallback((i: number) => {
+    const s = steps[i]
+    const prev = steps[at]
+    runRef.current?.cancel()
+    pickRunRef.current?.cancel()
+    resetDemoState(stage(), s.key)
+    const run = new Run()
+    runRef.current = run
+    setAt(i)
+    setAsking(false)
+    const flying = prev.view !== s.view
+
+    if (s.view === 'full' && prev.view === 'frame') {
+      // Into the screen: the camera pushes in on the laptop's top edge with the
+      // bar attached to it (the wallpaper stays still); once there, the real
+      // shelf's closed bar is exactly where the drawn one is and takes over.
+      // (Back from the last step: the shelf, laid out on the monitor there, gives
+      // way to the drawn bar first and is docked at the top again out of sight.)
+      if (prev.key === 'settings') {
+        setShelf(false)
+        setBarShown(true)
+        useStore.setState({
+          settings: {
+            ...useStore.getState().settings,
+            stickPosition: 'top',
+            hotZoneHeight: DEFAULT_SETTINGS.hotZoneHeight,
+            hotZoneWidth: realRef.current?.hotZoneWidth ?? DEFAULT_SETTINGS.hotZoneWidth
+          }
+        })
+      }
+      setCam('tour')
+      useStore.setState({ items: itemsFor(s.key), open: false })
+      later(900, () => { setShelf(true); setBarShown(false) })
+      later(1150, () => { if (!run.dead) useStore.setState({ open: s.open }) })
+    } else if (s.view === 'frame' && prev.view === 'full') {
+      // Back out: the shelf folds into its bar, the drawn bar takes over in the
+      // same spot, and the camera pulls back with it attached to the edge.
+      useStore.setState({ open: false })
+      later(320, () => {
+        setBarShown(true)
+        setShelf(false)
+        setCam('frame')
+        // out of sight now: a search empties (resetDemoState leaves it while the shelf folds), and the
+        // cards the last step's shelf shows (the welcome's demo sets its own)
+        if (!run.dead) useStore.setState({ query: '', items: itemsFor(s.key) })
+      })
+    } else if (s.view === 'full') {
+      useStore.setState({ items: itemsFor(s.key), open: s.open })
+    }
+    // The next demo starts as the camera lands, or straight away: each step's cards are where the last one left them.
+    play(run, i, flying ? 700 : 250)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [at, steps.length])
+
+  const finish = async () => {
+    runRef.current?.cancel()
+    await edge.updateSettings({ tutorialCompleted: true, onboardingVersion: ONBOARDING_VERSION })
     window.close()
   }
 
-  const currentSlide = slides[currentIndex]
+  atRef.current = at
+  goRef.current = go
+
+  // Autoplay's clock for a step starts when its text is up: after the intro, then on each step change.
+  useEffect(() => {
+    if (intro !== 'done') return
+    autoplay.current!.shown(steps[at].key, readingMs(steps[at].title, steps[at].body))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [at, intro])
+
+  const next = () => (at < last ? go(at + 1) : void finish())
+
+  // Settings the user picks on the last step are saved for real.
+  const pick = async (patch: Partial<Settings>) => {
+    setReal((r) => (r ? { ...r, ...patch } : r))
+    const saved = await edge.updateSettings(patch)
+    setReal(saved)
+  }
+
+  /** The user's edge: saved, and the shelf on the laptop goes there and opens once to show it. */
+  const choose = (pos: StickPosition) => {
+    void pick({ stickPosition: pos })
+    pickRunRef.current?.cancel()
+    const run = new Run()
+    pickRunRef.current = run
+    showEdge(run, stage(), pos).catch((e) => { if (e !== STOP) console.error(e) })
+  }
+
+  const s = steps[at]
+  const barPos: StickPosition = real?.stickPosition ?? 'left'
+  const locked = intro !== 'done'
+  // The tour's shelf: docked at the top, except on the last step, where it plays every edge of the laptop.
+  const demo = useStore((st) => st.settings)
+  const shelfOpen = useStore((st) => st.open)
+  const dock: StickPosition = demo.stickPosition ?? 'top'
+  // The last step lays the shelf out on a real monitor drawn on the laptop (edgeBar REAL_SCREEN).
+  const onMonitor = at === last && cam === 'frame'
+  const side = realSidePanel(demo.panelHeight || 0.6, demo.verticalOffset ?? 0.5)
+  const barStyle = tourBar(demo)
+  realRef.current = real
+  const primary = (
+    <button type="button" className="ob-primary" onClick={next}>
+      {at === last ? t('onboarding.getStarted') : t('onboarding.next')}
+    </button>
+  )
 
   return (
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      background: '#121212',
-      color: '#fff',
-      display: 'flex',
-      flexDirection: 'column',
-      userSelect: 'none',
-      fontFamily: 'Plus Jakarta Sans, Segoe UI, sans-serif'
-    }}>
-      {/* Header Bar */}
-      <div style={{
-        height: '64px',
-        padding: '0 32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderBottom: '1px solid #262626'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src={logoUrl} alt="T-Drop Logo" style={{ width: '28px', height: '28px' }} />
-          <span style={{ fontWeight: 700, fontSize: '16px', letterSpacing: '-0.02em' }}>T-Drop</span>
-        </div>
-        <button
-          onClick={handleSkip}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            color: '#888',
-            fontSize: '14px',
-            cursor: 'pointer',
-            padding: '6px 12px',
-            borderRadius: '6px',
-            transition: 'color 0.2s, background 0.2s'
-          }}
-          onMouseOver={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = '#222' }}
-          onMouseOut={(e) => { e.currentTarget.style.color = '#888'; e.currentTarget.style.background = 'transparent' }}
-        >
-          {t('onboarding.skip')}
-        </button>
-      </div>
+    <div className={`ob${intro === 'writing' ? '' : ' ob-focus'}${intro === 'done' ? ' ob-done' : ''}${asking ? ' ob-choosing' : ''}`}>
+      <div className="ob-stage" ref={stageRef}>
+        <div className="ob-scene">
+          {/* The cloud wallpaper: one pixel per 2px dither cell, drawn crisp (it never moves, not even with the camera). */}
+          <img className="ob-sky" src={skyUrl} alt="" />
 
-      {/* Main Content Area */}
-      {currentSlide.id === 'slide-6' ? (() => {
-        const isTopEdge = useStore.getState().settings.stickPosition === 'top'
-        return (
-          <div style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: isTopEdge ? 'column' : 'row',
-            gap: isTopEdge ? '14px' : '32px',
-            padding: isTopEdge ? '16px 28px' : '24px 32px',
-            boxSizing: 'border-box',
-            overflow: 'hidden'
-          }}>
-            {isTopEdge ? (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexShrink: 0 }}>
-                <div style={{ flex: 1 }}>
-                  <h1 style={{ fontSize: '22px', margin: '0 0 6px 0', fontWeight: 700, letterSpacing: '-0.02em' }}>
-                    {currentSlide.title}
-                  </h1>
-                  <p style={{ fontSize: '13.5px', lineHeight: 1.5, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
-                    {currentSlide.description}
-                  </p>
-                </div>
-                <div style={{
-                  background: '#1a1a1c',
-                  padding: '10px 16px',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  flex: '0 0 auto',
-                  maxWidth: '440px'
-                }}>
-                  <div style={{ fontSize: '11.5px', fontWeight: 600, color: '#fff', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {t('onboarding.proTips')}
-                  </div>
-                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>
-                    {t('onboarding.proTip1')} · {t('onboarding.proTip2')}
-                  </div>
-                </div>
+          {/* The camera: the laptop, what is on its screen and the pointer, pushed in on the action (lens.ts). */}
+          <div className="ob-lens" ref={lensRef}>
+
+            {/* A web page, for the copy demo: a sentence and the photo get copied. */}
+            <div className="ob-win ob-browser" ref={browserRef}>
+              <div className="ob-win-bar">
+                <span className="ob-tab"><i>W</i>{pageTitle()} - Wikipedia</span>
+                <Caption />
               </div>
-            ) : (
-              <div style={{ flex: '1 1 340px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <h1 style={{ fontSize: '28px', margin: '0 0 12px 0', fontWeight: 700, letterSpacing: '-0.02em' }}>
-                  {currentSlide.title}
-                </h1>
-                <p style={{ fontSize: '15px', lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', margin: '0 0 24px 0' }}>
-                  {currentSlide.description}
-                </p>
-                <div style={{ background: '#1a1a1c', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {t('onboarding.proTips')}
-                  </div>
-                  <ul style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', margin: 0, paddingLeft: '20px', lineHeight: 1.6 }}>
-                    <li>{t('onboarding.proTip1')}</li>
-                    <li>{t('onboarding.proTip2')}</li>
-                    <li>{t('onboarding.proTip3')}</li>
-                    <li>{t('onboarding.proTip4')}</li>
-                  </ul>
+              <div className="ob-address">
+                {/* the site's icon: links are dragged out of the address bar by it */}
+                <svg className="ob-site" width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+                  <path d="M1.5 3.5h5M8.5 3.5h1M1.5 7.5h1M4.5 7.5h5" />
+                  <circle cx="7.5" cy="3.5" r="1.2" />
+                  <circle cx="3.5" cy="7.5" r="1.2" />
+                </svg>
+                <span className="ob-url">en.wikipedia.org/wiki/Sea_of_clouds</span>
+              </div>
+              <div className="ob-page">
+                <div className="ob-article">
+                  <b>{pageTitle()}</b>
+                  {pageLines().map((line, i) => <span key={i} className="ob-line"><i className="ob-hl" />{line}</span>)}
+                  <span className="ob-rest">{t('tour.pageMore')}</span>
                 </div>
+                <div className="ob-photo" />
+              </div>
+              <div className="ob-menu">
+                <span>{t('tour.menuOpenTab')}</span>
+                <span>{t('tour.menuSaveImage')}</span>
+                <span className="is-copy">{t('tour.menuCopyImage')}</span>
+                <span>{t('tour.menuCopyLink')}</span>
+              </div>
+            </div>
+
+            {/* File Explorer, for the drag-in demo. */}
+            <div className="ob-win ob-explorer" ref={explorerRef}>
+              <div className="ob-win-bar">
+                <span className="ob-notes-title"><i className="ob-folder" />{t('tour.folder')}</span>
+                <Caption />
+              </div>
+              <div className="ob-files">
+                <div className="ob-files-head"><span>{t('tour.colName')}</span><span>{t('tour.colSize')}</span></div>
+                <i className="ob-band" />
+                {/* the rest of the folder, then the three files it selects and drags in */}
+                {[...otherFiles(), ...stackFiles()].map(([name, size], i) => (
+                  <div key={i} className={`ob-file${i >= 3 ? ' is-pick' : ''}`}>
+                    <img src={fileIconUrl(fileKindOf(name))} alt="" />
+                    <span>{name}</span>
+                    <em>{t('units.kb', { n: Math.round(size / 1024).toLocaleString(resolvedLang) })}</em>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Another app, for the drag demo. */}
+            <div className="ob-notes" ref={notesRef}>
+              <div className="ob-notes-bar">
+                <span className="ob-notes-title"><i />{t('tour.notesApp')}</span>
+                <Caption />
+              </div>
+              <div className="ob-notes-body">
+                <b>{t('tour.notesHeading')}</b>
+                <p>{t('tour.notesLine1')}</p>
+                <p>{t('tour.notesLine2')}</p>
+                <div className="ob-notes-image" ref={notesImageRef} />
+              </div>
+            </div>
+
+            {/* The real shelf, inert: the tour drives it. */}
+            {ready && (
+              <div
+                className={`ob-shelf${shelf ? '' : ' is-hidden'}${shelfOpen ? ' is-open' : ''}${onMonitor ? ' is-real' : ''}`}
+                style={{
+                  transform: onMonitor ? realScreenTransform(dock) : shelfTransform(cam),
+                  // the last step moves it between edges while it is out of sight: at once, not gliding
+                  transition: onMonitor ? 'none' : undefined,
+                  '--ob-bar-w': `${topBarLength(demo.hotZoneHeight)}px`,
+                  '--ob-real-h': `${side.height}px`,
+                  '--ob-real-mid': `${side.middle}px`
+                } as React.CSSProperties}
+                aria-hidden
+              >
+                <Panel />
               </div>
             )}
 
-            <div style={{
-              flex: 1,
-              width: '100%',
-              background: '#1a1a1c',
-              borderRadius: '16px',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-              overflow: 'hidden',
-              display: 'flex',
-              minHeight: 0
-            }}>
-              <div style={{
-                flex: 1,
-                width: '100%',
-                overflowY: isTopEdge ? 'hidden' : 'auto',
-                overflowX: isTopEdge ? 'auto' : 'hidden',
-                padding: isTopEdge ? '10px 14px' : '16px'
-              }}>
-                <Settings inlineIndicatorStyle={true} />
+            {/* The welcome and settings frames dim only below the laptop, so its screen stays the lit object. */}
+            <div className={`ob-below${cam === 'frame' ? '' : ' is-off'}`} aria-hidden />
+
+            {/* The camera on the laptop: the whole laptop, or the tour's push-in on its top edge. The bar is
+                inside, so it stays attached to the screen edge. */}
+            <div className={`ob-cam${cam === 'tour' ? ' is-tour' : ''}`} aria-hidden>
+              <div className="ob-laptop">
+                <div className="ob-bezel" />
+                <div className="ob-base" />
+                {/* The screen's taskbar: up whenever the whole laptop is in view (welcome, settings). */}
+                <div className={`ob-taskbar${cam === 'frame' ? ' is-on' : ''}`}>
+                  <div className="ob-task-apps">
+                    {/* Start: the Windows 11 logo, four tiles under one gradient (a vector, crisp at any zoom) */}
+                    <svg className="ob-start" width="12" height="12" viewBox="0 0 24 24">
+                      <defs>
+                        <linearGradient id="ob-start-blue" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stopColor="#7dd6ff" />
+                          <stop offset="0.5" stopColor="#2f9bff" />
+                          <stop offset="1" stopColor="#0b5fd8" />
+                        </linearGradient>
+                      </defs>
+                      <g fill="url(#ob-start-blue)">
+                        <rect x="0" y="0" width="11.2" height="11.2" rx="1.2" />
+                        <rect x="12.8" y="0" width="11.2" height="11.2" rx="1.2" />
+                        <rect x="0" y="12.8" width="11.2" height="11.2" rx="1.2" />
+                        <rect x="12.8" y="12.8" width="11.2" height="11.2" rx="1.2" />
+                      </g>
+                    </svg>
+                    <i className="ob-search" /><i /><i /><i />
+                  </div>
+                  <div className="ob-task-tray">
+                    <svg width="9" height="7" viewBox="0 0 9 7"><path d="M.5 2.6a5.6 5.6 0 0 1 8 0M2 4.1a3.4 3.4 0 0 1 5 0M3.5 5.6a1.3 1.3 0 0 1 2 0" fill="none" stroke="#fff" strokeWidth=".9" strokeLinecap="round" /></svg>
+                    <svg width="11" height="6" viewBox="0 0 11 6"><rect x=".5" y=".5" width="9" height="5" rx="1.2" fill="none" stroke="#fff" strokeWidth=".8" /><rect x="1.6" y="1.6" width="6" height="2.8" rx=".5" fill="#fff" /><rect x="9.8" y="2" width=".8" height="2" rx=".3" fill="#fff" /></svg>
+                    <span>{taskbarClock(resolvedLang).map((s, i) => <b key={i}>{s}</b>)}</span>
+                  </div>
+                </div>
               </div>
+              <div className={`ob-bar${barShown ? '' : ' is-hidden'}`} style={barStyle} />
+            </div>
+
+            <div className="ob-cursor" ref={cursorRef} aria-hidden>
+              {/* Dark-mode pointer: a black arrowhead (no stem, softly rounded) with a hairline light edge. */}
+              <svg width="16" height="18" viewBox="0 0 16 18">
+                <path
+                  d="M2.9 2.1C2.3 1.6 1.7 1.9 1.7 2.7v11.6c0 .9.9 1.3 1.6.7l2.9-2.7c.3-.3.7-.4 1.1-.4l4.4-.1c.9 0 1.3-1.1.6-1.7z"
+                  fill="#000"
+                  stroke="#fff"
+                  strokeWidth="0.6"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
           </div>
-        )
-      })() : (
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px 48px' }}>
-          <div style={{
-            width: '100%',
-            maxWidth: '560px',
-            height: '315px',
-            background: '#1a1a1c',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            position: 'relative',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
-            marginBottom: '36px',
-            border: '1px solid rgba(255, 255, 255, 0.05)'
-          }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSlide.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: currentSlide.placeholderColor }}
-              >
-                {currentSlide.id === 'slide-backup' ? (
-                  <BackupMockupView />
-                ) : (
-                  <video
-                    key={currentSlide.videoSrc}
-                    src={`${currentSlide.videoSrc}?v=1`}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
+
+          {/* Ctrl+C, outside the camera: placed beside a window as it is framed on screen (tour.ts keys). */}
+          <div className="ob-keys" ref={keysRef} aria-hidden>
+            <div><kbd>{t('tour.ctrl')}</kbd><b>+</b><kbd>C</kbd></div>
+            <span ref={keysLabelRef} />
           </div>
-          <div style={{ textAlign: 'center', height: '100px', maxWidth: '480px' }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSlide.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-              >
-                <h1 style={{ fontSize: '24px', margin: '0 0 12px 0', fontWeight: 700, letterSpacing: '-0.01em' }}>
-                  {currentSlide.title}
-                </h1>
-                <p style={{ fontSize: '15px', lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', margin: 0 }}>
-                  {currentSlide.description}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+
+          <div className={`ob-ui${locked ? ' is-locked' : ''}${s.key === 'settings' ? ' is-low' : ''}`}>
+            <div className="ob-progress">
+              {/* The active dash fills as the step plays and rests (autoplay); the last one is simply full. */}
+              <div className="ob-dots">
+                {steps.map((st, i) => (
+                  <i key={st.key} className={i === at ? 'on' : ''}>
+                    {i === at && <b ref={i === last ? undefined : attachFill} className={i === last ? 'is-full' : ''} />}
+                  </i>
+                ))}
+              </div>
+              {at < last && (
+                <button
+                  type="button"
+                  className="ob-play"
+                  aria-pressed={playing}
+                  aria-label={playing ? t('onboarding.pause') : t('onboarding.play')}
+                  onClick={() => setPlaying((p) => !p)}
+                >
+                  {playing ? (
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><rect x="1" y="0.5" width="2.2" height="7" rx="0.6" /><rect x="4.8" y="0.5" width="2.2" height="7" rx="0.6" /></svg>
+                  ) : (
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><path d="M1.6 1.1v5.8c0 .5.5.8.9.5l4.4-2.9c.4-.2.4-.8 0-1L2.5.6c-.4-.3-.9 0-.9.5z" /></svg>
+                  )}
+                </button>
+              )}
+            </div>
+            <div className="ob-copy" key={s.key}>
+              {s.key === 'settings' ? (
+                <>
+                  <h1>{s.title}</h1>
+                  <p>{s.body}</p>
+                </>
+              ) : (
+                // Every step's text in the same place, only this step's shown: the box is as tall as the
+                // longest in this language, so the button under it stays put from step to step. (This
+                // step's first, for anything that reads the heading.)
+                <div className="ob-text">
+                  {[s, ...steps.slice(0, last).filter((st) => st.key !== s.key)].map((st) => (
+                    <div key={st.key} className={st.key === s.key ? undefined : 'is-ghost'} aria-hidden={st.key === s.key ? undefined : true}>
+                      <h1>{st.title}</h1>
+                      <p>{st.body}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* The last step: once the shelf has shown every edge, the choice opens out under the text (the
+                  camera pulls back to make room): the three edges, each a small screen with its bar, then
+                  the two settings that matter and Get Started. */}
+              {s.key === 'settings' && real ? (
+                <div className={`ob-choose${asking ? ' is-up' : ''}`} aria-hidden={!asking}>
+                  <div>
+                    <div className="ob-edges" role="radiogroup" aria-label={s.title}>
+                      {(['left', 'top', 'right'] as const).map((pos) => (
+                        <button
+                          key={pos}
+                          type="button"
+                          role="radio"
+                          aria-checked={barPos === pos}
+                          tabIndex={asking ? 0 : -1}
+                          className="ob-edge"
+                          onClick={() => choose(pos)}
+                        >
+                          <span className={`ob-edge-screen is-${pos}`}><i /></span>
+                          {t(`position.${pos}`)}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="ob-controls">
+                      <button type="button" className="ob-toggle" tabIndex={asking ? 0 : -1} aria-pressed={real.soundEffects !== false} onClick={() => void pick({ soundEffects: real.soundEffects === false })}>
+                        <i />{t('behaviour.soundEffectsTitle')}
+                      </button>
+                      <button type="button" className="ob-toggle" tabIndex={asking ? 0 : -1} aria-pressed={real.launchAtLogin} onClick={() => void pick({ launchAtLogin: !real.launchAtLogin })}>
+                        <i />{t('behaviour.launchAtLoginTitle')}
+                      </button>
+                      {primary}
+                    </div>
+                  </div>
+                </div>
+              ) : primary}
+              {at === 0 && <button type="button" className="ob-skip" onClick={() => void finish()}>{t('onboarding.skip')}</button>}
+            </div>
           </div>
-        </div>
-      )}
 
-      {/* Footer / Navigation Bar */}
-      <div style={{
-        height: '80px',
-        padding: '0 40px',
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr',
-        alignItems: 'center',
-        borderTop: '1px solid #262626'
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <button
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            style={{
-              background: '#2a2a2a',
-              border: '1px solid #444',
-              color: currentIndex === 0 ? '#555' : '#fff',
-              fontSize: '15px',
-              fontWeight: 500,
-              cursor: currentIndex === 0 ? 'default' : 'pointer',
-              padding: '8px 20px',
-              borderRadius: '6px',
-              transition: 'background 0.2s',
-              opacity: currentIndex === 0 ? 0 : 1,
-              pointerEvents: currentIndex === 0 ? 'none' : 'auto'
-            }}
-            onMouseOver={(e) => { if (currentIndex !== 0) e.currentTarget.style.background = '#333' }}
-            onMouseOut={(e) => { if (currentIndex !== 0) e.currentTarget.style.background = '#2a2a2a' }}
-          >
-            {t('onboarding.back')}
+          <img className="ob-fog ob-fog-mid" src={fogMidUrl} alt="" />
+          <img className="ob-fog ob-fog-heavy" src={fogHeavyUrl} alt="" />
+        </div>
+
+        {at > 0 && (
+          <button type="button" className="ob-back" aria-label={t('onboarding.back')} onClick={() => go(at - 1)}>
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M7.5 2 3.5 6l4 4" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
-        </div>
+        )}
+        <button type="button" className="ob-close" aria-label={t('onboarding.skip')} onClick={() => void finish()}>
+          <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" /></svg>
+        </button>
 
-        <div style={{ display: 'flex', gap: '8px' }}>
-          {slides.map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: i === currentIndex ? '#fff' : '#444',
-                transition: 'background 0.3s'
-              }}
-            />
-          ))}
+        <div className="ob-letters" ref={lettersRef} aria-label="T-Drop">
+          <svg viewBox="0 0 800 640" width="800" height="640">
+            <defs>
+              <mask id="ob-pen" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="640">
+                <g transform={PEN_TRANSFORM}>
+                  <path ref={penRef} d={PEN_PATH} pathLength={1} fill="none" stroke="#fff" strokeWidth={PEN_WIDTH}
+                    strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 2" strokeDashoffset="1" />
+                </g>
+              </mask>
+            </defs>
+            <image ref={shadowRef} href={glassShadowUrl} {...SHADOW_BOX} opacity="0" style={{ transition: 'opacity .6s ease-out' }} />
+            <image href={glassUrl} {...GLASS_BOX} mask="url(#ob-pen)" />
+          </svg>
         </div>
-
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button
-            onClick={handleNext}
-            style={{
-              background: '#fff',
-              border: 'none',
-              color: '#000',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              padding: '8px 24px',
-              borderRadius: '6px',
-              transition: 'transform 0.1s, opacity 0.2s'
-            }}
-            onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.96)'}
-            onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-            onMouseOver={(e) => e.currentTarget.style.opacity = '0.9'}
-            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
-          >
-            {currentIndex === slides.length - 1 ? t('onboarding.getStarted') : t('onboarding.next')}
-          </button>
-        </div>
+        <img className="ob-letters-blur" src={glassBlurUrl} alt="" style={BLUR_BOX} />
       </div>
     </div>
   )

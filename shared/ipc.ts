@@ -44,14 +44,50 @@ export interface InvokeMap {
    *  collection) onto the system clipboard. */
   'item:copy-subitem': { args: [req: DragRequest]; result: boolean }
 
-  /** Copy an item and paste it directly into the active application. */
-  'item:paste': { args: [id: string]; result: boolean }
+  /**
+   * Copy an item and paste it directly into the active application.
+   * `plain` writes text items as plain text only (no html / table formatting).
+   */
+  'item:paste': { args: [id: string, opts?: { plain?: boolean }]; result: boolean }
+
+  /**
+   * Set or clear an item's note (normalized in main). Returns the updated
+   * list.
+   */
+  'item:set-meta': { args: [id: string, meta: import('./itemMeta').ItemMetaPatch]; result: ClipboardItemDto[] }
+
+  /**
+   * Put a derived piece of text on the clipboard (clean link, color in
+   * another format, file path) without adding it to history.
+   */
+  'item:copy-text': { args: [text: string]; result: boolean }
+
+  /**
+   * Save an image item's original file(s) into the user's Downloads folder.
+   * Returns the saved file names (empty when nothing could be saved).
+   */
+  'item:save-images': { args: [id: string]; result: string[] }
 
   /** Copy a sub-item and paste it directly into the active application. */
   'item:paste-subitem': { args: [req: DragRequest]; result: boolean }
 
   /** Write a Unicode emoji to the clipboard and Ctrl+V into the still-focused app. Does not close the shelf. */
   'emoji:paste': { args: [text: string]; result: boolean }
+
+  /**
+   * Picker glyph PNGs, many per call: file name -> base64 PNG. One call per
+   * screen of the grid instead of one image request per glyph (each costs
+   * main-thread time that delays this window's frames). Unknown names are
+   * left out.
+   */
+  'emoji:glyphs': { args: [files: string[]]; result: Record<string, string> }
+
+  /**
+   * A file-kind folder icon's SVG source (resources/file-icons/<kind>.svg),
+   * for the window to cut into the layers its hover "opening" moves. Only the
+   * 13 icon names are served; anything else is null.
+   */
+  'icon:svg': { args: [kind: string]; result: string | null }
 
   /** Add local file paths dragged into the shelf. */
   'item:add-files': { args: [paths: string[]]; result: ClipboardItemDto[] }
@@ -237,6 +273,8 @@ export interface EventMap {
     stickPosition: import('./types').StickPosition
     displayWidth: number
     displayHeight: number
+    /** A drag from another app is in progress anywhere on screen (see electron/main/externalDrag.ts). */
+    drag?: boolean
   }]
 }
 
@@ -255,6 +293,12 @@ export interface SendMap {
   'item:prestage-drag': { args: [req: DragRequest] }
   /** Synchronize tutorial step */
   'tutorial:set-step': { args: [step: number] }
+  /**
+   * The cards moved under a still pointer (new item, paste to top, delete,
+   * expand…): re-check what it is over. Chromium only updates :hover on a
+   * mouse move, so main sends one at the cursor's current spot.
+   */
+  'window:resync-hover': { args: [] }
 }
 
 /* ------------------------------------------------------------------ */

@@ -350,6 +350,11 @@ export function PreviewFlyout({ isRight }: { isRight: boolean }) {
           )}
           {/* Content — even bezels, no header chrome */}
           <div style={{ padding: selectedKeys.size > 0 ? '20px 20px 68px 20px' : '20px', overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none', flex: 1, minHeight: 0 }}>
+            {item.note && (
+              <div className="flyout-meta-head">
+                <div className="flyout-meta-label">{item.note}</div>
+              </div>
+            )}
             <PreviewContent
               item={item}
               selectedKeys={selectedKeys}

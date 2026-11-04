@@ -266,3 +266,31 @@ export function parseColor(raw: string): ColorInfo | null {
 
   return null
 }
+
+function alphaText(a: number): string {
+  return String(Math.round(a * 100) / 100)
+}
+
+/**
+ * The same color written as HEX, RGB and HSL (with alpha when it is not
+ * fully opaque), or null when `raw` is not a color code parseColor accepts.
+ * The source format is returned as typed, so copying it back never drifts.
+ */
+export function colorFormats(raw: string): { source: ColorFormat; hex: string; rgb: string; hsl: string } | null {
+  const c = parseColor(raw)
+  if (!c) return null
+  const str = raw.trim()
+  const source: ColorFormat = str.startsWith('#') ? 'hex' : /^rgba?\(/i.test(str) ? 'rgb' : 'hsl'
+  const { r, g, b, a } = c
+  const translucent = a < 1
+  const hex = `#${toHex2(r)}${toHex2(g)}${toHex2(b)}${translucent ? toHex2(Math.round(a * 255)) : ''}`
+  const rgb = translucent ? `rgba(${r}, ${g}, ${b}, ${alphaText(a)})` : `rgb(${r}, ${g}, ${b})`
+  const [h, sat, l] = rgbToHsl(r, g, b)
+  const hsl = translucent ? `hsla(${h}, ${sat}%, ${l}%, ${alphaText(a)})` : `hsl(${h}, ${sat}%, ${l}%)`
+  return {
+    source,
+    hex: source === 'hex' ? str : hex,
+    rgb: source === 'rgb' ? str : rgb,
+    hsl: source === 'hsl' ? str : hsl
+  }
+}

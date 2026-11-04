@@ -5,11 +5,12 @@
  * renderer calls them through the typed preload bridge, so a signature mismatch
  * is a compile-time error rather than a runtime one.
  */
-import { app, ipcMain, clipboard, nativeImage, shell, net, dialog, BrowserWindow } from 'electron'
+import { app, ipcMain, nativeImage, shell, net, dialog, BrowserWindow } from 'electron'
 import { existsSync, writeFileSync, readFileSync, mkdirSync } from 'node:fs'
-import { extname, normalize, join } from 'node:path'
+import { readFile } from 'node:fs/promises'
+import { basename, extname, normalize, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { resolveStoredImage } from './imageProtocol'
+import { resolveStoredImage, emojiAssetDir, readEmojiBatch, resolveIconAsset } from './imageProtocol'
 import { APP_CONFIG } from './config'
 import { PATHS } from '../store/paths'
 import { trimMemory } from './memory'
@@ -21,16 +22,18 @@ import { filterValidPaths, isExistingFilePath } from './pathValidation'
 import { type InvokeMap, type InvokeChannel, type SendMap, type SendChannel } from '../../shared/ipc'
 import { getStore, loadSettings, saveSettings, pushState, addFiles, getWatcher } from './state'
 import { createTxaBackup, previewTxaBackup, restoreTxaBackup, isBackupBusy } from '../store/backup'
-import { getMainWindow, sendToMainWindow, setInteractive, setHeartbeatPaused, setHotZoneWidth, repositionWindow, getDisplayListOptions, popUpAndRetract, setWindowFocusable, captureExternalForeground, traceFg, resolvePasteTarget } from './window'
+import { getMainWindow, sendToMainWindow, setInteractive, setHeartbeatPaused, setHotZoneWidth, repositionWindow, getDisplayListOptions, popUpAndRetract, setWindowFocusable, captureExternalForeground, traceFg, resolvePasteTarget, resyncHover } from './window'
 import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
 import { createPurchaseWindow, closePurchaseWindow, getPurchaseWindow } from './purchaseWindow'
 import { saveReceiptPdf } from './receipt'
-import { mt } from './i18n'
+import { mt, mainT } from './i18n'
 import { isSignatureDataUrl, normalizeBuyerName } from '../../shared/receipt'
 import { rebuildTrayMenu } from './tray'
-import { startDragOut, resolveDragData, prestageDrag, stageDragFile } from './drag'
+import { startDragOut, resolveDragData, prestageDrag, stageDragFile, formatClipboardImageFilename } from './drag'
 import { clipboardSignature, formatTabularDataForClipboard, signatureMatchesItem } from '../clipboard/formats'
+import * as clipboard from '../clipboard/osClipboard'
+import { saveItemImages } from './saveImages'
 import type { ClipboardItem, ItemData, MergeResult } from '../../shared/types'
 import { quitAndInstallUpdate, checkForUpdatesManual, startUpdateDownload, cancelUpdateDownload, syncAutoUpdaterState, getCachedUpdateState, triggerBackgroundCheck } from './updater'
 import { createId } from '../store/ids'
@@ -53,12 +56,12 @@ export { isStoreBuild }
  * clipboard; deleting an old history entry that the user has since replaced
  * must never wipe their current clipboard contents.
  */
-function clipboardMatchesItem(item: ClipboardItem): boolean {
+function clipboardMatchesItem(item: ClipboardItem, sig: string): boolean {
   const fullText =
     item.data.kind === 'text' && item.data.hasFullPayload
       ? getStore().getFullText(item.id)
       : undefined
-  return signatureMatchesItem(clipboardSignature(), item.data, fullText)
+  return signatureMatchesItem(sig, item.data, fullText)
 }
 
 /** Fire a transient toast to the renderer (best-effort; renderer may be closed). Message is a translation key resolved renderer-side; params fill {placeholders}. */
@@ -122,7 +125,7 @@ async function writeFileListToClipboard(rawPaths: string[]): Promise<boolean> {
   }
   // Non-Windows / PowerShell failure fallback: plain text paths (best-effort)
   clipboard.clear()
-  clipboard.writeText(validPaths.join('\r\n'))
+  await clipboard.writeText(validPaths.join('\r\n'))
   return true
 }
 
@@ -139,7 +142,7 @@ export async function writeImageToClipboard(imagePath: string | null): Promise<b
       const img = nativeImage.createFromPath(imagePath)
       if (!img.isEmpty()) {
         clipboard.clear()
-        clipboard.writeImage(img)
+        await clipboard.writeImage(img)
         return true
       }
     } catch (err) {
@@ -259,7 +262,54 @@ export function registerIpc(): void {
     return getStore().toDto()
   })
 
-  handle('item:delete', (id) => {
+  handle('item:set-meta', (id, meta) => {
+    getStore().setMeta(id, meta)
+    return getStore().toDto()
+  })
+
+  handle('item:copy-text', async (text) => {
+    if (typeof text !== 'string' || text.length === 0 || text.length > 100_000) return false
+    const watcher = getWatcher()
+    watcher.setPaused(true)
+    try {
+      clipboard.clear()
+      await clipboard.writeText(text)
+      return true
+    } catch (err) {
+      console.error('[IPC] item:copy-text failed:', err)
+      return false
+    } finally {
+      watcher.resyncSignature()
+      watcher.setPaused(loadSettings().incognito)
+    }
+  })
+
+  handle('item:save-images', (id) => {
+    const item = getStore().get(id)
+    if (!item || (item.data.kind !== 'image' && item.data.kind !== 'image-collection')) return []
+    let saved: string[] = []
+    try {
+      saved = saveItemImages(item, {
+        destDir: app.getPath('downloads'),
+        fallbackName: mainT('files.image'),
+        resolveSource: (imageId, ext) => getStore().resolveStoredImagePath(imageId, ext),
+        defaultName: (capturedAt, ext, img, index) =>
+          formatClipboardImageFilename(capturedAt, ext, {
+            source: img.source,
+            fileName: img.fileName,
+            indexSuffix: item.data.kind === 'image-collection' ? index : undefined
+          })
+      })
+    } catch (err) {
+      console.error('[IPC] item:save-images failed:', err)
+    }
+    if (saved.length === 0) toast('toast.saveImagesFailed', 'error')
+    else if (saved.length === 1) toast('toast.savedToDownloads', 'info', { name: basename(saved[0]) })
+    else toast('count.savedToDownloads', 'info', { count: saved.length })
+    return saved.map((p) => basename(p))
+  })
+
+  handle('item:delete', async (id) => {
     const item = getStore().get(id)
     const watcher = getWatcher()
     // Pause first: an in-flight settle timer from the copy that created this
@@ -272,7 +322,7 @@ export function registerIpc(): void {
       // under a live OS clipboard reference, and (b) resyncSignature() below
       // locks onto an EMPTY clipboard, making an immediate re-copy of the same
       // content a detectable change instead of an invisible no-op.
-      if (item && clipboardMatchesItem(item)) {
+      if (item && clipboardMatchesItem(item, await clipboardSignature())) {
         clipboard.clear()
       }
       getStore().delete(id)
@@ -284,13 +334,14 @@ export function registerIpc(): void {
     return getStore().toDto()
   })
 
-  handle('item:delete-batch', (ids) => {
+  handle('item:delete-batch', async (ids) => {
     if (!ids || ids.length === 0) return getStore().toDto()
     const items = ids.map((id) => getStore().get(id)).filter((item): item is ClipboardItem => !!item)
     const watcher = getWatcher()
     watcher.setPaused(true)
     try {
-      if (items.some((item) => clipboardMatchesItem(item))) {
+      const sig = items.length ? await clipboardSignature() : ''
+      if (items.some((item) => clipboardMatchesItem(item, sig))) {
         clipboard.clear()
       }
       getStore().deleteBatch(ids)
@@ -405,7 +456,7 @@ export function registerIpc(): void {
   let _lastEmojiPasteTime = 0
   const EMOJI_PASTE_GUARD_MS = 180
 
-  handle('item:paste', async (id) => {
+  handle('item:paste', async (id, opts) => {
     const now = Date.now()
     if (now - _lastPasteTime < PASTE_GUARD_MS) {
       console.log('[IPC] item:paste blocked — too soon after last paste')
@@ -440,7 +491,7 @@ export function registerIpc(): void {
       // 2. Write item to system clipboard
       const fullText = item.data.kind === 'text' ? getStore().getFullText(id) : undefined
       const itemDataWithFullText = item.data.kind === 'text' && fullText ? { ...item.data, text: fullText } : item.data
-      const ok = await writeItemToClipboard(itemDataWithFullText, item.capturedAt)
+      const ok = await writeItemToClipboard(itemDataWithFullText, item.capturedAt, opts)
       if (!ok) {
         // Extremely rare race: source vanished between pre-check and write.
         toast('toast.imageUnavailable', 'error')
@@ -557,7 +608,8 @@ export function registerIpc(): void {
       // seen as a new capture when the watcher resumes. A later copy of the
       // same emoji from another app still lands: signatures include the Win32
       // sequence number, so an outside Ctrl+C is a new seq and is recorded.
-      clipboard.writeText(text.trim())
+      clipboard.clear()
+      await clipboard.writeText(text.trim())
       const emojiSendDelay = await resolvePasteTarget(40)
       if (emojiSendDelay < 0) {
         toast('toast.pasteFallback', 'info')
@@ -575,6 +627,24 @@ export function registerIpc(): void {
       }, 350)
     }
     return true
+  })
+
+  handle('emoji:glyphs', (files) =>
+    readEmojiBatch(
+      emojiAssetDir({ packaged: app.isPackaged, resourcesPath: process.resourcesPath, appPath: app.getAppPath(), cwd: process.cwd() }),
+      files
+    )
+  )
+
+  handle('icon:svg', async (kind) => {
+    if (typeof kind !== 'string') return null
+    const filePath = resolveIconAsset(join(app.getAppPath(), 'resources', 'file-icons'), `${kind}.svg`)
+    if (!filePath) return null
+    try {
+      return await readFile(filePath, 'utf8')
+    } catch {
+      return null
+    }
   })
 
   handle('item:add-files', (paths) => {
@@ -858,7 +928,7 @@ export function registerIpc(): void {
     }
   })
 
-  handle('image:copy-dataurl', (dataUrl) => {
+  handle('image:copy-dataurl', async (dataUrl) => {
     try {
       let img = nativeImage.createFromDataURL(dataUrl)
       if (img.isEmpty()) {
@@ -868,7 +938,7 @@ export function registerIpc(): void {
       }
       if (!img.isEmpty()) {
         clipboard.clear()
-        clipboard.writeImage(img)
+        await clipboard.writeImage(img)
         return true
       }
     } catch (err) {
@@ -1216,6 +1286,10 @@ export function registerSendListeners(): void {
   on('item:prestage-drag', (_sender, req) => {
     prestageDrag(req)
   })
+
+  on('window:resync-hover', () => {
+    resyncHover()
+  })
 }
 
 /**
@@ -1227,12 +1301,12 @@ export function registerSendListeners(): void {
  * written (e.g. every source image vanished from disk) so callers can show an
  * explicit error instead of silently degrading quality.
  */
-export async function writeItemToClipboard(data: ItemData, capturedAt?: number): Promise<boolean> {
+export async function writeItemToClipboard(data: ItemData, capturedAt?: number, opts?: { plain?: boolean }): Promise<boolean> {
   switch (data.kind) {
     case 'text': {
       const formatted = formatTabularDataForClipboard(data.text, data.html)
       clipboard.clear()
-      clipboard.write({ text: formatted.text, html: formatted.html })
+      await clipboard.write(opts?.plain ? { text: formatted.text } : { text: formatted.text, html: formatted.html })
       return true
     }
 

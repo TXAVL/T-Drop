@@ -105,6 +105,48 @@ export function getHorizontalDockMetrics(
   }
 }
 
+/** Extra margin around the card menu that still counts as "on the menu". */
+const CARD_MENU_BUFFER = 12
+
+/**
+ * The main-process cursor poll reports work-area coordinates; the card menu's
+ * box is in window (client) coordinates. The window sits at the work area's
+ * left edge (left dock), right edge (right dock) or 30px left of the dock
+ * (top dock), always at the work area's top.
+ */
+export function cursorToWindow(
+  cursor: { x: number; y: number },
+  stickPosition: 'left' | 'right' | 'top' | undefined,
+  displayWidth: number,
+  windowWidth: number,
+  dockX: number
+): { x: number; y: number } {
+  if (stickPosition === 'right') return { x: cursor.x - (displayWidth - windowWidth), y: cursor.y }
+  if (stickPosition === 'top') return { x: cursor.x - (dockX - 30), y: cursor.y }
+  return { x: cursor.x, y: cursor.y }
+}
+
+/**
+ * True while the card menu (or the note editor it turns into) holds the shelf
+ * open for this cursor: only while the pointer is on it. Leaving both the
+ * shelf and the menu closes the shelf like any other leave; an open editor
+ * saves what was typed as it closes (setOpen in the store) and the keyboard
+ * goes back to the app that had it.
+ */
+export function cardMenuHolds(
+  menu: { mode: 'menu' | 'edit' } | null,
+  rect: { left: number; top: number; right: number; bottom: number } | null,
+  point: { x: number; y: number }
+): boolean {
+  if (!menu || !rect) return false
+  return (
+    point.x >= rect.left - CARD_MENU_BUFFER &&
+    point.x <= rect.right + CARD_MENU_BUFFER &&
+    point.y >= rect.top - CARD_MENU_BUFFER &&
+    point.y <= rect.bottom + CARD_MENU_BUFFER
+  )
+}
+
 export function useEdgeHover(): void {
   // Throttle the self-healing setInteractive(true) call.
   // Without this, it fires at 60Hz (every 16ms) via the cursor-edge poll,
@@ -277,6 +319,11 @@ export function useEdgeHover(): void {
       } else if (_previewClosedByUser) {
         effectiveDelay = PREVIEW_CLOSE_STAY_MS
       }
+      // The card menu just closed (an action, Escape, a click outside): it
+      // may have left the pointer outside the blade, so give it a moment to
+      // come back before the shelf closes.
+      const menuStayLeft = state.cardMenuStayUntil - Date.now()
+      if (menuStayLeft > 0) effectiveDelay = Math.max(effectiveDelay, menuStayLeft)
 
       graceTimer = window.setTimeout(closePanel, effectiveDelay)
     }
@@ -342,6 +389,18 @@ export function useEdgeHover(): void {
       }
     }
 
+    const cursorInWindow = (
+      state: ReturnType<typeof useStore.getState>,
+      pt: { x: number; y: number }
+    ): { x: number; y: number } => {
+      const dispW = displaySize.current.width || window.innerWidth
+      const s = state.settings
+      const dock = s.stickPosition === 'top'
+        ? getHorizontalDockMetrics(dispW, s.horizontalOffset ?? 0.5, s.hotZoneHeight ?? 0.25, s.triggerAlignment || 'center')
+        : null
+      return cursorToWindow(pt, s.stickPosition, dispW, window.innerWidth, dock?.dockX ?? 0)
+    }
+
     // ── panel:leave / panel:enter (from Panel.tsx blade div) ──────────────
     // NOTE: `mouseleave` can fire spuriously when Framer Motion's `layout`
     // reflow repositions an exiting child out from under the cursor (e.g. on
@@ -350,6 +409,7 @@ export function useEdgeHover(): void {
     const isInsideBlade = () => {
       const state = useStore.getState()
       if (state.sliderActive || state.edgeTransition?.active) return true
+      if (state.cardMenu && cardMenuHolds(state.cardMenu, state.cardMenuRect, cursorInWindow(state, lastClient.current))) return true
       const timeSincePositionChange = state.sliderReleasedTime > 0 ? Date.now() - state.sliderReleasedTime : Infinity
       if (timeSincePositionChange < 1750) return true
 
@@ -439,6 +499,17 @@ export function useEdgeHover(): void {
       const hasFlyout = !!(state.previewItemId || state.styleFlyoutOpen || state.languageFlyoutOpen)
       const currentKeepOpenPx = hasFlyout ? PREVIEW_WIDE - 15 : KEEP_OPEN_PX
       const currentStartClosePx = hasFlyout ? PREVIEW_WIDE + 20 : START_CLOSE_PX
+
+      // The card menu (or its note editor) is part of the shelf while the pointer is on it.
+      if (state.open && state.cardMenu && cardMenuHolds(state.cardMenu, state.cardMenuRect, cursorInWindow(state, data))) {
+        const now = Date.now()
+        if (now - lastSetInteractiveRef.current > 2000) {
+          lastSetInteractiveRef.current = now
+          edge.setInteractive(true)
+        }
+        cancelClose()
+        return
+      }
 
       switch (stickPosition) {
         case 'top': {

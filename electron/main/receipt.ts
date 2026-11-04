@@ -24,7 +24,7 @@ export async function saveReceiptPdf(data: ReceiptData): Promise<{ ok: boolean; 
     const pdf = await win.webContents.printToPDF({
       pageSize: 'A4',
       printBackground: true,
-      margins: { marginType: 'none' },
+      margins: { top: 0, bottom: 0, left: 0, right: 0 },
       preferCSSPageSize: true
     })
     const path = join(app.getPath('downloads'), `${receiptFileName(data.orderCode)}.pdf`)

@@ -21,6 +21,7 @@ import { prewarmDragIcons } from './drag'
 import { initState, getWatcher, loadSettings, saveSettings, pushState, stopStateTimers, getStore } from './state'
 import { initAutoUpdater, checkUpdateOnPanelOpen } from './updater'
 import { createOnboardingWindow, getOnboardingWindow } from './onboardingWindow'
+import { onboardingDue } from '../../shared/onboarding'
 import { getPurchaseWindow } from './purchaseWindow'
 import { startPeriodicMemoryManager, stopPeriodicMemoryManager } from './memory'
 import { startFullscreenMonitor, stopFullscreenMonitor, triggerFullscreenCheck } from './fullscreen'
@@ -160,7 +161,8 @@ app.whenReady().then(() => {
   if (hiddenLaunch) {
     console.log('[Main] Login launch detected (--hidden / wasOpenedAtLogin) — starting silently in tray')
   }
-  if (!settings.tutorialCompleted && !hiddenLaunch) {
+  const tour = onboardingDue(settings)
+  if (tour === 'first-run' && !hiddenLaunch) {
     // When onboarding is active (initial launch or reset tutorial), reset language to system default so onboarding always begins in System Default
     if (settings.language !== 'system') {
       settings = saveSettings({ language: 'system' })
@@ -168,6 +170,10 @@ app.whenReady().then(() => {
     setTimeout(() => {
       createOnboardingWindow()
     }, 2000)
+  } else if (tour === 'update') {
+    setTimeout(() => {
+      createOnboardingWindow()
+    }, hiddenLaunch ? 15000 : 2000)
   }
   setHotZoneWidth(settings.hotZoneWidth || 3)
 

@@ -24,6 +24,7 @@ import { ClearMenu } from './ClearMenu'
 import { PreviewFlyout } from './PreviewFlyout'
 import { IndicatorStyleFlyout } from './IndicatorStyleFlyout'
 import { LanguageFlyout } from './LanguageFlyout'
+import { CardMenu } from './CardMenu'
 import { CopyIndicatorCurve } from './CopyIndicatorCurve'
 import { useFilteredItems } from '../hooks/useFilteredItems'
 
@@ -563,6 +564,7 @@ export function Panel() {
         <PreviewFlyout isRight={isRight} />
         <IndicatorStyleFlyout isRight={isRight} />
         <LanguageFlyout isRight={isRight} />
+        <CardMenu />
       </div>
     </div>
   )

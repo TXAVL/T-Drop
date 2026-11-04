@@ -31,9 +31,19 @@ export interface EdgeApi {
   removeSubitem: (req: DragRequest) => Promise<boolean>
   copyItem: (id: string) => Promise<boolean>
   copySubitem: (req: DragRequest) => Promise<boolean>
-  pasteItem: (id: string) => Promise<boolean>
+  pasteItem: (id: string, opts?: { plain?: boolean }) => Promise<boolean>
+  /** Set or clear an item's note (see shared/itemMeta.ts). */
+  setItemMeta: (id: string, meta: import('./itemMeta').ItemMetaPatch) => Promise<import('./types').ClipboardItemDto[]>
+  /** Put derived text (clean link, color format, path) on the clipboard without a new card. */
+  copyText: (text: string) => Promise<boolean>
+  /** Save an image item's original file(s) into the user's Downloads folder. */
+  saveImages: (id: string) => Promise<string[]>
   pasteSubitem: (req: DragRequest) => Promise<boolean>
   pasteEmoji: (text: string) => Promise<boolean>
+  /** Picker glyph PNGs, many per call: file name -> base64 PNG (see ipc 'emoji:glyphs'). */
+  emojiGlyphs: (files: string[]) => Promise<Record<string, string>>
+  /** A file-kind folder icon's SVG source, or null (see ipc 'icon:svg'). */
+  iconSvg: (kind: string) => Promise<string | null>
   installUpdate: () => Promise<void>
   checkForUpdatesManual: () => Promise<{ status: string; version?: string; error?: string }>
   startUpdateDownload: () => Promise<void>
@@ -70,6 +80,8 @@ export interface EdgeApi {
   getDisplays: () => Promise<import('./types').DisplayInfo[]>
   setInternalDrag: (active: boolean) => void
   broadcastTutorialStep: (step: number) => void
+  /** Re-check what the pointer is over after the cards moved under it (ipc 'window:resync-hover'). */
+  resyncHover: () => void
   createBackup: (suggestedPath?: string) => Promise<{ ok: boolean; filePath?: string; fileSizeBytes?: number; itemsCount?: number; imagesCount?: number; error?: string }>
   previewBackup: (filePath?: string) => Promise<{ ok: boolean; filePath?: string; manifest?: { app: string; version: string; createdAt: string; itemsCount: number; imagesCount: number }; error?: string }>
   restoreBackup: (filePath: string, mode?: 'merge' | 'overwrite') => Promise<{ ok: boolean; restoredItemsCount?: number; mode?: 'merge' | 'overwrite'; error?: string }>

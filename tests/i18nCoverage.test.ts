@@ -6,10 +6,14 @@ import { SUPPLEMENT } from '../shared/i18n/supplement'
 
 const root = join(__dirname, '..')
 
+const isPlural = (v: unknown): v is Record<string, string> =>
+  !!v && typeof v === 'object' && typeof (v as { other?: unknown }).other === 'string'
+
 function flatten(o: unknown, p = '', r: Record<string, string> = {}): Record<string, string> {
   if (o && typeof o === 'object') {
     for (const [k, v] of Object.entries(o as Record<string, unknown>)) {
       if (typeof v === 'string') r[p + k] = v
+      else if (isPlural(v)) r[p + k] = v.other
       else flatten(v, p + k + '.', r)
     }
   }

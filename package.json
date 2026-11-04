@@ -1,6 +1,6 @@
 {
   "name": "t-drop",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "T-Drop — a clipboard manager that lives on the left edge of your screen and expands on hover.",
   "author": "TXAVL",
   "license": "Apache-2.0",
@@ -21,7 +21,8 @@
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "test": "vitest run",
     "i18n:sync": "node scripts/i18n-sync.cjs",
-    "i18n:check": "node scripts/i18n-sync.cjs --check"
+    "i18n:check": "node scripts/i18n-sync.cjs --check",
+    "postinstall": "install-electron"
   },
   "build": {
     "appId": "com.tdrop.app",
@@ -49,6 +50,7 @@
       "!**/node_modules/svg-path-bbox/**",
       "!**/node_modules/react-dom/**",
       "!**/node_modules/qrcode/**",
+      "!**/node_modules/prism-react-renderer/**",
       "!**/node_modules/koffi/doc/**"
     ],
     "extraResources": [
@@ -129,25 +131,26 @@
     "@iconify/react": "^6.0.2",
     "@radix-ui/react-scroll-area": "^1.2.13",
     "@radix-ui/react-separator": "^1.1.11",
-    "@types/node": "^20.11.30",
+    "@types/node": "^24.19.2",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.22",
     "@vitalets/google-translate-api": "^9.2.1",
     "@vitejs/plugin-react": "^4.2.1",
-    "electron": "^34.2.0",
-    "electron-builder": "^26.15.3",
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.1",
     "electron-vite": "^2.1.0",
     "emoji-datasource-twitter": "^16.0.0",
     "framer-motion": "^11.0.24",
     "gsap": "^3.15.0",
     "lucide-react": "^1.26.0",
-    "@types/qrcode": "^1.5.6",
+    "prism-react-renderer": "^2.4.1",
     "qrcode": "^1.5.4",
     "react-dom": "^18.2.0",
     "svg-path-bbox": "^2.1.0",
     "typescript": "^5.4.3",
     "vite": "^5.2.6",
-    "vitest": "^1.6.0"
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",

@@ -337,7 +337,7 @@ export {
   cleanTrackingUrl,
   hasTrackingParams
 } from '../../shared/urlTracking'
-import { isTrackingParam } from '../../shared/urlTracking'
+import { isTrackingParam, cleanTrackingUrl } from '../../shared/urlTracking'
 
 /* ------------------------------------------------------------------ */
 /* 4. Common Acronyms & Short Words to Keep Upper-Cased               */
@@ -692,4 +692,14 @@ export function parseUrlPreview(rawUrl: string): UrlPreviewInfo {
     subtitle,
     displayPath
   }
+}
+
+export function externalHref(text: string): string {
+  const t = (typeof text === 'string' ? text : '').trim()
+  return /^[a-z][a-z0-9+.-]*:/i.test(t) ? t : `https://${t}`
+}
+
+export function cleanLink(rawUrl: string): string {
+  const t = (typeof rawUrl === 'string' ? rawUrl : '').trim()
+  return cleanTrackingUrl(t)
 }

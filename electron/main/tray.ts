@@ -15,6 +15,7 @@ import { getMainWindow, setVisible, repositionWindow, getDisplayListOptions, reg
 import { findAvailableTxaBackups, previewTxaBackup } from '../store/backup'
 import type { StickPosition } from '../../shared/types'
 import { pushState } from './state'
+import { createOnboardingWindow } from './onboardingWindow'
 import { TRANSLATIONS, en } from '../../src/i18n/translations'
 import { mt } from './i18n'
 
@@ -283,6 +284,13 @@ export function createTray(): Tray {
           setVisible(true)
           getMainWindow()?.focus()
           pushState.openSettings()
+        }
+      },
+      {
+        label: t('tour'),
+        click: () => {
+          console.log('[Main] Context menu "Replay Welcome Tour" clicked')
+          createOnboardingWindow()
         }
       },
       { type: 'separator' },

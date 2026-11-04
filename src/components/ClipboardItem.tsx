@@ -97,6 +97,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
   }, [item.id])
 
   const isPreviewing = useStore((s) => s.previewItemId === item.id)
+  const isMenuTarget = useStore((s) => s.cardMenu?.itemId === item.id)
   const isBundle = (item.data.kind === 'files' && item.data.paths.length > 1) || item.data.kind === 'image-collection'
 
   const bundleCount = item.data.kind === 'image-collection'
@@ -217,6 +218,14 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
     }
   }, [])
 
+  const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const s = useStore.getState()
+    if (s.tutorialStep > 0 || s.internalDragReq) return
+    s.openCardMenu(item.id, e.clientX, e.clientY)
+  }, [item.id])
+
   const handleCardClick = useCallback((e: React.MouseEvent) => {
     if (pointerStartRef.current?.moved) {
       // User dragged or attempted to drag — do not execute click/paste!
@@ -258,7 +267,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
       ref={ref}
       initial={false}
       animate={{ opacity: 1 }}
-      className={`item${item.pinned ? ' pinned' : ''}${isBundle ? ' bundle' : ''}${expanded ? ' is-expanded' : ''}${colorInfo ? ` is-color-card ${colorInfo.isLight ? 'is-light-color' : 'is-dark-color'}` : ''}`}
+      className={`item${item.pinned ? ' pinned' : ''}${isBundle ? ' bundle' : ''}${expanded ? ' is-expanded' : ''}${colorInfo ? ` is-color-card ${colorInfo.isLight ? 'is-light-color' : 'is-dark-color'}` : ''}${isMenuTarget ? ' menu-target' : ''}`}
       data-expanded-stack={expanded ? 'true' : undefined}
       style={{
         ...(expandedWidth ? { width: expandedWidth, minWidth: expandedWidth, maxWidth: expandedWidth } : {}),
@@ -293,6 +302,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
         onMouseEnter={handlePrestage}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
+        onContextMenu={handleContextMenu}
         onDragStart={(e) => {
           if (pointerStartRef.current) pointerStartRef.current.moved = true
           handleDragStart(e, { id: item.id })
@@ -330,6 +340,9 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
           </span>
         )}
         <div className="body">
+          {item.note && (!isBundle || !expanded) && (
+            <div className="item-note" title={item.note}>{item.note}</div>
+          )}
           <div className="item-content">
             {isBundle ? (
                 <BundleFluidPreview 

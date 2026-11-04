@@ -26,6 +26,14 @@ import { PATHS } from './paths'
 import { createId } from './ids'
 import { contentSignature } from './signature'
 import { MAX_ITEM_HTML_CHARS } from '../clipboard/formats'
+import { isKept, joinNotes, normalizeNote, noteFromLegacy, type ItemMetaPatch } from '../../shared/itemMeta'
+import { linkTitleFromHtml } from '../../shared/linkText'
+
+/** Write an already-normalized note, removing the field when empty. */
+function applyNote(it: ClipboardItem, note: string | undefined): void {
+  if (note) it.note = note
+  else delete it.note
+}
 
 /**
  * Replace a file only once its new contents are on disk: written to a side file, flushed, then
@@ -183,7 +191,25 @@ export class ItemStore {
     // Auto-migrate large text items to disk payload files
     let changed = false
     for (const it of items) {
+      // A hand-edited or damaged file must never feed an odd note to the
+      // renderer: re-run the same cleanup as writes. Items saved with the
+      // old label + tags get them as one note (they were pinned when
+      // named, and stay pinned).
+      const legacy = it as ClipboardItem & { label?: unknown; tags?: unknown }
+      if ('label' in legacy || 'tags' in legacy) {
+        applyNote(it, joinNotes(normalizeNote(it.note), noteFromLegacy(legacy.label, legacy.tags)))
+        delete legacy.label
+        delete legacy.tags
+        changed = true
+      } else if ('note' in it) {
+        applyNote(it, normalizeNote(it.note))
+      }
       if (it.data.kind === 'text') {
+        // links saved before page titles were kept: read it from the saved html once
+        if (it.data.isUrl && it.data.html && !it.data.linkTitle) {
+          const linkTitle = linkTitleFromHtml(it.data.html, it.data.text.trim())
+          if (linkTitle) it.data.linkTitle = linkTitle
+        }
         if (!it.data.hasFullPayload && it.data.text.length > 300) {
           this.writeTextPayload(it.id, it.data.text)
           it.data.hasFullPayload = true
@@ -330,7 +356,7 @@ export class ItemStore {
     let stillNeed = need
     for (let i = this.items.length - 1; i >= 0; i--) {
       const it = this.items[i]
-      if (stillNeed > 0 && !it.pinned) {
+      if (stillNeed > 0 && !isKept(it)) {
         this.sigToId.delete(contentSignature(it.data))
         if (it.data.kind === 'image') this.removeImageFile(it.data.imageId)
         if (it.data.kind === 'image-collection') {
@@ -359,12 +385,22 @@ export class ItemStore {
     const existingId = this.sigToId.get(sig)
     const now = Date.now()
 
+    // A link copied with its page title (browsers put `<a href>Title</a>` in
+    // the html): keep the title for the card and search.
+    if (data.kind === 'text' && data.isUrl && data.html && !data.linkTitle) {
+      const linkTitle = linkTitleFromHtml(data.html, data.text.trim())
+      if (linkTitle) data = { ...data, linkTitle }
+    }
+
     if (existingId) {
       const idx = this.items.findIndex((it) => it.id === existingId)
       if (idx >= 0) {
         const it = this.items[idx]
-        // Bump count and move to front.
+        // Bump count and move to front (and learn the page title if this copy brought one).
         const updated: ClipboardItem = { ...it, hitCount: it.hitCount + 1, capturedAt: now }
+        if (data.kind === 'text' && data.linkTitle && updated.data.kind === 'text' && !updated.data.linkTitle) {
+          updated.data = { ...updated.data, linkTitle: data.linkTitle }
+        }
         this.items.splice(idx, 1)
         this.items.unshift(updated)
         this.persist()
@@ -425,6 +461,20 @@ export class ItemStore {
     if (!it) return
     it.pinned = pinned
     this.persist()
+  }
+
+  /**
+   * Set or clear an item's note. Normalized here, so nothing unclean is ever
+   * stored. The pin is left alone: a note keeps the item by itself (history
+   * limit, auto-delete and "clear" skip noted items, see isKept). Returns
+   * false when the item is gone.
+   */
+  setMeta(id: string, patch: ItemMetaPatch): boolean {
+    const it = this.items.find((x) => x.id === id)
+    if (!it || !patch || typeof patch !== 'object') return false
+    if ('note' in patch) applyNote(it, normalizeNote(patch.note))
+    this.persist()
+    return true
   }
 
   delete(id: string): void {
@@ -536,6 +586,10 @@ export class ItemStore {
     tgt.data = newData
     this.sigToId.set(contentSignature(newData), tgt.id)
     tgt.capturedAt = Date.now() // bump time
+
+    // The source card disappears, so carry what the user gave it: the
+    // target gets both notes (and with them, is kept).
+    if (src.note) applyNote(tgt, joinNotes(tgt.note, src.note))
 
     // Remove source item completely but DO NOT delete its underlying files/images
     // because they are now owned by the target!
@@ -677,11 +731,12 @@ export class ItemStore {
     return false
   }
 
+  /** Remove everything that isn't kept (pinned or noted). */
   clearUnpinned(): void {
     const kept: ClipboardItem[] = []
     const removed: ClipboardItem[] = []
     for (const it of this.items) {
-      if (it.pinned) kept.push(it)
+      if (isKept(it)) kept.push(it)
       else {
         this.sigToId.delete(contentSignature(it.data))
         if (it.data.kind === 'image') this.removeImageFile(it.data.imageId)
@@ -703,7 +758,7 @@ export class ItemStore {
     const kept: ClipboardItem[] = []
     const expired: ClipboardItem[] = []
     for (const it of this.items) {
-      if (it.pinned || it.capturedAt >= cutoff) {
+      if (isKept(it) || it.capturedAt >= cutoff) {
         kept.push(it)
       } else {
         expired.push(it)
@@ -930,7 +985,9 @@ export class ItemStore {
             isUrl: d.isUrl,
             isColor: d.isColor,
             hasFullPayload: d.hasFullPayload,
-            previewText: d.previewText
+            previewText: d.previewText,
+            linkTitle: d.linkTitle,
+            hasHtml: !!d.html
           }
         }
       }
