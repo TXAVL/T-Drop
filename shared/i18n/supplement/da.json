@@ -322,7 +322,8 @@
     "noPinnedTitle": "Ingen fastgjorte elementer endnu",
     "noPinnedHint": "Tryk på nålen 📌 på et kort for at gemme dine favoritter eller tekstskabeloner her.",
     "copy": "Kopiér",
-    "search": "Søg"
+    "search": "Søg",
+    "toggle": "Åbn / luk hylden"
   },
   "header": {
     "clearSearch": "Ryd søgning (Esc)"

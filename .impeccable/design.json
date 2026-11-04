@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T17:22:20.108092Z",
+  "title": "Design System: T-Drop",
+  "extensions": {
+    "colorMeta": {
+      "accent-violet": {
+        "role": "primary",
+        "displayName": "Rare Violet",
+        "canonical": "#8b5cf6"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Raised Charcoal",
+        "canonical": "#141414"
+      },
+      "glass-ink": {
+        "role": "neutral",
+        "displayName": "Glass Ink",
+        "canonical": "#0a0a0d"
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "Body",
+        "purpose": "Clipboard text and descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Pills, buttons, setting names."
+      }
+    },
+    "shadows": [
+      {
+        "name": "blade-edge",
+        "value": "14px 0 40px rgba(0,0,0,.75), 0 0 1px 1px rgba(255,255,255,.08)",
+        "purpose": "Separates the shelf from the desktop."
+      },
+      {
+        "name": "item-whisper",
+        "value": "0 2px 8px rgba(0,0,0,.22)",
+        "purpose": "Slight lift on clipboard cards."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default easing."
+      },
+      {
+        "name": "ease-spring",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "Small tactile moments only."
+      },
+      {
+        "name": "dur-fast",
+        "value": "140ms",
+        "purpose": "Hover and press."
+      },
+      {
+        "name": "dur-base",
+        "value": "240ms",
+        "purpose": "Panels and state changes."
+      }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Pill (idle)",
+      "kind": "chip",
+      "refersTo": "pill-idle",
+      "description": "Unselected segment option.",
+      "html": "<button class=\"ds-pill\">Balanced</button>",
+      "css": ".ds-pill{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:rgba(255,255,255,.72);background:#141414;border:none;cursor:pointer;transition:all .15s ease}.ds-pill:hover{color:#fff;background:#1c1c1c}.ds-pill:focus-visible{outline:2px solid #8b5cf6;outline-offset:2px}"
+    },
+    {
+      "name": "Pill (active)",
+      "kind": "chip",
+      "refersTo": "pill-active",
+      "description": "Selected segment option, inverted white.",
+      "html": "<button class=\"ds-pill-on\">Balanced</button>",
+      "css": ".ds-pill-on{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;color:#000;background:#fff;border:none;cursor:pointer}.ds-pill-on:focus-visible{outline:2px solid #8b5cf6;outline-offset:2px}"
+    },
+    {
+      "name": "Clipboard item card",
+      "kind": "card",
+      "refersTo": "item-card",
+      "description": "A clipboard entry on the shelf.",
+      "html": "<div class=\"ds-item\">Meeting notes: send the invoice on Friday</div>",
+      "css": ".ds-item{padding:12px 14px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:18px;color:#fff;font-size:14px;line-height:1.45;box-shadow:0 2px 8px rgba(0,0,0,.22);transition:all .16s cubic-bezier(.16,1,.3,1)}.ds-item:hover{background:#1c1c1c}"
+    },
+    {
+      "name": "Setting card",
+      "kind": "card",
+      "refersTo": "setting-card",
+      "description": "Container for one setting group.",
+      "html": "<div class=\"ds-setting\">Appearance</div>",
+      "css": ".ds-setting{padding:12px 14px;background:#141414;border-radius:18px;color:#fff;font-size:13px;font-weight:500}"
+    },
+    {
+      "name": "Icon button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "30px circular icon action.",
+      "html": "<button class=\"ds-icon\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M5 12h14M12 5v14\"/></svg></button>",
+      "css": ".ds-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:999px;color:rgba(255,255,255,.78);background:transparent;border:none;transition:background 140ms cubic-bezier(.22,1,.36,1),color 140ms}.ds-icon:hover{background:#141414;color:#fff}.ds-icon:focus-visible{outline:2px solid #8b5cf6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sliding Black Glass",
+    "overview": "T-Drop's shelf is a sheet of near-black glass that slides in from the screen edge over whatever the user is doing. It is silent at rest and instant when called.",
+    "keyCharacteristics": [
+      "Near-black layered surfaces, white text at three opacities",
+      "Big radii (24 / 18 / pill), almost no borders or card shadows",
+      "One theme-swappable accent for active, focus and glow only",
+      "Short precise motion (140ms / 240ms)",
+      "Built for any language, including RTL"
+    ],
+    "rules": [
+      {
+        "name": "The Rare Accent Rule",
+        "body": "The accent covers only active, focus and glow states, roughly 10% of any screen.",
+        "section": "colors"
+      },
+      {
+        "name": "The Scaled Type Rule",
+        "body": "Every font size is calc(Npx * var(--font-scale, 1)).",
+        "section": "typography"
+      },
+      {
+        "name": "The Tonal-First Rule",
+        "body": "Raise a surface by making it lighter, not by adding a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do read colour, radius and motion from tokens.css",
+      "Do use the white-on-black inverted pill for selected",
+      "Do test long strings and RTL",
+      "Do keep motion between 140ms and 240ms"
+    ],
+    "donts": [
+      "Don't hard-code #8b5cf6",
+      "Don't use accent for decoration",
+      "Don't add heavy borders or drop shadows to cards",
+      "Don't hard-code Vietnamese or English text",
+      "Don't slow the shelf open"
+    ]
+  }
+}

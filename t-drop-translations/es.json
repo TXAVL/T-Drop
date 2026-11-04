@@ -264,7 +264,8 @@
     "noPinnedTitle": "Aún no hay elementos fijados",
     "noPinnedHint": "Toca la chincheta 📌 de cualquier tarjeta para tener aquí tus favoritos o plantillas de texto.",
     "copy": "Copiar",
-    "search": "Buscar"
+    "search": "Buscar",
+    "toggle": "Abrir / cerrar el estante"
   },
   "onboarding": {
     "welcomeTitle": "Te damos la bienvenida a T-Drop",

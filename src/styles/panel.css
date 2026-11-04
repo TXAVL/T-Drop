@@ -602,6 +602,57 @@
   gap: 6px;
   max-width: 220px;
 }
+.empty-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+.empty .big {
+  font-size: calc(14px * var(--font-scale, 1));
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.empty-keys {
+  margin: 20px 0 0;
+  width: 100%;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--bg-card);
+}
+.empty-key-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: calc(12px * var(--font-scale, 1));
+  color: var(--text-secondary);
+}
+.empty-key-row dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.empty-key-row dd {
+  margin: 0;
+}
+.empty-key-row kbd {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: calc(11px * var(--font-scale, 1));
+  color: var(--text-primary);
+  white-space: nowrap;
+}
 .empty .title {
   font-size: calc(15px * var(--font-scale, 1));
   font-weight: 600;
@@ -611,7 +662,7 @@
 .empty .hint {
   font-size: calc(13px * var(--font-scale, 1));
   line-height: 1.45;
-  color: #a1a1aa;
+  color: var(--text-secondary);
 }
 .list.horizontal .empty {
   min-width: 320px;

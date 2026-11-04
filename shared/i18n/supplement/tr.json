@@ -322,7 +322,8 @@
     "noPinnedTitle": "Henüz sabitlenmiş öğe yok",
     "noPinnedHint": "Favorilerinizi veya metin şablonlarınızı burada tutmak için herhangi bir kartın 📌 simgesine dokunun.",
     "copy": "Kopyala",
-    "search": "Ara"
+    "search": "Ara",
+    "toggle": "Rafı aç / kapat"
   },
   "header": {
     "clearSearch": "Aramayı temizle (Esc)"

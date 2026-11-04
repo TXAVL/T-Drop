@@ -322,7 +322,8 @@
     "noPinnedTitle": "ピン留めした項目はまだありません",
     "noPinnedHint": "カードの📌をタップすると、お気に入りやテキストのテンプレートをここに保存できます。",
     "copy": "コピー",
-    "search": "検索"
+    "search": "検索",
+    "toggle": "シェルフを開く / 閉じる"
   },
   "header": {
     "clearSearch": "検索をクリア（Esc）"

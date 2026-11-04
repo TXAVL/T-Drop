@@ -264,7 +264,8 @@
     "noPinnedTitle": "Még nincsenek rögzített elemek",
     "noPinnedHint": "Koppintson bármely kártya 📌 ikonjára, hogy kedvenceit vagy szövegsablonjait itt tarthassa.",
     "copy": "Másolás",
-    "search": "Keresés"
+    "search": "Keresés",
+    "toggle": "Polc megnyitása / bezárása"
   },
   "onboarding": {
     "welcomeTitle": "Üdvözli az T-Drop",

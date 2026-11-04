@@ -322,7 +322,8 @@
     "noPinnedTitle": "Nog geen vastgezette items",
     "noPinnedHint": "Tik op het speldje 📌 van een kaart om je favorieten of tekstsjablonen hier te bewaren.",
     "copy": "Kopiëren",
-    "search": "Zoeken"
+    "search": "Zoeken",
+    "toggle": "Plank openen / sluiten"
   },
   "header": {
     "clearSearch": "Zoekopdracht wissen (Esc)"

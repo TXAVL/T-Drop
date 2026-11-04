@@ -98,6 +98,9 @@ export function QrModal() {
       <div className="txa-modal-overlay" onClick={handleClose}>
         <motion.div
           className="txa-modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('qr.title')}
           initial={{ opacity: 0, scale: 0.92, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 12 }}
@@ -134,6 +137,7 @@ export function QrModal() {
               className="txa-modal-close"
               onClick={handleClose}
               title={t('header.close')}
+              aria-label={t('header.close')}
             >
               <CloseIcon width={14} height={14} />
             </button>

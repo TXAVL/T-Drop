@@ -264,7 +264,8 @@
     "noPinnedTitle": "Henüz sabitlenmiş öğe yok",
     "noPinnedHint": "Favorilerinizi veya metin şablonlarınızı burada tutmak için herhangi bir kartın 📌 simgesine dokunun.",
     "copy": "Kopyala",
-    "search": "Ara"
+    "search": "Ara",
+    "toggle": "Rafı aç / kapat"
   },
   "onboarding": {
     "welcomeTitle": "T-Drop'a Hoş Geldiniz",

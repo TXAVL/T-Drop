@@ -264,7 +264,8 @@
     "noPinnedTitle": "Chưa có mục nào được ghim",
     "noPinnedHint": "Bấm biểu tượng ghim 📌 trên bất kỳ thẻ nào để lưu trữ danh sách yêu thích hoặc mẫu văn bản.",
     "copy": "Sao chép",
-    "search": "Tìm kiếm"
+    "search": "Tìm kiếm",
+    "toggle": "Mở / đóng kệ"
   },
   "onboarding": {
     "welcomeTitle": "Chào mừng đến với T-Drop",

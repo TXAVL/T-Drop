@@ -264,7 +264,8 @@
     "noPinnedTitle": "Zatím nejsou žádné připnuté položky",
     "noPinnedHint": "Klepněte na špendlík 📌 na libovolné kartě a uložte si sem oblíbené položky nebo textové šablony.",
     "copy": "Kopírovat",
-    "search": "Hledat"
+    "search": "Hledat",
+    "toggle": "Otevřít / zavřít polici"
   },
   "onboarding": {
     "welcomeTitle": "Vítejte v T-Drop",

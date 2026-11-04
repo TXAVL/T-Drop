@@ -264,7 +264,8 @@
     "noPinnedTitle": "Ingen festede elementer ennå",
     "noPinnedHint": "Trykk på nålen 📌 på et kort for å ha favorittene eller tekstmalene dine samlet her.",
     "copy": "Kopier",
-    "search": "Søk"
+    "search": "Søk",
+    "toggle": "Åpne / lukk hyllen"
   },
   "onboarding": {
     "welcomeTitle": "Velkommen til T-Drop",

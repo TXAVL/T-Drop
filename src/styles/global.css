@@ -147,3 +147,28 @@ input {
   transition-duration: 0.01ms !important;
   animation-duration: 0.01ms !important;
 }
+
+/* Keyboard focus: one visible ring everywhere. Mouse clicks never show it
+   (focus-visible), and it overrides the older per-component outline:none. */
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[role='button']:focus-visible,
+[role='tab']:focus-visible,
+[role='switch']:focus-visible,
+[role='slider']:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 2px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -322,7 +322,8 @@
     "noPinnedTitle": "Nenhum item fixado ainda",
     "noPinnedHint": "Toque no alfinete 📌 de qualquer cartão para guardar aqui seus favoritos ou modelos de texto.",
     "copy": "Copiar",
-    "search": "Pesquisar"
+    "search": "Pesquisar",
+    "toggle": "Abrir / fechar a estante"
   },
   "header": {
     "clearSearch": "Limpar pesquisa (Esc)"

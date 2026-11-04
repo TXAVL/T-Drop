@@ -322,7 +322,8 @@
     "noPinnedTitle": "Ancora nessun elemento bloccato",
     "noPinnedHint": "Tocca la puntina 📌 su una scheda per tenere qui i tuoi preferiti o i modelli di testo.",
     "copy": "Copia",
-    "search": "Cerca"
+    "search": "Cerca",
+    "toggle": "Apri / chiudi la mensola"
   },
   "header": {
     "clearSearch": "Cancella ricerca (Esc)"

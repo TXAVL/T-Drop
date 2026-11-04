@@ -523,6 +523,19 @@ function PurchaseWindowContent({
   const newExpiry = current ? renewedExpiry(current.expiresAt, role) : null
   const qrUrl = order ? getVietQrImageUrl(order.amount, order.transfer_content) : ''
 
+  // Esc closes the modal (keyboard users and power users expect it)
+  useEffect(() => {
+    if (!isModal) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        onClose()
+      }
+    }
+    window.addEventListener('keydown', onKey, true)
+    return () => window.removeEventListener('keydown', onKey, true)
+  }, [isModal, onClose])
+
   const containerStyle: React.CSSProperties = isModal
     ? {
         position: 'fixed',
@@ -555,7 +568,12 @@ function PurchaseWindowContent({
     : {}
 
   const content = (
-    <div style={cardStyle}>
+    <div
+      style={cardStyle}
+      {...(isModal
+        ? { role: 'dialog', 'aria-modal': true, 'aria-label': isRenew ? t('renew.title') : t('purchase.title') }
+        : {})}
+    >
       {isModal && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -567,12 +585,18 @@ function PurchaseWindowContent({
           <button
             type="button"
             onClick={onClose}
+            aria-label={t('purchase.closeWindow')}
+            title={t('purchase.closeWindow')}
             style={{
               background: 'none',
               border: 'none',
-              color: 'rgba(255, 255, 255, 0.6)',
+              color: 'rgba(255, 255, 255, 0.72)',
               cursor: 'pointer',
-              padding: 4
+              width: 32,
+              height: 32,
+              borderRadius: 10,
+              display: 'grid',
+              placeItems: 'center'
             }}
           >
             <CloseIcon width={16} height={16} />
@@ -802,13 +826,12 @@ function PurchaseWindowContent({
               justifyContent: 'center',
               fontSize: 13.5,
               fontWeight: 700,
-              borderRadius: 8,
+              borderRadius: 999,
               border: 'none',
               cursor: submitting ? 'not-allowed' : 'pointer',
               opacity: submitting ? 0.7 : 1,
-              background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-              color: '#000000',
-              boxShadow: '0 4px 14px rgba(245, 158, 11, 0.35)'
+              background: '#ffffff',
+              color: '#000000'
             }}
           >
             {submitting
@@ -845,7 +868,7 @@ function PurchaseWindowContent({
                 color: '#000',
                 display: 'grid',
                 placeItems: 'center',
-                boxShadow: '0 0 24px rgba(16, 185, 129, 0.55)'
+                boxShadow: '0 6px 18px rgba(0, 0, 0, 0.45)'
               }}>
                 <CheckIcon width={30} height={30} />
               </div>

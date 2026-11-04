@@ -322,7 +322,8 @@
     "noPinnedTitle": "Belum ada item yang disematkan",
     "noPinnedHint": "Ketuk ikon pin 📌 pada kartu mana pun untuk menyimpan favorit atau templat teks Anda di sini.",
     "copy": "Salin",
-    "search": "Cari"
+    "search": "Cari",
+    "toggle": "Buka / tutup rak"
   },
   "header": {
     "clearSearch": "Hapus pencarian (Esc)"

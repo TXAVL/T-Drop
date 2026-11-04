@@ -322,7 +322,8 @@
     "noPinnedTitle": "Még nincsenek rögzített elemek",
     "noPinnedHint": "Koppintson bármely kártya 📌 ikonjára, hogy kedvenceit vagy szövegsablonjait itt tarthassa.",
     "copy": "Másolás",
-    "search": "Keresés"
+    "search": "Keresés",
+    "toggle": "Polc megnyitása / bezárása"
   },
   "header": {
     "clearSearch": "Keresés törlése (Esc)"

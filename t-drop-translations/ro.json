@@ -264,7 +264,8 @@
     "noPinnedTitle": "Încă nu există elemente fixate",
     "noPinnedHint": "Atinge pinul 📌 de pe orice card pentru a păstra aici favoritele sau șabloanele de text.",
     "copy": "Copiază",
-    "search": "Caută"
+    "search": "Caută",
+    "toggle": "Deschide / închide raftul"
   },
   "onboarding": {
     "welcomeTitle": "Bun venit la T-Drop",

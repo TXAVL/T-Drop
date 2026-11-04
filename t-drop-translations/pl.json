@@ -264,7 +264,8 @@
     "noPinnedTitle": "Nie ma jeszcze przypiętych elementów",
     "noPinnedHint": "Dotknij ikony pinezki 📌 na dowolnej karcie, aby trzymać tu ulubione elementy lub szablony tekstu.",
     "copy": "Kopiuj",
-    "search": "Szukaj"
+    "search": "Szukaj",
+    "toggle": "Otwórz / zamknij półkę"
   },
   "onboarding": {
     "welcomeTitle": "Witaj w T-Drop",

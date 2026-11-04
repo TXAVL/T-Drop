@@ -322,7 +322,8 @@
     "noPinnedTitle": "Aucun élément épinglé pour l’instant",
     "noPinnedHint": "Touchez l’épingle 📌 d’une carte pour garder ici vos favoris ou vos modèles de texte.",
     "copy": "Copier",
-    "search": "Rechercher"
+    "search": "Rechercher",
+    "toggle": "Ouvrir / fermer l’étagère"
   },
   "header": {
     "clearSearch": "Effacer la recherche (Échap)"

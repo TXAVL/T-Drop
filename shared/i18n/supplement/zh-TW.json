@@ -322,7 +322,8 @@
     "noPinnedTitle": "還沒有固定的項目",
     "noPinnedHint": "點選任何卡片上的 📌 圖示，即可將常用內容或文字範本固定在這裡。",
     "copy": "複製",
-    "search": "搜尋"
+    "search": "搜尋",
+    "toggle": "開啟 / 關閉置物架"
   },
   "header": {
     "clearSearch": "清除搜尋（Esc）"

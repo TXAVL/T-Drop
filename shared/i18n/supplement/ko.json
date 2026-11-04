@@ -322,7 +322,8 @@
     "noPinnedTitle": "고정된 항목이 아직 없어요",
     "noPinnedHint": "카드의 📌 아이콘을 눌러 즐겨찾기나 텍스트 템플릿을 여기에 보관하세요.",
     "copy": "복사",
-    "search": "검색"
+    "search": "검색",
+    "toggle": "선반 열기 / 닫기"
   },
   "header": {
     "clearSearch": "검색어 지우기 (Esc)"

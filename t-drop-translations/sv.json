@@ -264,7 +264,8 @@
     "noPinnedTitle": "Inga fästa objekt ännu",
     "noPinnedHint": "Tryck på nålen 📌 på ett kort för att spara dina favoriter eller textmallar här.",
     "copy": "Kopiera",
-    "search": "Sök"
+    "search": "Sök",
+    "toggle": "Öppna / stäng hyllan"
   },
   "onboarding": {
     "welcomeTitle": "Välkommen till T-Drop",

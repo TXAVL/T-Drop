@@ -322,7 +322,8 @@
     "noPinnedTitle": "还没有固定的项目",
     "noPinnedHint": "点击任意卡片上的 📌 图标，即可把常用内容或文本模板固定在这里。",
     "copy": "复制",
-    "search": "搜索"
+    "search": "搜索",
+    "toggle": "打开 / 关闭置物架"
   },
   "header": {
     "clearSearch": "清除搜索（Esc）"

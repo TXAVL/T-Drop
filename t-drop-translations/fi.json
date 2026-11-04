@@ -264,7 +264,8 @@
     "noPinnedTitle": "Ei vielä kiinnitettyjä kohteita",
     "noPinnedHint": "Napauta minkä tahansa kortin 📌-kuvaketta, niin suosikkisi tai tekstipohjasi pysyvät täällä.",
     "copy": "Kopioi",
-    "search": "Haku"
+    "search": "Haku",
+    "toggle": "Avaa / sulje hylly"
   },
   "onboarding": {
     "welcomeTitle": "Tervetuloa T-Dropiin",

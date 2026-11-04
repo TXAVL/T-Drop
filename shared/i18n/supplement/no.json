@@ -322,7 +322,8 @@
     "noPinnedTitle": "Ingen festede elementer ennå",
     "noPinnedHint": "Trykk på nålen 📌 på et kort for å ha favorittene eller tekstmalene dine samlet her.",
     "copy": "Kopier",
-    "search": "Søk"
+    "search": "Søk",
+    "toggle": "Åpne / lukk hyllen"
   },
   "header": {
     "clearSearch": "Tøm søk (Esc)"

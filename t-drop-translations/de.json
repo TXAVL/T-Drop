@@ -264,7 +264,8 @@
     "noPinnedTitle": "Noch nichts angepinnt",
     "noPinnedHint": "Tippen Sie auf die Pinnnadel 📌 einer Karte, um Ihre Favoriten oder Textvorlagen hier zu behalten.",
     "copy": "Kopieren",
-    "search": "Suchen"
+    "search": "Suchen",
+    "toggle": "Ablage öffnen / schließen"
   },
   "onboarding": {
     "welcomeTitle": "Willkommen bei T-Drop",

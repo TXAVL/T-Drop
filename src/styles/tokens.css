@@ -25,7 +25,7 @@
   /* Text — High Contrast & Ultra-Legible */
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.78);
-  --text-tertiary: rgba(255, 255, 255, 0.48);
+  --text-tertiary: rgba(255, 255, 255, 0.62);
 
   /* Accent (overridden at runtime by theme.ts) */
   --accent: #8b5cf6;

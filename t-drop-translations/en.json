@@ -264,7 +264,8 @@
     "noPinnedTitle": "No pinned items yet",
     "noPinnedHint": "Tap the pin icon 📌 on any card to keep your favorites or text templates here.",
     "copy": "Copy",
-    "search": "Search"
+    "search": "Search",
+    "toggle": "Open / close shelf"
   },
   "onboarding": {
     "welcomeTitle": "Welcome to T-Drop",
