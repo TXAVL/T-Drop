@@ -11,8 +11,8 @@ export function EmptyState({ filtered }: { filtered: boolean }) {
 
   if (typeFilter !== 'all') {
     if (typeFilter === 'pinned') {
-      title = t('emptyState.noPinnedTitle') || 'Chưa có mục nào được ghim'
-      hint = t('emptyState.noPinnedHint') || 'Bấm biểu tượng ghim 📌 trên bất kỳ thẻ nào để lưu trữ danh sách yêu thích hoặc mẫu văn bản.'
+      title = t('emptyState.noPinnedTitle')
+      hint = t('emptyState.noPinnedHint')
     } else {
       const labelKey =
         typeFilter === 'text'
@@ -65,11 +65,11 @@ export function EmptyState({ filtered }: { filtered: boolean }) {
           maxWidth: 220
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: 'rgba(255, 255, 255, 0.65)' }}>
-            <span>Sao chép</span>
+            <span>{t('emptyState.copy')}</span>
             <kbd style={{ padding: '2px 6px', borderRadius: 4, background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.12)', fontFamily: 'var(--font-mono)', fontSize: 10 }}>Ctrl + C</kbd>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: 'rgba(255, 255, 255, 0.65)' }}>
-            <span>Tìm kiếm</span>
+            <span>{t('emptyState.search')}</span>
             <kbd style={{ padding: '2px 6px', borderRadius: 4, background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.12)', fontFamily: 'var(--font-mono)', fontSize: 10 }}>/</kbd>
           </div>
         </div>

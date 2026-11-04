@@ -10,7 +10,8 @@ import {
   SparkleIndicatorIcon
 } from './CopyIndicatorCurve'
 import { ChevronRightIcon, CloseIcon, LogOutIcon, StarIcon, InfoIcon, GithubOctocatLogo, MicrosoftStoreLogo, CrownIcon } from './icons'
-import { getDaysRemaining, formatCountdownRemaining, formatExpiryDate, type DeviceFingerprint } from '../../shared/license'
+import { getDaysRemaining, type DeviceFingerprint } from '../../shared/license'
+import { countdownText, expiryText, userNameText } from '../lib/licenseText'
 import { PurchaseModal } from './PurchaseModal'
 import { HotkeyRecorder } from './HotkeyRecorder'
 import { SlideCommit } from './SlideCommit'
@@ -465,7 +466,7 @@ export function Settings({
             isPro: true,
             licenseKey: trimmed,
             licenseRole: activatedRole,
-            licenseUserName: res.userName || 'Khách hàng',
+            licenseUserName: res.userName || t('license.defaultUser'),
             licenseExpiresAt: res.expiresAt || null
           }
         }))
@@ -533,7 +534,7 @@ export function Settings({
         setDiagnosing(false)
       }
     } catch (err: any) {
-      setRawLogs(`Lỗi khi đọc file log: ${err?.message || String(err)}`)
+      setRawLogs(t('logs.readError', { error: err?.message || String(err) }))
     } finally {
       setLogsLoading(false)
     }
@@ -553,7 +554,7 @@ export function Settings({
     setTimeout(() => setCopiedLogs(false), 2000)
     pushToast({
       id: Date.now().toString(),
-      message: 'Đã sao chép toàn bộ logs! Hãy dán để gửi cho A.I.',
+      message: t('logs.copiedAll'),
       tone: 'info'
     })
   }
@@ -565,7 +566,7 @@ export function Settings({
       await loadSystemLogs()
       pushToast({
         id: Date.now().toString(),
-        message: 'Đã xóa trắng file nhật ký!',
+        message: t('logs.cleared'),
         tone: 'info'
       })
     }
@@ -587,14 +588,14 @@ export function Settings({
         setLogFilePath(res.path)
         pushToast({
           id: Date.now().toString(),
-          message: 'Đã hoàn tất chẩn đoán sâu hệ thống & bản quyền Windows!',
+          message: t('license.diagSuccess'),
           tone: 'info'
         })
       }
     } catch (err: any) {
       pushToast({
         id: Date.now().toString(),
-        message: `Lỗi chẩn đoán: ${err?.message || String(err)}`,
+        message: t('license.diagFailed', { error: err?.message || String(err) }),
         tone: 'error'
       })
     } finally {
@@ -610,7 +611,7 @@ export function Settings({
     setTimeout(() => setCopiedHw(false), 2000)
     pushToast({
       id: Date.now().toString(),
-      message: 'Đã sao chép mã máy!',
+      message: t('license.copiedMachineId'),
       tone: 'info'
     })
   }
@@ -619,7 +620,7 @@ export function Settings({
     const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
     const role = settings.licenseRole || 'FREE'
     const daysLeft = getDaysRemaining(settings.licenseExpiresAt)
-    const countdownStr = formatCountdownRemaining(settings.licenseExpiresAt)
+    const countdownStr = countdownText(settings.licenseExpiresAt)
 
     const content = (
       <>
@@ -654,7 +655,7 @@ export function Settings({
 
           <div className="setting-desc">
             {isPro
-              ? t('license.ownerInfo', { name: settings.licenseUserName || 'Khách hàng', time: countdownStr ? `${countdownStr}` : daysLeft !== null ? `${daysLeft} ngày` : 'Active' })
+              ? t('license.ownerInfo', { name: userNameText(settings.licenseUserName), time: countdownStr ? `${countdownStr}` : daysLeft !== null ? t('license.daysCount', { days: daysLeft }) : t('license.activeShort') })
               : t('license.freeDesc')}
           </div>
 
@@ -671,8 +672,8 @@ export function Settings({
               alignItems: 'center',
               justifyContent: 'space-between'
             }}>
-              <span>{t('license.expiresAt')} <strong>{formatExpiryDate(settings.licenseExpiresAt)}</strong></span>
-              <span>{t('license.duration')} <strong style={{ color: '#fff' }}>{countdownStr || `${daysLeft ?? 0} ngày`}</strong></span>
+              <span>{t('license.expiresAt')} <strong>{expiryText(settings.licenseExpiresAt)}</strong></span>
+              <span>{t('license.duration')} <strong style={{ color: '#fff' }}>{countdownStr || t('license.daysCount', { days: daysLeft ?? 0 })}</strong></span>
             </div>
           )}
 
@@ -801,7 +802,7 @@ export function Settings({
                         fontSize: 14,
                         lineHeight: 1
                       }}
-                      title="Xóa mã"
+                      title={t('license.clearKey')}
                     >
                       ✕
                     </button>
@@ -943,7 +944,7 @@ export function Settings({
                 <rect width="18" height="18" x="3" y="3" rx="2"/>
                 <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01"/>
               </svg>
-              <span>{t('footer.donateTitle') || 'Ủng hộ tác giả (MB Bank)'}</span>
+              <span>{t('footer.donateTitle')}</span>
             </div>
             <button
               type="button"
@@ -965,11 +966,11 @@ export function Settings({
 
             <div className="donate-bank-info">
               <div className="donate-bank-row">
-                <span className="donate-label">{t('footer.bankName') || 'Ngân hàng:'}</span>
+                <span className="donate-label">{t('footer.bankName')}</span>
                 <span className="donate-value highlight">MB Bank</span>
               </div>
               <div className="donate-bank-row">
-                <span className="donate-label">{t('footer.accountNumber') || 'Số tài khoản:'}</span>
+                <span className="donate-label">{t('footer.accountNumber')}</span>
                 <div className="donate-stk-group">
                   <span className="donate-value code">2211231106</span>
                   <button
@@ -977,18 +978,18 @@ export function Settings({
                     className="donate-copy-btn"
                     onClick={handleCopyStk}
                   >
-                    {copiedStk ? (t('footer.copied') || '✓ Đã chép') : (t('footer.copy') || 'Sao chép')}
+                    {copiedStk ? (t('footer.copied')) : (t('footer.copy'))}
                   </button>
                 </div>
               </div>
               <div className="donate-bank-row">
-                <span className="donate-label">{t('footer.accountHolder') || 'Chủ tài khoản:'}</span>
+                <span className="donate-label">{t('footer.accountHolder')}</span>
                 <span className="donate-value highlight">TANG XUAN ANH</span>
               </div>
             </div>
 
             <p className="donate-note">
-              {t('footer.donateNote') || 'Quét mã VietQR trên bất kỳ ứng dụng ngân hàng hoặc ví điện tử để ủng hộ.'}
+              {t('footer.donateNote')}
             </p>
           </div>
 
@@ -998,7 +999,7 @@ export function Settings({
               className="txa-btn txa-btn-secondary"
               onClick={() => setDonateModalOpen(false)}
             >
-              {t('common.close') || 'Đóng'}
+              {t('common.close')}
             </button>
           </div>
         </div>
@@ -1049,8 +1050,8 @@ export function Settings({
                 </svg>
               </div>
               <div className="txa-modal-title-text">
-                <span className="txa-modal-title">Nhật ký & Gỡ lỗi hệ thống</span>
-                <span className="txa-modal-subtitle">Ghi lại toàn bộ hoạt động & lỗi để chia sẻ với A.I hoặc Dev</span>
+                <span className="txa-modal-title">{t('logs.title')}</span>
+                <span className="txa-modal-subtitle">{t('logs.subtitle')}</span>
               </div>
             </div>
             <button
@@ -1064,25 +1065,25 @@ export function Settings({
 
           <div className="logs-path-bar">
             <span className="logs-path-text" title={logFilePath || 'T-Drop Logs'}>
-              {logFilePath || 'Đang tải đường dẫn logs...'}
+              {logFilePath || t('logs.loadingPath')}
             </span>
             <button
               type="button"
               className="logs-folder-btn"
               onClick={handleOpenLogFolder}
-              title="Mở thư mục chứa file log trong Windows Explorer"
+              title={t('logs.openFolderTip')}
             >
-              📂 Mở thư mục
+              {t('logs.openFolder')}
             </button>
           </div>
 
           <div className="logs-filter-bar">
             <div className="logs-filter-group">
               {([
-                { key: 'ALL', label: 'Tất cả' },
-                { key: 'ERROR', label: '❌ Lỗi' },
-                { key: 'WARN', label: '⚠️ Cảnh báo' },
-                { key: 'INFO', label: 'ℹ️ Thông tin' }
+                { key: 'ALL', label: t('logs.filterAll') },
+                { key: 'ERROR', label: t('logs.filterError') },
+                { key: 'WARN', label: t('logs.filterWarn') },
+                { key: 'INFO', label: t('logs.filterInfo') }
               ] as const).map(({ key, label }) => (
                 <button
                   key={key}
@@ -1105,9 +1106,9 @@ export function Settings({
                 onClick={() => {
                   if (logsTerminalRef.current) logsTerminalRef.current.scrollTop = 0
                 }}
-                title="Cuộn lên đầu trang"
+                title={t('logs.scrollTopTip')}
               >
-                ⬆️ Đầu
+                {t('logs.top')}
               </button>
               <button
                 type="button"
@@ -1116,12 +1117,12 @@ export function Settings({
                 onClick={() => {
                   if (logsTerminalRef.current) logsTerminalRef.current.scrollTop = logsTerminalRef.current.scrollHeight
                 }}
-                title="Cuộn xuống dòng mới nhất"
+                title={t('logs.scrollBottomTip')}
               >
-                ⬇️ Cuối
+                {t('logs.bottom')}
               </button>
               <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.45)', fontFamily: 'var(--font-mono, monospace)' }}>
-                {filteredLines.length}/{visibleLines.length} dòng
+                {t('logs.lineCount', { shown: filteredLines.length, total: visibleLines.length })}
               </span>
             </div>
           </div>
@@ -1129,11 +1130,11 @@ export function Settings({
           <div className="logs-terminal-viewport" ref={logsTerminalRef}>
             {logsLoading ? (
               <div style={{ color: 'rgba(255, 255, 255, 0.5)', padding: '16px 0', textAlign: 'center' }}>
-                Đang đọc dữ liệu logs từ đĩa...
+                {t('logs.reading')}
               </div>
             ) : filteredLines.length === 0 ? (
               <div style={{ color: 'rgba(255, 255, 255, 0.4)', padding: '16px 0', textAlign: 'center' }}>
-                Không có dòng log nào phù hợp bộ lọc.
+                {t('logs.noMatch')}
               </div>
             ) : (
               filteredLines.map((line, idx) => {
@@ -1176,7 +1177,7 @@ export function Settings({
               disabled={diagnosing}
               onClick={handleGenerateDiagnostics}
             >
-              {diagnosing ? '⏳ Đang phân tích bản quyền Windows & phần cứng...' : '🔍 Quét chẩn đoán sâu (Bản quyền Windows & Phần cứng)'}
+              {diagnosing ? t('logs.diagBusy') : t('logs.diagRun')}
             </button>
           </div>
 
@@ -1187,7 +1188,7 @@ export function Settings({
               style={{ flex: 1.5, background: copiedLogs ? '#10b981' : undefined }}
               onClick={handleCopyLogs}
             >
-              {copiedLogs ? '✓ Đã sao chép vào Clipboard!' : '📋 Sao chép Logs (Gửi A.I)'}
+              {copiedLogs ? t('logs.copiedClip') : t('logs.copyAi')}
             </button>
             <button
               type="button"
@@ -1196,7 +1197,7 @@ export function Settings({
               onClick={() => void loadSystemLogs()}
               disabled={logsLoading || diagnosing}
             >
-              🔄 Làm mới
+              {t('logs.refresh')}
             </button>
             <button
               type="button"
@@ -1204,7 +1205,7 @@ export function Settings({
               style={{ flex: 0.8, color: '#f87171' }}
               onClick={handleClearLogs}
             >
-              🗑️ Xóa logs
+              {t('logs.clear')}
             </button>
           </div>
         </div>
@@ -1482,7 +1483,7 @@ export function Settings({
             <div className="setting-desc">
               {downloadPercent > 0
                 ? t('behaviour.downloadingWithPercent', { percent: downloadPercent })
-                : (t('behaviour.connectingDownload') || 'Đang kết nối máy chủ tải về...')}
+                : (t('behaviour.connectingDownload'))}
             </div>
           </div>
           <div className="shelf-card-bottom">
@@ -1649,7 +1650,7 @@ export function Settings({
             <div className="setting-desc">
               {downloadPercent > 0
                 ? t('behaviour.downloadingWithPercent', { percent: downloadPercent })
-                : (t('behaviour.connectingDownload') || 'Đang kết nối máy chủ tải về...')}
+                : (t('behaviour.connectingDownload'))}
             </div>
           </div>
           <div className="shelf-card-bottom">
@@ -2724,7 +2725,7 @@ export function Settings({
                   <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                       <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 12, fontWeight: 600 }}>
-                        {t('appearance.soundVolumeTitle') || 'Âm lượng hiệu ứng'}
+                        {t('appearance.soundVolumeTitle')}
                       </span>
                       <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.5)' }}>
                         {Math.round((settings.soundVolume ?? 0.8) * 100)}%
@@ -2750,8 +2751,8 @@ export function Settings({
 
                 <div className="shelf-card-inline" style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                   <div className="shelf-card-inline-text">
-                    <div className="setting-title">{t('appearance.showQuickKeysTitle') || 'Phím số dán nhanh (1–9)'}</div>
-                    <div className="setting-desc">{t('appearance.showQuickKeysDesc') || 'Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì'}</div>
+                    <div className="setting-title">{t('appearance.showQuickKeysTitle')}</div>
+                    <div className="setting-desc">{t('appearance.showQuickKeysDesc')}</div>
                   </div>
                   <div className="shelf-card-inline-action">
                     <Toggle
@@ -3774,7 +3775,7 @@ export function Settings({
                       <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                           <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 12, fontWeight: 600 }}>
-                            {t('appearance.soundVolumeTitle') || 'Âm lượng hiệu ứng'}
+                            {t('appearance.soundVolumeTitle')}
                           </span>
                           <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.5)' }}>
                             {Math.round((settings.soundVolume ?? 0.8) * 100)}%
@@ -3800,8 +3801,8 @@ export function Settings({
 
                     <div className="shelf-card-inline" style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                       <div className="shelf-card-inline-text">
-                        <div className="setting-title">{t('appearance.showQuickKeysTitle') || 'Phím số dán nhanh (1–9)'}</div>
-                        <div className="setting-desc">{t('appearance.showQuickKeysDesc') || 'Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì'}</div>
+                        <div className="setting-title">{t('appearance.showQuickKeysTitle')}</div>
+                        <div className="setting-desc">{t('appearance.showQuickKeysDesc')}</div>
                       </div>
                       <div className="shelf-card-inline-action">
                         <Toggle

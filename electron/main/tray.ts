@@ -16,6 +16,7 @@ import { findAvailableTxaBackups, previewTxaBackup } from '../store/backup'
 import type { StickPosition } from '../../shared/types'
 import { pushState } from './state'
 import { TRANSLATIONS, en } from '../../src/i18n/translations'
+import { mt } from './i18n'
 
 let tray: Tray | null = null
 let themeListenerRegistered = false
@@ -182,17 +183,14 @@ export function createTray(): Tray {
       if (Notification.isSupported()) {
         const initialSettings = loadSettings()
         const resolvedLang = initialSettings.language === 'system' ? detectSystemLanguage() : initialSettings.language
-        const isVi = resolvedLang === 'vi'
 
         // Check if any existing .txa backup files are present
         const backups = findAvailableTxaBackups()
         if (backups.length > 0) {
           const newest = backups[0]
           const notif = new Notification({
-            title: isVi ? 'T-Drop - Phát hiện bản sao lưu' : 'T-Drop - Backup Detected',
-            body: isVi
-              ? `Tìm thấy bản sao lưu "${newest.fileName}". Bấm để khôi phục dữ liệu!`
-              : `Found backup "${newest.fileName}". Click to restore your data!`,
+            title: mt('main.backup.detectedTitle'),
+            body: mt('main.backup.detectedBody', { file: newest.fileName }),
             icon: PATHS.icon()
           })
           notif.on('click', () => {

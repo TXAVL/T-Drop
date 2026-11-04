@@ -26,6 +26,7 @@ import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
 import { createPurchaseWindow, closePurchaseWindow, getPurchaseWindow } from './purchaseWindow'
 import { saveReceiptPdf } from './receipt'
+import { mt } from './i18n'
 import { isSignatureDataUrl, normalizeBuyerName } from '../../shared/receipt'
 import { rebuildTrayMenu } from './tray'
 import { startDragOut, resolveDragData, prestageDrag, stageDragFile } from './drag'
@@ -792,7 +793,7 @@ export function registerIpc(): void {
     if (!targetPath) {
       const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '')
       const saveResult = await dialog.showSaveDialog({
-        title: 'T-Drop - Tạo bản sao lưu (.txa)',
+        title: mt('main.dialog.exportBackup'),
         defaultPath: `T-Drop-Backup-${dateStr}.txa`,
         filters: [{ name: 'T-Drop Encrypted Backup (*.txa)', extensions: ['txa'] }]
       })
@@ -817,7 +818,7 @@ export function registerIpc(): void {
     let targetPath = filePath
     if (!targetPath) {
       const openResult = await dialog.showOpenDialog({
-        title: 'T-Drop - Mở tệp sao lưu (.txa)',
+        title: mt('main.dialog.openBackup'),
         filters: [{ name: 'T-Drop Encrypted Backup (*.txa)', extensions: ['txa'] }],
         properties: ['openFile']
       })
@@ -1012,7 +1013,7 @@ export function registerIpc(): void {
           if (m && typeof m.progress === 'number' && win) {
             sendToMainWindow('ocr:progress', {
               progress: Math.round(m.progress * 100),
-              status: m.status || 'Đang xử lý...'
+              status: m.status || mt('imageStudio.ocrProcessing')
             })
           }
         }

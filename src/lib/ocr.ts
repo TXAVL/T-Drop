@@ -4,6 +4,7 @@
  * Supports Vietnamese & English text recognition.
  */
 import { createWorker } from 'tesseract.js'
+import { t } from '../i18n'
 
 export interface OcrResult {
   text: string
@@ -33,7 +34,7 @@ async function getOcrWorker(lang = 'vie+eng', onProgress?: (p: number, status: s
   const worker = await createWorker(lang, 1, {
     logger: (m: any) => {
       if (m && typeof m.progress === 'number' && onProgress) {
-        onProgress(Math.round(m.progress * 100), m.status || 'Đang xử lý...')
+        onProgress(Math.round(m.progress * 100), m.status || t('imageStudio.ocrProcessing'))
       }
     }
   })

@@ -11,7 +11,7 @@ import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
 import { CopyIcon, FolderOpenIcon, CheckIcon, OcrIcon, CrownIcon } from './icons'
 import { t } from '../i18n'
-import { formatCountdownRemaining } from '../../shared/license'
+import { countdownText } from '../lib/licenseText'
 
 interface ImageStudioPanelProps {
   imageSrc: string
@@ -52,7 +52,7 @@ export function ImageStudioPanel({
   const isPro = Boolean(settings.isPro && (settings.licenseRole === 'VIP' || settings.licenseRole === 'PREMIUM'))
   const isPremium = Boolean(settings.isPro && settings.licenseRole === 'PREMIUM')
   const role = settings.licenseRole || 'FREE'
-  const countdownStr = formatCountdownRemaining(settings.licenseExpiresAt)
+  const countdownStr = countdownText(settings.licenseExpiresAt)
 
   const [autoOcr, setAutoOcr] = useState<boolean>(() => {
     return localStorage.getItem('tdrop_auto_ocr') === 'true'
@@ -71,14 +71,14 @@ export function ImageStudioPanel({
       setTimeout(() => setCopiedSuccess(null), 1500)
       useStore.getState().pushToast({
         id: `convert-copy-${Date.now()}`,
-        message: `Đã chuyển đổi và sao chép ảnh (${convertFormat === 'jpeg' ? 'JPG' : convertFormat.toUpperCase()})!`,
+        message: t('imageStudio.toastConverted', { format: convertFormat === 'jpeg' ? 'JPG' : convertFormat.toUpperCase() }),
         tone: 'info'
       })
     } catch (err: any) {
       console.error('[ImageStudio] Convert & Copy failed:', err)
       useStore.getState().pushToast({
         id: `convert-err-${Date.now()}`,
-        message: 'Chuyển đổi ảnh thất bại: ' + (err?.message || 'Lỗi không xác định'),
+        message: t('imageStudio.toastConvertFailed', { error: err?.message || t('common.unknownError') }),
         tone: 'error'
       })
     } finally {
@@ -102,7 +102,7 @@ export function ImageStudioPanel({
         setTimeout(() => setSavedSuccess(false), 2000)
         useStore.getState().pushToast({
           id: `save-ok-${Date.now()}`,
-          message: 'Đã lưu tệp ảnh thành công!',
+          message: t('imageStudio.toastSaved'),
           tone: 'info'
         })
       }
@@ -110,7 +110,7 @@ export function ImageStudioPanel({
       console.error('[ImageStudio] Save failed:', err)
       useStore.getState().pushToast({
         id: `save-err-${Date.now()}`,
-        message: 'Lưu tệp thất bại: ' + (err?.message || 'Lỗi không xác định'),
+        message: t('imageStudio.toastSaveFailed', { error: err?.message || t('common.unknownError') }),
         tone: 'error'
       })
     } finally {
@@ -128,14 +128,14 @@ export function ImageStudioPanel({
       setCompressResult(res)
       useStore.getState().pushToast({
         id: `compress-ok-${Date.now()}`,
-        message: `Đã nén ảnh thành công: Giảm ${res.percentSaved}% dung lượng!`,
+        message: t('imageStudio.toastCompressed', { percent: res.percentSaved }),
         tone: 'info'
       })
     } catch (err: any) {
       console.error('[ImageStudio] Compress failed:', err)
       useStore.getState().pushToast({
         id: `compress-err-${Date.now()}`,
-        message: 'Nén ảnh thất bại: ' + (err?.message || 'Lỗi không xác định'),
+        message: t('imageStudio.toastCompressFailed', { error: err?.message || t('common.unknownError') }),
         tone: 'error'
       })
     } finally {
@@ -171,7 +171,7 @@ export function ImageStudioPanel({
     if (!isPro) {
       useStore.getState().pushToast({
         id: `ocr-pro-required-${Date.now()}`,
-        message: 'Tính năng trích chữ OCR yêu cầu kích hoạt bản quyền VIP hoặc PREMIUM!',
+        message: t('imageStudio.ocrNeedsLicense'),
         tone: 'error'
       })
       useStore.getState().setSettingsOpen(true)
@@ -180,7 +180,7 @@ export function ImageStudioPanel({
     if (ocrRunning || !imageSrc) return
     setOcrRunning(true)
     setOcrProgress(5)
-    setOcrStatus('Đang chuẩn bị mô hình nhận diện...')
+    setOcrStatus(t('imageStudio.ocrPreparing'))
     playButtonClickSound()
 
     try {
@@ -192,18 +192,18 @@ export function ImageStudioPanel({
       if (result.text) {
         useStore.getState().pushToast({
           id: `ocr-ok-${Date.now()}`,
-          message: `Đã trích xuất ${result.wordsCount} từ thành công!`,
+          message: t('imageStudio.ocrDone', { count: result.wordsCount }),
           tone: 'info'
         })
       } else {
-        setOcrStatus('Không tìm thấy văn bản rõ ràng trong ảnh.')
+        setOcrStatus(t('imageStudio.ocrNoText'))
       }
     } catch (err: any) {
       console.error('[ImageStudio] OCR failed:', err)
-      setOcrStatus('Nhận diện thất bại: ' + (err?.message || 'Lỗi tải mô hình.'))
+      setOcrStatus(t('imageStudio.ocrFailedStatus', { error: err?.message || t('imageStudio.modelLoadError') }))
       useStore.getState().pushToast({
         id: `ocr-err-${Date.now()}`,
-        message: 'Trích xuất chữ thất bại!',
+        message: t('imageStudio.ocrFailedToast'),
         tone: 'error'
       })
     } finally {
@@ -244,7 +244,7 @@ export function ImageStudioPanel({
       playButtonClickSound()
       useStore.getState().pushToast({
         id: `premium-auto-ocr-${Date.now()}`,
-        message: t('imageStudio.premiumRequired') || 'Tính năng Auto-OCR tự động dành riêng cho gói PREMIUM!',
+        message: t('imageStudio.premiumRequired'),
         tone: 'error'
       })
       useStore.getState().setSettingsOpen(true)
@@ -265,7 +265,7 @@ export function ImageStudioPanel({
       playButtonClickSound()
       useStore.getState().pushToast({
         id: `premium-unwrap-${Date.now()}`,
-        message: t('imageStudio.premiumRequired') || 'Tính năng làm sạch ngắt dòng dành riêng cho gói PREMIUM!',
+        message: t('imageStudio.premiumRequired'),
         tone: 'error'
       })
       useStore.getState().setSettingsOpen(true)
@@ -279,7 +279,7 @@ export function ImageStudioPanel({
     setOcrResult({ ...ocrResult, text: unwrapped })
     useStore.getState().pushToast({
       id: `unwrap-ok-${Date.now()}`,
-      message: t('imageStudio.ocrUnwrapped') || 'Đã nối dòng thành đoạn văn!',
+      message: t('imageStudio.ocrUnwrapped'),
       tone: 'info'
     })
   }, [ocrResult, isPremium])
@@ -291,7 +291,7 @@ export function ImageStudioPanel({
       playButtonClickSound()
       useStore.getState().pushToast({
         id: `premium-md-${Date.now()}`,
-        message: t('imageStudio.premiumRequired') || 'Tính năng sao chép Markdown dành riêng cho gói PREMIUM!',
+        message: t('imageStudio.premiumRequired'),
         tone: 'error'
       })
       useStore.getState().setSettingsOpen(true)
@@ -304,7 +304,7 @@ export function ImageStudioPanel({
     setTimeout(() => setOcrCopiedMarkdown(false), 1500)
     useStore.getState().pushToast({
       id: `md-ok-${Date.now()}`,
-      message: t('imageStudio.ocrCopiedMarkdown') || 'Đã sao chép Markdown!',
+      message: t('imageStudio.ocrCopiedMarkdown'),
       tone: 'info'
     })
   }, [ocrResult, isPremium])
@@ -316,7 +316,7 @@ export function ImageStudioPanel({
       playButtonClickSound()
       useStore.getState().pushToast({
         id: `premium-save-${Date.now()}`,
-        message: t('imageStudio.premiumRequired') || 'Tính năng xuất file .TXT dành riêng cho gói PREMIUM!',
+        message: t('imageStudio.premiumRequired'),
         tone: 'error'
       })
       useStore.getState().setSettingsOpen(true)
@@ -331,7 +331,7 @@ export function ImageStudioPanel({
       setTimeout(() => setOcrSavedTxt(false), 2000)
       useStore.getState().pushToast({
         id: `save-txt-${Date.now()}`,
-        message: t('imageStudio.ocrSavedTxt') || 'Đã lưu file .TXT thành công!',
+        message: t('imageStudio.ocrSavedTxt'),
         tone: 'info'
       })
     }
@@ -347,7 +347,7 @@ export function ImageStudioPanel({
   return (
     <div className="image-studio-wrap" onClick={(e) => e.stopPropagation()}>
       <div className="image-studio-header">
-        <span>{t('imageStudio.title') || 'Tiện ích Ảnh'}</span>
+        <span>{t('imageStudio.title')}</span>
         {width && height ? <span>{width} × {height}</span> : null}
       </div>
 
@@ -357,14 +357,14 @@ export function ImageStudioPanel({
           className={`image-studio-tab${activeTab === 'convert' ? ' active' : ''}`}
           onClick={() => { setActiveTab('convert'); playButtonClickSound() }}
         >
-          {t('imageStudio.tabConvert') || 'Chuyển định dạng'}
+          {t('imageStudio.tabConvert')}
         </button>
         <button
           type="button"
           className={`image-studio-tab${activeTab === 'compress' ? ' active' : ''}`}
           onClick={() => { setActiveTab('compress'); playButtonClickSound() }}
         >
-          {t('imageStudio.tabCompress') || 'Nén dung lượng'}
+          {t('imageStudio.tabCompress')}
         </button>
         <button
           type="button"
@@ -373,7 +373,7 @@ export function ImageStudioPanel({
           style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}
         >
           <OcrIcon width={12} height={12} />
-          <span>{t('imageStudio.tabOcr') || 'Trích chữ (OCR)'}</span>
+          <span>{t('imageStudio.tabOcr')}</span>
           {!isPro ? (
             <span style={{ fontSize: 9, background: 'linear-gradient(135deg, #f59e0b, #ef4444)', padding: '1px 5px', borderRadius: 99, color: '#fff', fontWeight: 700 }}>PRO</span>
           ) : role === 'PREMIUM' ? (
@@ -388,7 +388,7 @@ export function ImageStudioPanel({
         <>
           <div className="image-studio-row">
             <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-              {t('imageStudio.targetFormat') || 'Định dạng đích'}:
+              {t('imageStudio.targetFormat')}:
             </span>
             <div className="image-format-pills">
               {(['png', 'jpeg', 'webp'] as const).map((fmt) => (
@@ -407,7 +407,7 @@ export function ImageStudioPanel({
           {convertFormat !== 'png' && (
             <div className="image-studio-row">
               <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-                {t('imageStudio.quality') || 'Chất lượng'}: {Math.round(quality * 100)}%
+                {t('imageStudio.quality')}: {Math.round(quality * 100)}%
               </span>
               <div style={{ display: 'flex', gap: 4 }}>
                 {[0.65, 0.78, 0.88, 0.95].map((q) => (
@@ -433,8 +433,8 @@ export function ImageStudioPanel({
             >
               {copiedSuccess === 'convert' ? <CheckIcon width={13} height={13} /> : <CopyIcon width={13} height={13} />}
               {copiedSuccess === 'convert'
-                ? (t('imageStudio.copied') || 'Đã chép vào clipboard!')
-                : (t('imageStudio.convertCopy') || `Sao chép ${convertFormat === 'jpeg' ? 'JPG' : convertFormat.toUpperCase()}`)}
+                ? (t('imageStudio.copied'))
+                : t('imageStudio.copyAs', { format: convertFormat === 'jpeg' ? 'JPG' : convertFormat.toUpperCase() })}
             </button>
             <button
               type="button"
@@ -443,7 +443,7 @@ export function ImageStudioPanel({
               onClick={handleConvertAndSave}
             >
               {savedSuccess ? <CheckIcon width={13} height={13} /> : <FolderOpenIcon width={13} height={13} />}
-              {savedSuccess ? (t('imageStudio.saved') || 'Đã lưu!') : (t('imageStudio.saveAs') || 'Lưu tệp...')}
+              {savedSuccess ? (t('imageStudio.saved')) : (t('imageStudio.saveAs'))}
             </button>
           </div>
         </>
@@ -453,13 +453,13 @@ export function ImageStudioPanel({
         <>
           <div className="image-studio-row">
             <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-              {t('imageStudio.compressMode') || 'Mức độ nén'}:
+              {t('imageStudio.compressMode')}:
             </span>
             <div style={{ display: 'flex', gap: 4 }}>
               {[
-                { label: 'Cân bằng', q: 0.78 },
-                { label: 'Tối đa', q: 0.65 },
-                { label: 'Chất lượng cao', q: 0.88 }
+                { label: t('imageStudio.levelBalanced'), q: 0.78 },
+                { label: t('imageStudio.levelMax'), q: 0.65 },
+                { label: t('imageStudio.levelHigh'), q: 0.88 }
               ].map(({ label, q }) => (
                 <button
                   key={q}
@@ -484,7 +484,7 @@ export function ImageStudioPanel({
             </div>
           ) : (
             <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'center', padding: '4px 0' }}>
-              {t('imageStudio.compressHint') || 'Chọn mức độ nén ở trên để tối ưu dung lượng ảnh (giảm 50% - 80%)'}
+              {t('imageStudio.compressHint')}
             </div>
           )}
 
@@ -496,7 +496,7 @@ export function ImageStudioPanel({
                 onClick={handleCopyCompressed}
               >
                 {copiedSuccess === 'compress' ? <CheckIcon width={13} height={13} /> : <CopyIcon width={13} height={13} />}
-                {copiedSuccess === 'compress' ? (t('imageStudio.copied') || 'Đã chép!') : (t('imageStudio.copyCompressed') || 'Sao chép ảnh đã nén')}
+                {copiedSuccess === 'compress' ? (t('imageStudio.copied')) : (t('imageStudio.copyCompressed'))}
               </button>
               <button
                 type="button"
@@ -504,7 +504,7 @@ export function ImageStudioPanel({
                 onClick={handleSaveCompressed}
               >
                 {savedSuccess ? <CheckIcon width={13} height={13} /> : <FolderOpenIcon width={13} height={13} />}
-                {savedSuccess ? (t('imageStudio.saved') || 'Đã lưu!') : (t('imageStudio.saveCompressed') || 'Lưu file WebP...')}
+                {savedSuccess ? (t('imageStudio.saved')) : (t('imageStudio.saveCompressed'))}
               </button>
             </div>
           )}
@@ -526,11 +526,11 @@ export function ImageStudioPanel({
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <CrownIcon width={16} height={16} fill="#f59e0b" />
                 <span style={{ fontSize: 12.5, fontWeight: 700, color: '#f59e0b' }}>
-                  {t('imageStudio.ocrProTitle') || 'Tính năng VIP & PREMIUM: Trích chữ AI (OCR)'}
+                  {t('imageStudio.ocrProTitle')}
                 </span>
               </div>
               <p style={{ margin: 0, fontSize: 11.5, color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
-                {t('imageStudio.ocrProDesc') || 'Tự động nhận diện chữ tiếng Việt & tiếng Anh từ hình ảnh bằng mô hình AI client-side nhanh chóng và bảo mật.'}
+                {t('imageStudio.ocrProDesc')}
               </p>
               <button
                 type="button"
@@ -548,7 +548,7 @@ export function ImageStudioPanel({
                   useStore.getState().setSettingsOpen(true)
                 }}
               >
-                {t('imageStudio.ocrProBtn') || 'Kích hoạt mã bản quyền trong Cài đặt'}
+                {t('imageStudio.ocrProBtn')}
               </button>
             </div>
           ) : (
@@ -570,7 +570,7 @@ export function ImageStudioPanel({
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <CrownIcon width={13} height={13} fill={isPremium ? '#c084fc' : '#f59e0b'} />
                   <span style={{ fontSize: 11, fontWeight: 700, color: isPremium ? '#c084fc' : '#f59e0b' }}>
-                    {role === 'PREMIUM' ? 'Gói PREMIUM' : 'Gói VIP'}
+                    {t('license.planBadge', { role: role === 'PREMIUM' ? 'PREMIUM' : 'VIP' })}
                   </span>
                   <span style={{
                     fontSize: 9.5,
@@ -580,7 +580,7 @@ export function ImageStudioPanel({
                     background: isPremium ? 'rgba(168, 85, 247, 0.3)' : 'rgba(245, 158, 11, 0.25)',
                     color: isPremium ? '#e9d5ff' : '#fef08a'
                   }}>
-                    {countdownStr || (role === 'PREMIUM' ? 'Còn 60 ngày' : 'Còn 30 ngày')}
+                    {countdownStr || t('license.daysLeftFixed', { days: role === 'PREMIUM' ? 60 : 30 })}
                   </span>
                 </div>
                 {!isPremium ? (
@@ -601,11 +601,11 @@ export function ImageStudioPanel({
                       useStore.getState().setSettingsOpen(true)
                     }}
                   >
-                    Nâng cấp PREMIUM
+                    {t('imageStudio.upgradePremium')}
                   </button>
                 ) : (
                   <span style={{ fontSize: 9.5, color: '#e9d5ff', background: 'rgba(168, 85, 247, 0.25)', padding: '1px 6px', borderRadius: 4, fontWeight: 600 }}>
-                    Auto-OCR & Xuất File
+                    {t('imageStudio.autoOcrExport')}
                   </span>
                 )}
               </div>
@@ -613,13 +613,13 @@ export function ImageStudioPanel({
               {/* Language Selection */}
               <div className="image-studio-row">
                 <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-                  {t('imageStudio.ocrLangLabel') || 'Ngôn ngữ nhận diện:'}
+                  {t('imageStudio.ocrLangLabel')}
                 </span>
                 <div style={{ display: 'flex', gap: 4 }}>
                   {[
-                    { id: 'vie+eng' as const, label: 'Việt + Anh' },
+                    { id: 'vie+eng' as const, label: t('imageStudio.langViEn') },
                     { id: 'eng' as const, label: 'English' },
-                    { id: 'vie' as const, label: 'Tiếng Việt' }
+                    { id: 'vie' as const, label: t('imageStudio.langVi') }
                   ].map((item) => (
                     <button
                       key={item.id}
@@ -644,7 +644,7 @@ export function ImageStudioPanel({
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                   <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.75)' }}>
-                    {t('imageStudio.autoOcr') || 'Tự động trích chữ khi mở ảnh'}
+                    {t('imageStudio.autoOcr')}
                   </span>
                   <span style={{
                     fontSize: 8.5,
@@ -673,14 +673,14 @@ export function ImageStudioPanel({
                   onClick={handleStartOcr}
                 >
                   <OcrIcon width={14} height={14} />
-                  <span>{t('imageStudio.ocrStartBtn') || 'Bắt đầu trích xuất chữ'}</span>
+                  <span>{t('imageStudio.ocrStartBtn')}</span>
                 </button>
               )}
 
               {ocrRunning && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: '6px 0' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>
-                    <span>{ocrStatus || (t('imageStudio.ocrExtracting') || 'Đang nhận diện chữ...')}</span>
+                    <span>{ocrStatus || (t('imageStudio.ocrExtracting'))}</span>
                     <strong style={{ color: '#38bdf8' }}>{ocrProgress}%</strong>
                   </div>
                   <div style={{ height: 4, background: 'rgba(255,255,255,0.1)', borderRadius: 2, overflow: 'hidden' }}>
@@ -700,7 +700,7 @@ export function ImageStudioPanel({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.45)' }}>
-                      {ocrResult.linesCount} dòng · {ocrResult.wordsCount} từ · ~{ocrResult.confidence}% tin cậy
+                      {t('imageStudio.ocrStats', { lines: ocrResult.linesCount, words: ocrResult.wordsCount, confidence: ocrResult.confidence })}
                     </span>
                     <button
                       type="button"
@@ -714,13 +714,13 @@ export function ImageStudioPanel({
                       }}
                       onClick={handleStartOcr}
                     >
-                      {t('imageStudio.ocrRefresh') || 'Quét lại'}
+                      {t('imageStudio.ocrRefresh')}
                     </button>
                   </div>
 
                   <textarea
                     readOnly
-                    value={ocrResult.text || (t('imageStudio.ocrNotFound') || '(Không phát hiện thấy văn bản rõ ràng)')}
+                    value={ocrResult.text || (t('imageStudio.ocrNotFound'))}
                     rows={4}
                     style={{
                       width: '100%',
@@ -754,7 +754,7 @@ export function ImageStudioPanel({
                         gap: 4
                       }}
                     >
-                      <span>{t('imageStudio.ocrUnwrap') || 'Bỏ ngắt dòng'}</span>
+                      <span>{t('imageStudio.ocrUnwrap')}</span>
                       <span style={{ fontSize: 8, background: isPremium ? '#a855f7' : 'rgba(255,255,255,0.15)', color: '#fff', padding: '0 3px', borderRadius: 3, fontWeight: 700 }}>PRO+</span>
                     </button>
                     <button
@@ -771,7 +771,7 @@ export function ImageStudioPanel({
                         gap: 4
                       }}
                     >
-                      <span>{ocrCopiedMarkdown ? (t('imageStudio.ocrCopiedMarkdown') || 'Đã chép MD!') : (t('imageStudio.ocrCopyMarkdown') || 'Chép Markdown')}</span>
+                      <span>{ocrCopiedMarkdown ? (t('imageStudio.ocrCopiedMarkdown')) : (t('imageStudio.ocrCopyMarkdown'))}</span>
                       <span style={{ fontSize: 8, background: isPremium ? '#a855f7' : 'rgba(255,255,255,0.15)', color: '#fff', padding: '0 3px', borderRadius: 3, fontWeight: 700 }}>PRO+</span>
                     </button>
                     <button
@@ -788,7 +788,7 @@ export function ImageStudioPanel({
                         gap: 4
                       }}
                     >
-                      <span>{ocrSavedTxt ? (t('imageStudio.ocrSavedTxt') || 'Đã lưu!') : (t('imageStudio.ocrSaveTxt') || 'Lưu .TXT')}</span>
+                      <span>{ocrSavedTxt ? (t('imageStudio.ocrSavedTxt')) : (t('imageStudio.ocrSaveTxt'))}</span>
                       <span style={{ fontSize: 8, background: isPremium ? '#a855f7' : 'rgba(255,255,255,0.15)', color: '#fff', padding: '0 3px', borderRadius: 3, fontWeight: 700 }}>PRO+</span>
                     </button>
                   </div>
@@ -801,7 +801,7 @@ export function ImageStudioPanel({
                       disabled={!ocrResult.text}
                     >
                       {ocrCopied ? <CheckIcon width={13} height={13} /> : <CopyIcon width={13} height={13} />}
-                      {ocrCopied ? (t('imageStudio.ocrCopiedText') || 'Đã sao chép chữ!') : (t('imageStudio.ocrCopyText') || 'Sao chép văn bản')}
+                      {ocrCopied ? (t('imageStudio.ocrCopiedText')) : (t('imageStudio.ocrCopyText'))}
                     </button>
                     <button
                       type="button"
@@ -810,7 +810,7 @@ export function ImageStudioPanel({
                       disabled={!ocrResult.text}
                     >
                       {ocrAddedToHistory ? <CheckIcon width={13} height={13} /> : <span>+</span>}
-                      {ocrAddedToHistory ? (t('imageStudio.ocrAddedToHistory') || 'Đã thêm vào lịch sử!') : (t('imageStudio.ocrAddToHistory') || 'Thêm vào danh sách')}
+                      {ocrAddedToHistory ? (t('imageStudio.ocrAddedToHistory')) : (t('imageStudio.ocrAddToHistory'))}
                     </button>
                   </div>
                 </div>

@@ -6,6 +6,7 @@ import { pushState } from './state'
 import { getSettings } from '../store/settings'
 import { resolveUpdateMode } from '../../shared/types'
 import { getMainWindow, setVisible, sendToMainWindow } from './window'
+import { mt } from './i18n'
 
 export interface CachedUpdateInfo {
   hasUpdate: boolean
@@ -153,10 +154,8 @@ export function showUpdateAvailableNotification(version: string, isAuto: boolean
     const ElectronNotification = (require('electron') as any).Notification
     if (ElectronNotification && typeof ElectronNotification.isSupported === 'function' && ElectronNotification.isSupported()) {
       const notif = new ElectronNotification({
-        title: `T-Drop — Có bản cập nhật mới v${version}!`,
-        body: isAuto
-          ? `Đang tự động tải ngầm bản cập nhật v${version}. Bạn có thể tiếp tục sử dụng bình thường.`
-          : `Phiên bản mới v${version} đã sẵn sàng trên GitHub. Nhấn vào đây để tải về và cập nhật.`,
+        title: mt('main.update.availableTitle', { version }),
+        body: mt(isAuto ? 'main.update.availableAuto' : 'main.update.availableManual', { version }),
         icon: getNotificationIcon(),
         silent: false
       })
@@ -194,8 +193,8 @@ export function showUpdateDownloadedNotification(version: string): void {
     const ElectronNotification = (require('electron') as any).Notification
     if (ElectronNotification && typeof ElectronNotification.isSupported === 'function' && ElectronNotification.isSupported()) {
       const notif = new ElectronNotification({
-        title: `T-Drop — Bản cập nhật v${version} đã tải xong!`,
-        body: `Bản cập nhật v${version} đã sẵn sàng. Nhấn vào đây để khởi động lại và áp dụng ngay.`,
+        title: mt('main.update.downloadedTitle', { version }),
+        body: mt('main.update.downloadedBody', { version }),
         icon: getNotificationIcon(),
         silent: false
       })

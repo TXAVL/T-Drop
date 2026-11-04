@@ -128,7 +128,7 @@ export function ShelfSearch() {
             inputRef.current?.focus()
           }}
           className="search-clear-btn"
-          title="Xóa tìm kiếm (Esc)"
+          title={t('header.clearSearch')}
         >
           ✕
         </button>

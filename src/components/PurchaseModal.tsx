@@ -18,11 +18,11 @@ import {
   getVietQrImageUrl,
   buildTransferContent,
   renewedExpiry,
-  formatExpiryDate,
   getDaysRemaining,
   type TdropOrder
 } from '../../shared/license'
 import { fetchOrderStatus, fetchRenewalInfo } from '../lib/licenseApi'
+import { expiryText } from '../lib/licenseText'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { useStore } from '../store/appStore'
 import { t } from '../i18n'
@@ -90,7 +90,7 @@ export function PurchaseWindowView({ mode = 'buy' }: { mode?: CheckoutMode }) {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 600 }}>
           <CrownIcon width={16} height={16} fill="#f59e0b" />
-          <span>{mode === 'renew' ? t('renew.windowTitle') : 'T-Drop — Nâng Cấp Bản Quyền VIP & PREMIUM'}</span>
+          <span>{mode === 'renew' ? t('renew.windowTitle') : t('purchase.windowTitle')}</span>
         </div>
         <button
           type="button"
@@ -110,7 +110,7 @@ export function PurchaseWindowView({ mode = 'buy' }: { mode?: CheckoutMode }) {
           }}
           onMouseEnter={(e) => { e.currentTarget.style.color = '#ef4444' }}
           onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)' }}
-          title="Đóng cửa sổ"
+          title={t('purchase.closeWindow')}
         >
           <CloseIcon width={14} height={14} />
         </button>
@@ -384,12 +384,12 @@ function PurchaseWindowContent({
             isPro: true,
             licenseKey: key,
             licenseRole: activatedRole,
-            licenseUserName: res.userName || 'Khách hàng',
+            licenseUserName: res.userName || t('license.defaultUser'),
             licenseExpiresAt: res.expiresAt || null
           }
         }))
         const text = isRenew
-          ? t('renew.success', { date: formatExpiryDate(res.expiresAt) })
+          ? t('renew.success', { date: expiryText(res.expiresAt) })
           : res.message || t('purchase.activatedSuccess', { role: activatedRole })
         setActivationMsg({ text, ok: true })
         setPaidInfo({
@@ -486,7 +486,7 @@ function PurchaseWindowContent({
             isPro: true,
             licenseKey: trimmed,
             licenseRole: activatedRole,
-            licenseUserName: res.userName || 'Khách hàng',
+            licenseUserName: res.userName || t('license.defaultUser'),
             licenseExpiresAt: res.expiresAt || null
           }
         }))
@@ -613,7 +613,7 @@ function PurchaseWindowContent({
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
                 <strong style={{ color: current.role === 'PREMIUM' ? '#c084fc' : '#f59e0b', fontSize: 13.5 }}>{current.role}</strong>
                 <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-                  {t('renew.expiresOn', { date: formatExpiryDate(current.expiresAt) })}
+                  {t('renew.expiresOn', { date: expiryText(current.expiresAt) })}
                   {daysLeft !== null && <span style={{ color: daysLeft <= 3 ? '#f87171' : '#7dd3fc' }}> · {t('renew.daysLeft', { days: daysLeft })}</span>}
                 </span>
               </div>
@@ -673,7 +673,7 @@ function PurchaseWindowContent({
             </div>
             {isRenew && newExpiry && (
               <div style={{ marginTop: 6, fontSize: 11.5, color: '#6ee7b7' }}>
-                {t('renew.newExpiry', { date: formatExpiryDate(newExpiry.toISOString()) })}
+                {t('renew.newExpiry', { date: expiryText(newExpiry.toISOString()) })}
                 {current?.role === 'PREMIUM' && role === 'VIP' && (
                   <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}> · {t('renew.keepsPremium')}</span>
                 )}
@@ -873,7 +873,7 @@ function PurchaseWindowContent({
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
                   <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.paidExpiry')}</span>
-                  <strong style={{ color: '#6ee7b7' }}>{formatExpiryDate(paidInfo.expiresAt)}</strong>
+                  <strong style={{ color: '#6ee7b7' }}>{expiryText(paidInfo.expiresAt)}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
                   <span style={{ color: 'rgba(255, 255, 255, 0.55)' }}>{t('purchase.paidKey')}</span>
@@ -1019,7 +1019,7 @@ function PurchaseWindowContent({
           <div style={{ textAlign: 'center', background: '#ffffff', padding: 12, borderRadius: 12 }}>
             <img
               src={qrUrl}
-              alt="VietQR Chuyển Khoản"
+              alt={t('purchase.qrAlt')}
               style={{ width: '100%', maxWidth: 260, height: 'auto', display: 'block', margin: '0 auto', borderRadius: 8 }}
             />
             <span style={{ fontSize: 11, color: '#666', marginTop: 6, display: 'block' }}>

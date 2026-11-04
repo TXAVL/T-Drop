@@ -12,6 +12,7 @@ import { SUPABASE_CONFIG, type DeviceFingerprint, type LicenseActivationResult, 
 import { loadSettings, saveSettings } from '../store/settings'
 import { pushState } from './state'
 import { AppLogger } from './logger'
+import { mt } from './i18n'
 
 let cachedFingerprint: DeviceFingerprint | null = null
 
@@ -87,6 +88,18 @@ export class TxaLicense {
 }
 
 /**
+ * The license server answers in Vietnamese. Show the user's language instead, keyed
+ * by the stable result code; unknown codes keep the server's own message.
+ */
+function localizedLicenseMessage(data: { ok: boolean; code?: string; message?: string; role?: string }): string {
+  const known = ['NOT_FOUND', 'INACTIVE', 'EXPIRED', 'HARDWARE_MISMATCH', 'ACTIVATED', 'VERIFIED']
+  if (data.code && known.includes(data.code)) {
+    return mt(`main.license.code.${data.code}`, { role: data.role === 'PREMIUM' ? 'PREMIUM' : 'VIP' })
+  }
+  return data.message || (data.ok ? mt('main.license.activated') : mt('main.license.activateFailed'))
+}
+
+/**
  * Activate a license key with Supabase.
  * VIP = 30 days validity, PREMIUM = 60 days validity.
  */
@@ -94,7 +107,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
   const trimmed = key.trim().toUpperCase()
   if (!trimmed) {
     AppLogger.write('WARN', 'License', 'Kích hoạt thất bại: mã bản quyền rỗng')
-    return { ok: false, code: 'NOT_FOUND', message: 'Vui lòng nhập mã bản quyền' }
+    return { ok: false, code: 'NOT_FOUND', message: mt('main.license.enterKey') }
   }
 
   const { hardwareId, pcName, hwHash } = getDeviceFingerprint()
@@ -121,7 +134,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
     if (!res.ok) {
       const errText = await res.text()
       AppLogger.write('ERROR', 'License', `Supabase trả về lỗi HTTP ${res.status}: ${errText}`)
-      return { ok: false, code: 'NETWORK_ERROR', message: `Lỗi kết nối máy chủ (${res.status}): ${errText}` }
+      return { ok: false, code: 'NETWORK_ERROR', message: mt('main.license.serverError', { status: res.status, error: errText }) }
     }
 
     const data = await res.json() as {
@@ -140,7 +153,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
         isPro: true,
         licenseKey: trimmed,
         licenseRole: role,
-        licenseUserName: data.user_name || 'Khách hàng',
+        licenseUserName: data.user_name || '', // empty = show the localized default name in the UI
         licenseExpiresAt: data.expires_at || null
       })
       pushState.settings(loadSettings())
@@ -151,7 +164,7 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
     return {
       ok: Boolean(data.ok),
       code: data.code as any,
-      message: data.message || (data.ok ? 'Kích hoạt bản quyền thành công!' : 'Kích hoạt không thành công'),
+      message: localizedLicenseMessage(data),
       role: data.role,
       userName: data.user_name,
       expiresAt: data.expires_at
@@ -159,8 +172,8 @@ export async function activateLicense(key: string): Promise<LicenseActivationRes
   } catch (err: any) {
     const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('aborted')
     const msg = isTimeout
-      ? 'Hết thời gian chờ phản hồi từ máy chủ (quá 8 giây). Vui lòng kiểm tra lại kết nối mạng.'
-      : `Không thể kết nối đến máy chủ xác minh: ${err?.message || String(err)}`
+      ? mt('main.license.timeout')
+      : mt('main.license.cannotConnect', { error: err?.message || String(err) })
     AppLogger.write('ERROR', 'License', `Ngoại lệ khi gọi Supabase: ${err?.message || String(err)}`)
     return {
       ok: false,

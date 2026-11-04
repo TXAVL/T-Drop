@@ -788,7 +788,7 @@ function PreviewContent({
                 onClick={() => window.open(activeText, '_blank')}
               />
               <QuickActionButton
-                title={t('qr.title') || 'Chia sẻ mã QR'}
+                title={t('qr.title')}
                 icon={QrCodeIcon}
                 onClick={() => {
                   playButtonClickSound()
@@ -1034,16 +1034,16 @@ function PreviewContent({
             alignItems: 'center',
             gap: 6
           }}>
-            <span>{stats.characters.toLocaleString()} {t('text.chars') || 'ký tự'}</span>
+            <span>{stats.characters.toLocaleString()} {t('text.chars')}</span>
             <span style={{ opacity: 0.4 }}>·</span>
-            <span>{stats.words.toLocaleString()} {t('text.words') || 'từ'}</span>
+            <span>{stats.words.toLocaleString()} {t('text.words')}</span>
             <span style={{ opacity: 0.4 }}>·</span>
-            <span>{stats.lines.toLocaleString()} {t('text.lines') || 'dòng'}</span>
+            <span>{stats.lines.toLocaleString()} {t('text.lines')}</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <QuickActionButton
-              title={t('qr.title') || 'Chia sẻ mã QR'}
+              title={t('qr.title')}
               icon={QrCodeIcon}
               onClick={() => {
                 playButtonClickSound()
@@ -1076,8 +1076,8 @@ function PreviewContent({
         >
           <button
             type="button"
-            title={t('text.upperTip') || 'Chuyển sang IN HOA và sao chép'}
-            onClick={() => handleTransform(toUpper, t('text.copiedUpper') || 'Đã sao chép chữ IN HOA!')}
+            title={t('text.upperTip')}
+            onClick={() => handleTransform(toUpper, t('text.copiedUpper'))}
             style={{
               background: 'rgba(255, 255, 255, 0.06)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -1096,8 +1096,8 @@ function PreviewContent({
 
           <button
             type="button"
-            title={t('text.lowerTip') || 'Chuyển sang chữ thường và sao chép'}
-            onClick={() => handleTransform(toLower, t('text.copiedLower') || 'Đã sao chép chữ thường!')}
+            title={t('text.lowerTip')}
+            onClick={() => handleTransform(toLower, t('text.copiedLower'))}
             style={{
               background: 'rgba(255, 255, 255, 0.06)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -1116,8 +1116,8 @@ function PreviewContent({
 
           <button
             type="button"
-            title={t('text.titleTip') || 'Chuyển sang In Hoa Đầu Từ và sao chép'}
-            onClick={() => handleTransform(toTitleCase, t('text.copiedTitle') || 'Đã sao chép In Hoa Đầu Từ!')}
+            title={t('text.titleTip')}
+            onClick={() => handleTransform(toTitleCase, t('text.copiedTitle'))}
             style={{
               background: 'rgba(255, 255, 255, 0.06)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -1136,8 +1136,8 @@ function PreviewContent({
 
           <button
             type="button"
-            title={t('text.camelTip') || 'Chuyển sang camelCase và sao chép'}
-            onClick={() => handleTransform(toCamelCase, t('text.copiedCamel') || 'Đã sao chép dạng camelCase!')}
+            title={t('text.camelTip')}
+            onClick={() => handleTransform(toCamelCase, t('text.copiedCamel'))}
             style={{
               background: 'rgba(255, 255, 255, 0.06)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -1156,8 +1156,8 @@ function PreviewContent({
 
           <button
             type="button"
-            title={t('text.cleanSpaceTip') || 'Làm sạch khoảng trắng thừa, xóa dòng trống thừa'}
-            onClick={() => handleTransform(toCleanSpace, t('text.copiedClean') || 'Đã làm sạch khoảng trắng!')}
+            title={t('text.cleanSpaceTip')}
+            onClick={() => handleTransform(toCleanSpace, t('text.copiedClean'))}
             style={{
               background: 'rgba(0, 210, 255, 0.1)',
               border: '1px solid rgba(0, 210, 255, 0.25)',

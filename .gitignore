@@ -21,4 +21,4 @@ electron-clipboard-search-implementation/
 scratch/verify-*.cjs
 scratch/release_notes*.md
 *.traineddata
-
+.env.i18n

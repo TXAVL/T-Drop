@@ -484,7 +484,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
           {item.data.kind === 'text' && !item.data.isUrl && !item.data.isColor && !colorInfo && (
             <button
               className="act act-text-transform"
-              title={t('item.transformCase') || 'Đổi kiểu chữ (HOA / thường / Viết Hoa Đầu Từ)'}
+              title={t('item.transformCase')}
               onClick={(e) => {
                 e.stopPropagation()
                 e.preventDefault()
@@ -503,7 +503,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
                 setCopied(true)
                 useStore.getState().pushToast({
                   id: Date.now().toString(),
-                  message: 'Đã đổi kiểu chữ & sao chép vào clipboard!',
+                  message: t('toast.caseChanged'),
                   tone: 'info'
                 })
                 window.setTimeout(() => setCopied(false), 900)
@@ -515,7 +515,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
           {item.data.kind === 'text' && (
             <button
               className="act act-qr"
-              title={t('qr.title') || 'Chia sẻ mã QR (Quét bằng điện thoại)'}
+              title={t('qr.title')}
               onClick={(e) => {
                 e.stopPropagation()
                 e.preventDefault()
@@ -533,7 +533,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
           {Boolean(singleImageSrc) && (
             <button
               className="act act-ocr-img"
-              title={t('item.extractText') || 'Xử lý hình ảnh (Đổi đuôi, Nén, OCR)'}
+              title={t('item.extractText')}
               onClick={(e) => {
                 e.stopPropagation()
                 e.preventDefault()
@@ -1382,7 +1382,7 @@ function ItemDetails({ item }: { item: ClipboardItemDto }) {
         <>
           {isJson && <span className="meta-code-tag">JSON</span>}
           {isCode && <span className="meta-code-tag">CODE</span>}
-          <span className="meta-detail">· {len} {t('stats.chars') || 'ký tự'}{words > 1 ? ` · ${words} ${t('stats.words') || 'từ'}` : ''}</span>
+          <span className="meta-detail">· {len} {t('stats.chars')}{words > 1 ? ` · ${words} ${t('stats.words')}` : ''}</span>
         </>
       )
     }

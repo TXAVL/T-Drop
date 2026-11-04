@@ -618,10 +618,10 @@ export const useStore = create<AppState>((set, get) => ({
       if (removedItem) {
         get().pushToast({
           id: `undo-${Date.now()}`,
-          message: t('toast.itemDeleted') || 'Đã xóa mục',
+          message: t('toast.itemDeleted'),
           tone: 'info',
           action: {
-            label: t('common.undo') || 'Hoàn tác',
+            label: t('common.undo'),
             onClick: async () => {
               try {
                 const restored = await edge.addItemData(removedItem.data)

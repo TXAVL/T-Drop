@@ -62,7 +62,7 @@ export function QrModal() {
       setCopied(true)
       pushToast({
         id: Date.now().toString(),
-        message: t('qr.imageCopied') || 'Đã sao chép ảnh mã QR vào clipboard!',
+        message: t('qr.imageCopied'),
         tone: 'info'
       })
       setTimeout(() => setCopied(false), 1500)
@@ -82,7 +82,7 @@ export function QrModal() {
     document.body.removeChild(a)
     pushToast({
       id: Date.now().toString(),
-      message: t('qr.downloadSuccess') || 'Đã lưu ảnh mã QR (.PNG)!',
+      message: t('qr.downloadSuccess'),
       tone: 'info'
     })
   }
@@ -113,7 +113,7 @@ export function QrModal() {
               </div>
               <div className="txa-modal-title-text" style={{ minWidth: 0 }}>
                 <div className="txa-modal-title">
-                  {t('qr.title') || 'Chia sẻ mã QR'}
+                  {t('qr.title')}
                 </div>
                 <div
                   className="txa-modal-subtitle"
@@ -133,7 +133,7 @@ export function QrModal() {
               type="button"
               className="txa-modal-close"
               onClick={handleClose}
-              title={t('header.close') || 'Đóng'}
+              title={t('header.close')}
             >
               <CloseIcon width={14} height={14} />
             </button>
@@ -165,7 +165,7 @@ export function QrModal() {
               />
             ) : (
               <div style={{ color: '#0f172a', fontSize: 13, fontWeight: 500 }}>
-                {t('common.loading') || 'Đang tạo...'}
+                {t('common.loading')}
               </div>
             )}
           </div>
@@ -180,7 +180,7 @@ export function QrModal() {
               padding: '0 8px'
             }}
           >
-            {t('qr.scanTip') || 'Mở camera trên điện thoại (iOS / Android) để quét và nhận nội dung tức thì không cần dây cáp.'}
+            {t('qr.scanTip')}
           </div>
 
           {/* Actions */}
@@ -219,7 +219,7 @@ export function QrModal() {
               }}
             >
               {copied ? <CheckIcon width={14} height={14} /> : <CopyIcon width={14} height={14} />}
-              <span>{copied ? (t('item.copied') || 'Đã sao chép') : (t('qr.copyImage') || 'Chép ảnh')}</span>
+              <span>{copied ? (t('item.copied')) : (t('qr.copyImage'))}</span>
             </button>
 
             <button
@@ -255,7 +255,7 @@ export function QrModal() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              <span>{t('qr.download') || 'Tải ảnh PNG'}</span>
+              <span>{t('qr.download')}</span>
             </button>
           </div>
         </motion.div>
