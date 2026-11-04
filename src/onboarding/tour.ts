@@ -1020,6 +1020,21 @@ export async function showEdge(run: Run, stage: Stage, to: StickPosition) {
   await playEdge(run, to, 1100)
 }
 
+
+async function demoBackup(run: Run, stage: Stage) {
+  const p = new Pointer(run, stage.cursor)
+  await p.show(520, 360)
+  const target = card(stage, 'demo-pdf')
+  const r = rect(stage, target)
+  const at = { x: r.left + r.width * 0.5, y: r.top + r.height * 0.3 }
+  zoomTo(stage.lens, withEdge(PUSH, at.x), 900)
+  await p.move(at.x, at.y, 800)
+  await run.sleep(400)
+  zoomRest(stage.lens, 800)
+  await p.move(480, 340, 600)
+  await run.sleep(400)
+}
+
 export const DEMOS: Record<string, ((run: Run, stage: Stage) => Promise<void>) | undefined> = {
   welcome: demoWelcome,
   collect: demoCollect,
@@ -1027,7 +1042,8 @@ export const DEMOS: Record<string, ((run: Run, stage: Stage) => Promise<void>) |
   drag: demoDrag,
   stacks: demoStacks,
   preview: demoPreview,
-  find: demoFind
+  find: demoFind,
+  backup: demoBackup
 }
 
 // ---------- replays ----------

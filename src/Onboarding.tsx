@@ -22,16 +22,13 @@ import { applyReduceMotion } from './lib/theme'
 import { useTranslation } from './i18n'
 import { DEFAULT_SETTINGS, type Settings, type StickPosition } from '../shared/types'
 import { ONBOARDING_VERSION } from '../shared/onboarding'
-import { PEN_PATH, PEN_TRANSFORM, PEN_WIDTH, GLASS_BOX, SHADOW_BOX, BLUR_BOX, penProgress } from './onboarding/lettering'
+import { PEN_PATH, PEN_TRANSFORM, PEN_WIDTH, penProgress } from './onboarding/lettering'
 import { CHOICE_VIEW, DEMOS, PREVIEW_PAN, Run, STOP, demoEdges, itemsFor, playLooped, resetDemoState, showEdge, watchActivity, type Stage } from './onboarding/tour'
 import { realScreenTransform, realSidePanel, tourBar, shelfTransform, topBarLength, SHELF_SCALE, TOUR_SCREEN_TOP } from './onboarding/edgeBar'
 import { otherFiles, pageLines, pageTitle, stackFiles } from './onboarding/demoItems'
 import { Autoplay, readingMs } from './onboarding/autoplay'
 import { fileIconUrl, fileKindOf } from './lib/fileKind'
 import skyUrl from './assets/onboarding/sky.png'
-import glassUrl from './assets/onboarding/glass.png'
-import glassShadowUrl from './assets/onboarding/glass-shadow.png'
-import glassBlurUrl from './assets/onboarding/glass-blur.png'
 import fogHeavyUrl from './assets/onboarding/welcome-blur-heavy.png'
 import fogMidUrl from './assets/onboarding/welcome-blur-mid.png'
 import './styles/onboarding.css'
@@ -211,7 +208,7 @@ export function Onboarding() {
       if (settings.reduceMotion) setPlaying(false)
       // Start once every image is decoded, so the first frame is already the blurred scene.
       const decode = (src: string) => { const im = new Image(); im.src = src; return im.decode().catch(() => {}) }
-      await Promise.all([skyUrl, glassUrl, glassShadowUrl, glassBlurUrl, fogHeavyUrl, fogMidUrl].map(decode))
+      await Promise.all([skyUrl, fogHeavyUrl, fogMidUrl].map(decode))
       if (!cancelled) setReady(true)
     })
     return () => {
@@ -437,7 +434,45 @@ export function Onboarding() {
               </div>
             </div>
 
-            {/* Another app, for the drag demo. */}
+{/* T-Drop Backup & Restore Archive mock view */}
+            <div className={`ob-win ob-backup-mock${s.key === 'backup' ? ' is-visible' : ''}`}>
+              <div className="ob-win-bar">
+                <span className="ob-notes-title">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                  </svg>
+                  T-Drop Backup &amp; Restore (.txa)
+                </span>
+                <Caption />
+              </div>
+              <div className="ob-backup-body">
+                <div className="ob-backup-card">
+                  <div className="ob-backup-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                      <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                  </div>
+                  <div className="ob-backup-meta">
+                    <b>T-Drop-Archive-2026.txa</b>
+                    <span>128 clips • 5 pinned • 12 notes</span>
+                    <div className="ob-backup-tags">
+                      <span className="tag-enc">AES-256</span>
+                      <span className="tag-mode">{t('backup.modeMerge') || 'Merge'}</span>
+                      <span className="tag-mode">{t('backup.modeOverwrite') || 'Overwrite'}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="ob-backup-actions">
+                  <button type="button" className="btn-exp">{t('backup.exportBtn') || 'Export .txa'}</button>
+                  <button type="button" className="btn-imp">{t('backup.importBtn') || 'Import .txa'}</button>
+                </div>
+              </div>
+            </div>
+
+                        {/* Another app, for the drag demo. */}
             <div className="ob-notes" ref={notesRef}>
               <div className="ob-notes-bar">
                 <span className="ob-notes-title"><i />{t('tour.notesApp')}</span>
@@ -628,18 +663,46 @@ export function Onboarding() {
         <div className="ob-letters" ref={lettersRef} aria-label="T-Drop">
           <svg viewBox="0 0 800 640" width="800" height="640">
             <defs>
+              <linearGradient id="tdrop-glass-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+                <stop offset="50%" stopColor="#bae6fd" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#7dd3fc" stopOpacity="0.8" />
+              </linearGradient>
+              <linearGradient id="tdrop-badge-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#818cf8" />
+                <stop offset="100%" stopColor="#c084fc" />
+              </linearGradient>
+              <filter id="tdrop-glass-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="16" stdDeviation="20" floodColor="#0284c7" floodOpacity="0.35" />
+                <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="#000000" floodOpacity="0.5" />
+              </filter>
               <mask id="ob-pen" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="640">
                 <g transform={PEN_TRANSFORM}>
-                  <path ref={penRef} d={PEN_PATH} pathLength={1} fill="none" stroke="#fff" strokeWidth={PEN_WIDTH}
+                  <path ref={penRef} d={PEN_PATH} pathLength={1} fill="none" stroke="#fff" strokeWidth={PEN_WIDTH * 2}
                     strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 2" strokeDashoffset="1" />
                 </g>
               </mask>
             </defs>
-            <image ref={shadowRef} href={glassShadowUrl} {...SHADOW_BOX} opacity="0" style={{ transition: 'opacity .6s ease-out' }} />
-            <image href={glassUrl} {...GLASS_BOX} mask="url(#ob-pen)" />
+
+            {/* Glowing Brand Backdrop */}
+            <g ref={shadowRef} opacity="0" style={{ transition: 'opacity .6s ease-out' }}>
+              <rect x="200" y="240" width="400" height="120" rx="28" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(56, 189, 248, 0.3)" strokeWidth="1.5" filter="url(#tdrop-glass-shadow)" />
+            </g>
+
+            {/* Vector T-Drop Glass Brandmark revealed by the pen */}
+            <g mask="url(#ob-pen)">
+              <g transform="translate(224, 252)">
+                <rect x="0" y="0" width="96" height="96" rx="24" fill="rgba(30, 41, 59, 0.85)" stroke="url(#tdrop-badge-grad)" strokeWidth="3" />
+                <path d="M 24 30 L 72 30 M 48 30 L 48 68" stroke="url(#tdrop-badge-grad)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="70" cy="66" r="6" fill="#38bdf8" />
+                <text x="114" y="68" fill="url(#tdrop-glass-grad)" fontSize="68" fontWeight="800" letterSpacing="-2px" fontFamily="'Plus Jakarta Sans', system-ui, sans-serif">
+                  T-Drop
+                </text>
+              </g>
+            </g>
           </svg>
         </div>
-        <img className="ob-letters-blur" src={glassBlurUrl} alt="" style={BLUR_BOX} />
       </div>
     </div>
   )

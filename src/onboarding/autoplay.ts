@@ -25,7 +25,8 @@ const DEMO_MS: Record<string, number> = {
   drag: 3750,
   stacks: 7500,
   preview: 6000,
-  find: 9200
+  find: 9200,
+  backup: 5500
 }
 
 /** Han, kana and Hangul: one character carries about a word. */

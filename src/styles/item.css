@@ -71,6 +71,10 @@
    geometry stays exact while `96px` is only the first-guess fallback for
    never-rendered cards. Scoped to the scroll list so flyouts/overlays are
    untouched. */
+.list-stack .item[data-near] {
+  content-visibility: visible;
+}
+
 .list-stack .item {
   content-visibility: auto;
   contain-intrinsic-size: auto 96px;
