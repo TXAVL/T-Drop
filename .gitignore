@@ -25,3 +25,4 @@ scratch/release_notes*.md
 .claude/
 .agents/
 skills-lock.json
+build/

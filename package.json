@@ -22,6 +22,7 @@
     "test": "vitest run",
     "i18n:sync": "node scripts/i18n-sync.cjs",
     "i18n:check": "node scripts/i18n-sync.cjs --check",
+    "build:nsis-assets": "node scripts/generate_nsis_assets.cjs",
     "postinstall": "install-electron"
   },
   "build": {
@@ -99,7 +100,14 @@
       "shortcutName": "T-Drop",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "artifactName": "T-Drop-Setup-${version}.${ext}"
+      "installerIcon": "resources/icon.ico",
+      "uninstallerIcon": "resources/icon.ico",
+      "installerHeader": "resources/installerHeader.bmp",
+      "installerSidebar": "resources/installerSidebar.bmp",
+      "uninstallerSidebar": "resources/uninstallerSidebar.bmp",
+      "include": "resources/installer.nsh",
+      "artifactName": "T-Drop-Setup-${version}.${ext}",
+      "uninstallDisplayName": "T-Drop ${version}"
     },
     "appx": {
       "identityName": "TXAVLOG.TDrop",
