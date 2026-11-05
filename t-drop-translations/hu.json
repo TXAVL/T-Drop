@@ -189,7 +189,9 @@
     "copyStyle": "Másolás",
     "sparkleStyle": "Szikra",
     "openStyleSelector": "Stílus kiválasztása",
-    "closeStyleSelector": "Stílusválasztó bezárása"
+    "closeStyleSelector": "Stílusválasztó bezárása",
+    "lightningStyle": "Villám",
+    "pulseStyle": "Impulzus"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Képernyő",
     "quit": "Kilépés az T-Drop-ból",
     "welcomeTitle": "T-Drop vágólap-polc",
-    "welcomeBody": "Húzza az egeret a képernyő bal-középső széle mentén, vagy nyomja meg az Alt+C billentyűt a polc kinyitásához."
+    "welcomeBody": "Húzza az egeret a képernyő bal-középső széle mentén, vagy nyomja meg az Alt+C billentyűt a polc kinyitásához.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Másolásjelző stílusa",

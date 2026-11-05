@@ -189,7 +189,9 @@
     "copyStyle": "Kopioi",
     "sparkleStyle": "Kipinä",
     "openStyleSelector": "Valitse tyyli",
-    "closeStyleSelector": "Sulje tyylin valinta"
+    "closeStyleSelector": "Sulje tyylin valinta",
+    "lightningStyle": "Salama",
+    "pulseStyle": "Pulssi"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Näyttö",
     "quit": "Lopeta T-Drop",
     "welcomeTitle": "T-Drop leikepöytähylly",
-    "welcomeBody": "Vie osoitin näytön vasemman reunan keskikohtaan tai paina Alt+C avataksesi hylly."
+    "welcomeBody": "Vie osoitin näytön vasemman reunan keskikohtaan tai paina Alt+C avataksesi hylly.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Kopiointi-indikaattorin tyyli",

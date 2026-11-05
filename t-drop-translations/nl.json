@@ -189,7 +189,9 @@
     "copyStyle": "Kopiëren",
     "sparkleStyle": "Sprankel",
     "openStyleSelector": "Stijl kiezen",
-    "closeStyleSelector": "Stijlkiezer sluiten"
+    "closeStyleSelector": "Stijlkiezer sluiten",
+    "lightningStyle": "Bliksem",
+    "pulseStyle": "Puls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Weergave",
     "quit": "T-Drop afsluiten",
     "welcomeTitle": "T-Drop klembordplank",
-    "welcomeBody": "Beweeg tegen het midden van de linkerschermrand of druk op Alt+C om je plank te openen."
+    "welcomeBody": "Beweeg tegen het midden van de linkerschermrand of druk op Alt+C om je plank te openen.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Stijl van kopieer-indicator",

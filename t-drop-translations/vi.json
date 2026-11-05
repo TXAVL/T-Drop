@@ -189,7 +189,9 @@
     "copyStyle": "Sao chép",
     "sparkleStyle": "Lấp lánh",
     "openStyleSelector": "Chọn kiểu",
-    "closeStyleSelector": "Đóng bảng chọn kiểu"
+    "closeStyleSelector": "Đóng bảng chọn kiểu",
+    "lightningStyle": "Tia chớp",
+    "pulseStyle": "Sóng xung"
   },
   "item": {
     "quickBadgeTitle": "Nhấn {index} để dán",
@@ -309,7 +311,8 @@
     "display": "Màn hình",
     "quit": "Thoát T-Drop",
     "welcomeTitle": "Giá Bảng tạm T-Drop",
-    "welcomeBody": "Di chuột vào giữa mép trái màn hình hoặc nhấn Alt+C để mở giá."
+    "welcomeBody": "Di chuột vào giữa mép trái màn hình hoặc nhấn Alt+C để mở giá.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Kiểu Chỉ báo Sao chép",

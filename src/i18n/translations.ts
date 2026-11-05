@@ -348,6 +348,8 @@ export const en: TranslationKeys = {
     "tickStyle": "Tick",
     "copyStyle": "Copy",
     "sparkleStyle": "Sparkle",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "openStyleSelector": "Open Indicator Style Selector",
     "closeStyleSelector": "Close Indicator Style Selector",
     "soundVolumeTitle": "Sound Volume",
@@ -1036,6 +1038,8 @@ const es: TranslationKeys = {
     "tickStyle": "Marca",
     "copyStyle": "Copiar",
     "sparkleStyle": "Destello",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -1730,6 +1734,8 @@ const fr: TranslationKeys = {
     "tickStyle": "Coche",
     "copyStyle": "Copier",
     "sparkleStyle": "Étincelle",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -2424,6 +2430,8 @@ const de: TranslationKeys = {
     "tickStyle": "Häkchen",
     "copyStyle": "Kopieren",
     "sparkleStyle": "Funke",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -3110,6 +3118,8 @@ const it: TranslationKeys = {
     "tickStyle": "Segno di spunta",
     "copyStyle": "Copia",
     "sparkleStyle": "Scintilla",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -3804,6 +3814,8 @@ const pt: TranslationKeys = {
     "tickStyle": "Marca",
     "copyStyle": "Copiar",
     "sparkleStyle": "Cintilação",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -4498,6 +4510,8 @@ const ru: TranslationKeys = {
     "tickStyle": "Галочка",
     "copyStyle": "Копирование",
     "sparkleStyle": "Искра",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -5200,6 +5214,8 @@ const ja: TranslationKeys = {
     "tickStyle": "チェック",
     "copyStyle": "コピー",
     "sparkleStyle": "スパークル",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -5878,6 +5894,8 @@ const ko: TranslationKeys = {
     "tickStyle": "체크",
     "copyStyle": "복사",
     "sparkleStyle": "반짝임",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -6556,6 +6574,8 @@ const zhCN: TranslationKeys = {
     "tickStyle": "勾选",
     "copyStyle": "复制",
     "sparkleStyle": "闪光",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -7234,6 +7254,8 @@ const zhTW: TranslationKeys = {
     "tickStyle": "勾選",
     "copyStyle": "複製",
     "sparkleStyle": "閃光",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -7912,6 +7934,8 @@ const hi: TranslationKeys = {
     "tickStyle": "टिक",
     "copyStyle": "कॉपी",
     "sparkleStyle": "स्पार्कल",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -8598,6 +8622,8 @@ const ar: TranslationKeys = {
     "tickStyle": "علامة",
     "copyStyle": "نسخ",
     "sparkleStyle": "وميض",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -9316,6 +9342,8 @@ const fa: TranslationKeys = {
     "tickStyle": "تیک",
     "copyStyle": "کپی",
     "sparkleStyle": "درخشش",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -10002,6 +10030,8 @@ const bn: TranslationKeys = {
     "tickStyle": "টিক",
     "copyStyle": "কপি",
     "sparkleStyle": "স্পার্কল",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -10688,6 +10718,8 @@ const tr: TranslationKeys = {
     "tickStyle": "İşaret",
     "copyStyle": "Kopyala",
     "sparkleStyle": "Kıvılcım",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -11374,6 +11406,8 @@ const vi: TranslationKeys = {
     "tickStyle": "Dấu kiểm",
     "copyStyle": "Sao chép",
     "sparkleStyle": "Lấp lánh",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Âm lượng hiệu ứng",
     "showQuickKeysTitle": "Phím số dán nhanh (1–9)",
     "showQuickKeysDesc": "Hiển thị huy hiệu số 1–9 trên các mục gần nhất để dán nhanh tức thì"
@@ -12052,6 +12086,8 @@ const pl: TranslationKeys = {
     "tickStyle": "Znacznik",
     "copyStyle": "Kopiuj",
     "sparkleStyle": "Iskra",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -12754,6 +12790,8 @@ const nl: TranslationKeys = {
     "tickStyle": "Vinkje",
     "copyStyle": "Kopiëren",
     "sparkleStyle": "Sprankel",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -13440,6 +13478,8 @@ const sv: TranslationKeys = {
     "tickStyle": "Bock",
     "copyStyle": "Kopiera",
     "sparkleStyle": "Gnista",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -14126,6 +14166,8 @@ const id: TranslationKeys = {
     "tickStyle": "Centang",
     "copyStyle": "Salin",
     "sparkleStyle": "Kilau",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -14804,6 +14846,8 @@ const uk: TranslationKeys = {
     "tickStyle": "Галочка",
     "copyStyle": "Копіювати",
     "sparkleStyle": "Іскра",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -15506,6 +15550,8 @@ const el: TranslationKeys = {
     "tickStyle": "Τικ",
     "copyStyle": "Αντιγραφή",
     "sparkleStyle": "Σπίθα",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -16192,6 +16238,8 @@ const cs: TranslationKeys = {
     "tickStyle": "Zaškrtnutí",
     "copyStyle": "Kopírovat",
     "sparkleStyle": "Jiskra",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -16894,6 +16942,8 @@ const ro: TranslationKeys = {
     "tickStyle": "Bifă",
     "copyStyle": "Copiază",
     "sparkleStyle": "Scânteie",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -17588,6 +17638,8 @@ const hu: TranslationKeys = {
     "tickStyle": "Pipa",
     "copyStyle": "Másolás",
     "sparkleStyle": "Szikra",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -18274,6 +18326,8 @@ const da: TranslationKeys = {
     "tickStyle": "Hak",
     "copyStyle": "Kopier",
     "sparkleStyle": "Gnist",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -18960,6 +19014,8 @@ const fi: TranslationKeys = {
     "tickStyle": "Rasti",
     "copyStyle": "Kopioi",
     "sparkleStyle": "Kipinä",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -19646,6 +19702,8 @@ const th: TranslationKeys = {
     "tickStyle": "เครื่องหมายถูก",
     "copyStyle": "คัดลอก",
     "sparkleStyle": "ประกาย",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -20324,6 +20382,8 @@ const he: TranslationKeys = {
     "tickStyle": "סימן",
     "copyStyle": "העתק",
     "sparkleStyle": "ניצוץ",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"
@@ -21018,6 +21078,8 @@ const no: TranslationKeys = {
     "tickStyle": "Hake",
     "copyStyle": "Kopier",
     "sparkleStyle": "Gnist",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse",
     "soundVolumeTitle": "Sound Volume",
     "showQuickKeysTitle": "Quick Number Paste (1–9)",
     "showQuickKeysDesc": "Display 1–9 badges on recent items to paste instantly with number keys"

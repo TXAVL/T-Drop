@@ -189,7 +189,9 @@
     "copyStyle": "Copia",
     "sparkleStyle": "Scintilla",
     "openStyleSelector": "Scegli lo stile",
-    "closeStyleSelector": "Chiudi la selezione dello stile"
+    "closeStyleSelector": "Chiudi la selezione dello stile",
+    "lightningStyle": "Fulmine",
+    "pulseStyle": "Impulso"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Schermo",
     "quit": "Esci da T-Drop",
     "welcomeTitle": "Scaffale appunti T-Drop",
-    "welcomeBody": "Passa il mouse al centro del bordo sinistro dello schermo, o premi Alt+C per aprire lo scaffale."
+    "welcomeBody": "Passa il mouse al centro del bordo sinistro dello schermo, o premi Alt+C per aprire lo scaffale.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Stile indicatore di copia",

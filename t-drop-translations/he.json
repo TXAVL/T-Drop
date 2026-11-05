@@ -189,7 +189,9 @@
     "copyStyle": "העתק",
     "sparkleStyle": "ניצוץ",
     "openStyleSelector": "בחירת סגנון",
-    "closeStyleSelector": "סגירת אפשרויות הסגנון"
+    "closeStyleSelector": "סגירת אפשרויות הסגנון",
+    "lightningStyle": "ברק",
+    "pulseStyle": "דופק"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "מסך",
     "quit": "צא מ-T-Drop",
     "welcomeTitle": "מדף לוח הגזירים T-Drop",
-    "welcomeBody": "רחף מול קצה שמאל-אמצע המסך, או לחץ Alt+C כדי להחליק ולפתוח את המדף שלך."
+    "welcomeBody": "רחף מול קצה שמאל-אמצע המסך, או לחץ Alt+C כדי להחליק ולפתוח את המדף שלך.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "סגנון מחוון העתקה",

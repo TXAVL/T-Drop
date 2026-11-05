@@ -199,7 +199,7 @@ export interface Settings {
   /** When true, shows the visual edge morph indicator on copy actions. Default: true. */
   showCopyIndicator: boolean
   /** Style variant of the copy indicator icon ('logo' | 'check' | 'copy' | 'sparkle'). Default: 'logo'. */
-  copyIndicatorStyle: 'logo' | 'check' | 'copy' | 'sparkle'
+  copyIndicatorStyle: 'logo' | 'check' | 'copy' | 'sparkle' | 'lightning' | 'pulse'
   /** Vertical offset fraction along screen edge (0 = top, 0.5 = center, 1 = bottom). Default: 0.5. */
   verticalOffset: number
   /** Horizontal offset fraction along screen edge when positioned at top/bottom (0 = left, 0.5 = center, 1 = right). Default: 0.5. */

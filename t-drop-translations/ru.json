@@ -189,7 +189,9 @@
     "copyStyle": "Копирование",
     "sparkleStyle": "Искра",
     "openStyleSelector": "Выбрать стиль",
-    "closeStyleSelector": "Закрыть выбор стиля"
+    "closeStyleSelector": "Закрыть выбор стиля",
+    "lightningStyle": "Молния",
+    "pulseStyle": "Импульс"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Экран",
     "quit": "Выйти из T-Drop",
     "welcomeTitle": "Полка буфера обмена T-Drop",
-    "welcomeBody": "Наведите курсор на середину левого края экрана или нажмите Alt+C, чтобы открыть полку."
+    "welcomeBody": "Наведите курсор на середину левого края экрана или нажмите Alt+C, чтобы открыть полку.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Стиль индикатора копирования",

@@ -27,6 +27,7 @@ import { LanguageFlyout } from './LanguageFlyout'
 import { CardMenu } from './CardMenu'
 import { CopyIndicatorCurve } from './CopyIndicatorCurve'
 import { useFilteredItems } from '../hooks/useFilteredItems'
+import { DashedOutline } from './DashedOutline'
 
 import { useTranslation } from '../i18n'
 
@@ -558,7 +559,7 @@ export function Panel() {
               )}
             </AnimatePresence>
           </div>
-          <DropOverlay />
+          <DropOverlay isHorizontal={isHorizontal} />
           <SplitDropZone stickPosition={settings.stickPosition || (isRight ? 'right' : 'left')} />
         </div>
         <PreviewFlyout isRight={isRight} />
@@ -589,60 +590,82 @@ function getTutorialText(step: number): string {
 }
 */
 
-function DropOverlay() {
+function TrayArrowIcon() {
+  return (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <g className="drop-arrow">
+        <path d="M12 3.25v9" />
+        <path d="m8.25 8.75 3.75 3.75 3.75-3.75" />
+      </g>
+      <path d="M3.5 14h4.1l1.6 2.6h5.6l1.6-2.6h4.1" />
+      <path d="M3.5 14v3.75a2.25 2.25 0 0 0 2.25 2.25h12.5a2.25 2.25 0 0 0 2.25-2.25V14l-2.1-5.1" />
+      <path d="M5.6 8.9 3.5 14" />
+    </svg>
+  )
+}
+
+const ACCEPT_FADE_MS = 280
+function DropOverlay({ isHorizontal }: { isHorizontal: boolean }) {
   const { t } = useTranslation()
-  const dragActive = useStore((s) => s.dragActive)
-  const internalDragReq = useStore((s) => s.internalDragReq)
+  const open = useStore((s) => s.open)
+  const incoming = useStore((s) => !s.internalDragReq && (s.externalDrag || s.dragActive))
+  const over = useStore((s) => s.dragActive && !s.internalDragReq)
+  const reduceMotion = useStore((s) => !!s.settings.reduceMotion)
+  const [accepted, setAccepted] = useState(false)
+  const [held, setHeld] = useState(false)
+  useEffect(() => {
+    if (accepted) {
+      if (held) setHeld(false)
+      return
+    }
+    if (open && incoming) {
+      if (!held) setHeld(true)
+      return
+    }
+    if (!held) return
+    const timer = window.setTimeout(() => setHeld(false), open ? 450 : 320)
+    return () => window.clearTimeout(timer)
+  }, [open, incoming, held, accepted])
+  const visible = held || (open && incoming)
+  const wasOpen = useRef(open)
+  const intoZone = open && !wasOpen.current
+  useEffect(() => {
+    wasOpen.current = open
+  }, [open])
+
+  useEffect(() => {
+    if (!visible) return
+    const onDrop = () => setAccepted(true)
+    document.addEventListener('drop', onDrop, true)
+    return () => document.removeEventListener('drop', onDrop, true)
+  }, [visible])
+
+  useEffect(() => {
+    if (!accepted) return
+    const timer = window.setTimeout(() => setAccepted(false), reduceMotion ? 0 : ACCEPT_FADE_MS + 40)
+    return () => window.clearTimeout(timer)
+  }, [accepted, reduceMotion])
 
   return (
     <AnimatePresence>
-      {dragActive && !internalDragReq && (
+      {(visible || accepted) && (
         <motion.div
-          initial={{ opacity: 0 }}
+          key="drop-overlay"
+          className={`drop-overlay${isHorizontal ? ' is-horizontal' : ''}${over ? ' is-over' : ''}${accepted ? ' is-accepted' : ''}`}
+          initial={{ opacity: intoZone ? 1 : 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 100,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '14px',
-            pointerEvents: 'none',
-            background: 'rgba(6, 6, 8, 0.95)',
-            textAlign: 'center',
-            padding: '24px'
-          }}
+          transition={{ duration: reduceMotion ? 0.01 : 0.14, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div
-            style={{
-              width: '52px',
-              height: '52px',
-              borderRadius: '16px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'rgba(255, 255, 255, 0.9)'
-            }}
-          >
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 3v13"></path>
-              <path d="m8 12 4 4 4-4"></path>
-              <path d="M4 20h16"></path>
-            </svg>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ fontSize: '15px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.95)', letterSpacing: '0.01em' }}>
-              {t('item.dropToSave')}
-            </div>
-            <div style={{ fontSize: '12px', fontWeight: 400, color: 'rgba(255, 255, 255, 0.5)', lineHeight: 1.4 }}>
-              {t('item.dropToSaveDesc')}
-            </div>
+          <div className="drop-well">
+            <DashedOutline radius={16} />
+            <span className="drop-icon">
+              <TrayArrowIcon />
+            </span>
+            <span className="drop-text">
+              <span className="drop-title">{t('item.dropToSave')}</span>
+              <span className="drop-sub">{t('item.dropToSaveDesc')}</span>
+            </span>
           </div>
         </motion.div>
       )}

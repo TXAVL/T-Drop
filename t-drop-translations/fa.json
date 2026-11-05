@@ -189,7 +189,9 @@
     "copyStyle": "کپی",
     "sparkleStyle": "درخشش",
     "openStyleSelector": "انتخاب سبک",
-    "closeStyleSelector": "بستن گزینه‌های سبک"
+    "closeStyleSelector": "بستن گزینه‌های سبک",
+    "lightningStyle": "صاعقه",
+    "pulseStyle": "پالس"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "نمایشگر",
     "quit": "بستن کامل T-Drop",
     "welcomeTitle": "قفسه کلیپ‌بورد T-Drop",
-    "welcomeBody": "ماوس رو نزدیک وسط لبه چپ نگه دار یا Alt+C رو بزن تا قفسه باز بشه."
+    "welcomeBody": "ماوس رو نزدیک وسط لبه چپ نگه دار یا Alt+C رو بزن تا قفسه باز بشه.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "مدل نشانگر کپی",

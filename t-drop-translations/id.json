@@ -189,7 +189,9 @@
     "copyStyle": "Salin",
     "sparkleStyle": "Kilau",
     "openStyleSelector": "Pilih gaya",
-    "closeStyleSelector": "Tutup pemilih gaya"
+    "closeStyleSelector": "Tutup pemilih gaya",
+    "lightningStyle": "Petir",
+    "pulseStyle": "Pulsa"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Layar",
     "quit": "Keluar dari T-Drop",
     "welcomeTitle": "Rak Papan Klip T-Drop",
-    "welcomeBody": "Hover di tepi tengah-kiri layar, atau tekan Alt+C untuk membuka rak Anda."
+    "welcomeBody": "Hover di tepi tengah-kiri layar, atau tekan Alt+C untuk membuka rak Anda.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Gaya Indikator Salin",

@@ -10,7 +10,8 @@ if (fs.existsSync(cachePath)) {
 const masterEn = {
   filters: { all: 'All', text: 'Text', links: 'Links', images: 'Images', files: 'Files' },
   tabs: { behaviour: 'Behaviour', position: 'Position', appearance: 'Appearance' },
-  header: { searchPlaceholder: 'Search history...', settings: 'Settings', close: 'Close', whatsNew: "What's New" },
+  header: { searchPlaceholder: 'Search history...', settings: 'Settings',
+    tour: 'Replay Welcome Tour', close: 'Close', whatsNew: "What's New" },
   behaviour: {
     languageTitle: 'Language',
     languageDesc: 'Select UI language for system menus and controls',
@@ -153,7 +154,9 @@ const masterEn = {
     logoStyle: 'Logo',
     tickStyle: 'Tick',
     copyStyle: 'Copy',
-    sparkleStyle: 'Sparkle'
+    sparkleStyle: 'Sparkle',
+    lightningStyle: 'Lightning',
+    pulseStyle: 'Pulse'
   },
   item: {
     quickBadgeTitle: 'Press {index} to paste',
@@ -252,6 +255,7 @@ const masterEn = {
   tray: {
     showClipboard: 'Show Clipboard',
     settings: 'Settings',
+    tour: 'Replay Welcome Tour',
     incognito: 'Incognito (pause capture)',
     hoverTrigger: 'Hover Trigger (open on hover)',
     stickTo: 'Stick to',
@@ -589,6 +593,7 @@ let fileContent = `export interface TranslationKeys {
   header: {
     searchPlaceholder: string
     settings: string
+    tour: string
     close: string
     whatsNew: string
   }
@@ -723,6 +728,8 @@ let fileContent = `export interface TranslationKeys {
     tickStyle: string
     copyStyle: string
     sparkleStyle: string
+    lightningStyle?: string
+    pulseStyle?: string
     soundVolumeTitle?: string
     showQuickKeysTitle?: string
     showQuickKeysDesc?: string
@@ -826,6 +833,7 @@ let fileContent = `export interface TranslationKeys {
   tray: {
     showClipboard: string
     settings: string
+    tour: string
     incognito: string
     hoverTrigger: string
     stickTo: string

@@ -189,7 +189,9 @@
     "copyStyle": "Copiază",
     "sparkleStyle": "Scânteie",
     "openStyleSelector": "Alege stilul",
-    "closeStyleSelector": "Închide selectorul de stil"
+    "closeStyleSelector": "Închide selectorul de stil",
+    "lightningStyle": "Fulger",
+    "pulseStyle": "Puls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Ecran",
     "quit": "Ieșire din T-Drop",
     "welcomeTitle": "Raft clipboard T-Drop",
-    "welcomeBody": "Survolează marginea stângă-centrală a ecranului sau apasă Alt+C pentru a-ți glisa raftul."
+    "welcomeBody": "Survolează marginea stângă-centrală a ecranului sau apasă Alt+C pentru a-ți glisa raftul.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Stil indicator copiere",

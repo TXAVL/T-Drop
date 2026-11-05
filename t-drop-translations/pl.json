@@ -189,7 +189,9 @@
     "copyStyle": "Kopiuj",
     "sparkleStyle": "Iskra",
     "openStyleSelector": "Wybierz styl",
-    "closeStyleSelector": "Zamknij wybór stylu"
+    "closeStyleSelector": "Zamknij wybór stylu",
+    "lightningStyle": "Błyskawica",
+    "pulseStyle": "Puls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Ekran",
     "quit": "Zakończ T-Drop",
     "welcomeTitle": "Półka schowka T-Drop",
-    "welcomeBody": "Najedź na środek lewej krawędzi ekranu lub naciśnij Alt+C, aby wysunąć półkę."
+    "welcomeBody": "Najedź na środek lewej krawędzi ekranu lub naciśnij Alt+C, aby wysunąć półkę.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Styl wskaźnika kopiowania",

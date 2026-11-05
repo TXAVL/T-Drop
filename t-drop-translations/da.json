@@ -189,7 +189,9 @@
     "copyStyle": "Kopier",
     "sparkleStyle": "Gnist",
     "openStyleSelector": "Vælg stil",
-    "closeStyleSelector": "Luk stilvælger"
+    "closeStyleSelector": "Luk stilvælger",
+    "lightningStyle": "Lyn",
+    "pulseStyle": "Puls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Skærm",
     "quit": "Afslut T-Drop",
     "welcomeTitle": "T-Drop Udklipsholder-hylde",
-    "welcomeBody": "Svæv mod midten af venstre skærmkant, eller tryk Alt+C for at åbne din hylde."
+    "welcomeBody": "Svæv mod midten af venstre skærmkant, eller tryk Alt+C for at åbne din hylde.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Stil for kopieringsindikator",

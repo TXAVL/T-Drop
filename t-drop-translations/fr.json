@@ -189,7 +189,9 @@
     "copyStyle": "Copier",
     "sparkleStyle": "Étincelle",
     "openStyleSelector": "Choisir le style",
-    "closeStyleSelector": "Fermer le sélecteur de style"
+    "closeStyleSelector": "Fermer le sélecteur de style",
+    "lightningStyle": "Éclair",
+    "pulseStyle": "Impulsion"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Écran",
     "quit": "Quitter T-Drop",
     "welcomeTitle": "Étagère de presse-papiers T-Drop",
-    "welcomeBody": "Survolez le milieu du bord gauche de l'écran, ou appuyez sur Alt+C pour ouvrir votre étagère."
+    "welcomeBody": "Survolez le milieu du bord gauche de l'écran, ou appuyez sur Alt+C pour ouvrir votre étagère.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Style de l'indicateur de copie",

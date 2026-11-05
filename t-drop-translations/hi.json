@@ -189,7 +189,9 @@
     "copyStyle": "कॉपी",
     "sparkleStyle": "स्पार्कल",
     "openStyleSelector": "स्टाइल चुनें",
-    "closeStyleSelector": "स्टाइल विकल्प बंद करें"
+    "closeStyleSelector": "स्टाइल विकल्प बंद करें",
+    "lightningStyle": "बिजली",
+    "pulseStyle": "पल्स"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "डिस्प्ले",
     "quit": "T-Drop से बाहर",
     "welcomeTitle": "T-Drop क्लिपबोर्ड शेल्फ़",
-    "welcomeBody": "मध्य-बाएँ स्क्रीन किनारे के साथ होवर करें, या अपनी शेल्फ़ खोलने के लिए Alt+C दबाएँ।"
+    "welcomeBody": "मध्य-बाएँ स्क्रीन किनारे के साथ होवर करें, या अपनी शेल्फ़ खोलने के लिए Alt+C दबाएँ।",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "कॉपी सूचक शैली",

@@ -189,7 +189,9 @@
     "copyStyle": "Αντιγραφή",
     "sparkleStyle": "Σπίθα",
     "openStyleSelector": "Επιλογή στυλ",
-    "closeStyleSelector": "Κλείσιμο επιλογής στυλ"
+    "closeStyleSelector": "Κλείσιμο επιλογής στυλ",
+    "lightningStyle": "Κεραυνός",
+    "pulseStyle": "Παλμός"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Οθόνη",
     "quit": "Έξοδος από το T-Drop",
     "welcomeTitle": "Ράφι Προχείρου T-Drop",
-    "welcomeBody": "Αιωρηθείτε against τη μέση-αριστερή άκρη οθόνης ή πατήστε Alt+C για να ανοίξετε το ράφι σας."
+    "welcomeBody": "Αιωρηθείτε against τη μέση-αριστερή άκρη οθόνης ή πατήστε Alt+C για να ανοίξετε το ράφι σας.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Στυλ Ένδειξης Αντιγραφής",

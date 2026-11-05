@@ -189,7 +189,9 @@
     "copyStyle": "Kopiera",
     "sparkleStyle": "Gnista",
     "openStyleSelector": "Välj stil",
-    "closeStyleSelector": "Stäng stilväljaren"
+    "closeStyleSelector": "Stäng stilväljaren",
+    "lightningStyle": "Blixt",
+    "pulseStyle": "Puls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Skärm",
     "quit": "Avsluta T-Drop",
     "welcomeTitle": "T-Drop urklippshylla",
-    "welcomeBody": "Sväv mot mitten av den vänstra skärmkanten eller tryck Alt+C för att skjuta ut din hylla."
+    "welcomeBody": "Sväv mot mitten av den vänstra skärmkanten eller tryck Alt+C för att skjuta ut din hylla.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Stil för kopieringsindikator",

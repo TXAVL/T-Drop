@@ -189,7 +189,9 @@
     "copyStyle": "Kopyala",
     "sparkleStyle": "Kıvılcım",
     "openStyleSelector": "Stil seç",
-    "closeStyleSelector": "Stil seçiciyi kapat"
+    "closeStyleSelector": "Stil seçiciyi kapat",
+    "lightningStyle": "Şimşek",
+    "pulseStyle": "Darbe"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Ekran",
     "quit": "T-Drop'tan Çık",
     "welcomeTitle": "T-Drop Pano Rafı",
-    "welcomeBody": "Ekranın sol-orta kenarına gelin veya rafınızı açmak için Alt+C tuşlarına basın."
+    "welcomeBody": "Ekranın sol-orta kenarına gelin veya rafınızı açmak için Alt+C tuşlarına basın.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Kopya Göstergesi Stili",

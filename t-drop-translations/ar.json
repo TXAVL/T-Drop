@@ -189,7 +189,9 @@
     "copyStyle": "نسخ",
     "sparkleStyle": "وميض",
     "openStyleSelector": "اختر النمط",
-    "closeStyleSelector": "إغلاق خيارات النمط"
+    "closeStyleSelector": "إغلاق خيارات النمط",
+    "lightningStyle": "برق",
+    "pulseStyle": "نبض"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "الشاشة",
     "quit": "إنهاء T-Drop",
     "welcomeTitle": "رف حافظة T-Drop",
-    "welcomeBody": "حوّم مقابل منتصف الحافة اليسرى للشاشة، أو اضغط Alt+C لفتح رفك."
+    "welcomeBody": "حوّم مقابل منتصف الحافة اليسرى للشاشة، أو اضغط Alt+C لفتح رفك.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "نمط مؤشر النسخ",

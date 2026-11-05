@@ -189,7 +189,9 @@
     "copyStyle": "Копіювати",
     "sparkleStyle": "Іскра",
     "openStyleSelector": "Обрати стиль",
-    "closeStyleSelector": "Закрити вибір стилю"
+    "closeStyleSelector": "Закрити вибір стилю",
+    "lightningStyle": "Блискавка",
+    "pulseStyle": "Імпульс"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Екран",
     "quit": "Вийти з T-Drop",
     "welcomeTitle": "Полиця буфера обміну T-Drop",
-    "welcomeBody": "Наведіть курсор на середину лівого краю екрана або натисніть Alt+C, щоб відкрити полицю."
+    "welcomeBody": "Наведіть курсор на середину лівого краю екрана або натисніть Alt+C, щоб відкрити полицю.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Стиль індикатора копіювання",

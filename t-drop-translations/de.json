@@ -189,7 +189,9 @@
     "copyStyle": "Kopieren",
     "sparkleStyle": "Funke",
     "openStyleSelector": "Stil wählen",
-    "closeStyleSelector": "Stilauswahl schließen"
+    "closeStyleSelector": "Stilauswahl schließen",
+    "lightningStyle": "Blitz",
+    "pulseStyle": "Impuls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Anzeige",
     "quit": "T-Drop beenden",
     "welcomeTitle": "T-Drop Zwischenablage-Ablage",
-    "welcomeBody": "Fahren Sie mit der Maus an die mittlere linke Bildschirmkante, oder drücken Sie Alt+C, um Ihre Ablage zu öffnen."
+    "welcomeBody": "Fahren Sie mit der Maus an die mittlere linke Bildschirmkante, oder drücken Sie Alt+C, um Ihre Ablage zu öffnen.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Stil der Kopieranzeige",

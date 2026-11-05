@@ -189,7 +189,9 @@
     "copyStyle": "复制",
     "sparkleStyle": "闪光",
     "openStyleSelector": "选择样式",
-    "closeStyleSelector": "关闭样式选择器"
+    "closeStyleSelector": "关闭样式选择器",
+    "lightningStyle": "闪电",
+    "pulseStyle": "脉冲"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "显示器",
     "quit": "退出 T-Drop",
     "welcomeTitle": "T-Drop 剪贴板搁架",
-    "welcomeBody": "将鼠标悬停在屏幕左中边缘，或按 Alt+C 滑出打开您的搁架。"
+    "welcomeBody": "将鼠标悬停在屏幕左中边缘，或按 Alt+C 滑出打开您的搁架。",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "复制指示器样式",

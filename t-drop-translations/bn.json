@@ -189,7 +189,9 @@
     "copyStyle": "কপি",
     "sparkleStyle": "স্পার্কল",
     "openStyleSelector": "স্টাইল বেছে নিন",
-    "closeStyleSelector": "স্টাইলের বিকল্প বন্ধ করুন"
+    "closeStyleSelector": "স্টাইলের বিকল্প বন্ধ করুন",
+    "lightningStyle": "বিদ্যুৎ",
+    "pulseStyle": "পালস"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "প্রদর্শন",
     "quit": "T-Drop থেকে প্রস্থান",
     "welcomeTitle": "T-Drop ক্লিপবোর্ড শেলফ",
-    "welcomeBody": "মাঝ-বাম স্ক্রিন প্রান্তে হোভার করুন, বা আপনার শেলফ খুলতে Alt+C চাপুন।"
+    "welcomeBody": "মাঝ-বাম স্ক্রিন প্রান্তে হোভার করুন, বা আপনার শেলফ খুলতে Alt+C চাপুন।",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "কপি সূচক শৈলী",

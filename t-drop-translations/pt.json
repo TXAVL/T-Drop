@@ -189,7 +189,9 @@
     "copyStyle": "Copiar",
     "sparkleStyle": "Cintilação",
     "openStyleSelector": "Escolher estilo",
-    "closeStyleSelector": "Fechar seletor de estilo"
+    "closeStyleSelector": "Fechar seletor de estilo",
+    "lightningStyle": "Relâmpago",
+    "pulseStyle": "Pulso"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Tela",
     "quit": "Sair do T-Drop",
     "welcomeTitle": "Prateleira de Área de Transferência T-Drop",
-    "welcomeBody": "Passe o mouse contra o centro da borda esquerda da tela, ou pressione Alt+C para abrir sua prateleira."
+    "welcomeBody": "Passe o mouse contra o centro da borda esquerda da tela, ou pressione Alt+C para abrir sua prateleira.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Estilo do indicador de cópia",

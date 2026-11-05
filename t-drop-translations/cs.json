@@ -189,7 +189,9 @@
     "copyStyle": "Kopírovat",
     "sparkleStyle": "Jiskra",
     "openStyleSelector": "Vybrat styl",
-    "closeStyleSelector": "Zavřít výběr stylu"
+    "closeStyleSelector": "Zavřít výběr stylu",
+    "lightningStyle": "Blesk",
+    "pulseStyle": "Puls"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Obrazovka",
     "quit": "Ukončit T-Drop",
     "welcomeTitle": "Police schránky T-Drop",
-    "welcomeBody": "Najeďte na střed levého okraje obrazovky nebo stiskněte Alt+C pro vysunutí vaší police."
+    "welcomeBody": "Najeďte na střed levého okraje obrazovky nebo stiskněte Alt+C pro vysunutí vaší police.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Styl indikátoru kopírování",

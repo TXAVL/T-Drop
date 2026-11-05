@@ -189,7 +189,9 @@
     "copyStyle": "コピー",
     "sparkleStyle": "スパークル",
     "openStyleSelector": "スタイルを選択",
-    "closeStyleSelector": "スタイル選択を閉じる"
+    "closeStyleSelector": "スタイル選択を閉じる",
+    "lightningStyle": "稲妻",
+    "pulseStyle": "パルス"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "パネルを表示するディスプレイ",
     "quit": "T-Drop を終了",
     "welcomeTitle": "T-Drop クリップボードパネル",
-    "welcomeBody": "画面左端中央にホバーするか、Alt + C を押してパネルを開きます。"
+    "welcomeBody": "画面左端中央にホバーするか、Alt + C を押してパネルを開きます。",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "コピー時のインジケーターのスタイル",

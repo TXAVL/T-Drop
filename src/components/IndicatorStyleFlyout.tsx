@@ -13,7 +13,9 @@ import {
   LogoIndicatorIcon,
   TickIndicatorIcon,
   CopyIndicatorIcon,
-  SparkleIndicatorIcon
+  SparkleIndicatorIcon,
+  LightningIndicatorIcon,
+  PulseIndicatorIcon
 } from './CopyIndicatorCurve'
 import { CloseIcon } from './icons'
 import { playButtonClickSound } from '../lib/soundEffects'
@@ -317,6 +319,29 @@ export function IndicatorStyleFlyout({ isRight }: { isRight: boolean }) {
                 }}
                 preview={<SparkleIndicatorIcon fillColor="#ffffff" size={30} />}
                 title={t('appearance.sparkleStyle')}
+              />
+              {/* Card 5: Lightning */}
+              <StyleCard
+                active={(settings.copyIndicatorStyle || 'logo') === 'lightning'}
+                onClick={() => {
+                  playButtonClickSound()
+                  patch({ copyIndicatorStyle: 'lightning' })
+                  useStore.getState().triggerCopyFlare()
+                }}
+                preview={<LightningIndicatorIcon fillColor="#ffffff" size={30} />}
+                title={t('appearance.lightningStyle') || 'Lightning'}
+              />
+
+              {/* Card 6: Pulse */}
+              <StyleCard
+                active={(settings.copyIndicatorStyle || 'logo') === 'pulse'}
+                onClick={() => {
+                  playButtonClickSound()
+                  patch({ copyIndicatorStyle: 'pulse' })
+                  useStore.getState().triggerCopyFlare()
+                }}
+                preview={<PulseIndicatorIcon fillColor="#ffffff" size={30} />}
+                title={t('appearance.pulseStyle') || 'Pulse'}
               />
             </div>
           </div>

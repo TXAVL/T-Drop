@@ -189,7 +189,9 @@
     "copyStyle": "คัดลอก",
     "sparkleStyle": "ประกาย",
     "openStyleSelector": "เลือกสไตล์",
-    "closeStyleSelector": "ปิดตัวเลือกสไตล์"
+    "closeStyleSelector": "ปิดตัวเลือกสไตล์",
+    "lightningStyle": "สายฟ้า",
+    "pulseStyle": "ชีพจร"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "หน้าจอ",
     "quit": "ออกจาก T-Drop",
     "welcomeTitle": "ชั้นวางคลิปบอร์ด T-Drop",
-    "welcomeBody": "เลื่อนเมาส์ไปที่กึ่งกลางขอบซ้ายของหน้าจอ หรือกด Alt+C เพื่อเปิดชั้นวางของคุณ"
+    "welcomeBody": "เลื่อนเมาส์ไปที่กึ่งกลางขอบซ้ายของหน้าจอ หรือกด Alt+C เพื่อเปิดชั้นวางของคุณ",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "สไตล์ตัวบ่งชี้การคัดลอก",

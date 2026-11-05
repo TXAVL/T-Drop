@@ -189,7 +189,9 @@
     "copyStyle": "Copy",
     "sparkleStyle": "Sparkle",
     "openStyleSelector": "Choose style",
-    "closeStyleSelector": "Close style selector"
+    "closeStyleSelector": "Close style selector",
+    "lightningStyle": "Lightning",
+    "pulseStyle": "Pulse"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Display",
     "quit": "Quit T-Drop",
     "welcomeTitle": "T-Drop Clipboard Shelf",
-    "welcomeBody": "Hover against the middle-left screen edge, or press Alt+C to slide open your shelf."
+    "welcomeBody": "Hover against the middle-left screen edge, or press Alt+C to slide open your shelf.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Copy Indicator Style",

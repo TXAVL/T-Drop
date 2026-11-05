@@ -189,7 +189,9 @@
     "copyStyle": "복사",
     "sparkleStyle": "반짝임",
     "openStyleSelector": "스타일 선택",
-    "closeStyleSelector": "스타일 선택기 닫기"
+    "closeStyleSelector": "스타일 선택기 닫기",
+    "lightningStyle": "번개",
+    "pulseStyle": "펄스"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "디스플레이",
     "quit": "T-Drop 종료",
     "welcomeTitle": "T-Drop 클립보드 선반",
-    "welcomeBody": "화면 왼쪽 가장자리 중앙에 호버하거나 Alt+C를 눌러 선반을 여세요."
+    "welcomeBody": "화면 왼쪽 가장자리 중앙에 호버하거나 Alt+C를 눌러 선반을 여세요.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "복사 표시기 스타일",

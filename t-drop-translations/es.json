@@ -189,7 +189,9 @@
     "copyStyle": "Copiar",
     "sparkleStyle": "Destello",
     "openStyleSelector": "Elegir estilo",
-    "closeStyleSelector": "Cerrar el selector de estilo"
+    "closeStyleSelector": "Cerrar el selector de estilo",
+    "lightningStyle": "Rayo",
+    "pulseStyle": "Pulso"
   },
   "item": {
     "quickBadgeTitle": "Press {index} to paste",
@@ -309,7 +311,8 @@
     "display": "Pantalla",
     "quit": "Salir de T-Drop",
     "welcomeTitle": "Panel de portapapeles T-Drop",
-    "welcomeBody": "Pasa el cursor por el centro del borde izquierdo de la pantalla o pulsa Alt+C para deslizar y abrir tu panel."
+    "welcomeBody": "Pasa el cursor por el centro del borde izquierdo de la pantalla o pulsa Alt+C para deslizar y abrir tu panel.",
+    "tour": "Replay Welcome Tour"
   },
   "flyout": {
     "copyBeaconStyleTitle": "Estilo del indicador de copia",

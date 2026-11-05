@@ -195,6 +195,128 @@ export function CopyIndicatorIcon({
   )
 }
 
+
+export function LightningIndicatorIcon({
+  fillColor = '#ffffff',
+  size = 36,
+  animated = false
+}: {
+  fillColor?: string
+  glowColor?: string
+  size?: number
+  animated?: boolean
+}) {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: size,
+        height: size,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        filter: ICON_FILTER
+      }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        style={{ display: 'block', overflow: 'visible' }}
+      >
+        {animated ? (
+          <motion.path
+            d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+            fill={fillColor}
+            stroke={fillColor}
+            strokeWidth="0.5"
+            strokeLinejoin="round"
+            initial={{ scale: 0.82, opacity: 0, rotate: -8 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            transition={{ duration: 0.26, ease: EASE_OUT }}
+          />
+        ) : (
+          <path
+            d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+            fill={fillColor}
+            stroke={fillColor}
+            strokeWidth="0.5"
+            strokeLinejoin="round"
+          />
+        )}
+      </svg>
+    </div>
+  )
+}
+
+export function PulseIndicatorIcon({
+  fillColor = '#ffffff',
+  size = 36,
+  animated = false
+}: {
+  fillColor?: string
+  glowColor?: string
+  size?: number
+  animated?: boolean
+}) {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: size,
+        height: size,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        filter: ICON_FILTER
+      }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        style={{ display: 'block', overflow: 'visible' }}
+      >
+        {animated ? (
+          <>
+            <motion.circle
+              cx="12"
+              cy="12"
+              r="4"
+              fill={fillColor}
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.22, ease: EASE_OUT }}
+            />
+            <motion.path
+              d="M12 3C7.03 3 3 7.03 3 12M21 12C21 7.03 16.97 3 12 3M12 21C7.03 21 3 16.97 3 12M21 12C21 16.97 16.97 21 12 21"
+              stroke={fillColor}
+              strokeWidth="2"
+              strokeLinecap="round"
+              initial={{ scale: 0.75, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.8 }}
+              transition={{ duration: 0.32, ease: EASE_OUT, delay: 0.05 }}
+            />
+          </>
+        ) : (
+          <>
+            <circle cx="12" cy="12" r="4" fill={fillColor} />
+            <path
+              d="M12 3C7.03 3 3 7.03 3 12M21 12C21 7.03 16.97 3 12 3M12 21C7.03 21 3 16.97 3 12M21 12C21 16.97 16.97 21 12 21"
+              stroke={fillColor}
+              strokeWidth="2"
+              strokeLinecap="round"
+              opacity="0.8"
+            />
+          </>
+        )}
+      </svg>
+    </div>
+  )
+}
+
 export function SparkleIndicatorIcon({
   fillColor = '#ffffff',
   size = 36,
@@ -401,6 +523,10 @@ export function CopyIndicatorCurve() {
               <CopyIndicatorIcon fillColor="#ffffff" animated />
             ) : indicatorStyle === 'sparkle' ? (
               <SparkleIndicatorIcon fillColor="#ffffff" animated />
+            ) : indicatorStyle === 'lightning' ? (
+              <LightningIndicatorIcon fillColor="#ffffff" animated />
+            ) : indicatorStyle === 'pulse' ? (
+              <PulseIndicatorIcon fillColor="#ffffff" animated />
             ) : (
               <LogoIndicatorIcon fillColor="#ffffff" size={38} />
             )}
