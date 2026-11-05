@@ -1286,6 +1286,7 @@
   pointer-events: none;
   z-index: 20;
 }
+.ob-backup-mock.is-up,
 .ob-backup-mock.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -1375,4 +1376,21 @@
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+.ob-backup-card.is-success {
+  border-color: rgba(16, 185, 129, 0.8) !important;
+  background: rgba(16, 185, 129, 0.16) !important;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+  transform: scale(1.02);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-exp.is-active {
+  transform: scale(0.95);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.7);
+}
+.btn-imp.is-active {
+  transform: scale(0.95);
+  border-color: #38bdf8 !important;
+  color: #fff !important;
+  background: rgba(56, 189, 248, 0.25) !important;
 }

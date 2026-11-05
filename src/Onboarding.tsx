@@ -73,6 +73,7 @@ export function Onboarding() {
     { key: 'stacks', view: 'full', open: true, title: t('onboarding.stacksTitle'), body: t('onboarding.stacksDesc') },
     { key: 'preview', view: 'full', open: true, title: t('onboarding.previewTitle'), body: t('onboarding.previewDesc') },
     { key: 'find', view: 'full', open: true, title: t('onboarding.findTitle'), body: t('onboarding.findDesc') },
+    { key: 'backup', view: 'full', open: false, title: t('onboarding.backupTitle'), body: t('onboarding.backupDesc') },
     { key: 'settings', view: 'frame', open: false, title: t('onboarding.configTitle'), body: t('onboarding.configDesc') }
   ]
   const last = steps.length - 1
@@ -100,6 +101,7 @@ export function Onboarding() {
   const notesImageRef = useRef<HTMLDivElement>(null)
   const browserRef = useRef<HTMLDivElement>(null)
   const explorerRef = useRef<HTMLDivElement>(null)
+  const backupMockRef = useRef<HTMLDivElement>(null)
   const lensRef = useRef<HTMLDivElement>(null)
   const penRef = useRef<SVGPathElement>(null)
   const lettersRef = useRef<HTMLDivElement>(null)
@@ -147,6 +149,7 @@ export function Onboarding() {
     notesImage: notesImageRef.current!,
     browser: browserRef.current!,
     explorer: explorerRef.current!,
+    backupMock: backupMockRef.current!,
     lens: lensRef.current!,
     showShelf: (on) => {
       setShelf(on)
@@ -435,7 +438,7 @@ export function Onboarding() {
             </div>
 
 {/* T-Drop Backup & Restore Archive mock view */}
-            <div className={`ob-win ob-backup-mock${s.key === 'backup' ? ' is-visible' : ''}`}>
+            <div ref={backupMockRef} className={`ob-win ob-backup-mock${s.key === 'backup' ? ' is-visible' : ''}`}>
               <div className="ob-win-bar">
                 <span className="ob-notes-title">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>

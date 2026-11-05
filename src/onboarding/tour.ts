@@ -77,6 +77,8 @@ export interface Stage {
   browser: HTMLElement
   /** File Explorer, the drag-in demo's source. */
   explorer: HTMLElement
+  /** The backup & restore archive mockup view. */
+  backupMock: HTMLElement
   /** The camera over all of the above (lens.ts). */
   lens: HTMLElement
   /** Welcome: the real shelf in place of the drawn bar on the laptop (the closed bars match exactly). */
@@ -108,6 +110,7 @@ export function itemsFor(step: string, now = Date.now()): ClipboardItemDto[] {
     case 'preview':
     case 'find':
       return sorted()
+    case 'backup':
     case 'settings': return sorted(demoNote())
     default: return []
   }
@@ -117,7 +120,8 @@ export function itemsFor(step: string, now = Date.now()): ClipboardItemDto[] {
 const WINDOW_OF: Record<string, (stage: Stage) => HTMLElement> = {
   collect: (s) => s.browser,
   dropin: (s) => s.browser,
-  drag: (s) => s.notes
+  drag: (s) => s.notes,
+  backup: (s) => s.backupMock
 }
 
 /** Clear everything a demo may have left behind (on cancel, Back, Continue); `next` is the step coming up. */
@@ -150,7 +154,9 @@ export function resetDemoState(stage: Stage, next?: string): void {
   const picture = stage.notesImage
   if (keep === stage.notes) picture.classList.remove('is-in')
   else window.setTimeout(() => { if (!stage.notes.classList.contains('is-up')) picture.classList.remove('is-in') }, 300)
-  for (const w of [stage.notes, stage.browser, stage.explorer]) if (w !== keep) hideWindow(w)
+  stage.backupMock?.querySelectorAll('.ob-backup-card.is-success').forEach((el) => el.classList.remove('is-success'))
+  stage.backupMock?.querySelectorAll('.btn-exp.is-active, .btn-imp.is-active').forEach((el) => el.classList.remove('is-active'))
+  for (const w of [stage.notes, stage.browser, stage.explorer, stage.backupMock]) if (w && w !== keep) hideWindow(w)
   stage.root.querySelector('.ob-shelf')?.getAnimations().forEach((a) => a.cancel())
 }
 
@@ -1022,16 +1028,42 @@ export async function showEdge(run: Run, stage: Stage, to: StickPosition) {
 
 
 async function demoBackup(run: Run, stage: Stage) {
+  showWindow(stage.backupMock)
+  const cardBox = stage.backupMock.querySelector<HTMLElement>('.ob-backup-card')
+  const expBtn = stage.backupMock.querySelector<HTMLElement>('.btn-exp')
+  const impBtn = stage.backupMock.querySelector<HTMLElement>('.btn-imp')
+
   const p = new Pointer(run, stage.cursor)
-  await p.show(520, 360)
-  const target = card(stage, 'demo-pdf')
-  const r = rect(stage, target)
-  const at = { x: r.left + r.width * 0.5, y: r.top + r.height * 0.3 }
-  zoomTo(stage.lens, withEdge(PUSH, at.x), 900)
-  await p.move(at.x, at.y, 800)
+  await p.show(420, 320)
+
+  // Zoom towards the backup card in view
+  const bRect = rect(stage, stage.backupMock)
+  zoomTo(stage.lens, onWindow(bRect), 800)
   await run.sleep(400)
+
+  if (expBtn) {
+    const r = rect(stage, expBtn)
+    await p.move(r.left + r.width / 2, r.top + r.height / 2, 600)
+    await run.sleep(150)
+    expBtn.classList.add('is-active')
+    await p.press()
+    expBtn.classList.remove('is-active')
+
+    // Flashing success on card
+    cardBox?.classList.add('is-success')
+    await run.sleep(700)
+  }
+
+  if (impBtn) {
+    const r = rect(stage, impBtn)
+    await p.move(r.left + r.width / 2, r.top + r.height / 2, 500)
+    impBtn.classList.add('is-active')
+    await run.sleep(600)
+    impBtn.classList.remove('is-active')
+  }
+
   zoomRest(stage.lens, 800)
-  await p.move(480, 340, 600)
+  await p.hide()
   await run.sleep(400)
 }
 
@@ -1098,6 +1130,8 @@ async function rewind(run: Run, stage: Stage, step: string, open: boolean) {
     if (o < 0.01) continue
     run.animate(m, [{ transform: t, opacity: o }, { transform: t, opacity: 0 }], { duration: 400, easing: 'ease' }).catch(() => {})
   }
+  stage.backupMock?.querySelectorAll('.ob-backup-card.is-success').forEach((el) => el.classList.remove('is-success'))
+  stage.backupMock?.querySelectorAll('.btn-exp.is-active, .btn-imp.is-active').forEach((el) => el.classList.remove('is-active'))
   stage.root.querySelectorAll('.ob-file.is-on').forEach((el) => el.classList.remove('is-on'))
   if (stage.notesImage.classList.contains('is-in')) {
     stage.notesImage.classList.remove('is-in')

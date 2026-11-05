@@ -305,7 +305,7 @@ const masterEn = {
     quitTitle: 'Quit T-Drop',
     quitDesc: 'Exit application and stop background process',
     supportPromo: 'T-Drop is 100% free & open-source. If it helps your daily workflow, consider supporting development to make it even better!',
-    supportOnKofi: 'Support via Ko-fi / UPI',
+    supportOnKofi: 'Support Author (VietQR)',
     starOnGithub: 'Star on GitHub',
     reviewOnStore: 'Review on Microsoft Store',
     githubPromo: 'Enjoying T-Drop? Show your support by starring the project on GitHub!',

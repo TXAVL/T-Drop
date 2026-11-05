@@ -607,7 +607,7 @@ export const en: TranslationKeys = {
     "githubPromo": "If you like T-Drop, please consider starring the project on GitHub!",
     "version": "Version",
     "supportPromo": "T-Drop is 100% free & open-source. If it helps your daily workflow, consider supporting development to make it even better!",
-    "supportOnKofi": "Support via Ko-fi / UPI"
+    "supportOnKofi": "Support Author (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -1293,7 +1293,7 @@ const es: TranslationKeys = {
     "githubPromo": "Si te gusta T-Drop, ¡considera darle una estrella en GitHub!",
     "version": "Versión",
     "supportPromo": "T-Drop es 100 % gratuito y de código abierto. Si te ayuda en tu trabajo diario, considera apoyar su desarrollo para hacerlo aún mejor.",
-    "supportOnKofi": "Apoyar en Ko-fi"
+    "supportOnKofi": "Apoyar al autor (VietQR)"
   },
   "groups": {
     "feedback": "COMENTARIOS",
@@ -1987,7 +1987,7 @@ const fr: TranslationKeys = {
     "githubPromo": "Si vous aimez T-Drop, pensez à mettre une étoile au projet sur GitHub !",
     "version": "Version",
     "supportPromo": "T-Drop est 100 % gratuit et open source. S'il améliore votre flux de travail quotidien, pensez à soutenir son développement pour le rendre encore meilleur !",
-    "supportOnKofi": "Soutenir sur Ko-fi"
+    "supportOnKofi": "Soutenir l'auteur (VietQR)"
   },
   "groups": {
     "feedback": "COMMENTAIRES",
@@ -2681,7 +2681,7 @@ const de: TranslationKeys = {
     "githubPromo": "Wenn Ihnen T-Drop gefällt, geben Sie dem Projekt bitte einen Stern auf GitHub!",
     "version": "Version",
     "supportPromo": "T-Drop ist 100 % kostenlos und Open Source. Wenn es Ihren Arbeitsalltag erleichtert, unterstützen Sie gerne die Entwicklung, damit es noch besser wird!",
-    "supportOnKofi": "Auf Ko-fi unterstützen"
+    "supportOnKofi": "Autor unterstützen (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -3367,7 +3367,7 @@ const it: TranslationKeys = {
     "githubPromo": "Se ti piace T-Drop, valuta di mettere una stella al progetto su GitHub!",
     "version": "Versione",
     "supportPromo": "T-Drop è completamente gratuito e open source. Se ti aiuta nel tuo lavoro quotidiano, valuta di supportarne lo sviluppo per renderlo ancora migliore!",
-    "supportOnKofi": "Supporta su Ko-fi"
+    "supportOnKofi": "Supporta l'autore (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -4061,7 +4061,7 @@ const pt: TranslationKeys = {
     "githubPromo": "Se você gosta do T-Drop, considere dar uma estrela no projeto no GitHub!",
     "version": "Versão",
     "supportPromo": "O T-Drop é 100% gratuito e de código aberto. Se ele ajuda no seu fluxo de trabalho diário, considere apoiar o desenvolvimento para torná-lo ainda melhor!",
-    "supportOnKofi": "Apoiar no Ko-fi"
+    "supportOnKofi": "Apoiar o autor (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -4755,7 +4755,7 @@ const ru: TranslationKeys = {
     "githubPromo": "Если вам нравится T-Drop, пожалуйста, поставьте звезду проекту на GitHub!",
     "version": "Версия",
     "supportPromo": "T-Drop полностью бесплатный и с открытым исходным кодом. Если он помогает вам в повседневной работе, поддержите разработку, чтобы сделать его ещё лучше!",
-    "supportOnKofi": "Поддержать на Ko-fi"
+    "supportOnKofi": "Поддержать автора (VietQR)"
   },
   "groups": {
     "feedback": "ОБРАТНАЯ СВЯЗЬ",
@@ -5457,7 +5457,7 @@ const ja: TranslationKeys = {
     "githubPromo": "T-Drop を気に入っていただけたら、GitHub でスターをよろしくお願いします！",
     "version": "バージョン",
     "supportPromo": "T-Drop は100%無料のオープンソースです。日々の作業に役立っているなら、さらに良くするために開発を応援していただけると嬉しいです！",
-    "supportOnKofi": "Ko-fiで支援する"
+    "supportOnKofi": "作者を支援する (VietQR)"
   },
   "groups": {
     "feedback": "フィードバック",
@@ -6135,7 +6135,7 @@ const ko: TranslationKeys = {
     "githubPromo": "T-Drop이 마음에 드시면 GitHub에서 프로젝트에 별표를 고려해 주세요!",
     "version": "버전",
     "supportPromo": "T-Drop은 100% 무료 오픈소스입니다. 일상적인 작업에 도움이 된다면, 더 나은 앱을 만들 수 있도록 개발을 후원해 주세요!",
-    "supportOnKofi": "Ko-fi에서 후원하기"
+    "supportOnKofi": "개발자 후원하기 (VietQR)"
   },
   "groups": {
     "feedback": "피드백",
@@ -6813,7 +6813,7 @@ const zhCN: TranslationKeys = {
     "githubPromo": "如果您喜欢 T-Drop，请在 GitHub 上为项目加星！",
     "version": "版本",
     "supportPromo": "T-Drop 完全免费且开源。如果它能帮助提升您的日常工作效率，欢迎支持开发，让它变得更好！",
-    "supportOnKofi": "在 Ko-fi 上支持"
+    "supportOnKofi": "支持作者 (VietQR)"
   },
   "groups": {
     "feedback": "反馈",
@@ -7491,7 +7491,7 @@ const zhTW: TranslationKeys = {
     "githubPromo": "如果您喜歡 T-Drop，請在 GitHub 上為專案加星！",
     "version": "版本",
     "supportPromo": "T-Drop 完全免費且開源。如果它能幫助提升您的日常工作效率，歡迎支持開發，讓它變得更好！",
-    "supportOnKofi": "在 Ko-fi 上支持"
+    "supportOnKofi": "支持作者 (VietQR)"
   },
   "groups": {
     "feedback": "意見回饋",
@@ -8169,7 +8169,7 @@ const hi: TranslationKeys = {
     "githubPromo": "यदि आपको T-Drop पसंद आता है, तो कृपया GitHub पर प्रोजेक्ट को स्टार देने पर विचार करें!",
     "version": "संस्करण",
     "supportPromo": "T-Drop 100% मुफ़्त और ओपन-सोर्स है। यदि यह आपके रोज़मर्रा के काम को आसान बनाता है, तो इसे और बेहतर बनाने के लिए विकास का समर्थन करने पर विचार करें!",
-    "supportOnKofi": "Ko-fi / UPI से समर्थन करें"
+    "supportOnKofi": "डेवलपर का समर्थन करें (VietQR)"
   },
   "groups": {
     "feedback": "प्रतिक्रिया",
@@ -8855,7 +8855,7 @@ const ar: TranslationKeys = {
     "githubPromo": "إذا أحببت T-Drop، يُرجى النظر في تمييز المشروع بنجمة على GitHub!",
     "version": "الإصدار",
     "supportPromo": "T-Drop مجاني ومفتوح المصدر بالكامل. إذا كان يساعدك في سير عملك اليومي، ففكر في دعم تطويره ليصبح أفضل!",
-    "supportOnKofi": "ادعم عبر Ko-fi / UPI"
+    "supportOnKofi": "دعم المطور (VietQR)"
   },
   "groups": {
     "feedback": "الملاحظات",
@@ -9573,7 +9573,7 @@ const fa: TranslationKeys = {
     "githubPromo": "T-Drop رو دوست داری؟ با یه ستاره توی GitHub حمایتش کن!",
     "version": "نسخه",
     "supportPromo": "T-Drop کاملاً رایگان و متن‌بازه. اگه توی کارهای روزمره به دردت می‌خوره، با حمایت از پروژه کمک کن بهترش کنیم!",
-    "supportOnKofi": "حمایت از طریق Ko-fi / UPI"
+    "supportOnKofi": "حمایت از سازنده (VietQR)"
   },
   "groups": {
     "feedback": "بازخورد",
@@ -10259,7 +10259,7 @@ const bn: TranslationKeys = {
     "githubPromo": "আপনি যদি T-Drop পছন্দ করেন, তবে GitHub-এ প্রকল্পে তারা দেওয়ার কথা বিবেচনা করুন!",
     "version": "সংস্করণ",
     "supportPromo": "T-Drop ১০০% বিনামূল্যে এবং ওপেন-সোর্স। এটি যদি আপনার দৈনন্দিন কাজকে সহজ করে, তাহলে এটিকে আরও উন্নত করতে উন্নয়নে সহায়তা করার কথা বিবেচনা করুন!",
-    "supportOnKofi": "Ko-fi / UPI-তে সহায়তা করুন"
+    "supportOnKofi": "ডেভেলপারকে সহায়তা (VietQR)"
   },
   "groups": {
     "feedback": "মতামত",
@@ -10945,7 +10945,7 @@ const tr: TranslationKeys = {
     "githubPromo": "T-Drop'u beğendiyseniz, lütfen GitHub'da projeye yıldız vermeyi düşünün!",
     "version": "Sürüm",
     "supportPromo": "T-Drop %100 ücretsiz ve açık kaynaklıdır. Günlük iş akışınıza yardımcı oluyorsa, daha da geliştirilmesine destek olmayı düşünebilirsiniz!",
-    "supportOnKofi": "Ko-fi üzerinden destek ol"
+    "supportOnKofi": "Yazarı destekle (VietQR)"
   },
   "groups": {
     "feedback": "GERİ BİLDİRİM",
@@ -11631,7 +11631,7 @@ const vi: TranslationKeys = {
     "githubPromo": "Nếu bạn thích T-Drop, hãy cân nhắc đánh sao cho dự án trên GitHub!",
     "version": "Phiên bản",
     "supportPromo": "T-Drop hoàn toàn miễn phí và mã nguồn mở. Nếu ứng dụng giúp ích cho công việc hằng ngày của bạn, hãy cân nhắc ủng hộ quá trình phát triển để ứng dụng ngày càng tốt hơn!",
-    "supportOnKofi": "Ủng hộ trên Ko-fi"
+    "supportOnKofi": "Ủng hộ tác giả (VietQR)"
   },
   "groups": {
     "feedback": "PHẢN HỒI",
@@ -12309,7 +12309,7 @@ const pl: TranslationKeys = {
     "githubPromo": "Jeśli lubisz T-Drop, rozważ dodanie gwiazdki projektowi na GitHub!",
     "version": "Wersja",
     "supportPromo": "T-Drop jest w 100% darmowy i otwartoźródłowy. Jeśli pomaga Ci w codziennej pracy, rozważ wsparcie jego rozwoju, aby był jeszcze lepszy!",
-    "supportOnKofi": "Wesprzyj na Ko-fi"
+    "supportOnKofi": "Wesprzyj autora (VietQR)"
   },
   "groups": {
     "feedback": "OPINIE",
@@ -13011,7 +13011,7 @@ const nl: TranslationKeys = {
     "githubPromo": "Als je T-Drop leuk vindt, overweeg dan om het project een ster te geven op GitHub!",
     "version": "Versie",
     "supportPromo": "T-Drop is 100% gratis en open source. Als het je dagelijkse workflow makkelijker maakt, overweeg dan de ontwikkeling te steunen zodat het nog beter wordt!",
-    "supportOnKofi": "Steun op Ko-fi"
+    "supportOnKofi": "Steun de auteur (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -13697,7 +13697,7 @@ const sv: TranslationKeys = {
     "githubPromo": "Om du gillar T-Drop, överväg att stjärnmärka projektet på GitHub!",
     "version": "Version",
     "supportPromo": "T-Drop är 100 % gratis och med öppen källkod. Om det hjälper dig i ditt dagliga arbete kan du överväga att stödja utvecklingen så att det blir ännu bättre!",
-    "supportOnKofi": "Stöd på Ko-fi"
+    "supportOnKofi": "Stöd författaren (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -14383,7 +14383,7 @@ const id: TranslationKeys = {
     "githubPromo": "Jika Anda menyukai T-Drop, harap pertimbangkan untuk memberi bintang pada proyek di GitHub!",
     "version": "Versi",
     "supportPromo": "T-Drop 100% gratis dan bersifat open-source. Jika aplikasi ini membantu alur kerja harian Anda, pertimbangkan untuk mendukung pengembangannya agar menjadi lebih baik lagi!",
-    "supportOnKofi": "Dukung di Ko-fi"
+    "supportOnKofi": "Dukung pembuat (VietQR)"
   },
   "groups": {
     "feedback": "UMPAN BALIK",
@@ -15061,7 +15061,7 @@ const uk: TranslationKeys = {
     "githubPromo": "Якщо вам подобається T-Drop, будь ласка, поставте зірку проєкту на GitHub!",
     "version": "Версія",
     "supportPromo": "T-Drop є повністю безкоштовним і відкритим. Якщо він допомагає вам у щоденній роботі, підтримайте його розвиток, щоб зробити його ще кращим!",
-    "supportOnKofi": "Підтримати на Ko-fi"
+    "supportOnKofi": "Підтримати автора (VietQR)"
   },
   "groups": {
     "feedback": "ВІДГУК",
@@ -15763,7 +15763,7 @@ const el: TranslationKeys = {
     "githubPromo": "Αν σας αρέσει το T-Drop, σκεφτείτε να δώσετε ένα αστέρι στο έργο στο GitHub!",
     "version": "Έκδοση",
     "supportPromo": "Το T-Drop είναι 100% δωρεάν και ανοιχτού κώδικα. Αν σας βοηθά στην καθημερινή εργασία σας, σκεφτείτε να υποστηρίξετε την ανάπτυξή του ώστε να γίνει ακόμη καλύτερο!",
-    "supportOnKofi": "Υποστήριξη στο Ko-fi"
+    "supportOnKofi": "Υποστήριξη δημιουργού (VietQR)"
   },
   "groups": {
     "feedback": "ΣΧΟΛΙΑ",
@@ -16449,7 +16449,7 @@ const cs: TranslationKeys = {
     "githubPromo": "Pokud se vám T-Drop líbí, dejte prosím projektu hvězdičku na GitHubu!",
     "version": "Verze",
     "supportPromo": "T-Drop je 100% zdarma a s otevřeným zdrojovým kódem. Pokud vám usnadňuje každodenní práci, zvažte podporu jeho vývoje, aby byl ještě lepší!",
-    "supportOnKofi": "Podpořit na Ko-fi"
+    "supportOnKofi": "Podpořit autora (VietQR)"
   },
   "groups": {
     "feedback": "ZPĚTNÁ VAZBA",
@@ -17151,7 +17151,7 @@ const ro: TranslationKeys = {
     "githubPromo": "Dacă îți place T-Drop, te rugăm să iei în considerare marcarea cu stea a proiectului pe GitHub!",
     "version": "Versiune",
     "supportPromo": "T-Drop este 100% gratuit și open-source. Dacă îți este util în activitatea de zi cu zi, ia în considerare susținerea dezvoltării pentru a-l face și mai bun!",
-    "supportOnKofi": "Susține pe Ko-fi"
+    "supportOnKofi": "Susține autorul (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -17845,7 +17845,7 @@ const hu: TranslationKeys = {
     "githubPromo": "Ha tetszik az T-Drop, fontolja meg a projekt csillagozását a GitHubon!",
     "version": "Verzió",
     "supportPromo": "Az T-Drop 100%-ban ingyenes és nyílt forráskódú. Ha megkönnyíti a mindennapi munkáját, fontolja meg a fejlesztés támogatását, hogy még jobb lehessen!",
-    "supportOnKofi": "Támogatás a Ko-fi oldalon"
+    "supportOnKofi": "Szerző támogatása (VietQR)"
   },
   "groups": {
     "feedback": "VISSZAJELZÉS",
@@ -18531,7 +18531,7 @@ const da: TranslationKeys = {
     "githubPromo": "Hvis du kan lide T-Drop, så overvej at give projektet en stjerne på GitHub!",
     "version": "Version",
     "supportPromo": "T-Drop er 100 % gratis og open source. Hvis det hjælper dig i din daglige arbejdsgang, kan du overveje at støtte udviklingen, så det bliver endnu bedre!",
-    "supportOnKofi": "Støt på Ko-fi"
+    "supportOnKofi": "Støt forfatteren (VietQR)"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -19217,7 +19217,7 @@ const fi: TranslationKeys = {
     "githubPromo": "Jos pidät T-Dropista, harkitse tähden antamista projektille GitHubissa!",
     "version": "Versio",
     "supportPromo": "T-Drop on 100 % ilmainen ja avoimen lähdekoodin ohjelmisto. Jos se helpottaa päivittäistä työnkulkuasi, harkitse kehityksen tukemista, jotta siitä tulee vielä parempi!",
-    "supportOnKofi": "Tue Ko-fi:ssa"
+    "supportOnKofi": "Tue kehittäjää (VietQR)"
   },
   "groups": {
     "feedback": "PALAUTE",
@@ -19903,7 +19903,7 @@ const th: TranslationKeys = {
     "githubPromo": "หากคุณชอบ T-Drop โปรดพิจารณาติดดาวให้โปรเจกต์บน GitHub!",
     "version": "เวอร์ชัน",
     "supportPromo": "T-Drop ฟรี 100% และเป็นโอเพนซอร์ส หากแอปนี้ช่วยให้การทำงานประจำวันของคุณสะดวกขึ้น โปรดพิจารณาสนับสนุนการพัฒนาเพื่อให้ดียิ่งขึ้น!",
-    "supportOnKofi": "สนับสนุนผ่าน Ko-fi"
+    "supportOnKofi": "สนับสนุนผู้พัฒนา (VietQR)"
   },
   "groups": {
     "feedback": "ความคิดเห็น",
@@ -20581,7 +20581,7 @@ const he: TranslationKeys = {
     "githubPromo": "אם אתה אוהב את T-Drop, אנא שקול לתת כוכב לפרויקט ב-GitHub!",
     "version": "גרסה",
     "supportPromo": "T-Drop הוא חינמי לחלוטין ובקוד פתוח. אם הוא עוזר לכם בעבודה היומיומית, שקלו לתמוך בפיתוח כדי להפוך אותו לטוב אפילו יותר!",
-    "supportOnKofi": "תמכו דרך Ko-fi / UPI"
+    "supportOnKofi": "תמיכה במפתח (VietQR)"
   },
   "groups": {
     "feedback": "משוב",
@@ -21275,7 +21275,7 @@ const no: TranslationKeys = {
     "githubPromo": "Hvis du liker T-Drop, vennligst vurder å gi prosjektet en stjerne på GitHub!",
     "version": "Versjon",
     "supportPromo": "T-Drop er 100 % gratis og åpen kildekode. Hvis det hjelper deg i den daglige arbeidsflyten, kan du vurdere å støtte utviklingen for å gjøre det enda bedre!",
-    "supportOnKofi": "Støtt på Ko-fi"
+    "supportOnKofi": "Støtt forfatteren (VietQR)"
   },
   "groups": {
     "feedback": "TILBAKEMELDING",
