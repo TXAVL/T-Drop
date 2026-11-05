@@ -2204,15 +2204,30 @@
 /* ------------------------------------------------------------------ */
 
 .item-note {
-  padding: 11px 16px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px 0 16px;
   font-family: var(--font-ui);
   font-size: calc(12px * var(--font-scale, 1));
   font-weight: 600;
   line-height: 1.3;
-  color: #ffffff;
+  color: #f1f5f9;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.item-note-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #38bdf8;
+}
+.item-note-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .item-note + .item-content {
   padding-top: 4px;

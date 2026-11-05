@@ -19,6 +19,7 @@ export function itemRenderKey(item: ClipboardItemDto): string {
   const cached = renderKeyCache.get(item)
   if (cached !== undefined) return cached
 
+  const noteKey = item.note ?? ''
   const d = item.data
   let key: string
   switch (d.kind) {
@@ -26,15 +27,15 @@ export function itemRenderKey(item: ClipboardItemDto): string {
       // text feeds both the plain preview and the offline link-preview card;
       // isUrl switches the whole body layout. Do not include html: Excel
       // CF_HTML can be megabytes and cards never render it.
-      key = `t|${d.isUrl ? 1 : 0}|${d.isColor ? 1 : 0}|${d.text}`
+      key = `t|${d.isUrl ? 1 : 0}|${d.isColor ? 1 : 0}|${d.text}|${noteKey}`
       break
     case 'image':
-      key = `i|${d.imageId}|${d.width}x${d.height}|${d.bytes}|${d.ext ?? ''}|${d.source ?? ''}|${d.fileName ?? ''}|${d.preview}`
+      key = `i|${d.imageId}|${d.width}x${d.height}|${d.bytes}|${d.ext ?? ''}|${d.source ?? ''}|${d.fileName ?? ''}|${d.preview}|${noteKey}`
       break
     case 'image-collection':
       key = `c|${d.images
         .map((i) => `${i.imageId},${i.width},${i.height},${i.bytes},${i.ext ?? ''},${i.preview}`)
-        .join(';')}`
+        .join(';')}|${noteKey}`
       break
     case 'files': {
       const entries =
@@ -44,7 +45,7 @@ export function itemRenderKey(item: ClipboardItemDto): string {
               `${en.name},${en.size},${en.isImage ? 1 : 0},${en.isDirectory ? 1 : 0},${en.preview ?? ''}`
           )
           .join(';') ?? ''
-      key = `f|${d.paths.join('\n')}|${entries}`
+      key = `f|${d.paths.join('\n')}|${entries}|${noteKey}`
       break
     }
   }

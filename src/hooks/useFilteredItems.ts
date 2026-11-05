@@ -10,20 +10,53 @@ import type { ClipboardItemDto, TypeFilter } from '../../shared/types'
 import { basename, isImagePath } from '../lib/format'
 import { parseColor } from '../lib/colorUtils'
 
+function normalizeSearchText(str: string): string {
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[\u0110\u0111]/g, 'd')
+}
+
 function matches(it: ClipboardItemDto, q: string): boolean {
   if (!q) return true
-  const needle = q.toLowerCase()
+  const needle = q.trim().toLowerCase()
+  if (!needle) return true
+  const needleNorm = normalizeSearchText(needle)
+
+  // 1. Search in item note if present
+  if (it.note) {
+    const noteLower = it.note.toLowerCase()
+    if (noteLower.includes(needle) || normalizeSearchText(noteLower).includes(needleNorm)) {
+      return true
+    }
+  }
+
+  // 2. Search in item content
   switch (it.data.kind) {
-    case 'text':
-      return it.data.text.toLowerCase().includes(needle)
+    case 'text': {
+      const textLower = it.data.text.toLowerCase()
+      return textLower.includes(needle) || normalizeSearchText(textLower).includes(needleNorm)
+    }
     case 'files':
-      return it.data.paths.some((p) => basename(p).toLowerCase().includes(needle))
+      return (
+        it.data.paths.some((p) => {
+          const name = basename(p).toLowerCase()
+          return name.includes(needle) || normalizeSearchText(name).includes(needleNorm)
+        }) ||
+        (it.data.entries?.some((en) => {
+          const name = en.name.toLowerCase()
+          return name.includes(needle) || normalizeSearchText(name).includes(needleNorm)
+        }) ?? false)
+      )
     case 'image':
-      // images have no searchable text; hidden by query
+      if (it.data.fileName) {
+        const fn = it.data.fileName.toLowerCase()
+        if (fn.includes(needle) || normalizeSearchText(fn).includes(needleNorm)) return true
+      }
       return false
     case 'image-collection':
-      // image collections have no searchable text; hidden by query
-      return false
+      return it.data.images.some((img) => {
+        if (!img.fileName) return false
+        const fn = img.fileName.toLowerCase()
+        return fn.includes(needle) || normalizeSearchText(fn).includes(needleNorm)
+      })
   }
 }
 

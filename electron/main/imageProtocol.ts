@@ -103,6 +103,23 @@ export async function readEmojiBatch(assetDir: string, names: readonly unknown[]
   return out
 }
 
+/** Directory of file-kind icons (SVG, resources/file-icons). */
+export function iconAssetDir(opts: { packaged: boolean; resourcesPath: string; appPath: string; cwd: string }): string {
+  if (opts.packaged) {
+    const candidates = [
+      join(opts.resourcesPath, 'file-icons'),
+      join(opts.resourcesPath, 'app.asar', 'resources', 'file-icons'),
+      join(opts.appPath, 'resources', 'file-icons')
+    ]
+    return candidates.find((dir) => existsSync(dir)) ?? candidates[0]
+  }
+  const candidates = [
+    join(opts.cwd, 'resources', 'file-icons'),
+    join(opts.appPath, 'resources', 'file-icons')
+  ]
+  return candidates.find((dir) => existsSync(dir)) ?? candidates[0]
+}
+
 /**
  * File-kind folder icons (SVG, resources/file-icons). Fixed 13-name
  * allowlist so the protocol cannot escape the icon directory — same

@@ -27,7 +27,8 @@ import { CHOICE_VIEW, DEMOS, PREVIEW_PAN, Run, STOP, demoEdges, itemsFor, playLo
 import { realScreenTransform, realSidePanel, tourBar, shelfTransform, topBarLength, SHELF_SCALE, TOUR_SCREEN_TOP } from './onboarding/edgeBar'
 import { otherFiles, pageLines, pageTitle, stackFiles } from './onboarding/demoItems'
 import { Autoplay, readingMs } from './onboarding/autoplay'
-import { fileIconUrl, fileKindOf } from './lib/fileKind'
+import { fileKindOf } from './lib/fileKind'
+import { CustomFileIcon } from './components/CustomFileIcon'
 import skyUrl from './assets/onboarding/sky.png'
 import fogHeavyUrl from './assets/onboarding/welcome-blur-heavy.png'
 import fogMidUrl from './assets/onboarding/welcome-blur-mid.png'
@@ -429,7 +430,7 @@ export function Onboarding() {
                 {/* the rest of the folder, then the three files it selects and drags in */}
                 {[...otherFiles(), ...stackFiles()].map(([name, size], i) => (
                   <div key={i} className={`ob-file${i >= 3 ? ' is-pick' : ''}`}>
-                    <img src={fileIconUrl(fileKindOf(name))} alt="" />
+                    <CustomFileIcon kind={fileKindOf(name)} width={16} height={16} />
                     <span>{name}</span>
                     <em>{t('units.kb', { n: Math.round(size / 1024).toLocaleString(resolvedLang) })}</em>
                   </div>
@@ -441,41 +442,29 @@ export function Onboarding() {
             <div ref={backupMockRef} className={`ob-win ob-backup-mock${s.key === 'backup' ? ' is-visible' : ''}`}>
               <div className="ob-win-bar">
                 <span className="ob-notes-title">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="M9 12l2 2 4-4"/>
-                  </svg>
-                  T-Drop Backup &amp; Restore (.txa)
+                  <i className="ob-settings-icon" />
+                  {t('tray.settings')} — {t('backup.title')}
                 </span>
                 <Caption />
               </div>
               <div className="ob-backup-body">
                 <div className="ob-backup-card">
-                  <div className="ob-backup-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                      <line x1="12" y1="22.08" x2="12" y2="12"/>
-                    </svg>
+                  <div className="setting-group-label">{t('backup.title')}</div>
+                  <div className="setting-title">{t('backup.title')}</div>
+                  <div className="setting-desc">{t('backup.desc')}</div>
+                  <div className="ob-backup-actions">
+                    <button type="button" className="pill active btn-exp">
+                      {t('backup.exportBtn')}
+                    </button>
+                    <button type="button" className="pill outline btn-imp">
+                      {t('backup.importBtn')}
+                    </button>
                   </div>
-                  <div className="ob-backup-meta">
-                    <b>T-Drop-Archive-2026.txa</b>
-                    <span>128 clips • 5 pinned • 12 notes</span>
-                    <div className="ob-backup-tags">
-                      <span className="tag-enc">AES-256</span>
-                      <span className="tag-mode">{t('backup.modeMerge') || 'Merge'}</span>
-                      <span className="tag-mode">{t('backup.modeOverwrite') || 'Overwrite'}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="ob-backup-actions">
-                  <button type="button" className="btn-exp">{t('backup.exportBtn') || 'Export .txa'}</button>
-                  <button type="button" className="btn-imp">{t('backup.importBtn') || 'Import .txa'}</button>
                 </div>
               </div>
             </div>
 
-                        {/* Another app, for the drag demo. */}
+            {/* Another app, for the drag demo. */}
             <div className="ob-notes" ref={notesRef}>
               <div className="ob-notes-bar">
                 <span className="ob-notes-title"><i />{t('tour.notesApp')}</span>

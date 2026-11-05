@@ -29,7 +29,7 @@ import { flushStagedTempRegistry } from './stagedTemp'
 import { extname, normalize } from 'node:path'
 import { existsSync, createReadStream } from 'node:fs'
 import { createHash } from 'node:crypto'
-import { resolveStoredImage, resolveEmojiAsset, emojiAssetDir } from './imageProtocol'
+import { resolveStoredImage, resolveEmojiAsset, emojiAssetDir, resolveIconAsset, iconAssetDir } from './imageProtocol'
 import { getThumbnailPayload, thumbnailCacheControl } from './thumbnailCache'
 import { registerTxaAssociation } from './txaAssociation'
 import { previewTxaBackup, findAvailableTxaBackups } from '../store/backup'
@@ -262,6 +262,28 @@ function registerImageProtocol(): void {
           status: 200,
           headers: new Headers({
             'Content-Type': 'image/png',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+            'Access-Control-Allow-Origin': '*'
+          })
+        })
+      }
+
+      if (request.url.startsWith(`${APP_CONFIG.imageProtocol}://icon/`)) {
+        const fileName = decodeURIComponent(request.url.slice(`${APP_CONFIG.imageProtocol}://icon/`.length).split('?')[0] ?? '')
+        const dir = iconAssetDir({
+          packaged: app.isPackaged,
+          resourcesPath: process.resourcesPath,
+          appPath: app.getAppPath(),
+          cwd: process.cwd()
+        })
+        const filePath = resolveIconAsset(dir, fileName)
+        if (!filePath) return new Response('Not found', { status: 404 })
+        const stream = createReadStream(filePath)
+        const body = new Response(stream as unknown as ReadableStream<Uint8Array>).body
+        return new Response(body, {
+          status: 200,
+          headers: new Headers({
+            'Content-Type': 'image/svg+xml',
             'Cache-Control': 'public, max-age=31536000, immutable',
             'Access-Control-Allow-Origin': '*'
           })
