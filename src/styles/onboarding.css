@@ -581,8 +581,7 @@
   align-self: stretch;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.ob-line,
-.ob-rest {
+.ob-line {
   position: relative;
   white-space: nowrap;
   line-height: 17px;
@@ -590,8 +589,14 @@
   color: #c9cbd2;
 }
 .ob-rest {
-  margin-top: 3px;
+  position: relative;
+  margin-top: 4px;
   color: #8e919b;
+  font-size: 10px;
+  line-height: 14.5px;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
 }
 .ob-photo {
   flex: none;
