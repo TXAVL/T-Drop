@@ -1935,6 +1935,10 @@
   width: 270px;
 }
 
+.settings-shelf-card.backup-card {
+  width: 380px;
+}
+
 .settings-shelf-card.autodelete-card {
   width: 330px;
 }

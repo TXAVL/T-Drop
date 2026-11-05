@@ -550,7 +550,7 @@ export const useStore = create<AppState>((set, get) => ({
     const prevItems = get().items
     if (
       prevItems.length === items.length &&
-      prevItems.every((it, i) => it.id === items[i]?.id && it.pinned === items[i]?.pinned && it.hitCount === items[i]?.hitCount && it.capturedAt === items[i]?.capturedAt)
+      prevItems.every((it, i) => it.id === items[i]?.id && it.pinned === items[i]?.pinned && it.hitCount === items[i]?.hitCount && it.capturedAt === items[i]?.capturedAt && it.note === items[i]?.note)
     ) {
       return
     }

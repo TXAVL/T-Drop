@@ -567,11 +567,14 @@
   padding: 14px 18px 0;
 }
 .ob-article {
-  flex: 1;
+  flex: 0 0 236px;
+  width: 236px;
+  max-width: 236px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   min-width: 0;
+  overflow: hidden;
 }
 .ob-article b {
   font: 400 17px/1.2 Georgia, 'Times New Roman', serif;
@@ -587,6 +590,9 @@
   line-height: 17px;
   font-size: 10.5px;
   color: #c9cbd2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .ob-rest {
   position: relative;
@@ -597,6 +603,11 @@
   white-space: normal;
   word-break: break-word;
   max-width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .ob-photo {
   flex: none;
@@ -1278,9 +1289,9 @@
 /* Mock Backup & Restore view in Onboarding (Matches real app Settings Card) */
 .ob-backup-mock {
   position: absolute;
-  left: 200px;
+  left: 175px;
   top: 140px;
-  width: 400px;
+  width: 450px;
   border-radius: 12px;
   overflow: hidden;
   opacity: 0;
@@ -1378,11 +1389,9 @@
   font-size: 11px;
   font-weight: 600;
   border-radius: 8px;
-  padding: 4px 6px;
+  padding: 4px 10px;
   min-width: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   cursor: pointer;
   border: none;
   display: flex;

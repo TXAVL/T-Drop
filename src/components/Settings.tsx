@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom'
 import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
@@ -294,21 +295,20 @@ export function Settings({
           <div className="setting-title">{t('backup.title') || 'Backup & Restore (.txa)'}</div>
           <div className="setting-desc">{t('backup.desc')}</div>
         </div>
-        <div className="shelf-card-bottom">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, width: '100%' }}>
+        <div className="shelf-card-bottom" style={{ marginTop: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isShelf ? '1fr 1fr' : 'repeat(auto-fit, minmax(130px, 1fr))', gap: 6, width: '100%' }}>
             <button
               type="button"
               className="pill active"
               style={{
                 justifyContent: 'center',
                 height: 34,
-                fontSize: 'calc(11.5px * var(--font-scale, 1))',
+                fontSize: 11,
                 fontWeight: 600,
                 borderRadius: 8,
-                padding: '4px 6px',
+                padding: '4px 8px',
                 minWidth: 0,
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis'
+                whiteSpace: 'nowrap'
               }}
               disabled={isExporting}
               onClick={handleCreateBackup}
@@ -322,13 +322,12 @@ export function Settings({
               style={{
                 justifyContent: 'center',
                 height: 34,
-                fontSize: 'calc(11.5px * var(--font-scale, 1))',
+                fontSize: 11,
                 fontWeight: 600,
                 borderRadius: 8,
-                padding: '4px 6px',
+                padding: '4px 8px',
                 minWidth: 0,
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis'
+                whiteSpace: 'nowrap'
               }}
               onClick={handleOpenBackupFile}
               title={t('backup.importBtn') || 'Restore (.txa)'}
@@ -402,6 +401,7 @@ export function Settings({
       void window.edge.openPurchaseWindow(mode)
     } else {
       setPurchaseMode(mode)
+      if (isHorizontal) window.edge?.setPreviewMode?.(true)
       setPurchaseModalOpen(true)
     }
   }
@@ -904,8 +904,255 @@ export function Settings({
 
     if (isShelf) {
       return (
-        <div className="settings-shelf-card license-card behaviour-col">
-          {content}
+        <div
+          className="settings-shelf-card license-card behaviour-col"
+          style={{
+            width: 530,
+            minWidth: 530,
+            height: 146,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 14,
+            padding: '12px 14px'
+          }}
+        >
+          {/* Left Column: Status, Badges & Machine ID */}
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto', paddingRight: 4, scrollbarWidth: 'thin' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+              <div className="setting-group-label" style={{ display: 'flex', alignItems: 'center', gap: 4, margin: 0 }}>
+                <CrownIcon width={13} height={13} fill={isPro ? '#f59e0b' : 'rgba(255,255,255,0.4)'} />
+                <span>{t('license.title')}</span>
+              </div>
+              <span style={{
+                fontSize: 10,
+                fontWeight: 700,
+                padding: '2px 7px',
+                borderRadius: 99,
+                letterSpacing: '0.04em',
+                background: role === 'PREMIUM'
+                  ? 'linear-gradient(135deg, #a855f7, #6366f1)'
+                  : role === 'VIP'
+                  ? 'linear-gradient(135deg, #f59e0b, #d97706)'
+                  : 'rgba(255,255,255,0.1)',
+                color: '#ffffff'
+              }}>
+                {role === 'PREMIUM' ? t('license.premiumBadge') : role === 'VIP' ? t('license.vipBadge') : t('license.freeBadge')}
+              </span>
+            </div>
+
+            <div className="setting-title" style={{ marginTop: 4 }}>
+              {isPro ? t('license.activeStatus', { role }) : t('license.freeStatus')}
+            </div>
+
+            <div className="setting-desc" style={{ marginTop: 2 }}>
+              {isPro
+                ? t('license.ownerInfo', { name: userNameText(settings.licenseUserName), time: countdownStr ? `${countdownStr}` : daysLeft !== null ? t('license.daysCount', { days: daysLeft }) : t('license.activeShort') })
+                : t('license.freeDesc')}
+            </div>
+
+            {settings.licenseExpiresAt && isPro && (
+              <div style={{
+                marginTop: 4,
+                fontSize: 10.5,
+                color: '#38bdf8',
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                borderRadius: 6,
+                padding: '3px 6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}>
+                <span>{t('license.expiresAt')} <strong>{expiryText(settings.licenseExpiresAt)}</strong></span>
+                <span>{countdownStr || t('license.daysCount', { days: daysLeft ?? 0 })}</span>
+              </div>
+            )}
+
+            {deviceInfo?.hwHash && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'rgba(0, 0, 0, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: 8,
+                padding: '4px 8px',
+                marginTop: 'auto'
+              }}>
+                <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.55)' }}>
+                  {t('license.machineId')} <strong style={{ color: '#fff', letterSpacing: '0.04em' }}>{deviceInfo.hwHash}</strong>
+                </span>
+                <button
+                  type="button"
+                  onClick={handleCopyHardwareHash}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: copiedHw ? '#10b981' : '#38bdf8',
+                    fontSize: 10.5,
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  {copiedHw ? t('license.copied') : t('license.copy')}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column: Key Activation Input, Purchase & Logs */}
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', overflowY: 'auto', paddingLeft: 2, scrollbarWidth: 'thin' }}>
+            {isPro ? (
+              <div style={{ display: 'flex', gap: 6, width: '100%' }}>
+                <button
+                  type="button"
+                  className="pill"
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    height: 32,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2))',
+                    border: '1px solid rgba(56, 189, 248, 0.3)',
+                    color: '#38bdf8'
+                  }}
+                  onClick={handleOpenRenew}
+                >
+                  {t('license.extend')}
+                </button>
+                <button
+                  type="button"
+                  className="pill danger"
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    height: 32,
+                    fontSize: 11,
+                    fontWeight: 600
+                  }}
+                  onClick={handleDeactivateLicense}
+                >
+                  {t('license.deactivate')}
+                </button>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
+                <div style={{ display: 'flex', gap: 5, width: '100%', alignItems: 'center' }}>
+                  <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                    <input
+                      ref={licenseInputRef}
+                      type="text"
+                      placeholder={t('license.keyPlaceholder')}
+                      value={licenseInput}
+                      disabled={licenseActivating}
+                      onFocus={handleFocusLicenseInput}
+                      onChange={(e) => setLicenseInput(e.target.value.toUpperCase().replace(/\s+/g, ''))}
+                      onPaste={(e) => {
+                        e.preventDefault()
+                        const pasted = e.clipboardData.getData('text').trim().toUpperCase().replace(/\s+/g, '')
+                        if (pasted) setLicenseInput(pasted)
+                      }}
+                      style={{
+                        width: '100%',
+                        height: 30,
+                        background: 'rgba(0, 0, 0, 0.45)',
+                        border: licenseActivating ? '1px solid rgba(56, 189, 248, 0.5)' : '1px solid rgba(255, 255, 255, 0.16)',
+                        borderRadius: 8,
+                        padding: '0 24px 0 8px',
+                        color: '#ffffff',
+                        fontSize: 10.5,
+                        fontFamily: 'monospace',
+                        outline: 'none',
+                        boxSizing: 'border-box'
+                      }}
+                    />
+                    {licenseInput && !licenseActivating && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLicenseInput('')
+                          licenseInputRef.current?.focus()
+                        }}
+                        style={{
+                          position: 'absolute',
+                          right: 6,
+                          background: 'none',
+                          border: 'none',
+                          color: 'rgba(255, 255, 255, 0.5)',
+                          fontSize: 11,
+                          cursor: 'pointer',
+                          padding: 0
+                        }}
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    className="pill outline"
+                    style={{ height: 30, padding: '0 8px', fontSize: 10.5, flexShrink: 0 }}
+                    onClick={handlePasteLicenseKey}
+                  >
+                    {t('license.pasteBtn')}
+                  </button>
+                  <button
+                    type="button"
+                    className="pill active"
+                    style={{
+                      height: 30,
+                      padding: '0 10px',
+                      fontSize: 10.5,
+                      fontWeight: 600,
+                      flexShrink: 0,
+                      background: licenseActivating ? 'rgba(56, 189, 248, 0.3)' : '#ffffff',
+                      color: licenseActivating ? '#38bdf8' : '#000000'
+                    }}
+                    onClick={handleActivateLicense}
+                    disabled={licenseActivating}
+                  >
+                    {licenseActivating ? t('license.activating') : t('license.verify')}
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  className="pill"
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    justifyContent: 'center',
+                    background: 'linear-gradient(135deg, #0284c7, #6366f1)',
+                    color: '#ffffff',
+                    boxShadow: '0 2px 10px rgba(2, 132, 199, 0.3)'
+                  }}
+                  onClick={handleOpenPurchase}
+                >
+                  {t('license.buyUpgrade')}
+                </button>
+              </div>
+            )}
+            <button
+              type="button"
+              className="pill"
+              style={{
+                width: '100%',
+                height: 28,
+                fontSize: 10.5,
+                fontWeight: 500,
+                justifyContent: 'center',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: 'rgba(255, 255, 255, 0.85)',
+                marginTop: 'auto'
+              }}
+              onClick={handleOpenLogsModal}
+            >
+              {t('license.viewLogs')}
+            </button>
+          </div>
         </div>
       )
     }
@@ -921,6 +1168,10 @@ export function Settings({
 
   const renderDonateModal = () => {
     if (!donateModalOpen) return null
+    const closeDonate = () => {
+      setDonateModalOpen(false)
+      if (isHorizontal) window.edge?.setPreviewMode?.(false)
+    }
 
     const handleCopyStk = () => {
       playButtonClickSound()
@@ -929,10 +1180,10 @@ export function Settings({
       setTimeout(() => setCopiedStk(false), 2000)
     }
 
-    return (
+    return createPortal(
       <div
         className="txa-modal-overlay"
-        onClick={() => setDonateModalOpen(false)}
+        onClick={closeDonate}
       >
         <div
           className="txa-modal-card donate-modal-card"
@@ -997,13 +1248,14 @@ export function Settings({
             <button
               type="button"
               className="txa-btn txa-btn-secondary"
-              onClick={() => setDonateModalOpen(false)}
+              onClick={closeDonate}
             >
               {t('common.close')}
             </button>
           </div>
         </div>
-      </div>
+      </div>,
+      document.body
     )
   }
 
@@ -1032,10 +1284,14 @@ export function Settings({
       return true
     })
 
-    return (
+    const closeLogs = () => {
+      setLogsModalOpen(false)
+      if (isHorizontal) window.edge?.setPreviewMode?.(false)
+    }
+    return createPortal(
       <div
         className="txa-modal-overlay"
-        onClick={() => setLogsModalOpen(false)}
+        onClick={closeLogs}
       >
         <div
           className="txa-modal-card logs-modal-card"
@@ -1209,7 +1465,8 @@ export function Settings({
             </button>
           </div>
         </div>
-      </div>
+      </div>,
+      document.body
     )
   }
 
@@ -1867,6 +2124,7 @@ export function Settings({
             className="shelf-kofi-btn"
             onClick={() => {
               playButtonClickSound()
+              if (isHorizontal) window.edge?.setPreviewMode?.(true)
               setDonateModalOpen(true)
             }}
           >
@@ -2784,7 +3042,10 @@ export function Settings({
         {renderLogsModal()}
         <PurchaseModal
           open={purchaseModalOpen}
-          onClose={() => setPurchaseModalOpen(false)}
+          onClose={() => {
+            setPurchaseModalOpen(false)
+            if (isHorizontal) window.edge?.setPreviewMode?.(false)
+          }}
           machineId={deviceInfo?.hwHash || ''}
           mode={purchaseMode}
         />

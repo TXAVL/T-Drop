@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom'
 /**
  * PurchaseModal & PurchaseWindowView — VietQR Payment & Key Order Flow.
  * Automatically saves order to Supabase tdrop_orders before rendering VietQR code.
@@ -45,7 +46,10 @@ interface PurchaseModalProps {
 
 export function PurchaseModal({ open, onClose, machineId: propMachineId, mode = 'buy' }: PurchaseModalProps) {
   if (!open) return null
-  return <PurchaseWindowContent onClose={onClose} initialMachineId={propMachineId} isModal={true} mode={mode} />
+  return createPortal(
+    <PurchaseWindowContent onClose={onClose} initialMachineId={propMachineId} isModal={true} mode={mode} />,
+    document.body
+  )
 }
 
 export function PurchaseWindowView({ mode = 'buy' }: { mode?: CheckoutMode }) {

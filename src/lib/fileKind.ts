@@ -81,9 +81,9 @@ export function fileKindOf(path: string, isDirectory?: boolean): FileKind {
 }
 
 /**
- * edgelocal:// URL for a file-kind folder icon (SVG, see resources/file-icons).
- * Same hardcoded-scheme convention as the emoji catalog (`edgelocal://emoji/…`).
+ * tdrop-local:// URL for a file-kind folder icon (SVG, see resources/file-icons).
+ * Backward-compatible with edgelocal:// scheme.
  */
 export function fileIconUrl(kind: FileKind): string {
-  return `edgelocal://icon/${kind}.svg`
+  return `tdrop-local://icon/${kind}.svg`
 }

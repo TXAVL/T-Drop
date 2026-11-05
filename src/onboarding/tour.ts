@@ -812,8 +812,12 @@ function scrollTo(run: Run, el: HTMLElement, top: number, ms: number): Promise<v
 async function typeInto(run: Run, input: HTMLInputElement, text: string) {
   const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!
   for (let i = 1; i <= text.length; i++) {
-    setValue.call(input, text.slice(0, i))
+    const val = text.slice(0, i)
+    const tracker = (input as any)._valueTracker
+    if (tracker) tracker.setValue('')
+    setValue.call(input, val)
     input.dispatchEvent(new Event('input', { bubbles: true }))
+    input.dispatchEvent(new Event('change', { bubbles: true }))
     // an even rhythm, a beat longer after a word
     await run.sleep(text[i - 1] === ' ' ? 150 : 85)
   }
@@ -916,6 +920,7 @@ export async function demoFind(run: Run, stage: Stage) {
   await pick(run, top, save, 420)
   // the editor's own Save: the note goes onto the card (in the tour's store only) and the editor closes
   save.closest('form')?.requestSubmit()
+  void useStore.getState().setItemMeta('demo-pdf', { note: demoNote() })
   await run.sleep(80)
   // back under the camera
   const back = top.pos
@@ -935,6 +940,7 @@ export async function demoFind(run: Run, stage: Stage) {
   // the pointer moves off the field, out of the way of what is typed
   p.move(c.x + 70, c.y + 60, 500).catch(() => {})
   await typeInto(run, input, demoQuery())
+  useStore.getState().setQuery(demoQuery())
   await run.sleep(700)
   await p.hide()
 }

@@ -94,7 +94,7 @@ export function IndicatorStyleFlyout({ isRight }: { isRight: boolean }) {
   const styleFlyoutAnchorRect = useStore((s) => s.styleFlyoutAnchorRect)
 
   const dockWidth = Math.min(screenW - 60, 1080)
-  const flyoutWidth = isHorizontal ? 320 : 280
+  const flyoutWidth = isHorizontal ? 460 : 280
   const dockLeft = Math.round((screenW - dockWidth) / 2)
   const anchorCenterX = isHorizontal && styleFlyoutAnchorRect?.x !== undefined
     ? (styleFlyoutAnchorRect.x + (styleFlyoutAnchorRect.width || 32) / 2) - dockLeft
@@ -272,7 +272,18 @@ export function IndicatorStyleFlyout({ isRight }: { isRight: boolean }) {
             </div>
 
             {/* 2-Column Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, overflowY: 'visible', padding: 1 }}>
+            <div
+              onWheel={(e) => e.stopPropagation()}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: isHorizontal ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
+                gap: 8,
+                overflowY: 'auto',
+                maxHeight: isHorizontal ? 210 : 'none',
+                padding: '2px 4px 6px 2px',
+                scrollbarWidth: 'thin'
+              }}
+            >
               {/* Card 1: Logo */}
               <StyleCard
                 active={(settings.copyIndicatorStyle || 'logo') === 'logo'}

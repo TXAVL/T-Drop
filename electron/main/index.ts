@@ -96,6 +96,10 @@ protocol.registerSchemesAsPrivileged([
   {
     scheme: APP_CONFIG.imageProtocol,
     privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true, corsEnabled: true, bypassCSP: true }
+  },
+  {
+    scheme: 'tdrop-local',
+    privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true, corsEnabled: true, bypassCSP: true }
   }
 ])
 
@@ -138,8 +142,9 @@ app.whenReady().then(() => {
   const ses = session.defaultSession
   ses.setPermissionRequestHandler((_wc, _perm, cb) => cb(false))
 
-  // Register the image protocol: edgelocal://<imageId> -> the staged image file.
-  registerImageProtocol()
+  // Register image protocols: edgelocal:// and tdrop-local://
+  registerImageProtocol('edgelocal')
+  registerImageProtocol('tdrop-local')
 
   createWindow()
   startCursorPoll()
@@ -232,8 +237,8 @@ app.on('activate', () => {
 })
 
 // ---- image protocol handler ------------------------------------------------
-function registerImageProtocol(): void {
-  protocol.handle(APP_CONFIG.imageProtocol, async (request) => {
+function registerImageProtocol(protocolScheme: string = APP_CONFIG.imageProtocol): void {
+  protocol.handle(protocolScheme, async (request) => {
     try {
       if (request.method === 'OPTIONS') {
         return new Response(null, {
@@ -246,8 +251,8 @@ function registerImageProtocol(): void {
         })
       }
 
-      if (request.url.startsWith(`${APP_CONFIG.imageProtocol}://emoji/`)) {
-        const fileName = decodeURIComponent(request.url.slice(`${APP_CONFIG.imageProtocol}://emoji/`.length).split('?')[0] ?? '')
+      if (request.url.startsWith(`${protocolScheme}://emoji/`)) {
+        const fileName = decodeURIComponent(request.url.slice(`${protocolScheme}://emoji/`.length).split('?')[0] ?? '')
         const dir = emojiAssetDir({
           packaged: app.isPackaged,
           resourcesPath: process.resourcesPath,
@@ -268,8 +273,8 @@ function registerImageProtocol(): void {
         })
       }
 
-      if (request.url.startsWith(`${APP_CONFIG.imageProtocol}://icon/`)) {
-        const fileName = decodeURIComponent(request.url.slice(`${APP_CONFIG.imageProtocol}://icon/`.length).split('?')[0] ?? '')
+      if (request.url.startsWith(`${protocolScheme}://icon/`)) {
+        const fileName = decodeURIComponent(request.url.slice(`${protocolScheme}://icon/`.length).split('?')[0] ?? '')
         const dir = iconAssetDir({
           packaged: app.isPackaged,
           resourcesPath: process.resourcesPath,
@@ -292,8 +297,8 @@ function registerImageProtocol(): void {
 
       // List cards request bounded raster thumbnails.  Do not hand an original
       // multi-megapixel file to Chromium merely to paint a 50–240px card.
-      if (request.url.startsWith(`${APP_CONFIG.imageProtocol}://thumb/`)) {
-        const rawTarget = request.url.slice(`${APP_CONFIG.imageProtocol}://thumb/`.length)
+      if (request.url.startsWith(`${protocolScheme}://thumb/`)) {
+        const rawTarget = request.url.slice(`${protocolScheme}://thumb/`.length)
         const isFileThumb = rawTarget.startsWith('file/')
         const filePath = isFileThumb
           ? normalize(decodeURIComponent(rawTarget.slice('file/'.length)))
@@ -304,8 +309,8 @@ function registerImageProtocol(): void {
       }
 
       // Support streaming full-resolution local image files: edgelocal://file/<encodedPath>
-      if (request.url.startsWith(`${APP_CONFIG.imageProtocol}://file/`)) {
-        const rawPath = request.url.slice(`${APP_CONFIG.imageProtocol}://file/`.length)
+      if (request.url.startsWith(`${protocolScheme}://file/`)) {
+        const rawPath = request.url.slice(`${protocolScheme}://file/`.length)
         const filePath = normalize(decodeURIComponent(rawPath))
         if (existsSync(filePath)) {
           const ext = extname(filePath).toLowerCase()
