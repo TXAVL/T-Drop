@@ -567,9 +567,9 @@
   padding: 14px 18px 0;
 }
 .ob-article {
-  flex: 0 0 236px;
-  width: 236px;
-  max-width: 236px;
+  flex: 0 0 220px;
+  width: 220px;
+  max-width: 220px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -602,11 +602,9 @@
   line-height: 14.5px;
   white-space: normal;
   word-break: break-word;
+  width: 100%;
   max-width: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
+  display: block;
   overflow: hidden;
 }
 .ob-photo {
@@ -1378,8 +1376,8 @@
   margin-top: 4px;
 }
 .ob-backup-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-top: 13px;
 }
@@ -1389,9 +1387,10 @@
   font-size: 11px;
   font-weight: 600;
   border-radius: 8px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   min-width: 0;
   white-space: nowrap;
+  width: 100%;
   cursor: pointer;
   border: none;
   display: flex;

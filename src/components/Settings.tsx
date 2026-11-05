@@ -296,7 +296,7 @@ export function Settings({
           <div className="setting-desc">{t('backup.desc')}</div>
         </div>
         <div className="shelf-card-bottom" style={{ marginTop: 8 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: isShelf ? '1fr 1fr' : 'repeat(auto-fit, minmax(130px, 1fr))', gap: 6, width: '100%' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isShelf ? '1fr' : 'repeat(auto-fit, minmax(140px, 1fr))', gap: 6, width: '100%' }}>
             <button
               type="button"
               className="pill active"
@@ -306,9 +306,10 @@ export function Settings({
                 fontSize: 11,
                 fontWeight: 600,
                 borderRadius: 8,
-                padding: '4px 8px',
+                padding: '4px 10px',
                 minWidth: 0,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                width: '100%'
               }}
               disabled={isExporting}
               onClick={handleCreateBackup}
@@ -325,9 +326,10 @@ export function Settings({
                 fontSize: 11,
                 fontWeight: 600,
                 borderRadius: 8,
-                padding: '4px 8px',
+                padding: '4px 10px',
                 minWidth: 0,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                width: '100%'
               }}
               onClick={handleOpenBackupFile}
               title={t('backup.importBtn') || 'Restore (.txa)'}

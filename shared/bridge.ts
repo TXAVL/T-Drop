@@ -21,6 +21,7 @@ export interface EdgeApi {
       downloaded: boolean
       notesUrl?: string
       downloadProgress?: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }
+      installSource?: 'standard' | 'txa'
     } | null
   }>
   setPinned: (id: string, pinned: boolean) => Promise<import('./types').ClipboardItemDto[]>

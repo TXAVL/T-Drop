@@ -103,7 +103,7 @@ export function IndicatorStyleFlyout({ isRight }: { isRight: boolean }) {
   const maxLeft = Math.max(minLeft, dockWidth - flyoutWidth - 12)
   const flyoutLeft = Math.max(minLeft, Math.min(maxLeft, Math.round(anchorCenterX - flyoutWidth / 2)))
 
-  const maxFlyoutHeight = isHorizontal ? 260 : Math.max(100, panelH - 24)
+  const maxFlyoutHeight = isHorizontal ? 320 : Math.max(100, panelH - 24)
 
   const originX = isHorizontal
     ? Math.max(0.08, Math.min(0.92, (anchorCenterX - flyoutLeft) / flyoutWidth))
@@ -123,8 +123,8 @@ export function IndicatorStyleFlyout({ isRight }: { isRight: boolean }) {
         useStore.getState().setPreviewFlyoutRect({
           top: 210,
           bottom: 222 + h,
-          left: flyoutLeft,
-          right: flyoutLeft + flyoutWidth
+          left: dockLeft + flyoutLeft,
+          right: dockLeft + flyoutLeft + flyoutWidth
         })
       } else {
         const top = panelTop + (panelH - h) / 2
@@ -279,7 +279,7 @@ export function IndicatorStyleFlyout({ isRight }: { isRight: boolean }) {
                 gridTemplateColumns: isHorizontal ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
                 gap: 8,
                 overflowY: 'auto',
-                maxHeight: isHorizontal ? 210 : 'none',
+                maxHeight: isHorizontal ? 260 : 'none',
                 padding: '2px 4px 6px 2px',
                 scrollbarWidth: 'thin'
               }}

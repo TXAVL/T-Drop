@@ -150,6 +150,7 @@ interface AppState {
     /** Last failure (check/download/install); the banner offers a retry. */
     error?: { message: string; phase: 'check' | 'download' | 'install' }
     downloadProgress?: UpdateProgress
+    installSource?: 'standard' | 'txa'
   } | null
   /** Item ID currently being previewed in the flyout. */
   previewItemId: string | null
@@ -170,7 +171,7 @@ interface AppState {
   /* hydration + sync */
   hydrate: () => Promise<void>
   manualCheckState: {
-    status: 'idle' | 'checking' | 'up-to-date' | 'available' | 'downloading' | 'error'
+    status: 'idle' | 'checking' | 'up-to-date' | 'available' | 'downloading' | 'error' | 'repo-pending'
     version?: string
     error?: string
   }
@@ -410,6 +411,16 @@ export const useStore = create<AppState>((set, get) => ({
         get().pushToast({
           id: `update-check-${Date.now()}`,
           message: t('behaviour.isUpToDate'),
+          tone: 'info'
+        })
+      } else if (res.status === 'repo-pending') {
+        set({
+          manualCheckState: { status: 'repo-pending', version: res.version },
+          manualUpdateActive: false
+        })
+        get().pushToast({
+          id: `update-check-${Date.now()}`,
+          message: res.error || 'Waiting for TXA Repo package sync',
           tone: 'info'
         })
       } else {

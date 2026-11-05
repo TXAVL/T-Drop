@@ -7,6 +7,7 @@ import { getSettings } from '../store/settings'
 import { resolveUpdateMode } from '../../shared/types'
 import { getMainWindow, setVisible, sendToMainWindow } from './window'
 import { mt } from './i18n'
+import { isTxaRepoInstalled, checkTxaRepoVersion, executeTxaUpgrade } from './txaUpdater'
 
 export interface CachedUpdateInfo {
   hasUpdate: boolean
@@ -15,6 +16,7 @@ export interface CachedUpdateInfo {
   /** GitHub release page — shown as "What's new" in the banner. */
   notesUrl?: string
   downloadProgress?: { percent: number; bytesPerSecond?: number; transferred?: number; total?: number }
+  installSource?: 'standard' | 'txa'
 }
 
 // Module-level reference to the single autoUpdater instance and cached update state.
@@ -218,6 +220,18 @@ export function showUpdateSystemNotification(version: string): void {
  */
 export function quitAndInstallUpdate(): void {
   if (isStoreBuild()) return
+  const version = _cachedUpdateInfo?.latestVersion || app.getVersion()
+
+  if (isTxaRepoInstalled()) {
+    console.log(`[AutoUpdater] Installed via txa-repo — executing txapm upgrade to v${version}...`)
+    void executeTxaUpgrade(version).then((ok) => {
+      if (!ok) {
+        console.warn('[AutoUpdater] txapm upgrade could not be executed; falling back to default installer.')
+      }
+    })
+    return
+  }
+
   if (!app.isPackaged) {
     console.log('[AutoUpdater] Dev mode — quitAndInstall is simulated. In packaged builds, app restarts and updates.')
     sendToMainWindow('ui:toast', {
@@ -427,6 +441,7 @@ async function fastCheck(): Promise<FastCheckOutcome> {
 /** Records a found update, notifies the UI once, and starts the download in auto mode. */
 function announceUpdate(version: string, notesUrl: string | undefined): void {
   const mode = resolveUpdateMode(getSettings())
+  const isTxa = isTxaRepoInstalled()
   const alreadyDownloaded = _cachedUpdateInfo?.downloaded && _cachedUpdateInfo.latestVersion === version
   if (alreadyDownloaded) {
     pushState.updateDownloaded({ version })
@@ -436,9 +451,10 @@ function announceUpdate(version: string, notesUrl: string | undefined): void {
   _cachedUpdateInfo = {
     hasUpdate: true,
     latestVersion: version,
-    downloaded: false,
+    downloaded: isTxa, // When installed via TXA, txapm handles download and install in one step
     notesUrl: notesUrl || (sameAsCached ? _cachedUpdateInfo?.notesUrl : undefined),
-    downloadProgress: sameAsCached ? _cachedUpdateInfo?.downloadProgress : undefined
+    downloadProgress: sameAsCached ? _cachedUpdateInfo?.downloadProgress : undefined,
+    installSource: isTxa ? 'txa' : 'standard'
   }
   pushState.updateAvailable({ version, notesUrl: _cachedUpdateInfo.notesUrl })
   showUpdateAvailableNotification(version, mode === 'auto')
@@ -463,6 +479,13 @@ export async function runBackgroundUpdateCheck(): Promise<void> {
     // 1. Fast direct GitHub check
     const fast = await fastCheck()
     if (fast.kind === 'available') {
+      if (isTxaRepoInstalled()) {
+        const txaCheck = await checkTxaRepoVersion(fast.version)
+        if (!txaCheck.matched) {
+          console.log(`[AutoUpdater] Background check: GitHub has v${fast.version}, but TXA Repo manifest is still v${txaCheck.repoVersion}. Waiting for TXA Repo to sync.`)
+          return
+        }
+      }
       announceUpdate(fast.version, fast.notesUrl)
       return
     }
@@ -535,6 +558,17 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
   lastCheckTimestamp = Date.now()
   const fast = await fastCheck()
   if (fast.kind === 'available') {
+    if (isTxaRepoInstalled()) {
+      const txaCheck = await checkTxaRepoVersion(fast.version)
+      if (!txaCheck.matched) {
+        console.log(`[AutoUpdater] Manual check: v${fast.version} is on GitHub, but TXA Repo manifest is still v${txaCheck.repoVersion}.`)
+        return {
+          status: 'repo-pending',
+          version: fast.version,
+          error: `v${fast.version} is on GitHub, waiting for TXA Repo sync (current: v${txaCheck.repoVersion || 'unknown'}).`
+        }
+      }
+    }
     announceUpdate(fast.version, fast.notesUrl)
     return { status: 'available', version: fast.version }
   }
@@ -551,8 +585,20 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
       )
       const result = await Promise.race([checkPromise, timeoutPromise])
       if (result && result.updateInfo && semverCompare(result.updateInfo.version, app.getVersion()) > 0) {
-        announceUpdate(result.updateInfo.version, undefined)
-        return { status: 'available', version: result.updateInfo.version }
+        const ver = result.updateInfo.version
+        if (isTxaRepoInstalled()) {
+          const txaCheck = await checkTxaRepoVersion(ver)
+          if (!txaCheck.matched) {
+            console.log(`[AutoUpdater] Manual check (fallback): v${ver} is on GitHub, but TXA Repo is still v${txaCheck.repoVersion}.`)
+            return {
+              status: 'repo-pending',
+              version: ver,
+              error: `v${ver} is on GitHub, waiting for TXA Repo sync (current: v${txaCheck.repoVersion || 'unknown'}).`
+            }
+          }
+        }
+        announceUpdate(ver, undefined)
+        return { status: 'available', version: ver }
       }
       return { status: 'up-to-date', version: app.getVersion() }
     } catch (err: any) {
@@ -578,6 +624,24 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
  */
 export function startUpdateDownload(): Promise<void> {
   if (isStoreBuild()) return Promise.resolve()
+
+  // If installed via TXA package manager, txapm handles both downloading and silent installation directly
+  if (isTxaRepoInstalled()) {
+    const version = _cachedUpdateInfo?.latestVersion || app.getVersion()
+    console.log(`[AutoUpdater] txa-repo install detected — delegating update flow to txapm for v${version}`)
+    if (_cachedUpdateInfo) {
+      _cachedUpdateInfo.downloaded = true
+      _cachedUpdateInfo.installSource = 'txa'
+    }
+    pushState.updateProgress({ percent: 100, transferred: 1, total: 1, bytesPerSecond: 0 })
+    pushState.updateDownloaded({ version })
+    const mode = resolveUpdateMode(getSettings())
+    if (mode === 'auto') {
+      void quitAndInstallUpdate()
+    }
+    return Promise.resolve()
+  }
+
   if (downloadInFlight) return downloadInFlight
   downloadInFlight = runDownload().finally(() => {
     downloadInFlight = null
