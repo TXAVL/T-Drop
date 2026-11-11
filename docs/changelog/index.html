@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.3.0</span>
+          <span data-i18n="nav.download">Tải về v0.3.2</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,107 @@
       </div>
     </div>
 
-    <!-- ── VERSION 0.3.0 ───────────────────────────────────────── -->
+        <!-- ── VERSION 0.3.2 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.3.0</span>
+          <span>Version v0.3.2</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">06/11/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v032.summary">
+        Bộ cài đặt Windows (NSIS) thiết kế lại theo phong cách Dark Glass sang trọng, tích hợp tự động cập nhật thông minh qua kho gói TXA Repo (txapm), bổ sung kênh ủng hộ tác giả VietQR và khắc phục triệt để các lỗi giao diện.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.feat1.title">Bộ cài đặt Windows phong cách Dark Glass mới (Modern Installer UI)</h3>
+            <p data-i18n="v032.feat1.desc">Giao diện bộ cài đặt NSIS được thiết kế lại hoàn toàn với phong cách kính mờ Dark Glass sang trọng, viền phát quang cyan hiện đại và các bước thao tác rõ ràng, mượt mà chuẩn nhận diện T-Drop.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.feat2.title">Tự động cập nhật thông minh qua TXA Repo (txapm)</h3>
+            <p data-i18n="v032.feat2.desc">Tự động phát hiện khi ứng dụng được cài đặt từ hệ thống TXA Repo. Khi có bản cập nhật mới, T-Drop sẽ đối soát đồng bộ manifest trên kho TXA, tự động đóng app an toàn, chạy lệnh nâng cấp của txapm và khởi động lại app mượt mà.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.feat3.title">Ủng hộ tác giả qua VietQR đa ngôn ngữ</h3>
+            <p data-i18n="v032.feat3.desc">Bổ sung phương thức ủng hộ tác giả nhanh chóng qua mã VietQR trực quan, hỗ trợ đa ngôn ngữ ngay trong ứng dụng.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v032.feat4.title">Khắc phục các lỗi giao diện &amp; Trải nghiệm người dùng (Bug Fixes)</h3>
+            <p data-i18n="v032.feat4.desc">Thiết kế lại 2 nút Sao lưu &amp; Khôi phục hiển thị trọn vẹn không bị cắt chữ (...), sửa lỗi văn bản tràn đè lên ảnh minh họa trong màn hình chào mừng, và sửa lỗi con lăn chuột không cuộn được bảng chọn kiểu chỉ báo khi đặt Kệ ở cạnh trên màn hình.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+        <!-- ── VERSION 0.3.1 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.1</span>
+        </div>
+        <div class="release-date">05/11/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v031.summary">
+        Bổ sung 2 kiểu chỉ báo sao chép mới (Tia chớp &amp; Sóng xung), nút quay lại vị trí vừa xem (Back to where you were) sau khi mở lại kệ, tối ưu hóa vẽ trước thẻ cận màn hình (Data-near Card Culling) chống trắng rỗng ở cạnh trên, cải tiến chuyển cảnh vùng thả tệp chống giật lag và nút xem lại Welcome Tour trong khay hệ thống.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.feat1.title">2 Kiểu chỉ báo sao chép mới: Tia chớp (Lightning) &amp; Sóng xung (Pulse)</h3>
+            <p data-i18n="v031.feat1.desc">Bổ sung 2 phong cách hiệu ứng thị giác phát quang neon khi sao chép: Tia chớp góc cạnh tốc độ cao và Vòng tròn sóng âm xung kích lan tỏa (Sonar wave), nâng tổng số lựa chọn cá nhân hóa lên 6 kiểu độc đáo.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.feat2.title">Nút quay lại vị trí vừa xem (Back to where you were)</h3>
+            <p data-i18n="v031.feat2.desc">Khi mở lại kệ sau khi lướt sâu vào lịch sử, một nút tròn sẽ xuất hiện ở góc dưới kèm vòng tròn đếm ngược 6 giây. Bấm vào nút sẽ cuộn mượt mà đưa bạn quay lại chính xác thẻ bạn vừa xem trước đó, không bao giờ bị lạc vị trí.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.feat3.title">Tối ưu hóa vẽ thẻ cận màn hình (Data-near Card Culling)</h3>
+            <p data-i18n="v031.feat3.desc">Tích hợp cơ chế IntersectionObserver đánh dấu [data-near] thông minh cho các thẻ nằm trong và gần tầm nhìn, loại bỏ hoàn toàn hiện tượng thẻ trắng rỗng khi mở kệ ở cạnh trên (top dock).</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.feat4.title">Vùng thả tệp mượt mà không nhấp nháy (Flicker-Free Drop Overlay)</h3>
+            <p data-i18n="v031.feat4.desc">Cải tiến chuyển tiếp CSS và hiệu ứng viền nét đứt chuyển động (Dashed Outline), mở thẳng vào vùng thả tệp và mờ dần êm ái khi tệp rơi vào kệ.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v031.feat5.title">Xem lại Welcome Tour trong khay hệ thống (Replay Welcome Tour)</h3>
+            <p data-i18n="v031.feat5.desc">Thêm tùy chọn &quot;Xem lại màn hình chào mừng&quot; ngay dưới mục Cài đặt trong menu chuột phải icon khay hệ thống (Tray), giúp người dùng dễ dàng mở lại tour bất cứ lúc nào.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── VERSION 0.3.0 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.0</span>
         </div>
         <div class="release-date">05/11/2026</div>
       </div>
@@ -1319,7 +1414,27 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.3.0',
+        'nav.download': 'Tải về v0.3.2',
+        'v032.summary': 'Bộ cài đặt Windows (NSIS) thiết kế lại theo phong cách Dark Glass sang trọng, tích hợp tự động cập nhật thông minh qua kho gói TXA Repo (txapm), bổ sung kênh ủng hộ tác giả VietQR và khắc phục triệt để các lỗi giao diện.',
+        'v032.feat1.title': 'Bộ cài đặt Windows phong cách Dark Glass mới (Modern Installer UI)',
+        'v032.feat1.desc': 'Giao diện bộ cài đặt NSIS được thiết kế lại hoàn toàn với phong cách kính mờ Dark Glass sang trọng, viền phát quang cyan hiện đại và các bước thao tác rõ ràng, mượt mà chuẩn nhận diện T-Drop.',
+        'v032.feat2.title': 'Tự động cập nhật thông minh qua TXA Repo (txapm)',
+        'v032.feat2.desc': 'Tự động phát hiện khi ứng dụng được cài đặt từ hệ thống TXA Repo. Khi có bản cập nhật mới, T-Drop sẽ đối soát đồng bộ manifest trên kho TXA, tự động đóng app an toàn, chạy lệnh nâng cấp của txapm và khởi động lại app mượt mà.',
+        'v032.feat3.title': 'Ủng hộ tác giả qua VietQR đa ngôn ngữ',
+        'v032.feat3.desc': 'Bổ sung phương thức ủng hộ tác giả nhanh chóng qua mã VietQR trực quan, hỗ trợ đa ngôn ngữ ngay trong ứng dụng.',
+        'v032.feat4.title': 'Khắc phục các lỗi giao diện & Trải nghiệm người dùng (Bug Fixes)',
+        'v032.feat4.desc': 'Thiết kế lại 2 nút Sao lưu & Khôi phục hiển thị trọn vẹn không bị cắt chữ (...), sửa lỗi văn bản tràn đè lên ảnh minh họa trong màn hình chào mừng, và sửa lỗi con lăn chuột không cuộn được bảng chọn kiểu chỉ báo khi đặt Kệ ở cạnh trên màn hình.',
+        'v031.summary': 'Bổ sung 2 kiểu chỉ báo sao chép mới (Tia chớp & Sóng xung), nút quay lại vị trí vừa xem (Back to where you were) sau khi mở lại kệ, tối ưu hóa vẽ trước thẻ cận màn hình (Data-near Card Culling) chống trắng rỗng ở cạnh trên, cải tiến chuyển cảnh vùng thả tệp chống giật lag và nút xem lại Welcome Tour trong khay hệ thống.',
+        'v031.feat1.title': '2 Kiểu chỉ báo sao chép mới: Tia chớp (Lightning) & Sóng xung (Pulse)',
+        'v031.feat1.desc': 'Bổ sung 2 phong cách hiệu ứng thị giác phát quang neon khi sao chép: Tia chớp góc cạnh tốc độ cao và Vòng tròn sóng âm xung kích lan tỏa (Sonar wave), nâng tổng số lựa chọn cá nhân hóa lên 6 kiểu độc đáo.',
+        'v031.feat2.title': 'Nút quay lại vị trí vừa xem (Back to where you were)',
+        'v031.feat2.desc': 'Khi mở lại kệ sau khi lướt sâu vào lịch sử, một nút tròn sẽ xuất hiện ở góc dưới kèm vòng tròn đếm ngược 6 giây. Bấm vào nút sẽ cuộn mượt mà đưa bạn quay lại chính xác thẻ bạn vừa xem trước đó, không bao giờ bị lạc vị trí.',
+        'v031.feat3.title': 'Tối ưu hóa vẽ thẻ cận màn hình (Data-near Card Culling)',
+        'v031.feat3.desc': 'Tích hợp cơ chế IntersectionObserver đánh dấu [data-near] thông minh cho các thẻ nằm trong và gần tầm nhìn, loại bỏ hoàn toàn hiện tượng thẻ trắng rỗng khi mở kệ ở cạnh trên (top dock).',
+        'v031.feat4.title': 'Vùng thả tệp mượt mà không nhấp nháy (Flicker-Free Drop Overlay)',
+        'v031.feat4.desc': 'Cải tiến chuyển tiếp CSS và hiệu ứng viền nét đứt chuyển động (Dashed Outline), mở thẳng vào vùng thả tệp và mờ dần êm ái khi tệp rơi vào kệ.',
+        'v031.feat5.title': 'Xem lại Welcome Tour trong khay hệ thống (Replay Welcome Tour)',
+        'v031.feat5.desc': 'Thêm tùy chọn "Xem lại màn hình chào mừng" ngay dưới mục Cài đặt trong menu chuột phải icon khay hệ thống (Tray), giúp người dùng dễ dàng mở lại tour bất cứ lúc nào.',
         'v030.summary': 'Đại tu toàn diện với Welcome Tour tương tác 8 bước chuẩn nhận diện T-Drop Neon Glass, gắn ghi chú trên từng thẻ (Per-card Notes), menu chuột phải nhanh (Card Menu), bộ 13 biểu tượng tệp SVG xếp tầng mượt mà, tích hợp giới thiệu Sao lưu/Khôi phục (.txa) và nâng cấp lõi Electron 45.',
         'v030.feat1.title': 'Welcome Tour tương tác 8 bước & Brandmark T-Drop Neon Glass',
         'v030.feat1.desc': 'Trải nghiệm chào mừng hoàn toàn mới trên màn hình laptop mô phỏng Windows 11 với hiệu ứng vẽ bút neon cyan-purple và kính mờ sắc nét. Tour hướng dẫn tương tác trực quan 8 tính năng: Ghim thẻ, Dán nhanh 1-9, Tẩy link rác, Chuyển đổi mã màu, Xử lý ảnh Studio, Ghi chú theo thẻ, Menu chuột phải và Sao lưu/Khôi phục (.txa).',
@@ -1490,7 +1605,27 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.3.0',
+        'nav.download': 'Download v0.3.2',
+        'v032.summary': 'Redesigned modern Dark Glass Windows installer, smart auto-upgrade integration for TXA Repo (txapm), multi-language VietQR author support, and comprehensive UI bug fixes.',
+        'v032.feat1.title': 'Modern Dark Glass Windows Installer',
+        'v032.feat1.desc': 'Completely revamped NSIS setup wizard with a sleek dark glassmorphism design, glowing cyan accents, and clear install options matching T-Drop\'s brand identity.',
+        'v032.feat2.title': 'Smart Auto-Updates via TXA Repo (txapm)',
+        'v032.feat2.desc': 'Auto-detects TXA repository installs. When a new update is released, T-Drop verifies repository manifest sync, smoothly closes the app, runs txapm upgrade, and automatically restarts.',
+        'v032.feat3.title': 'Direct VietQR Author Support',
+        'v032.feat3.desc': 'Added quick VietQR donation modal with multi-language support, allowing seamless community support for project development.',
+        'v032.feat4.title': 'UI Bug Fixes & Experience Polish',
+        'v032.feat4.desc': 'Redesigned full-width Backup & Restore buttons to prevent text ellipsis (...), fixed article text overflowing illustrations in the welcome tour, and resolved wheel scrolling issues when docked to the top edge.',
+        'v031.summary': 'Adds 2 new vibrant copy indicator styles (Lightning & Pulse), \'Back to where you were\' floating pill with 6-second countdown, data-near card culling to eliminate empty boxes on top dock open, flicker-free drop overlay transitions, and Replay Welcome Tour tray menu option.',
+        'v031.feat1.title': 'Two New Copy Indicator Styles: Lightning & Pulse',
+        'v031.feat1.desc': 'Adds two new neon luminescent visual feedback styles: sharp high-voltage Lightning Bolt and expanding Sonar Pulse Wave, expanding your personalization choices to 6 distinct variants.',
+        'v031.feat2.title': '\'Back to where you were\' Smart Scroll Pill',
+        'v031.feat2.desc': 'Reopening the shelf after browsing deep in your history now offers a floating round button with a 6-second countdown ring. One click smoothly scrolls back to the exact card you were looking at.',
+        'v031.feat3.title': 'Data-Near Card Culling Performance Optimization',
+        'v031.feat3.desc': 'Uses an intelligent IntersectionObserver to mark cards in or near the viewport with [data-near], completely eliminating empty white box flickers when opening the top dock.',
+        'v031.feat4.title': 'Flicker-Free Drag & Drop Transitions',
+        'v031.feat4.desc': 'Enhanced CSS transitions with animated dashed outline, opening directly into the drop zone and smoothly fading out as items land on the shelf.',
+        'v031.feat5.title': 'Replay Welcome Tour from System Tray',
+        'v031.feat5.desc': 'Added a \'Replay Welcome Tour\' option right beneath Settings in the system tray context menu, allowing users to revisit the interactive tour at any time.',
         'v030.summary': 'Major release featuring the interactive 8-step T-Drop Neon Glass Welcome Tour, Per-card Notes, rapid right-click Card Menu, 13 SVG file type icons with stacked previews, integrated Backup & Restore (.txa) onboarding, and Electron 45 core upgrade.',
         'v030.feat1.title': 'Interactive 8-Step Welcome Tour & T-Drop Neon Glass Brandmark',
         'v030.feat1.desc': 'A completely redesigned onboarding experience with a Windows 11 laptop mockup, glowing cyan-to-purple neon T-Drop glass typography, and interactive walkthroughs covering 8 core superpowers: Pinned items, Quick 1-9 paste, URL cleaner, Color swatches, Image Studio, Card Notes, Card Menu, and Backup/Restore (.txa).',
