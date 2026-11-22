@@ -75,3 +75,23 @@ describe('txaUpdater', () => {
     expect(found === null || typeof found === 'string').toBe(true)
   })
 })
+
+describe('txapm which --json', () => {
+  it('reads managed and the informational fields', async () => {
+    const { parseTxapmWhich } = await import('../electron/main/txaUpdater')
+    const r = parseTxapmWhich('{"managed":true,"version":"0.3.2","newest":"0.3.3","update_available":true,"pinned":false,"dir":"C:/Apps/TDrop"}')
+    expect(r).toEqual({ managed: true, version: '0.3.2', newest: '0.3.3', updateAvailable: true, pinned: false, dir: 'C:/Apps/TDrop' })
+  })
+
+  it('reads managed:false', async () => {
+    const { parseTxapmWhich } = await import('../electron/main/txaUpdater')
+    expect(parseTxapmWhich('{"managed":false}')?.managed).toBe(false)
+  })
+
+  it('returns null without a boolean managed or on garbage', async () => {
+    const { parseTxapmWhich } = await import('../electron/main/txaUpdater')
+    expect(parseTxapmWhich('')).toBeNull()
+    expect(parseTxapmWhich('not json')).toBeNull()
+    expect(parseTxapmWhich('{"managed":"yes"}')).toBeNull()
+  })
+})

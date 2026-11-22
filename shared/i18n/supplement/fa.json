@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "تازه‌ها",
     "retry": "تلاش دوباره",
-    "updateDownloadFailed": "دانلود به‌روزرسانی ناموفق بود",
     "updateInstallFailed": "اجرای نصب‌کننده ممکن نشد",
-    "updateEta": "{eta} باقی مانده",
-    "updateModeAuto": "خودکار",
-    "updateModeNotify": "فقط اعلان",
-    "updateModeOff": "خاموش",
-    "updateModeNotifyDesc": "هنگام وجود به‌روزرسانی خبر بده، ولی دانلود نکن",
-    "updateLabelReady": "به‌روزرسانی آماده است",
-    "updateLabelDownloading": "در حال دانلود به‌روزرسانی",
-    "updateLabelAvailable": "به‌روزرسانی جدید موجود است",
-    "update": "به‌روزرسانی"
+    "updateEta": "{eta} باقی مانده"
   },
   "common": {
     "close": "بستن",
     "dismiss": "بستن اعلان",
-    "undo": "واگرد",
     "loading": "در حال ساخت…",
     "unknownError": "خطای ناشناخته"
   },
   "toast": {
-    "shortcutUpdated": "میان‌بر به‌روز شد: {shortcut}",
-    "deleteFailed": "حذف مورد ممکن نشد",
-    "clearFailed": "پاک کردن موردها ممکن نشد",
     "caseChanged": "حروف بزرگ و کوچک تغییر کرد و در کلیپ‌بورد کپی شد"
   },
-  "tabs": {
-    "generalStartup": "عمومی و راه‌اندازی",
-    "activationShortcuts": "فعال‌سازی و میان‌برها",
-    "clipboardRules": "قوانین کلیپ‌بورد",
-    "storageRetention": "حافظه و تاریخچه",
-    "updates": "به‌روزرسانی‌ها"
-  },
-  "position": {
-    "left": "چپ",
-    "right": "راست",
-    "topEdge": "لبهٔ بالا",
-    "loadingDisplays": "در حال شناسایی نمایشگرها…",
-    "horizontalPositionTitle": "جایگاه افقی",
-    "horizontalPositionDesc": "تراز افقی را بر اساس لبهٔ صفحه تنظیم کنید"
-  },
   "filters": {
-    "colors": "رنگ",
-    "pinned": "سنجاق‌شده‌ها",
-    "title": "فیلتر"
+    "pinned": "سنجاق‌شده‌ها"
   },
   "item": {
-    "copied": "کپی شد!",
     "copiedTimes": "{count} بار کپی شد",
-    "imagePlaceholder": "تصویر",
     "extractText": "Image Studio (تبدیل، فشرده‌سازی، OCR)",
     "convertTo": "تبدیل به…",
     "compressBtn": "فشرده‌سازی",
     "quickCompress": "فشرده‌سازی سریع",
     "transformCase": "تغییر حروف بزرگ و کوچک (بزرگ / کوچک / حرف اول هر کلمه بزرگ)"
-  },
-  "flyout": {
-    "selectItem": "انتخاب مورد",
-    "deselectItem": "لغو انتخاب مورد",
-    "clickToSelect": "برای انتخاب کلیک کنید",
-    "clickToDeselect": "برای لغو انتخاب کلیک کنید",
-    "copied": "کپی شد!",
-    "clickToPasteImageDrag": "برای کپی کلیک کنید · برای جابه‌جایی بکشید"
-  },
-  "appearance": {
-    "openStyleSelector": "انتخاب سبک",
-    "closeStyleSelector": "بستن گزینه‌های سبک"
   },
   "backup": {
     "securityLabel": "امنیت",
@@ -162,17 +118,8 @@
     "bankName": "بانک",
     "accountNumber": "شمارهٔ حساب",
     "accountHolder": "نام صاحب حساب",
-    "supportTagline": "برای همیشه رایگان و متن‌باز",
     "copied": "در کلیپ‌بورد کپی شد",
     "copy": "کپی"
-  },
-  "emoji": {
-    "open": "اموجی و نمادها",
-    "categories": "دسته‌ها",
-    "clearRecents": "پاک کردن اموجی‌های اخیر",
-    "emptyRecents": "اموجی اخیری وجود ندارد",
-    "loadFailed": "بارگیری اموجی‌ها ناموفق بود",
-    "skinTone": "رنگ پوست"
   },
   "imageStudio": {
     "tabConvert": "تبدیل",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — بستهٔ شما به‌زودی تمام می‌شود",
       "expiringBody": "بستهٔ {role}، روزهای باقی‌مانده: {days}. برای تمدید، تنظیمات را باز کنید."
     }
+  },
+  "codeSnap": {
+    "title": "کد عکس‌برداری (سبک CodeSnap)",
+    "save": "ذخیره عکس کد",
+    "copied": "عکس کد کپی شد",
+    "failed": "ناتوان در ایجاد عکس کد"
   }
 }

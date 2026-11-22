@@ -1,4 +1,30 @@
 {
+  "count": {
+    "images": {
+      "one": "{count} 張圖片"
+    },
+    "files": {
+      "one": "{count} 個檔案"
+    },
+    "copiedTimes": {
+      "one": "已複製 {count} 次"
+    },
+    "moreImages": {
+      "one": "+{count} 張圖片"
+    },
+    "moreFiles": {
+      "one": "+{count} 個檔案"
+    },
+    "selected": {
+      "one": "已選 {count} 個"
+    },
+    "savedToDownloads": {
+      "one": "已將 {count} 張圖片存至下載"
+    },
+    "splitStacks": {
+      "one": "已分拆為 {count} 堆疊（每堆最多 10 個）"
+    }
+  },
   "renew": {
     "windowTitle": "T-Drop — 續訂授權",
     "title": "續訂授權",
@@ -85,72 +111,28 @@
   "behaviour": {
     "whatsNew": "新功能",
     "retry": "重試",
-    "updateDownloadFailed": "更新下載失敗",
     "updateInstallFailed": "無法啟動安裝程式",
-    "updateEta": "剩餘 {eta}",
-    "updateModeAuto": "自動",
-    "updateModeNotify": "僅通知",
-    "updateModeOff": "已停用",
-    "updateModeNotifyDesc": "有可用更新時通知，但不自動下載",
-    "updateLabelReady": "更新已就緒",
-    "updateLabelDownloading": "正在下載更新",
-    "updateLabelAvailable": "有可用更新",
-    "update": "更新"
+    "updateEta": "剩餘 {eta}"
   },
   "common": {
     "close": "關閉",
     "dismiss": "略過",
-    "undo": "復原",
     "loading": "正在產生…",
     "unknownError": "未知的錯誤"
   },
   "toast": {
-    "shortcutUpdated": "快速鍵已更新：{shortcut}",
-    "deleteFailed": "無法刪除此項目",
-    "clearFailed": "無法清除項目",
     "caseChanged": "已轉換大小寫並複製到剪貼簿"
   },
-  "tabs": {
-    "generalStartup": "一般與啟動",
-    "activationShortcuts": "啟用與快速鍵",
-    "clipboardRules": "剪貼簿規則",
-    "storageRetention": "儲存空間與記錄",
-    "updates": "更新"
-  },
-  "position": {
-    "left": "左",
-    "right": "右",
-    "topEdge": "上緣",
-    "loadingDisplays": "正在偵測顯示器…",
-    "horizontalPositionTitle": "水平位置",
-    "horizontalPositionDesc": "沿著螢幕邊緣調整水平對齊方式"
-  },
   "filters": {
-    "colors": "色彩",
-    "pinned": "已固定",
-    "title": "篩選"
+    "pinned": "已固定"
   },
   "item": {
-    "copied": "已複製！",
     "copiedTimes": "已複製 {count} 次",
-    "imagePlaceholder": "圖片",
     "extractText": "Image Studio（轉換、壓縮、OCR）",
     "convertTo": "轉換為…",
     "compressBtn": "壓縮",
     "quickCompress": "快速壓縮",
     "transformCase": "變更大小寫（大寫 / 小寫 / 單字首字母大寫）"
-  },
-  "flyout": {
-    "selectItem": "選取此項目",
-    "deselectItem": "取消選取此項目",
-    "clickToSelect": "按一下以選取",
-    "clickToDeselect": "按一下以取消選取",
-    "copied": "已複製！",
-    "clickToPasteImageDrag": "按一下複製 · 拖曳移動"
-  },
-  "appearance": {
-    "openStyleSelector": "選擇樣式",
-    "closeStyleSelector": "關閉樣式選擇器"
   },
   "backup": {
     "securityLabel": "安全性",
@@ -162,17 +144,8 @@
     "bankName": "銀行",
     "accountNumber": "帳號",
     "accountHolder": "戶名",
-    "supportTagline": "永久免費且開放原始碼",
     "copied": "已複製到剪貼簿",
     "copy": "複製"
-  },
-  "emoji": {
-    "open": "表情符號與符號",
-    "categories": "類別",
-    "clearRecents": "清除最近使用",
-    "emptyRecents": "沒有最近使用的表情符號",
-    "loadFailed": "無法載入表情符號",
-    "skinTone": "膚色"
   },
   "imageStudio": {
     "tabConvert": "轉換",
@@ -394,5 +367,11 @@
       "expiringTitle": "T-Drop — 您的方案即將到期",
       "expiringBody": "{role} 方案，剩餘天數：{days}。開啟設定即可續期。"
     }
+  },
+  "codeSnap": {
+    "title": "截圖程式碼（CodeSnap 樣式）",
+    "save": "儲存程式碼截圖",
+    "copied": "程式碼截圖已複製",
+    "failed": "無法建立程式碼截圖"
   }
 }

@@ -23,7 +23,7 @@ import { showTrayNotification } from './trayNotify'
 export const LICENSE_SYNC_INTERVAL_MS = 15 * 60 * 1000
 const FIRST_SYNC_DELAY_MS = 20 * 1000
 const MIN_GAP_MS = 60 * 1000
-const STRIKES_BEFORE_DROP = 2
+const STRIKES_BEFORE_DROP = 3
 const REMIND_WITHIN_DAYS = 3
 
 export type SyncAnswer =
@@ -118,6 +118,11 @@ export async function syncLicenseNow(force = false): Promise<void> {
     if (answer.kind === 'unknown') return // offline / server hiccup: keep what we have
 
     if (answer.kind === 'invalid') {
+      // Never revoke because of a fallback device ID: the mismatch would be ours, not the user's.
+      if (getDeviceFingerprint().reliable === false) {
+        AppLogger.write('WARN', 'LicenseSync', `Server says invalid (${answer.code}) but device ID is unreliable; keeping license`)
+        return
+      }
       strikes += 1
       AppLogger.write('WARN', 'LicenseSync', `Server says license invalid (${answer.code}), strike ${strikes}/${STRIKES_BEFORE_DROP}`)
       if (strikes >= STRIKES_BEFORE_DROP) {

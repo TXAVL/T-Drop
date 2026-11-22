@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Noutăți",
     "retry": "Reîncearcă",
-    "updateDownloadFailed": "Descărcarea actualizării a eșuat",
     "updateInstallFailed": "Programul de instalare nu a putut fi pornit",
-    "updateEta": "mai sunt {eta}",
-    "updateModeAuto": "Automat",
-    "updateModeNotify": "Doar notificare",
-    "updateModeOff": "Dezactivat",
-    "updateModeNotifyDesc": "Notifică despre actualizări fără a le descărca",
-    "updateLabelReady": "Actualizarea este pregătită",
-    "updateLabelDownloading": "Se descarcă actualizarea",
-    "updateLabelAvailable": "Actualizare disponibilă",
-    "update": "Actualizează"
+    "updateEta": "mai sunt {eta}"
   },
   "common": {
     "close": "Închide",
     "dismiss": "Ignoră",
-    "undo": "Anulează",
     "loading": "Se generează…",
     "unknownError": "Eroare necunoscută"
   },
   "toast": {
-    "shortcutUpdated": "Scurtătura a fost actualizată: {shortcut}",
-    "deleteFailed": "Elementul nu a putut fi șters",
-    "clearFailed": "Elementele nu au putut fi golite",
     "caseChanged": "Majusculele au fost schimbate și textul a fost copiat în clipboard"
   },
-  "tabs": {
-    "generalStartup": "General și pornire",
-    "activationShortcuts": "Activare și scurtături",
-    "clipboardRules": "Reguli pentru clipboard",
-    "storageRetention": "Stocare și istoric",
-    "updates": "Actualizări"
-  },
-  "position": {
-    "left": "Stânga",
-    "right": "Dreapta",
-    "topEdge": "Marginea de sus",
-    "loadingDisplays": "Se detectează ecranele…",
-    "horizontalPositionTitle": "Poziție orizontală",
-    "horizontalPositionDesc": "Ajustează alinierea orizontală de-a lungul marginii ecranului"
-  },
   "filters": {
-    "colors": "Culori",
-    "pinned": "Fixate",
-    "title": "Filtre"
+    "pinned": "Fixate"
   },
   "item": {
-    "copied": "Copiat!",
     "copiedTimes": "Copiat de {count} ori",
-    "imagePlaceholder": "Imagine",
     "extractText": "Image Studio (convertește, comprimă, OCR)",
     "convertTo": "Convertește în…",
     "compressBtn": "Comprimă",
     "quickCompress": "Comprimare rapidă",
     "transformCase": "Schimbă majusculele (MAJUSCULE / minuscule / Fiecare Cuvânt)"
-  },
-  "flyout": {
-    "selectItem": "Selectează elementul",
-    "deselectItem": "Deselectează elementul",
-    "clickToSelect": "Fă clic pentru a selecta",
-    "clickToDeselect": "Fă clic pentru a deselecta",
-    "copied": "Copiat!",
-    "clickToPasteImageDrag": "Fă clic pentru a copia · Trage pentru a muta"
-  },
-  "appearance": {
-    "openStyleSelector": "Alege stilul",
-    "closeStyleSelector": "Închide selectorul de stil"
   },
   "backup": {
     "securityLabel": "Securitate",
@@ -162,17 +118,8 @@
     "bankName": "Banca",
     "accountNumber": "Număr de cont",
     "accountHolder": "Titularul contului",
-    "supportTagline": "Gratuit și open source pentru totdeauna",
     "copied": "Copiat în clipboard",
     "copy": "Copiază"
-  },
-  "emoji": {
-    "open": "Emoji și simboluri",
-    "categories": "Categorii",
-    "clearRecents": "Șterge recentele",
-    "emptyRecents": "Nu există emoji recente",
-    "loadFailed": "Emoji-urile nu au putut fi încărcate",
-    "skinTone": "Nuanța pielii"
   },
   "imageStudio": {
     "tabConvert": "Convertește",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Planul tău expiră în curând",
       "expiringBody": "Plan {role}, zile rămase: {days}. Deschide Setările pentru a reînnoi."
     }
+  },
+  "codeSnap": {
+    "title": "Captură de ecran cod (stil CodeSnap)",
+    "save": "Salvează captura de cod",
+    "copied": "Captură de cod copiată",
+    "failed": "Nu s-a putut crea captura de cod"
   }
 }

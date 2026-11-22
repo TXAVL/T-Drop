@@ -1,4 +1,30 @@
 {
+  "count": {
+    "images": {
+      "one": "{count} รูปภาพ"
+    },
+    "files": {
+      "one": "{count} ไฟล์"
+    },
+    "copiedTimes": {
+      "one": "คัดลอก {count} ครั้ง"
+    },
+    "moreImages": {
+      "one": "+{count} รูปภาพเพิ่มเติม"
+    },
+    "moreFiles": {
+      "one": "+{count} ไฟล์เพิ่มเติม"
+    },
+    "selected": {
+      "one": "{count} เลือก"
+    },
+    "savedToDownloads": {
+      "one": "บันทึกรูปภาพ {count} ไฟล์ลงดาวน์โหลด"
+    },
+    "splitStacks": {
+      "one": "แยกเป็น {count} กลุ่ม (สูงสุด 10 ต่อกลุ่ม)"
+    }
+  },
   "renew": {
     "windowTitle": "T-Drop — ต่ออายุไลเซนส์",
     "title": "ต่ออายุไลเซนส์ของคุณ",
@@ -85,72 +111,28 @@
   "behaviour": {
     "whatsNew": "มีอะไรใหม่",
     "retry": "ลองอีกครั้ง",
-    "updateDownloadFailed": "ดาวน์โหลดการอัปเดตไม่สำเร็จ",
     "updateInstallFailed": "เริ่มตัวติดตั้งไม่ได้",
-    "updateEta": "เหลืออีก {eta}",
-    "updateModeAuto": "อัตโนมัติ",
-    "updateModeNotify": "แจ้งเตือนเท่านั้น",
-    "updateModeOff": "ปิด",
-    "updateModeNotifyDesc": "แจ้งเมื่อมีการอัปเดตโดยไม่ดาวน์โหลดให้",
-    "updateLabelReady": "การอัปเดตพร้อมแล้ว",
-    "updateLabelDownloading": "กำลังดาวน์โหลดการอัปเดต",
-    "updateLabelAvailable": "มีการอัปเดตใหม่",
-    "update": "อัปเดต"
+    "updateEta": "เหลืออีก {eta}"
   },
   "common": {
     "close": "ปิด",
     "dismiss": "ปิดการแจ้งเตือน",
-    "undo": "เลิกทำ",
     "loading": "กำลังสร้าง…",
     "unknownError": "ข้อผิดพลาดที่ไม่ทราบสาเหตุ"
   },
   "toast": {
-    "shortcutUpdated": "อัปเดตทางลัดแล้ว: {shortcut}",
-    "deleteFailed": "ลบรายการไม่สำเร็จ",
-    "clearFailed": "ล้างรายการไม่สำเร็จ",
     "caseChanged": "เปลี่ยนตัวพิมพ์ใหญ่/เล็กและคัดลอกไปยังคลิปบอร์ดแล้ว"
   },
-  "tabs": {
-    "generalStartup": "ทั่วไปและการเริ่มต้น",
-    "activationShortcuts": "การเปิดใช้งานและทางลัด",
-    "clipboardRules": "กฎของคลิปบอร์ด",
-    "storageRetention": "พื้นที่จัดเก็บและประวัติ",
-    "updates": "การอัปเดต"
-  },
-  "position": {
-    "left": "ซ้าย",
-    "right": "ขวา",
-    "topEdge": "ขอบบน",
-    "loadingDisplays": "กำลังตรวจหาจอแสดงผล…",
-    "horizontalPositionTitle": "ตำแหน่งแนวนอน",
-    "horizontalPositionDesc": "ปรับการจัดแนวนอนตามขอบหน้าจอ"
-  },
   "filters": {
-    "colors": "สี",
-    "pinned": "ปักหมุดแล้ว",
-    "title": "ตัวกรอง"
+    "pinned": "ปักหมุดแล้ว"
   },
   "item": {
-    "copied": "คัดลอกแล้ว!",
     "copiedTimes": "คัดลอกแล้ว {count} ครั้ง",
-    "imagePlaceholder": "รูปภาพ",
     "extractText": "Image Studio (แปลง บีบอัด OCR)",
     "convertTo": "แปลงเป็น…",
     "compressBtn": "บีบอัด",
     "quickCompress": "บีบอัดด่วน",
     "transformCase": "เปลี่ยนตัวพิมพ์ใหญ่/เล็ก (ตัวพิมพ์ใหญ่ / ตัวพิมพ์เล็ก / ขึ้นต้นทุกคำด้วยตัวใหญ่)"
-  },
-  "flyout": {
-    "selectItem": "เลือกรายการ",
-    "deselectItem": "ยกเลิกการเลือกรายการ",
-    "clickToSelect": "คลิกเพื่อเลือก",
-    "clickToDeselect": "คลิกเพื่อยกเลิกการเลือก",
-    "copied": "คัดลอกแล้ว!",
-    "clickToPasteImageDrag": "คลิกเพื่อคัดลอก · ลากเพื่อย้าย"
-  },
-  "appearance": {
-    "openStyleSelector": "เลือกสไตล์",
-    "closeStyleSelector": "ปิดตัวเลือกสไตล์"
   },
   "backup": {
     "securityLabel": "ความปลอดภัย",
@@ -162,17 +144,8 @@
     "bankName": "ธนาคาร",
     "accountNumber": "เลขที่บัญชี",
     "accountHolder": "ชื่อบัญชี",
-    "supportTagline": "ฟรีและโอเพนซอร์สตลอดไป",
     "copied": "คัดลอกไปยังคลิปบอร์ดแล้ว",
     "copy": "คัดลอก"
-  },
-  "emoji": {
-    "open": "อีโมจิและสัญลักษณ์",
-    "categories": "หมวดหมู่",
-    "clearRecents": "ล้างรายการล่าสุด",
-    "emptyRecents": "ไม่มีอีโมจิที่ใช้ล่าสุด",
-    "loadFailed": "โหลดอีโมจิไม่สำเร็จ",
-    "skinTone": "สีผิว"
   },
   "imageStudio": {
     "tabConvert": "แปลง",
@@ -394,5 +367,11 @@
       "expiringTitle": "T-Drop — แพ็กเกจของคุณใกล้หมดอายุ",
       "expiringBody": "แพ็กเกจ {role} เหลืออีก {days} วัน เปิดการตั้งค่าเพื่อต่ออายุ"
     }
+  },
+  "codeSnap": {
+    "title": "ภาพหน้าจอโค้ด (สไตล์ CodeSnap)",
+    "save": "บันทึกภาพหน้าจอโค้ด",
+    "copied": "คัดลอกภาพหน้าจอโค้ดแล้ว",
+    "failed": "ไม่สามารถสร้างภาพหน้าจอโค้ด"
   }
 }

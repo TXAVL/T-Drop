@@ -95,7 +95,10 @@
     "updateLabelReady": "Bản cập nhật đã sẵn sàng",
     "updateLabelDownloading": "Đang tải bản cập nhật",
     "updateLabelAvailable": "Có bản cập nhật mới",
-    "update": "Cập nhật"
+    "update": "Cập nhật",
+    "hoverDelayTitle": "Độ trễ khi mở",
+    "hoverDelayDesc": "Chờ ở cạnh màn hình bấy lâu rồi mới trượt mở panel",
+    "hoverDelayInstant": "Tức thì"
   },
   "common": {
     "close": "Đóng",
@@ -394,5 +397,14 @@
       "expiringTitle": "T-Drop — Gói của bạn sắp hết hạn",
       "expiringBody": "Gói {role}, còn lại: {days} ngày. Mở Cài đặt để gia hạn."
     }
+  },
+  "codeSnap": {
+    "title": "Chụp ảnh code (kiểu CodeSnap)",
+    "save": "Lưu ảnh chụp code",
+    "copied": "Đã sao chép ảnh chụp code",
+    "failed": "Không thể tạo ảnh chụp code"
+  },
+  "groups": {
+    "hoverDelay": "ĐỘ TRỄ KHI MỞ"
   }
 }

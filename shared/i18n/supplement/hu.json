@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Újdonságok",
     "retry": "Újra",
-    "updateDownloadFailed": "A frissítés letöltése sikertelen",
     "updateInstallFailed": "A telepítőt nem sikerült elindítani",
-    "updateEta": "{eta} van hátra",
-    "updateModeAuto": "Automatikus",
-    "updateModeNotify": "Csak értesítés",
-    "updateModeOff": "Kikapcsolva",
-    "updateModeNotifyDesc": "Értesítés frissítés esetén, letöltés nélkül",
-    "updateLabelReady": "A frissítés kész",
-    "updateLabelDownloading": "Frissítés letöltése",
-    "updateLabelAvailable": "Frissítés érhető el",
-    "update": "Frissítés"
+    "updateEta": "{eta} van hátra"
   },
   "common": {
     "close": "Bezárás",
     "dismiss": "Elvetés",
-    "undo": "Visszavonás",
     "loading": "Létrehozás…",
     "unknownError": "Ismeretlen hiba"
   },
   "toast": {
-    "shortcutUpdated": "A gyorsbillentyű frissítve: {shortcut}",
-    "deleteFailed": "Az elemet nem sikerült törölni",
-    "clearFailed": "Az elemeket nem sikerült törölni",
     "caseChanged": "A kis- és nagybetűk módosítva, a szöveg a vágólapra másolva"
   },
-  "tabs": {
-    "generalStartup": "Általános és indítás",
-    "activationShortcuts": "Aktiválás és gyorsbillentyűk",
-    "clipboardRules": "Vágólap-szabályok",
-    "storageRetention": "Tárhely és előzmények",
-    "updates": "Frissítések"
-  },
-  "position": {
-    "left": "Bal",
-    "right": "Jobb",
-    "topEdge": "Felső szél",
-    "loadingDisplays": "Kijelzők felismerése…",
-    "horizontalPositionTitle": "Vízszintes pozíció",
-    "horizontalPositionDesc": "Állítsa be a vízszintes igazítást a képernyő széle mentén"
-  },
   "filters": {
-    "colors": "Színek",
-    "pinned": "Rögzítettek",
-    "title": "Szűrők"
+    "pinned": "Rögzítettek"
   },
   "item": {
-    "copied": "Másolva!",
     "copiedTimes": "{count}× másolva",
-    "imagePlaceholder": "Kép",
     "extractText": "Image Studio (átalakítás, tömörítés, OCR)",
     "convertTo": "Átalakítás erre…",
     "compressBtn": "Tömörítés",
     "quickCompress": "Gyors tömörítés",
     "transformCase": "Kis- és nagybetűk váltása (NAGYBETŰS / kisbetűs / Minden Szó Nagybetűs)"
-  },
-  "flyout": {
-    "selectItem": "Elem kijelölése",
-    "deselectItem": "Elem kijelölésének megszüntetése",
-    "clickToSelect": "Kattintson a kijelöléshez",
-    "clickToDeselect": "Kattintson a kijelölés megszüntetéséhez",
-    "copied": "Másolva!",
-    "clickToPasteImageDrag": "Kattintson a másoláshoz · Húzza az áthelyezéshez"
-  },
-  "appearance": {
-    "openStyleSelector": "Stílus kiválasztása",
-    "closeStyleSelector": "Stílusválasztó bezárása"
   },
   "backup": {
     "securityLabel": "Biztonság",
@@ -162,17 +118,8 @@
     "bankName": "Bank",
     "accountNumber": "Számlaszám",
     "accountHolder": "Számlatulajdonos",
-    "supportTagline": "Örökre ingyenes és nyílt forráskódú",
     "copied": "Vágólapra másolva",
     "copy": "Másolás"
-  },
-  "emoji": {
-    "open": "Emojik és szimbólumok",
-    "categories": "Kategóriák",
-    "clearRecents": "Legutóbbiak törlése",
-    "emptyRecents": "Nincsenek legutóbbi emojik",
-    "loadFailed": "Az emojikat nem sikerült betölteni",
-    "skinTone": "Bőrtónus"
   },
   "imageStudio": {
     "tabConvert": "Átalakítás",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — A csomagod hamarosan lejár",
       "expiringBody": "{role} csomag, hátralévő napok: {days}. A megújításhoz nyisd meg a Beállításokat."
     }
+  },
+  "codeSnap": {
+    "title": "Képkód (CodeSnap stílus)",
+    "save": "Képkód mentése",
+    "copied": "Képkód mentve",
+    "failed": "Nem sikerült létrehozni a képkódot"
   }
 }

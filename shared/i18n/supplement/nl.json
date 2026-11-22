@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Wat is er nieuw",
     "retry": "Opnieuw proberen",
-    "updateDownloadFailed": "Downloaden van de update mislukt",
     "updateInstallFailed": "Het installatieprogramma kon niet worden gestart",
-    "updateEta": "nog {eta}",
-    "updateModeAuto": "Automatisch",
-    "updateModeNotify": "Alleen melden",
-    "updateModeOff": "Uit",
-    "updateModeNotifyDesc": "Melden wanneer er updates zijn, zonder te downloaden",
-    "updateLabelReady": "Update klaar",
-    "updateLabelDownloading": "Update wordt gedownload",
-    "updateLabelAvailable": "Update beschikbaar",
-    "update": "Bijwerken"
+    "updateEta": "nog {eta}"
   },
   "common": {
     "close": "Sluiten",
     "dismiss": "Negeren",
-    "undo": "Ongedaan maken",
     "loading": "Wordt gemaakt…",
     "unknownError": "Onbekende fout"
   },
   "toast": {
-    "shortcutUpdated": "Sneltoets bijgewerkt: {shortcut}",
-    "deleteFailed": "Item kon niet worden verwijderd",
-    "clearFailed": "Items konden niet worden gewist",
     "caseChanged": "Hoofdletters aangepast en naar klembord gekopieerd"
   },
-  "tabs": {
-    "generalStartup": "Algemeen en opstarten",
-    "activationShortcuts": "Activering en sneltoetsen",
-    "clipboardRules": "Klembordregels",
-    "storageRetention": "Opslag en geschiedenis",
-    "updates": "Updates"
-  },
-  "position": {
-    "left": "Links",
-    "right": "Rechts",
-    "topEdge": "Bovenrand",
-    "loadingDisplays": "Beeldschermen worden gedetecteerd…",
-    "horizontalPositionTitle": "Horizontale positie",
-    "horizontalPositionDesc": "Pas de horizontale uitlijning langs de schermrand aan"
-  },
   "filters": {
-    "colors": "Kleuren",
-    "pinned": "Vastgezet",
-    "title": "Filters"
+    "pinned": "Vastgezet"
   },
   "item": {
-    "copied": "Gekopieerd!",
     "copiedTimes": "{count} keer gekopieerd",
-    "imagePlaceholder": "Afbeelding",
     "extractText": "Image Studio (converteren, comprimeren, OCR)",
     "convertTo": "Converteren naar…",
     "compressBtn": "Comprimeren",
     "quickCompress": "Snel comprimeren",
     "transformCase": "Hoofdletters wijzigen (HOOFDLETTERS / kleine letters / Elk Woord Hoofdletter)"
-  },
-  "flyout": {
-    "selectItem": "Item selecteren",
-    "deselectItem": "Selectie van item opheffen",
-    "clickToSelect": "Klik om te selecteren",
-    "clickToDeselect": "Klik om de selectie op te heffen",
-    "copied": "Gekopieerd!",
-    "clickToPasteImageDrag": "Klik om te kopiëren · Sleep om te verplaatsen"
-  },
-  "appearance": {
-    "openStyleSelector": "Stijl kiezen",
-    "closeStyleSelector": "Stijlkiezer sluiten"
   },
   "backup": {
     "securityLabel": "Beveiliging",
@@ -162,17 +118,8 @@
     "bankName": "Bank",
     "accountNumber": "Rekeningnummer",
     "accountHolder": "Rekeninghouder",
-    "supportTagline": "Voor altijd gratis en open source",
     "copied": "Gekopieerd naar klembord",
     "copy": "Kopiëren"
-  },
-  "emoji": {
-    "open": "Emoji en symbolen",
-    "categories": "Categorieën",
-    "clearRecents": "Recente wissen",
-    "emptyRecents": "Geen recente emoji",
-    "loadFailed": "Emoji konden niet worden geladen",
-    "skinTone": "Huidskleur"
   },
   "imageStudio": {
     "tabConvert": "Converteren",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Je abonnement loopt binnenkort af",
       "expiringBody": "{role}-abonnement, resterende dagen: {days}. Open Instellingen om te verlengen."
     }
+  },
+  "codeSnap": {
+    "title": "CodeSnap-schermafdruk",
+    "save": "Codeafbeelding opslaan",
+    "copied": "Codeafbeelding gekopieerd",
+    "failed": "Codeafbeelding niet gemaakt"
   }
 }

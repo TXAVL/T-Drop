@@ -1,4 +1,30 @@
 {
+  "count": {
+    "images": {
+      "one": "{count} 이미지"
+    },
+    "files": {
+      "one": "{count} 파일"
+    },
+    "copiedTimes": {
+      "one": "복사 {count}회"
+    },
+    "moreImages": {
+      "one": "+{count} 이미지 더"
+    },
+    "moreFiles": {
+      "one": "+{count} 파일 더"
+    },
+    "selected": {
+      "one": "{count} 선택"
+    },
+    "savedToDownloads": {
+      "one": "{count} 이미지 다운로드에 저장"
+    },
+    "splitStacks": {
+      "one": "{count} 스택으로 분할 (각 10개 이하)"
+    }
+  },
   "renew": {
     "windowTitle": "T-Drop — 라이선스 연장",
     "title": "라이선스 연장",
@@ -85,72 +111,28 @@
   "behaviour": {
     "whatsNew": "새로운 기능",
     "retry": "다시 시도",
-    "updateDownloadFailed": "업데이트를 다운로드하지 못했어요",
     "updateInstallFailed": "설치 프로그램을 시작하지 못했어요",
-    "updateEta": "{eta} 남음",
-    "updateModeAuto": "자동",
-    "updateModeNotify": "알림만",
-    "updateModeOff": "사용 안 함",
-    "updateModeNotifyDesc": "업데이트가 있으면 다운로드하지 않고 알려 줘요",
-    "updateLabelReady": "업데이트 준비 완료",
-    "updateLabelDownloading": "업데이트 다운로드 중",
-    "updateLabelAvailable": "업데이트 사용 가능",
-    "update": "업데이트"
+    "updateEta": "{eta} 남음"
   },
   "common": {
     "close": "닫기",
     "dismiss": "닫기",
-    "undo": "실행 취소",
     "loading": "생성 중…",
     "unknownError": "알 수 없는 오류"
   },
   "toast": {
-    "shortcutUpdated": "단축키를 업데이트했어요: {shortcut}",
-    "deleteFailed": "항목을 삭제하지 못했어요",
-    "clearFailed": "항목을 비우지 못했어요",
     "caseChanged": "대소문자를 변환해 클립보드에 복사했어요"
   },
-  "tabs": {
-    "generalStartup": "일반 및 시작",
-    "activationShortcuts": "실행 및 단축키",
-    "clipboardRules": "클립보드 규칙",
-    "storageRetention": "저장 공간 및 기록",
-    "updates": "업데이트"
-  },
-  "position": {
-    "left": "왼쪽",
-    "right": "오른쪽",
-    "topEdge": "위쪽 가장자리",
-    "loadingDisplays": "디스플레이를 찾는 중…",
-    "horizontalPositionTitle": "가로 위치",
-    "horizontalPositionDesc": "화면 가장자리를 따라 가로 정렬을 조정해요"
-  },
   "filters": {
-    "colors": "색상",
-    "pinned": "고정됨",
-    "title": "필터"
+    "pinned": "고정됨"
   },
   "item": {
-    "copied": "복사됨!",
     "copiedTimes": "{count}번 복사됨",
-    "imagePlaceholder": "이미지",
     "extractText": "Image Studio (변환, 압축, OCR)",
     "convertTo": "다음으로 변환…",
     "compressBtn": "압축",
     "quickCompress": "빠른 압축",
     "transformCase": "대소문자 변경 (대문자 / 소문자 / 단어별 대문자)"
-  },
-  "flyout": {
-    "selectItem": "항목 선택",
-    "deselectItem": "항목 선택 해제",
-    "clickToSelect": "클릭하여 선택",
-    "clickToDeselect": "클릭하여 선택 해제",
-    "copied": "복사됨!",
-    "clickToPasteImageDrag": "클릭하여 복사 · 드래그하여 이동"
-  },
-  "appearance": {
-    "openStyleSelector": "스타일 선택",
-    "closeStyleSelector": "스타일 선택기 닫기"
   },
   "backup": {
     "securityLabel": "보안",
@@ -162,17 +144,8 @@
     "bankName": "은행",
     "accountNumber": "계좌번호",
     "accountHolder": "예금주",
-    "supportTagline": "영원히 무료, 오픈 소스",
     "copied": "클립보드에 복사됨",
     "copy": "복사"
-  },
-  "emoji": {
-    "open": "이모지 및 기호",
-    "categories": "카테고리",
-    "clearRecents": "최근 항목 지우기",
-    "emptyRecents": "최근 사용한 이모지가 없어요",
-    "loadFailed": "이모지를 불러오지 못했어요",
-    "skinTone": "피부색"
   },
   "imageStudio": {
     "tabConvert": "변환",
@@ -394,5 +367,11 @@
       "expiringTitle": "T-Drop — 요금제가 곧 종료됩니다",
       "expiringBody": "{role} 요금제, 남은 일수: {days}. 설정을 열어 갱신하세요."
     }
+  },
+  "codeSnap": {
+    "title": "코드 스크린샷 (CodeSnap 스타일)",
+    "save": "코드 스크린샷 저장",
+    "copied": "코드 스크린샷 복사 완료",
+    "failed": "코드 스크린샷 생성 실패"
   }
 }

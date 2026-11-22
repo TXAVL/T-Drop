@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
 import type { DisplayInfo, UpdateMode } from '../../shared/types'
-import { resolveUpdateMode } from '../../shared/types'
+import { resolveUpdateMode, normalizeHoverOpenDelay, HOVER_OPEN_DELAY_MIN, HOVER_OPEN_DELAY_MAX, HOVER_OPEN_DELAY_STEP } from '../../shared/types'
 import {
   LogoIndicatorIcon,
   TickIndicatorIcon,
@@ -134,6 +134,84 @@ export function Settings({
     playDialTickSound()
     patch({ hotZoneWidth: clamped })
   }
+
+
+  // ── Hover open delay (shared by both layouts) ──────────────────────────
+  const hoverOn = settings.hoverActivation ?? true
+  const hoverDelay = normalizeHoverOpenDelay(settings.hoverOpenDelay)
+  const formatHoverDelay = (ms: number) =>
+    ms === 0 ? t('behaviour.hoverDelayInstant') : t('units.ms', { n: ms })
+
+  const handleHoverDelayInput = (rawVal: number) => {
+    const next = normalizeHoverOpenDelay(rawVal)
+    if (next !== normalizeHoverOpenDelay(useStore.getState().settings.hoverOpenDelay)) {
+      useStore.setState((s) => ({ settings: { ...s.settings, hoverOpenDelay: next } }))
+    }
+  }
+
+  const handleHoverDelayRelease = (rawVal: number) => {
+    setSliderActive(false)
+    patch({ hoverOpenDelay: normalizeHoverOpenDelay(rawVal) })
+  }
+
+  /** Open Delay card: wave slider plus Instant / 500 ms / 1000 ms presets. */
+  const renderHoverDelayCard = (cardClass: string) => (
+    <div className={cardClass}>
+      <div className="shelf-card-top">
+        <div className="setting-group-label">{t('groups.hoverDelay')}</div>
+        <div className="setting-slider-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <div>
+            <div className="setting-title">{t('behaviour.hoverDelayTitle')}</div>
+            <div className="setting-desc">{hoverOn ? t('behaviour.hoverDelayDesc') : t('behaviour.disabledHoverOff')}</div>
+          </div>
+          <div className="setting-slider-val">{formatHoverDelay(hoverDelay)}</div>
+        </div>
+      </div>
+      <div className="shelf-card-bottom">
+        <div className="setting-slider-wrap">
+          <WakeSlider
+            ariaLabel={t('behaviour.hoverDelayTitle')}
+            min={HOVER_OPEN_DELAY_MIN}
+            max={HOVER_OPEN_DELAY_MAX}
+            step={HOVER_OPEN_DELAY_STEP}
+            bars={28}
+            height={28}
+            restHeight={8}
+            gap={3}
+            value={hoverDelay}
+            disabled={!hoverOn}
+            onStart={() => {
+              void window.edge.setInteractive(true)
+              setSliderActive(true)
+            }}
+            onRelease={(val) => handleHoverDelayRelease(val)}
+            onChange={(val) => handleHoverDelayInput(val)}
+          />
+          <div className="setting-slider-labels">
+            {[HOVER_OPEN_DELAY_MIN, 500, HOVER_OPEN_DELAY_MAX].map((ms) => {
+              const active = hoverDelay === ms
+              return (
+                <button
+                  key={ms}
+                  type="button"
+                  disabled={!hoverOn}
+                  className={`slider-label-btn${active ? ' active' : ''}`}
+                  onClick={() => {
+                    if (hoverOn && !active) {
+                      playDialTickSound()
+                      patch({ hoverOpenDelay: ms })
+                    }
+                  }}
+                >
+                  {formatHoverDelay(ms)}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 
   const [localInlineOpen, setLocalInlineOpen] = useState(false)
   const isTutorial = inlineIndicatorStyle || (typeof window !== 'undefined' && window.location.hash.includes('onboarding'))
@@ -544,6 +622,9 @@ export function Settings({
 
   const handleOpenLogsModal = () => {
     playButtonClickSound()
+    // Keep the panel expanded while the modal is open (otherwise the top-docked
+    // panel collapses as soon as the cursor leaves its thin bounds).
+    if (isHorizontal) window.edge?.setPreviewMode?.(true)
     setLogsModalOpen(true)
     void loadSystemLogs(true)
   }
@@ -1315,7 +1396,7 @@ export function Settings({
             <button
               type="button"
               className="txa-modal-close"
-              onClick={() => setLogsModalOpen(false)}
+              onClick={closeLogs}
             >
               ✕
             </button>
@@ -2848,6 +2929,9 @@ export function Settings({
                 </div>
               </div>
 
+              {/* Card 6b: Open Delay */}
+              {renderHoverDelayCard('settings-shelf-card trigger-thickness-card position-col')}
+
               {/* ── SUB-GROUP 3 DIVIDER: Community & Support ── */}
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('footer.communityAndSupport') || 'COMMUNITY & SUPPORT'}</span>
@@ -3744,6 +3828,9 @@ export function Settings({
                       </div>
                     </div>
                   </div>
+
+                  {/* Card 7b: Open Delay */}
+                  {renderHoverDelayCard('setting-card')}
 
                   {/* Card 8: Panel Height */}
                   <div className="setting-card">

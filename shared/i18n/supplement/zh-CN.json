@@ -1,4 +1,30 @@
 {
+  "count": {
+    "images": {
+      "one": "{count}张图片"
+    },
+    "files": {
+      "one": "{count}个文件"
+    },
+    "copiedTimes": {
+      "one": "已复制{count}次"
+    },
+    "moreImages": {
+      "one": "+{count}张更多图片"
+    },
+    "moreFiles": {
+      "one": "+{count}个更多文件"
+    },
+    "selected": {
+      "one": "已选择{count}项"
+    },
+    "savedToDownloads": {
+      "one": "已保存{count}张图片至下载"
+    },
+    "splitStacks": {
+      "one": "拆分为{count}堆（每堆最多10项）"
+    }
+  },
   "renew": {
     "windowTitle": "T-Drop — 续期许可证",
     "title": "续期许可证",
@@ -85,72 +111,28 @@
   "behaviour": {
     "whatsNew": "新功能",
     "retry": "重试",
-    "updateDownloadFailed": "更新下载失败",
     "updateInstallFailed": "无法启动安装程序",
-    "updateEta": "剩余 {eta}",
-    "updateModeAuto": "自动",
-    "updateModeNotify": "仅通知",
-    "updateModeOff": "已关闭",
-    "updateModeNotifyDesc": "有可用更新时通知，但不自动下载",
-    "updateLabelReady": "更新已就绪",
-    "updateLabelDownloading": "正在下载更新",
-    "updateLabelAvailable": "有可用更新",
-    "update": "更新"
+    "updateEta": "剩余 {eta}"
   },
   "common": {
     "close": "关闭",
     "dismiss": "忽略",
-    "undo": "撤销",
     "loading": "正在生成…",
     "unknownError": "未知错误"
   },
   "toast": {
-    "shortcutUpdated": "快捷键已更新：{shortcut}",
-    "deleteFailed": "无法删除该项",
-    "clearFailed": "无法清空项目",
     "caseChanged": "已转换大小写并复制到剪贴板"
   },
-  "tabs": {
-    "generalStartup": "常规与启动",
-    "activationShortcuts": "激活与快捷键",
-    "clipboardRules": "剪贴板规则",
-    "storageRetention": "存储与历史记录",
-    "updates": "更新"
-  },
-  "position": {
-    "left": "左",
-    "right": "右",
-    "topEdge": "上边缘",
-    "loadingDisplays": "正在检测显示器…",
-    "horizontalPositionTitle": "水平位置",
-    "horizontalPositionDesc": "沿屏幕边缘调整水平对齐方式"
-  },
   "filters": {
-    "colors": "颜色",
-    "pinned": "已固定",
-    "title": "筛选"
+    "pinned": "已固定"
   },
   "item": {
-    "copied": "已复制！",
     "copiedTimes": "已复制 {count} 次",
-    "imagePlaceholder": "图片",
     "extractText": "Image Studio（转换、压缩、OCR）",
     "convertTo": "转换为…",
     "compressBtn": "压缩",
     "quickCompress": "快速压缩",
     "transformCase": "更改大小写（大写 / 小写 / 单词首字母大写）"
-  },
-  "flyout": {
-    "selectItem": "选择该项",
-    "deselectItem": "取消选择该项",
-    "clickToSelect": "点击选择",
-    "clickToDeselect": "点击取消选择",
-    "copied": "已复制！",
-    "clickToPasteImageDrag": "点击复制 · 拖动移动"
-  },
-  "appearance": {
-    "openStyleSelector": "选择样式",
-    "closeStyleSelector": "关闭样式选择器"
   },
   "backup": {
     "securityLabel": "安全",
@@ -162,17 +144,8 @@
     "bankName": "银行",
     "accountNumber": "账号",
     "accountHolder": "户名",
-    "supportTagline": "永久免费且开源",
     "copied": "已复制到剪贴板",
     "copy": "复制"
-  },
-  "emoji": {
-    "open": "表情符号与符号",
-    "categories": "分类",
-    "clearRecents": "清除最近使用",
-    "emptyRecents": "没有最近使用的表情符号",
-    "loadFailed": "无法加载表情符号",
-    "skinTone": "肤色"
   },
   "imageStudio": {
     "tabConvert": "转换",
@@ -394,5 +367,11 @@
       "expiringTitle": "T-Drop — 您的套餐即将到期",
       "expiringBody": "{role} 套餐，剩余天数：{days}。打开设置即可续期。"
     }
+  },
+  "codeSnap": {
+    "title": "截图代码（CodeSnap 风格）",
+    "save": "保存代码截图",
+    "copied": "代码截图已复制",
+    "failed": "无法创建代码截图"
   }
 }

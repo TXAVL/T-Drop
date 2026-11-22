@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Neuigkeiten",
     "retry": "Erneut versuchen",
-    "updateDownloadFailed": "Download des Updates fehlgeschlagen",
     "updateInstallFailed": "Das Installationsprogramm konnte nicht gestartet werden",
-    "updateEta": "noch {eta}",
-    "updateModeAuto": "Automatisch",
-    "updateModeNotify": "Nur benachrichtigen",
-    "updateModeOff": "Deaktiviert",
-    "updateModeNotifyDesc": "Bei verfügbaren Updates benachrichtigen, ohne sie herunterzuladen",
-    "updateLabelReady": "Update bereit",
-    "updateLabelDownloading": "Update wird heruntergeladen",
-    "updateLabelAvailable": "Update verfügbar",
-    "update": "Aktualisieren"
+    "updateEta": "noch {eta}"
   },
   "common": {
     "close": "Schließen",
     "dismiss": "Verwerfen",
-    "undo": "Rückgängig",
     "loading": "Wird erzeugt …",
     "unknownError": "Unbekannter Fehler"
   },
   "toast": {
-    "shortcutUpdated": "Tastenkürzel aktualisiert: {shortcut}",
-    "deleteFailed": "Element konnte nicht gelöscht werden",
-    "clearFailed": "Elemente konnten nicht geleert werden",
     "caseChanged": "Schreibweise geändert und in die Zwischenablage kopiert"
   },
-  "tabs": {
-    "generalStartup": "Allgemein und Start",
-    "activationShortcuts": "Aktivierung und Tastenkürzel",
-    "clipboardRules": "Regeln für die Zwischenablage",
-    "storageRetention": "Speicher und Verlauf",
-    "updates": "Updates"
-  },
-  "position": {
-    "left": "Links",
-    "right": "Rechts",
-    "topEdge": "Oberer Rand",
-    "loadingDisplays": "Bildschirme werden erkannt …",
-    "horizontalPositionTitle": "Horizontale Position",
-    "horizontalPositionDesc": "Horizontale Ausrichtung entlang des Bildschirmrands anpassen"
-  },
   "filters": {
-    "colors": "Farben",
-    "pinned": "Angepinnt",
-    "title": "Filter"
+    "pinned": "Angepinnt"
   },
   "item": {
-    "copied": "Kopiert!",
     "copiedTimes": "{count}-mal kopiert",
-    "imagePlaceholder": "Bild",
     "extractText": "Image Studio (Konvertieren, Komprimieren, OCR)",
     "convertTo": "Konvertieren in …",
     "compressBtn": "Komprimieren",
     "quickCompress": "Schnell komprimieren",
     "transformCase": "Groß-/Kleinschreibung ändern (GROSS / klein / Wortanfang Groß)"
-  },
-  "flyout": {
-    "selectItem": "Element auswählen",
-    "deselectItem": "Auswahl aufheben",
-    "clickToSelect": "Zum Auswählen klicken",
-    "clickToDeselect": "Zum Abwählen klicken",
-    "copied": "Kopiert!",
-    "clickToPasteImageDrag": "Klicken zum Kopieren · Ziehen zum Verschieben"
-  },
-  "appearance": {
-    "openStyleSelector": "Stil wählen",
-    "closeStyleSelector": "Stilauswahl schließen"
   },
   "backup": {
     "securityLabel": "Sicherheit",
@@ -162,17 +118,8 @@
     "bankName": "Bank",
     "accountNumber": "Kontonummer",
     "accountHolder": "Kontoinhaber",
-    "supportTagline": "Für immer kostenlos und Open Source",
     "copied": "In die Zwischenablage kopiert",
     "copy": "Kopieren"
-  },
-  "emoji": {
-    "open": "Emojis und Symbole",
-    "categories": "Kategorien",
-    "clearRecents": "Zuletzt verwendete löschen",
-    "emptyRecents": "Keine zuletzt verwendeten Emojis",
-    "loadFailed": "Emojis konnten nicht geladen werden",
-    "skinTone": "Hautton"
   },
   "imageStudio": {
     "tabConvert": "Konvertieren",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Dein Tarif läuft bald ab",
       "expiringBody": "Tarif {role}, verbleibende Tage: {days}. Zum Verlängern die Einstellungen öffnen."
     }
+  },
+  "codeSnap": {
+    "title": "CodeSnap-Bild",
+    "save": "Code-Bild speichern",
+    "copied": "Code-Bild kopiert",
+    "failed": "Code-Bild konnte nicht erstellt werden"
   }
 }

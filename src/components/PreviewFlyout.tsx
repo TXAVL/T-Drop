@@ -3,11 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
 import { formatBytes, formatImageDisplayName, previewText } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
-import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon, BroomIcon, QrCodeIcon } from './icons'
+import { FileKindIcon, FolderOpenIcon, CopyIcon, CheckIcon, ExternalLinkIcon, CloseIcon, GlobeIcon, BroomIcon, QrCodeIcon, CameraIcon, ImageIcon } from './icons'
 import { parseUrlPreview, hasTrackingParams, cleanTrackingUrl } from '../lib/urlPreview'
 import { parseColor, getColorFormats } from '../lib/colorUtils'
 import { toUpper, toLower, toTitleCase, toCamelCase, toCleanSpace, getTextStats } from '../lib/textTransform'
 import { ImageStudioPanel } from './ImageStudioPanel'
+import { CodeBlock } from './CodeBlock'
+import { detectCode } from '../lib/codeDetect'
+import { copyCodeSnap, saveCodeSnap } from '../lib/codeSnap'
 import { createPortal } from 'react-dom'
 import { useAdaptiveSpring } from '../hooks/useAdaptiveSpring'
 import { useDragOut } from '../hooks/useDragOut'
@@ -999,6 +1002,7 @@ function PreviewContent({
     }
 
     const stats = getTextStats(activeText)
+    const codeInfo = detectCode(activeText)
 
     const handleTransform = (transformer: (s: string) => string, toastMsg: string) => {
       playButtonClickSound()
@@ -1058,6 +1062,20 @@ function PreviewContent({
                 })
               }}
             />
+            {codeInfo.isCode && (
+              <>
+                <QuickActionButton
+                  title={t('codeSnap.title')}
+                  icon={CameraIcon}
+                  onClick={() => copyCodeSnap(activeText, codeInfo.language)}
+                />
+                <QuickActionButton
+                  title={t('codeSnap.save')}
+                  icon={ImageIcon}
+                  onClick={() => saveCodeSnap(activeText, codeInfo.language)}
+                />
+              </>
+            )}
             <QuickActionButton
               title={t('flyout.copyText')}
               icon={CopyIcon}
@@ -1181,6 +1199,16 @@ function PreviewContent({
         </div>
 
         {/* Text Body */}
+        {codeInfo.isCode ? (
+          <CodeBlock
+            code={text}
+            language={codeInfo.language}
+            showFrame={false}
+            showHeader={false}
+            showLineNumbers={true}
+            showCopyButton={false}
+          />
+        ) : (
         <div style={{
           color: 'rgba(255,255,255,0.88)',
           whiteSpace: 'pre-wrap',
@@ -1193,6 +1221,7 @@ function PreviewContent({
         }}>
           {text}
         </div>
+        )}
       </div>
     )
   }

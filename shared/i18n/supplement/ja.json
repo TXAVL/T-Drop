@@ -1,4 +1,30 @@
 {
+  "count": {
+    "images": {
+      "one": "{count}枚の画像"
+    },
+    "files": {
+      "one": "{count}件のファイル"
+    },
+    "copiedTimes": {
+      "one": "コピー済み {count}回"
+    },
+    "moreImages": {
+      "one": "+{count}枚の画像"
+    },
+    "moreFiles": {
+      "one": "+{count}件のファイル"
+    },
+    "selected": {
+      "one": "{count}件選択"
+    },
+    "savedToDownloads": {
+      "one": "{count}枚の画像をダウンロード保存"
+    },
+    "splitStacks": {
+      "one": "{count}スタックに分割（各最大10件）"
+    }
+  },
   "renew": {
     "windowTitle": "T-Drop — ライセンスの更新",
     "title": "ライセンスを更新",
@@ -85,72 +111,28 @@
   "behaviour": {
     "whatsNew": "新機能",
     "retry": "再試行",
-    "updateDownloadFailed": "アップデートのダウンロードに失敗しました",
     "updateInstallFailed": "インストーラーを起動できませんでした",
-    "updateEta": "残り{eta}",
-    "updateModeAuto": "自動",
-    "updateModeNotify": "通知のみ",
-    "updateModeOff": "無効",
-    "updateModeNotifyDesc": "アップデートがあるときに通知します（ダウンロードはしません）",
-    "updateLabelReady": "アップデートの準備完了",
-    "updateLabelDownloading": "アップデートをダウンロード中",
-    "updateLabelAvailable": "アップデートがあります",
-    "update": "更新"
+    "updateEta": "残り{eta}"
   },
   "common": {
     "close": "閉じる",
     "dismiss": "閉じる",
-    "undo": "元に戻す",
     "loading": "作成中…",
     "unknownError": "不明なエラー"
   },
   "toast": {
-    "shortcutUpdated": "ショートカットを更新しました: {shortcut}",
-    "deleteFailed": "項目を削除できませんでした",
-    "clearFailed": "項目をクリアできませんでした",
     "caseChanged": "大文字・小文字を変換してクリップボードにコピーしました"
   },
-  "tabs": {
-    "generalStartup": "全般と起動",
-    "activationShortcuts": "起動とショートカット",
-    "clipboardRules": "クリップボードのルール",
-    "storageRetention": "保存と履歴",
-    "updates": "アップデート"
-  },
-  "position": {
-    "left": "左",
-    "right": "右",
-    "topEdge": "上端",
-    "loadingDisplays": "ディスプレイを検出しています…",
-    "horizontalPositionTitle": "水平位置",
-    "horizontalPositionDesc": "画面の端に沿った水平方向の位置を調整します"
-  },
   "filters": {
-    "colors": "カラー",
-    "pinned": "ピン留め",
-    "title": "フィルター"
+    "pinned": "ピン留め"
   },
   "item": {
-    "copied": "コピーしました！",
     "copiedTimes": "{count}回コピー",
-    "imagePlaceholder": "画像",
     "extractText": "Image Studio（変換・圧縮・OCR）",
     "convertTo": "変換先…",
     "compressBtn": "圧縮",
     "quickCompress": "クイック圧縮",
     "transformCase": "大文字・小文字を変換（大文字 / 小文字 / 先頭のみ大文字）"
-  },
-  "flyout": {
-    "selectItem": "項目を選択",
-    "deselectItem": "項目の選択を解除",
-    "clickToSelect": "クリックで選択",
-    "clickToDeselect": "クリックで選択解除",
-    "copied": "コピーしました！",
-    "clickToPasteImageDrag": "クリックでコピー · ドラッグで移動"
-  },
-  "appearance": {
-    "openStyleSelector": "スタイルを選択",
-    "closeStyleSelector": "スタイル選択を閉じる"
   },
   "backup": {
     "securityLabel": "セキュリティ",
@@ -162,17 +144,8 @@
     "bankName": "銀行",
     "accountNumber": "口座番号",
     "accountHolder": "口座名義",
-    "supportTagline": "ずっと無料・オープンソース",
     "copied": "クリップボードにコピーしました",
     "copy": "コピー"
-  },
-  "emoji": {
-    "open": "絵文字と記号",
-    "categories": "カテゴリ",
-    "clearRecents": "最近使ったものを消去",
-    "emptyRecents": "最近使った絵文字はありません",
-    "loadFailed": "絵文字を読み込めませんでした",
-    "skinTone": "肌の色"
   },
   "imageStudio": {
     "tabConvert": "変換",
@@ -394,5 +367,11 @@
       "expiringTitle": "T-Drop — まもなくプランが終了します",
       "expiringBody": "{role} プラン、残り日数: {days}。更新するには設定を開いてください。"
     }
+  },
+  "codeSnap": {
+    "title": "コードスクリーンショット（CodeSnapスタイル）",
+    "save": "コードスクリーンショットを保存",
+    "copied": "コードスクリーンショットをコピー済み",
+    "failed": "コードスクリーンショットを作成できません"
   }
 }

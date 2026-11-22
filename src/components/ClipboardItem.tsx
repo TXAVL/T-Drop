@@ -25,8 +25,11 @@ import { itemRenderKey } from '../lib/itemSignature'
 import { basename, formatBytes, previewText, relativeTime, formatImageDisplayName } from '../lib/format'
 import { getFileKind } from '../lib/fileType'
 import { playButtonClickSound, playToggleSound, playDeleteSound, playCardExpandSound } from '../lib/soundEffects'
-import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon, OcrIcon, QrCodeIcon } from './icons'
+import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon, MinusIcon, ChevronUpIcon, ChevronLeftIcon, ExpandIcon, ContractIcon, ExternalLinkIcon, BroomIcon, ColorConvertIcon, OcrIcon, QrCodeIcon, CameraIcon } from './icons'
 import { LinkPreviewCard } from './LinkPreviewCard'
+import { CodeBlock } from './CodeBlock'
+import { detectCode } from '../lib/codeDetect'
+import { copyCodeSnap } from '../lib/codeSnap'
 import '../styles/item.css'
 import { tryPaste } from '../lib/tryPaste'
 import { parseColor, getColorFormats, cycleColorFormat } from '../lib/colorUtils'
@@ -381,7 +384,23 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
                     </span>
                   </>
                 )}
-                {item.data.kind === 'text' && item.data.isUrl && hasTrackingParams(item.data.text) && (
+                {item.data.kind === 'text' && !item.data.isUrl && detectCode(item.data.text).isCode && (
+            <button
+              className="act"
+              title={t('codeSnap.title')}
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                e.currentTarget.blur()
+                playButtonClickSound()
+                const d = item.data as { text: string }
+                void copyCodeSnap(d.text, detectCode(d.text).language)
+              }}
+            >
+              <CameraIcon />
+            </button>
+          )}
+          {item.data.kind === 'text' && item.data.isUrl && hasTrackingParams(item.data.text) && (
                   <>
                     <span>·</span>
                     <span 
@@ -1241,6 +1260,23 @@ function Preview({ item }: { item: ClipboardItemDto }) {
       const colorInfo = parseColor(item.data.text)
       if (colorInfo) {
         return <ColorSwatchPreview item={item} colorInfo={colorInfo} />
+      }
+      const codeInfo = detectCode(item.data.text)
+      if (codeInfo.isCode) {
+        return (
+          <div className="code-card-preview">
+            <CodeBlock
+              code={item.data.text}
+              language={codeInfo.language}
+              showFrame={false}
+              showHeader={false}
+              showLineNumbers={true}
+              showCopyButton={false}
+              compact={true}
+              maxLines={5}
+            />
+          </div>
+        )
       }
       return <div className="preview">{previewText(item.data.text)}</div>
     }

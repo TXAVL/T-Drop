@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Uutta",
     "retry": "Yritä uudelleen",
-    "updateDownloadFailed": "Päivityksen lataus epäonnistui",
     "updateInstallFailed": "Asennusohjelmaa ei voitu käynnistää",
-    "updateEta": "{eta} jäljellä",
-    "updateModeAuto": "Automaattinen",
-    "updateModeNotify": "Vain ilmoitus",
-    "updateModeOff": "Pois käytöstä",
-    "updateModeNotifyDesc": "Ilmoita päivityksistä lataamatta niitä",
-    "updateLabelReady": "Päivitys on valmis",
-    "updateLabelDownloading": "Ladataan päivitystä",
-    "updateLabelAvailable": "Päivitys saatavilla",
-    "update": "Päivitä"
+    "updateEta": "{eta} jäljellä"
   },
   "common": {
     "close": "Sulje",
     "dismiss": "Hylkää",
-    "undo": "Kumoa",
     "loading": "Luodaan…",
     "unknownError": "Tuntematon virhe"
   },
   "toast": {
-    "shortcutUpdated": "Pikanäppäin päivitetty: {shortcut}",
-    "deleteFailed": "Kohdetta ei voitu poistaa",
-    "clearFailed": "Kohteita ei voitu tyhjentää",
     "caseChanged": "Kirjainkoko muutettu ja kopioitu leikepöydälle"
   },
-  "tabs": {
-    "generalStartup": "Yleiset ja käynnistys",
-    "activationShortcuts": "Aktivointi ja pikanäppäimet",
-    "clipboardRules": "Leikepöydän säännöt",
-    "storageRetention": "Tallennustila ja historia",
-    "updates": "Päivitykset"
-  },
-  "position": {
-    "left": "Vasen",
-    "right": "Oikea",
-    "topEdge": "Yläreuna",
-    "loadingDisplays": "Tunnistetaan näyttöjä…",
-    "horizontalPositionTitle": "Vaakasuuntainen sijainti",
-    "horizontalPositionDesc": "Säädä vaakasuuntaista tasausta näytön reunaa pitkin"
-  },
   "filters": {
-    "colors": "Värit",
-    "pinned": "Kiinnitetyt",
-    "title": "Suodattimet"
+    "pinned": "Kiinnitetyt"
   },
   "item": {
-    "copied": "Kopioitu!",
     "copiedTimes": "Kopioitu {count} kertaa",
-    "imagePlaceholder": "Kuva",
     "extractText": "Image Studio (muunna, pakkaa, OCR)",
     "convertTo": "Muunna muotoon…",
     "compressBtn": "Pakkaa",
     "quickCompress": "Pikapakkaus",
     "transformCase": "Vaihda kirjainkokoa (ISOT / pienet / Jokainen Sana Isolla)"
-  },
-  "flyout": {
-    "selectItem": "Valitse kohde",
-    "deselectItem": "Poista kohteen valinta",
-    "clickToSelect": "Valitse napsauttamalla",
-    "clickToDeselect": "Poista valinta napsauttamalla",
-    "copied": "Kopioitu!",
-    "clickToPasteImageDrag": "Kopioi napsauttamalla · Siirrä vetämällä"
-  },
-  "appearance": {
-    "openStyleSelector": "Valitse tyyli",
-    "closeStyleSelector": "Sulje tyylin valinta"
   },
   "backup": {
     "securityLabel": "Suojaus",
@@ -162,17 +118,8 @@
     "bankName": "Pankki",
     "accountNumber": "Tilinumero",
     "accountHolder": "Tilinomistaja",
-    "supportTagline": "Ilmainen ja avoimen lähdekoodin ikuisesti",
     "copied": "Kopioitu leikepöydälle",
     "copy": "Kopioi"
-  },
-  "emoji": {
-    "open": "Emojit ja symbolit",
-    "categories": "Luokat",
-    "clearRecents": "Tyhjennä viimeisimmät",
-    "emptyRecents": "Ei viimeksi käytettyjä emojeita",
-    "loadFailed": "Emojeita ei voitu ladata",
-    "skinTone": "Ihonsävy"
   },
   "imageStudio": {
     "tabConvert": "Muunna",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Pakettisi päättyy pian",
       "expiringBody": "{role}-paketti, päiviä jäljellä: {days}. Uusi avaamalla Asetukset."
     }
+  },
+  "codeSnap": {
+    "title": "Koodin kuvakaappaus (CodeSnap-tyyli)",
+    "save": "Tallenna koodikuvakaappaus",
+    "copied": "Koodikuvakaappaus kopioitu",
+    "failed": "Koodikuvakaappauksen luominen epäonnistui"
   }
 }

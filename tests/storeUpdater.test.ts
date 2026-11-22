@@ -31,6 +31,13 @@ vi.mock('../electron/store/settings', () => ({
   getSettings: () => mocks.getSettings()
 }))
 
+// Never spawn the real txapm here: this suite tests the GitHub path, and a dev machine
+// that has txapm installed would otherwise change (and slow down) the result.
+vi.mock('../electron/main/txaUpdater', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../electron/main/txaUpdater')>()),
+  refreshTxapmStatus: vi.fn(async () => null)
+}))
+
 import {
   cancelUpdateDownload,
   checkForUpdatesManual,

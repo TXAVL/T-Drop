@@ -7,7 +7,7 @@ import { getSettings } from '../store/settings'
 import { resolveUpdateMode } from '../../shared/types'
 import { getMainWindow, setVisible, sendToMainWindow } from './window'
 import { mt } from './i18n'
-import { isTxaRepoInstalled, checkTxaRepoVersion, executeTxaUpgrade } from './txaUpdater'
+import { isTxaRepoInstalled, checkTxaRepoVersion, executeTxaUpgrade, refreshTxapmStatus } from './txaUpdater'
 
 export interface CachedUpdateInfo {
   hasUpdate: boolean
@@ -473,6 +473,7 @@ export async function runBackgroundUpdateCheck(): Promise<void> {
 
   isCheckingInProgress = true
   lastCheckTimestamp = Date.now()
+  await refreshTxapmStatus() // is T-Drop managed by txapm? decides which updater runs
   console.log('[AutoUpdater] Executing background update check (mode =', mode, ')...')
 
   try {
@@ -535,6 +536,8 @@ export async function checkForUpdatesManual(): Promise<{ status: string; version
   if (isStoreBuild()) {
     return { status: 'up-to-date', version: app.getVersion() }
   }
+
+  await refreshTxapmStatus()
 
   // Ensure autoUpdater reference is initialized for subsequent download calls
   if (!_autoUpdater) {
@@ -730,6 +733,8 @@ export function initAutoUpdater(): void {
     console.log('[AutoUpdater] Store build detected — auto-updater disabled.')
     return
   }
+
+  void refreshTxapmStatus() // warm the cache; falls back to txapm's state files until it answers
 
   try {
     const { autoUpdater } = require('electron-updater')

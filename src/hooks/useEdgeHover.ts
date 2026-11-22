@@ -20,12 +20,18 @@
  *
  *  Drag-awareness: while an external OS file drag is active we never close.
  */
+import { normalizeHoverOpenDelay } from '../../shared/types'
 import { useEffect, useRef } from 'react'
 import { edge } from '../lib/edge'
 import { useStore } from '../store/appStore'
 
 const TRIGGER_PX = 3    // leftmost px that count as "the edge"
-const DWELL_MS = 40      // cursor must linger this long to open
+const DWELL_MS = 40      // cursor must linger this long to open (base; user delay adds on top)
+
+/** Base dwell plus the user's Open Delay setting (read live so the slider applies instantly). */
+function dwellMs(): number {
+  return DWELL_MS + normalizeHoverOpenDelay(useStore.getState().settings.hoverOpenDelay)
+}
 const GRACE_MS = 250     // close delay after leaving
 const PANEL_WIDE = 320   // blade is 320px (var(--panel-width))
 /** Hysteresis thresholds for closing the panel.
@@ -537,7 +543,7 @@ export function useEdgeHover(): void {
               dwellTimer = window.setTimeout(() => {
                 dwellTimer = undefined
                 openPanel()
-              }, DWELL_MS)
+              }, dwellMs())
             }
             return
           }
@@ -605,7 +611,7 @@ export function useEdgeHover(): void {
               dwellTimer = window.setTimeout(() => {
                 dwellTimer = undefined
                 openPanel()
-              }, DWELL_MS)
+              }, dwellMs())
             }
             return
           }
@@ -667,7 +673,7 @@ export function useEdgeHover(): void {
               dwellTimer = window.setTimeout(() => {
                 dwellTimer = undefined
                 openPanel()
-              }, DWELL_MS)
+              }, dwellMs())
             }
             return
           }

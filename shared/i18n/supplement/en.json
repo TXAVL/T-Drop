@@ -95,7 +95,10 @@
     "updateLabelReady": "Update Ready",
     "updateLabelDownloading": "Downloading Update",
     "updateLabelAvailable": "Update Available",
-    "update": "Update"
+    "update": "Update",
+    "hoverDelayTitle": "Open Delay",
+    "hoverDelayDesc": "Wait this long at the edge before the shelf slides open",
+    "hoverDelayInstant": "Instant"
   },
   "common": {
     "close": "Close",
@@ -394,5 +397,14 @@
       "expiringTitle": "T-Drop — Your plan ends soon",
       "expiringBody": "{role} plan, days left: {days}. Open Settings to renew."
     }
+  },
+  "codeSnap": {
+    "title": "Screenshot code (CodeSnap style)",
+    "save": "Save code screenshot",
+    "copied": "Code screenshot copied",
+    "failed": "Could not create the code screenshot"
+  },
+  "groups": {
+    "hoverDelay": "OPEN DELAY"
   }
 }

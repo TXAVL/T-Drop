@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.3.2</span>
+          <span data-i18n="nav.download">Tải về v0.3.3</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,70 @@
       </div>
     </div>
 
-        <!-- ── VERSION 0.3.2 ───────────────────────────────────────── -->
+        <!-- ── VERSION 0.3.3 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.3.2</span>
+          <span>Version v0.3.3</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">22/11/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v033.summary">
+        Ảnh chụp code kiểu CodeSnap, nhận diện hơn 35 ngôn ngữ và framework, khắc phục lỗi bản quyền tự về Free, chẩn đoán phần cứng chính xác hơn và nhận diện bản cài qua TXA Repo.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v033.feat1.title">Ảnh chụp code đẹp kiểu CodeSnap &amp; code tô màu cú pháp</h3>
+            <p data-i18n="v033.feat1.desc">Code sao chép được tô màu cú pháp ngay trên thẻ và xem đầy đủ có số dòng trong bản xem trước. Nút camera trên thẻ code tạo ảnh PNG đẹp (cửa sổ macOS, nền gradient riêng theo từng ngôn ngữ) và sao chép thẳng vào clipboard hoặc lưu thành tệp.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v033.feat2.title">Nhận diện hơn 35 ngôn ngữ, framework JavaScript và tệp .txa</h3>
+            <p data-i18n="v033.feat2.desc">Thêm Kotlin, Swift, Java, PHP, Ruby, Dart, Lua, Zig, Mojo, Gleam, Elixir, Haskell, Julia, Nim, Odin, Scala, YAML, TOML, PowerShell, Dockerfile cùng React, Next.js, Vue, Svelte, Angular, Astro, Express. Nhận diện Ruby và Lua chính xác hơn bằng chấm điểm. Tệp sao lưu .txa có nền gradient ba màu xanh - đỏ - vàng.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v033.feat3.title">Khắc phục lỗi bản quyền tự quay về gói Free</h3>
+            <p data-i18n="v033.feat3.desc">Mã máy giờ ổn định: đọc MachineGuid bền bỉ hơn (thử lại, timeout dài hơn), lưu mã tốt gần nhất và không đổi khi đổi tên PC. Khi không đọc được mã máy, ứng dụng sẽ không bao giờ thu hồi bản quyền; số lần máy chủ báo không hợp lệ trước khi hủy tăng từ 2 lên 3.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v033.feat4.title">Chẩn đoán Windows, phần cứng và nguồn cài đặt chính xác hơn</h3>
+            <p data-i18n="v033.feat4.desc">Đọc Windows qua registry (không còn N/A), phân biệt kênh Insider Canary/Dev/Beta/Release Preview/Retail/UNKNOWN dựa trên bằng chứng, bổ sung CPU, RAM, GPU, bo mạch, BIOS, ổ đĩa, màn hình. Nhận diện bản cài từ TXA Repo qua txapm which --json (trường managed), MSIX, Portable hoặc EXE.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v033.feat5.title">Độ trễ khi mở (Open Delay) &amp; tối ưu hiệu năng</h3>
+            <p data-i18n="v033.feat5.desc">Thanh trượt Open Delay 0-1000 ms để kệ không bật ra quá nhạy. Thiết bị âm thanh tự nghỉ sau 2 giây rảnh để giảm CPU, bảng emoji nạp cả màn hình ảnh trong một lần gọi giúp chuyển danh mục mượt hơn.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v033.feat6.title">Modal nhật ký không còn tự đóng khi rê chuột</h3>
+            <p data-i18n="v033.feat6.desc">Khi đặt kệ ở cạnh trên, mở Nhật ký rồi rê chuột xuống dưới khung log không còn làm kệ co lại và mất focus.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+        <!-- ── VERSION 0.3.2 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.2</span>
         </div>
         <div class="release-date">06/11/2026</div>
       </div>
@@ -1414,7 +1472,20 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.3.2',
+        'nav.download': 'Tải về v0.3.3',
+        'v033.summary': 'Ảnh chụp code kiểu CodeSnap, nhận diện hơn 35 ngôn ngữ và framework, khắc phục lỗi bản quyền tự về Free, chẩn đoán phần cứng chính xác hơn và nhận diện bản cài qua TXA Repo.',
+        'v033.feat1.title': 'Ảnh chụp code đẹp kiểu CodeSnap & code tô màu cú pháp',
+        'v033.feat1.desc': 'Code sao chép được tô màu cú pháp ngay trên thẻ và xem đầy đủ có số dòng trong bản xem trước. Nút camera trên thẻ code tạo ảnh PNG đẹp (cửa sổ macOS, nền gradient riêng theo từng ngôn ngữ) và sao chép thẳng vào clipboard hoặc lưu thành tệp.',
+        'v033.feat2.title': 'Nhận diện hơn 35 ngôn ngữ, framework JavaScript và tệp .txa',
+        'v033.feat2.desc': 'Thêm Kotlin, Swift, Java, PHP, Ruby, Dart, Lua, Zig, Mojo, Gleam, Elixir, Haskell, Julia, Nim, Odin, Scala, YAML, TOML, PowerShell, Dockerfile cùng React, Next.js, Vue, Svelte, Angular, Astro, Express. Nhận diện Ruby và Lua chính xác hơn bằng chấm điểm. Tệp sao lưu .txa có nền gradient ba màu xanh - đỏ - vàng.',
+        'v033.feat3.title': 'Khắc phục lỗi bản quyền tự quay về gói Free',
+        'v033.feat3.desc': 'Mã máy giờ ổn định: đọc MachineGuid bền bỉ hơn (thử lại, timeout dài hơn), lưu mã tốt gần nhất và không đổi khi đổi tên PC. Khi không đọc được mã máy, ứng dụng sẽ không bao giờ thu hồi bản quyền; số lần máy chủ báo không hợp lệ trước khi hủy tăng từ 2 lên 3.',
+        'v033.feat4.title': 'Chẩn đoán Windows, phần cứng và nguồn cài đặt chính xác hơn',
+        'v033.feat4.desc': 'Đọc Windows qua registry (không còn N/A), phân biệt kênh Insider Canary/Dev/Beta/Release Preview/Retail/UNKNOWN dựa trên bằng chứng, bổ sung CPU, RAM, GPU, bo mạch, BIOS, ổ đĩa, màn hình. Nhận diện bản cài từ TXA Repo qua txapm which --json (trường managed), MSIX, Portable hoặc EXE.',
+        'v033.feat5.title': 'Độ trễ khi mở (Open Delay) & tối ưu hiệu năng',
+        'v033.feat5.desc': 'Thanh trượt Open Delay 0-1000 ms để kệ không bật ra quá nhạy. Thiết bị âm thanh tự nghỉ sau 2 giây rảnh để giảm CPU, bảng emoji nạp cả màn hình ảnh trong một lần gọi giúp chuyển danh mục mượt hơn.',
+        'v033.feat6.title': 'Modal nhật ký không còn tự đóng khi rê chuột',
+        'v033.feat6.desc': 'Khi đặt kệ ở cạnh trên, mở Nhật ký rồi rê chuột xuống dưới khung log không còn làm kệ co lại và mất focus.',
         'v032.summary': 'Bộ cài đặt Windows (NSIS) thiết kế lại theo phong cách Dark Glass sang trọng, tích hợp tự động cập nhật thông minh qua kho gói TXA Repo (txapm), bổ sung kênh ủng hộ tác giả VietQR và khắc phục triệt để các lỗi giao diện.',
         'v032.feat1.title': 'Bộ cài đặt Windows phong cách Dark Glass mới (Modern Installer UI)',
         'v032.feat1.desc': 'Giao diện bộ cài đặt NSIS được thiết kế lại hoàn toàn với phong cách kính mờ Dark Glass sang trọng, viền phát quang cyan hiện đại và các bước thao tác rõ ràng, mượt mà chuẩn nhận diện T-Drop.',
@@ -1605,7 +1676,20 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.3.2',
+        'nav.download': 'Download v0.3.3',
+        'v033.summary': 'CodeSnap-style code screenshots, 35+ detected languages and frameworks, a fix for licenses reverting to Free, more accurate hardware diagnostics and TXA Repo install detection.',
+        'v033.feat1.title': 'CodeSnap-style code screenshots & syntax highlighting',
+        'v033.feat1.desc': 'Copied code is now syntax-highlighted on its card and shown in full with line numbers in the preview. A camera button on code cards renders a polished PNG (macOS-style window, a gradient per language) and copies it to the clipboard or saves it as a file.',
+        'v033.feat2.title': '35+ languages, JavaScript frameworks and .txa files',
+        'v033.feat2.desc': 'Added Kotlin, Swift, Java, PHP, Ruby, Dart, Lua, Zig, Mojo, Gleam, Elixir, Haskell, Julia, Nim, Odin, Scala, YAML, TOML, PowerShell, Dockerfile plus React, Next.js, Vue, Svelte, Angular, Astro and Express. Ruby and Lua detection is more accurate through scoring. .txa backup files get a blue - red - yellow gradient.',
+        'v033.feat3.title': 'Fixed licenses falling back to Free',
+        'v033.feat3.desc': 'The machine ID is now stable: more resilient MachineGuid reads (retry, longer timeout), a stored last-known-good ID, and no change when the PC is renamed. When the ID cannot be read the app never revokes a license, and the number of server rejections before dropping it goes from 2 to 3.',
+        'v033.feat4.title': 'More accurate Windows, hardware and install-source diagnostics',
+        'v033.feat4.desc': 'Windows is read from the registry (no more N/A), the Insider channel (Canary/Dev/Beta/Release Preview/Retail/UNKNOWN) is based on evidence, and CPU, RAM, GPU, board, BIOS, storage and displays are reported. TXA Repo installs are detected through txapm which --json (the managed field), as are MSIX, Portable and EXE installs.',
+        'v033.feat5.title': 'Open Delay & performance tuning',
+        'v033.feat5.desc': 'An Open Delay slider (0-1000 ms) stops the shelf from opening too eagerly. The audio device suspends after 2 idle seconds to save CPU, and the emoji picker loads a whole screen of glyphs in one call for smoother category switches.',
+        'v033.feat6.title': 'Logs modal no longer closes on hover',
+        'v033.feat6.desc': 'With the shelf on the top edge, moving the cursor below the log frame no longer collapses the shelf and drops focus.',
         'v032.summary': 'Redesigned modern Dark Glass Windows installer, smart auto-upgrade integration for TXA Repo (txapm), multi-language VietQR author support, and comprehensive UI bug fixes.',
         'v032.feat1.title': 'Modern Dark Glass Windows Installer',
         'v032.feat1.desc': 'Completely revamped NSIS setup wizard with a sleek dark glassmorphism design, glowing cyan accents, and clear install options matching T-Drop\'s brand identity.',

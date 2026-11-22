@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Что нового",
     "retry": "Повторить",
-    "updateDownloadFailed": "Не удалось скачать обновление",
     "updateInstallFailed": "Не удалось запустить установщик",
-    "updateEta": "осталось {eta}",
-    "updateModeAuto": "Автоматически",
-    "updateModeNotify": "Только уведомлять",
-    "updateModeOff": "Отключено",
-    "updateModeNotifyDesc": "Уведомлять об обновлениях, не скачивая их",
-    "updateLabelReady": "Обновление готово",
-    "updateLabelDownloading": "Загрузка обновления",
-    "updateLabelAvailable": "Доступно обновление",
-    "update": "Обновить"
+    "updateEta": "осталось {eta}"
   },
   "common": {
     "close": "Закрыть",
     "dismiss": "Скрыть",
-    "undo": "Отменить",
     "loading": "Создание…",
     "unknownError": "Неизвестная ошибка"
   },
   "toast": {
-    "shortcutUpdated": "Сочетание клавиш обновлено: {shortcut}",
-    "deleteFailed": "Не удалось удалить элемент",
-    "clearFailed": "Не удалось очистить элементы",
     "caseChanged": "Регистр изменён, текст скопирован в буфер обмена"
   },
-  "tabs": {
-    "generalStartup": "Основные и запуск",
-    "activationShortcuts": "Активация и сочетания клавиш",
-    "clipboardRules": "Правила буфера обмена",
-    "storageRetention": "Хранилище и история",
-    "updates": "Обновления"
-  },
-  "position": {
-    "left": "Слева",
-    "right": "Справа",
-    "topEdge": "Верхний край",
-    "loadingDisplays": "Поиск мониторов…",
-    "horizontalPositionTitle": "Положение по горизонтали",
-    "horizontalPositionDesc": "Настройте выравнивание по горизонтали вдоль края экрана"
-  },
   "filters": {
-    "colors": "Цвета",
-    "pinned": "Закреплённые",
-    "title": "Фильтры"
+    "pinned": "Закреплённые"
   },
   "item": {
-    "copied": "Скопировано!",
     "copiedTimes": "Скопировано раз: {count}",
-    "imagePlaceholder": "Изображение",
     "extractText": "Image Studio (конвертация, сжатие, OCR)",
     "convertTo": "Конвертировать в…",
     "compressBtn": "Сжать",
     "quickCompress": "Быстрое сжатие",
     "transformCase": "Изменить регистр (ЗАГЛАВНЫЕ / строчные / Каждое Слово)"
-  },
-  "flyout": {
-    "selectItem": "Выбрать элемент",
-    "deselectItem": "Снять выбор с элемента",
-    "clickToSelect": "Нажмите, чтобы выбрать",
-    "clickToDeselect": "Нажмите, чтобы снять выбор",
-    "copied": "Скопировано!",
-    "clickToPasteImageDrag": "Нажмите, чтобы скопировать · Перетащите, чтобы переместить"
-  },
-  "appearance": {
-    "openStyleSelector": "Выбрать стиль",
-    "closeStyleSelector": "Закрыть выбор стиля"
   },
   "backup": {
     "securityLabel": "Безопасность",
@@ -162,17 +118,8 @@
     "bankName": "Банк",
     "accountNumber": "Номер счёта",
     "accountHolder": "Владелец счёта",
-    "supportTagline": "Бесплатно и с открытым кодом навсегда",
     "copied": "Скопировано в буфер обмена",
     "copy": "Копировать"
-  },
-  "emoji": {
-    "open": "Эмодзи и символы",
-    "categories": "Категории",
-    "clearRecents": "Очистить недавние",
-    "emptyRecents": "Нет недавних эмодзи",
-    "loadFailed": "Не удалось загрузить эмодзи",
-    "skinTone": "Оттенок кожи"
   },
   "imageStudio": {
     "tabConvert": "Конвертировать",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Ваш тариф скоро закончится",
       "expiringBody": "Тариф {role}, осталось дней: {days}. Откройте настройки, чтобы продлить."
     }
+  },
+  "codeSnap": {
+    "title": "Снимок кода (стиль CodeSnap)",
+    "save": "Сохранить снимок кода",
+    "copied": "Снимок кода скопирован",
+    "failed": "Не удалось создать снимок кода"
   }
 }

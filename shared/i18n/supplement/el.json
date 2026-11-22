@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Τι νέο υπάρχει",
     "retry": "Επανάληψη",
-    "updateDownloadFailed": "Η λήψη της ενημέρωσης απέτυχε",
     "updateInstallFailed": "Δεν ήταν δυνατή η εκκίνηση του προγράμματος εγκατάστασης",
-    "updateEta": "απομένουν {eta}",
-    "updateModeAuto": "Αυτόματα",
-    "updateModeNotify": "Μόνο ειδοποίηση",
-    "updateModeOff": "Απενεργοποιημένο",
-    "updateModeNotifyDesc": "Ειδοποίηση όταν υπάρχουν ενημερώσεις, χωρίς λήψη",
-    "updateLabelReady": "Η ενημέρωση είναι έτοιμη",
-    "updateLabelDownloading": "Λήψη ενημέρωσης",
-    "updateLabelAvailable": "Διαθέσιμη ενημέρωση",
-    "update": "Ενημέρωση"
+    "updateEta": "απομένουν {eta}"
   },
   "common": {
     "close": "Κλείσιμο",
     "dismiss": "Απόρριψη",
-    "undo": "Αναίρεση",
     "loading": "Δημιουργία…",
     "unknownError": "Άγνωστο σφάλμα"
   },
   "toast": {
-    "shortcutUpdated": "Η συντόμευση ενημερώθηκε: {shortcut}",
-    "deleteFailed": "Δεν ήταν δυνατή η διαγραφή του στοιχείου",
-    "clearFailed": "Δεν ήταν δυνατή η εκκαθάριση των στοιχείων",
     "caseChanged": "Η μορφή πεζών/κεφαλαίων άλλαξε και το κείμενο αντιγράφηκε στο πρόχειρο"
   },
-  "tabs": {
-    "generalStartup": "Γενικά και εκκίνηση",
-    "activationShortcuts": "Ενεργοποίηση και συντομεύσεις",
-    "clipboardRules": "Κανόνες προχείρου",
-    "storageRetention": "Αποθήκευση και ιστορικό",
-    "updates": "Ενημερώσεις"
-  },
-  "position": {
-    "left": "Αριστερά",
-    "right": "Δεξιά",
-    "topEdge": "Πάνω άκρη",
-    "loadingDisplays": "Εντοπισμός οθονών…",
-    "horizontalPositionTitle": "Οριζόντια θέση",
-    "horizontalPositionDesc": "Προσαρμόστε την οριζόντια στοίχιση κατά μήκος της άκρης της οθόνης"
-  },
   "filters": {
-    "colors": "Χρώματα",
-    "pinned": "Καρφιτσωμένα",
-    "title": "Φίλτρα"
+    "pinned": "Καρφιτσωμένα"
   },
   "item": {
-    "copied": "Αντιγράφηκε!",
     "copiedTimes": "Αντιγράφηκε {count} φορές",
-    "imagePlaceholder": "Εικόνα",
     "extractText": "Image Studio (μετατροπή, συμπίεση, OCR)",
     "convertTo": "Μετατροπή σε…",
     "compressBtn": "Συμπίεση",
     "quickCompress": "Γρήγορη συμπίεση",
     "transformCase": "Αλλαγή πεζών/κεφαλαίων (ΚΕΦΑΛΑΙΑ / πεζά / Κάθε Λέξη Κεφαλαία)"
-  },
-  "flyout": {
-    "selectItem": "Επιλογή στοιχείου",
-    "deselectItem": "Αποεπιλογή στοιχείου",
-    "clickToSelect": "Κάντε κλικ για επιλογή",
-    "clickToDeselect": "Κάντε κλικ για αποεπιλογή",
-    "copied": "Αντιγράφηκε!",
-    "clickToPasteImageDrag": "Κάντε κλικ για αντιγραφή · Σύρετε για μετακίνηση"
-  },
-  "appearance": {
-    "openStyleSelector": "Επιλογή στυλ",
-    "closeStyleSelector": "Κλείσιμο επιλογής στυλ"
   },
   "backup": {
     "securityLabel": "Ασφάλεια",
@@ -162,17 +118,8 @@
     "bankName": "Τράπεζα",
     "accountNumber": "Αριθμός λογαριασμού",
     "accountHolder": "Δικαιούχος",
-    "supportTagline": "Δωρεάν και ανοιχτού κώδικα για πάντα",
     "copied": "Αντιγράφηκε στο πρόχειρο",
     "copy": "Αντιγραφή"
-  },
-  "emoji": {
-    "open": "Emoji και σύμβολα",
-    "categories": "Κατηγορίες",
-    "clearRecents": "Εκκαθάριση πρόσφατων",
-    "emptyRecents": "Δεν υπάρχουν πρόσφατα emoji",
-    "loadFailed": "Δεν ήταν δυνατή η φόρτωση των emoji",
-    "skinTone": "Τόνος δέρματος"
   },
   "imageStudio": {
     "tabConvert": "Μετατροπή",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Το πακέτο σας λήγει σύντομα",
       "expiringBody": "Πακέτο {role}, ημέρες που απομένουν: {days}. Ανοίξτε τις Ρυθμίσεις για ανανέωση."
     }
+  },
+  "codeSnap": {
+    "title": "Στιγμιότυπο κώδικα (στυλ CodeSnap)",
+    "save": "Αποθήκευση στιγμιότυπου κώδικα",
+    "copied": "Στιγμιότυπο κώδικα αντιγράφηκε",
+    "failed": "Αδυναμία δημιουργίας στιγμιότυπου κώδικα"
   }
 }

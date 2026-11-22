@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Yenilikler",
     "retry": "Yeniden dene",
-    "updateDownloadFailed": "Güncelleme indirilemedi",
     "updateInstallFailed": "Yükleyici başlatılamadı",
-    "updateEta": "{eta} kaldı",
-    "updateModeAuto": "Otomatik",
-    "updateModeNotify": "Yalnızca bildir",
-    "updateModeOff": "Kapalı",
-    "updateModeNotifyDesc": "Güncelleme olduğunda indirmeden haber ver",
-    "updateLabelReady": "Güncelleme hazır",
-    "updateLabelDownloading": "Güncelleme indiriliyor",
-    "updateLabelAvailable": "Güncelleme mevcut",
-    "update": "Güncelle"
+    "updateEta": "{eta} kaldı"
   },
   "common": {
     "close": "Kapat",
     "dismiss": "Yoksay",
-    "undo": "Geri al",
     "loading": "Oluşturuluyor…",
     "unknownError": "Bilinmeyen hata"
   },
   "toast": {
-    "shortcutUpdated": "Kısayol güncellendi: {shortcut}",
-    "deleteFailed": "Öğe silinemedi",
-    "clearFailed": "Öğeler temizlenemedi",
     "caseChanged": "Harf büyüklüğü değiştirildi ve panoya kopyalandı"
   },
-  "tabs": {
-    "generalStartup": "Genel ve başlangıç",
-    "activationShortcuts": "Etkinleştirme ve kısayollar",
-    "clipboardRules": "Pano kuralları",
-    "storageRetention": "Depolama ve geçmiş",
-    "updates": "Güncellemeler"
-  },
-  "position": {
-    "left": "Sol",
-    "right": "Sağ",
-    "topEdge": "Üst kenar",
-    "loadingDisplays": "Ekranlar algılanıyor…",
-    "horizontalPositionTitle": "Yatay konum",
-    "horizontalPositionDesc": "Ekran kenarı boyunca yatay hizalamayı ayarlayın"
-  },
   "filters": {
-    "colors": "Renkler",
-    "pinned": "Sabitlenenler",
-    "title": "Filtreler"
+    "pinned": "Sabitlenenler"
   },
   "item": {
-    "copied": "Kopyalandı!",
     "copiedTimes": "{count} kez kopyalandı",
-    "imagePlaceholder": "Görsel",
     "extractText": "Image Studio (dönüştür, sıkıştır, OCR)",
     "convertTo": "Şuna dönüştür…",
     "compressBtn": "Sıkıştır",
     "quickCompress": "Hızlı sıkıştır",
     "transformCase": "Harf büyüklüğünü değiştir (BÜYÜK / küçük / Baş Harfler Büyük)"
-  },
-  "flyout": {
-    "selectItem": "Öğeyi seç",
-    "deselectItem": "Öğe seçimini kaldır",
-    "clickToSelect": "Seçmek için tıklayın",
-    "clickToDeselect": "Seçimi kaldırmak için tıklayın",
-    "copied": "Kopyalandı!",
-    "clickToPasteImageDrag": "Kopyalamak için tıklayın · Taşımak için sürükleyin"
-  },
-  "appearance": {
-    "openStyleSelector": "Stil seç",
-    "closeStyleSelector": "Stil seçiciyi kapat"
   },
   "backup": {
     "securityLabel": "Güvenlik",
@@ -162,17 +118,8 @@
     "bankName": "Banka",
     "accountNumber": "Hesap numarası",
     "accountHolder": "Hesap sahibi",
-    "supportTagline": "Sonsuza dek ücretsiz ve açık kaynak",
     "copied": "Panoya kopyalandı",
     "copy": "Kopyala"
-  },
-  "emoji": {
-    "open": "Emoji ve simgeler",
-    "categories": "Kategoriler",
-    "clearRecents": "Son kullanılanları temizle",
-    "emptyRecents": "Son kullanılan emoji yok",
-    "loadFailed": "Emojiler yüklenemedi",
-    "skinTone": "Ten rengi"
   },
   "imageStudio": {
     "tabConvert": "Dönüştür",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Paketiniz yakında bitiyor",
       "expiringBody": "{role} paketi, kalan gün: {days}. Yenilemek için Ayarlar'ı açın."
     }
+  },
+  "codeSnap": {
+    "title": "Kod ekran görüntüsü (CodeSnap tarzı)",
+    "save": "Kod ekran görüntüsünü kaydet",
+    "copied": "Kod ekran görüntüsü kopyalandı",
+    "failed": "Kod ekran görüntüsü oluşturulamadı"
   }
 }

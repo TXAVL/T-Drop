@@ -256,6 +256,8 @@ export interface Settings {
   licenseUserName?: string
   /** Expiration timestamp/date (ISO string). Null for Free. */
   licenseExpiresAt?: string | null
+  /** Last known-good device identity (same algorithm as before). Keeps the ID stable if the registry read fails or the PC is renamed. */
+  deviceIdentity?: { hardwareId: string; hwHash: string; machineGuidHash: string }
 }
 
 export const DEFAULT_SETTINGS: Settings = {

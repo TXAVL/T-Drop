@@ -49,6 +49,22 @@ function isSoundEnabled(): boolean {
   }
 }
 
+/**
+ * A running AudioContext keeps the audio device stream open and wakes the CPU
+ * ~200 times a second even in silence. Pause it this long after it was last
+ * needed; every sound is far shorter, so none is ever cut off.
+ */
+const IDLE_SUSPEND_MS = 2000
+let idleTimer: ReturnType<typeof setTimeout> | undefined
+
+function armIdleSuspend(): void {
+  if (idleTimer !== undefined) clearTimeout(idleTimer)
+  idleTimer = setTimeout(() => {
+    idleTimer = undefined
+    if (audioCtx && audioCtx.state === 'running') audioCtx.suspend().catch(() => {})
+  }, IDLE_SUSPEND_MS)
+}
+
 function getAudioContext(): any | null {
   if (!isSoundEnabled()) return null
   const win = typeof globalThis !== 'undefined' ? (globalThis as any).window : undefined
@@ -62,6 +78,7 @@ function getAudioContext(): any | null {
   if (audioCtx && audioCtx.state === 'suspended') {
     audioCtx.resume().catch(() => {})
   }
+  if (audioCtx) armIdleSuspend()
   return audioCtx
 }
 

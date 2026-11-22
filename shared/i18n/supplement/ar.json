@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "ما الجديد",
     "retry": "إعادة المحاولة",
-    "updateDownloadFailed": "تعذّر تنزيل التحديث",
     "updateInstallFailed": "تعذّر تشغيل برنامج التثبيت",
-    "updateEta": "المتبقي {eta}",
-    "updateModeAuto": "تلقائي",
-    "updateModeNotify": "إشعار فقط",
-    "updateModeOff": "إيقاف",
-    "updateModeNotifyDesc": "إشعارك عند توفر تحديث دون تنزيله",
-    "updateLabelReady": "التحديث جاهز",
-    "updateLabelDownloading": "جارٍ تنزيل التحديث",
-    "updateLabelAvailable": "يتوفر تحديث جديد",
-    "update": "تحديث"
+    "updateEta": "المتبقي {eta}"
   },
   "common": {
     "close": "إغلاق",
     "dismiss": "تجاهل الإشعار",
-    "undo": "تراجع",
     "loading": "جارٍ الإنشاء…",
     "unknownError": "خطأ غير معروف"
   },
   "toast": {
-    "shortcutUpdated": "تم تحديث الاختصار: {shortcut}",
-    "deleteFailed": "تعذّر حذف العنصر",
-    "clearFailed": "تعذّر مسح العناصر",
     "caseChanged": "تم تغيير حالة الأحرف ونسخ النص إلى الحافظة"
   },
-  "tabs": {
-    "generalStartup": "عام وبدء التشغيل",
-    "activationShortcuts": "التفعيل والاختصارات",
-    "clipboardRules": "قواعد الحافظة",
-    "storageRetention": "التخزين والسجل",
-    "updates": "التحديثات"
-  },
-  "position": {
-    "left": "يسار",
-    "right": "يمين",
-    "topEdge": "الحافة العلوية",
-    "loadingDisplays": "جارٍ اكتشاف الشاشات…",
-    "horizontalPositionTitle": "الموضع الأفقي",
-    "horizontalPositionDesc": "اضبط المحاذاة الأفقية بحسب حافة الشاشة"
-  },
   "filters": {
-    "colors": "اللون",
-    "pinned": "المثبّتة",
-    "title": "تصفية"
+    "pinned": "المثبّتة"
   },
   "item": {
-    "copied": "تم النسخ!",
     "copiedTimes": "تم النسخ {count} مرة",
-    "imagePlaceholder": "صورة",
     "extractText": "Image Studio (تحويل وضغط وOCR)",
     "convertTo": "تحويل إلى…",
     "compressBtn": "ضغط",
     "quickCompress": "ضغط سريع",
     "transformCase": "تغيير حالة الأحرف (كبيرة / صغيرة / أول حرف من كل كلمة كبير)"
-  },
-  "flyout": {
-    "selectItem": "تحديد العنصر",
-    "deselectItem": "إلغاء تحديد العنصر",
-    "clickToSelect": "انقر للتحديد",
-    "clickToDeselect": "انقر لإلغاء التحديد",
-    "copied": "تم النسخ!",
-    "clickToPasteImageDrag": "انقر للنسخ · اسحب للنقل"
-  },
-  "appearance": {
-    "openStyleSelector": "اختر النمط",
-    "closeStyleSelector": "إغلاق خيارات النمط"
   },
   "backup": {
     "securityLabel": "الأمان",
@@ -162,17 +118,8 @@
     "bankName": "البنك",
     "accountNumber": "رقم الحساب",
     "accountHolder": "اسم صاحب الحساب",
-    "supportTagline": "مجاني ومفتوح المصدر إلى الأبد",
     "copied": "تم النسخ إلى الحافظة",
     "copy": "نسخ"
-  },
-  "emoji": {
-    "open": "الرموز التعبيرية والرموز",
-    "categories": "الفئات",
-    "clearRecents": "مسح الرموز التعبيرية الأخيرة",
-    "emptyRecents": "لا توجد رموز تعبيرية مستخدمة مؤخرًا",
-    "loadFailed": "تعذّر تحميل الرموز التعبيرية",
-    "skinTone": "لون البشرة"
   },
   "imageStudio": {
     "tabConvert": "تحويل",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — باقتك على وشك الانتهاء",
       "expiringBody": "باقة {role}، الأيام المتبقية: {days}. افتح الإعدادات للتجديد."
     }
+  },
+  "codeSnap": {
+    "title": "لقطة كود (نمط CodeSnap)",
+    "save": "حفظ لقطة الكود",
+    "copied": "لقطة الكود محفوظة",
+    "failed": "تعذر إنشاء لقطة الكود"
   }
 }

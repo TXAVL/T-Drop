@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Nouveautés",
     "retry": "Réessayer",
-    "updateDownloadFailed": "Échec du téléchargement de la mise à jour",
     "updateInstallFailed": "Impossible de lancer l’installateur",
-    "updateEta": "{eta} restantes",
-    "updateModeAuto": "Automatique",
-    "updateModeNotify": "Notification seulement",
-    "updateModeOff": "Désactivé",
-    "updateModeNotifyDesc": "Prévenir des mises à jour sans les télécharger",
-    "updateLabelReady": "Mise à jour prête",
-    "updateLabelDownloading": "Téléchargement de la mise à jour",
-    "updateLabelAvailable": "Mise à jour disponible",
-    "update": "Mettre à jour"
+    "updateEta": "{eta} restantes"
   },
   "common": {
     "close": "Fermer",
     "dismiss": "Ignorer",
-    "undo": "Annuler",
     "loading": "Génération…",
     "unknownError": "Erreur inconnue"
   },
   "toast": {
-    "shortcutUpdated": "Raccourci mis à jour : {shortcut}",
-    "deleteFailed": "Impossible de supprimer l’élément",
-    "clearFailed": "Impossible de vider les éléments",
     "caseChanged": "Casse modifiée et texte copié dans le presse-papiers"
   },
-  "tabs": {
-    "generalStartup": "Général et démarrage",
-    "activationShortcuts": "Activation et raccourcis",
-    "clipboardRules": "Règles du presse-papiers",
-    "storageRetention": "Stockage et historique",
-    "updates": "Mises à jour"
-  },
-  "position": {
-    "left": "Gauche",
-    "right": "Droite",
-    "topEdge": "Bord supérieur",
-    "loadingDisplays": "Détection des écrans…",
-    "horizontalPositionTitle": "Position horizontale",
-    "horizontalPositionDesc": "Ajuste l’alignement horizontal le long du bord de l’écran"
-  },
   "filters": {
-    "colors": "Couleurs",
-    "pinned": "Épinglés",
-    "title": "Filtres"
+    "pinned": "Épinglés"
   },
   "item": {
-    "copied": "Copié !",
     "copiedTimes": "Copié {count} fois",
-    "imagePlaceholder": "Image",
     "extractText": "Image Studio (convertir, compresser, OCR)",
     "convertTo": "Convertir en…",
     "compressBtn": "Compresser",
     "quickCompress": "Compression rapide",
     "transformCase": "Changer la casse (MAJUSCULES / minuscules / Première Lettre)"
-  },
-  "flyout": {
-    "selectItem": "Sélectionner l’élément",
-    "deselectItem": "Désélectionner l’élément",
-    "clickToSelect": "Cliquez pour sélectionner",
-    "clickToDeselect": "Cliquez pour désélectionner",
-    "copied": "Copié !",
-    "clickToPasteImageDrag": "Cliquez pour copier · Glissez pour déplacer"
-  },
-  "appearance": {
-    "openStyleSelector": "Choisir le style",
-    "closeStyleSelector": "Fermer le sélecteur de style"
   },
   "backup": {
     "securityLabel": "Sécurité",
@@ -162,17 +118,8 @@
     "bankName": "Banque",
     "accountNumber": "Numéro de compte",
     "accountHolder": "Titulaire du compte",
-    "supportTagline": "Gratuit et open source pour toujours",
     "copied": "Copié dans le presse-papiers",
     "copy": "Copier"
-  },
-  "emoji": {
-    "open": "Émojis et symboles",
-    "categories": "Catégories",
-    "clearRecents": "Effacer les récents",
-    "emptyRecents": "Aucun émoji récent",
-    "loadFailed": "Impossible de charger les émojis",
-    "skinTone": "Teinte de peau"
   },
   "imageStudio": {
     "tabConvert": "Convertir",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Votre forfait se termine bientôt",
       "expiringBody": "Forfait {role}, jours restants : {days}. Ouvrez les Réglages pour le renouveler."
     }
+  },
+  "codeSnap": {
+    "title": "Capture de code (style CodeSnap)",
+    "save": "Enregistrer la capture",
+    "copied": "Capture de code copiée",
+    "failed": "Impossible de créer la capture de code"
   }
 }

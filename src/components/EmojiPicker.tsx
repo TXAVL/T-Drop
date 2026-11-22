@@ -2,7 +2,7 @@
  * Unicode emoji library. Glyphs are Twemoji; paste is the character itself.
  * No text field — categories + click — so the shelf never takes OS focus.
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 import {
   emojiGlyphUrl,
   entriesForCategory,
@@ -14,6 +14,7 @@ import {
   type EmojiCategoryId,
   type EmojiEntry
 } from '../lib/emoji/catalog'
+import { glyphSrc, glyphsVersion, loadGlyphs, subscribeGlyphs } from '../lib/emoji/glyphCache'
 import { loadEmojiCatalog } from '../lib/emoji/load'
 import { loadRecents, saveRecents } from '../lib/emoji/prefs'
 import { useStore } from '../store/appStore'
@@ -36,10 +37,16 @@ interface TonePopup {
 }
 
 function Glyph({ file, size = 22 }: { file: string; size?: number }) {
+  // Loaded a screen at a time (glyphCache); no src until its batch lands.
+  // Once shown, a glyph keeps its image even if the cache later drops it.
+  const shown = useRef<{ file: string; src?: string }>({ file })
+  if (shown.current.file !== file) shown.current = { file }
+  const src = glyphSrc(file) ?? shown.current.src
+  shown.current.src = src
   return (
     <img
       className="emoji-glyph"
-      src={emojiGlyphUrl(file)}
+      src={src}
       alt=""
       width={size}
       height={size}
@@ -188,6 +195,9 @@ export function EmojiPicker({
     [catalog, category, recents]
   )
 
+  // Re-render when a batch of glyphs lands.
+  useSyncExternalStore(subscribeGlyphs, glyphsVersion)
+
   const cols = useMemo(() => {
     if (!isHorizontal) return COLS
     if (viewW <= 0) return 24
@@ -235,6 +245,12 @@ export function EmojiPicker({
     return () => cancelAnimationFrame(id)
   }, [catalog, windowRows, rowBudget])
   const effEndRow = Math.min(endRow, startRow + rowBudget)
+
+  // The whole window's glyphs in one IPC call (kept as data: URLs by glyphCache).
+  useEffect(() => {
+    if (!catalog) return
+    loadGlyphs(items.slice(startRow * cols, endRow * cols).map((item) => item.file))
+  }, [catalog, items, startRow, endRow, cols])
 
   const onPaste = useCallback(
     (unified: string) => {

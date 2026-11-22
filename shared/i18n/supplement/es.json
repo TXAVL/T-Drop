@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Novedades",
     "retry": "Reintentar",
-    "updateDownloadFailed": "Error al descargar la actualización",
     "updateInstallFailed": "No se pudo iniciar el instalador",
-    "updateEta": "Faltan {eta}",
-    "updateModeAuto": "Automático",
-    "updateModeNotify": "Solo notificar",
-    "updateModeOff": "Desactivado",
-    "updateModeNotifyDesc": "Avisar de las actualizaciones sin descargarlas",
-    "updateLabelReady": "Actualización lista",
-    "updateLabelDownloading": "Descargando actualización",
-    "updateLabelAvailable": "Actualización disponible",
-    "update": "Actualizar"
+    "updateEta": "Faltan {eta}"
   },
   "common": {
     "close": "Cerrar",
     "dismiss": "Descartar",
-    "undo": "Deshacer",
     "loading": "Generando...",
     "unknownError": "Error desconocido"
   },
   "toast": {
-    "shortcutUpdated": "Atajo actualizado: {shortcut}",
-    "deleteFailed": "No se pudo eliminar el elemento",
-    "clearFailed": "No se pudieron borrar los elementos",
     "caseChanged": "Mayúsculas cambiadas y texto copiado al portapapeles"
   },
-  "tabs": {
-    "generalStartup": "General e inicio",
-    "activationShortcuts": "Activación y atajos",
-    "clipboardRules": "Reglas del portapapeles",
-    "storageRetention": "Almacenamiento e historial",
-    "updates": "Actualizaciones"
-  },
-  "position": {
-    "left": "Izquierda",
-    "right": "Derecha",
-    "topEdge": "Borde superior",
-    "loadingDisplays": "Detectando pantallas...",
-    "horizontalPositionTitle": "Posición horizontal",
-    "horizontalPositionDesc": "Ajusta la alineación horizontal a lo largo del borde de la pantalla"
-  },
   "filters": {
-    "colors": "Colores",
-    "pinned": "Fijados",
-    "title": "Filtros"
+    "pinned": "Fijados"
   },
   "item": {
-    "copied": "¡Copiado!",
     "copiedTimes": "Copiado {count} veces",
-    "imagePlaceholder": "Imagen",
     "extractText": "Image Studio (convertir, comprimir, OCR)",
     "convertTo": "Convertir a...",
     "compressBtn": "Comprimir",
     "quickCompress": "Compresión rápida",
     "transformCase": "Cambiar mayúsculas (MAYÚSCULAS / minúsculas / Tipo Título)"
-  },
-  "flyout": {
-    "selectItem": "Seleccionar elemento",
-    "deselectItem": "Deseleccionar elemento",
-    "clickToSelect": "Clic para seleccionar",
-    "clickToDeselect": "Clic para deseleccionar",
-    "copied": "¡Copiado!",
-    "clickToPasteImageDrag": "Clic para copiar · Arrastra para mover"
-  },
-  "appearance": {
-    "openStyleSelector": "Elegir estilo",
-    "closeStyleSelector": "Cerrar el selector de estilo"
   },
   "backup": {
     "securityLabel": "Seguridad",
@@ -162,17 +118,8 @@
     "bankName": "Banco",
     "accountNumber": "Número de cuenta",
     "accountHolder": "Titular de la cuenta",
-    "supportTagline": "Gratis y de código abierto para siempre",
     "copied": "Copiado al portapapeles",
     "copy": "Copiar"
-  },
-  "emoji": {
-    "open": "Emojis y símbolos",
-    "categories": "Categorías",
-    "clearRecents": "Borrar recientes",
-    "emptyRecents": "Sin emojis recientes",
-    "loadFailed": "No se pudieron cargar los emojis",
-    "skinTone": "Tono de piel"
   },
   "imageStudio": {
     "tabConvert": "Convertir",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Tu plan termina pronto",
       "expiringBody": "Plan {role}, días restantes: {days}. Abre Ajustes para renovarlo."
     }
+  },
+  "codeSnap": {
+    "title": "Captura de código (estilo CodeSnap)",
+    "save": "Guardar captura de código",
+    "copied": "Captura de código copiada",
+    "failed": "No se pudo crear la captura de código"
   }
 }

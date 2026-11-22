@@ -17,7 +17,7 @@ import { app } from 'electron'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
-import { spawn } from 'child_process'
+import { spawn, execFile } from 'child_process'
 import { sendToMainWindow } from './window'
 
 export const TXA_REPO_PACKAGE_ID = 'TXAVL.TDrop'
@@ -37,6 +37,78 @@ export function semverCompare(v1: string, v2: string): number {
 }
 
 /**
+ * What `txapm which TXAVL.TDrop --json` reports. txapm always exits 0 for this
+ * command, so `managed` is the only field the app relies on to decide the
+ * install source; the rest is informational (diagnostics).
+ */
+export interface TxapmStatus {
+  managed: boolean
+  version?: string
+  newest?: string
+  updateAvailable?: boolean
+  pinned?: boolean
+  dir?: string
+}
+
+/** Pure: parse the JSON txapm prints. Returns null unless `managed` is a boolean. */
+export function parseTxapmWhich(stdout: string): TxapmStatus | null {
+  const m = stdout.match(/\{[\s\S]*\}/)
+  if (!m) return null
+  try {
+    const j = JSON.parse(m[0]) as Record<string, unknown>
+    if (typeof j.managed !== 'boolean') return null
+    const str = (v: unknown) => (typeof v === 'string' && v ? v : undefined)
+    return {
+      managed: j.managed,
+      version: str(j.version),
+      newest: str(j.newest),
+      updateAvailable: typeof j.update_available === 'boolean' ? j.update_available : undefined,
+      pinned: typeof j.pinned === 'boolean' ? j.pinned : undefined,
+      dir: str(j.dir)
+    }
+  } catch {
+    return null
+  }
+}
+
+let txapmStatus: TxapmStatus | null = null
+let txapmCheckedAt = 0
+const TXAPM_TTL_MS = 10 * 60 * 1000
+
+/** Last answer from txapm (null if never asked or txapm is not installed). */
+export function getTxapmStatus(): TxapmStatus | null {
+  return txapmStatus
+}
+
+/**
+ * Ask txapm whether it manages T-Drop. Cached for 10 minutes. A missing txapm,
+ * a timeout or unreadable output leaves the previous answer untouched.
+ */
+export function refreshTxapmStatus(force = false): Promise<TxapmStatus | null> {
+  if (!force && txapmStatus && Date.now() - txapmCheckedAt < TXAPM_TTL_MS) return Promise.resolve(txapmStatus)
+  if (process.platform !== 'win32') return Promise.resolve(txapmStatus)
+  return new Promise((resolve) => {
+    try {
+      execFile(
+        findTxapmPath() || 'txapm.exe',
+        ['which', TXA_REPO_PACKAGE_ID, '--json'],
+        { timeout: 5000, windowsHide: true, encoding: 'utf8' },
+        (_err, stdout) => {
+          const parsed = stdout ? parseTxapmWhich(stdout) : null
+          if (parsed) {
+            txapmStatus = parsed
+            txapmCheckedAt = Date.now()
+          }
+          resolve(txapmStatus)
+        }
+      )
+    } catch {
+      resolve(txapmStatus)
+    }
+  })
+}
+
+/**
  * Checks whether this installation was performed via the TXA package manager (txapm).
  */
 export function isTxaRepoInstalled(opts?: { localAppData?: string; programData?: string }): boolean {
@@ -47,6 +119,10 @@ export function isTxaRepoInstalled(opts?: { localAppData?: string; programData?:
     return false
   }
 
+  // txapm is authoritative once it has answered (`managed` from `txapm which ... --json`).
+  if (txapmStatus) return txapmStatus.managed
+
+  // Not asked yet / txapm unavailable: fall back to its state files.
   try {
     const localAppData = opts?.localAppData || process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local')
     const userStatePath = path.join(localAppData, 'TXA', 'state', 'installed.json')

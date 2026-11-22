@@ -1,4 +1,30 @@
 {
+  "count": {
+    "images": {
+      "one": "{count} gambar"
+    },
+    "files": {
+      "one": "{count} berkas"
+    },
+    "copiedTimes": {
+      "one": "Disalin {count} kali"
+    },
+    "moreImages": {
+      "one": "+{count} gambar lagi"
+    },
+    "moreFiles": {
+      "one": "+{count} berkas lagi"
+    },
+    "selected": {
+      "one": "{count} terpilih"
+    },
+    "savedToDownloads": {
+      "one": "{count} gambar disimpan ke Unduhan"
+    },
+    "splitStacks": {
+      "one": "Bagi menjadi {count} tumpukan (maks 10 tiap)"
+    }
+  },
   "renew": {
     "windowTitle": "T-Drop — Perpanjang lisensi",
     "title": "Perpanjang lisensi Anda",
@@ -85,72 +111,28 @@
   "behaviour": {
     "whatsNew": "Yang baru",
     "retry": "Coba lagi",
-    "updateDownloadFailed": "Gagal mengunduh pembaruan",
     "updateInstallFailed": "Tidak dapat menjalankan penginstal",
-    "updateEta": "{eta} lagi",
-    "updateModeAuto": "Otomatis",
-    "updateModeNotify": "Hanya beri tahu",
-    "updateModeOff": "Nonaktif",
-    "updateModeNotifyDesc": "Beri tahu saat ada pembaruan tanpa mengunduhnya",
-    "updateLabelReady": "Pembaruan siap",
-    "updateLabelDownloading": "Mengunduh pembaruan",
-    "updateLabelAvailable": "Pembaruan tersedia",
-    "update": "Perbarui"
+    "updateEta": "{eta} lagi"
   },
   "common": {
     "close": "Tutup",
     "dismiss": "Abaikan",
-    "undo": "Urungkan",
     "loading": "Membuat...",
     "unknownError": "Kesalahan tidak diketahui"
   },
   "toast": {
-    "shortcutUpdated": "Pintasan diperbarui: {shortcut}",
-    "deleteFailed": "Gagal menghapus item",
-    "clearFailed": "Gagal mengosongkan item",
     "caseChanged": "Huruf besar/kecil diubah dan disalin ke papan klip"
   },
-  "tabs": {
-    "generalStartup": "Umum & mulai",
-    "activationShortcuts": "Aktivasi & pintasan",
-    "clipboardRules": "Aturan papan klip",
-    "storageRetention": "Penyimpanan & riwayat",
-    "updates": "Pembaruan"
-  },
-  "position": {
-    "left": "Kiri",
-    "right": "Kanan",
-    "topEdge": "Tepi Atas",
-    "loadingDisplays": "Mendeteksi layar...",
-    "horizontalPositionTitle": "Posisi horizontal",
-    "horizontalPositionDesc": "Atur perataan horizontal di sepanjang tepi layar"
-  },
   "filters": {
-    "colors": "Warna",
-    "pinned": "Disematkan",
-    "title": "Filter"
+    "pinned": "Disematkan"
   },
   "item": {
-    "copied": "Tersalin!",
     "copiedTimes": "Disalin {count} kali",
-    "imagePlaceholder": "Gambar",
     "extractText": "Image Studio (konversi, kompres, OCR)",
     "convertTo": "Konversi ke...",
     "compressBtn": "Kompres",
     "quickCompress": "Kompres cepat",
     "transformCase": "Ubah huruf (KAPITAL / kecil / Awal Kata Kapital)"
-  },
-  "flyout": {
-    "selectItem": "Pilih item",
-    "deselectItem": "Batalkan pilihan item",
-    "clickToSelect": "Klik untuk memilih",
-    "clickToDeselect": "Klik untuk membatalkan pilihan",
-    "copied": "Tersalin!",
-    "clickToPasteImageDrag": "Klik untuk menyalin · Seret untuk memindahkan"
-  },
-  "appearance": {
-    "openStyleSelector": "Pilih gaya",
-    "closeStyleSelector": "Tutup pemilih gaya"
   },
   "backup": {
     "securityLabel": "Keamanan",
@@ -162,17 +144,8 @@
     "bankName": "Bank",
     "accountNumber": "Nomor rekening",
     "accountHolder": "Nama pemilik rekening",
-    "supportTagline": "Gratis dan open source selamanya",
     "copied": "Disalin ke papan klip",
     "copy": "Salin"
-  },
-  "emoji": {
-    "open": "Emoji & simbol",
-    "categories": "Kategori",
-    "clearRecents": "Hapus yang terbaru",
-    "emptyRecents": "Belum ada emoji terbaru",
-    "loadFailed": "Gagal memuat emoji",
-    "skinTone": "Warna kulit"
   },
   "imageStudio": {
     "tabConvert": "Konversi",
@@ -394,5 +367,11 @@
       "expiringTitle": "T-Drop — Paket Anda segera berakhir",
       "expiringBody": "Paket {role}, sisa hari: {days}. Buka Pengaturan untuk memperpanjang."
     }
+  },
+  "codeSnap": {
+    "title": "Tangkapan kode (Gaya CodeSnap)",
+    "save": "Simpan tangkapan kode",
+    "copied": "Tangkapan kode disalin",
+    "failed": "Tidak dapat membuat tangkapan kode"
   }
 }

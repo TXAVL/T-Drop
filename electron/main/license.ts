@@ -7,7 +7,7 @@
  */
 import os from 'node:os'
 import { createHash, randomBytes } from 'node:crypto'
-import { execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import { SUPABASE_CONFIG, type DeviceFingerprint, type LicenseActivationResult, type LicenseState } from '../../shared/license'
 import { loadSettings, saveSettings } from '../store/settings'
 import { pushState } from './state'
@@ -16,35 +16,60 @@ import { mt } from './i18n'
 
 let cachedFingerprint: DeviceFingerprint | null = null
 
-function getRawMachineGuid(): string {
-  if (process.platform === 'win32') {
+function readMachineGuid(): string | null {
+  if (process.platform !== 'win32') return null
+  const regExe = `${process.env.SystemRoot || 'C:/Windows'}/System32/reg.exe`
+  // Retry with a generous timeout: a 1s limit used to fail on slow boots / busy antivirus,
+  // which silently produced a different (fallback) ID and got the license rejected.
+  for (const timeout of [4000, 8000]) {
     try {
-      const stdout = execSync('reg query "HKLM\\SOFTWARE\\Microsoft\\Cryptography" /v MachineGuid', {
+      const stdout = execFileSync(regExe, ['query', String.raw`HKLM\SOFTWARE\Microsoft\Cryptography`, '/v', 'MachineGuid'], {
         windowsHide: true,
         encoding: 'utf-8',
         stdio: ['ignore', 'pipe', 'ignore'],
-        timeout: 1000
+        timeout
       })
       const match = stdout.match(/MachineGuid\s+REG_SZ\s+([a-fA-F0-9-]+)/)
       if (match && match[1]) return match[1].trim()
     } catch {}
   }
-  // Resilient fallback based on hardware properties
-  const cpuInfo = os.cpus()[0]?.model || 'cpu'
-  return `${os.hostname()}-${os.platform()}-${cpuInfo}-${os.arch()}`
+  return null
 }
 
 export function getDeviceFingerprint(): DeviceFingerprint {
   if (cachedFingerprint) return cachedFingerprint
 
   const pcName = os.hostname() || 'Windows-PC'
-  const rawId = getRawMachineGuid()
-  const hardwareId = createHash('sha256').update(`TDROP_HW:${rawId}`).digest('hex').substring(0, 16).toUpperCase()
-  // 6-character uppercase hash of hardwareId + pcName
-  const hwHash = createHash('sha256').update(`${hardwareId}:${pcName}`).digest('hex').substring(0, 6).toUpperCase()
+  const guid = readMachineGuid()
+  const saved = loadSettings().deviceIdentity
 
-  cachedFingerprint = { hardwareId, pcName, hwHash }
-  return cachedFingerprint
+  if (guid) {
+    // Same algorithm as before, so already-activated devices keep matching.
+    const hardwareId = createHash('sha256').update(`TDROP_HW:${guid}`).digest('hex').substring(0, 16).toUpperCase()
+    const guidHash = createHash('sha256').update(guid).digest('hex').substring(0, 12)
+    let hwHash: string
+    if (saved && saved.machineGuidHash === guidHash && saved.hardwareId === hardwareId) {
+      hwHash = saved.hwHash // renaming the PC must not change the ID
+    } else {
+      hwHash = createHash('sha256').update(`${hardwareId}:${pcName}`).digest('hex').substring(0, 6).toUpperCase()
+      try { saveSettings({ deviceIdentity: { hardwareId, hwHash, machineGuidHash: guidHash } }) } catch {}
+    }
+    cachedFingerprint = { hardwareId, pcName, hwHash, reliable: true }
+    return cachedFingerprint
+  }
+
+  // Registry unreadable: reuse the last known-good identity instead of inventing a new one.
+  if (saved) {
+    cachedFingerprint = { hardwareId: saved.hardwareId, pcName, hwHash: saved.hwHash, reliable: true }
+    return cachedFingerprint
+  }
+
+  // Last resort (non-Windows / first run with no registry): derived ID. NOT cached and flagged unreliable.
+  const cpuInfo = os.cpus()[0]?.model || 'cpu'
+  const rawId = `${os.hostname()}-${os.platform()}-${cpuInfo}-${os.arch()}`
+  const hardwareId = createHash('sha256').update(`TDROP_HW:${rawId}`).digest('hex').substring(0, 16).toUpperCase()
+  const hwHash = createHash('sha256').update(`${hardwareId}:${pcName}`).digest('hex').substring(0, 6).toUpperCase()
+  return { hardwareId, pcName, hwHash, reliable: false }
 }
 
 // Pre-warm fingerprint in background so user interactions never hitch

@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "নতুন কী আছে",
     "retry": "আবার চেষ্টা করুন",
-    "updateDownloadFailed": "আপডেট ডাউনলোড করা যায়নি",
     "updateInstallFailed": "ইনস্টলার চালু করা যায়নি",
-    "updateEta": "আর {eta} বাকি",
-    "updateModeAuto": "স্বয়ংক্রিয়",
-    "updateModeNotify": "শুধু বিজ্ঞপ্তি",
-    "updateModeOff": "বন্ধ",
-    "updateModeNotifyDesc": "আপডেট এলে জানাবে, কিন্তু ডাউনলোড করবে না",
-    "updateLabelReady": "আপডেট প্রস্তুত",
-    "updateLabelDownloading": "আপডেট ডাউনলোড হচ্ছে",
-    "updateLabelAvailable": "নতুন আপডেট এসেছে",
-    "update": "আপডেট করুন"
+    "updateEta": "আর {eta} বাকি"
   },
   "common": {
     "close": "বন্ধ করুন",
     "dismiss": "বিজ্ঞপ্তি সরিয়ে দিন",
-    "undo": "আগের অবস্থায় ফিরুন",
     "loading": "তৈরি হচ্ছে…",
     "unknownError": "অজানা ত্রুটি"
   },
   "toast": {
-    "shortcutUpdated": "শর্টকাট আপডেট হয়েছে: {shortcut}",
-    "deleteFailed": "আইটেম মোছা যায়নি",
-    "clearFailed": "আইটেম পরিষ্কার করা যায়নি",
     "caseChanged": "অক্ষরের কেস বদলে ক্লিপবোর্ডে কপি করা হয়েছে"
   },
-  "tabs": {
-    "generalStartup": "সাধারণ ও স্টার্টআপ",
-    "activationShortcuts": "সক্রিয়করণ ও শর্টকাট",
-    "clipboardRules": "ক্লিপবোর্ডের নিয়ম",
-    "storageRetention": "স্টোরেজ ও ইতিহাস",
-    "updates": "আপডেট"
-  },
-  "position": {
-    "left": "বাঁয়ে",
-    "right": "ডানে",
-    "topEdge": "উপরের কিনারা",
-    "loadingDisplays": "ডিসপ্লে শনাক্ত করা হচ্ছে…",
-    "horizontalPositionTitle": "অনুভূমিক অবস্থান",
-    "horizontalPositionDesc": "স্ক্রিনের কিনারা অনুযায়ী অনুভূমিক সারিবদ্ধতা ঠিক করুন"
-  },
   "filters": {
-    "colors": "রং",
-    "pinned": "পিন করা",
-    "title": "ফিল্টার"
+    "pinned": "পিন করা"
   },
   "item": {
-    "copied": "কপি হয়েছে!",
     "copiedTimes": "{count} বার কপি করা হয়েছে",
-    "imagePlaceholder": "ছবি",
     "extractText": "Image Studio (রূপান্তর, কম্প্রেস, OCR)",
     "convertTo": "রূপান্তর করুন…",
     "compressBtn": "কম্প্রেস করুন",
     "quickCompress": "দ্রুত কম্প্রেস",
     "transformCase": "অক্ষরের কেস বদলান (বড় হাতের / ছোট হাতের / প্রতিটি শব্দের প্রথম অক্ষর বড়)"
-  },
-  "flyout": {
-    "selectItem": "আইটেম বেছে নিন",
-    "deselectItem": "আইটেমের নির্বাচন বাতিল করুন",
-    "clickToSelect": "বেছে নিতে ক্লিক করুন",
-    "clickToDeselect": "নির্বাচন বাতিল করতে ক্লিক করুন",
-    "copied": "কপি হয়েছে!",
-    "clickToPasteImageDrag": "কপি করতে ক্লিক করুন · সরাতে টেনে আনুন"
-  },
-  "appearance": {
-    "openStyleSelector": "স্টাইল বেছে নিন",
-    "closeStyleSelector": "স্টাইলের বিকল্প বন্ধ করুন"
   },
   "backup": {
     "securityLabel": "নিরাপত্তা",
@@ -162,17 +118,8 @@
     "bankName": "ব্যাংক",
     "accountNumber": "অ্যাকাউন্ট নম্বর",
     "accountHolder": "অ্যাকাউন্টধারী",
-    "supportTagline": "চিরকাল বিনামূল্যে ও ওপেন সোর্স",
     "copied": "ক্লিপবোর্ডে কপি হয়েছে",
     "copy": "কপি করুন"
-  },
-  "emoji": {
-    "open": "ইমোজি ও প্রতীক",
-    "categories": "বিভাগ",
-    "clearRecents": "সাম্প্রতিক ইমোজি মুছে ফেলুন",
-    "emptyRecents": "সম্প্রতি ব্যবহৃত কোনো ইমোজি নেই",
-    "loadFailed": "ইমোজি লোড করা যায়নি",
-    "skinTone": "ত্বকের রং"
   },
   "imageStudio": {
     "tabConvert": "রূপান্তর করুন",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — আপনার প্ল্যানের মেয়াদ শিগগিরই শেষ হবে",
       "expiringBody": "{role} প্ল্যান, বাকি দিন: {days}। নবায়ন করতে সেটিংস খুলুন।"
     }
+  },
+  "codeSnap": {
+    "title": "কোড স্ক্রিনশট (CodeSnap স্টাইল)",
+    "save": "কোড স্ক্রিনশট সংরক্ষণ",
+    "copied": "কোড স্ক্রিনশট কপি করা হয়েছে",
+    "failed": "কোড স্ক্রিনশট তৈরি করা যায়নি"
   }
 }

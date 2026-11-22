@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Novinky",
     "retry": "Zkusit znovu",
-    "updateDownloadFailed": "Stažení aktualizace se nezdařilo",
     "updateInstallFailed": "Instalační program se nepodařilo spustit",
-    "updateEta": "zbývá {eta}",
-    "updateModeAuto": "Automaticky",
-    "updateModeNotify": "Jen upozornit",
-    "updateModeOff": "Vypnuto",
-    "updateModeNotifyDesc": "Upozornit na aktualizace, aniž by se stáhly",
-    "updateLabelReady": "Aktualizace je připravena",
-    "updateLabelDownloading": "Stahování aktualizace",
-    "updateLabelAvailable": "Je k dispozici aktualizace",
-    "update": "Aktualizovat"
+    "updateEta": "zbývá {eta}"
   },
   "common": {
     "close": "Zavřít",
     "dismiss": "Zavřít upozornění",
-    "undo": "Zpět",
     "loading": "Vytváření…",
     "unknownError": "Neznámá chyba"
   },
   "toast": {
-    "shortcutUpdated": "Zkratka byla aktualizována: {shortcut}",
-    "deleteFailed": "Položku se nepodařilo smazat",
-    "clearFailed": "Položky se nepodařilo vymazat",
     "caseChanged": "Velikost písmen změněna a zkopírována do schránky"
   },
-  "tabs": {
-    "generalStartup": "Obecné a spuštění",
-    "activationShortcuts": "Aktivace a zkratky",
-    "clipboardRules": "Pravidla schránky",
-    "storageRetention": "Úložiště a historie",
-    "updates": "Aktualizace"
-  },
-  "position": {
-    "left": "Vlevo",
-    "right": "Vpravo",
-    "topEdge": "Horní okraj",
-    "loadingDisplays": "Zjišťování displejů…",
-    "horizontalPositionTitle": "Vodorovná poloha",
-    "horizontalPositionDesc": "Upravte vodorovné zarovnání podél okraje obrazovky"
-  },
   "filters": {
-    "colors": "Barvy",
-    "pinned": "Připnuté",
-    "title": "Filtry"
+    "pinned": "Připnuté"
   },
   "item": {
-    "copied": "Zkopírováno!",
     "copiedTimes": "Zkopírováno {count}×",
-    "imagePlaceholder": "Obrázek",
     "extractText": "Image Studio (převod, komprese, OCR)",
     "convertTo": "Převést na…",
     "compressBtn": "Komprimovat",
     "quickCompress": "Rychlá komprese",
     "transformCase": "Změnit velikost písmen (VELKÁ / malá / Každé Slovo Velké)"
-  },
-  "flyout": {
-    "selectItem": "Vybrat položku",
-    "deselectItem": "Zrušit výběr položky",
-    "clickToSelect": "Kliknutím vyberete",
-    "clickToDeselect": "Kliknutím zrušíte výběr",
-    "copied": "Zkopírováno!",
-    "clickToPasteImageDrag": "Kliknutím zkopírujete · Přetažením přesunete"
-  },
-  "appearance": {
-    "openStyleSelector": "Vybrat styl",
-    "closeStyleSelector": "Zavřít výběr stylu"
   },
   "backup": {
     "securityLabel": "Zabezpečení",
@@ -162,17 +118,8 @@
     "bankName": "Banka",
     "accountNumber": "Číslo účtu",
     "accountHolder": "Majitel účtu",
-    "supportTagline": "Navždy zdarma a open source",
     "copied": "Zkopírováno do schránky",
     "copy": "Kopírovat"
-  },
-  "emoji": {
-    "open": "Emoji a symboly",
-    "categories": "Kategorie",
-    "clearRecents": "Vymazat nedávné",
-    "emptyRecents": "Žádná nedávná emoji",
-    "loadFailed": "Emoji se nepodařilo načíst",
-    "skinTone": "Odstín pleti"
   },
   "imageStudio": {
     "tabConvert": "Převést",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Váš tarif brzy skončí",
       "expiringBody": "Tarif {role}, zbývá dní: {days}. Pro prodloužení otevřete Nastavení."
     }
+  },
+  "codeSnap": {
+    "title": "Snímek kódu (styl CodeSnap)",
+    "save": "Uložit snímek kódu",
+    "copied": "Snímek kódu zkopírován",
+    "failed": "Nelze vytvořit snímek kódu"
   }
 }

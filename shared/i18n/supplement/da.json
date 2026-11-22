@@ -85,72 +85,28 @@
   "behaviour": {
     "whatsNew": "Nyheder",
     "retry": "Prøv igen",
-    "updateDownloadFailed": "Download af opdateringen mislykkedes",
     "updateInstallFailed": "Installationsprogrammet kunne ikke startes",
-    "updateEta": "{eta} tilbage",
-    "updateModeAuto": "Automatisk",
-    "updateModeNotify": "Kun besked",
-    "updateModeOff": "Fra",
-    "updateModeNotifyDesc": "Giv besked, når der er opdateringer, uden at downloade dem",
-    "updateLabelReady": "Opdateringen er klar",
-    "updateLabelDownloading": "Downloader opdatering",
-    "updateLabelAvailable": "Opdatering tilgængelig",
-    "update": "Opdatér"
+    "updateEta": "{eta} tilbage"
   },
   "common": {
     "close": "Luk",
     "dismiss": "Afvis",
-    "undo": "Fortryd",
     "loading": "Opretter …",
     "unknownError": "Ukendt fejl"
   },
   "toast": {
-    "shortcutUpdated": "Genvejen er opdateret: {shortcut}",
-    "deleteFailed": "Elementet kunne ikke slettes",
-    "clearFailed": "Elementerne kunne ikke ryddes",
     "caseChanged": "Store/små bogstaver ændret og kopieret til udklipsholderen"
   },
-  "tabs": {
-    "generalStartup": "Generelt og start",
-    "activationShortcuts": "Aktivering og genveje",
-    "clipboardRules": "Regler for udklipsholder",
-    "storageRetention": "Lager og historik",
-    "updates": "Opdateringer"
-  },
-  "position": {
-    "left": "Venstre",
-    "right": "Højre",
-    "topEdge": "Øverste kant",
-    "loadingDisplays": "Registrerer skærme …",
-    "horizontalPositionTitle": "Vandret placering",
-    "horizontalPositionDesc": "Juster den vandrette placering langs skærmkanten"
-  },
   "filters": {
-    "colors": "Farver",
-    "pinned": "Fastgjorte",
-    "title": "Filtre"
+    "pinned": "Fastgjorte"
   },
   "item": {
-    "copied": "Kopieret!",
     "copiedTimes": "Kopieret {count} gange",
-    "imagePlaceholder": "Billede",
     "extractText": "Image Studio (konvertér, komprimér, OCR)",
     "convertTo": "Konvertér til …",
     "compressBtn": "Komprimér",
     "quickCompress": "Hurtig komprimering",
     "transformCase": "Skift store/små bogstaver (STORE / små / Hvert Ord Med Stort)"
-  },
-  "flyout": {
-    "selectItem": "Markér element",
-    "deselectItem": "Fjern markering af element",
-    "clickToSelect": "Klik for at markere",
-    "clickToDeselect": "Klik for at fjerne markeringen",
-    "copied": "Kopieret!",
-    "clickToPasteImageDrag": "Klik for at kopiere · Træk for at flytte"
-  },
-  "appearance": {
-    "openStyleSelector": "Vælg stil",
-    "closeStyleSelector": "Luk stilvælger"
   },
   "backup": {
     "securityLabel": "Sikkerhed",
@@ -162,17 +118,8 @@
     "bankName": "Bank",
     "accountNumber": "Kontonummer",
     "accountHolder": "Kontoindehaver",
-    "supportTagline": "Gratis og open source for altid",
     "copied": "Kopieret til udklipsholderen",
     "copy": "Kopiér"
-  },
-  "emoji": {
-    "open": "Emojis og symboler",
-    "categories": "Kategorier",
-    "clearRecents": "Ryd seneste",
-    "emptyRecents": "Ingen seneste emojis",
-    "loadFailed": "Emojis kunne ikke indlæses",
-    "skinTone": "Hudtone"
   },
   "imageStudio": {
     "tabConvert": "Konvertér",
@@ -394,5 +341,11 @@
       "expiringTitle": "T-Drop — Dit abonnement udløber snart",
       "expiringBody": "{role}-abonnement, dage tilbage: {days}. Åbn Indstillinger for at forny."
     }
+  },
+  "codeSnap": {
+    "title": "Skærmbillede af kode (CodeSnap-stil)",
+    "save": "Gem kodebillede",
+    "copied": "Kodebillede kopieret",
+    "failed": "Kunne ikke oprette kodebillede"
   }
 }

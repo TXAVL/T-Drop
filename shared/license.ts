@@ -13,6 +13,8 @@ export interface DeviceFingerprint {
   hardwareId: string
   pcName: string
   hwHash: string
+  /** false when MachineGuid could not be read and the id came from a fallback (never trust it for revoking a license). */
+  reliable?: boolean
 }
 
 export interface LicenseState {
