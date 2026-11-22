@@ -471,29 +471,29 @@
         <div class="release-date">22/11/2026</div>
       </div>
       <p class="release-summary" data-i18n="v034.summary">
-        Ra mắt bộ xử lý Markdown riêng (txa-markdown) hiển thị Markdown Preview khi mở rộng thẻ, tách cửa sổ Nhật ký &amp; Chẩn đoán độc lập và sửa lỗi nút Sao chép logs không hoạt động.
+        Xem trước tài liệu Markdown trực quan ngay khi mở rộng thẻ, mở Nhật ký lỗi trong cửa sổ riêng tiện theo dõi và sửa lỗi nút sao chép nhật ký không phản hồi.
       </p>
 
       <div class="change-group">
         <div class="change-item">
           <span class="badge new" data-i18n="badge.new">Mới</span>
           <div class="change-content">
-            <h3 data-i18n="v034.feat1.title">Bộ xử lý Markdown riêng (txa-markdown) &amp; Markdown Preview</h3>
-            <p data-i18n="v034.feat1.desc">Khi mở rộng thẻ chứa nội dung Markdown, T-Drop tự động render thành bản xem trước Markdown đẹp mắt (tiêu đề, bảng GFM, task list, blockquote, code block tô màu cú pháp, bảo vệ XSS) kèm nút chuyển nhanh Preview / Raw. Nhận diện Markdown chuẩn xác, không còn nhầm bảng Markdown thành JavaScript.</p>
+            <h3 data-i18n="v034.feat1.title">Xem trước Markdown trực quan khi mở rộng thẻ</h3>
+            <p data-i18n="v034.feat1.desc">Khi bấm mở rộng nội dung Markdown, T-Drop tự động hiển thị thành bản xem trước gọn gàng (tiêu đề, chữ in đậm/nghiêng, bảng biểu, danh sách công việc, trích dẫn và khối mã) thay vì hiện chữ thô. Có sẵn nút chuyển nhanh giữa bản xem trước và nội dung gốc, đồng thời nhận diện chuẩn xác hơn để bảng Markdown không bị nhầm thành mã JavaScript.</p>
           </div>
         </div>
         <div class="change-item">
           <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
           <div class="change-content">
-            <h3 data-i18n="v034.feat2.title">Cửa sổ Nhật ký &amp; Chẩn đoán độc lập</h3>
-            <p data-i18n="v034.feat2.desc">Nhật ký lỗi được tách thành cửa sổ riêng biệt, dễ kéo di chuyển, đổi kích thước và không bị đóng mất khi rê chuột ra khỏi kệ.</p>
+            <h3 data-i18n="v034.feat2.title">Cửa sổ Nhật ký &amp; Chẩn đoán tách riêng</h3>
+            <p data-i18n="v034.feat2.desc">Mục Nhật ký giờ mở thành một cửa sổ độc lập, bạn có thể thoải mái di chuyển, phóng to thu nhỏ và đọc log mà không lo bị đóng mất khi đưa chuột ra ngoài kệ.</p>
           </div>
         </div>
         <div class="change-item">
           <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
           <div class="change-content">
-            <h3 data-i18n="v034.feat3.title">Sửa lỗi nút Sao chép logs không hoạt động</h3>
-            <p data-i18n="v034.feat3.desc">Nút sao chép log giờ ghi trực tiếp qua clipboard gốc của Electron (tự tạm dừng watcher để log không tràn vào lịch sử clipboard) và nâng giới hạn dung lượng log sao chép lên 500 KB.</p>
+            <h3 data-i18n="v034.feat3.title">Sửa lỗi bấm "Sao chép logs" không hoạt động</h3>
+            <p data-i18n="v034.feat3.desc">Nút sao chép trong cửa sổ Nhật ký lỗi giờ hoạt động ổn định, sao chép trọn vẹn cả các bản log dài mà không làm trôi hay xuất hiện rác trong lịch sử clipboard của bạn.</p>
           </div>
         </div>
       </div>
@@ -1510,13 +1510,13 @@
     const translations = {
       vi: {
         'nav.download': 'Tải về v0.3.4',
-        'v034.summary': 'Ra mắt bộ xử lý Markdown riêng (txa-markdown) hiển thị Markdown Preview khi mở rộng thẻ, tách cửa sổ Nhật ký & Chẩn đoán độc lập và sửa lỗi nút Sao chép logs không hoạt động.',
-        'v034.feat1.title': 'Bộ xử lý Markdown riêng (txa-markdown) & Markdown Preview',
-        'v034.feat1.desc': 'Khi mở rộng thẻ chứa nội dung Markdown, T-Drop tự động render thành bản xem trước Markdown đẹp mắt (tiêu đề, bảng GFM, task list, blockquote, code block tô màu cú pháp, bảo vệ XSS) kèm nút chuyển nhanh Preview / Raw. Nhận diện Markdown chuẩn xác, không còn nhầm bảng Markdown thành JavaScript.',
-        'v034.feat2.title': 'Cửa sổ Nhật ký & Chẩn đoán độc lập',
-        'v034.feat2.desc': 'Nhật ký lỗi được tách thành cửa sổ riêng biệt, dễ kéo di chuyển, đổi kích thước và không bị đóng mất khi rê chuột ra khỏi kệ.',
-        'v034.feat3.title': 'Sửa lỗi nút Sao chép logs không hoạt động',
-        'v034.feat3.desc': 'Nút sao chép log giờ ghi trực tiếp qua clipboard gốc của Electron (tự tạm dừng watcher để log không tràn vào lịch sử clipboard) và nâng giới hạn dung lượng log sao chép lên 500 KB.',
+        'v034.summary': 'Xem trước tài liệu Markdown trực quan ngay khi mở rộng thẻ, mở Nhật ký lỗi trong cửa sổ riêng tiện theo dõi và sửa lỗi nút sao chép nhật ký không phản hồi.',
+        'v034.feat1.title': 'Xem trước Markdown trực quan khi mở rộng thẻ',
+        'v034.feat1.desc': 'Khi bấm mở rộng nội dung Markdown, T-Drop tự động hiển thị thành bản xem trước gọn gàng (tiêu đề, chữ in đậm/nghiêng, bảng biểu, danh sách công việc, trích dẫn và khối mã) thay vì hiện chữ thô. Có sẵn nút chuyển nhanh giữa bản xem trước và nội dung gốc, đồng thời nhận diện chuẩn xác hơn để bảng Markdown không bị nhầm thành mã JavaScript.',
+        'v034.feat2.title': 'Cửa sổ Nhật ký & Chẩn đoán tách riêng',
+        'v034.feat2.desc': 'Mục Nhật ký giờ mở thành một cửa sổ độc lập, bạn có thể thoải mái di chuyển, phóng to thu nhỏ và đọc log mà không lo bị đóng mất khi đưa chuột ra ngoài kệ.',
+        'v034.feat3.title': 'Sửa lỗi bấm "Sao chép logs" không hoạt động',
+        'v034.feat3.desc': 'Nút sao chép trong cửa sổ Nhật ký lỗi giờ hoạt động ổn định, sao chép trọn vẹn cả các bản log dài mà không làm trôi hay xuất hiện rác trong lịch sử clipboard của bạn.',
         'v033.summary': 'Ảnh chụp code kiểu CodeSnap, nhận diện hơn 35 ngôn ngữ và framework, khắc phục lỗi bản quyền tự về Free, chẩn đoán phần cứng chính xác hơn và nhận diện bản cài qua TXA Repo.',
         'v033.feat1.title': 'Ảnh chụp code đẹp kiểu CodeSnap & code tô màu cú pháp',
         'v033.feat1.desc': 'Code sao chép được tô màu cú pháp ngay trên thẻ và xem đầy đủ có số dòng trong bản xem trước. Nút camera trên thẻ code tạo ảnh PNG đẹp (cửa sổ macOS, nền gradient riêng theo từng ngôn ngữ) và sao chép thẳng vào clipboard hoặc lưu thành tệp.',
@@ -1721,13 +1721,13 @@
       },
       en: {
         'nav.download': 'Download v0.3.4',
-        'v034.summary': 'Introduces the custom txa-markdown engine with rich Markdown Preview on card expand, a standalone Logs & Diagnostics window, and a fix for the non-responsive Copy Logs button.',
-        'v034.feat1.title': 'Custom txa-markdown engine & Markdown Preview',
-        'v034.feat1.desc': 'Expanding a Markdown card now renders a clean Markdown Preview (headings, GFM tables, task lists, blockquotes, syntax-highlighted fenced code blocks, XSS-safe links) with a quick Preview / Raw toggle. Markdown detection is also more accurate and no longer misclassifies Markdown tables as JavaScript.',
-        'v034.feat2.title': 'Standalone Logs & Diagnostics window',
-        'v034.feat2.desc': 'The error log viewer now opens in its own resizable, draggable window that stays focused without being dismissed by shelf hover behavior.',
-        'v034.feat3.title': 'Fixed Copy Logs button doing nothing',
-        'v034.feat3.desc': 'Copying logs now writes through Electron\'s native clipboard IPC (pausing the clipboard watcher so logs never pollute history) and raises the text copy limit to 500 KB.',
+        'v034.summary': 'Clean Markdown preview when expanding cards, a standalone window for Error Logs & Diagnostics, and a fix for the Copy Logs button not responding.',
+        'v034.feat1.title': 'Rich Markdown Preview on Card Expand',
+        'v034.feat1.desc': 'Expanding a Markdown card now shows a clean, formatted preview (headings, bold/italic text, tables, checklists, quotes, and code blocks) instead of raw syntax. Includes a quick switch between Preview and Raw text, plus smarter detection so Markdown tables are no longer mistaken for JavaScript.',
+        'v034.feat2.title': 'Standalone Logs & Diagnostics Window',
+        'v034.feat2.desc': 'Error logs now open in their own window that you can move, resize, and read comfortably without it closing when your cursor leaves the shelf.',
+        'v034.feat3.title': 'Fixed "Copy Logs" Button Not Responding',
+        'v034.feat3.desc': 'Copying logs now works reliably even for long diagnostic logs, without cluttering your clipboard history.',
         'v033.summary': 'CodeSnap-style code screenshots, 35+ detected languages and frameworks, a fix for licenses reverting to Free, more accurate hardware diagnostics and TXA Repo install detection.',
         'v033.feat1.title': 'CodeSnap-style code screenshots & syntax highlighting',
         'v033.feat1.desc': 'Copied code is now syntax-highlighted on its card and shown in full with line numbers in the preview. A camera button on code cards renders a polished PNG (macOS-style window, a gradient per language) and copies it to the clipboard or saves it as a file.',
