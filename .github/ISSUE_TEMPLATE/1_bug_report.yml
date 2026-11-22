@@ -30,13 +30,31 @@ body:
     id: os_version
     attributes:
       label: Operating System
+      description: Select your Windows version (including Windows Insider channels).
       options:
+        - Windows 11 (25H2)
         - Windows 11 (24H2)
-        - Windows 11 (23H2 / 22H2)
+        - Windows 11 (23H2)
+        - Windows 11 (22H2)
+        - Windows 11 (21H2)
+        - Windows 11 Insider Preview (Canary Channel)
+        - Windows 11 Insider Preview (Dev Channel)
+        - Windows 11 Insider Preview (Beta Channel)
+        - Windows 11 Insider Preview (Release Preview Channel)
         - Windows 10 (22H2)
-        - Other Windows version
+        - Windows 10 (21H2)
+        - Windows 10 LTSC (2021 / 21H2)
+        - Other (specify below)
     validations:
       required: true
+  - type: input
+    id: os_version_other
+    attributes:
+      label: Other Windows Version / OS Build (Optional)
+      description: If you chose "Other" above, or want to provide your exact OS build number (run `winver` to check).
+      placeholder: e.g. Windows 11 Dev Build 26120.xxxx or custom edition
+    validations:
+      required: false
   - type: textarea
     id: description
     attributes:
