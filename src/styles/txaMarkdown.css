@@ -1,0 +1,281 @@
+/* txa-markdown — Markdown preview styling for T-Drop's dark glass flyout. */
+
+.txa-md-root {
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-ui, system-ui, sans-serif);
+  font-size: 13.5px;
+  line-height: 1.65;
+  word-break: break-word;
+  user-select: text;
+  cursor: text;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.txa-md-root strong {
+  color: #ffffff;
+  font-weight: 650;
+}
+
+.txa-md-root em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.txa-md-root del {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.txa-md-p {
+  margin: 0;
+}
+
+.txa-md-h {
+  margin: 4px 0 0;
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.txa-md-h:first-child {
+  margin-top: 0;
+}
+
+.txa-md-h1 {
+  font-size: 18px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.txa-md-h2 {
+  font-size: 16px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.txa-md-h3 {
+  font-size: 14.5px;
+}
+
+.txa-md-h4 {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.txa-md-h5,
+.txa-md-h6 {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.txa-md-inline-code {
+  font-family: var(--font-mono, Consolas, monospace);
+  font-size: 12px;
+  padding: 1.5px 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #7dd3fc;
+}
+
+.txa-md-link {
+  color: #38bdf8;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.35);
+  transition: color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.txa-md-link:hover {
+  color: #7dd3fc;
+  border-bottom-color: rgba(125, 211, 252, 0.75);
+}
+
+.txa-md-img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: block;
+  margin: 4px 0;
+}
+
+.txa-md-hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 4px 0;
+}
+
+.txa-md-quote {
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(56, 189, 248, 0.06);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.txa-md-list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.txa-md-list.is-task {
+  list-style: none;
+  padding-left: 2px;
+}
+
+.txa-md-li {
+  line-height: 1.55;
+}
+
+.txa-md-li.is-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.txa-md-checkbox {
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.04);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #04121f;
+  flex-shrink: 0;
+}
+
+.txa-md-checkbox.is-checked {
+  background: #38bdf8;
+  border-color: #38bdf8;
+}
+
+.txa-md-li-text.is-done {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: line-through;
+}
+
+.txa-md-nested {
+  width: 100%;
+  margin-top: 4px;
+  padding-left: 14px;
+}
+
+.txa-md-code-wrap {
+  margin: 2px 0;
+  cursor: default;
+}
+
+/* GFM Table */
+.txa-md-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.25);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.txa-md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.txa-md-table th {
+  padding: 8px 11px;
+  font-weight: 650;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+
+.txa-md-table td {
+  padding: 7px 11px;
+  color: rgba(255, 255, 255, 0.84);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: top;
+}
+
+.txa-md-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.txa-md-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.txa-md-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mode toggle pill in PreviewFlyout */
+.txa-md-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.txa-md-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+.txa-md-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  gap: 2px;
+}
+
+.txa-md-toggle-btn {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.txa-md-toggle-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.txa-md-toggle-btn.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}

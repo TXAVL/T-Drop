@@ -26,6 +26,7 @@ import { getMainWindow, sendToMainWindow, setInteractive, setHeartbeatPaused, se
 import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
 import { createPurchaseWindow, closePurchaseWindow, getPurchaseWindow } from './purchaseWindow'
+import { createLogsWindow, closeLogsWindow } from './logsWindow'
 import { saveReceiptPdf } from './receipt'
 import { mt, mainT } from './i18n'
 import { isSignatureDataUrl, normalizeBuyerName } from '../../shared/receipt'
@@ -268,7 +269,7 @@ export function registerIpc(): void {
   })
 
   handle('item:copy-text', async (text) => {
-    if (typeof text !== 'string' || text.length === 0 || text.length > 100_000) return false
+    if (typeof text !== 'string' || text.length === 0 || text.length > 500_000) return false
     const watcher = getWatcher()
     watcher.setPaused(true)
     try {
@@ -1177,6 +1178,14 @@ export function registerIpc(): void {
       buyerSignature: isSignatureDataUrl(data.buyerSignature) ? data.buyerSignature : null,
       buyerName: normalizeBuyerName(data.buyerName) || null
     })
+  })
+
+  handle('logs:open-window', () => {
+    createLogsWindow()
+  })
+
+  handle('logs:close-window', () => {
+    closeLogsWindow()
   })
 
   handle('system:get-logs', (maxLines) => {

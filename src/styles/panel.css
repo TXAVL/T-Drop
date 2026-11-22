@@ -1240,9 +1240,160 @@
 .purchase-ghost-btn:focus-visible,
 .purchase-primary-btn:focus-visible { outline: 2px solid #10b981; outline-offset: 2px; }
 
+/* The drag targets' dashed line (DashedOutline): a 2px stroke,
+   10px dashes with round ends and 8px clear between them, the same for the
+   drop zone, the stacking ring and the detach edge. --dash-color sets how lit
+   it is. The rect is inset by half the stroke so it is never clipped. */
+.dashed-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.dashed-outline-shape {
+  fill: none;
+  stroke: var(--dash-color, rgba(255, 255, 255, 0.38));
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dasharray: 8 10;
+  transition: stroke 180ms ease;
+}
+rect.dashed-outline-shape {
+  x: 1px;
+  y: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+}
 
-/* Drop overlay accepted transition */
+/* Drop zone for drags from other apps (DropOverlay): solid black over the
+   whole shelf (nothing shows through), a dashed well, and the tray icon on its
+   own. The well comes in at its size as the shelf opens; once the drag is over
+   the shelf its dashes brighten softly (no change of size: a step from the edge
+   into the shelf, where the zone turns over, read as a pop), and it tightens as
+   it takes the drop. */
+.drop-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 320; /* above the header and the split zone, below the content veil (400) */
+  display: flex;
+  padding: 12px;
+  pointer-events: none;
+  background: #000000;
+}
+.drop-overlay.is-horizontal {
+  padding: 10px 12px 12px;
+}
+/* A soft blue light rising from the bottom of the drop zone, in the edge light's blue, gone before 30% of
+   the zone's height; the shelf is otherwise unchanged. An ellipse wider than the shelf, so its sides fall
+   off softly too, with an eased falloff (no visible gradient band). It comes up with the zone and grows a
+   little brighter once the drag is over the shelf. Behind the well (painted first). */
+.drop-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 75% 30% at 50% 100%,
+    rgba(10, 132, 255, 0.34) 0%,
+    rgba(10, 132, 255, 0.24) 28%,
+    rgba(10, 132, 255, 0.13) 52%,
+    rgba(10, 132, 255, 0.06) 72%,
+    rgba(10, 132, 255, 0.016) 88%,
+    rgba(10, 132, 255, 0) 100%
+  );
+  opacity: 0.7;
+  transition: opacity 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.drop-overlay.is-over::before {
+  opacity: 1;
+}
+.drop-well {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  position: relative;
+  border-radius: 16px;
+  --dash-color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: drop-well-in 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* the well's dashes brighten over a longer, even ease than other dashed outlines */
+.drop-well .dashed-outline-shape {
+  transition: stroke 360ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.drop-overlay.is-horizontal .drop-well {
+  flex-direction: row;
+  gap: 14px;
+  text-align: left;
+}
+@keyframes drop-well-in {
+  from {
+    transform: scale(0.94);
+  }
+}
+.drop-overlay.is-over .drop-well {
+  --dash-color: rgba(255, 255, 255, 0.78);
+}
+.drop-overlay.is-accepted .drop-well {
+  --dash-color: rgba(255, 255, 255, 0.9);
+  transform: scale(0.97);
+  transition-duration: 200ms;
+}
+/* Taken in: the zone fades as the new card comes up under it (Panel unmounts it once faded,
+   ACCEPT_FADE_MS). A CSS transition over framer-motion's inline opacity (hence !important): framer's
+   own fade showed the zone at full opacity for a frame as it finished, a flash after the drop. */
 .drop-overlay.is-accepted {
   opacity: 0 !important;
   transition: opacity 280ms cubic-bezier(0.45, 0, 0.25, 1);
+}
+.drop-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.92);
+}
+.drop-icon .drop-arrow {
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+}
+.drop-overlay.is-over .drop-icon .drop-arrow {
+  transform: translateY(1.5px);
+  transition-duration: 360ms;
+}
+.drop-overlay.is-accepted .drop-icon .drop-arrow {
+  transform: translateY(4px);
+  opacity: 0;
+}
+.drop-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.drop-title {
+  font-size: calc(14px * var(--font-scale, 1));
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.01em;
+}
+.drop-sub {
+  font-size: calc(12px * var(--font-scale, 1));
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-motion='reduce'] .drop-overlay.is-accepted,
+[data-motion='reduce'] .drop-overlay::before,
+[data-motion='reduce'] .drop-well,
+[data-motion='reduce'] .drop-icon,
+[data-motion='reduce'] .drop-icon .drop-arrow {
+  transition: none;
+  animation: none;
 }

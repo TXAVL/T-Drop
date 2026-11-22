@@ -45,6 +45,15 @@ if (window.location.hash === '#onboarding' || window.location.hash === '#/onboar
       </StrictMode>
     )
   })
+} else if (window.location.hash.includes('logs')) {
+  // Standalone logs & diagnostics window
+  void import('./components/LogsWindow').then(({ LogsWindowView }) => {
+    root.render(
+      <StrictMode>
+        <LogsWindowView />
+      </StrictMode>
+    )
+  })
 } else if (window.location.hash.includes('purchase') || window.location.hash.includes('renew')) {
   // Standalone checkout window: #purchase = buy a plan, #renew = extend the current key
   const mode = window.location.hash.includes('renew') ? 'renew' : 'buy'

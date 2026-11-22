@@ -1,6 +1,7 @@
 /**
  * codeDetect.ts — Fast heuristic syntax and language detection for clipboard text.
  */
+import { isMarkdown, isStrongMarkdown } from './txa-markdown/detect'
 
 export interface CodeDetectionResult {
   isCode: boolean
@@ -98,6 +99,12 @@ export function detectCode(raw: string): CodeDetectionResult {
     /^\s*txapm\s+(install|upgrade|which|search|list|uninstall)\b/m.test(raw)
   ) {
     return { isCode: true, language: 'txa', displayName: 'TXA' }
+  }
+
+  // 0b. Strong Markdown structures (GFM tables, fenced code blocks, task lists).
+  // Checked early so Markdown docs containing code examples aren't misclassified as JS/HTML.
+  if (isStrongMarkdown(text)) {
+    return { isCode: true, language: 'markdown', displayName: 'Markdown' }
   }
 
   // 1. JSON Detection
@@ -373,6 +380,11 @@ export function detectCode(raw: string): CodeDetectionResult {
     if (yamlLike / nonEmpty.length >= 0.8 && /^\s*[\w."'/-]+:(\s|$)/m.test(text)) {
       return named('yaml', 'YAML')
     }
+  }
+
+  // 10c. Markdown (headings, bold/italic, links, lists, blockquotes)
+  if (isMarkdown(text)) {
+    return { isCode: true, language: 'markdown', displayName: 'Markdown' }
   }
 
   // 11. General Code Heuristics (e.g. multi-line structured block with brackets and operators)

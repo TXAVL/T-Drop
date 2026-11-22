@@ -267,27 +267,6 @@ export function Settings({
   const [isExporting, setIsExporting] = useState(false)
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [copiedStk, setCopiedStk] = useState(false)
-  type LogFilterType = 'ALL' | 'ERROR' | 'WARN' | 'INFO'
-  const [logsModalOpen, setLogsModalOpen] = useState(false)
-  const [rawLogs, setRawLogs] = useState('')
-  const [logFilePath, setLogFilePath] = useState('')
-  const [logsFilter, setLogsFilter] = useState<LogFilterType>('ALL')
-  const [logsLoading, setLogsLoading] = useState(false)
-  const [copiedLogs, setCopiedLogs] = useState(false)
-  const [diagnosing, setDiagnosing] = useState(false)
-  const logsTerminalRef = useRef<HTMLDivElement>(null)
-  const logsBottomRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (logsModalOpen && logsTerminalRef.current) {
-      const tm = setTimeout(() => {
-        if (logsTerminalRef.current) {
-          logsTerminalRef.current.scrollTop = logsTerminalRef.current.scrollHeight
-        }
-      }, 60)
-      return () => clearTimeout(tm)
-    }
-  }, [logsModalOpen, rawLogs, logsFilter])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.edge?.onBackupFileOpened) return
@@ -596,94 +575,10 @@ export function Settings({
     })
   }
 
-  const loadSystemLogs = async (triggerDiagIfMissing = false) => {
-    if (!window.edge?.getSystemLogs) return
-    setLogsLoading(true)
-    try {
-      const res = await window.edge.getSystemLogs(450)
-      setRawLogs(res.logs || '')
-      setLogFilePath(res.path || '')
-
-      if (triggerDiagIfMissing && !res.logs?.includes('[WinOS]') && window.edge?.generateDiagnostics) {
-        setDiagnosing(true)
-        const diagRes = await window.edge.generateDiagnostics()
-        if (diagRes.ok) {
-          setRawLogs(diagRes.logs)
-          setLogFilePath(diagRes.path)
-        }
-        setDiagnosing(false)
-      }
-    } catch (err: any) {
-      setRawLogs(t('logs.readError', { error: err?.message || String(err) }))
-    } finally {
-      setLogsLoading(false)
-    }
-  }
-
+  /** Logs live in their own window: the shelf closes on hover-out, a real window does not. */
   const handleOpenLogsModal = () => {
     playButtonClickSound()
-    // Keep the panel expanded while the modal is open (otherwise the top-docked
-    // panel collapses as soon as the cursor leaves its thin bounds).
-    if (isHorizontal) window.edge?.setPreviewMode?.(true)
-    setLogsModalOpen(true)
-    void loadSystemLogs(true)
-  }
-
-  const handleCopyLogs = () => {
-    playButtonClickSound()
-    if (!rawLogs) return
-    navigator.clipboard.writeText(rawLogs)
-    setCopiedLogs(true)
-    setTimeout(() => setCopiedLogs(false), 2000)
-    pushToast({
-      id: Date.now().toString(),
-      message: t('logs.copiedAll'),
-      tone: 'info'
-    })
-  }
-
-  const handleClearLogs = async () => {
-    playButtonClickSound()
-    if (window.edge?.clearSystemLogs) {
-      await window.edge.clearSystemLogs()
-      await loadSystemLogs()
-      pushToast({
-        id: Date.now().toString(),
-        message: t('logs.cleared'),
-        tone: 'info'
-      })
-    }
-  }
-
-  const handleOpenLogFolder = () => {
-    playButtonClickSound()
-    window.edge?.openLogFolder?.()
-  }
-
-  const handleGenerateDiagnostics = async () => {
-    if (!window.edge?.generateDiagnostics) return
-    playButtonClickSound()
-    setDiagnosing(true)
-    try {
-      const res = await window.edge.generateDiagnostics()
-      if (res.ok) {
-        setRawLogs(res.logs)
-        setLogFilePath(res.path)
-        pushToast({
-          id: Date.now().toString(),
-          message: t('license.diagSuccess'),
-          tone: 'info'
-        })
-      }
-    } catch (err: any) {
-      pushToast({
-        id: Date.now().toString(),
-        message: t('license.diagFailed', { error: err?.message || String(err) }),
-        tone: 'error'
-      })
-    } finally {
-      setDiagnosing(false)
-    }
+    void window.edge?.openLogsWindow?.()
   }
 
   const handleCopyHardwareHash = () => {
@@ -1334,217 +1229,6 @@ export function Settings({
               onClick={closeDonate}
             >
               {t('common.close')}
-            </button>
-          </div>
-        </div>
-      </div>,
-      document.body
-    )
-  }
-
-  const renderLogsModal = () => {
-    if (!logsModalOpen) return null
-
-    const allLines = rawLogs.split(/\r?\n/).filter(Boolean)
-
-    // User rule: Diagnostic / Windows OS / License details are ONLY visible when copying logs
-    // or viewing the log file on disk. Never expose them directly on the Logs tab UI!
-    const isHiddenDiagLine = (line: string) =>
-      line.includes('[WinOS]') ||
-      line.includes('[WinLic]') ||
-      line.includes('[Hardware]') ||
-      line.includes('[Diag]') ||
-      line.includes('[Runtime]') ||
-      line.includes('[TD-License]') ||
-      line.includes('THÔNG TIN CHẨN ĐOÁN')
-
-    const visibleLines = allLines.filter((line) => !isHiddenDiagLine(line))
-
-    const filteredLines = visibleLines.filter((line) => {
-      if (logsFilter === 'ERROR') return line.includes('[ERROR]') || line.includes('UncaughtException') || line.includes('UnhandledRejection')
-      if (logsFilter === 'WARN') return line.includes('[WARN')
-      if (logsFilter === 'INFO') return line.includes('[INFO')
-      return true
-    })
-
-    const closeLogs = () => {
-      setLogsModalOpen(false)
-      if (isHorizontal) window.edge?.setPreviewMode?.(false)
-    }
-    return createPortal(
-      <div
-        className="txa-modal-overlay"
-        onClick={closeLogs}
-      >
-        <div
-          className="txa-modal-card logs-modal-card"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="txa-modal-header">
-            <div className="txa-modal-title-group">
-              <div className="txa-modal-icon-badge" style={{ background: 'rgba(56, 189, 248, 0.15)', borderColor: 'rgba(56, 189, 248, 0.35)', color: '#38bdf8' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="4 17 10 11 4 5"/>
-                  <line x1="12" y1="19" x2="20" y2="19"/>
-                </svg>
-              </div>
-              <div className="txa-modal-title-text">
-                <span className="txa-modal-title">{t('logs.title')}</span>
-                <span className="txa-modal-subtitle">{t('logs.subtitle')}</span>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="txa-modal-close"
-              onClick={closeLogs}
-            >
-              ✕
-            </button>
-          </div>
-
-          <div className="logs-path-bar">
-            <span className="logs-path-text" title={logFilePath || 'T-Drop Logs'}>
-              {logFilePath || t('logs.loadingPath')}
-            </span>
-            <button
-              type="button"
-              className="logs-folder-btn"
-              onClick={handleOpenLogFolder}
-              title={t('logs.openFolderTip')}
-            >
-              {t('logs.openFolder')}
-            </button>
-          </div>
-
-          <div className="logs-filter-bar">
-            <div className="logs-filter-group">
-              {([
-                { key: 'ALL', label: t('logs.filterAll') },
-                { key: 'ERROR', label: t('logs.filterError') },
-                { key: 'WARN', label: t('logs.filterWarn') },
-                { key: 'INFO', label: t('logs.filterInfo') }
-              ] as const).map(({ key, label }) => (
-                <button
-                  key={key}
-                  type="button"
-                  className={`logs-filter-chip ${key === 'ERROR' ? 'error' : key === 'WARN' ? 'warn' : ''} ${logsFilter === key ? 'active' : ''}`}
-                  onClick={() => {
-                    playButtonClickSound()
-                    setLogsFilter(key)
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-            <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              <button
-                type="button"
-                className="logs-folder-btn"
-                style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#cbd5e1' }}
-                onClick={() => {
-                  if (logsTerminalRef.current) logsTerminalRef.current.scrollTop = 0
-                }}
-                title={t('logs.scrollTopTip')}
-              >
-                {t('logs.top')}
-              </button>
-              <button
-                type="button"
-                className="logs-folder-btn"
-                style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#cbd5e1' }}
-                onClick={() => {
-                  if (logsTerminalRef.current) logsTerminalRef.current.scrollTop = logsTerminalRef.current.scrollHeight
-                }}
-                title={t('logs.scrollBottomTip')}
-              >
-                {t('logs.bottom')}
-              </button>
-              <span style={{ fontSize: 10.5, color: 'rgba(255, 255, 255, 0.45)', fontFamily: 'var(--font-mono, monospace)' }}>
-                {t('logs.lineCount', { shown: filteredLines.length, total: visibleLines.length })}
-              </span>
-            </div>
-          </div>
-
-          <div className="logs-terminal-viewport" ref={logsTerminalRef}>
-            {logsLoading ? (
-              <div style={{ color: 'rgba(255, 255, 255, 0.5)', padding: '16px 0', textAlign: 'center' }}>
-                {t('logs.reading')}
-              </div>
-            ) : filteredLines.length === 0 ? (
-              <div style={{ color: 'rgba(255, 255, 255, 0.4)', padding: '16px 0', textAlign: 'center' }}>
-                {t('logs.noMatch')}
-              </div>
-            ) : (
-              filteredLines.map((line, idx) => {
-                const isErr = line.includes('[ERROR]') || line.includes('UncaughtException') || line.includes('UnhandledRejection')
-                const isWarn = line.includes('[WARN')
-                const isInfo = line.includes('[INFO')
-
-                const levelClass = isErr
-                  ? 'level-ERROR'
-                  : isWarn
-                  ? 'level-WARN'
-                  : isInfo
-                  ? 'level-INFO'
-                  : ''
-
-                return (
-                  <div key={idx} className={`logs-line ${levelClass}`}>
-                    {line}
-                  </div>
-                )
-              })
-            )}
-            <div ref={logsBottomRef} />
-          </div>
-
-          <div style={{ marginTop: 8, width: '100%' }}>
-            <button
-              type="button"
-              className="pill"
-              style={{
-                width: '100%',
-                height: 32,
-                fontSize: 11.5,
-                fontWeight: 600,
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.25))',
-                border: '1px solid rgba(168, 85, 247, 0.45)',
-                color: '#e9d5ff'
-              }}
-              disabled={diagnosing}
-              onClick={handleGenerateDiagnostics}
-            >
-              {diagnosing ? t('logs.diagBusy') : t('logs.diagRun')}
-            </button>
-          </div>
-
-          <div className="txa-modal-actions" style={{ marginTop: 6 }}>
-            <button
-              type="button"
-              className="txa-btn txa-btn-primary"
-              style={{ flex: 1.5, background: copiedLogs ? '#10b981' : undefined }}
-              onClick={handleCopyLogs}
-            >
-              {copiedLogs ? t('logs.copiedClip') : t('logs.copyAi')}
-            </button>
-            <button
-              type="button"
-              className="txa-btn ttxa-btn-secondary"
-              style={{ flex: 0.8 }}
-              onClick={() => void loadSystemLogs()}
-              disabled={logsLoading || diagnosing}
-            >
-              {t('logs.refresh')}
-            </button>
-            <button
-              type="button"
-              className="txa-btn ttxa-btn-secondary"
-              style={{ flex: 0.8, color: '#f87171' }}
-              onClick={handleClearLogs}
-            >
-              {t('logs.clear')}
             </button>
           </div>
         </div>
@@ -3125,7 +2809,6 @@ export function Settings({
         </div>
         {renderRestoreModal()}
         {renderDonateModal()}
-        {renderLogsModal()}
         <PurchaseModal
           open={purchaseModalOpen}
           onClose={() => {
@@ -4174,7 +3857,6 @@ export function Settings({
           </div>
           {renderRestoreModal()}
           {renderDonateModal()}
-          {renderLogsModal()}
           <PurchaseModal
             open={purchaseModalOpen}
             onClose={() => setPurchaseModalOpen(false)}

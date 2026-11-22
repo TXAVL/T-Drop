@@ -126,6 +126,7 @@ const BACKDROPS: Record<string, string[]> = {
   angular: ['#dd0031', '#c3002f', '#5a0014'], // Angular red
   astro: ['#ff5d01', '#8b5cf6', '#1b0f3a'], // Astro orange to violet
   express: ['#68a063', '#3c873a', '#1a3a1a'], // Node green
+  markdown: ['#6366f1', '#4f46e5', '#1e1b4b'], // Markdown indigo
   txa: ['#2563eb', '#ef4444', '#facc15'] // .txa: blue, red, yellow
 }
 const DEFAULT_BACKDROP = ['#5b7cfa', '#8b5cf6', '#ec4899']

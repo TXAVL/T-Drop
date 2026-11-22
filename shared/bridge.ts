@@ -101,6 +101,8 @@ export interface EdgeApi {
   openPurchaseWindow?: (mode?: 'buy' | 'renew') => Promise<void>
   closePurchaseWindow?: () => Promise<void>
   saveReceipt?: (data: import('./receipt').ReceiptData) => Promise<{ ok: boolean; path?: string; error?: string }>
+  openLogsWindow?: () => Promise<void>
+  closeLogsWindow?: () => Promise<void>
   getSystemLogs?: (maxLines?: number) => Promise<{ logs: string; path: string }>
   openLogFolder?: () => Promise<boolean>
   clearSystemLogs?: () => Promise<boolean>

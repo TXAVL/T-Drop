@@ -9,6 +9,7 @@ import { parseColor, getColorFormats } from '../lib/colorUtils'
 import { toUpper, toLower, toTitleCase, toCamelCase, toCleanSpace, getTextStats } from '../lib/textTransform'
 import { ImageStudioPanel } from './ImageStudioPanel'
 import { CodeBlock } from './CodeBlock'
+import { TxaMarkdown } from '../lib/txa-markdown'
 import { detectCode } from '../lib/codeDetect'
 import { copyCodeSnap, saveCodeSnap } from '../lib/codeSnap'
 import { createPortal } from 'react-dom'
@@ -724,6 +725,11 @@ function PreviewContent({
   const startDrag = useDragOut()
 
   const [fullText, setFullText] = useState<string | null>(null)
+  const [mdViewMode, setMdViewMode] = useState<'preview' | 'raw'>('preview')
+
+  useEffect(() => {
+    setMdViewMode('preview')
+  }, [item?.id])
 
   useEffect(() => {
     if (item?.data?.kind === 'text' && item.data.hasFullPayload) {
@@ -1199,7 +1205,51 @@ function PreviewContent({
         </div>
 
         {/* Text Body */}
-        {codeInfo.isCode ? (
+        {codeInfo.isCode && codeInfo.language === 'markdown' ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div className="txa-md-mode-bar" onClick={(e) => e.stopPropagation()}>
+              <span className="txa-md-badge">Markdown</span>
+              <div className="txa-md-toggle" role="tablist" aria-label="Markdown view mode">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={mdViewMode === 'preview'}
+                  className={`txa-md-toggle-btn${mdViewMode === 'preview' ? ' active' : ''}`}
+                  onClick={() => {
+                    playButtonClickSound()
+                    setMdViewMode('preview')
+                  }}
+                >
+                  Preview
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={mdViewMode === 'raw'}
+                  className={`txa-md-toggle-btn${mdViewMode === 'raw' ? ' active' : ''}`}
+                  onClick={() => {
+                    playButtonClickSound()
+                    setMdViewMode('raw')
+                  }}
+                >
+                  Raw
+                </button>
+              </div>
+            </div>
+            {mdViewMode === 'preview' ? (
+              <TxaMarkdown content={text} />
+            ) : (
+              <CodeBlock
+                code={text}
+                language="markdown"
+                showFrame={false}
+                showHeader={false}
+                showLineNumbers={true}
+                showCopyButton={false}
+              />
+            )}
+          </div>
+        ) : codeInfo.isCode ? (
           <CodeBlock
             code={text}
             language={codeInfo.language}

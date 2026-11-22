@@ -195,6 +195,12 @@ export interface InvokeMap {
   /** Open standalone purchase & VietQR checkout window */
   'license:open-purchase': { args: [mode?: 'buy' | 'renew']; result: void }
 
+  /** Open the standalone logs & diagnostics window */
+  'logs:open-window': { args: []; result: void }
+
+  /** Close the standalone logs & diagnostics window */
+  'logs:close-window': { args: []; result: void }
+
   /** Close standalone purchase & VietQR checkout window */
   'license:close-purchase': { args: []; result: void }
 
