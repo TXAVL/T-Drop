@@ -1014,5 +1014,40 @@
     "save": "Spara kodskärmdump",
     "copied": "Kodskärmdump kopierad",
     "failed": "Kunde inte skapa kodskärmdump"
+  },
+  "snippets": {
+    "title": "Snuttar",
+    "subtitle": "Återanvändbar text med levande variabler, klistra in med ett klick",
+    "new": "Ny snutt",
+    "manage": "Hantera",
+    "empty": "Inga snuttar ännu. Skapa din första.",
+    "emptyShelf": "Spara text du ofta skriver och klistra in härifrån.",
+    "createFirst": "Skapa snutt",
+    "clickToPaste": "Klicka för att klistra in",
+    "fieldTitle": "TITEL",
+    "fieldText": "TEXT",
+    "titlePlaceholder": "t.ex. E-postsignatur",
+    "textPlaceholder": "Skriv text. Använd variabler som {date} eller {clipboard}.",
+    "variables": "Infoga:",
+    "preview": "FORHANDSVISNING",
+    "previewEmpty": "Resultatet visas här.",
+    "clipboardSample": "(din urklipp)",
+    "save": "Spara",
+    "saved": "Sparad",
+    "saveFailed": "Kunde inte spara",
+    "delete": "Ta bort",
+    "deleteConfirm": "Klicka igen för att ta bort",
+    "deleted": "Borttagen",
+    "var": {
+      "date": "Dagens datum, i ditt regionala format",
+      "time": "Nuvarande tid, i ditt regionala format",
+      "datetime": "Datum och tid, i ditt regionala format",
+      "weekday": "Veckodag",
+      "clipboard": "Det som finns i urklipp vid inklistring",
+      "uuid": "En ny slumpmässig ID",
+      "longdate": "Långt datum, i ditt regionala format"
+    },
+    "saveFromCard": "Spara som snutt",
+    "savedToast": "Sparad till Snuttar"
   }
 }

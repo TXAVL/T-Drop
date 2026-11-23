@@ -1014,5 +1014,40 @@
     "save": "コードスクリーンショットを保存",
     "copied": "コードスクリーンショットをコピー済み",
     "failed": "コードスクリーンショットを作成できません"
+  },
+  "snippets": {
+    "title": "スニペット",
+    "subtitle": "ライブ変数付きの再利用可能テキストをワンクリックで貼り付け",
+    "new": "新規スニペット",
+    "manage": "管理",
+    "empty": "まだスニペットがありません。最初のものを作成してください。",
+    "emptyShelf": "よく入力するテキストを保存し、ここから貼り付けます。",
+    "createFirst": "スニペット作成",
+    "clickToPaste": "クリックして貼り付け",
+    "fieldTitle": "タイトル",
+    "fieldText": "テキスト",
+    "titlePlaceholder": "例：メール署名",
+    "textPlaceholder": "テキストを入力してください。{date} や {clipboard} などの変数を使用できます。",
+    "variables": "挿入：",
+    "preview": "プレビュー",
+    "previewEmpty": "結果がここに表示されます。",
+    "clipboardSample": "（クリップボードの内容）",
+    "save": "保存",
+    "saved": "保存しました",
+    "saveFailed": "保存できませんでした",
+    "delete": "削除",
+    "deleteConfirm": "もう一度クリックして削除",
+    "deleted": "削除しました",
+    "var": {
+      "date": "今日の日付",
+      "time": "現在時刻",
+      "datetime": "日付と時刻",
+      "weekday": "曜日",
+      "clipboard": "貼り付け時のクリップボード内容",
+      "uuid": "新しいランダムID",
+      "longdate": "長い日付（地域形式）"
+    },
+    "saveFromCard": "スニペットとして保存",
+    "savedToast": "スニペットに保存しました"
   }
 }

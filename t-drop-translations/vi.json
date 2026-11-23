@@ -1014,5 +1014,40 @@
     "save": "Lưu ảnh chụp code",
     "copied": "Đã sao chép ảnh chụp code",
     "failed": "Không thể tạo ảnh chụp code"
+  },
+  "snippets": {
+    "title": "Snippet",
+    "subtitle": "Văn bản mẫu có biến động, dán chỉ với một cú nhấp",
+    "new": "Snippet mới",
+    "manage": "Quản lý",
+    "empty": "Chưa có snippet nào. Hãy tạo cái đầu tiên.",
+    "emptyShelf": "Lưu những đoạn chữ bạn hay gõ và dán nhanh từ đây.",
+    "createFirst": "Tạo snippet",
+    "clickToPaste": "Bấm để dán",
+    "fieldTitle": "TIÊU ĐỀ",
+    "fieldText": "NỘI DUNG",
+    "titlePlaceholder": "VD: Chữ ký email",
+    "textPlaceholder": "Gõ nội dung. Dùng biến như {date} hoặc {clipboard}.",
+    "variables": "Chèn:",
+    "preview": "XEM TRƯỚC",
+    "previewEmpty": "Kết quả sẽ hiện ở đây.",
+    "clipboardSample": "(nội dung clipboard của bạn)",
+    "save": "Lưu",
+    "saved": "Đã lưu",
+    "saveFailed": "Không lưu được",
+    "delete": "Xóa",
+    "deleteConfirm": "Bấm lần nữa để xóa",
+    "deleted": "Đã xóa",
+    "var": {
+      "date": "Ngày hôm nay, theo định dạng vùng của bạn",
+      "time": "Giờ hiện tại, theo định dạng vùng của bạn",
+      "datetime": "Ngày và giờ, theo định dạng vùng của bạn",
+      "weekday": "Thứ trong tuần",
+      "clipboard": "Nội dung đang có trong clipboard lúc dán",
+      "uuid": "Một mã ngẫu nhiên mới",
+      "longdate": "Ngày đầy đủ, theo định dạng vùng của bạn"
+    },
+    "saveFromCard": "Lưu thành snippet",
+    "savedToast": "Đã lưu vào Snippet"
   }
 }

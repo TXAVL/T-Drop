@@ -1014,5 +1014,40 @@
     "save": "Code-Bild speichern",
     "copied": "Code-Bild kopiert",
     "failed": "Code-Bild konnte nicht erstellt werden"
+  },
+  "snippets": {
+    "title": "Snippets",
+    "subtitle": "Wiederverwendbarer Text mit Live-Variablen, ein Klick zum Einfügen",
+    "new": "Neues Snippet",
+    "manage": "Verwalten",
+    "empty": "Noch keine Snippets. Erstes erstellen.",
+    "emptyShelf": "Text, den du häufig eingibst, speichern und hier einfügen.",
+    "createFirst": "Snippet erstellen",
+    "clickToPaste": "Klicken zum Einfügen",
+    "fieldTitle": "TITEL",
+    "fieldText": "TEXT",
+    "titlePlaceholder": "z. B. E‑Mail‑Signatur",
+    "textPlaceholder": "Text eingeben. Variablen wie {date} oder {clipboard} verwenden.",
+    "variables": "Einfügen:",
+    "preview": "VORSCHAU",
+    "previewEmpty": "Das Ergebnis erscheint hier.",
+    "clipboardSample": "(dein Clipboard)",
+    "save": "Speichern",
+    "saved": "Gespeichert",
+    "saveFailed": "Speichern fehlgeschlagen",
+    "delete": "Löschen",
+    "deleteConfirm": "Noch einmal klicken zum Löschen",
+    "deleted": "Gelöscht",
+    "var": {
+      "date": "Heutiges Datum",
+      "time": "Aktuelle Uhrzeit",
+      "datetime": "Datum und Uhrzeit",
+      "weekday": "Wochentag",
+      "clipboard": "Inhalt des Clipboards beim Einfügen",
+      "uuid": "Neue Zufalls‑ID",
+      "longdate": "Lange Datumsanzeige, nach Ihrem regionalen Format"
+    },
+    "saveFromCard": "Als Snippet speichern",
+    "savedToast": "Snippet gespeichert"
   }
 }

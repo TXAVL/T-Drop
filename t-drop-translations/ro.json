@@ -1014,5 +1014,40 @@
     "save": "Salvează captura de cod",
     "copied": "Captură de cod copiată",
     "failed": "Nu s-a putut crea captura de cod"
+  },
+  "snippets": {
+    "title": "Snippeturi",
+    "subtitle": "Text reutilizabil cu variabile live, lipit cu un singur clic",
+    "new": "Snippet nou",
+    "manage": "Gestionează",
+    "empty": "Niciun snippet încă. Creează primul tău.",
+    "emptyShelf": "Salvează textul pe care îl tastezi frecvent și lipește-l de aici.",
+    "createFirst": "Creează",
+    "clickToPaste": "Clic pentru a lipi",
+    "fieldTitle": "TITLU",
+    "fieldText": "TEXT",
+    "titlePlaceholder": "ex. Semnătură email",
+    "textPlaceholder": "Tastează textul. Folosește variabile ca {date} sau {clipboard}.",
+    "variables": "Inserează:",
+    "preview": "PREVIZUALIZARE",
+    "previewEmpty": "Rezultatul apare aici.",
+    "clipboardSample": "(clipboard-ul tău)",
+    "save": "Salvează",
+    "saved": "Salvat",
+    "saveFailed": "Nu s-a putut salva",
+    "delete": "Șterge",
+    "deleteConfirm": "Clic din nou pentru a șterge",
+    "deleted": "Șters",
+    "var": {
+      "date": "Data de azi, în formatul regional",
+      "time": "Ora curentă, în formatul regional",
+      "datetime": "Data și ora, în formatul regional",
+      "weekday": "Ziua săptămânii",
+      "clipboard": "Conținutul clipboard-ului la lipire",
+      "uuid": "Un ID aleator nou",
+      "longdate": "Data completă, în formatul regional"
+    },
+    "saveFromCard": "Salvează ca snippet",
+    "savedToast": "Salvat în Snippeturi"
   }
 }

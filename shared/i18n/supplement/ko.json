@@ -373,5 +373,40 @@
     "save": "코드 스크린샷 저장",
     "copied": "코드 스크린샷 복사 완료",
     "failed": "코드 스크린샷 생성 실패"
+  },
+  "snippets": {
+    "title": "스니펫",
+    "subtitle": "실시간 변수 포함 재사용 텍스트, 한 번 클릭으로 붙여넣기",
+    "new": "새 스니펫",
+    "manage": "관리",
+    "empty": "스니펫이 없습니다. 첫 번째를 만들어 보세요.",
+    "emptyShelf": "자주 쓰는 텍스트를 저장하고 여기서 바로 붙여넣기",
+    "createFirst": "스니펫 만들기",
+    "clickToPaste": "클릭해서 붙여넣기",
+    "fieldTitle": "제목",
+    "fieldText": "텍스트",
+    "titlePlaceholder": "예: 이메일 서명",
+    "textPlaceholder": "텍스트를 입력하세요. {date} 또는 {clipboard} 같은 변수를 사용하세요.",
+    "variables": "삽입:",
+    "preview": "미리보기",
+    "previewEmpty": "결과가 여기 표시됩니다.",
+    "clipboardSample": "(클립보드 내용)",
+    "save": "저장",
+    "saved": "저장 완료",
+    "saveFailed": "저장 실패",
+    "delete": "삭제",
+    "deleteConfirm": "다시 클릭해서 삭제",
+    "deleted": "삭제 완료",
+    "var": {
+      "date": "오늘 날짜",
+      "time": "현재 시간",
+      "datetime": "날짜와 시간",
+      "weekday": "요일",
+      "clipboard": "붙여넣을 때 클립보드에 있는 내용",
+      "uuid": "새로운 랜덤 ID",
+      "longdate": "긴 날짜 (지역 형식)"
+    },
+    "saveFromCard": "스니펫 저장",
+    "savedToast": "스니펫에 저장됨"
   }
 }

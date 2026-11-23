@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { copyText } from '../lib/copyText'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
 import { formatBytes, formatImageDisplayName, previewText } from '../lib/format'
@@ -11,7 +12,7 @@ import { ImageStudioPanel } from './ImageStudioPanel'
 import { CodeBlock } from './CodeBlock'
 import { TxaMarkdown } from '../lib/txa-markdown'
 import { detectCode } from '../lib/codeDetect'
-import { copyCodeSnap, saveCodeSnap } from '../lib/codeSnap'
+import { copyCodeSnap, saveCodeSnap, languageAccent } from '../lib/codeSnap'
 import { createPortal } from 'react-dom'
 import { useAdaptiveSpring } from '../hooks/useAdaptiveSpring'
 import { useDragOut } from '../hooks/useDragOut'
@@ -784,10 +785,10 @@ function PreviewContent({
                 <QuickActionButton
                   title={t('item.cleanUrl') || 'Clean URL (Remove tracking)'}
                   icon={BroomIcon}
-                  onClick={() => {
+                  onClick={async () => {
                     playButtonClickSound()
                     const clean = cleanTrackingUrl(activeText)
-                    navigator.clipboard.writeText(clean)
+                    if (!(await copyText(clean))) return
                     useStore.getState().pushToast({
                       id: Date.now().toString(),
                       message: t('item.cleanUrlCopied') || 'Clean URL copied!',
@@ -815,7 +816,7 @@ function PreviewContent({
               <QuickActionButton
                 title={t('flyout.copyText')}
                 icon={CopyIcon}
-                onClick={() => navigator.clipboard.writeText(info.cleanUrl || activeText)}
+                onClick={() => void copyText(info.cleanUrl || activeText)}
               />
             </div>
           </div>
@@ -960,9 +961,9 @@ function PreviewContent({
                 <QuickActionButton
                   title={`Copy ${fmt.toUpperCase()}`}
                   icon={CopyIcon}
-                  onClick={() => {
+                  onClick={async () => {
                     playButtonClickSound()
-                    navigator.clipboard.writeText(formats[fmt])
+                    if (!(await copyText(formats[fmt]))) return
                     useStore.getState().pushToast({
                       id: Date.now().toString(),
                       message: `Copied ${fmt.toUpperCase()}!`,
@@ -1010,10 +1011,10 @@ function PreviewContent({
     const stats = getTextStats(activeText)
     const codeInfo = detectCode(activeText)
 
-    const handleTransform = (transformer: (s: string) => string, toastMsg: string) => {
+    const handleTransform = async (transformer: (s: string) => string, toastMsg: string) => {
       playButtonClickSound()
       const result = transformer(activeText)
-      navigator.clipboard.writeText(result)
+      if (!(await copyText(result))) return
       useStore.getState().pushToast({
         id: Date.now().toString(),
         message: toastMsg,
@@ -1049,6 +1050,17 @@ function PreviewContent({
             alignItems: 'center',
             gap: 6
           }}>
+            {codeInfo.isCode && (
+              <>
+                <span
+                  className="meta-code-tag"
+                  style={{ '--tag': languageAccent(codeInfo.language), marginLeft: 0 } as React.CSSProperties}
+                >
+                  {codeInfo.displayName}
+                </span>
+                <span style={{ opacity: 0.4 }}>·</span>
+              </>
+            )}
             <span>{stats.characters.toLocaleString()} {t('text.chars')}</span>
             <span style={{ opacity: 0.4 }}>·</span>
             <span>{stats.words.toLocaleString()} {t('text.words')}</span>

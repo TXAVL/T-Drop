@@ -347,5 +347,40 @@
     "save": "Zapisz zrzut kodu",
     "copied": "Zrzut kodu skopiowano",
     "failed": "Nie udało się utworzyć zrzutu kodu"
+  },
+  "snippets": {
+    "title": "Fragmenty",
+    "subtitle": "Wzorzec tekstu z dynamicznymi zmiennymi, wklejony jednym kliknięciem",
+    "new": "Nowy fragment",
+    "manage": "Zarządzaj",
+    "empty": "Brak fragmentów. Utwórz pierwszy.",
+    "emptyShelf": "Zapisz często używany tekst i wklej go tutaj.",
+    "createFirst": "Utwórz fragment",
+    "clickToPaste": "Kliknij, aby wkleić",
+    "fieldTitle": "TYTUŁ",
+    "fieldText": "TEKST",
+    "titlePlaceholder": "np. Podpis e‑mail",
+    "textPlaceholder": "Wpisz tekst. Użyj zmiennych typu {date} lub {clipboard}.",
+    "variables": "Wstaw:",
+    "preview": "PRZEGLĄD",
+    "previewEmpty": "Wynik pojawi się tutaj.",
+    "clipboardSample": "(twoje schowek)",
+    "save": "Zapisz",
+    "saved": "Zapisano",
+    "saveFailed": "Nie udało się zapisać",
+    "delete": "Usuń",
+    "deleteConfirm": "Kliknij ponownie, aby usunąć",
+    "deleted": "Usunięto",
+    "var": {
+      "date": "Dzisiejsza data, w twoim formacie regionalnym",
+      "time": "Aktualny czas, w twoim formacie regionalnym",
+      "datetime": "Data i czas, w twoim formacie regionalnym",
+      "weekday": "Dzień tygodnia",
+      "clipboard": "Zawartość schowka w momencie wklejania",
+      "uuid": "Nowy losowy identyfikator",
+      "longdate": "Pełna data, w twoim formacie regionalnym"
+    },
+    "saveFromCard": "Zapisz jako fragment",
+    "savedToast": "Zapisano w Fragmentach"
   }
 }

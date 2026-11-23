@@ -25,9 +25,10 @@
   font-weight: 700;
   padding: 1px 5px;
   border-radius: 4px;
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  --tag: #38bdf8;
+  background: color-mix(in srgb, var(--tag) 16%, transparent);
+  color: var(--tag);
+  border: 1px solid color-mix(in srgb, var(--tag) 38%, transparent);
   letter-spacing: 0.04em;
   margin-left: 4px;
   line-height: 1.2;

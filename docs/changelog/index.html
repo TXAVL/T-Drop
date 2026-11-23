@@ -435,7 +435,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.3.4</span>
+          <span data-i18n="nav.download">Tải về v0.3.5</span>
         </a>
       </div>
     </div>
@@ -461,12 +461,63 @@
       </div>
     </div>
 
-        <!-- ── VERSION 0.3.4 ───────────────────────────────────────── -->
+        <!-- ── VERSION 0.3.5 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.3.4</span>
+          <span>Version v0.3.5</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">23/11/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v035.summary">
+        Snippet thông minh dán văn bản mẫu chỉ với một cú nhấp, ngày giờ theo định dạng vùng của Windows, huy hiệu ngôn ngữ trên thẻ code và sửa lỗi nút sao chép cùng vùng thả file.
+      </p>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v035.feat1.title">Snippet thông minh: văn bản mẫu dán chỉ với một cú nhấp</h3>
+            <p data-i18n="v035.feat1.desc">Tab Snippet mới trong kệ (biểu tượng tia chớp) lưu những đoạn chữ bạn hay gõ: chữ ký email, câu trả lời mẫu, đoạn code. Bấm một snippet là dán ngay vào ứng dụng đang dùng, không làm đầy lịch sử clipboard. Soạn trong cửa sổ riêng có xem trước kết quả và hỗ trợ biến động {date}, {time}, {datetime}, {longdate}, {weekday}, {clipboard}, {uuid}.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v035.feat2.title">Ngày giờ theo đúng định dạng vùng trong Windows</h3>
+            <p data-i18n="v035.feat2.desc">Các biến ngày và giờ trong snippet đọc thẳng cài đặt Region của Windows (ngày ngắn, ngày dài, giờ ngắn và ngôn ngữ), nên máy dùng dd/MM/yy ra 23/11/26, máy dùng định dạng khác sẽ ra đúng kiểu của họ. Có thêm mục Lưu thành snippet trong menu chuột phải của thẻ chữ.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v035.feat3.title">Huy hiệu ngôn ngữ trên thẻ code</h3>
+            <p data-i18n="v035.feat3.desc">Thẻ code giờ hiện tên ngôn ngữ nhận diện được (TypeScript, Kotlin, Vue, TXA...) bằng huy hiệu màu riêng của từng ngôn ngữ, cả trên thẻ lẫn trong bản xem trước, thay cho nhãn CODE chung chung.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v035.feat4.title">Nút sao chép không còn báo thành công giả</h3>
+            <p data-i18n="v035.feat4.desc">Các nút sao chép mã máy, số tài khoản, nội dung chuyển khoản, URL đã làm sạch, mã màu và kết quả OCR trước đây báo đã sao chép dù clipboard trống (cửa sổ kệ không nhận focus nên trình duyệt từ chối ghi). Giờ chúng ghi qua tiến trình chính của ứng dụng và chỉ báo thành công khi thực sự đã sao chép.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge fixed" data-i18n="badge.fixed">Sửa lỗi</span>
+          <div class="change-content">
+            <h3 data-i18n="v035.feat5.title">Vùng thả file hiển thị đúng khi kéo vào kệ</h3>
+            <p data-i18n="v035.feat5.desc">Khi kéo tệp từ ứng dụng khác vào kệ, vùng thả giờ nằm gọn trong khung với viền đứt nét, biểu tượng khay và dòng hướng dẫn, thay vì chữ và biểu tượng tràn ra ngoài khung bo tròn.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+        <!-- ── VERSION 0.3.4 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.4</span>
         </div>
         <div class="release-date">22/11/2026</div>
       </div>
@@ -1509,7 +1560,18 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.3.4',
+        'nav.download': 'Tải về v0.3.5',
+        'v035.summary': 'Snippet thông minh dán văn bản mẫu chỉ với một cú nhấp, ngày giờ theo định dạng vùng của Windows, huy hiệu ngôn ngữ trên thẻ code và sửa lỗi nút sao chép cùng vùng thả file.',
+        'v035.feat1.title': 'Snippet thông minh: văn bản mẫu dán chỉ với một cú nhấp',
+        'v035.feat1.desc': 'Tab Snippet mới trong kệ (biểu tượng tia chớp) lưu những đoạn chữ bạn hay gõ: chữ ký email, câu trả lời mẫu, đoạn code. Bấm một snippet là dán ngay vào ứng dụng đang dùng, không làm đầy lịch sử clipboard. Soạn trong cửa sổ riêng có xem trước kết quả và hỗ trợ biến động {date}, {time}, {datetime}, {longdate}, {weekday}, {clipboard}, {uuid}.',
+        'v035.feat2.title': 'Ngày giờ theo đúng định dạng vùng trong Windows',
+        'v035.feat2.desc': 'Các biến ngày và giờ trong snippet đọc thẳng cài đặt Region của Windows (ngày ngắn, ngày dài, giờ ngắn và ngôn ngữ), nên máy dùng dd/MM/yy ra 23/11/26, máy dùng định dạng khác sẽ ra đúng kiểu của họ. Có thêm mục Lưu thành snippet trong menu chuột phải của thẻ chữ.',
+        'v035.feat3.title': 'Huy hiệu ngôn ngữ trên thẻ code',
+        'v035.feat3.desc': 'Thẻ code giờ hiện tên ngôn ngữ nhận diện được (TypeScript, Kotlin, Vue, TXA...) bằng huy hiệu màu riêng của từng ngôn ngữ, cả trên thẻ lẫn trong bản xem trước, thay cho nhãn CODE chung chung.',
+        'v035.feat4.title': 'Nút sao chép không còn báo thành công giả',
+        'v035.feat4.desc': 'Các nút sao chép mã máy, số tài khoản, nội dung chuyển khoản, URL đã làm sạch, mã màu và kết quả OCR trước đây báo đã sao chép dù clipboard trống (cửa sổ kệ không nhận focus nên trình duyệt từ chối ghi). Giờ chúng ghi qua tiến trình chính của ứng dụng và chỉ báo thành công khi thực sự đã sao chép.',
+        'v035.feat5.title': 'Vùng thả file hiển thị đúng khi kéo vào kệ',
+        'v035.feat5.desc': 'Khi kéo tệp từ ứng dụng khác vào kệ, vùng thả giờ nằm gọn trong khung với viền đứt nét, biểu tượng khay và dòng hướng dẫn, thay vì chữ và biểu tượng tràn ra ngoài khung bo tròn.',
         'v034.summary': 'Xem trước tài liệu Markdown trực quan ngay khi mở rộng thẻ, mở Nhật ký lỗi trong cửa sổ riêng tiện theo dõi và sửa lỗi nút sao chép nhật ký không phản hồi.',
         'v034.feat1.title': 'Xem trước Markdown trực quan khi mở rộng thẻ',
         'v034.feat1.desc': 'Khi bấm mở rộng nội dung Markdown, T-Drop tự động hiển thị thành bản xem trước gọn gàng (tiêu đề, chữ in đậm/nghiêng, bảng biểu, danh sách công việc, trích dẫn và khối mã) thay vì hiện chữ thô. Có sẵn nút chuyển nhanh giữa bản xem trước và nội dung gốc, đồng thời nhận diện chuẩn xác hơn để bảng Markdown không bị nhầm thành mã JavaScript.',
@@ -1720,7 +1782,18 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.3.4',
+        'nav.download': 'Download v0.3.5',
+        'v035.summary': 'Smart Snippets paste reusable text in one click, dates follow your Windows region format, code cards get a language badge, and the copy buttons and file drop zone are fixed.',
+        'v035.feat1.title': 'Smart Snippets: reusable text pasted in one click',
+        'v035.feat1.desc': 'A new Snippets tab in the shelf (lightning icon) keeps the text you type often: email signatures, canned replies, code blocks. Click one to paste it straight into the app you were using, without filling your clipboard history. Edit them in their own window with a live preview and variables {date}, {time}, {datetime}, {longdate}, {weekday}, {clipboard} and {uuid}.',
+        'v035.feat2.title': 'Dates and times in your own Windows region format',
+        'v035.feat2.desc': 'Date and time variables in snippets read your Windows Region settings (short date, long date, short time and language), so a PC using dd/MM/yy gives 23/11/26 and any other format comes out in its own style. A Save as snippet entry was also added to the right-click menu of text cards.',
+        'v035.feat3.title': 'Language badge on code cards',
+        'v035.feat3.desc': 'Code cards now show the detected language (TypeScript, Kotlin, Vue, TXA...) in a badge tinted with that language\'s own colour, both on the card and in the preview, instead of a generic CODE label.',
+        'v035.feat4.title': 'Copy buttons no longer report a false success',
+        'v035.feat4.desc': 'The copy buttons for the machine ID, bank account, transfer note, cleaned URLs, colour codes and OCR results used to say copied while the clipboard stayed empty (the shelf window never takes focus, so the browser refused the write). They now write through the app\'s main process and only report success when the copy really happened.',
+        'v035.feat5.title': 'Drop zone renders correctly when dragging into the shelf',
+        'v035.feat5.desc': 'When you drag files from another app into the shelf, the drop zone now sits neatly inside the frame with its dashed outline, tray icon and hint text, instead of text and icon spilling out of the rounded frame.',
         'v034.summary': 'Clean Markdown preview when expanding cards, a standalone window for Error Logs & Diagnostics, and a fix for the Copy Logs button not responding.',
         'v034.feat1.title': 'Rich Markdown Preview on Card Expand',
         'v034.feat1.desc': 'Expanding a Markdown card now shows a clean, formatted preview (headings, bold/italic text, tables, checklists, quotes, and code blocks) instead of raw syntax. Includes a quick switch between Preview and Raw text, plus smarter detection so Markdown tables are no longer mistaken for JavaScript.',

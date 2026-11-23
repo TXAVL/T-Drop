@@ -347,5 +347,40 @@
     "save": "Képkód mentése",
     "copied": "Képkód mentve",
     "failed": "Nem sikerült létrehozni a képkódot"
+  },
+  "snippets": {
+    "title": "Snippetek",
+    "subtitle": "Újrahasználható szöveg élő változókkal, egy kattintással beillesztve",
+    "new": "Új snippet",
+    "manage": "Kezelés",
+    "empty": "Még nincsenek snippetek. Hozd létre az elsőd.",
+    "emptyShelf": "Mentsd a gyakran használt szövegeket, és illeszd be innen.",
+    "createFirst": "Snippet létrehozása",
+    "clickToPaste": "Kattintás a beillesztéshez",
+    "fieldTitle": "CÍM",
+    "fieldText": "SZÖVEG",
+    "titlePlaceholder": "pl. Email aláírás",
+    "textPlaceholder": "Írj szöveget. Használj változókat, pl. {date} vagy {clipboard}.",
+    "variables": "Beszúrás:",
+    "preview": "ELŐNÉZET",
+    "previewEmpty": "Az eredmény itt jelenik meg.",
+    "clipboardSample": "(a vágólapod)",
+    "save": "Mentés",
+    "saved": "Mentve",
+    "saveFailed": "Nem menthető",
+    "delete": "Törlés",
+    "deleteConfirm": "Kattints újra a törléshez",
+    "deleted": "Törölve",
+    "var": {
+      "date": "Mai dátum, helyi formátumban",
+      "time": "Jelenlegi idő, helyi formátumban",
+      "datetime": "Dátum és idő, helyi formátumban",
+      "weekday": "Hét napja",
+      "clipboard": "A vágólapon lévő tartalom a beillesztéskor",
+      "uuid": "Új véletlenszerű azonosító",
+      "longdate": "Hosszú dátum, helyi formátumban"
+    },
+    "saveFromCard": "Mentés snippetként",
+    "savedToast": "Mentve a Snippetekbe"
   }
 }

@@ -45,6 +45,15 @@ if (window.location.hash === '#onboarding' || window.location.hash === '#/onboar
       </StrictMode>
     )
   })
+} else if (window.location.hash.includes('snippets')) {
+  // Standalone Smart Snippets editor
+  void import('./components/SnippetsWindow').then(({ SnippetsWindowView }) => {
+    root.render(
+      <StrictMode>
+        <SnippetsWindowView />
+      </StrictMode>
+    )
+  })
 } else if (window.location.hash.includes('logs')) {
   // Standalone logs & diagnostics window
   void import('./components/LogsWindow').then(({ LogsWindowView }) => {

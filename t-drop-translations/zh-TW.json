@@ -1014,5 +1014,40 @@
     "save": "儲存程式碼截圖",
     "copied": "程式碼截圖已複製",
     "failed": "無法建立程式碼截圖"
+  },
+  "snippets": {
+    "title": "片段",
+    "subtitle": "可重複使用的文字，含即時變數，一鍵貼上",
+    "new": "新增片段",
+    "manage": "管理",
+    "empty": "尚無片段，先建立一個",
+    "emptyShelf": "將常用文字儲存於此，隨時貼上",
+    "createFirst": "建立片段",
+    "clickToPaste": "點擊貼上",
+    "fieldTitle": "標題",
+    "fieldText": "內容",
+    "titlePlaceholder": "例如：電子郵件簽名",
+    "textPlaceholder": "輸入文字。使用變數如 {date} 或 {clipboard}",
+    "variables": "插入：",
+    "preview": "預覽",
+    "previewEmpty": "結果將顯示於此",
+    "clipboardSample": "（剪貼簿內容）",
+    "save": "儲存",
+    "saved": "已儲存",
+    "saveFailed": "儲存失敗",
+    "delete": "刪除",
+    "deleteConfirm": "再次點擊以刪除",
+    "deleted": "已刪除",
+    "var": {
+      "date": "今天日期",
+      "time": "現在時間",
+      "datetime": "日期與時間",
+      "weekday": "星期幾",
+      "clipboard": "貼上時剪貼簿中的內容",
+      "uuid": "隨機 ID",
+      "longdate": "長日期（區域格式）"
+    },
+    "saveFromCard": "儲存為片段",
+    "savedToast": "已儲存至片段"
   }
 }

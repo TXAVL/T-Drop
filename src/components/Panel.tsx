@@ -28,6 +28,7 @@ import { CardMenu } from './CardMenu'
 import { CopyIndicatorCurve } from './CopyIndicatorCurve'
 import { useFilteredItems } from '../hooks/useFilteredItems'
 import { DashedOutline } from './DashedOutline'
+import { SnippetsView } from './SnippetsView'
 
 import { useTranslation } from '../i18n'
 
@@ -45,6 +46,7 @@ export function Panel() {
   const setSettingsOpen = useStore((s) => s.setSettingsOpen)
   const setQuery = useStore((s) => s.setQuery)
   const emojiOpen = useStore((s) => s.emojiOpen)
+  const snippetsOpen = typeFilter === 'snippets' && !emojiOpen
   const setEmojiOpen = useStore((s) => s.setEmojiOpen)
   // Mount the picker on first open, then keep it. Tearing it (and ItemList)
   // down on every smile click is what made the switch hitch.
@@ -469,7 +471,7 @@ export function Panel() {
           <RestoreModal />
           <QrModal />
           <UpdateBanner isHorizontal={isHorizontal} />
-          {!isHorizontal && !emojiOpen && !settingsOpen && <ShelfSearch />}
+          {!isHorizontal && !emojiOpen && !snippetsOpen && !settingsOpen && <ShelfSearch />}
           <div style={{ flex: 1, display: 'grid', gridTemplate: '1fr / 1fr', overflow: 'hidden', position: 'relative' }}>
             {/* Main clipboard / emoji view (persistent so ItemList is never torn down and doesn't jump on Y-axis) */}
             <div
@@ -490,16 +492,30 @@ export function Panel() {
                 <div
                   style={{
                     gridArea: '1 / 1 / 2 / 2',
-                    display: emojiOpen ? 'none' : 'flex',
+                    display: emojiOpen || snippetsOpen ? 'none' : 'flex',
                     flexDirection: 'column',
                     minHeight: 0,
                     height: '100%',
                     overflow: 'hidden'
                   }}
-                  aria-hidden={emojiOpen}
+                  aria-hidden={emojiOpen || snippetsOpen}
                 >
                   <ItemList />
                 </div>
+                {snippetsOpen && (
+                  <div
+                    style={{
+                      gridArea: '1 / 1 / 2 / 2',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      minHeight: 0,
+                      height: '100%',
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <SnippetsView />
+                  </div>
+                )}
                 <div
                   style={{
                     gridArea: '1 / 1 / 2 / 2',
@@ -516,7 +532,7 @@ export function Panel() {
               </div>
               {!isHorizontal && (
                 <div className="footer" style={{ position: 'relative', zIndex: 100 }}>
-                  {!emojiOpen && (
+                  {!emojiOpen && !snippetsOpen && (
                     <>
                       <div className="footer-capsule">
                         <span className="footer-capsule-count" title={`${filteredCount}`}>

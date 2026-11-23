@@ -347,5 +347,40 @@
     "save": "Guardar captura de código",
     "copied": "Captura de código copiada",
     "failed": "No se pudo crear la captura de código"
+  },
+  "snippets": {
+    "title": "Fragmentos",
+    "subtitle": "Texto reutilizable con variables en vivo, pegado con un clic",
+    "new": "Nuevo fragmento",
+    "manage": "Gestionar",
+    "empty": "No hay fragmentos. Crea el primero.",
+    "emptyShelf": "Guarda textos que usas a menudo y pégalos desde aquí.",
+    "createFirst": "Crear",
+    "clickToPaste": "Pegar",
+    "fieldTitle": "TÍTULO",
+    "fieldText": "TEXTO",
+    "titlePlaceholder": "p. ej. Firma de correo",
+    "textPlaceholder": "Escribe el texto. Usa variables como {date} o {clipboard}.",
+    "variables": "Insertar:",
+    "preview": "PREVIA",
+    "previewEmpty": "El resultado aparecerá aquí.",
+    "clipboardSample": "(tu portapapeles)",
+    "save": "Guardar",
+    "saved": "Guardado",
+    "saveFailed": "No se pudo guardar",
+    "delete": "Eliminar",
+    "deleteConfirm": "Haz clic de nuevo para eliminar",
+    "deleted": "Eliminado",
+    "var": {
+      "date": "Fecha de hoy",
+      "time": "Hora actual",
+      "datetime": "Fecha y hora",
+      "weekday": "Día de la semana",
+      "clipboard": "Lo que esté en el portapapeles al pegar",
+      "uuid": "Un ID aleatorio nuevo",
+      "longdate": "Fecha larga, en tu formato regional"
+    },
+    "saveFromCard": "Guardar como fragmento",
+    "savedToast": "Guardado en fragmentos"
   }
 }

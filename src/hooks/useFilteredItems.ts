@@ -75,6 +75,7 @@ export function isImageOnlyFileItem(it: ClipboardItemDto): boolean {
 export function itemMatchesTypeFilter(it: ClipboardItemDto, filter: TypeFilter): boolean {
   if (filter === 'all') return true
   if (filter === 'pinned') return !!it.pinned
+  if (filter === 'snippets') return false // the Snippets tab shows its own list, never clipboard items
   switch (filter) {
     case 'text':
       return it.data.kind === 'text' && !it.data.isUrl && !it.data.isColor && !parseColor(it.data.text)

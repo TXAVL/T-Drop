@@ -347,5 +347,40 @@
     "save": "Enregistrer la capture",
     "copied": "Capture de code copiée",
     "failed": "Impossible de créer la capture de code"
+  },
+  "snippets": {
+    "title": "Échantillons",
+    "subtitle": "Texte réutilisable avec variables dynamiques, collé en un clic",
+    "new": "Nouvel échantillon",
+    "manage": "Gérer",
+    "empty": "Pas encore d'échantillons. Créez le premier.",
+    "emptyShelf": "Enregistrez les textes fréquents et collez-les depuis ici.",
+    "createFirst": "Créer",
+    "clickToPaste": "Cliquez pour coller",
+    "fieldTitle": "TITRE",
+    "fieldText": "TEXTE",
+    "titlePlaceholder": "ex. Signature email",
+    "textPlaceholder": "Saisissez le texte. Utilisez des variables comme {date} ou {clipboard}.",
+    "variables": "Insérer :",
+    "preview": "APERÇU",
+    "previewEmpty": "Le résultat apparaît ici.",
+    "clipboardSample": "(votre presse-papiers)",
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "saveFailed": "Impossible d’enregistrer",
+    "delete": "Supprimer",
+    "deleteConfirm": "Cliquez à nouveau pour supprimer",
+    "deleted": "Supprimé",
+    "var": {
+      "date": "Date d’aujourd’hui",
+      "time": "Heure actuelle",
+      "datetime": "Date et heure",
+      "weekday": "Jour de la semaine",
+      "clipboard": "Contenu du presse-papiers au moment du collage",
+      "uuid": "Nouvel identifiant aléatoire",
+      "longdate": "Date longue, format régional"
+    },
+    "saveFromCard": "Enregistrer comme snippet",
+    "savedToast": "Enregistré dans les snippets"
   }
 }

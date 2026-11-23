@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState, useSyncExtern
 import { CopyIcon, CheckIcon } from './icons'
 import { t } from '../i18n'
 import { prismGrammar } from '../lib/codeDetect'
+import { copyText } from '../lib/copyText'
 
 const TAP_SPRING = { type: 'spring', stiffness: 500, damping: 30 } as const
 const SWAP_SPRING = { type: 'spring', duration: 0.3, bounce: 0 } as const
@@ -180,22 +181,7 @@ function CopyButton({ code, floating }: { code: string; floating?: boolean }) {
   const copy = useCallback(async (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(code)
-      } else {
-        const area = document.createElement('textarea')
-        area.value = code
-        area.style.position = 'fixed'
-        area.style.opacity = '0'
-        document.body.appendChild(area)
-        area.select()
-        document.execCommand('copy')
-        area.remove()
-      }
-    } catch {
-      return
-    }
+    if (!(await copyText(code))) return
     setCopied(true)
     if (timer.current) clearTimeout(timer.current)
     timer.current = setTimeout(() => setCopied(false), COPY_RESET_MS)

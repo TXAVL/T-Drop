@@ -46,6 +46,7 @@ import {
   PasteIcon,
   PinFillIcon,
   NoteIcon,
+  SnippetIcon,
   PinIcon,
   TrashIcon,
   TypeIcon
@@ -459,6 +460,31 @@ function MenuList({ item }: { item: ClipboardItemDto }) {
         onSelect={() => {
           close()
           void store().saveImages(item.id)
+        }}
+      />
+    )
+  }
+
+  // Plain text only: not a link, not a colour (those already have their own actions).
+  const canSaveSnippet = isText && !isLink && !colors && text.trim().length > 0
+  if (canSaveSnippet) {
+    typeRows.push(
+      <MenuRow
+        key="snippet"
+        icon={<SnippetIcon />}
+        label={t('snippets.saveFromCard')}
+        onSelect={() => {
+          close()
+          void (async () => {
+            // the card may hold a long text: ask for the full payload, not the preview
+            const full = (await edge.getFullText?.(item.id)) || text
+            const saved = await edge.saveSnippet?.({ title: '', text: full })
+            store().pushToast({
+              id: `snippet-${Date.now()}`,
+              message: saved ? t('snippets.savedToast') : t('snippets.saveFailed'),
+              tone: saved ? 'info' : 'error'
+            })
+          })()
         }}
       />
     )

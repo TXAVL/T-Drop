@@ -73,6 +73,13 @@ export interface InvokeMap {
 
   /** Write a Unicode emoji to the clipboard and Ctrl+V into the still-focused app. Does not close the shelf. */
   'emoji:paste': { args: [text: string]; result: boolean }
+  'snippets:list': { args: []; result: import('./snippets').Snippet[] }
+  'snippets:formats': { args: []; result: import('./snippets').SnippetFormats }
+  'snippets:save': { args: [draft: import('./snippets').SnippetDraft]; result: import('./snippets').Snippet | null }
+  'snippets:delete': { args: [id: string]; result: boolean }
+  'snippets:paste': { args: [id: string]; result: boolean }
+  'snippets:open-window': { args: []; result: void }
+  'snippets:close-window': { args: []; result: void }
 
   /**
    * Picker glyph PNGs, many per call: file name -> base64 PNG. One call per

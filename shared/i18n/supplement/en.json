@@ -406,5 +406,40 @@
   },
   "groups": {
     "hoverDelay": "OPEN DELAY"
+  },
+  "snippets": {
+    "title": "Snippets",
+    "subtitle": "Reusable text with live variables, pasted in one click",
+    "new": "New snippet",
+    "manage": "Manage",
+    "empty": "No snippets yet. Create your first one.",
+    "emptyShelf": "Save text you type often and paste it from here.",
+    "createFirst": "Create a snippet",
+    "clickToPaste": "Click to paste",
+    "fieldTitle": "TITLE",
+    "fieldText": "TEXT",
+    "titlePlaceholder": "e.g. Email signature",
+    "textPlaceholder": "Type the text. Use variables like {date} or {clipboard}.",
+    "variables": "Insert:",
+    "preview": "PREVIEW",
+    "previewEmpty": "The result appears here.",
+    "clipboardSample": "(your clipboard)",
+    "save": "Save",
+    "saved": "Saved",
+    "saveFailed": "Could not save",
+    "delete": "Delete",
+    "deleteConfirm": "Click again to delete",
+    "deleted": "Deleted",
+    "var": {
+      "date": "Today's date, in your regional format",
+      "time": "Current time, in your regional format",
+      "datetime": "Date and time, in your regional format",
+      "weekday": "Day of the week",
+      "clipboard": "Whatever is on the clipboard when you paste",
+      "uuid": "A new random ID",
+      "longdate": "Long date, in your regional format"
+    },
+    "saveFromCard": "Save as snippet",
+    "savedToast": "Saved to Snippets"
   }
 }

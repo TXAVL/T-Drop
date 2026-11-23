@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom'
+import { copyText } from '../lib/copyText'
 import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../store/appStore'
@@ -581,10 +582,10 @@ export function Settings({
     void window.edge?.openLogsWindow?.()
   }
 
-  const handleCopyHardwareHash = () => {
+  const handleCopyHardwareHash = async () => {
     if (!deviceInfo?.hwHash) return
     playButtonClickSound()
-    navigator.clipboard.writeText(deviceInfo.hwHash)
+    if (!(await copyText(deviceInfo.hwHash))) return
     setCopiedHw(true)
     setTimeout(() => setCopiedHw(false), 2000)
     pushToast({
@@ -1151,9 +1152,9 @@ export function Settings({
       if (isHorizontal) window.edge?.setPreviewMode?.(false)
     }
 
-    const handleCopyStk = () => {
+    const handleCopyStk = async () => {
       playButtonClickSound()
-      navigator.clipboard.writeText('2211231106')
+      if (!(await copyText('2211231106'))) return
       setCopiedStk(true)
       setTimeout(() => setCopiedStk(false), 2000)
     }

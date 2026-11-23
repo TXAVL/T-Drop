@@ -373,5 +373,40 @@
     "save": "Simpan tangkapan kode",
     "copied": "Tangkapan kode disalin",
     "failed": "Tidak dapat membuat tangkapan kode"
+  },
+  "snippets": {
+    "title": "Snippet",
+    "subtitle": "Teks reusable dengan variabel live, tempel dengan satu klik",
+    "new": "Snippet baru",
+    "manage": "Kelola",
+    "empty": "Belum ada snippet. Buat yang pertama.",
+    "emptyShelf": "Simpan teks yang sering Anda ketik dan tempel dari sini.",
+    "createFirst": "Buat snippet",
+    "clickToPaste": "Klik untuk tempel",
+    "fieldTitle": "JUDUL",
+    "fieldText": "TEX",
+    "titlePlaceholder": "mis. Tanda tangan email",
+    "textPlaceholder": "Ketik teks. Gunakan variabel seperti {date} atau {clipboard}.",
+    "variables": "Sisipkan:",
+    "preview": "PRIVIEW",
+    "previewEmpty": "Hasil akan muncul di sini.",
+    "clipboardSample": "(clipboard Anda)",
+    "save": "Simpan",
+    "saved": "Tersimpan",
+    "saveFailed": "Tidak dapat menyimpan",
+    "delete": "Hapus",
+    "deleteConfirm": "Klik lagi untuk hapus",
+    "deleted": "Terhapus",
+    "var": {
+      "date": "Tanggal hari ini, format regional Anda",
+      "time": "Waktu sekarang, format regional Anda",
+      "datetime": "Tanggal dan waktu, format regional Anda",
+      "weekday": "Hari dalam seminggu",
+      "clipboard": "Isi clipboard saat Anda tempel",
+      "uuid": "ID acak baru",
+      "longdate": "Tanggal lengkap, format regional Anda"
+    },
+    "saveFromCard": "Simpan sebagai snippet",
+    "savedToast": "Tersimpan ke Snippet"
   }
 }

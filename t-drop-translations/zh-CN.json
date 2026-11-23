@@ -1014,5 +1014,40 @@
     "save": "保存代码截图",
     "copied": "代码截图已复制",
     "failed": "无法创建代码截图"
+  },
+  "snippets": {
+    "title": "片段",
+    "subtitle": "可实时变量的可重复使用文本，一键粘贴",
+    "new": "新建片段",
+    "manage": "管理",
+    "empty": "暂无片段，先创建一个吧",
+    "emptyShelf": "保存常用文本，随时粘贴",
+    "createFirst": "创建片段",
+    "clickToPaste": "点击粘贴",
+    "fieldTitle": "标题",
+    "fieldText": "内容",
+    "titlePlaceholder": "例如：邮件签名",
+    "textPlaceholder": "输入文本。使用 {date} 或 {clipboard} 等变量",
+    "variables": "插入：",
+    "preview": "预览",
+    "previewEmpty": "结果显示于此",
+    "clipboardSample": "（剪贴板内容）",
+    "save": "保存",
+    "saved": "已保存",
+    "saveFailed": "保存失败",
+    "delete": "删除",
+    "deleteConfirm": "再次点击删除",
+    "deleted": "已删除",
+    "var": {
+      "date": "今天日期",
+      "time": "当前时间",
+      "datetime": "日期和时间",
+      "weekday": "星期几",
+      "clipboard": "粘贴时的剪贴板内容",
+      "uuid": "随机 ID",
+      "longdate": "长日期（按地区格式）"
+    },
+    "saveFromCard": "保存为片段",
+    "savedToast": "已保存到片段"
   }
 }

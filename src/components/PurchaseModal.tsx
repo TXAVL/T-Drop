@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom'
  * After the QR is shown the order is polled; once the SePay webhook (or an admin)
  * approves it, the key is activated / re-verified automatically.
  */
+import { copyText } from '../lib/copyText'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   SUPABASE_CONFIG,
@@ -269,9 +270,9 @@ function PurchaseWindowContent({
     } catch {}
   }
 
-  const handleCopyMachineId = () => {
+  const handleCopyMachineId = async () => {
     if (!machineId) return
-    navigator.clipboard.writeText(machineId)
+    if (!(await copyText(machineId))) return
     setCopiedMachineId(true)
     setTimeout(() => setCopiedMachineId(false), 1500)
   }
@@ -1077,8 +1078,8 @@ function PurchaseWindowContent({
                 <button
                   type="button"
                   style={{ background: 'none', border: 'none', color: copiedStk ? '#10b981' : '#38bdf8', cursor: 'pointer', padding: 0 }}
-                  onClick={() => {
-                    navigator.clipboard.writeText(VIETQR_CONFIG.accountNo)
+                  onClick={async () => {
+                    if (!(await copyText(VIETQR_CONFIG.accountNo))) return
                     setCopiedStk(true)
                     setTimeout(() => setCopiedStk(false), 1500)
                   }}
@@ -1115,8 +1116,8 @@ function PurchaseWindowContent({
                 <button
                   type="button"
                   style={{ background: 'none', border: 'none', color: copiedMemo ? '#10b981' : '#f59e0b', cursor: 'pointer', padding: 0, marginLeft: 6 }}
-                  onClick={() => {
-                    navigator.clipboard.writeText(order.transfer_content)
+                  onClick={async () => {
+                    if (!(await copyText(order.transfer_content))) return
                     setCopiedMemo(true)
                     setTimeout(() => setCopiedMemo(false), 1500)
                   }}

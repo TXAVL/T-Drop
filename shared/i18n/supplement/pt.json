@@ -347,5 +347,40 @@
     "save": "Salvar captura de código",
     "copied": "Captura de código copiada",
     "failed": "Não foi possível criar a captura de código"
+  },
+  "snippets": {
+    "title": "Fragmentos",
+    "subtitle": "Texto reutilizável com variáveis ao vivo, colado com um clique",
+    "new": "Novo fragmento",
+    "manage": "Gerenciar",
+    "empty": "Nenhum fragmento ainda. Crie o primeiro.",
+    "emptyShelf": "Salve textos que você digita com frequência e cole aqui.",
+    "createFirst": "Criar",
+    "clickToPaste": "Clique para colar",
+    "fieldTitle": "TÍTULO",
+    "fieldText": "TEXTO",
+    "titlePlaceholder": "ex.: Assinatura de e‑mail",
+    "textPlaceholder": "Digite o texto. Use variáveis como {date} ou {clipboard}.",
+    "variables": "Inserir:",
+    "preview": "PRÉ-EXIBIR",
+    "previewEmpty": "O resultado aparecerá aqui.",
+    "clipboardSample": "(conteúdo da área de transferência)",
+    "save": "Salvar",
+    "saved": "Salvo",
+    "saveFailed": "Não foi possível salvar",
+    "delete": "Excluir",
+    "deleteConfirm": "Clique novamente para excluir",
+    "deleted": "Excluído",
+    "var": {
+      "date": "Data de hoje",
+      "time": "Hora atual",
+      "datetime": "Data e hora",
+      "weekday": "Dia da semana",
+      "clipboard": "Conteúdo da área de transferência no momento da colagem",
+      "uuid": "Um ID aleatório",
+      "longdate": "Data longa, no seu formato regional"
+    },
+    "saveFromCard": "Salvar como snippet",
+    "savedToast": "Salvo em Snippets"
   }
 }

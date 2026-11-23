@@ -347,5 +347,40 @@
     "save": "Gem kodebillede",
     "copied": "Kodebillede kopieret",
     "failed": "Kunne ikke oprette kodebillede"
+  },
+  "snippets": {
+    "title": "Snippets",
+    "subtitle": "Genbrugelig tekst med live‑variabler, indsæt med ét klik",
+    "new": "Ny snippet",
+    "manage": "Administrér",
+    "empty": "Ingen snippets endnu. Opret din første.",
+    "emptyShelf": "Gem tekst du ofte skriver, og indsæt den herfra.",
+    "createFirst": "Opret snippet",
+    "clickToPaste": "Klik for at indsætte",
+    "fieldTitle": "TITEL",
+    "fieldText": "TEKST",
+    "titlePlaceholder": "f.eks. Email‑signatur",
+    "textPlaceholder": "Skriv teksten. Brug variabler som {date} eller {clipboard}.",
+    "variables": "Indsæt:",
+    "preview": "FORHÅNDSVISNING",
+    "previewEmpty": "Resultatet vises her.",
+    "clipboardSample": "(din clipboard)",
+    "save": "Gem",
+    "saved": "Gemt",
+    "saveFailed": "Kunne ikke gemme",
+    "delete": "Slet",
+    "deleteConfirm": "Klik igen for at slette",
+    "deleted": "Slettet",
+    "var": {
+      "date": "Dagens dato, i dit regionale format",
+      "time": "Nuværende tid, i dit regionale format",
+      "datetime": "Dato og tid, i dit regionale format",
+      "weekday": "Ugedag",
+      "clipboard": "Det indhold der er på udklipsholderen ved indsættelse",
+      "uuid": "En ny tilfældig ID",
+      "longdate": "Lang dato, i dit regionale format"
+    },
+    "saveFromCard": "Gem som snippet",
+    "savedToast": "Gemt i Snippets"
   }
 }

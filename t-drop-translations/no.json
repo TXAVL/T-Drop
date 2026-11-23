@@ -1014,5 +1014,40 @@
     "save": "Lagre kode‑skjermbilde",
     "copied": "Kode‑skjermbilde kopiert",
     "failed": "Kunne ikke lage kode‑skjermbilde"
+  },
+  "snippets": {
+    "title": "Snippets",
+    "subtitle": "Gjenbrukbar tekst med live‑variabler, lim inn med ett klikk",
+    "new": "Ny snippet",
+    "manage": "Administrer",
+    "empty": "Ingen snippet ennå. Lag din første.",
+    "emptyShelf": "Lagre tekst du ofte skriver og lim den herfra.",
+    "createFirst": "Lag snippet",
+    "clickToPaste": "Klikk for å lime",
+    "fieldTitle": "TITTEL",
+    "fieldText": "TEKST",
+    "titlePlaceholder": "f.eks. E‑post‑signatur",
+    "textPlaceholder": "Skriv teksten. Bruk variabler som {date} eller {clipboard}.",
+    "variables": "Sett inn:",
+    "preview": "FORHÅNDSVISNING",
+    "previewEmpty": "Resultatet vises her.",
+    "clipboardSample": "(din utklippstavle)",
+    "save": "Lagre",
+    "saved": "Lagret",
+    "saveFailed": "Kunne ikke lagre",
+    "delete": "Slett",
+    "deleteConfirm": "Klikk igjen for å slette",
+    "deleted": "Slettet",
+    "var": {
+      "date": "Dagens dato, i ditt regionale format",
+      "time": "Nåværende tid, i ditt regionale format",
+      "datetime": "Dato og tid, i ditt regionale format",
+      "weekday": "Ukedag",
+      "clipboard": "Det som er på utklippstavlen når du limer",
+      "uuid": "En ny tilfeldig ID",
+      "longdate": "Lang dato, i ditt regionale format"
+    },
+    "saveFromCard": "Lagre som snippet",
+    "savedToast": "Lagret i Snippets"
   }
 }

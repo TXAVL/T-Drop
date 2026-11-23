@@ -41,6 +41,13 @@ export interface EdgeApi {
   saveImages: (id: string) => Promise<string[]>
   pasteSubitem: (req: DragRequest) => Promise<boolean>
   pasteEmoji: (text: string) => Promise<boolean>
+  listSnippets: () => Promise<import('./snippets').Snippet[]>
+  getSnippetFormats: () => Promise<import('./snippets').SnippetFormats>
+  saveSnippet: (draft: import('./snippets').SnippetDraft) => Promise<import('./snippets').Snippet | null>
+  deleteSnippet: (id: string) => Promise<boolean>
+  pasteSnippet: (id: string) => Promise<boolean>
+  openSnippetsWindow: () => Promise<void>
+  closeSnippetsWindow: () => Promise<void>
   /** Picker glyph PNGs, many per call: file name -> base64 PNG (see ipc 'emoji:glyphs'). */
   emojiGlyphs: (files: string[]) => Promise<Record<string, string>>
   /** A file-kind folder icon's SVG source, or null (see ipc 'icon:svg'). */

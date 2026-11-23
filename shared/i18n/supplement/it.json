@@ -347,5 +347,40 @@
     "save": "Salva schermata codice",
     "copied": "Schermata codice copiata",
     "failed": "Impossibile creare la schermata codice"
+  },
+  "snippets": {
+    "title": "Snippet",
+    "subtitle": "Testo riutilizzabile con variabili live, incollato con un clic",
+    "new": "Nuovo snippet",
+    "manage": "Gestisci",
+    "empty": "Nessun snippet. Crea il primo.",
+    "emptyShelf": "Salva il testo che usi spesso e incollalo da qui.",
+    "createFirst": "Crea snippet",
+    "clickToPaste": "Clicca per incollare",
+    "fieldTitle": "TITOLO",
+    "fieldText": "TESTO",
+    "titlePlaceholder": "es. Firma email",
+    "textPlaceholder": "Digita il testo. Usa variabili come {date} o {clipboard}.",
+    "variables": "Inserisci:",
+    "preview": "ANTEPRIMA",
+    "previewEmpty": "Il risultato apparirà qui.",
+    "clipboardSample": "(contenuto clipboard)",
+    "save": "Salva",
+    "saved": "Salvato",
+    "saveFailed": "Impossibile salvare",
+    "delete": "Elimina",
+    "deleteConfirm": "Clicca di nuovo per eliminare",
+    "deleted": "Eliminato",
+    "var": {
+      "date": "Data odierna",
+      "time": "Ora corrente",
+      "datetime": "Data e ora",
+      "weekday": "Giorno della settimana",
+      "clipboard": "Contenuto clipboard al momento dell’incolla",
+      "uuid": "Nuovo ID casuale",
+      "longdate": "Data lunga, nel formato regionale"
+    },
+    "saveFromCard": "Salva come snippet",
+    "savedToast": "Salvato in Snippets"
   }
 }

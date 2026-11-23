@@ -347,5 +347,40 @@
     "save": "Tallenna koodikuvakaappaus",
     "copied": "Koodikuvakaappaus kopioitu",
     "failed": "Koodikuvakaappauksen luominen epäonnistui"
+  },
+  "snippets": {
+    "title": "Snippetit",
+    "subtitle": "Käytettävät tekstit, joissa on muuttujia, liitetään yhdellä klikkauksella",
+    "new": "Uusi snippet",
+    "manage": "Hallinnoi",
+    "empty": "Ei snippettejä. Luo ensimmäinen",
+    "emptyShelf": "Tallenna usein kirjoittamaasi tekstiä ja liitä se täältä",
+    "createFirst": "Luo snippet",
+    "clickToPaste": "Klikkaa liittääksesi",
+    "fieldTitle": "Otsikko",
+    "fieldText": "Teksti",
+    "titlePlaceholder": "esim. Sähköpostin allekirjoitus",
+    "textPlaceholder": "Kirjoita teksti. Käytä muuttujia kuten {date} tai {clipboard}.",
+    "variables": "Lisää:",
+    "preview": "ESIKATSELMA",
+    "previewEmpty": "Tulos näkyy täällä",
+    "clipboardSample": "(esiintyvä leikepöytä)",
+    "save": "Tallenna",
+    "saved": "Tallennettu",
+    "saveFailed": "Tallennus epäonnistui",
+    "delete": "Poista",
+    "deleteConfirm": "Klikkaa uudelleen poistaaksesi",
+    "deleted": "Poistettu",
+    "var": {
+      "date": "Tänään päivämäärä, alueellinen muoto",
+      "time": "Nykyinen aika, alueellinen muoto",
+      "datetime": "Päivämäärä ja aika, alueellinen muoto",
+      "weekday": "Viikonpäivä",
+      "clipboard": "Leikepöydällä oleva sisältö",
+      "uuid": "Uusi satunnainen tunniste",
+      "longdate": "Pitkä päivämäärä, alueellinen muoto"
+    },
+    "saveFromCard": "Tallenna snippetiksi",
+    "savedToast": "Tallennettu Snippetteihin"
   }
 }

@@ -14,6 +14,7 @@
  * clamped preview; file items list names or bundle badge. Motion is handled by
  * the parent list (layout/AnimatePresence), so this component stays presentational.
  */
+import { copyText } from '../lib/copyText'
 import { memo, useState, useCallback, useEffect, useMemo, useRef, forwardRef, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import type { ClipboardItemDto } from '../../shared/types'
@@ -29,7 +30,7 @@ import { CopyIcon, FileKindIcon, FileStackPhoto, PinIcon, PinFillIcon, TrashIcon
 import { LinkPreviewCard } from './LinkPreviewCard'
 import { CodeBlock } from './CodeBlock'
 import { detectCode } from '../lib/codeDetect'
-import { copyCodeSnap } from '../lib/codeSnap'
+import { copyCodeSnap, languageAccent } from '../lib/codeSnap'
 import '../styles/item.css'
 import { tryPaste } from '../lib/tryPaste'
 import { parseColor, getColorFormats, cycleColorFormat } from '../lib/colorUtils'
@@ -406,12 +407,12 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
                     <span 
                       className="meta-clean-badge" 
                       title={t('item.cleanUrl') || 'Contains tracking parameters (click to clean)'}
-                      onClick={(e) => {
+                      onClick={async (e) => {
                         e.stopPropagation()
                         e.preventDefault()
                         playButtonClickSound()
                         const cleaned = cleanTrackingUrl((item.data as any).text)
-                        navigator.clipboard.writeText(cleaned)
+                        if (!(await copyText(cleaned))) return
                         setCopied(true)
                         window.setTimeout(() => setCopied(false), 900)
                       }}
@@ -476,13 +477,13 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
             <button
               className="act act-clean-url"
               title={t('item.cleanUrl') || 'Clean URL (Remove tracking)'}
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.stopPropagation()
                 e.preventDefault()
                 e.currentTarget.blur()
                 playButtonClickSound()
                 const cleaned = cleanTrackingUrl((item.data as any).text)
-                navigator.clipboard.writeText(cleaned)
+                if (!(await copyText(cleaned))) return
                 setCopied(true)
                 window.setTimeout(() => setCopied(false), 900)
               }}
@@ -509,13 +510,13 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
             <button
               className="act"
               title={t('item.convertColor') || 'Convert & Copy color'}
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.stopPropagation()
                 e.preventDefault()
                 e.currentTarget.blur()
                 playButtonClickSound()
                 const cycled = cycleColorFormat((item.data as any).text)
-                navigator.clipboard.writeText(cycled.nextText)
+                if (!(await copyText(cycled.nextText))) return
                 setCopied(true)
                 window.setTimeout(() => setCopied(false), 900)
               }}
@@ -527,7 +528,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
             <button
               className="act act-text-transform"
               title={t('item.transformCase')}
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.stopPropagation()
                 e.preventDefault()
                 e.currentTarget.blur()
@@ -541,7 +542,7 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
                 } else {
                   nextText = toUpper(current)
                 }
-                navigator.clipboard.writeText(nextText)
+                if (!(await copyText(nextText))) return
                 setCopied(true)
                 useStore.getState().pushToast({
                   id: Date.now().toString(),
@@ -1216,13 +1217,13 @@ function ColorSwatchPreview({ colorInfo }: { item: ClipboardItemDto; colorInfo: 
   const [activeFmt, setActiveFmt] = useState<'hex' | 'rgb' | 'hsl'>(formats.activeFormat)
   const [copiedFmt, setCopiedFmt] = useState<string | null>(null)
 
-  const handleCopyFmt = (fmt: 'hex' | 'rgb' | 'hsl', e: React.MouseEvent) => {
+  const handleCopyFmt = async (fmt: 'hex' | 'rgb' | 'hsl', e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
     playButtonClickSound()
     setActiveFmt(fmt)
     const code = formats[fmt]
-    navigator.clipboard.writeText(code)
+    if (!(await copyText(code))) return
     setCopiedFmt(fmt)
     setTimeout(() => setCopiedFmt(null), 900)
   }
@@ -1434,13 +1435,19 @@ function ItemDetails({ item }: { item: ClipboardItemDto }) {
       const trimmed = text.trim()
       const len = text.length
       const words = trimmed ? trimmed.split(/\s+/).length : 0
-      const isJson = (trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']'))
-      const isCode = !isJson && (text.includes('\n') && (text.includes('function ') || text.includes('const ') || text.includes('import ') || text.includes('class ') || text.includes('def ')))
+      const codeInfo = detectCode(text)
 
       return (
         <>
-          {isJson && <span className="meta-code-tag">JSON</span>}
-          {isCode && <span className="meta-code-tag">CODE</span>}
+          {codeInfo.isCode && (
+            <span
+              className="meta-code-tag"
+              title={codeInfo.displayName}
+              style={{ '--tag': languageAccent(codeInfo.language) } as React.CSSProperties}
+            >
+              {codeInfo.displayName}
+            </span>
+          )}
           <span className="meta-detail">· {len} {t('stats.chars')}{words > 1 ? ` · ${words} ${t('stats.words')}` : ''}</span>
         </>
       )

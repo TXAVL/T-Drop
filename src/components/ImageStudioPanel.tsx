@@ -3,6 +3,7 @@
  * Features 1-click format conversion (PNG, JPG, WebP), smart image compression,
  * and AI OCR Text Extraction (VIP 30-day / PREMIUM 60-day feature).
  */
+import { copyText } from '../lib/copyText'
 import { useState, useCallback, useEffect } from 'react'
 import { convertImage, compressImage, type CompressResult } from '../lib/imageTools'
 import { extractTextFromImage, type OcrResult } from '../lib/ocr'
@@ -212,10 +213,10 @@ export function ImageStudioPanel({
   }, [imageSrc, ocrLang, ocrRunning, isPro])
 
   // Copy OCR Text
-  const handleCopyOcrText = useCallback(() => {
+  const handleCopyOcrText = useCallback(async () => {
     if (!ocrResult?.text) return
     playButtonClickSound()
-    navigator.clipboard.writeText(ocrResult.text)
+    if (!(await copyText(ocrResult.text))) return
     useStore.getState().triggerCopyFlare()
     setOcrCopied(true)
     setTimeout(() => setOcrCopied(false), 1500)
@@ -285,7 +286,7 @@ export function ImageStudioPanel({
   }, [ocrResult, isPremium])
 
   // Copy as Markdown (PREMIUM Exclusive)
-  const handleCopyMarkdown = useCallback(() => {
+  const handleCopyMarkdown = useCallback(async () => {
     if (!ocrResult?.text) return
     if (!isPremium) {
       playButtonClickSound()
@@ -298,7 +299,7 @@ export function ImageStudioPanel({
       return
     }
     playButtonClickSound()
-    navigator.clipboard.writeText(ocrResult.text.trim())
+    if (!(await copyText(ocrResult.text.trim()))) return
     useStore.getState().triggerCopyFlare()
     setOcrCopiedMarkdown(true)
     setTimeout(() => setOcrCopiedMarkdown(false), 1500)

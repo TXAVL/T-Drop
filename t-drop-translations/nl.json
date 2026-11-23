@@ -1014,5 +1014,40 @@
     "save": "Codeafbeelding opslaan",
     "copied": "Codeafbeelding gekopieerd",
     "failed": "Codeafbeelding niet gemaakt"
+  },
+  "snippets": {
+    "title": "Snippets",
+    "subtitle": "Herbruikbare tekst met live variabelen, één klik om te plakken",
+    "new": "Nieuw snippet",
+    "manage": "Beheren",
+    "empty": "Nog geen snippets. Maak je eerste.",
+    "emptyShelf": "Sla vaak gebruikte tekst op en plak hier.",
+    "createFirst": "Snippet maken",
+    "clickToPaste": "Klik om te plakken",
+    "fieldTitle": "TITEL",
+    "fieldText": "TEKST",
+    "titlePlaceholder": "bv. e‑mailhandtekening",
+    "textPlaceholder": "Typ de tekst. Gebruik variabelen zoals {date} of {clipboard}.",
+    "variables": "Invoegen:",
+    "preview": "VOORBEELD",
+    "previewEmpty": "Het resultaat verschijnt hier.",
+    "clipboardSample": "(je klembord)",
+    "save": "Opslaan",
+    "saved": "Opgeslagen",
+    "saveFailed": "Opslaan mislukt",
+    "delete": "Verwijderen",
+    "deleteConfirm": "Klik nogmaals om te verwijderen",
+    "deleted": "Verwijderd",
+    "var": {
+      "date": "Vandaag’s datum, in je regionale formaat",
+      "time": "Huidige tijd, in je regionale formaat",
+      "datetime": "Datum en tijd, in je regionale formaat",
+      "weekday": "Dag van de week",
+      "clipboard": "Wat er op het klembord staat bij het plakken",
+      "uuid": "Een nieuwe willekeurige ID",
+      "longdate": "Lange datum, in je regionale formaat"
+    },
+    "saveFromCard": "Opslaan als snippet",
+    "savedToast": "Opgeslagen in Snippets"
   }
 }

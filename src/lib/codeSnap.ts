@@ -131,6 +131,15 @@ const BACKDROPS: Record<string, string[]> = {
 }
 const DEFAULT_BACKDROP = ['#5b7cfa', '#8b5cf6', '#ec4899']
 
+/** The most readable (brightest) colour of a language's gradient, for badges and chips. */
+export function languageAccent(language: string): string {
+  const lum = (hex: string) => {
+    const n = parseInt(hex.slice(1), 16)
+    return 0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255)
+  }
+  return pickBackdrop(language).reduce((best, c) => (lum(c) > lum(best) ? c : best))
+}
+
 /** Gradient stops (CSS colours, left-top to right-bottom) behind the code window. */
 export function pickBackdrop(language: string): string[] {
   return BACKDROPS[language.toLowerCase()] ?? DEFAULT_BACKDROP

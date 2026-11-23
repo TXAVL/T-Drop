@@ -1,6 +1,6 @@
 import { useStore } from '../store/appStore'
 import RubberSegment from './RubberSegment'
-import { GearIcon, CloseIcon, InfoIcon, ClockIcon, TypeIcon, LinkIcon, ImageIcon, FilesIcon, PaletteIcon, EmojiSmileIcon, PinFillIcon } from './icons'
+import { GearIcon, CloseIcon, InfoIcon, ClockIcon, TypeIcon, LinkIcon, ImageIcon, FilesIcon, PaletteIcon, EmojiSmileIcon, PinFillIcon, SnippetIcon } from './icons'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { loadEmojiCatalog } from '../lib/emoji/load'
 import { ShelfSearch } from './ShelfSearch'
@@ -63,6 +63,7 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
     { id: 'images', label: t('filters.images'), Icon: ImageIcon },
     { id: 'files', label: t('filters.files'), Icon: FilesIcon },
     { id: 'colors', label: t('filters.colors') || 'Colors', Icon: PaletteIcon },
+    { id: 'snippets', label: t('snippets.title'), Icon: SnippetIcon },
     { id: 'emoji', label: t('emoji.open'), Icon: EmojiSmileIcon }
   ]
 

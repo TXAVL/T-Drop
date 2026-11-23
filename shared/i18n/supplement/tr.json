@@ -347,5 +347,40 @@
     "save": "Kod ekran görüntüsünü kaydet",
     "copied": "Kod ekran görüntüsü kopyalandı",
     "failed": "Kod ekran görüntüsü oluşturulamadı"
+  },
+  "snippets": {
+    "title": "Snippetler",
+    "subtitle": "Canlı değişkenlerle tek tıklamayla yapıştırılabilir metin",
+    "new": "Yeni Snippet",
+    "manage": "Yönet",
+    "empty": "Henüz snippet yok. İlkini oluşturun.",
+    "emptyShelf": "Sık kullandığınız metni kaydedin ve buradan yapıştırın.",
+    "createFirst": "Snippet Oluştur",
+    "clickToPaste": "Tıkla Yapıştır",
+    "fieldTitle": "BAŞLIK",
+    "fieldText": "METİN",
+    "titlePlaceholder": "Örn.: E-posta imzası",
+    "textPlaceholder": "Metni girin. {date} veya {clipboard} gibi değişkenleri kullanın.",
+    "variables": "Ekle:",
+    "preview": "ÖNIZLEME",
+    "previewEmpty": "Sonuç burada görünecek.",
+    "clipboardSample": "(panoya kopyalanan içerik)",
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "saveFailed": "Kaydedilemedi",
+    "delete": "Sil",
+    "deleteConfirm": "Tekrar tıklayarak sil",
+    "deleted": "Silindi",
+    "var": {
+      "date": "Bugünün tarihi, bölgesel biçimde",
+      "time": "Şu anki saat, bölgesel biçimde",
+      "datetime": "Tarih ve saat, bölgesel biçimde",
+      "weekday": "Haftanın günü",
+      "clipboard": "Yapıştırırken panoda olan içerik",
+      "uuid": "Yeni rastgele kimlik",
+      "longdate": "Uzun tarih, bölgesel biçimde"
+    },
+    "saveFromCard": "Snippet olarak kaydet",
+    "savedToast": "Snippetlere kaydedildi"
   }
 }

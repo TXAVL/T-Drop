@@ -1014,5 +1014,40 @@
     "save": "Uložit snímek kódu",
     "copied": "Snímek kódu zkopírován",
     "failed": "Nelze vytvořit snímek kódu"
+  },
+  "snippets": {
+    "title": "Úryvky",
+    "subtitle": "Opakovatelný text s živými proměnnými, vložený jedním kliknutím",
+    "new": "Nový úryvek",
+    "manage": "Spravovat",
+    "empty": "Zatím žádné úryvky. Vytvořte první.",
+    "emptyShelf": "Ukládejte často používaný text a vkládejte ho z tady.",
+    "createFirst": "Vytvořit",
+    "clickToPaste": "Klikněte pro vložení",
+    "fieldTitle": "NÁZEV",
+    "fieldText": "TEXT",
+    "titlePlaceholder": "např. Podpis e‑mailu",
+    "textPlaceholder": "Zadejte text. Použijte proměnné jako {date} nebo {clipboard}.",
+    "variables": "Vložit:",
+    "preview": "NÁHLED",
+    "previewEmpty": "Výsledek se zde zobrazí.",
+    "clipboardSample": "(váš obsah clipboardu)",
+    "save": "Uložit",
+    "saved": "Uloženo",
+    "saveFailed": "Nelze uložit",
+    "delete": "Smazat",
+    "deleteConfirm": "Klikněte znovu pro smazání",
+    "deleted": "Smazáno",
+    "var": {
+      "date": "Dnešní datum, ve vašem regionálním formátu",
+      "time": "Aktuální čas, ve vašem regionálním formátu",
+      "datetime": "Datum a čas, ve vašem regionálním formátu",
+      "weekday": "Den v týdnu",
+      "clipboard": "Obsah clipboardu při vkládání",
+      "uuid": "Nové náhodné ID",
+      "longdate": "Dlouhé datum, ve vašem regionálním formátu"
+    },
+    "saveFromCard": "Uložit jako úryvek",
+    "savedToast": "Uloženo do úryvků"
   }
 }

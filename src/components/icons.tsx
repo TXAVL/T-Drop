@@ -49,6 +49,7 @@ import {
   Palette,
   QrCode,
   Camera,
+  Zap,
   Download,
   ClipboardCopy,
   Edit3
@@ -240,4 +241,5 @@ export const CrownIcon = (p: P) => {
 
 export const QrCodeIcon = uiIcon(QrCode)
 export const CameraIcon = uiIcon(Camera)
+export const SnippetIcon = uiIcon(Zap)
 

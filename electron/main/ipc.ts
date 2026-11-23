@@ -27,6 +27,11 @@ import { registerGlobalHotkey } from './index'
 import { getOnboardingWindow } from './onboardingWindow'
 import { createPurchaseWindow, closePurchaseWindow, getPurchaseWindow } from './purchaseWindow'
 import { createLogsWindow, closeLogsWindow } from './logsWindow'
+import { createSnippetsWindow, closeSnippetsWindow } from './snippetsWindow'
+import { listSnippets, saveSnippet, deleteSnippet, getSnippet, countSnippetUse } from '../store/snippets'
+import { expandSnippet } from '../../shared/snippets'
+import { getSnippetFormats } from './regionFormat'
+import { randomUUID } from 'node:crypto'
 import { saveReceiptPdf } from './receipt'
 import { mt, mainT } from './i18n'
 import { isSignatureDataUrl, normalizeBuyerName } from '../../shared/receipt'
@@ -620,6 +625,60 @@ export function registerIpc(): void {
           simulatePaste()
           setTimeout(() => traceFg('sendKeys+400ms'), 400)
         }, emojiSendDelay)
+      }
+    } finally {
+      setTimeout(() => {
+        watcher.resyncSignature()
+        watcher.setPaused(loadSettings().incognito)
+      }, 350)
+    }
+    return true
+  })
+
+  handle('snippets:list', () => listSnippets())
+  handle('snippets:formats', () => getSnippetFormats())
+  handle('snippets:save', (draft) => saveSnippet(draft))
+  handle('snippets:delete', (id) => (typeof id === 'string' ? deleteSnippet(id) : false))
+  handle('snippets:open-window', () => {
+    createSnippetsWindow()
+  })
+  handle('snippets:close-window', () => {
+    closeSnippetsWindow()
+  })
+
+  // Paste a snippet: variables are expanded at this moment ({clipboard} reads what is
+  // on the clipboard NOW), the result is typed into the app the user came from, and
+  // nothing is added to clipboard history (a snippet is a paste tool, not a capture).
+  handle('snippets:paste', async (id) => {
+    if (typeof id !== 'string') return false
+    const snippet = getSnippet(id)
+    if (!snippet) return false
+    const now = Date.now()
+    if (now - _lastPasteTime < PASTE_GUARD_MS) return false
+    _lastPasteTime = now
+
+    const watcher = getWatcher()
+    watcher.setPaused(true)
+    try {
+      let current = ''
+      try {
+        current = (await clipboard.readText?.()) ?? ''
+      } catch {
+        current = ''
+      }
+      const text = expandSnippet(snippet.text, { now: new Date(), formats: await getSnippetFormats(), clipboard: current, uuid: randomUUID })
+      pushState.togglePanel(false)
+      clipboard.clear()
+      await clipboard.writeText(text)
+      countSnippetUse(id)
+      const delay = await resolvePasteTarget(50)
+      if (delay < 0) {
+        toast('toast.pasteFallback', 'info')
+      } else {
+        setTimeout(() => {
+          traceFg('sendKeys')
+          simulatePaste()
+        }, delay)
       }
     } finally {
       setTimeout(() => {
