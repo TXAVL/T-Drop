@@ -676,7 +676,16 @@
     "notesLine2": "Vas · Gerinctúra a felhők felett",
     "note": "Vonatjegyek",
     "query": "vonat",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Haladásjelentés küldése 9:00-kor",
+    "demoMulti2": "2. Legújabb tervezeti vázlat csatolása",
+    "demoMdHeading": "Hétvégi terv **T-Drop**",
+    "demoMdColFeature": "Funkció",
+    "demoMdColStatus": "Állapot",
+    "demoMdRow1": "**Markdown** előnézet",
+    "demoMdRow1Status": "Kész",
+    "demoMdRow2": "Beágyazott szerkesztés & többszörös beillesztés",
+    "demoMdRow2Status": "Élő"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Mentés snippetként",
     "savedToast": "Mentve a Snippetekbe"
+  },
+  "themeStudio": {
+    "section": "TÉMA ÉS SZÍNMÓD",
+    "group": "POLC TÉMA",
+    "title": "Téma és színmód",
+    "desc": "Élő animált előnézet a polc témájának és színmódjának kiválasztásához.",
+    "modeSystem": "Rendszer",
+    "modeLight": "Világos",
+    "modeDark": "Sötét",
+    "sectionTitle": "TÉMA ÉS SZÍNMÓD",
+    "groupLabel": "POLC TÉMA",
+    "cardTitle": "Téma és színmód",
+    "cardDesc": "Élő animált előnézet a polc témájának és színmódjának kiválasztásához.",
+    "colorModeLabel": "Színmód",
+    "presetLabel": "Téma előbeállítás"
+  },
+  "whatsNew": {
+    "windowTitle": "Újdonságok a T-Dropban",
+    "badgeNew": "Új",
+    "mdTitle": "Markdown előnézet és beágyazott szövegszerkesztés",
+    "mdDesc": "A Markdown kártya kibontásakor tiszta, formázott előnézet jelenik meg (címek, táblázatok, kódrészek) a nyers szintaxis helyett. Kattintson a ceruza gombra a másolt szöveges kártya helyben szerkesztéséhez.",
+    "mdTip": "Tipp: Nyomja meg a Ctrl+Enter-t a gyors mentéshez, vagy váltson bármikor Előnézet/Nyers között.",
+    "mpTitle": "Polc rögzítése nyitva & Több kártya beillesztése",
+    "mpDesc": "Kattintson a Fejlécben lévő Rögzítés gombra a polc nyitva tartásához munka közben. Ctrl+Kattintással több szöveges kártyát jelölhet ki, majd egy lépésben másolhatja vagy beillesztheti őket.",
+    "mpTip": "Tipp: Válaszd ki a sortörő (↵), bekezdést (¶) vagy szóközt (␣) közvetlenül a lebegő sávon.",
+    "thTitle": "6 polcstílus és Rendszer / Világos / Sötét",
+    "thDesc": "Az alapértelmezett a jellegzetes Obsidian sötét téma, plusz 5 új, kurátori témák, valamint Rendszer / Világos / Sötét módok élő animált előnézettel a Beállítások → Megjelenés menüben.",
+    "thTip": "Tipp: Válaszd a „Rendszer” opciót, hogy a T-Drop automatikusan kövesse a Windows témáját.",
+    "skip": "Kihagyás",
+    "next": "Következő →",
+    "done": "Értem, indítás",
+    "close": "Bezárás",
+    "mdHeading": "Hétvégi terv",
+    "mdColItem": "Elem",
+    "mdColStatus": "Állapot",
+    "mdRowEdit": "Élő szerkesztés",
+    "mdReady": "Kész",
+    "mdOn": "Be",
+    "mdSaveHint": "Ctrl+Enter · Mentés",
+    "mpCard1": "1. Haladási jelentés küldése 9:00-kor",
+    "mpCard2": "2. Legfrissebb tervrajz csatolása"
+  },
+  "multiPaste": {
+    "selected": "{count} kiválasztva",
+    "copyAll": "Egyesített másolása",
+    "pasteAll": "Beillesztés",
+    "clear": "Kijelölés törlése",
+    "copiedToast": "Másolva {count} kombinált kártya!",
+    "selectMenu": "Kijelölés többszörös beillesztéshez (Ctrl+Kattintás)",
+    "deselectMenu": "Eltávolítás a többszörös beillesztésből",
+    "pinShelf": "Polc rögzítése nyitva",
+    "unpinShelf": "Polc feloldása (elhagyáskor automatikus elrejtés)"
+  },
+  "textEdit": {
+    "editMenu": "Szöveg szerkesztése",
+    "editBtn": "Szerkesztés",
+    "cancelEdit": "Szerkesztés megszakítása",
+    "hint": "Ctrl+Enter mentés · Esc megszakítás",
+    "cancel": "Mégse",
+    "saveCopy": "Mentés és másolás",
+    "save": "Mentés",
+    "savedToast": "Szerkesztett szöveg mentve!",
+    "savedCopyToast": "Mentve és másolva!"
+  },
+  "appFilter": {
+    "group": "ALKALMAZÁS SZŰRŐ",
+    "title": "Alkalmazások felvétele / kizárása",
+    "descExclude": "Ne rögzítse a vágólap előzményt a listában szereplő alkalmazásokból.",
+    "descInclude": "Csak a listában szereplő alkalmazásokból másoláskor rögzíti a vágólap előzményt.",
+    "exclude": "Kizár",
+    "include": "Csak ezek",
+    "placeholder": "pl. KeePass.exe, chrome...",
+    "add": "Hozzáadás"
+  },
+  "imageViewer": {
+    "group": "KÉPNÉZŐ",
+    "title": "Alkalmazás a képernyőfotók megnyitásához",
+    "desc": "Válaszd ki, melyik alkalmazás nyílik meg a „Kép megnyitása alkalmazással” kattintásakor.",
+    "systemDefault": "Rendszer alapértelmezett",
+    "choose": "Alkalmazás kiválasztása...",
+    "reset": "Alapértelmezett",
+    "openMenu": "Kép megnyitása alkalmazással",
+    "movePinUp": "Rögzített felfelé",
+    "movePinDown": "Rögzített lefelé"
+  },
+  "editor": {
+    "editTitle": "Szöveg szerkesztése",
+    "cancelEditTitle": "Szerkesztés megszakítása",
+    "savedEdited": "Szerkesztett szöveg mentve!",
+    "hint": "Ctrl+Enter mentéshez · Esc megszakításhoz",
+    "cancel": "Mégse",
+    "savedCopied": "Mentve & másolva!",
+    "saved": "Mentve!",
+    "saveCopy": "Mentés és másolás",
+    "save": "Mentés",
+    "openImageWithApp": "Kép megnyitása alkalmazással"
+  },
+  "multiSelect": {
+    "separator": "Elválasztó",
+    "sepNewline": "Új sor (\\n)",
+    "sepBlank": "Üres sor (\\n\\n)",
+    "sepSpace": "Szóköz"
+  },
+  "themes": {
+    "default": {
+      "name": "Obszidián",
+      "tagline": "Eredeti tiszta sötét üveg"
+    },
+    "midnightOcean": {
+      "name": "Éjféli óceán",
+      "tagline": "Mély tengerkék és elektromos cián"
+    },
+    "emeraldGlass": {
+      "name": "Smaragd üveg",
+      "tagline": "Erdei obszidián és mentás ragyogás"
+    },
+    "sunsetAmber": {
+      "name": "Borostyán szürkület",
+      "tagline": "Meleg faszén és aranyszínű borostyán"
+    },
+    "roseVelvet": {
+      "name": "Rózsaszín bársony",
+      "tagline": "Mély szilva és lágy rózsaszín kiemelés"
+    },
+    "nordicFrost": {
+      "name": "Északi fagy",
+      "tagline": "Sarkvidéki pala és friss indigó"
+    }
   }
 }

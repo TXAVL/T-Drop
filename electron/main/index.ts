@@ -21,7 +21,8 @@ import { prewarmDragIcons } from './drag'
 import { initState, getWatcher, loadSettings, saveSettings, pushState, stopStateTimers, getStore } from './state'
 import { initAutoUpdater, checkUpdateOnPanelOpen } from './updater'
 import { createOnboardingWindow, getOnboardingWindow } from './onboardingWindow'
-import { onboardingDue } from '../../shared/onboarding'
+import { createWhatsNewWindow } from './whatsNewWindow'
+import { onboardingDue, whatsNewDue } from '../../shared/onboarding'
 import { getPurchaseWindow } from './purchaseWindow'
 import { startPeriodicMemoryManager, stopPeriodicMemoryManager } from './memory'
 import { startFullscreenMonitor, stopFullscreenMonitor, triggerFullscreenCheck } from './fullscreen'
@@ -179,6 +180,10 @@ app.whenReady().then(() => {
     setTimeout(() => {
       createOnboardingWindow()
     }, hiddenLaunch ? 15000 : 2000)
+  } else if (whatsNewDue(settings, app.getVersion())) {
+    setTimeout(() => {
+      createWhatsNewWindow()
+    }, hiddenLaunch ? 15000 : 2200)
   }
   setHotZoneWidth(settings.hotZoneWidth || 3)
 

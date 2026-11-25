@@ -26,8 +26,9 @@ import { LAPTOP_SCREEN, SHELF_SCALE, TOUR_SCREEN_TOP, realHotZoneWidth, realSide
 import { DEFAULT_SETTINGS } from '../../shared/types'
 import { aim, REST, toLocal, toScreen, zoomRest, zoomTo, type Rect, type View } from './lens'
 import {
-  demoText, demoLink, demoImage, demoPdf, demoStack, demoStackWithPhoto, stackFiles, pageTitle, DEMO_DIR, demoNote, demoQuery
+  demoText, demoLink, demoImage, demoPdf, demoStack, demoStackWithPhoto, stackFiles, pageTitle, DEMO_DIR, demoNote, demoQuery, demoMarkdown, demoMultiTexts
 } from './demoItems'
+import { applyTheme } from '../lib/theme'
 
 export const STOP = Symbol('stop')
 
@@ -110,6 +111,12 @@ export function itemsFor(step: string, now = Date.now()): ClipboardItemDto[] {
     case 'preview':
     case 'find':
       return sorted()
+    case 'markdown':
+      return [demoMarkdown(now - 1000), demoLink(now - 6000), demoText(now - 14000)]
+    case 'multipaste':
+      return [...demoMultiTexts(now - 1000), demoLink(now - 6000), demoText(now - 14000)]
+    case 'themes':
+      return [demoMarkdown(now - 1000), demoImage(now - 4000), demoLink(now - 6000), demoText(now - 14000)]
     case 'backup':
     case 'settings': return sorted(demoNote())
     default: return []
@@ -132,9 +139,12 @@ export function resetDemoState(stage: Stage, next?: string): void {
   leaveField()
   set({
     internalDragReq: null, dropTargetId: null, expandedStackId: null, previewItemId: null, previewItemRect: null,
+    previewEditingId: null, selectedTextIds: [], shelfPinned: false,
     copyFlareActive: false, externalDrag: false, dragActive: false, cardMenu: null, cardMenuRect: null,
     edgeTransition: null
   })
+  const curSettings = useStore.getState().settings
+  applyTheme(curSettings.themePreset ?? 'default', curSettings.colorMode ?? 'dark')
   // a search empties at once, except when the shelf is folding away for a step on the laptop (the welcome,
   // the last step): there the shelf would fill back up as it closes, so Onboarding empties it once the
   // shelf is out of sight
@@ -196,8 +206,8 @@ const onWindow = (box: Rect): View => aim(PUSH, { x: box.left + box.width / 2, y
  * pulls back as its pointer comes in (its flyout opens outside the camera, at rest).
  */
 function openingView(step?: string): View | null {
-  if (step === 'stacks') return SHELF_CLOSE
-  if (step === 'preview') return null
+  if (step === 'stacks' || step === 'multipaste' || step === 'themes') return SHELF_CLOSE
+  if (step === 'preview' || step === 'markdown') return null
   return REST
 }
 
@@ -1073,6 +1083,92 @@ async function demoBackup(run: Run, stage: Stage) {
   await run.sleep(400)
 }
 
+/** Markdown Preview & Inline Edit: open a Markdown card into txa-markdown preview, then toggle inline editor. */
+export async function demoMarkdownPreview(run: Run, stage: Stage) {
+  const p = new Pointer(run, stage.cursor)
+  await p.show(580, 360)
+  const target = card(stage, 'demo-markdown')
+  const c = centre(stage, target)
+  document.body.classList.remove('ob-preview-pan')
+  zoomRest(stage.lens, 850)
+  await p.move(c.x, c.y, 600)
+  target.classList.add('force-actions')
+  await run.sleep(220)
+  const btn = target.querySelector<HTMLElement>('.act.preview-expand')
+  if (btn) {
+    const b = centre(stage, btn)
+    await p.move(b.x, b.y, 350)
+  }
+  await p.press()
+  const r = target.getBoundingClientRect()
+  set({ previewItemId: 'demo-markdown', previewItemRect: toShelfLayer(r), previewEditingId: null })
+  await run.sleep(420)
+  target.classList.remove('force-actions')
+  await p.hide()
+
+  const moving = document.documentElement.dataset.motion !== 'reduce'
+  if (moving) {
+    document.body.classList.add('ob-preview-pan')
+    zoomTo(stage.lens, { k: 1, x: 0, y: -PREVIEW_PAN }, 850)
+  }
+  // Hold on rendered Markdown Preview so the user sees formatted heading + table
+  await run.sleep(1600)
+  // Switch into inline text editor to showcase editing copied text
+  set({ previewEditingId: 'demo-markdown' })
+  await run.sleep(1300)
+  // Back to rendered Markdown Preview
+  set({ previewEditingId: null })
+  await run.sleep(500)
+}
+
+/** Multi-Select Text Cards & Pin Shelf Open: pin the shelf open, then pick two text cards for batch paste. */
+export async function demoMultiPasteAndPin(run: Run, stage: Stage) {
+  const p = new Pointer(run, stage.cursor)
+  await p.show(560, 340)
+
+  // 1. Click the Pin Shelf Open button in Header
+  const pinBtn = stage.root.querySelector<HTMLElement>('.header button[aria-pressed]')
+  if (pinBtn) {
+    const pb = centre(stage, pinBtn)
+    await p.move(pb.x, pb.y, 620)
+    await p.press()
+    set({ shelfPinned: true })
+    await run.sleep(480)
+  }
+
+  // 2. Select first text card
+  const c1 = centre(stage, card(stage, 'demo-multi-1'))
+  await p.move(c1.x, c1.y, 560)
+  await p.press()
+  set({ selectedTextIds: ['demo-multi-1'] })
+  await run.sleep(420)
+
+  // 3. Select second text card -> MultiSelectTextBar appears with 2 selected
+  const c2 = centre(stage, card(stage, 'demo-multi-2'))
+  await p.move(c2.x, c2.y, 560)
+  await p.press()
+  set({ selectedTextIds: ['demo-multi-1', 'demo-multi-2'] })
+  await run.sleep(1200)
+  await p.hide()
+}
+
+/** Theme Studio showcase: smoothly cycle the live shelf across curated themes and light/dark modes. */
+export async function demoThemeShowcase(run: Run, stage: Stage) {
+  const sequence: Array<[import('../../shared/types').ThemePreset, import('../../shared/types').ColorMode]> = [
+    ['midnight-ocean', 'dark'],
+    ['emerald-glass', 'dark'],
+    ['sunset-amber', 'light'],
+    ['rose-velvet', 'dark'],
+    ['nordic-frost', 'light'],
+    ['default', 'dark']
+  ]
+  void stage
+  for (const [preset, mode] of sequence) {
+    applyTheme(preset, mode)
+    await run.sleep(850)
+  }
+}
+
 export const DEMOS: Record<string, ((run: Run, stage: Stage) => Promise<void>) | undefined> = {
   welcome: demoWelcome,
   collect: demoCollect,
@@ -1081,6 +1177,9 @@ export const DEMOS: Record<string, ((run: Run, stage: Stage) => Promise<void>) |
   stacks: demoStacks,
   preview: demoPreview,
   find: demoFind,
+  markdown: demoMarkdownPreview,
+  multipaste: demoMultiPasteAndPin,
+  themes: demoThemeShowcase,
   backup: demoBackup
 }
 
@@ -1114,7 +1213,8 @@ const shelfLayer = (stage: Stage) => stage.root.querySelector<HTMLElement>('.ob-
  */
 async function rewind(run: Run, stage: Stage, step: string, open: boolean) {
   const st = useStore.getState()
-  set({ previewItemId: null, previewItemRect: null, expandedStackId: null, cardMenu: null, cardMenuRect: null })
+  set({ previewItemId: null, previewItemRect: null, previewEditingId: null, selectedTextIds: [], shelfPinned: false, expandedStackId: null, cardMenu: null, cardMenuRect: null })
+  applyTheme(st.settings.themePreset ?? 'default', st.settings.colorMode ?? 'dark')
   // a search empties (the shelf fills back up) and lets go of the caret
   if (st.query) {
     leaveField()

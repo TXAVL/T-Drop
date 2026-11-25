@@ -22,7 +22,6 @@ import {
   readClipboard,
   clipboardSignature,
   getClipboardSequenceNumber,
-  clipboardHasFileNameW,
   clipboardTextContent,
   clipboardFilesContentKey
 } from './formats'
@@ -50,6 +49,7 @@ export class ClipboardWatcher {
   private lastCapturedAt = 0
   private paused = false
   private reading = false
+  private pendingNudge = false
   /** A content-signature comparison is in flight (only where Windows gives no sequence number). */
   private signing = false
   private incompleteTries = 0
@@ -58,7 +58,7 @@ export class ClipboardWatcher {
   private onNew: NewItemHandler | null = null
   private onHint: (() => void) | null = null
 
-  constructor(intervalMs = 300, settleMs = 220) {
+  constructor(intervalMs = 260, settleMs = 150) {
     this.intervalMs = intervalMs
     this.settleMs = settleMs
   }
@@ -99,7 +99,12 @@ export class ClipboardWatcher {
 
   /** Run one poll immediately (WM_CLIPBOARDUPDATE). Safe if not started. */
   nudge(): void {
-    if (!this.onNew || this.paused || this.reading) return
+    if (!this.onNew || this.paused) return
+    if (this.reading) {
+      // Queue a follow-up check so rapid consecutive copies never get dropped (Issue #108)
+      this.pendingNudge = true
+      return
+    }
     this.pollTick()
   }
 
@@ -129,7 +134,9 @@ export class ClipboardWatcher {
       return nextPaths.length === 1 && lastPaths.includes(nextPaths[0])
     }
     if (!this.inCoalesceWindow(now)) return false
-    if (this.lastCapturedKey.startsWith('image|')) return !clipboardHasFileNameW()
+    // Note: Do NOT blindly swallow rapid image copies here — two distinct images
+    // copied back-to-back within 500ms must both be captured (Issue #108). Identical
+    // image re-renders are still deduplicated by contentSignature in commitCapture().
     if (this.lastCapturedKey.startsWith('text|')) {
       const t = clipboardTextContent()
       return t !== null && this.lastCapturedKey === `text|${t}`
@@ -217,6 +224,18 @@ export class ClipboardWatcher {
       if (data.kind === 'image') {
         const img = await readImage()
         png = img.toPNG()
+        if (!png || png.length === 0) {
+          // Source app hasn't finished writing bitmap bytes yet — retry shortly (Issue #108)
+          if (this.incompleteTries < MAX_INCOMPLETE_RETRIES) {
+            this.incompleteTries++
+            this.settleTimer = setTimeout(() => {
+              void this.commitCapture()
+            }, this.settleMs)
+          } else {
+            this.incompleteTries = 0
+          }
+          return
+        }
         data.imageId = createId()
         data.bytes = png.length
         data.ext = 'png'
@@ -241,12 +260,14 @@ export class ClipboardWatcher {
       else this.onNew(data)
     } finally {
       this.reading = false
+      const hadPendingNudge = this.pendingNudge
+      this.pendingNudge = false
       const seqNow = getClipboardSequenceNumber()
       if (this.settleTimer) {
-        // Incomplete file list: retry is already scheduled. Only restart if
+        // Incomplete file/image: retry is already scheduled. Only restart if
         // a newer copy landed after that read.
-        if (seqNow !== this.lastSeq) this.pollTick()
-      } else if (seqNow !== this.lastSeq) {
+        if (seqNow !== this.lastSeq || hadPendingNudge) this.pollTick()
+      } else if (seqNow !== this.lastSeq || hadPendingNudge) {
         this.pollTick()
       } else if (seqNow !== seqWhenSettled) {
         // Seq moved during our read. Explorer delay-renders of a file list

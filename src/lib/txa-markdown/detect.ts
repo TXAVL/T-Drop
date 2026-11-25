@@ -9,20 +9,25 @@
 const GFM_TABLE_RE = /(?:^|\n)[^\n]*\|[^\n]*\n\s*\|?\s*:?-{2,}:?\s*(?:\|\s*:?-{2,}:?\s*)+\|?\s*(?:\n|$)/
 const FENCED_CODE_RE = /(?:^|\n)\s*(`{3,}|~{3,})[a-zA-Z0-9_+-]*\s*\n[\s\S]*?\n\s*\1\s*(?:\n|$)/
 const ATX_HEADING_RE = /(?:^|\n)\s{0,3}#{1,6}\s+\S/
+const ATX_HEADING_ALL_RE = /(?:^|\n)\s{0,3}#{1,6}\s+\S/g
+const ATX_SUBHEADING_RE = /(?:^|\n)\s{0,3}#{2,6}\s+\S/
 const TASK_LIST_RE = /(?:^|\n)\s*[-*+]\s+\[[ xX]\]\s+\S/
 const MD_LINK_RE = /!?\[[^\]\n]{1,120}\]\((https?:\/\/[^\s)]+|#[^\s)]+)\)/
 const BOLD_RE = /\*\*[^*\n]{1,120}\*\*/g
 const STRIKE_RE = /~~[^~\n]{1,120}~~/
 const INLINE_CODE_RE = /`[^`\n]{1,80}`/
+const INLINE_CODE_ALL_RE = /`[^`\n]{1,80}`/g
 const BLOCKQUOTE_RE = /(?:^|\n)\s{0,3}>\s+\S/
 const BULLET_LINE_RE = /^\s*[-*+]\s+\S/
 const ORDERED_LINE_RE = /^\s*\d+[.)]\s+\S/
 const HR_LINE_RE = /(?:^|\n)\s*([-*_])\1{2,}\s*(?:\n|$)/
+const PREPROC_OR_SHEBANG_RE = /^#!\/|^\s*#(include|define|ifdef|ifndef|pragma|endif)\b/m
 
 /**
  * Strong structural Markdown signals that clearly indicate a Markdown document
- * even if it embeds code examples (e.g. a fenced code block inside a doc, or a
- * GFM pipe table). Safe to check before generic JS/TS heuristics.
+ * even if it embeds code examples (e.g. a fenced code block inside a doc, a
+ * GFM pipe table, or a structured spec with headings + lists + inline code).
+ * Safe to check before generic JS/TS/HTML heuristics.
  */
 export function isStrongMarkdown(raw: string): boolean {
   if (!raw || typeof raw !== 'string') return false
@@ -37,6 +42,31 @@ export function isStrongMarkdown(raw: string): boolean {
 
   // Task list (`- [x] ...` or `- [ ] ...`) is uniquely Markdown
   if (TASK_LIST_RE.test(text)) return true
+
+  // Structured Markdown document: ATX headings + lists / inline code / bold / links.
+  // Prevents Markdown specs & prompts that mention code identifiers (e.g. `DbSet<Evaluation>`)
+  // from being misclassified as JSX/C#/HTML.
+  if (!PREPROC_OR_SHEBANG_RE.test(text)) {
+    const headingMatches = text.match(ATX_HEADING_ALL_RE)
+    const headingCount = headingMatches ? headingMatches.length : 0
+    if (headingCount >= 1) {
+      const lines = text.split(/\r?\n/)
+      const listCount = lines.filter((l) => BULLET_LINE_RE.test(l) || ORDERED_LINE_RE.test(l)).length
+      const inlineCodeCount = (text.match(INLINE_CODE_ALL_RE) ?? []).length
+      const hasBold = BOLD_RE.test(text)
+      BOLD_RE.lastIndex = 0
+      const hasLink = MD_LINK_RE.test(text)
+      const hasSubheading = ATX_SUBHEADING_RE.test(text)
+
+      // 2+ headings + any list or inline code or bold, OR ##/### heading + 2+ list items
+      if (headingCount >= 2 && (listCount >= 2 || inlineCodeCount >= 2 || hasBold || hasLink)) {
+        return true
+      }
+      if (hasSubheading && listCount >= 2 && (inlineCodeCount >= 1 || hasBold || hasLink)) {
+        return true
+      }
+    }
+  }
 
   return false
 }

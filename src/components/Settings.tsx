@@ -16,6 +16,8 @@ import { getDaysRemaining, type DeviceFingerprint } from '../../shared/license'
 import { countdownText, expiryText, userNameText } from '../lib/licenseText'
 import { PurchaseModal } from './PurchaseModal'
 import { HotkeyRecorder } from './HotkeyRecorder'
+import { ThemeStudioCard } from './ThemeStudioCard'
+import { AppFilterSettingCard, ImageViewerSettingCard } from './AppFilterAndViewerCards'
 import { SlideCommit } from './SlideCommit'
 import { WakeSlider } from './WakeSlider'
 import { playDialTickSound, playToggleSound, playButtonClickSound } from '../lib/soundEffects'
@@ -2224,6 +2226,20 @@ export function Settings({
                 </div>
               </div>
 
+              <AppFilterSettingCard
+                cardClass="settings-shelf-card"
+                mode={settings.appFilterMode ?? 'exclude'}
+                list={settings.appFilterList ?? []}
+                onChangeMode={(appFilterMode) => patch({ appFilterMode })}
+                onChangeList={(appFilterList) => patch({ appFilterList })}
+              />
+
+              <ImageViewerSettingCard
+                cardClass="settings-shelf-card"
+                viewerApp={settings.imageViewerApp ?? ''}
+                onChangeViewer={(imageViewerApp) => patch({ imageViewerApp })}
+              />
+
               {/* ── SUB-GROUP 4 DIVIDER: Storage & Retention ── */}
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('tabs.storageRetention') || 'STORAGE & RETENTION'}</span>
@@ -2633,6 +2649,31 @@ export function Settings({
           {/* ── TAB 3: APPEARANCE ── */}
           {horizontalTab === 'appearance' && (
             <>
+              {/* ── SUB-GROUP 0 DIVIDER: Theme & Color Mode ── */}
+              <div className="shelf-section-divider">
+                <span className="shelf-section-divider-text">{t('themeStudio.sectionTitle')}</span>
+              </div>
+
+              {/* Card 0: Theme Studio (HTML Animated Preview + System/Light/Dark + Presets) */}
+              <div className="settings-shelf-card appearance-col" style={{ minWidth: 330, maxWidth: 360 }}>
+                <div className="shelf-card-top">
+                  <div className="setting-group-label">{t('themeStudio.groupLabel')}</div>
+                  <div className="setting-title">{t('themeStudio.cardTitle')}</div>
+                  <div className="setting-desc">
+                    {t('themeStudio.cardDesc')}
+                  </div>
+                </div>
+                <div className="shelf-card-bottom">
+                  <ThemeStudioCard
+                    compact={true}
+                    themePreset={settings.themePreset ?? 'default'}
+                    colorMode={settings.colorMode ?? 'dark'}
+                    onChangePreset={(themePreset) => patch({ themePreset })}
+                    onChangeColorMode={(colorMode) => patch({ colorMode })}
+                  />
+                </div>
+              </div>
+
               {/* ── SUB-GROUP 1 DIVIDER: Copy Indicator ── */}
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('appearance.copyIndicatorTitle') || 'COPY INDICATOR'}</span>
@@ -3071,6 +3112,20 @@ export function Settings({
                       </div>
                     </div>
                   </div>
+
+                  <AppFilterSettingCard
+                    cardClass="setting-card"
+                    mode={settings.appFilterMode ?? 'exclude'}
+                    list={settings.appFilterList ?? []}
+                    onChangeMode={(appFilterMode) => patch({ appFilterMode })}
+                    onChangeList={(appFilterList) => patch({ appFilterList })}
+                  />
+
+                  <ImageViewerSettingCard
+                    cardClass="setting-card"
+                    viewerApp={settings.imageViewerApp ?? ''}
+                    onChangeViewer={(imageViewerApp) => patch({ imageViewerApp })}
+                  />
 
                   {/* ── SUB-GROUP 4: Storage & Retention ─────────────── */}
                   <div className="setting-section-divider">
@@ -3558,6 +3613,30 @@ export function Settings({
                   exit={{ opacity: 0, scale: 0.98, y: -4 }}
                   transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >
+                  {/* ── GROUP: Theme & Color Mode ───────────────────────── */}
+                  <div className="setting-section-divider">
+                    <span className="setting-section-divider-text">{t('themeStudio.sectionTitle')}</span>
+                  </div>
+
+                  {/* Card 0: Theme Studio */}
+                  <div className="setting-card">
+                    <div className="shelf-card-top">
+                      <div className="setting-group-label">{t('themeStudio.groupLabel')}</div>
+                      <div className="setting-title">{t('themeStudio.cardTitle')}</div>
+                      <div className="setting-desc">
+                        {t('themeStudio.cardDesc')}
+                      </div>
+                    </div>
+                    <div className="shelf-card-bottom">
+                      <ThemeStudioCard
+                        themePreset={settings.themePreset ?? 'default'}
+                        colorMode={settings.colorMode ?? 'dark'}
+                        onChangePreset={(themePreset) => patch({ themePreset })}
+                        onChangeColorMode={(colorMode) => patch({ colorMode })}
+                      />
+                    </div>
+                  </div>
+
                   {/* ── GROUP: Copy Indicator ────────────────────────────── */}
                   <div className="setting-section-divider">
                     <span className="setting-section-divider-text">{t('appearance.copyIndicatorTitle') || 'COPY INDICATOR'}</span>

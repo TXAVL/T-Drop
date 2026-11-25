@@ -50,7 +50,7 @@ const args = process.argv.slice(2)
 const CHECK = args.includes('--check')
 const onlyLangs = (args.find((a) => a.startsWith('--lang=')) || '').slice(7).split(',').filter(Boolean)
 const retrans = (args.find((a) => a.startsWith('--retranslate=')) || '').slice(14).split(',').filter(Boolean)
-const BATCH = 40
+const BATCH = Number(process.env.I18N_BATCH) || 10 // small batches: progress is saved and printed after every few strings
 
 function flatten(o: unknown, p = '', r: Flat = {}): Flat {
   if (o && typeof o === 'object') {
@@ -84,6 +84,12 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const enAll: Flat = { ...flatten(TRANSLATIONS.en) }
 for (const [k, v] of Object.entries(flatten(readJson(join(SUPP_DIR, 'en.json'))))) if (!(k in enAll)) enAll[k] = v
 const keys = Object.keys(enAll)
+/** Plural forms (key.one, key.few, ...) a language never uses (Intl.PluralRules), e.g. vi/ja/ko/zh have only 'other'. */
+const unusedPlural = (lang: string, key: string): boolean => {
+  const m = key.match(/\.(zero|one|two|few|many)$/)
+  if (!m) return false
+  try { return !new Intl.PluralRules(lang).resolvedOptions().pluralCategories.includes(m[1] as Intl.LDMLPluralRule) } catch { return false }
+}
 const viAll: Flat = { ...flatten(readJson(join(SUPP_DIR, 'vi.json'))), ...flatten(TRANSLATIONS.vi) }
 const langName = (code: string) => LANGUAGES.find((l) => l.code === code)?.name || code
 const placeholders = (s: string) => (s.match(/\{[A-Za-z0-9_]+\}/g) || []).sort().join(',')
@@ -172,17 +178,17 @@ function buildProviders(): Provider[] {
   const list: Provider[] = []
   const env = process.env
   if (env.OPENROUTER_API_KEY) {
-    const models = (env.OPENROUTER_MODELS || 'meta-llama/llama-3.3-70b-instruct:free,qwen/qwen3-235b-a22b:free,mistralai/mistral-small-3.2-24b-instruct:free').split(',')
+    const models = (env.OPENROUTER_MODELS || 'baidu/ernie-5.5-flash-preview:free,nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free,nvidia/nemotron-3-ultra-550b-a55b:free').split(',')
     for (const m of models) list.push({ name: `openrouter:${m}`, url: 'https://openrouter.ai/api/v1/chat/completions', key: env.OPENROUTER_API_KEY, model: m.trim() })
   }
   if (env.GEMINI_API_KEY) {
     // each Gemini model has its own free quota, so several models run faster than one
-    for (const m of (env.GEMINI_MODELS || 'gemini-2.5-flash,gemini-2.0-flash,gemini-2.5-flash-lite').split(',')) {
+    for (const m of (env.GEMINI_MODELS || 'gemini-3.5-flash-lite,gemini-flash-lite-latest').split(',')) {
       list.push({ name: `gemini:${m.trim()}`, url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', key: env.GEMINI_API_KEY, model: m.trim() })
     }
   }
   if (env.GROQ_API_KEY) {
-    for (const m of (env.GROQ_MODELS || 'llama-3.3-70b-versatile,qwen/qwen3-32b').split(',')) {
+    for (const m of (env.GROQ_MODELS || 'openai/gpt-oss-120b,qwen/qwen3.8-27b,openai/gpt-oss-20b').split(',')) {
       list.push({ name: `groq:${m.trim()}`, url: 'https://api.groq.com/openai/v1/chat/completions', key: env.GROQ_API_KEY, model: m.trim() })
     }
   }
@@ -193,9 +199,10 @@ function buildProviders(): Provider[] {
 const PROVIDERS = buildProviders()
 
 async function ask(p: Provider, system: string, user: string): Promise<Record<string, string> | null> {
-  for (let attempt = 0; attempt < 6; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetch(p.url, {
+        signal: AbortSignal.timeout(45000),
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(p.key ? { Authorization: `Bearer ${p.key}` } : {}) },
         body: JSON.stringify({
@@ -207,7 +214,9 @@ async function ask(p: Provider, system: string, user: string): Promise<Record<st
         })
       })
       if (res.status === 402 || res.status === 429 || res.status >= 500) {
-        await sleep(8000 * (attempt + 1))
+        // rate limit / overload: wait 8s, retry once, then give up and let the next provider take over (16s max)
+        if (attempt >= 1) return null
+        await sleep(8000)
         continue
       }
       if (!res.ok) return null
@@ -216,7 +225,8 @@ async function ask(p: Provider, system: string, user: string): Promise<Record<st
       const m = content.match(/\{[\s\S]*\}/)
       return m ? (JSON.parse(m[0]) as Record<string, string>) : null
     } catch {
-      await sleep(4000 * (attempt + 1))
+      if (attempt >= 1) return null
+      await sleep(4000)
     }
   }
   return null
@@ -264,7 +274,7 @@ async function translateBatch(lang: string, dict: Flat, batch: string[]): Promis
 // ── main ────────────────────────────────────────────────────────────────────
 async function main() {
   const langs = Object.keys(TRANSLATIONS).filter((l) => l !== 'en' && l !== 'vi' && (!onlyLangs.length || onlyLangs.includes(l)))
-  const viMissing = keys.filter((k) => !flatten(TRANSLATIONS.vi)[k] && !flatten(readJson(join(SUPP_DIR, 'vi.json')))[k])
+  const viMissing = keys.filter((k) => !unusedPlural('vi', k) && !flatten(TRANSLATIONS.vi)[k] && !flatten(readJson(join(SUPP_DIR, 'vi.json')))[k])
   let totalMissing = viMissing.length
   if (CHECK && viMissing.length) console.log(`vi: ${viMissing.length} missing`)
 
@@ -274,7 +284,7 @@ async function main() {
     const suppPath = join(SUPP_DIR, `${lang}.json`)
     const supp = flatten(readJson(suppPath))
 
-    const needed = keys.filter((k) => !dict[k])
+    const needed = keys.filter((k) => !dict[k] && !unusedPlural(lang, k))
     const kept: Flat = {}
     const redoAll = retrans.includes('all')
     for (const k of needed) if (supp[k] && !redoAll && !retrans.some((p) => k.startsWith(p))) kept[k] = supp[k]
@@ -296,9 +306,10 @@ async function main() {
     process.stdout.write(`${lang} (${langName(lang)}): ${todo.length} strings `)
     const got: Flat = {}
     for (let i = 0; i < todo.length; i += BATCH) {
-      Object.assign(got, await translateBatch(lang, dict, todo.slice(i, i + BATCH)))
+      const part = await translateBatch(lang, dict, todo.slice(i, i + BATCH))
+      Object.assign(got, part)
       save(got) // progress survives an interruption
-      process.stdout.write('.')
+      console.log(`  ${lang}: ${Object.keys(got).length}/${todo.length} (+${Object.keys(part).length})`)
     }
     const failed = todo.filter((k) => !got[k])
     console.log(failed.length ? ` ${failed.length} unresolved (rerun to retry)` : ' ok')

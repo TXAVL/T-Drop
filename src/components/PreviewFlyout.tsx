@@ -17,6 +17,7 @@ import { createPortal } from 'react-dom'
 import { useAdaptiveSpring } from '../hooks/useAdaptiveSpring'
 import { useDragOut } from '../hooks/useDragOut'
 import { tryPaste } from '../lib/tryPaste'
+import { acquireKeyboard, releaseKeyboard } from '../lib/keyboardFocus'
 import { playButtonClickSound, playToggleSound } from '../lib/soundEffects'
 
 import { useTranslation, t } from '../i18n'
@@ -724,13 +725,43 @@ function PreviewContent({
 }) {
   const { t } = useTranslation()
   const startDrag = useDragOut()
+  const previewEditingId = useStore((s) => s.previewEditingId)
+  const setPreviewEditingId = useStore((s) => s.setPreviewEditingId)
 
   const [fullText, setFullText] = useState<string | null>(null)
   const [mdViewMode, setMdViewMode] = useState<'preview' | 'raw'>('preview')
+  const [isEditingText, setIsEditingText] = useState(false)
+  const [editDraft, setEditDraft] = useState('')
+  const [savingEdit, setSavingEdit] = useState(false)
+  const editorRef = useRef<HTMLTextAreaElement | null>(null)
 
   useEffect(() => {
     setMdViewMode('preview')
+    setIsEditingText(false)
+    setEditDraft('')
   }, [item?.id])
+
+  // Enter edit mode when triggered externally (e.g. from CardMenu)
+  useEffect(() => {
+    if (item?.data?.kind === 'text' && previewEditingId === item.id && !isEditingText) {
+      const current = fullText ?? item.data.text
+      setEditDraft(current)
+      setIsEditingText(true)
+    }
+  }, [previewEditingId, item?.id, item?.data?.kind, fullText, isEditingText])
+
+  // Manage Electron keyboard focus while editing text
+  useEffect(() => {
+    if (!isEditingText) return
+    acquireKeyboard('preview-text-editor')
+    const id = window.setTimeout(() => {
+      editorRef.current?.focus()
+    }, 30)
+    return () => {
+      window.clearTimeout(id)
+      releaseKeyboard('preview-text-editor')
+    }
+  }, [isEditingText])
 
   useEffect(() => {
     if (item?.data?.kind === 'text' && item.data.hasFullPayload) {
@@ -1069,6 +1100,41 @@ function PreviewContent({
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <button
+              type="button"
+              title={isEditingText ? t('editor.cancelEditTitle') : t('editor.editTitle')}
+              onClick={(e) => {
+                e.stopPropagation()
+                playButtonClickSound()
+                if (isEditingText) {
+                  setIsEditingText(false)
+                  if (previewEditingId === item.id) setPreviewEditingId(null)
+                } else {
+                  setEditDraft(activeText)
+                  setIsEditingText(true)
+                  setPreviewEditingId(item.id)
+                }
+              }}
+              style={{
+                width: 28,
+                height: 28,
+                background: isEditingText ? 'rgba(56, 189, 248, 0.22)' : 'rgba(255, 255, 255, 0.06)',
+                border: isEditingText ? '1px solid rgba(56, 189, 248, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
+                color: isEditingText ? '#38bdf8' : 'rgba(255, 255, 255, 0.78)',
+                borderRadius: 8,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.15s ease',
+                flexShrink: 0
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </button>
             <QuickActionButton
               title={t('qr.title')}
               icon={QrCodeIcon}
@@ -1216,8 +1282,158 @@ function PreviewContent({
           </button>
         </div>
 
-        {/* Text Body */}
-        {codeInfo.isCode && codeInfo.language === 'markdown' ? (
+        {/* Text Body / Inline Text Editor (PR #107, Issues #115 & #76) */}
+        {isEditingText ? (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ display: 'flex', flexDirection: 'column', gap: 10, cursor: 'default' }}
+          >
+            <textarea
+              ref={editorRef}
+              value={editDraft}
+              onChange={(e) => setEditDraft(e.target.value)}
+              onKeyDown={async (e) => {
+                if (e.key === 'Escape') {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setIsEditingText(false)
+                  setPreviewEditingId(null)
+                } else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  if (!editDraft.trim() || savingEdit) return
+                  setSavingEdit(true)
+                  const ok = await useStore.getState().updateItemText(item.id, editDraft)
+                  setSavingEdit(false)
+                  if (ok) {
+                    setFullText(editDraft)
+                    setIsEditingText(false)
+                    setPreviewEditingId(null)
+                    useStore.getState().pushToast({
+                      id: Date.now().toString(),
+                      message: t('editor.savedEdited'),
+                      tone: 'info'
+                    })
+                  }
+                }
+              }}
+              spellCheck={false}
+              style={{
+                width: '100%',
+                minHeight: 220,
+                maxHeight: 360,
+                resize: 'vertical',
+                boxSizing: 'border-box',
+                padding: '10px 12px',
+                borderRadius: 10,
+                background: 'rgba(0, 0, 0, 0.42)',
+                border: '1px solid rgba(56, 189, 248, 0.4)',
+                color: '#ffffff',
+                fontFamily: codeInfo.isCode ? 'var(--font-mono, monospace)' : 'var(--font-ui)',
+                fontSize: codeInfo.isCode ? 12.5 : 13.5,
+                lineHeight: 1.6,
+                outline: 'none'
+              }}
+            />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.48)', fontFamily: SYS_FONT }}>
+                {t('editor.hint')}
+              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    playButtonClickSound()
+                    setIsEditingText(false)
+                    setPreviewEditingId(null)
+                  }}
+                  style={{
+                    height: 28,
+                    padding: '0 10px',
+                    borderRadius: 7,
+                    background: 'rgba(255,255,255,0.07)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    color: 'rgba(255,255,255,0.8)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {t('editor.cancel')}
+                </button>
+                <button
+                  type="button"
+                  disabled={!editDraft.trim() || savingEdit}
+                  onClick={async () => {
+                    playButtonClickSound()
+                    if (!editDraft.trim() || savingEdit) return
+                    setSavingEdit(true)
+                    const ok = await useStore.getState().updateItemText(item.id, editDraft)
+                    if (ok) {
+                      await useStore.getState().copyText(editDraft, { quiet: true })
+                      setFullText(editDraft)
+                      setIsEditingText(false)
+                      setPreviewEditingId(null)
+                      useStore.getState().pushToast({
+                        id: Date.now().toString(),
+                        message: t('editor.savedCopied'),
+                        tone: 'info'
+                      })
+                    }
+                    setSavingEdit(false)
+                  }}
+                  style={{
+                    height: 28,
+                    padding: '0 10px',
+                    borderRadius: 7,
+                    background: 'rgba(56, 189, 248, 0.16)',
+                    border: '1px solid rgba(56, 189, 248, 0.35)',
+                    color: '#7dd3fc',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {t('editor.saveCopy')}
+                </button>
+                <button
+                  type="button"
+                  disabled={!editDraft.trim() || savingEdit}
+                  onClick={async () => {
+                    playButtonClickSound()
+                    if (!editDraft.trim() || savingEdit) return
+                    setSavingEdit(true)
+                    const ok = await useStore.getState().updateItemText(item.id, editDraft)
+                    setSavingEdit(false)
+                    if (ok) {
+                      setFullText(editDraft)
+                      setIsEditingText(false)
+                      setPreviewEditingId(null)
+                      useStore.getState().pushToast({
+                        id: Date.now().toString(),
+                        message: t('editor.saved'),
+                        tone: 'info'
+                      })
+                    }
+                  }}
+                  style={{
+                    height: 28,
+                    padding: '0 12px',
+                    borderRadius: 7,
+                    background: '#ffffff',
+                    border: 'none',
+                    color: '#000000',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {t('editor.save')}
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : codeInfo.isCode && codeInfo.language === 'markdown' ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div className="txa-md-mode-bar" onClick={(e) => e.stopPropagation()}>
               <span className="txa-md-badge">Markdown</span>
@@ -1307,6 +1523,12 @@ function PreviewContent({
         style={{ display: 'flex', flexDirection: 'column', gap: 12, position: 'relative', cursor: 'grab' }}
       >
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, position: 'absolute', top: 8, right: 8, zIndex: 2 }}>
+          <QuickActionButton
+            title={t('editor.openImageWithApp')}
+            icon={ExternalLinkIcon}
+            onClick={() => useStore.getState().openImageExternal(item.id)}
+            solidDark={true}
+          />
           <QuickActionButton
             title={t('flyout.copyImage')}
             icon={CopyIcon}

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0e18"/>
+      <stop offset="55%" stop-color="#111626"/>
+      <stop offset="100%" stop-color="#171128"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .mono { font-family: "JetBrains Mono", Consolas, monospace; }
+      @keyframes pulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+      @keyframes slideIn { 0%,15% { transform: translateX(-14px); opacity: 0.4; } 30%,85% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-14px); opacity: 0.4; } }
+      @keyframes popBar { 0%,30% { opacity: 0; transform: translateY(8px); } 45%,88% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(8px); } }
+      .neo { animation: pulse 2.6s ease-in-out infinite; }
+      .blade { animation: slideIn 5s ease-in-out infinite; }
+      .bar { animation: popBar 4.5s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <rect width="900" height="300" rx="20" fill="url(#bg)"/>
+  <rect x="1" y="1" width="898" height="298" rx="19" fill="none" stroke="rgba(255,255,255,0.1)"/>
+
+  <!-- Header -->
+  <rect x="28" y="22" width="70" height="22" rx="11" fill="rgba(56,189,248,0.18)" stroke="rgba(56,189,248,0.45)"/>
+  <text x="63" y="37" fill="#7dd3fc" font-size="11" font-weight="700" text-anchor="middle">v0.3.6</text>
+  <text x="112" y="38" fill="#ffffff" font-size="16" font-weight="700">T-Drop — New Feature Highlights</text>
+
+  <!-- Card 1: Markdown Preview & Inline Edit -->
+  <g transform="translate(28, 62)">
+    <rect width="268" height="210" rx="14" fill="#131620" stroke="rgba(255,255,255,0.1)"/>
+    <rect x="14" y="14" width="112" height="20" rx="10" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.4)"/>
+    <text x="70" y="28" fill="#a5b4fc" font-size="10" font-weight="700" text-anchor="middle">Markdown · Preview</text>
+    <rect x="218" y="14" width="36" height="20" rx="6" fill="rgba(56,189,248,0.18)"/>
+    <text x="236" y="28" fill="#7dd3fc" font-size="10" font-weight="700" text-anchor="middle">Edit</text>
+    <text x="16" y="56" fill="#ffffff" font-size="13" font-weight="700">txa-markdown &amp; Inline Edit</text>
+    <rect x="14" y="68" width="240" height="82" rx="8" fill="#0b0d14" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="14" y="68" width="240" height="24" rx="8" fill="rgba(255,255,255,0.06)"/>
+    <text x="24" y="84" fill="#ffffff" font-size="10.5" font-weight="700">Feature</text>
+    <text x="180" y="84" fill="#ffffff" font-size="10.5" font-weight="700">Status</text>
+    <text x="24" y="110" fill="#cbd5e1" font-size="10.5">GFM Tables</text>
+    <text x="180" y="110" fill="#34d399" font-size="10.5" class="mono">Rendered</text>
+    <text x="24" y="134" fill="#cbd5e1" font-size="10.5">Edit in place</text>
+    <text x="180" y="134" fill="#7dd3fc" font-size="10.5" class="mono">Ctrl+Enter</text>
+    <text x="16" y="176" fill="rgba(255,255,255,0.68)" font-size="11">Preview formatted Markdown &amp; edit</text>
+    <text x="16" y="193" fill="rgba(255,255,255,0.68)" font-size="11">any copied text card directly.</text>
+  </g>
+
+  <!-- Card 2: Pin Shelf Open & Multi-Paste -->
+  <g transform="translate(316, 62)">
+    <rect width="268" height="210" rx="14" fill="#131620" stroke="rgba(255,255,255,0.1)"/>
+    <text x="16" y="28" fill="#ffffff" font-size="12" font-weight="700">Pin Shelf &amp; Multi-Paste</text>
+    <rect x="182" y="13" width="72" height="20" rx="10" fill="rgba(139,92,246,0.22)" stroke="rgba(139,92,246,0.55)"/>
+    <text x="218" y="27" fill="#c4b5fd" font-size="10" font-weight="700" text-anchor="middle">Pinned Open</text>
+
+    <rect x="14" y="46" width="240" height="34" rx="8" fill="#191b28" stroke="#8b5cf6" stroke-width="1.4"/>
+    <circle cx="30" cy="63" r="9" fill="#8b5cf6"/>
+    <text x="30" y="67" fill="#fff" font-size="10" font-weight="800" text-anchor="middle">1</text>
+    <text x="48" y="67" fill="#e2e8f0" font-size="11">Send progress report at 9:00</text>
+
+    <rect x="14" y="88" width="240" height="34" rx="8" fill="#191b28" stroke="#8b5cf6" stroke-width="1.4"/>
+    <circle cx="30" cy="105" r="9" fill="#8b5cf6"/>
+    <text x="30" y="109" fill="#fff" font-size="10" font-weight="800" text-anchor="middle">2</text>
+    <text x="48" y="109" fill="#e2e8f0" font-size="11">Attach latest design mockup</text>
+
+    <g class="bar">
+      <rect x="14" y="132" width="240" height="30" rx="8" fill="#0d0f18" stroke="rgba(255,255,255,0.16)"/>
+      <text x="26" y="151" fill="#ffffff" font-size="10.5" font-weight="600">2 selected · ↵  ¶  ␣</text>
+      <rect x="186" y="137" width="60" height="20" rx="6" fill="#ffffff"/>
+      <text x="216" y="151" fill="#000000" font-size="10.5" font-weight="700" text-anchor="middle">Paste All</text>
+    </g>
+
+    <text x="16" y="182" fill="rgba(255,255,255,0.68)" font-size="11">Lock shelf open &amp; Ctrl+Click cards</text>
+    <text x="16" y="198" fill="rgba(255,255,255,0.68)" font-size="11">to combine &amp; paste in one click.</text>
+  </g>
+
+  <!-- Card 3: 6 Curated Themes & System/Light/Dark -->
+  <g transform="translate(604, 62)">
+    <rect width="268" height="210" rx="14" fill="#131620" stroke="rgba(255,255,255,0.1)"/>
+    <text x="16" y="28" fill="#ffffff" font-size="12" font-weight="700">6 Themes &amp; Light / Dark</text>
+
+    <rect x="14" y="44" width="240" height="106" rx="10" fill="#071526" stroke="rgba(56,189,248,0.25)"/>
+    <rect class="neo" x="14" y="76" width="4" height="42" rx="2" fill="#38bdf8"/>
+    <g class="blade">
+      <rect x="24" y="54" width="118" height="86" rx="9" fill="#0d1b2f" stroke="rgba(56,189,248,0.28)"/>
+      <rect x="33" y="64" width="38" height="6" rx="3" fill="#38bdf8"/>
+      <rect x="33" y="78" width="98" height="22" rx="5" fill="#152a47"/>
+      <rect x="33" y="106" width="98" height="22" rx="5" fill="#152a47"/>
+    </g>
+    <!-- 6 Swatches -->
+    <rect x="160" y="58" width="24" height="24" rx="6" fill="#0a0a0d" stroke="#8b5cf6" stroke-width="1.5"/>
+    <rect x="192" y="58" width="24" height="24" rx="6" fill="#07111f" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="224" y="58" width="24" height="24" rx="6" fill="#061511" stroke="#34d399" stroke-width="1.5"/>
+    <rect x="160" y="92" width="24" height="24" rx="6" fill="#faf5ee" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="192" y="92" width="24" height="24" rx="6" fill="#140b12" stroke="#f472b6" stroke-width="1.5"/>
+    <rect x="224" y="92" width="24" height="24" rx="6" fill="#f1f4fa" stroke="#4f46e5" stroke-width="1.5"/>
+    <text x="160" y="138" fill="#7dd3fc" font-size="10" font-weight="600">System · Light · Dark</text>
+
+    <text x="16" y="176" fill="rgba(255,255,255,0.68)" font-size="11">Obsidian default + 5 curated themes</text>
+    <text x="16" y="193" fill="rgba(255,255,255,0.68)" font-size="11">with live animated preview in Settings.</text>
+  </g>
+</svg>

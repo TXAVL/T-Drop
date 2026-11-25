@@ -382,5 +382,144 @@
     },
     "saveFromCard": "Guardar como fragmento",
     "savedToast": "Guardado en fragmentos"
+  },
+  "themeStudio": {
+    "section": "INTERFAZ Y MODO DE COLOR",
+    "group": "TEMAS DE LA ESTANTILLA",
+    "title": "Tema y modo de color",
+    "desc": "Vista previa animada en vivo para elegir el tema de la estantería y el modo de color.",
+    "modeSystem": "Sistema",
+    "modeLight": "Claro",
+    "modeDark": "Oscuro",
+    "sectionTitle": "TEMA Y MODO DE COLOR",
+    "groupLabel": "TEMA DE LA ESTANTERÍA",
+    "cardTitle": "Tema y modo de color",
+    "cardDesc": "Vista previa animada en tiempo real para elegir el tema y el modo de color de la estantería.",
+    "colorModeLabel": "Modo de color",
+    "presetLabel": "Preajuste de tema"
+  },
+  "whatsNew": {
+    "windowTitle": "Novedades en T-Drop",
+    "badgeNew": "Nuevo",
+    "mdTitle": "Vista previa Markdown y edición en línea",
+    "mdDesc": "Al expandir una tarjeta Markdown se muestra una vista previa limpia (encabezados, tablas, bloques de código) en lugar de la sintaxis cruda. Pulsa el botón de lápiz para editar cualquier tarjeta de texto copiado directamente en su lugar.",
+    "mdTip": "Tip: Pulsa Ctrl+Enter para guardar rápido, o alterna Vista previa / Crudo en cualquier momento.",
+    "mpTitle": "Estantería fija y pegado múltiple",
+    "mpDesc": "Haz clic en Fijar en la cabecera para mantener la estantería abierta mientras trabajas. Ctrl+clic en varias tarjetas de texto para copiarlas o pegarlas todas juntas de una vez.",
+    "mpTip": "Tip: Elige separador de salto de línea (↵), párrafo (¶) o espacio (␣) directamente en la barra flotante.",
+    "thTitle": "6 temas de estantería y modos Sistema / Claro / Oscuro",
+    "thDesc": "Mantiene el tema oscuro Obsidian por defecto, más 5 nuevos temas seleccionados y modos Sistema / Claro / Oscuro con vista previa animada en Configuración → Apariencia.",
+    "thTip": "Tip: Elige \"Sistema\" para que T‑Drop siga automáticamente el tema de Windows.",
+    "skip": "Omitir",
+    "next": "Siguiente →",
+    "done": "Entendido, empezar a usar",
+    "close": "Cerrar",
+    "mdHeading": "Plan de fin de semana",
+    "mdColItem": "Elemento",
+    "mdColStatus": "Estado",
+    "mdRowEdit": "Edición en vivo",
+    "mdReady": "Listo",
+    "mdOn": "Activado",
+    "mdSaveHint": "Ctrl+Enter · Guardar",
+    "mpCard1": "1. Enviar informe de progreso a las 9:00",
+    "mpCard2": "2. Adjuntar el último mockup de diseño"
+  },
+  "multiPaste": {
+    "selected": "{count} seleccionados",
+    "copyAll": "Copiar combinado",
+    "pasteAll": "Pegar",
+    "clear": "Borrar selección",
+    "copiedToast": "¡Copiado {count} tarjetas combinadas!",
+    "selectMenu": "Seleccionar para pegado múltiple (Ctrl+clic)",
+    "deselectMenu": "Eliminar del pegado múltiple",
+    "pinShelf": "Fijar estantería abierta",
+    "unpinShelf": "Desfijar estantería (ocultar al salir)"
+  },
+  "textEdit": {
+    "editMenu": "Editar texto",
+    "editBtn": "Editar texto",
+    "cancelEdit": "Cancelar edición",
+    "hint": "Ctrl+Enter para guardar · Esc para cancelar",
+    "cancel": "Cancelar",
+    "saveCopy": "Guardar y copiar",
+    "save": "Guardar",
+    "savedToast": "¡Texto editado guardado!",
+    "savedCopyToast": "¡Guardado y copiado!"
+  },
+  "appFilter": {
+    "group": "FILTRADO DE APLICACIONES",
+    "title": "Incluir / Excluir Apps",
+    "descExclude": "Omite el historial del portapapeles al copiar desde las apps listadas.",
+    "descInclude": "Solo registra el historial al copiar desde las apps listadas.",
+    "exclude": "Excluir",
+    "include": "Incluir solo",
+    "placeholder": "p. ej. KeePass.exe, chrome...",
+    "add": "Añadir"
+  },
+  "imageViewer": {
+    "group": "VISOR DE IMÁGENES",
+    "title": "Aplicación para abrir capturas",
+    "desc": "Elige la app que abre al hacer clic en \"Abrir imagen con app\".",
+    "systemDefault": "Predeterminado del sistema",
+    "choose": "Elegir app...",
+    "reset": "Restablecer",
+    "openMenu": "Abrir imagen con app",
+    "movePinUp": "Mover fijado arriba",
+    "movePinDown": "Mover fijado abajo"
+  },
+  "editor": {
+    "editTitle": "Editar texto",
+    "cancelEditTitle": "Cancelar edición",
+    "savedEdited": "¡Texto editado guardado!",
+    "hint": "Ctrl+Enter para guardar · Esc para cancelar",
+    "cancel": "Cancelar",
+    "savedCopied": "¡Guardado y copiado!",
+    "saved": "¡Guardado!",
+    "saveCopy": "Guardar y copiar",
+    "save": "Guardar",
+    "openImageWithApp": "Abrir con otra aplicación"
+  },
+  "multiSelect": {
+    "separator": "Separador",
+    "sepNewline": "Nueva línea (\\n)",
+    "sepBlank": "Línea en blanco (\\n\\n)",
+    "sepSpace": "Espacio"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidiana",
+      "tagline": "Cristal oscuro original y puro"
+    },
+    "midnightOcean": {
+      "name": "Océano nocturno",
+      "tagline": "Azul marino profundo & cian eléctrico"
+    },
+    "emeraldGlass": {
+      "name": "Cristal esmeralda",
+      "tagline": "Obsidiana del bosque & brillo menta"
+    },
+    "sunsetAmber": {
+      "name": "Ocaso ámbar",
+      "tagline": "Carbón cálido & ámbar dorado"
+    },
+    "roseVelvet": {
+      "name": "Terciopelo rosa",
+      "tagline": "Ciruela intensa & toque rosa suave"
+    },
+    "nordicFrost": {
+      "name": "Escarcha Nórdica",
+      "tagline": "Pizarra ártica y añil nítido"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Enviar informe de progreso a las 9:00",
+    "demoMulti2": "2. Adjuntar última maqueta de diseño",
+    "demoMdHeading": "Plan de fin de semana **T-Drop**",
+    "demoMdColFeature": "Función",
+    "demoMdColStatus": "Estado",
+    "demoMdRow1": "Vista previa de **Markdown**",
+    "demoMdRow1Status": "Listo",
+    "demoMdRow2": "Edición en línea & pegado múltiple",
+    "demoMdRow2Status": "En vivo"
   }
 }

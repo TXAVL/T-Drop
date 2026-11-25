@@ -382,5 +382,144 @@
     },
     "saveFromCard": "Salva come snippet",
     "savedToast": "Salvato in Snippets"
+  },
+  "themeStudio": {
+    "section": "TEMI E MODALITÀ COLORE",
+    "group": "TEMI DEL GABBIETTO",
+    "title": "Tema e Modalità Colore",
+    "desc": "Anteprima animata in tempo reale per scegliere il tema del gabbietto e la modalità colore.",
+    "modeSystem": "Sistema",
+    "modeLight": "Chiaro",
+    "modeDark": "Scuro",
+    "sectionTitle": "TEMI E MODALITÀ COLORE",
+    "groupLabel": "TEMI DEL GABBIETTO",
+    "cardTitle": "Tema e Modalità Colore",
+    "cardDesc": "Anteprima animata in tempo reale per scegliere il tema del gabbietto e la modalità colore.",
+    "colorModeLabel": "Modalità colore",
+    "presetLabel": "Tema predefinito"
+  },
+  "whatsNew": {
+    "windowTitle": "Novità di T-Drop",
+    "badgeNew": "Nuovo",
+    "mdTitle": "Anteprima Markdown & Modifica in linea",
+    "mdDesc": "Espandendo una scheda Markdown viene visualizzata un'anteprima formattata (intestazioni, tabelle, blocchi di codice) invece della sintassi grezza. Fai clic sul pulsante matita per modificare qualsiasi scheda di testo copiata direttamente in loco.",
+    "mdTip": "Suggerimento: premi Ctrl+Invio per salvare rapidamente, o alterna Anteprima / Grezzo in qualsiasi momento.",
+    "mpTitle": "Gabbietto Sempre Aperto & Incolla Multiplo",
+    "mpDesc": "Fai clic su Ghimma nell'intestazione per mantenere il gabbietto aperto mentre lavori. Ctrl+Fai clic su più schede di testo per copiarle o incollarle tutte insieme in un unico passaggio.",
+    "mpTip": "Suggerimento: scegli come separatore di riga (↵), paragrafo (¶) o spazio (␣) direttamente sulla barra flottante.",
+    "thTitle": "6 Temi del Gabbietto & Sistema / Chiaro / Scuro",
+    "thDesc": "Mantiene il tema scuro Obsidian come predefinito, più 5 nuovi temi curati e modalità Sistema / Chiaro / Scuro con anteprima animata in Impostazioni → Aspetto.",
+    "thTip": "Suggerimento: scegli \"Sistema\" per far seguire automaticamente a T‑Drop la modalità Chiaro/Scuro di Windows.",
+    "skip": "Salta",
+    "next": "Avanti →",
+    "done": "Ho capito, inizia",
+    "close": "Chiudi",
+    "mdHeading": "Piano del weekend",
+    "mdColItem": "Elemento",
+    "mdColStatus": "Stato",
+    "mdRowEdit": "Modifica in tempo reale",
+    "mdReady": "Pronto",
+    "mdOn": "Attivo",
+    "mdSaveHint": "Ctrl+Invio · Salva",
+    "mpCard1": "1. Invia rapporto di avanzamento alle 9:00",
+    "mpCard2": "2. Allegare l'ultima bozza di design"
+  },
+  "multiPaste": {
+    "selected": "{count} selezionati",
+    "copyAll": "Copia combinata",
+    "pasteAll": "Incolla",
+    "clear": "Cancella selezione",
+    "copiedToast": "Copiate {count} schede combinate!",
+    "selectMenu": "Seleziona per incolla multipla (Ctrl+Click)",
+    "deselectMenu": "Rimuovi da incolla multipla",
+    "pinShelf": "Fissa scaffale",
+    "unpinShelf": "Sblocca scaffale (nascondi automatico)"
+  },
+  "textEdit": {
+    "editMenu": "Modifica testo",
+    "editBtn": "Modifica testo",
+    "cancelEdit": "Annulla modifica",
+    "hint": "Ctrl+Enter per salvare · Esc per annullare",
+    "cancel": "Annulla",
+    "saveCopy": "Salva & Copia",
+    "save": "Salva",
+    "savedToast": "Testo modificato salvato!",
+    "savedCopyToast": "Salvato & copiato!"
+  },
+  "appFilter": {
+    "group": "FILTRO APP",
+    "title": "Includi / Escludi App",
+    "descExclude": "Ignora la cronologia del clipboard quando copi da app elencate.",
+    "descInclude": "Registra la cronologia solo quando copi da app elencate.",
+    "exclude": "Escludi",
+    "include": "Includi solo",
+    "placeholder": "es. KeePass.exe, chrome...",
+    "add": "Aggiungi"
+  },
+  "imageViewer": {
+    "group": "VISUALIZZATORE IMMAGINI",
+    "title": "App per aprire screenshot",
+    "desc": "Scegli l'app da usare quando premi \"Apri immagine con app\".",
+    "systemDefault": "Predefinito di sistema",
+    "choose": "Scegli app...",
+    "reset": "Ripristina",
+    "openMenu": "Apri con un'app",
+    "movePinUp": "Sposta in alto",
+    "movePinDown": "Sposta in basso"
+  },
+  "editor": {
+    "editTitle": "Modifica testo",
+    "cancelEditTitle": "Annulla modifica",
+    "savedEdited": "Testo modificato salvato!",
+    "hint": "Ctrl+Invio per salvare · Esc per annullare",
+    "cancel": "Annulla",
+    "savedCopied": "Salvato e copiato!",
+    "saved": "Salvato!",
+    "saveCopy": "Salva e copia",
+    "save": "Salva",
+    "openImageWithApp": "Apri immagine con app"
+  },
+  "multiSelect": {
+    "separator": "Separatore",
+    "sepNewline": "A capo (\\n)",
+    "sepBlank": "Riga vuota (\\n\\n)",
+    "sepSpace": "Spazio"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Vetro scuro puro"
+    },
+    "midnightOcean": {
+      "name": "Oceano Notturno",
+      "tagline": "Blu notte profondo & ciano elettrico"
+    },
+    "emeraldGlass": {
+      "name": "Vetro Smeraldo",
+      "tagline": "Ossidiana foresta & bagliore menta"
+    },
+    "sunsetAmber": {
+      "name": "Crepuscolo d'Ambra",
+      "tagline": "Carbone caldo & ambra dorata"
+    },
+    "roseVelvet": {
+      "name": "Velluto Rosa",
+      "tagline": "Prugna profonda & accento rosa morbido"
+    },
+    "nordicFrost": {
+      "name": "Gelo Artico",
+      "tagline": "Ardesia artica e indaco vivido"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Invia il report di avanzamento alle 9:00",
+    "demoMulti2": "2. Allega il mockup di design più recente",
+    "demoMdHeading": "Piano per il fine settimana **T-Drop**",
+    "demoMdColFeature": "Funzione",
+    "demoMdColStatus": "Stato",
+    "demoMdRow1": "Anteprima **Markdown**",
+    "demoMdRow1Status": "Pronto",
+    "demoMdRow2": "Modifica e Incolla multiplo",
+    "demoMdRow2Status": "Attivo"
   }
 }

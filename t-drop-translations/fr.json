@@ -676,7 +676,16 @@
     "notesLine2": "Dim · Sur la crête, au-dessus des nuages",
     "note": "Billets de train",
     "query": "train",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Envoyer le rapport d’avancement à 9 h",
+    "demoMulti2": "2. Joindre la dernière maquette",
+    "demoMdHeading": "Plan week-end **T-Drop**",
+    "demoMdColFeature": "Fonctionnalité",
+    "demoMdColStatus": "Statut",
+    "demoMdRow1": "Aperçu **Markdown**",
+    "demoMdRow1Status": "Prêt",
+    "demoMdRow2": "Édition & Collage",
+    "demoMdRow2Status": "En direct"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Enregistrer comme snippet",
     "savedToast": "Enregistré dans les snippets"
+  },
+  "themeStudio": {
+    "section": "THEME & MODE DE COULEUR",
+    "group": "THÈME DE LA GÂLE",
+    "title": "Thème & Mode de Couleur",
+    "desc": "Aperçu animé en direct pour choisir le thème et le mode de couleur de la gâle.",
+    "modeSystem": "Système",
+    "modeLight": "Clair",
+    "modeDark": "Sombre",
+    "sectionTitle": "THÈME & MODE COULEUR",
+    "groupLabel": "THÈME DE L'ÉTAGÈRE",
+    "cardTitle": "Thème & mode couleur",
+    "cardDesc": "Aperçu animé en temps réel pour choisir le thème de votre étagère et le mode couleur.",
+    "colorModeLabel": "Mode couleur",
+    "presetLabel": "Thème prédéfini"
+  },
+  "whatsNew": {
+    "windowTitle": "Quoi de neuf dans T-Drop",
+    "badgeNew": "Nouveau",
+    "mdTitle": "Aperçu Markdown & Édition en Ligne",
+    "mdDesc": "Développer une carte Markdown affiche un aperçu formaté propre (titres, tableaux, blocs de code) au lieu de la syntaxe brute. Cliquez sur le bouton crayon pour éditer n’importe quelle carte texte directement.",
+    "mdTip": "Astuce : appuyez sur Ctrl+Entrée pour enregistrer rapidement, ou basculez Aperçu / Brut à tout moment.",
+    "mpTitle": "Gâle toujours ouverte & Collage multi-cartes",
+    "mpDesc": "Cliquez sur Épingler dans l’en-tête pour garder la gâle ouverte pendant le travail. Ctrl+Cliquez sur plusieurs cartes texte pour les copier ou coller toutes en une seule fois.",
+    "mpTip": "Astuce : choisissez le séparateur saut de ligne (↵), paragraphe (¶) ou espace (␣) directement sur la barre flottante.",
+    "thTitle": "6 Thèmes de Gâle & Modes Système / Clair / Sombre",
+    "thDesc": "Conserve le thème sombre Obsidian par défaut, plus 5 nouveaux thèmes sélectionnés et les modes Système / Clair / Sombre avec un aperçu animé en C‑Paramètres → Apparence.",
+    "thTip": "Astuce : choisissez \"Système\" pour suivre automatiquement le thème Windows.",
+    "skip": "Ignorer",
+    "next": "Suivant →",
+    "done": "Compris, commencer",
+    "close": "Fermer",
+    "mdHeading": "Plan du week‑end",
+    "mdColItem": "Élément",
+    "mdColStatus": "Statut",
+    "mdRowEdit": "Édition en direct",
+    "mdReady": "Prêt",
+    "mdOn": "Activé",
+    "mdSaveHint": "Ctrl+Enter · Enregistrer",
+    "mpCard1": "1. Envoyer le rapport d’avancement à 9 h",
+    "mpCard2": "2. Joindre la dernière maquette"
+  },
+  "multiPaste": {
+    "selected": "{count} sélectionné",
+    "copyAll": "Copier combiné",
+    "pasteAll": "Coller",
+    "clear": "Effacer sélection",
+    "copiedToast": "Copié {count} cartes combinées !",
+    "selectMenu": "Sélectionner pour collage multiple (Ctrl+Clique)",
+    "deselectMenu": "Retirer du collage multiple",
+    "pinShelf": "Épingler la gâle ouverte",
+    "unpinShelf": "Désépingler la gâle (masquage automatique à la sortie)"
+  },
+  "textEdit": {
+    "editMenu": "Modifier le texte",
+    "editBtn": "Modifier",
+    "cancelEdit": "Annuler la modification",
+    "hint": "Ctrl+Entrée pour enregistrer · Esc pour annuler",
+    "cancel": "Annuler",
+    "saveCopy": "Enregistrer & Copier",
+    "save": "Enregistrer",
+    "savedToast": "Texte modifié enregistré !",
+    "savedCopyToast": "Enregistré & copié !"
+  },
+  "appFilter": {
+    "group": "FILTRE D'APPLICATION",
+    "title": "Applications inclues / exclues",
+    "descExclude": "Ne pas enregistrer l’historique du presse‑papier lors de la copie depuis les applications listées.",
+    "descInclude": "Enregistrer l’historique du presse‑papier uniquement lors de la copie depuis les applications listées.",
+    "exclude": "Exclure",
+    "include": "Inclure uniquement",
+    "placeholder": "ex. KeePass.exe, chrome…",
+    "add": "Ajouter"
+  },
+  "imageViewer": {
+    "group": "VOIR L’IMAGE",
+    "title": "Ouvrir les captures d'écran",
+    "desc": "Sélectionnez l'application à lancer quand vous cliquez sur « Ouvrir l'image avec l'application »",
+    "systemDefault": "Par défaut du système",
+    "choose": "Choisir l'application…",
+    "reset": "Réinitialiser",
+    "openMenu": "Ouvrir l'image avec l'application",
+    "movePinUp": "Déplacer l'épinglé vers le haut",
+    "movePinDown": "Déplacer l'épinglé vers le bas"
+  },
+  "editor": {
+    "editTitle": "Modifier le texte",
+    "cancelEditTitle": "Annuler la modification",
+    "savedEdited": "Texte modifié enregistré !",
+    "hint": "Ctrl+Enter pour enregistrer · Esc pour annuler",
+    "cancel": "Annuler",
+    "savedCopied": "Enregistré et copié !",
+    "saved": "Enregistré !",
+    "saveCopy": "Enregistrer et copier",
+    "save": "Enregistrer",
+    "openImageWithApp": "Ouvrir l'image avec une application"
+  },
+  "multiSelect": {
+    "separator": "Séparateur",
+    "sepNewline": "Nouvelle ligne (\\n)",
+    "sepBlank": "Ligne vide (\\n\\n)",
+    "sepSpace": "Espace"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidienne",
+      "tagline": "Verre noir pur"
+    },
+    "midnightOcean": {
+      "name": "Océan de minuit",
+      "tagline": "Bleu marine profond & cyan électrique"
+    },
+    "emeraldGlass": {
+      "name": "Verre émeraude",
+      "tagline": "Obsidienne forestière & éclat de menthe"
+    },
+    "sunsetAmber": {
+      "name": "Crépuscule d'ambre",
+      "tagline": "Charbon chaud & ambre doré"
+    },
+    "roseVelvet": {
+      "name": "Velours rose",
+      "tagline": "Prune profond & rose délicat"
+    },
+    "nordicFrost": {
+      "name": "Givre nordique",
+      "tagline": "Ardoise arctique & indigo vif"
+    }
   }
 }

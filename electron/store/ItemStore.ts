@@ -464,6 +464,26 @@ export class ItemStore {
   }
 
   /**
+   * Rearrange pinned items by moving `sourceId` to the position of `targetId` (Issue #77).
+   */
+  reorderPinned(sourceId: string, targetId: string): boolean {
+    if (!sourceId || !targetId || sourceId === targetId) return false
+    const srcIdx = this.items.findIndex((x) => x.id === sourceId && x.pinned)
+    const tgtIdx = this.items.findIndex((x) => x.id === targetId && x.pinned)
+    if (srcIdx < 0 || tgtIdx < 0) return false
+    const [moved] = this.items.splice(srcIdx, 1)
+    const insertAt = this.items.findIndex((x) => x.id === targetId)
+    if (insertAt < 0) {
+      this.items.splice(srcIdx, 0, moved)
+      return false
+    }
+    const finalIdx = srcIdx < tgtIdx ? insertAt + 1 : insertAt
+    this.items.splice(finalIdx, 0, moved)
+    this.persist()
+    return true
+  }
+
+  /**
    * Set or clear an item's note. Normalized here, so nothing unclean is ever
    * stored. The pin is left alone: a note keeps the item by itself (history
    * limit, auto-delete and "clear" skip noted items, see isKept). Returns
@@ -473,6 +493,45 @@ export class ItemStore {
     const it = this.items.find((x) => x.id === id)
     if (!it || !patch || typeof patch !== 'object') return false
     if ('note' in patch) applyNote(it, normalizeNote(patch.note))
+    this.persist()
+    return true
+  }
+
+  /**
+   * Edit an existing text item's content in place. Updates its full-text disk
+   * payload (if > 300 chars), clears stale HTML, re-detects URL/color flags,
+   * and refreshes the deduplication index.
+   */
+  updateText(id: string, nextText: string): boolean {
+    const it = this.items.find((x) => x.id === id)
+    if (!it || it.data.kind !== 'text' || typeof nextText !== 'string') return false
+    if (nextText.trim().length === 0 || nextText.length > 500_000) return false
+
+    const oldSig = this.signatureOf(it)
+    this.sigToId.delete(oldSig)
+
+    const trimmed = nextText.trim()
+    const isUrl = /^(https?:\/\/|www\.)[^\s]+$/i.test(trimmed)
+    const isColor = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$|^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*[\d.]+%?\s*)?\)$|^hsla?\(\s*\d{1,3}(?:deg)?\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(?:\s*,\s*[\d.]+%?\s*)?\)$/i.test(trimmed)
+
+    delete it.data.html
+    it.data.isUrl = isUrl
+    it.data.isColor = isColor
+    if (!isUrl) delete it.data.linkTitle
+
+    if (nextText.length > 300) {
+      this.writeTextPayload(it.id, nextText)
+      it.data.hasFullPayload = true
+      it.data.previewText = nextText.slice(0, 300)
+      it.data.text = it.data.previewText
+    } else {
+      if (it.data.hasFullPayload) this.removeTextPayload(it.id)
+      delete it.data.hasFullPayload
+      delete it.data.previewText
+      it.data.text = nextText
+    }
+
+    this.sigToId.set(this.signatureOf(it), it.id)
     this.persist()
     return true
   }

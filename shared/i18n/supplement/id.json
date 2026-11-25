@@ -1,30 +1,4 @@
 {
-  "count": {
-    "images": {
-      "one": "{count} gambar"
-    },
-    "files": {
-      "one": "{count} berkas"
-    },
-    "copiedTimes": {
-      "one": "Disalin {count} kali"
-    },
-    "moreImages": {
-      "one": "+{count} gambar lagi"
-    },
-    "moreFiles": {
-      "one": "+{count} berkas lagi"
-    },
-    "selected": {
-      "one": "{count} terpilih"
-    },
-    "savedToDownloads": {
-      "one": "{count} gambar disimpan ke Unduhan"
-    },
-    "splitStacks": {
-      "one": "Bagi menjadi {count} tumpukan (maks 10 tiap)"
-    }
-  },
   "renew": {
     "windowTitle": "T-Drop — Perpanjang lisensi",
     "title": "Perpanjang lisensi Anda",
@@ -195,7 +169,7 @@
     "toastCompressFailed": "Gagal mengompres gambar: {error}",
     "ocrNeedsLicense": "Ekstraksi teks OCR membutuhkan lisensi VIP atau PREMIUM!",
     "ocrProcessing": "Memproses...",
-    "ocrDone": "{count} kata berhasil diekstrak!",
+    "ocrDone": "Berhasil mengekstrak {count} kata!",
     "ocrNoText": "Tidak ditemukan teks yang jelas pada gambar.",
     "ocrFailedStatus": "Pengenalan gagal: {error}",
     "modelLoadError": "Gagal memuat model.",
@@ -408,5 +382,144 @@
     },
     "saveFromCard": "Simpan sebagai snippet",
     "savedToast": "Tersimpan ke Snippet"
+  },
+  "themeStudio": {
+    "section": "GIAO DIỆN & CHẾ ĐỘ MÀU",
+    "group": "TEMA RAK",
+    "title": "Tema & Mode Warna",
+    "desc": "Pratinjau animasi langsung untuk memilih tema rak dan mode warna.",
+    "modeSystem": "Sistem",
+    "modeLight": "Terang",
+    "modeDark": "Gelap",
+    "sectionTitle": "GIAO DIỆN & CHẾ ĐỘ MÀU",
+    "groupLabel": "TEMA RAK",
+    "cardTitle": "Tema & Mode Warna",
+    "cardDesc": "Pratinjau animasi langsung untuk memilih tema rak dan mode warna.",
+    "colorModeLabel": "Mode warna",
+    "presetLabel": "Preset tema"
+  },
+  "whatsNew": {
+    "windowTitle": "Apa Baru di T-Drop",
+    "badgeNew": "Baru",
+    "mdTitle": "Pratinjau Markdown & Sunting Teks",
+    "mdDesc": "Membuka kartu Markdown menampilkan pratinjau terformat rapi (judul, tabel, blok kode) alih-alih sintaks mentah. Klik tombol pensil untuk menyunting kartu teks yang disalin langsung di tempat.",
+    "mdTip": "Tips: Tekan Ctrl+Enter untuk simpan cepat, atau alihkan Pratinjau / Mentah kapan saja.",
+    "mpTitle": "Pin Rak Terbuka & Tempel Multi‑Kartu",
+    "mpDesc": "Klik Pin di header untuk menjaga rak tetap terbuka saat bekerja. Ctrl+Click beberapa kartu teks secara berurutan untuk menyalin atau menempel semuanya sekaligus.",
+    "mpTip": "Tip: Pilih pemisah baris (↵), paragraf (¶), atau spasi (␣) di bilah mengambang.",
+    "thTitle": "6 Tema Rak & Sistem / Terang / Gelap",
+    "thDesc": "Gunakan tema gelap Obsidian sebagai bawaan, plus 5 tema baru dan mode Sistem / Terang / Gelap dengan pratinjau animasi di Pengaturan → Tampilan.",
+    "thTip": "Tip: Pilih \"Sistem\" agar T‑Drop menyesuaikan tema Windows secara otomatis.",
+    "skip": "Lewati",
+    "next": "Berikutnya →",
+    "done": "Mulai Gunakan",
+    "close": "Tutup",
+    "mdHeading": "Rencana akhir pekan",
+    "mdColItem": "Item",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Edit langsung",
+    "mdReady": "Siap",
+    "mdOn": "Aktif",
+    "mdSaveHint": "Ctrl+Enter · Simpan",
+    "mpCard1": "1. Kirim laporan progres pukul 09.00",
+    "mpCard2": "2. Lampirkan mockup desain terbaru"
+  },
+  "multiPaste": {
+    "selected": "{count} dipilih",
+    "copyAll": "Salin Gabungan",
+    "pasteAll": "Tempel",
+    "clear": "Bersihkan Pilihan",
+    "copiedToast": "Disalin {count} kartu gabungan!",
+    "selectMenu": "Pilih untuk tempel ganda (Ctrl+Klik)",
+    "deselectMenu": "Hapus dari tempel ganda",
+    "pinShelf": "Ghim rak terbuka",
+    "unpinShelf": "Lepas ghim rak (auto tutup)"
+  },
+  "textEdit": {
+    "editMenu": "Sunting teks",
+    "editBtn": "Sunting",
+    "cancelEdit": "Batal sunting",
+    "hint": "Ctrl+Enter untuk simpan · Esc untuk batal",
+    "cancel": "Batal",
+    "saveCopy": "Simpan & Salin",
+    "save": "Simpan",
+    "savedToast": "Teks yang disunting disimpan!",
+    "savedCopyToast": "Disimpan & disalin!"
+  },
+  "appFilter": {
+    "group": "FILTER APLIKASI",
+    "title": "Sertakan / Kecualikan Aplikasi",
+    "descExclude": "Lewati pencatatan riwayat papan klip saat menyalin dari aplikasi terdaftar.",
+    "descInclude": "Hanya catat riwayat papan klip saat menyalin dari aplikasi terdaftar.",
+    "exclude": "Kecualikan",
+    "include": "Hanya sertakan",
+    "placeholder": "mis. KeePass.exe, chrome...",
+    "add": "Tambah"
+  },
+  "imageViewer": {
+    "group": "PELIKA GAMBAR",
+    "title": "Aplikasi Buka Screenshot",
+    "desc": "Pilih aplikasi yang dibuka saat mengklik \"Buka gambar dengan aplikasi\".",
+    "systemDefault": "Default Sistem",
+    "choose": "Pilih Aplikasi...",
+    "reset": "Reset",
+    "openMenu": "Buka gambar dengan aplikasi",
+    "movePinUp": "Pindahkan pin ke atas",
+    "movePinDown": "Pindah semat ke bawah"
+  },
+  "editor": {
+    "editTitle": "Edit teks",
+    "cancelEditTitle": "Batal edit",
+    "savedEdited": "Teks disimpan!",
+    "hint": "Ctrl+Enter untuk simpan · Esc untuk batal",
+    "cancel": "Batal",
+    "savedCopied": "Disimpan & disalin!",
+    "saved": "Disimpan!",
+    "saveCopy": "Simpan & Salin",
+    "save": "Simpan",
+    "openImageWithApp": "Buka gambar dengan aplikasi"
+  },
+  "multiSelect": {
+    "separator": "Pemisah",
+    "sepNewline": "Baris baru (\\n)",
+    "sepBlank": "Baris kosong (\\n\\n)",
+    "sepSpace": "Spasi"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Kaca gelap murni asli"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Navy dalam & cyan listrik"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "Obsidian hutan & cahaya mint"
+    },
+    "sunsetAmber": {
+      "name": "Senja Amber",
+      "tagline": "Arang hangat & amber keemasan"
+    },
+    "roseVelvet": {
+      "name": "Beludru Mawar",
+      "tagline": "Plum pekat & aksen mawar lembut"
+    },
+    "nordicFrost": {
+      "name": "Salamandik Nordik",
+      "tagline": "Slate arktik & indigo segar"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Kirim laporan progres pukul 09.00",
+    "demoMulti2": "2. Lampirkan mockup desain terbaru",
+    "demoMdHeading": "Rencana akhir pekan **T-Drop**",
+    "demoMdColFeature": "Fitur",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "Pratinjau **Markdown**",
+    "demoMdRow1Status": "Siap",
+    "demoMdRow2": "Edit Langsung & Tempel Massal",
+    "demoMdRow2Status": "Aktif"
   }
 }

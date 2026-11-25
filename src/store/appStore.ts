@@ -113,6 +113,17 @@ interface AppState {
   setTypeFilter: (filter: import('../../shared/types').TypeFilter) => void
   /** Whether the panel blade is expanded. */
   open: boolean
+  /** When true, the shelf stays pinned open and ignores hover-leave / blur auto-close. */
+  shelfPinned: boolean
+  setShelfPinned: (pinned: boolean) => void
+  toggleShelfPinned: () => void
+  /** Item ID currently in inline text edit mode inside PreviewFlyout. */
+  previewEditingId: string | null
+  setPreviewEditingId: (id: string | null) => void
+  /** Ordered IDs of text cards selected for multi-copy / multi-paste (PR #93). */
+  selectedTextIds: string[]
+  toggleSelectedTextId: (id: string) => void
+  clearSelectedTextIds: () => void
   /** Settings sheet visibility. */
   settingsOpen: boolean
   /** Emoji library view (replaces the clipboard list). */
@@ -233,8 +244,12 @@ interface AppState {
   setCardMenuRect: (rect: CardMenuRect | null) => void
   /** Save or remove a note (main normalizes). */
   setItemMeta: (id: string, patch: ItemMetaPatch) => Promise<void>
+  /** Edit a text card's content in place (persists to main store & disk payload). */
+  updateItemText: (id: string, text: string) => Promise<boolean>
   /** Put derived text (clean link, color format, path) on the clipboard without a new card. */
   copyText: (text: string, opts?: { quiet?: boolean }) => Promise<boolean>
+  /** Write arbitrary text (e.g. merged selected cards) to clipboard and Ctrl+V into active app. */
+  pasteText: (text: string) => Promise<boolean>
   saveImages: (id: string) => Promise<void>
 
   /* toasts */
@@ -243,6 +258,8 @@ interface AppState {
 
   /* mutations (delegate to main) */
   togglePin: (id: string, pinned: boolean) => Promise<void>
+  reorderPinned: (sourceId: string, targetId: string) => Promise<void>
+  openImageExternal: (id: string, imageId?: string) => Promise<boolean>
   remove: (id: string) => Promise<void>
   clear: (ids?: string[]) => Promise<void>
   copy: (id: string) => Promise<void>
@@ -272,6 +289,24 @@ export const useStore = create<AppState>((set, get) => ({
     if (get().previewItemId) get().setPreviewItemId(null)
   },
   open: false,
+  shelfPinned: false,
+  setShelfPinned: (shelfPinned) => set({ shelfPinned }),
+  toggleShelfPinned: () => set((s) => ({ shelfPinned: !s.shelfPinned })),
+  previewEditingId: null,
+  setPreviewEditingId: (previewEditingId) => set({ previewEditingId }),
+  selectedTextIds: [],
+  toggleSelectedTextId: (id) =>
+    set((s) => {
+      const exists = s.selectedTextIds.includes(id)
+      return {
+        selectedTextIds: exists
+          ? s.selectedTextIds.filter((x) => x !== id)
+          : [...s.selectedTextIds, id]
+      }
+    }),
+  clearSelectedTextIds: () => {
+    if (get().selectedTextIds.length > 0) set({ selectedTextIds: [] })
+  },
   settingsOpen: false,
   settingsTab: 'behaviour',
   setSettingsTab: (settingsTab) => set({ settingsTab }),
@@ -583,6 +618,8 @@ export const useStore = create<AppState>((set, get) => ({
     }
     set({ open })
     if (!open) {
+      if (get().previewEditingId) set({ previewEditingId: null })
+      if (get().selectedTextIds.length > 0) set({ selectedTextIds: [] })
       // Release any focused control inside the blade. Without this, a button
       // left focused from a click keeps matching the card's :focus-within
       // rule and its action bar stays lit after the next open.
@@ -690,6 +727,20 @@ export const useStore = create<AppState>((set, get) => ({
     const current = get().items
     if (items.length !== current.length || items.some((it, i) => it.id !== current[i]?.id || it.pinned !== current[i]?.pinned)) {
       set({ items })
+    }
+  },
+
+  async reorderPinned(sourceId, targetId) {
+    if (!sourceId || !targetId || sourceId === targetId) return
+    const items = await edge.reorderPinned(sourceId, targetId)
+    set({ items })
+  },
+
+  async openImageExternal(id, imageId) {
+    try {
+      return await edge.openImageExternal(id, imageId)
+    } catch {
+      return false
     }
   },
 
@@ -853,6 +904,52 @@ export const useStore = create<AppState>((set, get) => ({
     try {
       await edge.saveImages(id)
     } catch { /* ignore */ }
+  },
+
+  async updateItemText(id, nextText) {
+    if (typeof nextText !== 'string' || nextText.trim().length === 0) return false
+    const trimmed = nextText.trim()
+    const isUrl = /^(https?:\/\/|www\.)[^\s]+$/i.test(trimmed)
+    const isColor = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$|^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*[\d.]+%?\s*)?\)$|^hsla?\(\s*\d{1,3}(?:deg)?\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(?:\s*,\s*[\d.]+%?\s*)?\)$/i.test(trimmed)
+    set({
+      items: get().items.map((it) => {
+        if (it.id !== id || it.data.kind !== 'text') return it
+        const isLong = nextText.length > 300
+        return {
+          ...it,
+          data: {
+            ...it.data,
+            text: isLong ? nextText.slice(0, 300) : nextText,
+            previewText: isLong ? nextText.slice(0, 300) : undefined,
+            hasFullPayload: isLong ? true : undefined,
+            hasHtml: false,
+            html: undefined,
+            isUrl,
+            isColor
+          }
+        }
+      })
+    })
+    if (get().demo) return true
+    try {
+      const items = await edge.updateItemText(id, nextText)
+      set({ items })
+      return true
+    } catch {
+      return false
+    }
+  },
+
+  async pasteText(text) {
+    if (!text) return false
+    set({ isInternalCopying: true })
+    try {
+      return await edge.pasteText(text)
+    } catch {
+      return false
+    } finally {
+      setTimeout(() => set({ isInternalCopying: false }), 600)
+    }
   },
 
   async pasteSubitem(req) {

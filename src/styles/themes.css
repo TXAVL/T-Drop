@@ -1,0 +1,168 @@
+/**
+ * Theme preset & Light/Dark mode overrides.
+ *
+ * Scoped strictly to [data-theme="light"] and non-default presets so the
+ * original Obsidian dark theme (data-theme="dark" + data-theme-preset="default")
+ * stays 100% pixel-identical.
+ */
+
+/* ── Shared overrides for Light mode OR any custom theme preset ─────────── */
+:root[data-theme="light"] .blade,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .blade {
+  background: var(--blade-bg) !important;
+  border-color: var(--edge-light) !important;
+  box-shadow: var(--blade-shadow) !important;
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .blade-container::before,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .blade-container::before {
+  background: var(--flare-bg) !important;
+}
+
+:root[data-theme="light"] .flare-top,
+:root[data-theme="light"] .flare-bottom,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .flare-top,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .flare-bottom {
+  background: linear-gradient(to right, var(--flare-bg) 30px, transparent 30px) !important;
+}
+
+:root[data-theme="light"] .flare-top.flare-right,
+:root[data-theme="light"] .flare-bottom.flare-right,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .flare-top.flare-right,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .flare-bottom.flare-right {
+  background: linear-gradient(to left, var(--flare-bg) 30px, transparent 30px) !important;
+}
+
+:root[data-theme="light"] .item:not(.is-color-card),
+:root[data-theme-preset]:not([data-theme-preset="default"]) .item:not(.is-color-card) {
+  background: var(--bg-card) !important;
+  border-color: var(--edge-light) !important;
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .item:not(.is-color-card):hover,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .item:not(.is-color-card):hover {
+  background: var(--bg-card-hover) !important;
+}
+
+:root[data-theme="light"] .setting-card,
+:root[data-theme="light"] .settings-shelf-card,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .setting-card,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .settings-shelf-card {
+  background: var(--bg-card) !important;
+  border-color: var(--edge-light) !important;
+}
+
+:root[data-theme="light"] .settings-tab-btn,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .settings-tab-btn {
+  background: var(--pill-bg);
+  color: var(--text-secondary);
+}
+
+:root[data-theme="light"] .settings-tab-btn.active,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .settings-tab-btn.active {
+  background: var(--pill-active-bg);
+  color: var(--pill-active-fg);
+}
+
+:root[data-theme="light"] .settings-tab-indicator,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .settings-tab-indicator {
+  background: var(--pill-active-bg);
+}
+
+:root[data-theme="light"] .pill,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .pill {
+  background: var(--pill-bg);
+  color: var(--text-secondary);
+  border-color: var(--edge-light);
+}
+
+:root[data-theme="light"] .pill.active,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .pill.active {
+  background: var(--pill-active-bg) !important;
+  color: var(--pill-active-fg) !important;
+  border-color: transparent !important;
+}
+
+:root[data-theme="light"] .preview-flyout,
+:root[data-theme-preset]:not([data-theme-preset="default"]) .preview-flyout {
+  background: var(--blade-bg) !important;
+  border: 1px solid var(--edge-light) !important;
+  color: var(--text-primary);
+}
+
+/* ── Light Mode legibility & surface contrast ───────────────────────────── */
+:root[data-theme="light"] .setting-title,
+:root[data-theme="light"] .item-text,
+:root[data-theme="light"] .header-title,
+:root[data-theme="light"] .panel-title,
+:root[data-theme="light"] .section-label {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="light"] .setting-desc,
+:root[data-theme="light"] .meta,
+:root[data-theme="light"] .meta-time,
+:root[data-theme="light"] .setting-group-label,
+:root[data-theme="light"] .setting-section-divider-text,
+:root[data-theme="light"] .shelf-section-divider-text {
+  color: var(--text-secondary) !important;
+}
+
+:root[data-theme="light"] .icon-btn,
+:root[data-theme="light"] .act,
+:root[data-theme="light"] .filter-btn {
+  color: var(--text-secondary);
+  background: rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme="light"] .icon-btn:hover,
+:root[data-theme="light"] .act:hover,
+:root[data-theme="light"] .filter-btn:hover {
+  color: var(--text-primary);
+  background: rgba(15, 23, 42, 0.1);
+}
+
+:root[data-theme="light"] .filter-btn.active {
+  background: var(--pill-active-bg) !important;
+  color: var(--pill-active-fg) !important;
+}
+
+:root[data-theme="light"] .shelf-search-input,
+:root[data-theme="light"] input[type="text"],
+:root[data-theme="light"] input[type="search"] {
+  background: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--edge-strong) !important;
+}
+
+:root[data-theme="light"] .shelf-search-input::placeholder,
+:root[data-theme="light"] input::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+:root[data-theme="light"] .txa-md-root {
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .txa-md-root strong,
+:root[data-theme="light"] .txa-md-h,
+:root[data-theme="light"] .txa-md-table th {
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .txa-md-table td {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="light"] .txa-md-table-wrap {
+  background: rgba(15, 23, 42, 0.03);
+  border-color: var(--edge-light);
+}
+
+:root[data-theme="light"] .txa-md-inline-code {
+  background: rgba(15, 23, 42, 0.07);
+  border-color: var(--edge-light);
+  color: var(--accent);
+}

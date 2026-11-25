@@ -676,7 +676,16 @@
     "notesLine2": "CN · Đi dọc sống núi trên biển mây",
     "note": "Vé tàu",
     "query": "tàu",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Gửi báo cáo tiến độ lúc 9:00 sáng",
+    "demoMulti2": "2. Đính kèm bản thiết kế mới nhất",
+    "demoMdHeading": "Kế hoạch cuối tuần **T-Drop**",
+    "demoMdColFeature": "Mục",
+    "demoMdColStatus": "Trạng thái",
+    "demoMdRow1": "Xem trước **Markdown**",
+    "demoMdRow1Status": "Hoàn tất",
+    "demoMdRow2": "Sửa nhanh & Dán gộp",
+    "demoMdRow2Status": "Sẵn sàng"
   },
   "common": {
     "undo": "Hoàn tác",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Lưu thành snippet",
     "savedToast": "Đã lưu vào Snippet"
+  },
+  "themeStudio": {
+    "section": "GIAO DIỆN & CHẾ ĐỘ MÀU",
+    "group": "BỘ GIAO DIỆN NEO",
+    "title": "Giao diện & Chế độ Sáng / Tối",
+    "desc": "Xem trước hoạt ảnh trực tiếp và chọn giao diện cho kệ T-Drop.",
+    "modeSystem": "Theo máy",
+    "modeLight": "Sáng",
+    "modeDark": "Tối",
+    "sectionTitle": "GIAO DIỆN & CHẾ ĐỘ MÀU",
+    "groupLabel": "BỘ GIAO DIỆN NEO",
+    "cardTitle": "Giao diện & Chế độ Sáng / Tối",
+    "cardDesc": "Xem trước hoạt ảnh trực tiếp và chọn giao diện cho kệ T-Drop.",
+    "colorModeLabel": "Chế độ màu",
+    "presetLabel": "Bộ giao diện"
+  },
+  "whatsNew": {
+    "windowTitle": "Có gì mới trong T-Drop",
+    "badgeNew": "Mới",
+    "mdTitle": "Xem trước Markdown & Sửa nhanh văn bản",
+    "mdDesc": "Mở rộng thẻ Markdown sẽ tự động hiển thị bản xem trước gọn gàng (tiêu đề, bảng biểu, khối mã) thay vì chữ thô. Bấm nút bút chì để chỉnh sửa trực tiếp bất kỳ thẻ văn bản nào và lưu ngay.",
+    "mdTip": "Mẹo: Nhấn Ctrl+Enter để lưu nhanh hoặc chuyển Preview / Raw bất cứ lúc nào.",
+    "mpTitle": "Ghim giữ kệ luôn mở & Dán gộp nhiều thẻ",
+    "mpDesc": "Bấm nút Ghim trên thanh tiêu đề để khóa mở kệ khi làm việc liên tục. Giữ Ctrl+Click trên nhiều thẻ văn bản để chọn theo thứ tự rồi sao chép hoặc dán gộp tất cả trong 1 lần.",
+    "mpTip": "Mẹo: Chọn dấu nối xuống dòng (↵), cách đoạn (¶) hoặc dấu cách (␣) ngay trên thanh nổi.",
+    "thTitle": "6 Bộ giao diện Neo & Sáng / Tối / Theo máy",
+    "thDesc": "Mặc định giữ nguyên giao diện tối quen thuộc, bổ sung thêm 5 bộ màu tuyển chọn cùng chế độ Theo máy (System), Sáng (Light) và Tối (Dark) kèm xem trước hoạt ảnh trong Cài đặt → Giao diện.",
+    "thTip": "Mẹo: Chọn \"Theo máy\" để T-Drop tự đổi Sáng/Tối theo Windows.",
+    "skip": "Bỏ qua",
+    "next": "Tiếp theo →",
+    "done": "Bắt đầu sử dụng",
+    "close": "Đóng",
+    "mdHeading": "Kế hoạch cuối tuần",
+    "mdColItem": "Mục",
+    "mdColStatus": "Trạng thái",
+    "mdRowEdit": "Chỉnh sửa trực tiếp",
+    "mdReady": "Sẵn sàng",
+    "mdOn": "Đã bật",
+    "mdSaveHint": "Ctrl+Enter · Lưu",
+    "mpCard1": "1. Gửi báo cáo tiến độ lúc 9:00",
+    "mpCard2": "2. Đính kèm bản thiết kế mới"
+  },
+  "multiPaste": {
+    "selected": "{count} đã chọn",
+    "copyAll": "Sao chép gộp",
+    "pasteAll": "Dán gộp",
+    "clear": "Bỏ chọn tất cả",
+    "copiedToast": "Đã sao chép gộp {count} thẻ!",
+    "selectMenu": "Chọn để dán gộp (Ctrl+Click)",
+    "deselectMenu": "Bỏ chọn dán gộp",
+    "pinShelf": "Ghim giữ kệ luôn mở",
+    "unpinShelf": "Bỏ ghim kệ (tự đóng khi rời chuột)"
+  },
+  "textEdit": {
+    "editMenu": "Chỉnh sửa văn bản",
+    "editBtn": "Chỉnh sửa văn bản",
+    "cancelEdit": "Đóng trình sửa",
+    "hint": "Ctrl+Enter để lưu · Esc để hủy",
+    "cancel": "Hủy",
+    "saveCopy": "Lưu & Chép",
+    "save": "Lưu",
+    "savedToast": "Đã lưu nội dung đã chỉnh sửa!",
+    "savedCopyToast": "Đã lưu & sao chép!"
+  },
+  "appFilter": {
+    "group": "LỌC ỨNG DỤNG",
+    "title": "Loại trừ / Chỉ định ứng dụng",
+    "descExclude": "Bỏ qua không lưu lịch sử khi sao chép từ các ứng dụng trong danh sách.",
+    "descInclude": "Chỉ ghi lại lịch sử khi sao chép từ các ứng dụng trong danh sách.",
+    "exclude": "Loại trừ",
+    "include": "Chỉ cho phép",
+    "placeholder": "vd: KeePass.exe, chrome...",
+    "add": "Thêm"
+  },
+  "imageViewer": {
+    "group": "TRÌNH XEM ẢNH",
+    "title": "Ứng dụng mở ảnh chụp màn hình",
+    "desc": "Chọn ứng dụng dùng khi bấm \"Mở ảnh bằng ứng dụng\" trên thẻ ảnh.",
+    "systemDefault": "Mặc định hệ thống",
+    "choose": "Chọn ứng dụng...",
+    "reset": "Mặc định",
+    "openMenu": "Mở ảnh bằng ứng dụng",
+    "movePinUp": "Đưa mục ghim lên trước",
+    "movePinDown": "Đưa mục ghim xuống sau"
+  },
+  "editor": {
+    "editTitle": "Chỉnh sửa văn bản",
+    "cancelEditTitle": "Đóng trình sửa",
+    "savedEdited": "Đã lưu nội dung đã chỉnh sửa!",
+    "hint": "Ctrl+Enter để lưu · Esc để hủy",
+    "cancel": "Hủy",
+    "savedCopied": "Đã lưu & sao chép!",
+    "saved": "Đã lưu nội dung!",
+    "saveCopy": "Lưu & Chép",
+    "save": "Lưu",
+    "openImageWithApp": "Mở ảnh bằng ứng dụng"
+  },
+  "multiSelect": {
+    "separator": "Ký tự nối",
+    "sepNewline": "Xuống dòng (\\n)",
+    "sepBlank": "Cách đoạn (\\n\\n)",
+    "sepSpace": "Dấu cách"
+  },
+  "themes": {
+    "default": {
+      "name": "Mặc định",
+      "tagline": "Giao diện gốc tối giản"
+    },
+    "midnightOcean": {
+      "name": "Đại dương đêm",
+      "tagline": "Xanh biển sâu & cyan nổi bật"
+    },
+    "emeraldGlass": {
+      "name": "Ngọc lục bảo",
+      "tagline": "Rừng đêm trầm & ánh ngọc"
+    },
+    "sunsetAmber": {
+      "name": "Hoàng hôn hổ phách",
+      "tagline": "Than ấm & hổ phách dịu mắt"
+    },
+    "roseVelvet": {
+      "name": "Nhung hồng",
+      "tagline": "Tím mận trầm & hồng tinh tế"
+    },
+    "nordicFrost": {
+      "name": "Sương Bắc Âu",
+      "tagline": "Xám đá Bắc Âu & xanh chàm"
+    }
   }
 }

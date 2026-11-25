@@ -382,5 +382,144 @@
     },
     "saveFromCard": "Snippet olarak kaydet",
     "savedToast": "Snippetlere kaydedildi"
+  },
+  "themeStudio": {
+    "section": "Tema & Renk Modu",
+    "group": "Raf Teması",
+    "title": "Tema & Renk Modu",
+    "desc": "Canlı animasyonlu ön izleme ile raf teması ve renk modunu seçin.",
+    "modeSystem": "Sistem",
+    "modeLight": "Açık",
+    "modeDark": "Koyu",
+    "sectionTitle": "Tema & Renk Modu",
+    "groupLabel": "Raf Teması",
+    "cardTitle": "Tema & Renk Modu",
+    "cardDesc": "Canlı animasyonlu ön izleme ile raf teması ve renk modunu seçin.",
+    "colorModeLabel": "Renk Modu",
+    "presetLabel": "Tema Ön Ayarı"
+  },
+  "whatsNew": {
+    "windowTitle": "T-Drop'ta Yenilikler",
+    "badgeNew": "Yeni",
+    "mdTitle": "Markdown Ön İzleme & Satır İçi Metin Düzenleme",
+    "mdDesc": "Markdown kartını genişlettiğinizde ham kod yerine başlık, tablo, kod bloğu gibi biçimlenmiş bir ön izleme gösterilir. Kalem düğmesine tıklayarak kopyalanan metin kartını doğrudan düzenleyin.",
+    "mdTip": "İpucu: Hızlı kaydetmek için Ctrl+Enter tuşlayın, ya da istediğiniz zaman Ön İzleme / Ham arasında geçiş yapın.",
+    "mpTitle": "Rafı Sabitle & Çoklu Kart Yapıştır",
+    "mpDesc": "Başlıkta Sabitle düğmesine tıklayarak rafı açık tutun. Ctrl+Click ile birden fazla metin kartını seçip tek seferde kopyalayıp yapıştırabilirsiniz.",
+    "mpTip": "İpucu: Satır sonu (↵), paragraf (¶) veya boşluk (␣) ayraçlarını doğrudan yüzen çubuktan seçin.",
+    "thTitle": "6 Raf Teması & Sistem / Açık / Koyu",
+    "thDesc": "Özelleştirilmiş koyu tema varsayılan olarak korunur; Ayarlar → Görünüm bölümünde canlı animasyonlu önizleme ile 5 yeni seçkin tema ve Sistem / Açık / Koyu modları eklendi.",
+    "thTip": "İpucu: T-Drop'un Windows temasına göre otomatik olarak Açık/Koyu arasında geçiş yapması için \"Sistem\" seçeneğini kullanın.",
+    "skip": "Geç",
+    "next": "İleri →",
+    "done": "Anladım, başla",
+    "close": "Kapat",
+    "mdHeading": "Hafta sonu planı",
+    "mdColItem": "Öğe",
+    "mdColStatus": "Durum",
+    "mdRowEdit": "Canlı Düzenleme",
+    "mdReady": "Hazır",
+    "mdOn": "Açık",
+    "mdSaveHint": "Ctrl+Enter · Kaydet",
+    "mpCard1": "1. 9:00’da ilerleme raporu gönder",
+    "mpCard2": "2. En yeni tasarım örneğini ekle"
+  },
+  "multiPaste": {
+    "selected": "{count} seçildi",
+    "copyAll": "Tümünü Kopyala",
+    "pasteAll": "Yapıştır",
+    "clear": "Seçimi temizle",
+    "copiedToast": "{count} birleşik kart kopyalandı!",
+    "selectMenu": "Çoklu yapıştırma için seç (Ctrl+Tık)",
+    "deselectMenu": "Çoklu yapıştırmadan kaldır",
+    "pinShelf": "Kafeyi sabitle",
+    "unpinShelf": "Kafeyi sabitleme (otomatik gizle)"
+  },
+  "textEdit": {
+    "editMenu": "Metni düzenle",
+    "editBtn": "Düzenle",
+    "cancelEdit": "Düzenlemeyi iptal",
+    "hint": "Ctrl+Enter kaydet · Esc iptal",
+    "cancel": "İptal",
+    "saveCopy": "Kaydet & Kopyala",
+    "save": "Kaydet",
+    "savedToast": "Düzenlenen metin kaydedildi!",
+    "savedCopyToast": "Kaydedildi & kopyalandı!"
+  },
+  "appFilter": {
+    "group": "UYGULAMA FİLTRESİ",
+    "title": "Uygulama Ekle / Hariç Tut",
+    "descExclude": "Listelenen uygulamalardan kopyalarken pano geçmişi kaydedilmez.",
+    "descInclude": "Sadece listelenen uygulamalardan kopyalarken pano geçmişi kaydedilir.",
+    "exclude": "Hariç tut",
+    "include": "Sadece dahil",
+    "placeholder": "örn. KeePass.exe, chrome...",
+    "add": "Ekle"
+  },
+  "imageViewer": {
+    "group": "GÖRÜNTÜ İZLEYİCİ",
+    "title": "Ekran görüntüsü açacak uygulama",
+    "desc": "\\\"Uygulama ile resmi aç\\\" tıklandığında açılacak uygulamayı seçin.",
+    "systemDefault": "Sistem Varsayılanı",
+    "choose": "Uygulama seç...",
+    "reset": "Sıfırla",
+    "openMenu": "Uygulama ile resmi aç",
+    "movePinUp": "Sabitlenenleri yukarı taşı",
+    "movePinDown": "Sabitlenenleri aşağı taşı"
+  },
+  "editor": {
+    "editTitle": "Metni düzenle",
+    "cancelEditTitle": "Düzenlemeyi iptal",
+    "savedEdited": "Düzenlenen metin kaydedildi!",
+    "hint": "Ctrl+Enter kaydet · Esc iptal",
+    "cancel": "İptal",
+    "savedCopied": "Kaydedildi & kopyalandı!",
+    "saved": "Kaydedildi!",
+    "saveCopy": "Kaydet & Kopyala",
+    "save": "Kaydet",
+    "openImageWithApp": "Görseli uygulamayla aç"
+  },
+  "multiSelect": {
+    "separator": "Ayraç",
+    "sepNewline": "Yeni satır (\\n)",
+    "sepBlank": "Boş satır (\\n\\n)",
+    "sepSpace": "Boşluk"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Orijinal saf koyu cam"
+    },
+    "midnightOcean": {
+      "name": "Gece Okyanusu",
+      "tagline": "Koyu lacivert & elektrik camgöbeği"
+    },
+    "emeraldGlass": {
+      "name": "Zümrüt Cam",
+      "tagline": "Orman obsidyeni & nane parıltısı"
+    },
+    "sunsetAmber": {
+      "name": "Amber Alacakaranlık",
+      "tagline": "Sıcak kömür & altın amber"
+    },
+    "roseVelvet": {
+      "name": "Gül Kadife",
+      "tagline": "Koyu erik & yumuşak gül vurgusu"
+    },
+    "nordicFrost": {
+      "name": "Kuzey Donu",
+      "tagline": "Arktik arduvaz & berrak çivit"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Saat 9:00'da ilerleme raporu gönder",
+    "demoMulti2": "2. En son tasarım maketini ekle",
+    "demoMdHeading": "Hafta sonu planı **T-Drop**",
+    "demoMdColFeature": "Özellik",
+    "demoMdColStatus": "Durum",
+    "demoMdRow1": "**Markdown** Önizleme",
+    "demoMdRow1Status": "Hazır",
+    "demoMdRow2": "Satır içi düzenleme & Çoklu yapıştırma",
+    "demoMdRow2Status": "Canlı"
   }
 }

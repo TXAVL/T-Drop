@@ -10,6 +10,21 @@ import type { Settings } from './types'
 export const ONBOARDING_VERSION = 2
 
 /**
+ * Whether this launch should open the standalone "What's New" feature showcase
+ * (separate from the full Welcome Tour): true only for returning users who have
+ * already completed onboarding and have not yet seen the current app version.
+ */
+export function whatsNewDue(
+  s: Pick<Settings, 'tutorialCompleted' | 'lastSeenChangelogVersion'>,
+  currentVersion: string
+): boolean {
+  if (!s.tutorialCompleted || !currentVersion) return false
+  const seen = (s.lastSeenChangelogVersion || '').replace(/^v/i, '').trim()
+  const cur = currentVersion.replace(/^v/i, '').trim()
+  return Boolean(cur) && seen !== cur
+}
+
+/**
  * Whether this launch should open the welcome tour: 'first-run' for a new install (or a reset
  * tutorial), 'update' for someone who finished an older tour, null when they have seen this one.
  */

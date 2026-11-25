@@ -676,7 +676,16 @@
     "notesLine2": "Sön · Kamvandring ovanför molnen",
     "note": "Tågbiljetter",
     "query": "tåg",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Skicka statusrapport kl. 9:00",
+    "demoMulti2": "2. Bifoga senaste designmockup",
+    "demoMdHeading": "Helgplan **T-Drop**",
+    "demoMdColFeature": "Funktion",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "**Markdown**-förhandsvisning",
+    "demoMdRow1Status": "Redo",
+    "demoMdRow2": "Inbyggd redigering & flerdelad klistra in",
+    "demoMdRow2Status": "Live"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Spara som snutt",
     "savedToast": "Sparad till Snuttar"
+  },
+  "themeStudio": {
+    "section": "TEMA & FÄRGLÄGE",
+    "group": "HYLLANS TEMA",
+    "title": "Tema & färgläge",
+    "desc": "Direktvisning med animation för att välja hyllans tema och färgläge.",
+    "modeSystem": "System",
+    "modeLight": "Ljust",
+    "modeDark": "Mörkt",
+    "sectionTitle": "TEMA & FÄRGLÄGE",
+    "groupLabel": "HYLLANS TEMA",
+    "cardTitle": "Tema & färgläge",
+    "cardDesc": "Direktvisning med animation för att välja hyllans tema och färgläge.",
+    "colorModeLabel": "Färgläge",
+    "presetLabel": "Temaförval"
+  },
+  "whatsNew": {
+    "windowTitle": "Vad som är nytt i T-Drop",
+    "badgeNew": "Nytt",
+    "mdTitle": "Markdown-förhandsvisning & inline-redigering",
+    "mdDesc": "När du expanderar ett Markdown-kort visas en snygg formaterad förhandsvisning (rubriker, tabeller, kodblock) istället för rå syntax. Klicka på pennaikonen för att redigera valfritt textkort direkt på plats.",
+    "mdTip": "Tips: Tryck på Ctrl+Enter för att spara snabbt, eller växla mellan Förhandsvisning / Råtext när som helst.",
+    "mpTitle": "Fäst hyllan & klistra in flera kort",
+    "mpDesc": "Klicka på Fäst i sidfoten för att hålla hyllan öppen medan du arbetar. Håll Ctrl och klicka på flera textkort i ordning för att kopiera eller klistra in dem alla samlade på en gång.",
+    "mpTip": "Tips: Välj radbrytning (↵), stycke (¶) eller mellanslag (␣) som avgränsare direkt på den flytande fältet.",
+    "thTitle": "6 hyllteman & System / Ljust / Mörkt",
+    "thDesc": "Behåller det signaturliknande mörka Obsidian-temat som standard, plus 5 nya utvalda teman och lägena System / Ljust / Mörkt med en animerad direktvisning under Inställningar → Utseende.",
+    "thTip": "Tips: Välj \"System\" för att automatiskt följa ditt Windows-tema.",
+    "skip": "Hoppa över",
+    "next": "Nästa →",
+    "done": "Förstått, börja använda",
+    "close": "Stäng",
+    "mdHeading": "Veckoplanering",
+    "mdColItem": "Post",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Direktredigering",
+    "mdReady": "Klar",
+    "mdOn": "På",
+    "mdSaveHint": "Ctrl+Enter · Spara",
+    "mpCard1": "1. Skicka statusrapport kl 09:00",
+    "mpCard2": "2. Bifoga senaste designmockupen"
+  },
+  "multiPaste": {
+    "selected": "{count} markerade",
+    "copyAll": "Kopiera samlade",
+    "pasteAll": "Klistra in",
+    "clear": "Rensa val",
+    "copiedToast": "Kopierade {count} kombinerade kort!",
+    "selectMenu": "Välj för flerklipp (Ctrl+Click)",
+    "deselectMenu": "Ta bort från flerklipp",
+    "pinShelf": "Fäst korg öppen",
+    "unpinShelf": "Avfäst korg (dölj vid avlägsnande)"
+  },
+  "textEdit": {
+    "editMenu": "Redigera text",
+    "editBtn": "Redigera",
+    "cancelEdit": "Avbryt redigering",
+    "hint": "Ctrl+Enter för spara · Esc för avbryt",
+    "cancel": "Avbryt",
+    "saveCopy": "Spara & kopiera",
+    "save": "Spara",
+    "savedToast": "Redigerad text sparad!",
+    "savedCopyToast": "Sparad & kopierad!"
+  },
+  "appFilter": {
+    "group": "APP FILTER",
+    "title": "Inkludera / Exkludera appar",
+    "descExclude": "Utelämna historik när du kopierar från listade appar.",
+    "descInclude": "Spara historik endast från listade appar.",
+    "exclude": "Exkludera",
+    "include": "Inkludera endast",
+    "placeholder": "t.ex. KeePass.exe, chrome...",
+    "add": "Lägg till"
+  },
+  "imageViewer": {
+    "group": "BILDVISARE",
+    "title": "App för att öppna skärmbilder",
+    "desc": "Välj vilken app som öppnas när du klickar på \"Öppna bild med app\".",
+    "systemDefault": "Systemstandard",
+    "choose": "Välj app...",
+    "reset": "Återställ",
+    "openMenu": "Öppna bild med app",
+    "movePinUp": "Flytta fäst uppåt",
+    "movePinDown": "Flytta fäst nedåt"
+  },
+  "editor": {
+    "editTitle": "Redigera text",
+    "cancelEditTitle": "Avbryt redigering",
+    "savedEdited": "Ändringarna har sparats!",
+    "hint": "Ctrl+Enter för att spara · Esc för att avbryta",
+    "cancel": "Avbryt",
+    "savedCopied": "Sparat och kopierat!",
+    "saved": "Sparat!",
+    "saveCopy": "Spara och kopiera",
+    "save": "Spara",
+    "openImageWithApp": "Öppna bild med app"
+  },
+  "multiSelect": {
+    "separator": "Separator",
+    "sepNewline": "Ny rad (\\n)",
+    "sepBlank": "Tom rad (\\n\\n)",
+    "sepSpace": "Mellanslag"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Original ren mörk glas"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Djup marinblå & elektrisk cyan"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "Skogobsidian & mintglöd"
+    },
+    "sunsetAmber": {
+      "name": "Amber Dusk",
+      "tagline": "Varm kol & gyllene amber"
+    },
+    "roseVelvet": {
+      "name": "Rose Velvet",
+      "tagline": "Djup plommon & mjukt rosaccent"
+    },
+    "nordicFrost": {
+      "name": "Nordic Frost",
+      "tagline": "Arktisk skiffer & skarp indigo"
+    }
   }
 }

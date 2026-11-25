@@ -676,7 +676,16 @@
     "notesLine2": "Su · Harjannekävely pilvien yläpuolella",
     "note": "Junaliput",
     "query": "juna",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Lähetä edistymisraportti klo 9:00",
+    "demoMulti2": "2. Liitä viimeisin suunnittelukuvio",
+    "demoMdHeading": "Viikonloppisuunnitelma **T-Drop**",
+    "demoMdColFeature": "Ominaisuus",
+    "demoMdColStatus": "Tila",
+    "demoMdRow1": "**Markdown**-esikatselu",
+    "demoMdRow1Status": "Valmis",
+    "demoMdRow2": "Sisäinen muokkaus & moninkertainen liittäminen",
+    "demoMdRow2Status": "Käynnissä"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Tallenna snippetiksi",
     "savedToast": "Tallennettu Snippetteihin"
+  },
+  "themeStudio": {
+    "section": "TEEMA & VÄRITILA",
+    "group": "HYLÄN TEEMA",
+    "title": "Teema & väritila",
+    "desc": "Animoitu esikatselu, jonka avulla valitset hyllyn teeman ja väritilan.",
+    "modeSystem": "Järjestelmä",
+    "modeLight": "Vaalea",
+    "modeDark": "Tumma",
+    "sectionTitle": "TEEMA & VÄRITILA",
+    "groupLabel": "HYLÄN TEEMA",
+    "cardTitle": "Teema & väritila",
+    "cardDesc": "Animoitu esikatselu, jonka avulla valitset hyllyn teeman ja väritilan.",
+    "colorModeLabel": "Väritila",
+    "presetLabel": "Teeman esiasetus"
+  },
+  "whatsNew": {
+    "windowTitle": "Mitä uutta T-Dropissa",
+    "badgeNew": "Uusi",
+    "mdTitle": "Markdown‑esikatselu & suora muokkaus",
+    "mdDesc": "Laajentamalla Markdown‑korttia näet siistin muotoillun esikatselun (otsikot, taulukot, koodilohkot) raakasyntaksin sijaan. Napsauta kynä‑painiketta muokataksesi mitä tahansa kopioitua tekstikorttia suoraan paikalla.",
+    "mdTip": "Vinkki: Paina Ctrl+Enter tallentaaksesi nopeasti tai vaihda esikatselun ja raakatilan välillä milloin tahansa.",
+    "mpTitle": "Kiinnitä hylly auki & monikortti‑liitä",
+    "mpDesc": "Napsauta Kiinnitä‑painiketta otsikossa pitääksesi hyllyn auki työskennellessäsi. Ctrl+Napsauta useita tekstikortteja valitaksesi ne peräkkäin ja kopioi tai liitä kaikki kerralla.",
+    "mpTip": "Vihje: Valitse rivinvaihto (↵), kappale (¶) tai välilyönti (␣) erottimena liukuvalla palkilla.",
+    "thTitle": "6 hyllyteemoja ja System / Light / Dark",
+    "thDesc": "Oletuksena säilytetään Obsidianin tumman teeman, lisäksi 5 uutta valittua teemaa ja System / Light / Dark -tilat, joissa on elävä animoitu esikatselu Asetukset → Ulkoasu.",
+    "thTip": "Vihje: Valitse \"System\" seuraamaan Windows-teemaa automaattisesti.",
+    "skip": "Ohita",
+    "next": "Seuraava →",
+    "done": "Hyvä, aloita",
+    "close": "Sulje",
+    "mdHeading": "Viikonloppusuunnitelma",
+    "mdColItem": "Kohde",
+    "mdColStatus": "Tila",
+    "mdRowEdit": "Toteutus",
+    "mdReady": "Valmis",
+    "mdOn": "Käytössä",
+    "mdSaveHint": "Ctrl+Enter · Tallenna",
+    "mpCard1": "1. Lähetä edistymisraportti klo 9:00",
+    "mpCard2": "2. Liitä viimeisin suunnittelumalli"
+  },
+  "multiPaste": {
+    "selected": "{count} valittu",
+    "copyAll": "Kopioi yhdistetty",
+    "pasteAll": "Liitä",
+    "clear": "Poista valinta",
+    "copiedToast": "Kopioitu {count} yhdistettyä korttia!",
+    "selectMenu": "Valitse moniliitä (Ctrl+Click)",
+    "deselectMenu": "Poista moniliitä",
+    "pinShelf": "Kiinnitä hylly auki",
+    "unpinShelf": "Irrota hylly (piilota automaattisesti)"
+  },
+  "textEdit": {
+    "editMenu": "Muokkaa tekstiä",
+    "editBtn": "Muokkaa",
+    "cancelEdit": "Peru muokkaus",
+    "hint": "Ctrl+Enter tallentaa · Esc peruuttaa",
+    "cancel": "Peru",
+    "saveCopy": "Tallenna & kopioi",
+    "save": "Tallenna",
+    "savedToast": "Muokattu teksti tallennettu!",
+    "savedCopyToast": "Tallennettu & kopioitu!"
+  },
+  "appFilter": {
+    "group": "SOVELLUSSUODATIN",
+    "title": "Sisällytä / Poissulje sovellukset",
+    "descExclude": "Ohita leikepöydän tallennus luetelluista sovelluksista.",
+    "descInclude": "Tallenna leikepöydän historia vain luetelluista sovelluksista.",
+    "exclude": "Poissulje",
+    "include": "Salli vain",
+    "placeholder": "esim. KeePass.exe, chrome...",
+    "add": "Lisää"
+  },
+  "imageViewer": {
+    "group": "KUVAN NÄYTTÖ",
+    "title": "Sovellus kuvakaappauksen avaamiseen",
+    "desc": "Valitse, mikä sovellus avautuu, kun valitset \"Avaa kuva sovelluksella\".",
+    "systemDefault": "Järjestelmän oletus",
+    "choose": "Valitse sovellus...",
+    "reset": "Palauta",
+    "openMenu": "Avaa kuva sovelluksella",
+    "movePinUp": "Siirrä kiinnitettyä ylös",
+    "movePinDown": "Siirrä kiinnitettyä alas"
+  },
+  "editor": {
+    "editTitle": "Muokkaa tekstiä",
+    "cancelEditTitle": "Peruuta muokkaus",
+    "savedEdited": "Muokattu teksti tallennettu!",
+    "hint": "Ctrl+Enter tallentaa · Esc peruuttaa",
+    "cancel": "Peruuta",
+    "savedCopied": "Tallennettu ja kopioitu!",
+    "saved": "Tallennettu!",
+    "saveCopy": "Tallenna ja kopioi",
+    "save": "Tallenna",
+    "openImageWithApp": "Avaa kuva sovelluksella"
+  },
+  "multiSelect": {
+    "separator": "Erotin",
+    "sepNewline": "Uusi rivi (\\n)",
+    "sepBlank": "Tyhjä rivi (\\n\\n)",
+    "sepSpace": "Välilyönti"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Alkuperäinen puhdas tumma lasi"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Syvä laivastonsininen & sähköinen syaani"
+    },
+    "emeraldGlass": {
+      "name": "Smaragdinen lasi",
+      "tagline": "Metsän obsidiani ja mintun hohto"
+    },
+    "sunsetAmber": {
+      "name": "Amberin hämärä",
+      "tagline": "Lämmin hiili ja kultainen amberi"
+    },
+    "roseVelvet": {
+      "name": "Ruusun veluuri",
+      "tagline": "Syvä prunni ja pehmeä ruusun sävy"
+    },
+    "nordicFrost": {
+      "name": "Pohjolan pakkas",
+      "tagline": "Arktinen pinta ja raikas indigo"
+    }
   }
 }

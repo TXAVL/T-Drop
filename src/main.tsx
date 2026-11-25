@@ -21,6 +21,7 @@ import './styles/panel.css'
 import './styles/item.css'
 import './styles/settings.css'
 import './styles/emoji.css'
+import './styles/themes.css'
 
 const container = document.getElementById('root')
 if (!container) throw new Error('#root element not found')
@@ -42,6 +43,15 @@ if (window.location.hash === '#onboarding' || window.location.hash === '#/onboar
       <StrictMode>
         <Onboarding />
         <TxaTooltipProvider />
+      </StrictMode>
+    )
+  })
+} else if (window.location.hash.includes('whats-new')) {
+  // Standalone "What's New" feature showcase for returning users on a new version
+  void import('./components/WhatsNewWindow').then(({ WhatsNewWindowView }) => {
+    root.render(
+      <StrictMode>
+        <WhatsNewWindowView />
       </StrictMode>
     )
   })

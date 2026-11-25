@@ -676,7 +676,16 @@
     "notesLine2": "Søn · Kamtur over skyerne",
     "note": "Togbilletter",
     "query": "tog",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Send fremskridtsrapport kl. 9:00",
+    "demoMulti2": "2. Vedhæft seneste designmockup",
+    "demoMdHeading": "Weekendplan **T-Drop**",
+    "demoMdColFeature": "Funktion",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "**Markdown**-forhåndsvisning",
+    "demoMdRow1Status": "Klar",
+    "demoMdRow2": "Inline-redigering & flerdobbelt indsætning",
+    "demoMdRow2Status": "Aktiv"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Gem som snippet",
     "savedToast": "Gemt i Snippets"
+  },
+  "themeStudio": {
+    "section": "TEMA & FARVELAG",
+    "group": "HYLDETEMA",
+    "title": "Tema & Farvelag",
+    "desc": "Se en animeret live-fremvisning for at vælge tema og farvelag til hylden.",
+    "modeSystem": "System",
+    "modeLight": "Lyst",
+    "modeDark": "Mørkt",
+    "sectionTitle": "TEMA & FARVELAG",
+    "groupLabel": "HYLDETEMA",
+    "cardTitle": "Tema & Farvelag",
+    "cardDesc": "Se en animeret live-fremvisning for at vælge tema og farvelag til hylden.",
+    "colorModeLabel": "Farvelag",
+    "presetLabel": "Tema"
+  },
+  "whatsNew": {
+    "windowTitle": "Nyt i T-Drop",
+    "badgeNew": "Nyt",
+    "mdTitle": "Markdown-fremvisning & redigering",
+    "mdDesc": "Når du udvider et Markdown-kort, vises en pæn formateret fremvisning (overskrifter, tabeller, kodeblokke) i stedet for rå syntaks. Klik på blyant-ikonet for at redigere tekst direkte.",
+    "mdTip": "Tip: Tryk på Ctrl+Enter for at gemme hurtigt, eller skift mellem Fremvisning / Rå tekst.",
+    "mpTitle": "Fastgør hylden & indsæt flere kort",
+    "mpDesc": "Klik på Fastgør i overskriften for at holde hylden åben, mens du arbejder. Hold Ctrl nede og klik på flere tekstkort for at kopiere eller indsætte dem alle samlet.",
+    "mpTip": "Tip: Vælg linjeskift (↵), afsnit (¶) eller mellemrum (␣) som skilletegn på den svævende bjælke.",
+    "thTitle": "6 hyldetemaer & System / Lyst / Mørkt",
+    "thDesc": "Det mørke Obsidian-tema er standard, men du kan nu også vælge 5 nye temaer samt System / Lyst / Mørkt med live-fremvisning under Indstillinger → Udseende.",
+    "thTip": "Tip: Vælg \"System\" for at følge Windows-temaet automatisk.",
+    "skip": "Spring over",
+    "next": "Næste →",
+    "done": "Forstået",
+    "close": "Luk",
+    "mdHeading": "Weekendplan",
+    "mdColItem": "Element",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Live-redigering",
+    "mdReady": "Klar",
+    "mdOn": "Til",
+    "mdSaveHint": "Ctrl+Enter · Gem",
+    "mpCard1": "1. Send statusrapport kl. 9:00",
+    "mpCard2": "2. Vedhæft den nyeste mockup"
+  },
+  "multiPaste": {
+    "selected": "{count} valgt",
+    "copyAll": "Kopier samlet",
+    "pasteAll": "Indsæt",
+    "clear": "Ryd val",
+    "copiedToast": "Kopierede {count} kombinerede kort!",
+    "selectMenu": "Vælg til flerklip (Ctrl+Click)",
+    "deselectMenu": "Fjern fra flerklip",
+    "pinShelf": "Fastgør kasse åben",
+    "unpinShelf": "Frigør kasse (auto‑skjul ved forlader)"
+  },
+  "textEdit": {
+    "editMenu": "Rediger tekst",
+    "editBtn": "Rediger",
+    "cancelEdit": "Annullér redigering",
+    "hint": "Ctrl+Enter for at gemme · Esc for at annullere",
+    "cancel": "Annullér",
+    "saveCopy": "Gem & kopier",
+    "save": "Gem",
+    "savedToast": "Redigeret tekst gemt!",
+    "savedCopyToast": "Gemt & kopieret!"
+  },
+  "appFilter": {
+    "group": "APP FILTER",
+    "title": "Inkludér / Ekskludér apps",
+    "descExclude": "Spring over at gemme klippehistorik, når du kopierer fra de angivne apps.",
+    "descInclude": "Gem kun klippehistorik, når du kopierer fra de angivne apps.",
+    "exclude": "Ekskludér",
+    "include": "Kun inkluder",
+    "placeholder": "fx. KeePass.exe, chrome...",
+    "add": "Tilføj"
+  },
+  "imageViewer": {
+    "group": "BILDEVISER",
+    "title": "App til at åbne skærmbilleder",
+    "desc": "Vælg hvilken app der skal åbnes, når du klikker på \"Open image with app\".",
+    "systemDefault": "Systemstandard",
+    "choose": "Vælg app...",
+    "reset": "Nulstil",
+    "openMenu": "Åbn billede med app",
+    "movePinUp": "Flyt fastgjort op",
+    "movePinDown": "Flyt fastgjort ned"
+  },
+  "editor": {
+    "editTitle": "Rediger tekst",
+    "cancelEditTitle": "Annullér redigering",
+    "savedEdited": "Redigeret tekst er gemt!",
+    "hint": "Ctrl+Enter for at gemme · Esc for at annullere",
+    "cancel": "Annullér",
+    "savedCopied": "Gemt og kopieret!",
+    "saved": "Gemt!",
+    "saveCopy": "Gem og kopier",
+    "save": "Gem",
+    "openImageWithApp": "Åbn billede med app"
+  },
+  "multiSelect": {
+    "separator": "Separator",
+    "sepNewline": "Ny linje (\\n)",
+    "sepBlank": "Tom linje (\\n\\n)",
+    "sepSpace": "Mellemrum"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Original ren mørk glas"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Dyb marineblå & elektrisk cyan"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "Skovobsidian & mintglød"
+    },
+    "sunsetAmber": {
+      "name": "Amber Dusk",
+      "tagline": "Varme kul og gylden amber"
+    },
+    "roseVelvet": {
+      "name": "Rose Velvet",
+      "tagline": "Dyb plomme & blød roseaccent"
+    },
+    "nordicFrost": {
+      "name": "Nordic Frost",
+      "tagline": "Arktisk skifer & skarp indigo"
+    }
   }
 }

@@ -9,7 +9,8 @@ import { ItemStore } from '../store/ItemStore'
 import { ClipboardWatcher } from '../clipboard/ClipboardWatcher'
 import { loadSettings, saveSettings } from '../store/settings'
 import type { ClipboardItemDto, Settings } from '../../shared/types'
-import { MAX_STACK } from '../../shared/types'
+import { MAX_STACK, shouldCaptureForApp } from '../../shared/types'
+import { getForegroundProcessName } from './foregroundApp'
 import { BrowserWindow, powerMonitor } from 'electron'
 import { cleanTrackingUrl } from '../../shared/urlTracking'
 import { isStagedTempPath } from '../store/paths'
@@ -19,7 +20,7 @@ import { runtime } from './config'
 import { getMainWindow, registerClipboardUpdateListener, requestPollBoost } from './window'
 
 const store = new ItemStore((removed) => forgetStagedItems(removed))
-const watcher = new ClipboardWatcher(600, 220)
+const watcher = new ClipboardWatcher(600, 150)
 let pruneTimer: ReturnType<typeof setInterval> | null = null
 let wakeTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -73,8 +74,15 @@ export function initState(): void {
     }
   }
   watcher.start((data, png) => {
-    if (loadSettings().incognito) return
-    store.pruneExpired(loadSettings().autoDeleteHours)
+    const s = loadSettings()
+    if (s.incognito) return
+    if (s.appFilterList && s.appFilterList.length > 0) {
+      const fgApp = getForegroundProcessName()
+      if (!shouldCaptureForApp(fgApp, s.appFilterMode ?? 'exclude', s.appFilterList)) {
+        return
+      }
+    }
+    store.pruneExpired(s.autoDeleteHours)
     if (data.kind === 'image' && png && data.imageId) {
       store.stageImageBytes(data.imageId, png)
       png = undefined as any

@@ -1,6 +1,7 @@
+import { useRef } from 'react'
 import { useStore } from '../store/appStore'
 import RubberSegment from './RubberSegment'
-import { GearIcon, CloseIcon, InfoIcon, ClockIcon, TypeIcon, LinkIcon, ImageIcon, FilesIcon, PaletteIcon, EmojiSmileIcon, PinFillIcon, SnippetIcon } from './icons'
+import { GearIcon, CloseIcon, InfoIcon, ClockIcon, TypeIcon, LinkIcon, ImageIcon, FilesIcon, PaletteIcon, EmojiSmileIcon, PinIcon, PinFillIcon, SnippetIcon } from './icons'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { loadEmojiCatalog } from '../lib/emoji/load'
 import { ShelfSearch } from './ShelfSearch'
@@ -25,6 +26,8 @@ export interface HeaderProps {
 export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderProps = {}) {
   const isStoreBuild = useStore((s) => s.isStoreBuild)
   const { t } = useTranslation()
+  const shelfPinned = useStore((s) => s.shelfPinned)
+  const toggleShelfPinned = useStore((s) => s.toggleShelfPinned)
   const setSettingsOpen = useStore((s) => s.setSettingsOpen)
   const settingsOpen = useStore((s) => s.settingsOpen)
   const updateInfo = useStore((s) => s.updateInfo)
@@ -68,6 +71,30 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
   ]
 
   const activeId: (typeof FILTERS)[number]['id'] = emojiOpen ? 'emoji' : typeFilter
+  const lastWheelAtRef = useRef(0)
+
+  const handleFilterWheel = (e: React.WheelEvent) => {
+    if (settingsOpen) return
+    const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX
+    if (Math.abs(delta) < 4) return
+    e.preventDefault()
+    e.stopPropagation()
+    const now = Date.now()
+    if (now - lastWheelAtRef.current < 120) return
+    lastWheelAtRef.current = now
+    const curIdx = FILTERS.findIndex((f) => f.id === activeId)
+    if (curIdx < 0) return
+    const dir = delta > 0 ? 1 : -1
+    const nextIdx = (curIdx + dir + FILTERS.length) % FILTERS.length
+    const nextVal = FILTERS[nextIdx].id
+    playButtonClickSound()
+    if (nextVal === 'emoji') {
+      void loadEmojiCatalog()
+      setEmojiOpen(true)
+    } else {
+      setTypeFilter(nextVal as TypeFilter)
+    }
+  }
   const filterSlotSize = isHorizontal ? 26 : 24
   const filterTrackHeight = isHorizontal ? 30 : 28
   const filterIconSize = isHorizontal ? 14 : 13
@@ -103,6 +130,7 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
         <div
           className="filter-segmented-track"
           aria-hidden={settingsOpen}
+          onWheel={handleFilterWheel}
           style={{
             gridArea: '1 / 1 / 2 / 2',
             position: 'relative',
@@ -290,6 +318,36 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
                 }}
               />
             )}
+          </button>
+        )}
+
+        {!settingsOpen && (
+          <button
+            type="button"
+            className={`icon-btn${shelfPinned ? ' active' : ''}`}
+            title={shelfPinned ? t('multiPaste.unpinShelf') : t('multiPaste.pinShelf')}
+            aria-pressed={shelfPinned}
+            onClick={() => {
+              playButtonClickSound()
+              toggleShelfPinned()
+            }}
+            style={{
+              color: shelfPinned ? 'var(--accent, #8b5cf6)' : 'rgba(255, 255, 255, 0.72)',
+              background: shelfPinned ? 'rgba(139, 92, 246, 0.16)' : 'transparent',
+              border: shelfPinned ? '1px solid var(--accent, #8b5cf6)' : '1px solid transparent',
+              boxShadow: 'none',
+              flexShrink: 0,
+              cursor: 'pointer',
+              width: 30,
+              height: 30,
+              display: 'grid',
+              placeItems: 'center',
+              position: 'relative',
+              borderRadius: 8,
+              transition: 'all 0.15s ease'
+            }}
+          >
+            {shelfPinned ? <PinFillIcon width={14} height={14} /> : <PinIcon width={14} height={14} />}
           </button>
         )}
 

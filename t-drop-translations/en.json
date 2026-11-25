@@ -676,7 +676,16 @@
     "notesLine2": "Sun · Ridge walk above the clouds",
     "note": "Train tickets",
     "query": "train",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Send progress report at 9:00 AM",
+    "demoMulti2": "2. Attach the latest design mockup",
+    "demoMdHeading": "Weekend plan **T-Drop**",
+    "demoMdColFeature": "Feature",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "**Markdown** Preview",
+    "demoMdRow1Status": "Ready",
+    "demoMdRow2": "Inline Edit & Multi-Paste",
+    "demoMdRow2Status": "Live"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Save as snippet",
     "savedToast": "Saved to Snippets"
+  },
+  "themeStudio": {
+    "section": "THEME & COLOR MODE",
+    "group": "SHELF THEME",
+    "title": "Theme & Color Mode",
+    "desc": "Live animated preview to pick your shelf theme and color mode.",
+    "modeSystem": "System",
+    "modeLight": "Light",
+    "modeDark": "Dark",
+    "sectionTitle": "THEME & COLOR MODE",
+    "groupLabel": "SHELF THEME",
+    "cardTitle": "Theme & Color Mode",
+    "cardDesc": "Live animated preview to pick your shelf theme and color mode.",
+    "colorModeLabel": "Color mode",
+    "presetLabel": "Theme preset"
+  },
+  "whatsNew": {
+    "windowTitle": "What's New in T-Drop",
+    "badgeNew": "New",
+    "mdTitle": "Markdown Preview & Inline Text Edit",
+    "mdDesc": "Expanding a Markdown card renders a clean formatted preview (headings, tables, code blocks) instead of raw syntax. Click the pencil button to edit any copied text card right in place.",
+    "mdTip": "Tip: Press Ctrl+Enter to save fast, or toggle Preview / Raw anytime.",
+    "mpTitle": "Pin Shelf Open & Multi-Card Paste",
+    "mpDesc": "Click Pin in the header to keep the shelf open while working. Ctrl+Click multiple text cards in order to copy or paste them all combined in one go.",
+    "mpTip": "Tip: Pick newline (↵), paragraph (¶), or space (␣) separator right on the floating bar.",
+    "thTitle": "6 Shelf Themes & System / Light / Dark",
+    "thDesc": "Keeps the signature Obsidian dark theme as default, plus 5 new curated themes and System / Light / Dark modes with a live animated preview in Settings → Appearance.",
+    "thTip": "Tip: Choose \"System\" to automatically follow your Windows theme.",
+    "skip": "Skip",
+    "next": "Next →",
+    "done": "Got it, start using",
+    "close": "Close",
+    "mdHeading": "Weekend plan",
+    "mdColItem": "Item",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Live editing",
+    "mdReady": "Ready",
+    "mdOn": "On",
+    "mdSaveHint": "Ctrl+Enter · Save",
+    "mpCard1": "1. Send progress report at 9:00",
+    "mpCard2": "2. Attach the latest design mockup"
+  },
+  "multiPaste": {
+    "selected": "{count} selected",
+    "copyAll": "Copy combined",
+    "pasteAll": "Paste",
+    "clear": "Clear selection",
+    "copiedToast": "Copied {count} combined cards!",
+    "selectMenu": "Select for multi-paste (Ctrl+Click)",
+    "deselectMenu": "Remove from multi-paste",
+    "pinShelf": "Pin shelf open",
+    "unpinShelf": "Unpin shelf (auto-hide on leave)"
+  },
+  "textEdit": {
+    "editMenu": "Edit text",
+    "editBtn": "Edit text",
+    "cancelEdit": "Cancel edit",
+    "hint": "Ctrl+Enter to save · Esc to cancel",
+    "cancel": "Cancel",
+    "saveCopy": "Save & Copy",
+    "save": "Save",
+    "savedToast": "Saved edited text!",
+    "savedCopyToast": "Saved & copied!"
+  },
+  "appFilter": {
+    "group": "APP FILTER",
+    "title": "Include / Exclude Apps",
+    "descExclude": "Skip recording clipboard history when copying from listed apps.",
+    "descInclude": "Only record clipboard history when copying from listed apps.",
+    "exclude": "Exclude",
+    "include": "Include only",
+    "placeholder": "e.g. KeePass.exe, chrome...",
+    "add": "Add"
+  },
+  "imageViewer": {
+    "group": "IMAGE VIEWER",
+    "title": "App to Open Screenshots",
+    "desc": "Choose which app opens when clicking \"Open image with app\".",
+    "systemDefault": "System Default",
+    "choose": "Choose App...",
+    "reset": "Reset",
+    "openMenu": "Open image with app",
+    "movePinUp": "Move pinned up",
+    "movePinDown": "Move pinned down"
+  },
+  "editor": {
+    "editTitle": "Edit text",
+    "cancelEditTitle": "Cancel edit",
+    "savedEdited": "Saved edited text!",
+    "hint": "Ctrl+Enter to save · Esc to cancel",
+    "cancel": "Cancel",
+    "savedCopied": "Saved & copied!",
+    "saved": "Saved!",
+    "saveCopy": "Save & Copy",
+    "save": "Save",
+    "openImageWithApp": "Open image with app"
+  },
+  "multiSelect": {
+    "separator": "Separator",
+    "sepNewline": "New line (\\n)",
+    "sepBlank": "Blank line (\\n\\n)",
+    "sepSpace": "Space"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Original pure dark glass"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Deep navy & electric cyan"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "Forest obsidian & mint glow"
+    },
+    "sunsetAmber": {
+      "name": "Amber Dusk",
+      "tagline": "Warm charcoal & golden amber"
+    },
+    "roseVelvet": {
+      "name": "Rose Velvet",
+      "tagline": "Deep plum & soft rose accent"
+    },
+    "nordicFrost": {
+      "name": "Nordic Frost",
+      "tagline": "Arctic slate & crisp indigo"
+    }
   }
 }

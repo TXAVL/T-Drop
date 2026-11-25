@@ -16,7 +16,7 @@ import { PATHS } from '../store/paths'
 import { trimMemory } from './memory'
 import { getDeviceFingerprint, activateLicense, deactivateLicense, getLicenseState, TxaLicense } from './license'
 import { AppLogger } from './logger'
-import { execFile } from 'node:child_process'
+import { execFile, spawn } from 'node:child_process'
 import { psHost, getSystemPowerShellPath, getWritableCwd } from './powershell'
 import { filterValidPaths, isExistingFilePath } from './pathValidation'
 import { type InvokeMap, type InvokeChannel, type SendMap, type SendChannel } from '../../shared/ipc'
@@ -268,8 +268,61 @@ export function registerIpc(): void {
     return getStore().toDto()
   })
 
+  handle('item:reorder-pinned', (sourceId, targetId) => {
+    getStore().reorderPinned(sourceId, targetId)
+    return getStore().toDto()
+  })
+
+  handle('image:open-external', async (id, imageId) => {
+    const store = getStore()
+    const item = store.get(id)
+    if (!item) return false
+    let filePath: string | null = null
+    if (item.data.kind === 'image') {
+      filePath = store.resolveStoredImagePath(item.data.imageId, item.data.ext)
+    } else if (item.data.kind === 'image-collection') {
+      const target = imageId
+        ? item.data.images.find((im) => im.imageId === imageId)
+        : item.data.images[0]
+      if (target) filePath = store.resolveStoredImagePath(target.imageId, target.ext)
+    } else if (item.data.kind === 'files' && item.data.paths.length > 0) {
+      filePath = item.data.paths[0]
+    }
+    if (!filePath || !existsSync(filePath)) return false
+
+    const viewerApp = (loadSettings().imageViewerApp || '').trim()
+    if (viewerApp && existsSync(viewerApp)) {
+      try {
+        const child = spawn(viewerApp, [filePath], { detached: true, stdio: 'ignore' })
+        child.unref()
+        return true
+      } catch {
+        /* fallback to OS default */
+      }
+    }
+    const err = await shell.openPath(filePath)
+    return err === ''
+  })
+
+  handle('system:pick-app', async () => {
+    const win = getMainWindow()
+    const opts: Electron.OpenDialogOptions = {
+      title: 'Select Image Viewer Application',
+      properties: ['openFile'],
+      filters: [{ name: 'Applications', extensions: ['exe'] }]
+    }
+    const res = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
+    if (res.canceled || !res.filePaths[0]) return null
+    return res.filePaths[0]
+  })
+
   handle('item:set-meta', (id, meta) => {
     getStore().setMeta(id, meta)
+    return getStore().toDto()
+  })
+
+  handle('item:update-text', (id, text) => {
+    getStore().updateText(id, text)
     return getStore().toDto()
   })
 
@@ -287,6 +340,35 @@ export function registerIpc(): void {
     } finally {
       watcher.resyncSignature()
       watcher.setPaused(loadSettings().incognito)
+    }
+  })
+
+  handle('item:paste-text', async (text) => {
+    if (typeof text !== 'string' || text.length === 0 || text.length > 500_000) return false
+    const watcher = getWatcher()
+    watcher.setPaused(true)
+    try {
+      clipboard.clear()
+      await clipboard.writeText(text)
+      const sendDelay = await resolvePasteTarget(40)
+      if (sendDelay < 0) {
+        toast('toast.pasteFallback', 'info')
+      } else {
+        setTimeout(() => {
+          traceFg('sendKeys')
+          simulatePaste()
+          setTimeout(() => traceFg('sendKeys+400ms'), 400)
+        }, sendDelay)
+      }
+      return true
+    } catch (err) {
+      console.error('[IPC] item:paste-text failed:', err)
+      return false
+    } finally {
+      setTimeout(() => {
+        watcher.resyncSignature()
+        watcher.setPaused(loadSettings().incognito)
+      }, 350)
     }
   })
 

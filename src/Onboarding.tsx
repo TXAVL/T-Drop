@@ -74,6 +74,27 @@ export function Onboarding() {
     { key: 'stacks', view: 'full', open: true, title: t('onboarding.stacksTitle'), body: t('onboarding.stacksDesc') },
     { key: 'preview', view: 'full', open: true, title: t('onboarding.previewTitle'), body: t('onboarding.previewDesc') },
     { key: 'find', view: 'full', open: true, title: t('onboarding.findTitle'), body: t('onboarding.findDesc') },
+    {
+      key: 'markdown',
+      view: 'full',
+      open: true,
+      title: t('whatsNew.mdTitle'),
+      body: t('whatsNew.mdDesc')
+    },
+    {
+      key: 'multipaste',
+      view: 'full',
+      open: true,
+      title: t('whatsNew.mpTitle'),
+      body: t('whatsNew.mpDesc')
+    },
+    {
+      key: 'themes',
+      view: 'full',
+      open: true,
+      title: t('whatsNew.thTitle'),
+      body: t('whatsNew.thDesc')
+    },
     { key: 'backup', view: 'full', open: false, title: t('onboarding.backupTitle'), body: t('onboarding.backupDesc') },
     { key: 'settings', view: 'frame', open: false, title: t('onboarding.configTitle'), body: t('onboarding.configDesc') }
   ]

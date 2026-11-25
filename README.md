@@ -76,6 +76,18 @@ It is built for the developer and creative workflow where you constantly juggle 
 
 <br/>
 
+<h3 align="center">What's New in v0.3.6 — Interactive Guide</h3>
+
+<p align="center">
+  <em>Markdown Preview (<code>txa-markdown</code>) &amp; Inline Text Edit · Pin Shelf Open &amp; Multi-Card Paste (<code>Ctrl+Click</code>) · 6 Curated Themes &amp; System / Light / Dark Mode.</em>
+</p>
+
+<p align="center">
+  <img src=".github/readme/v036-features.svg" alt="T-Drop v0.3.6 New Features Guide" width="90%" />
+</p>
+
+<br/>
+
 <table>
   <tr>
     <td width="50%" align="center">

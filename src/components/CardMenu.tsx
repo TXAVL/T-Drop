@@ -357,6 +357,7 @@ const FORMAT_LABEL: Record<ColorFormat, string> = { hex: 'HEX', rgb: 'RGB', hsl:
 function MenuList({ item }: { item: ClipboardItemDto }) {
   const { t } = useTranslation()
   const isPreviewing = useStore((s) => s.previewItemId === item.id)
+  const isMultiSelected = useStore((s) => s.selectedTextIds.includes(item.id))
   const close = () => useStore.getState().closeCardMenu()
   const store = () => useStore.getState()
 
@@ -377,6 +378,76 @@ function MenuList({ item }: { item: ClipboardItemDto }) {
   }
 
   const typeRows: ReactNode[] = []
+  if (isText) {
+    typeRows.push(
+      <MenuRow
+        key="edit-text"
+        icon={<TypeIcon />}
+        label={t('textEdit.editMenu')}
+        onSelect={() => {
+          close()
+          const s = store()
+          s.setPreviewItemId(item.id, revealRect(item.id))
+          s.setPreviewEditingId(item.id)
+        }}
+      />
+    )
+    typeRows.push(
+      <MenuRow
+        key="multi-select"
+        icon={<CopyIcon />}
+        label={isMultiSelected ? t('multiPaste.deselectMenu') : t('multiPaste.selectMenu')}
+        onSelect={() => {
+          playToggleSound(!isMultiSelected)
+          store().toggleSelectedTextId(item.id)
+          close()
+        }}
+      />
+    )
+  }
+  if (isImage) {
+    typeRows.push(
+      <MenuRow
+        key="open-external"
+        icon={<ExternalLinkIcon />}
+        label={t('imageViewer.openMenu')}
+        onSelect={() => {
+          close()
+          void store().openImageExternal(item.id)
+        }}
+      />
+    )
+  }
+  if (item.pinned) {
+    const pinnedList = useStore.getState().items.filter((x) => x.pinned)
+    const pIdx = pinnedList.findIndex((x) => x.id === item.id)
+    if (pIdx > 0) {
+      typeRows.push(
+        <MenuRow
+          key="pin-up"
+          icon={<PinFillIcon />}
+          label={t('imageViewer.movePinUp')}
+          onSelect={() => {
+            close()
+            void store().reorderPinned(item.id, pinnedList[pIdx - 1].id)
+          }}
+        />
+      )
+    }
+    if (pIdx >= 0 && pIdx < pinnedList.length - 1) {
+      typeRows.push(
+        <MenuRow
+          key="pin-down"
+          icon={<PinIcon />}
+          label={t('imageViewer.movePinDown')}
+          onSelect={() => {
+            close()
+            void store().reorderPinned(item.id, pinnedList[pIdx + 1].id)
+          }}
+        />
+      )
+    }
+  }
   if (isLink) {
     typeRows.push(
       <MenuRow

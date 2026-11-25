@@ -1,30 +1,4 @@
 {
-  "count": {
-    "images": {
-      "one": "{count}枚の画像"
-    },
-    "files": {
-      "one": "{count}件のファイル"
-    },
-    "copiedTimes": {
-      "one": "コピー済み {count}回"
-    },
-    "moreImages": {
-      "one": "+{count}枚の画像"
-    },
-    "moreFiles": {
-      "one": "+{count}件のファイル"
-    },
-    "selected": {
-      "one": "{count}件選択"
-    },
-    "savedToDownloads": {
-      "one": "{count}枚の画像をダウンロード保存"
-    },
-    "splitStacks": {
-      "one": "{count}スタックに分割（各最大10件）"
-    }
-  },
   "renew": {
     "windowTitle": "T-Drop — ライセンスの更新",
     "title": "ライセンスを更新",
@@ -195,7 +169,7 @@
     "toastCompressFailed": "画像を圧縮できませんでした: {error}",
     "ocrNeedsLicense": "OCRによるテキスト抽出にはVIPまたはPREMIUMライセンスが必要です！",
     "ocrProcessing": "処理中…",
-    "ocrDone": "{count}語を抽出しました！",
+    "ocrDone": "{count} 語を抽出しました",
     "ocrNoText": "画像から読み取れるテキストは見つかりませんでした。",
     "ocrFailedStatus": "認識に失敗しました: {error}",
     "modelLoadError": "モデルを読み込めませんでした。",
@@ -408,5 +382,144 @@
     },
     "saveFromCard": "スニペットとして保存",
     "savedToast": "スニペットに保存しました"
+  },
+  "themeStudio": {
+    "section": "テーマ & カラーモード",
+    "group": "棚テーマ",
+    "title": "テーマ & カラーモード",
+    "desc": "ライブアニメーションプレビューで棚のテーマとカラーモードを選択",
+    "modeSystem": "システム",
+    "modeLight": "ライト",
+    "modeDark": "ダーク",
+    "sectionTitle": "テーマ & カラーモード",
+    "groupLabel": "棚テーマ",
+    "cardTitle": "テーマ & カラーモード",
+    "cardDesc": "ライブアニメーションプレビューで棚のテーマとカラーモードを選択",
+    "colorModeLabel": "カラーモード",
+    "presetLabel": "テーマプリセット"
+  },
+  "whatsNew": {
+    "windowTitle": "T-Dropの新機能",
+    "badgeNew": "新",
+    "mdTitle": "Markdownプレビュー & インラインテキスト編集",
+    "mdDesc": "Markdownカードを展開すると、ヘッダー・テーブル・コードブロックなどが整形されたプレビューが表示されます。鉛筆ボタンをクリックしてコピーしたテキストカードをその場で編集できます。",
+    "mdTip": "Tip: Ctrl+Enterで高速保存、またはいつでもプレビュー/生テキストを切り替え",
+    "mpTitle": "棚を常に開いたままに & 複数カード貼り付け",
+    "mpDesc": "ヘッダーのピンをクリックして作業中に棚をロック。Ctrl+クリックで複数テキストカードを順に選択し、一括コピーまたは貼り付けできます。",
+    "mpTip": "Tip: 文字の区切りを浮動バーで改行(↵)、段落(¶)、スペース(␣)から選択",
+    "thTitle": "6つの棚テーマ & システム/ライト/ダーク",
+    "thDesc": "デフォルトはObsidianダークテーマを維持し、さらに5つの新しいテーマとシステム/ライト/ダークモードを設定→外観でライブアニメーションプレビュー付きで追加",
+    "thTip": "Tip: \"システム\"を選択すると、T-DropがWindowsテーマに自動で追従します",
+    "skip": "スキップ",
+    "next": "次へ →",
+    "done": "使ってみる",
+    "close": "閉じる",
+    "mdHeading": "週末の計画",
+    "mdColItem": "項目",
+    "mdColStatus": "状態",
+    "mdRowEdit": "ライブ編集",
+    "mdReady": "準備完了",
+    "mdOn": "オン",
+    "mdSaveHint": "Ctrl+Enter · 保存",
+    "mpCard1": "1. 進捗報告を9:00に送信",
+    "mpCard2": "2. 最新デザインモックアップを添付"
+  },
+  "multiPaste": {
+    "selected": "{count} 選択済み",
+    "copyAll": "一括コピー",
+    "pasteAll": "貼り付け",
+    "clear": "選択解除",
+    "copiedToast": "結合カードを{count}件コピーしました！",
+    "selectMenu": "マルチ貼り付け選択 (Ctrl+クリック)",
+    "deselectMenu": "マルチ貼り付け解除",
+    "pinShelf": "シェルフをピン留め",
+    "unpinShelf": "シェルフのピン解除 (自動非表示)"
+  },
+  "textEdit": {
+    "editMenu": "テキストを編集",
+    "editBtn": "編集",
+    "cancelEdit": "編集キャンセル",
+    "hint": "Ctrl+Enterで保存 · Escでキャンセル",
+    "cancel": "キャンセル",
+    "saveCopy": "保存 & コピー",
+    "save": "保存",
+    "savedToast": "テキストを保存！",
+    "savedCopyToast": "保存してコピー！"
+  },
+  "appFilter": {
+    "group": "アプリフィルタ",
+    "title": "アプリの含める/除外",
+    "descExclude": "リストにあるアプリからのコピーは履歴に記録しない",
+    "descInclude": "リストにあるアプリからのコピーのみ履歴に記録",
+    "exclude": "除外",
+    "include": "含むのみ",
+    "placeholder": "例: KeePass.exe, chrome...",
+    "add": "追加"
+  },
+  "imageViewer": {
+    "group": "画像ビューア",
+    "title": "スクリーンショットを開くアプリ",
+    "desc": "「画像をアプリで開く」をクリックしたときに使用するアプリを選択します。",
+    "systemDefault": "システム既定",
+    "choose": "アプリを選択...",
+    "reset": "既定に戻す",
+    "openMenu": "画像をアプリで開く",
+    "movePinUp": "ピン留めを上へ",
+    "movePinDown": "ピン留めを下へ"
+  },
+  "editor": {
+    "editTitle": "テキストを編集",
+    "cancelEditTitle": "編集をキャンセル",
+    "savedEdited": "編集内容を保存しました！",
+    "hint": "Ctrl+Enter で保存 · Esc でキャンセル",
+    "cancel": "キャンセル",
+    "savedCopied": "保存してコピーしました！",
+    "saved": "保存しました！",
+    "saveCopy": "保存してコピー",
+    "save": "保存",
+    "openImageWithApp": "アプリで画像を開く"
+  },
+  "multiSelect": {
+    "separator": "区切り",
+    "sepNewline": "改行 (\\n)",
+    "sepBlank": "空行 (\\n\\n)",
+    "sepSpace": "スペース"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "純粋な黒ガラス"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "ディープネイビー & エレクトリックシアン"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "深い森の黒とミントの光"
+    },
+    "sunsetAmber": {
+      "name": "アンバーの夕暮れ",
+      "tagline": "温かみのあるチャコールとゴールデンアンバー"
+    },
+    "roseVelvet": {
+      "name": "ローズベルベット",
+      "tagline": "ディーププラムとソフトローズのアクセント"
+    },
+    "nordicFrost": {
+      "name": "ノルディックフロスト",
+      "tagline": "北極のスレートと鮮やかなインディゴ"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. 午前9:00に進捗レポートを送信",
+    "demoMulti2": "2. 最新デザインモックアップを添付",
+    "demoMdHeading": "週末の計画 **T-Drop**",
+    "demoMdColFeature": "機能",
+    "demoMdColStatus": "状態",
+    "demoMdRow1": "**Markdown** プレビュー",
+    "demoMdRow1Status": "準備完了",
+    "demoMdRow2": "インライン編集 & 複数ペースト",
+    "demoMdRow2Status": "稼働中"
   }
 }

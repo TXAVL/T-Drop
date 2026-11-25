@@ -382,5 +382,144 @@
     },
     "saveFromCard": "Uložit jako úryvek",
     "savedToast": "Uloženo do úryvků"
+  },
+  "themeStudio": {
+    "section": "Vzhled a režim barev",
+    "group": "Téma police",
+    "title": "Vzhled a režim barev",
+    "desc": "Animovaná ukázka v reálném čase – vyberte si vzhled police a režim barev.",
+    "modeSystem": "Systém",
+    "modeLight": "Světlý",
+    "modeDark": "Tmavý",
+    "sectionTitle": "Vzhled a režim barev",
+    "groupLabel": "Téma police",
+    "cardTitle": "Vzhled a režim barev",
+    "cardDesc": "Animovaná ukázka v reálném čase – vyberte si vzhled police a režim barev.",
+    "colorModeLabel": "Režim barev",
+    "presetLabel": "Předvolba vzhledu"
+  },
+  "whatsNew": {
+    "windowTitle": "Novinky v T-Drop",
+    "badgeNew": "Nové",
+    "mdTitle": "Náhled Markdown a úprava textu",
+    "mdDesc": "Rozbalením karty Markdown zobrazíte čistý formátovaný náhled (nadpisy, tabulky, bloky kódu) místo surové syntaxe. Kliknutím na ikonu tužky upravíte libovolnou kartu s textem přímo.",
+    "mdTip": "Tip: Stiskněte Ctrl+Enter pro rychlé uložení nebo kdykoli přepněte Náhled/Raw.",
+    "mpTitle": "Připnout otevřenou polici a vkládání více karet",
+    "mpDesc": "Kliknutím na Připnout v záhlaví ponecháte polici otevřenou během práce. Ctrl+klik na více textových karet je vybere a umožní zkopírovat nebo vložit najednou.",
+    "mpTip": "Tip: Na plovoucí liště si přímo zvolte oddělovač: nový řádek (↵), odstavec (¶) nebo mezerník (␣).",
+    "thTitle": "6 motivů lišty a režimy Systém / Světlý / Tmavý",
+    "thDesc": "Výchozí zůstává charakteristická tmavá barva Obsidian, přidává se 5 nových motivů a režimy Systém / Světlý / Tmavý s živým náhledem v Nastavení → Vzhled.",
+    "thTip": "Tip: Výběrem „Systém“ se T-Drop automaticky přizpůsobí motivu Windows.",
+    "skip": "Přeskočit",
+    "next": "Další →",
+    "done": "Rozumím, začít",
+    "close": "Zavřít",
+    "mdHeading": "Plán na víkend",
+    "mdColItem": "Položka",
+    "mdColStatus": "Stav",
+    "mdRowEdit": "Živé úpravy",
+    "mdReady": "Připraveno",
+    "mdOn": "Zapnuto",
+    "mdSaveHint": "Ctrl+Enter · Uložit",
+    "mpCard1": "1. Odeslat zprávu o pokroku v 9:00",
+    "mpCard2": "2. Přiložit nejnovější návrh"
+  },
+  "multiPaste": {
+    "selected": "{count} vybráno",
+    "copyAll": "Kopírovat vše",
+    "pasteAll": "Vložit",
+    "clear": "Zrušit výběr",
+    "copiedToast": "Zkopírováno {count} spojených karet!",
+    "selectMenu": "Vybrat pro vícenásobné vložení (Ctrl+Click)",
+    "deselectMenu": "Odebrat z hromadného vložení",
+    "pinShelf": "Připnout otevřenou polici",
+    "unpinShelf": "Odepnout polici (automaticky skrýt)"
+  },
+  "textEdit": {
+    "editMenu": "Upravit text",
+    "editBtn": "Upravit text",
+    "cancelEdit": "Zrušit úpravu",
+    "hint": "Ctrl+Enter pro uložení · Esc pro zrušení",
+    "cancel": "Zrušit",
+    "saveCopy": "Uložit & zkopírovat",
+    "save": "Uložit",
+    "savedToast": "Upravený text uložen!",
+    "savedCopyToast": "Uloženo & zkopírováno!"
+  },
+  "appFilter": {
+    "group": "FILTR APLIKACÍ",
+    "title": "Zahrnout / Vyloučit aplikace",
+    "descExclude": "Nevkládat historii schránky při kopírování z uvedených aplikací.",
+    "descInclude": "Ukládat historii schránky jen při kopírování z uvedených aplikací.",
+    "exclude": "Vyloučit",
+    "include": "Zahrnout jen",
+    "placeholder": "např. KeePass.exe, chrome...",
+    "add": "Přidat"
+  },
+  "imageViewer": {
+    "group": "PROHLÍŽEČ OBRÁZKŮ",
+    "title": "Aplikace pro otevírání snímků",
+    "desc": "Vyberte aplikaci pro „Otevřít obrázek aplikací“.",
+    "systemDefault": "Výchozí",
+    "choose": "Vybrat aplikaci...",
+    "reset": "Obnovit",
+    "openMenu": "Otevřít obrázek aplikací",
+    "movePinUp": "Posunout připnuté nahoru",
+    "movePinDown": "Posunout připnuté dolů"
+  },
+  "editor": {
+    "editTitle": "Upravit text",
+    "cancelEditTitle": "Zrušit úpravu",
+    "savedEdited": "Upravený text uložen!",
+    "hint": "Ctrl+Enter pro uložení · Esc pro zrušení",
+    "cancel": "Zrušit",
+    "savedCopied": "Uloženo & zkopírováno!",
+    "saved": "Uloženo!",
+    "saveCopy": "Uložit & zkopírovat",
+    "save": "Uložit",
+    "openImageWithApp": "Otevřít obrázek v aplikaci"
+  },
+  "multiSelect": {
+    "separator": "Oddělovač",
+    "sepNewline": "Nový řádek (\\n)",
+    "sepBlank": "Prázdný řádek (\\n\\n)",
+    "sepSpace": "Mezerník"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidián",
+      "tagline": "Původní tmavé sklo"
+    },
+    "midnightOcean": {
+      "name": "Ponořná noc",
+      "tagline": "Tmavě modrá & elektrická azurová"
+    },
+    "emeraldGlass": {
+      "name": "Zelené sklo",
+      "tagline": "Lesní obsidián & mátová záře"
+    },
+    "sunsetAmber": {
+      "name": "Jantarový soumrak",
+      "tagline": "Teplá grafitová & zlatý jantar"
+    },
+    "roseVelvet": {
+      "name": "Růžový samet",
+      "tagline": "Tmavá švestka & jemná růžová"
+    },
+    "nordicFrost": {
+      "name": "Severská mráz",
+      "tagline": "Arktická břidlice & ostrá indigo"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Odeslat report o postupu v 9:00",
+    "demoMulti2": "2. Přiložit nejnovější návrh",
+    "demoMdHeading": "Víkendový plán **T-Drop**",
+    "demoMdColFeature": "Funkce",
+    "demoMdColStatus": "Stav",
+    "demoMdRow1": "Náhled **Markdown**",
+    "demoMdRow1Status": "Připraveno",
+    "demoMdRow2": "Úprava a vícenásobné vložení",
+    "demoMdRow2Status": "Aktivní"
   }
 }

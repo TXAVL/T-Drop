@@ -676,7 +676,16 @@
     "notesLine2": "Zo · Kamwandeling boven de wolken",
     "note": "Treinkaartjes",
     "query": "trein",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Verstuur voortgangsrapport om 09:00",
+    "demoMulti2": "2. Voeg laatste ontwerp‑mockup toe",
+    "demoMdHeading": "Weekendplan **T-Drop**",
+    "demoMdColFeature": "Kenmerk",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "**Markdown** Voorbeeld",
+    "demoMdRow1Status": "Klaar",
+    "demoMdRow2": "Inline Bewerken & Meervoudig Plakken",
+    "demoMdRow2Status": "Live"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Opslaan als snippet",
     "savedToast": "Opgeslagen in Snippets"
+  },
+  "themeStudio": {
+    "section": "THEMA & KLEURMODUS",
+    "group": "KASTTHEMA",
+    "title": "Thema & kleurmodus",
+    "desc": "Live‑animatie‑preview om je kaste‑thema en kleurmodus te kiezen.",
+    "modeSystem": "Systeem",
+    "modeLight": "Licht",
+    "modeDark": "Donker",
+    "sectionTitle": "THEMA & KLEURMODUS",
+    "groupLabel": "KASTTHEMA",
+    "cardTitle": "Thema & kleurmodus",
+    "cardDesc": "Live‑animatie‑preview om je kaste‑thema en kleurmodus te kiezen.",
+    "colorModeLabel": "Kleurmodus",
+    "presetLabel": "Thema‑preset"
+  },
+  "whatsNew": {
+    "windowTitle": "Wat is er nieuw in T-Drop",
+    "badgeNew": "Nieuw",
+    "mdTitle": "Markdown‑preview & inline bewerken",
+    "mdDesc": "Uitklappen van een Markdown‑kaart toont een nette opgemaakte preview (koppen, tabellen, codeblokken) i.p.v. ruwe syntaxis. Klik op de potloodknop om een gekopieerde tekstkaart direct te bewerken.",
+    "mdTip": "Tip: Druk op Ctrl+Enter om snel op te slaan, of schakel Preview/Raw naar wens.",
+    "mpTitle": "Kast vastzetten & meerdere kaarten plakken",
+    "mpDesc": "Klik op Vastzetten in de kop om de kast open te houden tijdens werken. Ctrl+klik meerdere tekstkaarten om ze samen te kopiëren of plakken in één stap.",
+    "mpTip": "Tip: Kies rechtstreeks op de zwevende balk voor regeleinde (↵), alinea (¶) of spatie (␣) als scheidingsteken.",
+    "thTitle": "6 schuifthema's & Systeem / Licht / Donker",
+    "thDesc": "Behoudt het kenmerkende Obsidian-donkerthema als standaard, plus 5 nieuwe geselecteerde thema's en Systeem / Licht / Donker-modi met een live geanimeerde voorvertoning in Instellingen → Weergave.",
+    "thTip": "Tip: Kies \"Systeem\" om automatisch het Windows-thema te volgen.",
+    "skip": "Overslaan",
+    "next": "Volgende →",
+    "done": "Begrepen, starten",
+    "close": "Sluiten",
+    "mdHeading": "Weekendplanning",
+    "mdColItem": "Item",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Live bewerken",
+    "mdReady": "Klaar",
+    "mdOn": "Aan",
+    "mdSaveHint": "Ctrl+Enter · Opslaan",
+    "mpCard1": "1. Verstuur voortgangsrapport om 9:00",
+    "mpCard2": "2. Voeg de nieuwste mockup toe"
+  },
+  "multiPaste": {
+    "selected": "{count} geselecteerd",
+    "copyAll": "Gecombineerd kopiëren",
+    "pasteAll": "Plakken",
+    "clear": "Selectie wissen",
+    "copiedToast": "Gekopieerd {count} gecombineerde kaarten!",
+    "selectMenu": "Selecteren voor meerdere plakken (Ctrl+Klik)",
+    "deselectMenu": "Verwijderen uit multi-plakken",
+    "pinShelf": "Kast vastzetten",
+    "unpinShelf": "Kast losmaken"
+  },
+  "textEdit": {
+    "editMenu": "Tekst bewerken",
+    "editBtn": "Tekst bewerken",
+    "cancelEdit": "Bewerking annuleren",
+    "hint": "Ctrl+Enter om op te slaan · Esc om te annuleren",
+    "cancel": "Annuleren",
+    "saveCopy": "Opslaan & Kopiëren",
+    "save": "Opslaan",
+    "savedToast": "Bewerkt tekst opgeslagen!",
+    "savedCopyToast": "Opgeslagen & gekopieerd!"
+  },
+  "appFilter": {
+    "group": "APP FILTER",
+    "title": "Apps opnemen / uitsluiten",
+    "descExclude": "Geen geschiedenis opnemen bij kopiëren vanuit vermelde apps.",
+    "descInclude": "Alleen geschiedenis opnemen bij kopiëren vanuit vermelde apps.",
+    "exclude": "Uitsluiten",
+    "include": "Alleen toestaan",
+    "placeholder": "bijv. KeePass.exe, chrome...",
+    "add": "Toevoegen"
+  },
+  "imageViewer": {
+    "group": "BILDBEKEKER",
+    "title": "App voor schermafbeeldingen",
+    "desc": "Kies welke app wordt geopend bij \"Afbeelding openen met app\".",
+    "systemDefault": "Systeemstandaard",
+    "choose": "App kiezen...",
+    "reset": "Herstellen",
+    "openMenu": "Afbeelding openen met app",
+    "movePinUp": "Vastzetten omhoog",
+    "movePinDown": "Vastzetten omlaag"
+  },
+  "editor": {
+    "editTitle": "Tekst bewerken",
+    "cancelEditTitle": "Bewerken annuleren",
+    "savedEdited": "Bewerkt opgeslagen!",
+    "hint": "Ctrl+Enter om op te slaan · Esc om te annuleren",
+    "cancel": "Annuleren",
+    "savedCopied": "Opgeslagen & gekopieerd!",
+    "saved": "Opgeslagen!",
+    "saveCopy": "Opslaan & kopiëren",
+    "save": "Opslaan",
+    "openImageWithApp": "Afbeelding openen"
+  },
+  "multiSelect": {
+    "separator": "Scheidingsteken",
+    "sepNewline": "Nieuwe regel (\\n)",
+    "sepBlank": "Lege regel (\\n\\n)",
+    "sepSpace": "Spatie"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Zuiver donker glas"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Diep marineblauw & elektrisch cyaan"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "Bosobsidiaan & muntglans"
+    },
+    "sunsetAmber": {
+      "name": "Amber Dusk",
+      "tagline": "Warme houtskool & gouden amber"
+    },
+    "roseVelvet": {
+      "name": "Rose Velvet",
+      "tagline": "Diep pruim & zacht roosaccent"
+    },
+    "nordicFrost": {
+      "name": "Nordic Frost",
+      "tagline": "Arctisch leisteen & frisse indigo"
+    }
   }
 }

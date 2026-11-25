@@ -481,35 +481,35 @@
   },
   "count": {
     "images": {
-      "one": "{count} 이미지",
+      "one": "{count} image",
       "other": "이미지 {count}개"
     },
     "files": {
-      "one": "{count} 파일",
+      "one": "{count} file",
       "other": "파일 {count}개"
     },
     "copiedTimes": {
-      "one": "복사 {count}회",
+      "one": "Copied {count} time",
       "other": "{count}회 복사됨"
     },
     "moreImages": {
-      "one": "+{count} 이미지 더",
+      "one": "+{count} more image",
       "other": "이미지 {count}개 더"
     },
     "moreFiles": {
-      "one": "+{count} 파일 더",
+      "one": "+{count} more file",
       "other": "파일 {count}개 더"
     },
     "selected": {
-      "one": "{count} 선택",
+      "one": "{count} Selected",
       "other": "{count}개 선택됨"
     },
     "savedToDownloads": {
-      "one": "{count} 이미지 다운로드에 저장",
+      "one": "Saved {count} image to Downloads",
       "other": "이미지 {count}개를 다운로드에 저장했습니다"
     },
     "splitStacks": {
-      "one": "{count} 스택으로 분할 (각 10개 이하)",
+      "one": "Split into {count} stack (max 10 each)",
       "other": "스택 {count}개로 분할됨 (각 최대 10개)"
     }
   },
@@ -676,7 +676,16 @@
     "notesLine2": "일 · 구름 위 능선 걷기",
     "note": "기차표",
     "query": "기차",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. 오전 9:00 진행 상황 보고서 전송",
+    "demoMulti2": "2. 최신 디자인 목업 첨부",
+    "demoMdHeading": "주말 계획 **T-Drop**",
+    "demoMdColFeature": "기능",
+    "demoMdColStatus": "상태",
+    "demoMdRow1": "**Markdown** 미리보기",
+    "demoMdRow1Status": "완료",
+    "demoMdRow2": "인라인 편집 & 다중 붙여넣기",
+    "demoMdRow2Status": "실시간"
   },
   "common": {
     "undo": "Undo",
@@ -846,7 +855,7 @@
     "toastCompressFailed": "이미지를 압축하지 못했어요: {error}",
     "ocrNeedsLicense": "OCR 텍스트 추출에는 VIP 또는 PREMIUM 라이선스가 필요해요!",
     "ocrProcessing": "처리 중…",
-    "ocrDone": "{count}단어를 추출했어요!",
+    "ocrDone": "추출된 {count} 단어!",
     "ocrNoText": "이미지에서 읽을 수 있는 텍스트를 찾지 못했어요.",
     "ocrFailedStatus": "인식하지 못했어요: {error}",
     "modelLoadError": "모델을 불러오지 못했어요.",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "스니펫 저장",
     "savedToast": "스니펫에 저장됨"
+  },
+  "themeStudio": {
+    "section": "테마 및 색상 모드",
+    "group": "선반 테마",
+    "title": "테마 및 색상 모드",
+    "desc": "실시간 애니메이션 미리보기로 선반 테마와 색상 모드를 선택하세요.",
+    "modeSystem": "시스템",
+    "modeLight": "라이트",
+    "modeDark": "다크",
+    "sectionTitle": "테마 및 색상 모드",
+    "groupLabel": "선반 테마",
+    "cardTitle": "테마 및 색상 모드",
+    "cardDesc": "실시간 애니메이션 미리보기로 선반 테마와 색상 모드를 선택하세요.",
+    "colorModeLabel": "색상 모드",
+    "presetLabel": "테마 프리셋"
+  },
+  "whatsNew": {
+    "windowTitle": "T-Drop 새 소식",
+    "badgeNew": "새",
+    "mdTitle": "Markdown 미리보기·인라인 편집",
+    "mdDesc": "Markdown 카드를 펼치면 원시 문법 대신 깔끔한 서식 미리보기가 표시됩니다(제목, 표, 코드 블록). 연필 버튼을 눌러 복사된 텍스트 카드를 바로 편집하세요.",
+    "mdTip": "팁: Ctrl+Enter로 빠르게 저장하거나 언제든지 미리보기/원본을 전환하세요.",
+    "mpTitle": "선반 고정·다중 카드 붙여넣기",
+    "mpDesc": "헤더의 고정 버튼을 클릭하면 작업 중에도 선반이 열려 있습니다. Ctrl+Click으로 여러 텍스트 카드를 순서대로 선택해 한 번에 복사·붙여넣기 할 수 있습니다.",
+    "mpTip": "팁: 플로팅 바에서 줄바꿈(↵), 단락(¶), 공백(␣) 구분자를 바로 선택하세요.",
+    "thTitle": "6가지 선반 테마 & 시스템 / 라이트 / 다크",
+    "thDesc": "시그니처 옵시디언 다크 테마를 기본으로 유지하고, 5가지 신규 큐레이션 테마와 설정 → 외관에서 실시간 애니메이션 미리보기가 가능한 시스템 / 라이트 / 다크 모드를 추가했습니다.",
+    "thTip": "팁: \"시스템\"을 선택하면 Windows 테마에 따라 자동으로 전환됩니다.",
+    "skip": "건너뛰기",
+    "next": "다음 →",
+    "done": "알았어요, 시작하세요",
+    "close": "닫기",
+    "mdHeading": "주말 계획",
+    "mdColItem": "항목",
+    "mdColStatus": "상태",
+    "mdRowEdit": "실시간 편집",
+    "mdReady": "준비",
+    "mdOn": "켜짐",
+    "mdSaveHint": "Ctrl+Enter · 저장",
+    "mpCard1": "1. 9시 진행 보고서 전송",
+    "mpCard2": "2. 최신 디자인 목업 첨부"
+  },
+  "multiPaste": {
+    "selected": "{count} 선택됨",
+    "copyAll": "합치기 복사",
+    "pasteAll": "붙여넣기",
+    "clear": "선택 해제",
+    "copiedToast": "{count}개 결합 카드 복사됨!",
+    "selectMenu": "다중 붙여넣기 선택 (Ctrl+Click)",
+    "deselectMenu": "다중 붙여넣기 해제",
+    "pinShelf": "선반 고정",
+    "unpinShelf": "선반 고정 해제"
+  },
+  "textEdit": {
+    "editMenu": "텍스트 편집",
+    "editBtn": "편집",
+    "cancelEdit": "편집 취소",
+    "hint": "Ctrl+Enter 로 저장 · Esc 로 취소",
+    "cancel": "취소",
+    "saveCopy": "저장·복사",
+    "save": "저장",
+    "savedToast": "편집 텍스트 저장됨!",
+    "savedCopyToast": "저장·복사됨!"
+  },
+  "appFilter": {
+    "group": "앱 필터",
+    "title": "앱 포함 / 제외",
+    "descExclude": "목록 앱 복사 시 기록 건너뛰기",
+    "descInclude": "목록 앱 복사 시에만 기록",
+    "exclude": "제외",
+    "include": "포함만",
+    "placeholder": "예: KeePass.exe, chrome...",
+    "add": "추가"
+  },
+  "imageViewer": {
+    "group": "이미지 뷰어",
+    "title": "스크린샷 열기 앱",
+    "desc": "‘앱으로 이미지 열기’ 클릭 시 앱 선택",
+    "systemDefault": "시스템 기본",
+    "choose": "앱 선택...",
+    "reset": "초기화",
+    "openMenu": "앱으로 이미지 열기",
+    "movePinUp": "고정 위로",
+    "movePinDown": "고정 아래로"
+  },
+  "editor": {
+    "editTitle": "텍스트 편집",
+    "cancelEditTitle": "편집 취소",
+    "savedEdited": "편집 텍스트 저장됨!",
+    "hint": "Ctrl+Enter 로 저장 · Esc 로 취소",
+    "cancel": "취소",
+    "savedCopied": "저장·복사됨!",
+    "saved": "저장됨!",
+    "saveCopy": "저장·복사",
+    "save": "저장",
+    "openImageWithApp": "앱으로 이미지 열기"
+  },
+  "multiSelect": {
+    "separator": "구분자",
+    "sepNewline": "줄바꿈 (\\n)",
+    "sepBlank": "빈 줄 (\\n\\n)",
+    "sepSpace": "공백"
+  },
+  "themes": {
+    "default": {
+      "name": "옵시디언",
+      "tagline": "오리지널 다크 글래스"
+    },
+    "midnightOcean": {
+      "name": "미드나잇 오션",
+      "tagline": "딥 네이비 & 일렉트릭 시안"
+    },
+    "emeraldGlass": {
+      "name": "에메랄드 글래스",
+      "tagline": "포레스트 옵시디언 & 민트 글로우"
+    },
+    "sunsetAmber": {
+      "name": "앰버 더스크",
+      "tagline": "웜 차콜 & 골든 앰버"
+    },
+    "roseVelvet": {
+      "name": "로즈 벨벳",
+      "tagline": "딥 플럼 & 소프트 로즈"
+    },
+    "nordicFrost": {
+      "name": "노르딕 프로스",
+      "tagline": "아크틱 슬레이트 & 크립스 인디고"
+    }
   }
 }

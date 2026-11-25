@@ -382,5 +382,144 @@
     },
     "saveFromCard": "שמור כקטע",
     "savedToast": "שמרתי לקטעים"
+  },
+  "themeStudio": {
+    "section": "תצוגה & מצב צבע",
+    "group": "תצוגת המדף",
+    "title": "תצוגה & מצב צבע",
+    "desc": "תצוגה אנימציה חיה לבחירת תבנית המדף ומצב הצבע",
+    "modeSystem": "מערכת",
+    "modeLight": "בהיר",
+    "modeDark": "כהה",
+    "sectionTitle": "תצוגה & מצב צבע",
+    "groupLabel": "תצוגת המדף",
+    "cardTitle": "תצוגה & מצב צבע",
+    "cardDesc": "תצוגה אנימציה חיה לבחירת תבנית המדף ומצב הצבע",
+    "colorModeLabel": "מצב צבע",
+    "presetLabel": "תבנית"
+  },
+  "whatsNew": {
+    "windowTitle": "מה חדש ב‑T-Drop",
+    "badgeNew": "חדש",
+    "mdTitle": "תצוגת Markdown & עריכה מהירה",
+    "mdDesc": "הרחבת כרטיס Markdown מציגה תצוגה מסודרת (כותרות, טבלאות, בלוקים קוד) במקום תחביר גולמי. לחץ על סמל העיפרון לערוך כרטיס טקסט מועתק ישירות במקום.",
+    "mdTip": "טיפ: Ctrl+Enter לשמירה מהירה או החלף תצוגה / גולמי בכל עת",
+    "mpTitle": "הצמדת המדף ו‑דביק מרובה",
+    "mpDesc": "לחץ על הצמד בכותרת כדי לשמור את המדף פתוח. Ctrl+Click על כרטיסים מרובים כדי לבחור ולשמור או להדביק את כולם יחד.",
+    "mpTip": "טיפ: בחר מפריד שורה (↵), פסקה (¶) או רווח (␣) ישירות על סרגל הצף",
+    "thTitle": "6 תבניות מדף & מצב מערכת/בהיר/כהה",
+    "thDesc": "שומר את תבנית Obsidian כהה כברירת מחדל, ועוד 5 תבניות נבחרות ומצבי מערכת/בהיר/כהה עם תצוגה אנימציה חיה ב‑הגדרות → מראה",
+    "thTip": "טיפ: בחר \"מערכת\" כדי לעקוב אוטומטית אחר תצוגת Windows",
+    "skip": "דלג",
+    "next": "הבא →",
+    "done": "הבנתי, נתחיל",
+    "close": "סגור",
+    "mdHeading": "תכנית סוף שבוע",
+    "mdColItem": "פריט",
+    "mdColStatus": "סטטוס",
+    "mdRowEdit": "עריכה חיה",
+    "mdReady": "מוכן",
+    "mdOn": "פעיל",
+    "mdSaveHint": "Ctrl+Enter · שמירה",
+    "mpCard1": "1. שלח דוח התקדמות ב‑9:00",
+    "mpCard2": "2. צרף את תבנית העיצוב האחרונה"
+  },
+  "multiPaste": {
+    "selected": "{count} נבחרו",
+    "copyAll": "העתק משולב",
+    "pasteAll": "הדבק",
+    "clear": "נקה בחירה",
+    "copiedToast": "הועתקו {count} כרטיסים משולבים!",
+    "selectMenu": "בחר להדבקה מרובה (Ctrl+Click)",
+    "deselectMenu": "הסר מהדבקה מרובה",
+    "pinShelf": "הצמד מדף פתוח",
+    "unpinShelf": "בטל הצמדה מדף (הסתרה אוטומטית)"
+  },
+  "textEdit": {
+    "editMenu": "ערוך טקסט",
+    "editBtn": "ערוך",
+    "cancelEdit": "בטל עריכה",
+    "hint": "Ctrl+Enter לשמירה · Esc לביטול",
+    "cancel": "ביטול",
+    "saveCopy": "שמור & העתק",
+    "save": "שמור",
+    "savedToast": "הטקסט הערוך נשמר!",
+    "savedCopyToast": "נשמר והועתק!"
+  },
+  "appFilter": {
+    "group": "סינון אפליקציות",
+    "title": "הכללה / החרגה אפליקציות",
+    "descExclude": "דלג על שמירת היסטוריית הלוח מאפליקציות ברשימה.",
+    "descInclude": "רק שמור היסטוריית הלוח מאפליקציות ברשימה.",
+    "exclude": "החרגה",
+    "include": "כולל רק",
+    "placeholder": "לדוגמה: KeePass.exe, chrome...",
+    "add": "הוסף"
+  },
+  "imageViewer": {
+    "group": "צפייה בתמונות",
+    "title": "אפליקציית פתיחת צילום",
+    "desc": "בחר איזה אפליקציה פותחת ב‑\"פתח עם אפליקציה\" בתמונה.",
+    "systemDefault": "ברירת מערכת",
+    "choose": "בחר אפליקציה",
+    "reset": "אפס",
+    "openMenu": "פתח עם אפליקציה",
+    "movePinUp": "העלה פריט מוצמד",
+    "movePinDown": "הורד פריט מוצמד"
+  },
+  "editor": {
+    "editTitle": "ערוך טקסט",
+    "cancelEditTitle": "בטל עריכה",
+    "savedEdited": "הטקסט הערוך נשמר!",
+    "hint": "Ctrl+Enter לשמירה · Esc לביטול",
+    "cancel": "ביטול",
+    "savedCopied": "נשמר והועתק!",
+    "saved": "נשמר!",
+    "saveCopy": "שמור והעתק",
+    "save": "שמור",
+    "openImageWithApp": "פתח תמונה באפליקציה"
+  },
+  "multiSelect": {
+    "separator": "מפריד",
+    "sepNewline": "שורה חדשה (\\n)",
+    "sepBlank": "שורה ריקה (\\n\\n)",
+    "sepSpace": "רווח"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "זכוכית כהה טהורה"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "כחול כהה עמוק & ציאן חשמלי"
+    },
+    "emeraldGlass": {
+      "name": "זכוכית אמרלד",
+      "tagline": "אובסידיאן יערני וזוהר נענע"
+    },
+    "sunsetAmber": {
+      "name": "שקיעת אמבר",
+      "tagline": "פחם חם ואמבר זהוב"
+    },
+    "roseVelvet": {
+      "name": "משי ורוד",
+      "tagline": "שזיפון עמוק וניואנס ורוד רך"
+    },
+    "nordicFrost": {
+      "name": "קרח נורדי",
+      "tagline": "סלע ארקטי וכחול אינדיגו חריף"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. שליחת דוח התקדמות בשעה 09:00",
+    "demoMulti2": "2. צירוף עיצוב המוקאפ העדכני ביותר",
+    "demoMdHeading": "תוכנית לסוף השבוע **T-Drop**",
+    "demoMdColFeature": "תכונה",
+    "demoMdColStatus": "מצב",
+    "demoMdRow1": "**Markdown** תצוגה מקדימה",
+    "demoMdRow1Status": "מוכן",
+    "demoMdRow2": "עריכה מוטמעת והדבקה מרובה",
+    "demoMdRow2Status": "פעיל"
   }
 }

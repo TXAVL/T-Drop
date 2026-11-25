@@ -382,5 +382,144 @@
     },
     "saveFromCard": "Salvează ca snippet",
     "savedToast": "Salvat în Snippeturi"
+  },
+  "themeStudio": {
+    "section": "TEMĂ & MOD DE CULOAR",
+    "group": "TEMĂ KEC",
+    "title": "Temă & Mod de Culoare",
+    "desc": "Previzualizare animată live pentru a alege tema și modul de culoare al căruciorului.",
+    "modeSystem": "Sistem",
+    "modeLight": "Luminos",
+    "modeDark": "Întunecat",
+    "sectionTitle": "TEMĂ & MOD DE CULOAR",
+    "groupLabel": "TEMĂ KEC",
+    "cardTitle": "Temă & Mod de Culoare",
+    "cardDesc": "Previzualizare animată live pentru a alege tema și modul de culoare al căruciorului.",
+    "colorModeLabel": "Mod de culoare",
+    "presetLabel": "Preset temă"
+  },
+  "whatsNew": {
+    "windowTitle": "Ce e nou în T-Drop",
+    "badgeNew": "Nou",
+    "mdTitle": "Previzualizare Markdown & Editare în linie",
+    "mdDesc": "Extinderea unei carduri Markdown generează o previzualizare formatată curată (titluri, tabele, blocuri de cod) în loc de sintaxă brută. Apăsați butonul cu creionul pentru a edita orice card de text copiat direct în loc.",
+    "mdTip": "Sfat: Apăsați Ctrl+Enter pentru a salva rapid, sau comutați Prev/Brut oricând.",
+    "mpTitle": "Cărucior fixat deschis & Dăunare multi-card",
+    "mpDesc": "Apăsați Fix în antet pentru a menține căruciorul deschis în timp ce lucrați. Ctrl+Click pe mai multe carduri de text pentru a le copia sau lipi toate împreună într-o singură acțiune.",
+    "mpTip": "Sfat: Alege separatorul newline (↵), paragraph (¶) sau space (␣) direct pe bara flotantă.",
+    "thTitle": "6 Tematici de raft & Sistem / Luminos / Întunecat",
+    "thDesc": "Păstrează tema întunecată Obsidian ca implicit, plus 5 tematici noi și moduri Sistem / Luminos / Întunecat cu previzualizare animată live în Setări → Aspect.",
+    "thTip": "Sfat: Alege \"Sistem\" pentru a urmări automat tema Windows.",
+    "skip": "Omite",
+    "next": "Următor →",
+    "done": "Înțeles, încep utilizarea",
+    "close": "Închide",
+    "mdHeading": "Planul de weekend",
+    "mdColItem": "Element",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Editare live",
+    "mdReady": "Gata",
+    "mdOn": "Activat",
+    "mdSaveHint": "Ctrl+Enter · Salvează",
+    "mpCard1": "1. Trimite raportul de progres la 9:00",
+    "mpCard2": "2. Atașează ultima machetă de design"
+  },
+  "multiPaste": {
+    "selected": "{count} selectate",
+    "copyAll": "Copiază tot",
+    "pasteAll": "Paste",
+    "clear": "Șterge selecția",
+    "copiedToast": "Copiat {count} carduri combinate!",
+    "selectMenu": "Selectează pentru dătură multiplă (Ctrl+Click)",
+    "deselectMenu": "Elimină din dătură multiplă",
+    "pinShelf": "Fixează kenu deschis",
+    "unpinShelf": "Debifează kenu (închide automat la ieșire)"
+  },
+  "textEdit": {
+    "editMenu": "Editează text",
+    "editBtn": "Editează",
+    "cancelEdit": "Anulează editare",
+    "hint": "Ctrl+Enter pentru salvare · Esc pentru anulare",
+    "cancel": "Anulează",
+    "saveCopy": "Salvează & Copiază",
+    "save": "Salvează",
+    "savedToast": "Text editat salvat!",
+    "savedCopyToast": "Salvat & copiat!"
+  },
+  "appFilter": {
+    "group": "FILTRU APLICAȚII",
+    "title": "Include / Excludere aplicații",
+    "descExclude": "Omite înregistrarea istoriei clipboard-ului la copiere din aplicațiile listate.",
+    "descInclude": "Înregistrează doar la copiere din aplicațiile listate.",
+    "exclude": "Excludere",
+    "include": "Include doar",
+    "placeholder": "ex. KeePass.exe, chrome...",
+    "add": "Adaugă"
+  },
+  "imageViewer": {
+    "group": "VIZUALIZATOR IMAGINI",
+    "title": "Aplicație pentru deschidere capturi",
+    "desc": "Alege aplicația care se deschide la clic pe \"Deschide imagine cu aplicație\".",
+    "systemDefault": "Implicit sistem",
+    "choose": "Alege aplicație...",
+    "reset": "Reset",
+    "openMenu": "Deschide imagine cu aplicație",
+    "movePinUp": "Mută ghim pe deasupra",
+    "movePinDown": "Mută ghim pe dedesubt"
+  },
+  "editor": {
+    "editTitle": "Editează text",
+    "cancelEditTitle": "Anulează editare",
+    "savedEdited": "Text editat salvat!",
+    "hint": "Ctrl+Enter pentru salvare · Esc pentru anulare",
+    "cancel": "Anulează",
+    "savedCopied": "Salvat & copiat!",
+    "saved": "Salvat!",
+    "saveCopy": "Salvează & Copiază",
+    "save": "Salvează",
+    "openImageWithApp": "Deschide imaginea cu aplicația"
+  },
+  "multiSelect": {
+    "separator": "Separator",
+    "sepNewline": "Linie nouă (\\n)",
+    "sepBlank": "Linie goală (\\n\\n)",
+    "sepSpace": "Spațiu"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Sticlă neagră pură originală"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Albastru închis profund & cyan electric"
+    },
+    "emeraldGlass": {
+      "name": "Sticlă Esmeraldă",
+      "tagline": "Obsidian în pădure & lumina mentă"
+    },
+    "sunsetAmber": {
+      "name": "Amberul searǎ",
+      "tagline": "Carbonesc cald & ambăr aur"
+    },
+    "roseVelvet": {
+      "name": "Velvet roz",
+      "tagline": "Tím profund & roșu ușor"
+    },
+    "nordicFrost": {
+      "name": "Frost nordic",
+      "tagline": "Grisă arctică & indigo neted"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Trimite raportul de progres la ora 9:00",
+    "demoMulti2": "2. Atașează ultima machetă de design",
+    "demoMdHeading": "Plan de weekend **T-Drop**",
+    "demoMdColFeature": "Funcție",
+    "demoMdColStatus": "Stare",
+    "demoMdRow1": "Previzualizare **Markdown**",
+    "demoMdRow1Status": "Pregătit",
+    "demoMdRow2": "Editare rapidă & Lipire multiplă",
+    "demoMdRow2Status": "Activ"
   }
 }

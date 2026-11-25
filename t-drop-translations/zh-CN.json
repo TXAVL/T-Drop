@@ -481,35 +481,35 @@
   },
   "count": {
     "images": {
-      "one": "{count}张图片",
+      "one": "{count} image",
       "other": "{count} 张图片"
     },
     "files": {
-      "one": "{count}个文件",
+      "one": "{count} file",
       "other": "{count} 个文件"
     },
     "copiedTimes": {
-      "one": "已复制{count}次",
+      "one": "Copied {count} time",
       "other": "已复制 {count} 次"
     },
     "moreImages": {
-      "one": "+{count}张更多图片",
+      "one": "+{count} more image",
       "other": "还有 {count} 张图片"
     },
     "moreFiles": {
-      "one": "+{count}个更多文件",
+      "one": "+{count} more file",
       "other": "还有 {count} 个文件"
     },
     "selected": {
-      "one": "已选择{count}项",
+      "one": "{count} Selected",
       "other": "已选 {count} 项"
     },
     "savedToDownloads": {
-      "one": "已保存{count}张图片至下载",
+      "one": "Saved {count} image to Downloads",
       "other": "已将 {count} 张图片保存到“下载”"
     },
     "splitStacks": {
-      "one": "拆分为{count}堆（每堆最多10项）",
+      "one": "Split into {count} stack (max 10 each)",
       "other": "已拆分为 {count} 个堆栈（每个最多 10 个）"
     }
   },
@@ -676,7 +676,16 @@
     "notesLine2": "周日 · 云上山脊漫步",
     "note": "火车票",
     "query": "火车",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. 上午 9:00 发送进度报告",
+    "demoMulti2": "2. 附上最新设计稿",
+    "demoMdHeading": "周末计划 **T-Drop**",
+    "demoMdColFeature": "功能",
+    "demoMdColStatus": "状态",
+    "demoMdRow1": "**Markdown** 预览",
+    "demoMdRow1Status": "已完成",
+    "demoMdRow2": "快速编辑 & 多重粘贴",
+    "demoMdRow2Status": "已就绪"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "保存为片段",
     "savedToast": "已保存到片段"
+  },
+  "themeStudio": {
+    "section": "主题与配色模式",
+    "group": "托盘主题",
+    "title": "主题与配色模式",
+    "desc": "实时动画预览，选择托盘主题与配色模式。",
+    "modeSystem": "系统",
+    "modeLight": "亮色",
+    "modeDark": "暗色",
+    "sectionTitle": "主题与配色模式",
+    "groupLabel": "托盘主题",
+    "cardTitle": "主题与配色模式",
+    "cardDesc": "实时动画预览，选择托盘主题与配色模式。",
+    "colorModeLabel": "配色模式",
+    "presetLabel": "主题预设"
+  },
+  "whatsNew": {
+    "windowTitle": "T-Drop 新功能",
+    "badgeNew": "新",
+    "mdTitle": "Markdown 预览与内联编辑",
+    "mdDesc": "展开 Markdown 卡片可直接显示整洁的格式预览（标题、表格、代码块），点击铅笔按钮即可即时编辑并保存。",
+    "mdTip": "提示：Ctrl+Enter 快速保存，随时切换预览/原始。",
+    "mpTitle": "固定托盘与批量粘贴",
+    "mpDesc": "点击标题栏的固定按钮保持托盘开启；Ctrl+点击多张文本卡片即可一次性复制或粘贴。",
+    "mpTip": "提示：在浮动栏选择换行（↵）、段落（¶）或空格（␣）分隔符。",
+    "thTitle": "6 款托盘主题与系统/亮色/暗色模式",
+    "thDesc": "默认保留 Obsidian 暗色主题，新增 5 款精选主题，并支持系统/亮色/暗色模式，均可在设置→外观中实时预览。",
+    "thTip": "提示：选择“系统”可随 Windows 主题自动切换。",
+    "skip": "跳过",
+    "next": "下一步 →",
+    "done": "开始使用",
+    "close": "关闭",
+    "mdHeading": "周末计划",
+    "mdColItem": "项目",
+    "mdColStatus": "状态",
+    "mdRowEdit": "实时编辑",
+    "mdReady": "已就绪",
+    "mdOn": "已开启",
+    "mdSaveHint": "Ctrl+Enter · 保存",
+    "mpCard1": "1. 9:00 发送进度报告",
+    "mpCard2": "2. 附加最新设计稿"
+  },
+  "multiPaste": {
+    "selected": "{count} 已选",
+    "copyAll": "合并复制",
+    "pasteAll": "粘贴",
+    "clear": "清除选择",
+    "copiedToast": "已复制{count}条合并卡片！",
+    "selectMenu": "选择多粘贴（Ctrl+点击）",
+    "deselectMenu": "取消多粘贴",
+    "pinShelf": "固定托盘打开",
+    "unpinShelf": "取消固定（离开时自动隐藏）"
+  },
+  "textEdit": {
+    "editMenu": "编辑文本",
+    "editBtn": "编辑文本",
+    "cancelEdit": "取消编辑",
+    "hint": "Ctrl+Enter 保存 · Esc 取消",
+    "cancel": "取消",
+    "saveCopy": "保存并复制",
+    "save": "保存",
+    "savedToast": "已保存编辑文本！",
+    "savedCopyToast": "已保存并复制！"
+  },
+  "appFilter": {
+    "group": "应用过滤",
+    "title": "包含/排除应用",
+    "descExclude": "复制时忽略列出的应用的历史记录",
+    "descInclude": "仅记录列出应用的复制历史",
+    "exclude": "排除",
+    "include": "仅包含",
+    "placeholder": "例如 KeePass.exe, chrome…",
+    "add": "添加"
+  },
+  "imageViewer": {
+    "group": "图片查看器",
+    "title": "打开截图的应用",
+    "desc": "选择点击“用应用打开图片”时使用的应用",
+    "systemDefault": "系统默认",
+    "choose": "选择应用…",
+    "reset": "重置",
+    "openMenu": "用应用打开图片",
+    "movePinUp": "将固定项上移",
+    "movePinDown": "将固定项下移"
+  },
+  "editor": {
+    "editTitle": "编辑文本",
+    "cancelEditTitle": "取消编辑",
+    "savedEdited": "已保存编辑文本！",
+    "hint": "Ctrl+Enter 保存 · Esc 取消",
+    "cancel": "取消",
+    "savedCopied": "已保存并复制！",
+    "saved": "已保存！",
+    "saveCopy": "保存并复制",
+    "save": "保存",
+    "openImageWithApp": "用应用打开图片"
+  },
+  "multiSelect": {
+    "separator": "分隔符",
+    "sepNewline": "换行 (\\n)",
+    "sepBlank": "空行 (\\n\\n)",
+    "sepSpace": "空格"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "原生纯暗玻璃"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "深海蓝 & 亮青"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "森林黑曜石与薄荷微光"
+    },
+    "sunsetAmber": {
+      "name": "琥珀黄昏",
+      "tagline": "暖炭色与金黄琥珀"
+    },
+    "roseVelvet": {
+      "name": "玫瑰丝绒",
+      "tagline": "深李子色与柔和玫瑰点缀"
+    },
+    "nordicFrost": {
+      "name": "北欧霜雪",
+      "tagline": "极地板岩与清冽靛蓝"
+    }
   }
 }

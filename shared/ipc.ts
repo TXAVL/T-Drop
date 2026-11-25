@@ -22,6 +22,9 @@ export interface InvokeMap {
   /** Set an item's pinned state. */
   'item:set-pinned': { args: [id: string, pinned: boolean]; result: ClipboardItemDto[] }
 
+  /** Rearrange pinned items by moving sourceId to targetId's position (Issue #77). */
+  'item:reorder-pinned': { args: [sourceId: string, targetId: string]; result: ClipboardItemDto[] }
+
   /** Delete a single item (and its image file if present). */
   'item:delete': { args: [id: string]; result: ClipboardItemDto[] }
 
@@ -56,17 +59,29 @@ export interface InvokeMap {
    */
   'item:set-meta': { args: [id: string, meta: import('./itemMeta').ItemMetaPatch]; result: ClipboardItemDto[] }
 
+  /** Update the text content of an existing text item (and its disk payload if long). */
+  'item:update-text': { args: [id: string, text: string]; result: ClipboardItemDto[] }
+
   /**
    * Put a derived piece of text on the clipboard (clean link, color in
    * another format, file path) without adding it to history.
    */
   'item:copy-text': { args: [text: string]; result: boolean }
 
+  /** Write arbitrary text (e.g. merged multi-selected cards) to clipboard and Ctrl+V into active app. */
+  'item:paste-text': { args: [text: string]; result: boolean }
+
   /**
    * Save an image item's original file(s) into the user's Downloads folder.
    * Returns the saved file names (empty when nothing could be saved).
    */
   'item:save-images': { args: [id: string]; result: string[] }
+
+  /** Open an image/screenshot item with OS default app or user-chosen viewer (Issue #109). */
+  'image:open-external': { args: [id: string, imageId?: string]; result: boolean }
+
+  /** Open a file picker to select an executable (.exe) for external image viewing (Issue #109). */
+  'system:pick-app': { args: []; result: string | null }
 
   /** Copy a sub-item and paste it directly into the active application. */
   'item:paste-subitem': { args: [req: DragRequest]; result: boolean }

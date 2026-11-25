@@ -351,7 +351,7 @@ export function detectCode(raw: string): CodeDetectionResult {
   // 10. TypeScript / TSX / JavaScript / JSX
   const hasTsTypes = /:\s*(string|number|boolean|any|void|unknown|never|Record<|Array<|Promise<|React\.[A-Za-z]+)\b/.test(text) ||
     /\b(interface\s+[A-Z]\w*|type\s+[A-Z]\w*\s*=|as\s+const\b|<[A-Z]\w*>\s*\()/.test(text)
-  const hasJsx = /<[A-Z][a-zA-Z0-9]*\b[^>]*(\/?>|>[\s\S]*?<\/[A-Z][a-zA-Z0-9]*>)/.test(text) ||
+  const hasJsx = /(^|[^A-Za-z0-9_$])<[A-Z][a-zA-Z0-9]*\b[^>]*(\/>|>[\s\S]*?<\/[A-Z][a-zA-Z0-9]*>)/.test(text) ||
     /<>\s*[\s\S]*?<\/>/.test(text) ||
     /\bclassName=/.test(text) ||
     // lowercase tags count only as markup, not inside a string or regex

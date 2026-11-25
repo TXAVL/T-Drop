@@ -2319,3 +2319,118 @@
   max-height: 86px;
 }
 
+
+
+/* ── Multi-select text cards & floating batch bar (PR #93) ─────────────── */
+.item.is-multi-selected {
+  box-shadow: inset 0 0 0 1.5px var(--accent, #8b5cf6), 0 0 14px var(--accent-glow, rgba(139, 92, 246, 0.35)) !important;
+}
+
+.multi-select-badge {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  z-index: 16;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent, #8b5cf6);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.multi-select-bar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: var(--blade-bg, #101016);
+  border: 1px solid var(--edge-strong, rgba(255, 255, 255, 0.16));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+}
+
+.multi-select-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.multi-select-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary, #ffffff);
+  white-space: nowrap;
+}
+
+.multi-select-seps {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 7px;
+  background: rgba(128, 128, 148, 0.14);
+}
+
+.multi-select-sep-btn {
+  width: 21px;
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  font-size: 10.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.multi-select-sep-btn.active {
+  background: var(--accent, #8b5cf6);
+  color: #ffffff;
+}
+
+.multi-select-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.multi-select-btn {
+  height: 26px;
+  min-width: 26px;
+  padding: 0 7px;
+  border-radius: 7px;
+  border: 1px solid var(--edge-light, rgba(255, 255, 255, 0.1));
+  background: rgba(128, 128, 148, 0.14);
+  color: var(--text-primary, #ffffff);
+  font-size: 11px;
+  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.multi-select-btn.primary {
+  background: var(--pill-active-bg, #ffffff);
+  color: var(--pill-active-fg, #000000);
+  border-color: transparent;
+}

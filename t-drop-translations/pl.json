@@ -676,7 +676,16 @@
     "notesLine2": "Niedz. · Spacer granią nad chmurami",
     "note": "Bilety na pociąg",
     "query": "pociąg",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. Wyślij raport postępu o 9:00",
+    "demoMulti2": "2. Dołącz najnowszą makietę projektu",
+    "demoMdHeading": "Plan na weekend **T-Drop**",
+    "demoMdColFeature": "Funkcja",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "Podgląd **Markdown**",
+    "demoMdRow1Status": "Gotowe",
+    "demoMdRow2": "Edycja inline i wielokrotne wklejanie",
+    "demoMdRow2Status": "Aktywne"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Zapisz jako fragment",
     "savedToast": "Zapisano w Fragmentach"
+  },
+  "themeStudio": {
+    "section": "THEM & TRYB COLORED",
+    "group": "THEM KOSZYKA",
+    "title": "Temat i tryb kolorów",
+    "desc": "Podgląd na żywo z animacją, aby wybrać motyw i tryb kolorów.",
+    "modeSystem": "System",
+    "modeLight": "Jasny",
+    "modeDark": "Ciemny",
+    "sectionTitle": "THEM & TRYB COLORED",
+    "groupLabel": "THEM KOSZYKA",
+    "cardTitle": "Temat i tryb kolorów",
+    "cardDesc": "Podgląd na żywo z animacją, aby wybrać motyw i tryb kolorów.",
+    "colorModeLabel": "Tryb kolorów",
+    "presetLabel": "Zestaw motywów"
+  },
+  "whatsNew": {
+    "windowTitle": "Co nowego w T-Drop",
+    "badgeNew": "Nowy",
+    "mdTitle": "Podgląd Markdown i edycja w linii",
+    "mdDesc": "Rozszerzenie karty Markdown wyświetla czysty podgląd formatowany (nagłówki, tabele, bloki kodu) zamiast surowego kodu. Kliknij ikonę ołówka, aby edytować dowolną kartę tekstową bezpośrednio w mieście.",
+    "mdTip": "Wskazówka: Naciśnij Ctrl+Enter, aby szybko zapisać, lub przełącz podgląd/źródło w dowolnym momencie.",
+    "mpTitle": "Zamrożony koszyk i wielokrotne wklejanie kart",
+    "mpDesc": "Kliknij przycisk „Ghim” w nagłówku, aby utrzymać koszyk otwarty podczas pracy. Przytrzymaj Ctrl+klik na wielu kartach tekstowych, aby je wybrać kolejno, a następnie skopiuj lub wklej wszystkie razem w jednym kroku.",
+    "mpTip": "Wskazówka: Wybierz separator: nowa linia (↵), akapit (¶) lub spacja (␣) bezpośrednio na pływającym pasku.",
+    "thTitle": "6 motywów półki: System / Jasny / Ciemny",
+    "thDesc": "Domyślnie zachowujemy charakterystyczny ciemny motyw Obsidian, a do tego dodajemy 5 nowych, starannie dobranych motywów oraz tryby System / Jasny / Ciemny z podglądem animowanym w Ustawienia → Wygląd.",
+    "thTip": "Wskazówka: Wybierz „System”, aby T-Drop automatycznie dostosowywał się do motywu Windows.",
+    "skip": "Pomiń",
+    "next": "Dalej →",
+    "done": "Zaczynam",
+    "close": "Zamknij",
+    "mdHeading": "Plan na weekend",
+    "mdColItem": "Element",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Edytuj na żywo",
+    "mdReady": "Gotowe",
+    "mdOn": "Włączone",
+    "mdSaveHint": "Ctrl+Enter · Zapisz",
+    "mpCard1": "1. Wyślij raport postępu o 9:00",
+    "mpCard2": "2. Dołącz najnowszy projekt"
+  },
+  "multiPaste": {
+    "selected": "{count} wybrane",
+    "copyAll": "Kopiuj łączone",
+    "pasteAll": "Wklej",
+    "clear": "Wyczyść",
+    "copiedToast": "Skopiowano {count} kart!",
+    "selectMenu": "Wybierz do wielokrotnego wklejania (Ctrl+Click)",
+    "deselectMenu": "Usuń z wielokrotnego wklejania",
+    "pinShelf": "Zapiąć kękę otwartą",
+    "unpinShelf": "Odepnij kękę (auto‑ukrycie przy opuszczeniu)"
+  },
+  "textEdit": {
+    "editMenu": "Edytuj tekst",
+    "editBtn": "Edytuj",
+    "cancelEdit": "Anuluj edycję",
+    "hint": "Ctrl+Enter aby zapisać · Esc aby anulować",
+    "cancel": "Anuluj",
+    "saveCopy": "Zapisz i skopiuj",
+    "save": "Zapisz",
+    "savedToast": "Zapisano edytowany tekst!",
+    "savedCopyToast": "Zapisano i skopiowano!"
+  },
+  "appFilter": {
+    "group": "FILTROWANIE APLIKACJI",
+    "title": "Dołącz / Wyklucz aplikacje",
+    "descExclude": "Pomiń zapisywanie historii schowka przy kopiowaniu z wymienionych aplikacji.",
+    "descInclude": "Zapisuj historię schowka tylko przy kopiowaniu z wymienionych aplikacji.",
+    "exclude": "Wyklucz",
+    "include": "Dołącz tylko",
+    "placeholder": "np. KeePass.exe, chrome...",
+    "add": "Dodaj"
+  },
+  "imageViewer": {
+    "group": "PRZEGLĄDACZ OBRAZÓW",
+    "title": "Aplikacja do otwierania zrzutów ekranu",
+    "desc": "Wybierz aplikację, która otworzy się po kliknięciu „Otwórz obraz w aplikacji”.",
+    "systemDefault": "Domyślne systemowe",
+    "choose": "Wybierz aplikację...",
+    "reset": "Resetuj",
+    "openMenu": "Otwórz obraz w aplikacji",
+    "movePinUp": "Przenieś przyklejone wyżej",
+    "movePinDown": "Przenieś przyklejone niżej"
+  },
+  "editor": {
+    "editTitle": "Edytuj tekst",
+    "cancelEditTitle": "Anuluj edycję",
+    "savedEdited": "Zapisano edytowany tekst!",
+    "hint": "Ctrl+Enter aby zapisać · Esc aby anulować",
+    "cancel": "Anuluj",
+    "savedCopied": "Zapisano i skopiowano!",
+    "saved": "Zapisano!",
+    "saveCopy": "Zapisz i skopiuj",
+    "save": "Zapisz",
+    "openImageWithApp": "Otwórz obraz w aplikacji"
+  },
+  "multiSelect": {
+    "separator": "Separator",
+    "sepNewline": "Nowa linia (\\n)",
+    "sepBlank": "Pusta linia (\\n\\n)",
+    "sepSpace": "Spacja"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Czyste, ciemne szkło"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Głęboki granat i elektryczny cyjan"
+    },
+    "emeraldGlass": {
+      "name": "Szmaragdowa Szkło",
+      "tagline": "Ciemny obsydian i świecąca mięta"
+    },
+    "sunsetAmber": {
+      "name": "Pomarańczowy Zachód",
+      "tagline": "Ciepły węgiel i złoty bursztyn"
+    },
+    "roseVelvet": {
+      "name": "Różowy Samet",
+      "tagline": "Głęboki śliwka i delikatny róż"
+    },
+    "nordicFrost": {
+      "name": "Nordycki Frost",
+      "tagline": "Artycki popiół i wyraźny indygowiec"
+    }
   }
 }

@@ -412,6 +412,92 @@
         gap: 0.4rem;
       }
     }
+    /* ── Interactive v0.3.6 Feature Video Demos ─────────────────────────── */
+    .v036-showcase {
+      margin: 1.25rem 0 1.4rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(16, 20, 34, 0.95), rgba(10, 12, 20, 0.95));
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .v036-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .v036-tab {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.72);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .v036-tab.active {
+      background: rgba(0, 210, 255, 0.16);
+      border-color: rgba(0, 210, 255, 0.5);
+      color: #ffffff;
+    }
+    .v036-stage {
+      position: relative;
+      height: 195px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.12), transparent 52%), #0b0d14;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .v036-pane { display: none; width: 100%; height: 100%; place-items: center; }
+    .v036-pane.active { display: grid; }
+    .v036-card {
+      position: relative;
+      width: min(360px, 88%);
+      border-radius: 12px;
+      background: #14161e;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px 14px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+    .v036-md-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px; }
+    .v036-md-pill { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.35); padding: 2px 8px; border-radius: 999px; font-weight: 700; }
+    .v036-md-tbl { border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 7px; overflow: hidden; font-size: 11.5px; }
+    .v036-md-r { display: flex; justify-content: space-between; padding: 5px 9px; border-top: 1px solid rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.82); }
+    .v036-md-r.hd { border-top: none; background: rgba(255, 255, 255, 0.06); font-weight: 700; color: #fff; }
+    .v036-md-ed {
+      position: absolute; inset: 40px 12px 12px; border-radius: 8px; background: #0a0c12; border: 1px solid rgba(0, 210, 255, 0.45);
+      padding: 9px 10px; font-family: monospace; font-size: 11px; color: #7dd3fc; display: flex; flex-direction: column; gap: 4px;
+      animation: v036-ed-cycle 5.2s ease-in-out infinite;
+    }
+    .v036-mp-row { display: flex; align-items: center; gap: 8px; padding: 7px 9px; border-radius: 8px; background: #191b26; border: 1.5px solid rgba(139, 92, 246, 0.65); font-size: 11.5px; color: #fff; margin-bottom: 6px; }
+    .v036-mp-num { width: 18px; height: 18px; border-radius: 999px; background: #8b5cf6; color: #fff; font-size: 10px; font-weight: 800; display: grid; place-items: center; flex-shrink: 0; }
+    .v036-mp-bar { display: flex; justify-content: space-between; align-items: center; padding: 6px 9px; border-radius: 8px; background: #121420; border: 1px solid rgba(255, 255, 255, 0.14); font-size: 11px; animation: v036-bar-rise 4s ease-in-out infinite; }
+    .v036-mp-btn { background: #fff; color: #000; font-weight: 700; padding: 2px 9px; border-radius: 6px; }
+    .v036-th-box {
+      width: min(360px, 88%); height: 148px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; position: relative;
+      animation: v036-theme-loop 6s ease-in-out infinite;
+    }
+    .v036-th-neo { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 5px; height: 46px; border-radius: 0 999px 999px 0; background: currentColor; box-shadow: 0 0 14px currentColor; }
+    .v036-th-blade { width: 165px; height: 114px; border-radius: 10px; background: rgba(12, 16, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); padding: 9px; display: flex; flex-direction: column; gap: 7px; }
+    .v036-th-line { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.25); }
+    .v036-th-dots { display: grid; grid-template-columns: repeat(2, 26px); gap: 7px; }
+    .v036-th-dots span { width: 26px; height: 26px; border-radius: 7px; border: 1.5px solid rgba(255, 255, 255, 0.28); }
+    @keyframes v036-ed-cycle { 0%, 46% { opacity: 0; transform: translateY(8px); } 56%, 86% { opacity: 1; transform: translateY(0); } 94%, 100% { opacity: 0; transform: translateY(8px); } }
+    @keyframes v036-bar-rise { 0%, 35% { opacity: 0; transform: translateY(8px); } 48%, 90% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(8px); } }
+    @keyframes v036-theme-loop {
+      0%, 100% { background: linear-gradient(135deg, #07192f, #0b2948); color: #38bdf8; }
+      25% { background: linear-gradient(135deg, #062119, #0a3326); color: #34d399; }
+      50% { background: linear-gradient(135deg, #fde6c4, #fed7aa); color: #d97706; }
+      75% { background: linear-gradient(135deg, #261022, #3b1734); color: #f472b6; }
+    }
   </style>
 </head>
 <body>
@@ -435,7 +521,7 @@
         </button>
         <a href="https://github.com/TXAVL/T-Drop/releases/latest" class="github-btn" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span data-i18n="nav.download">Tải về v0.3.5</span>
+          <span data-i18n="nav.download">Tải về v0.3.6</span>
         </a>
       </div>
     </div>
@@ -461,12 +547,109 @@
       </div>
     </div>
 
-        <!-- ── VERSION 0.3.5 ───────────────────────────────────────── -->
+        <!-- ── VERSION 0.3.6 ───────────────────────────────────────── -->
     <article class="release-card latest">
       <div class="release-header">
         <div class="release-version">
-          <span>Version v0.3.5</span>
+          <span>Version v0.3.6</span>
           <span class="tag-latest" data-i18n="tag.latest">MỚI NHẤT</span>
+        </div>
+        <div class="release-date">25/11/2026</div>
+      </div>
+      <p class="release-summary" data-i18n="v036.summary">
+        Bộ 6 giao diện Neo cùng chế độ Sáng / Tối / Theo máy có xem trước hoạt ảnh trực tiếp, chỉnh sửa văn bản ngay trên thẻ, ghim giữ kệ luôn mở, chọn nhiều thẻ để dán gộp 1 lần và cửa sổ "Có gì mới" riêng biệt mỗi khi lên bản mới.
+      </p>
+
+      <!-- Interactive HTML/CSS Animated Video Feature Guide -->
+      <div class="v036-showcase">
+        <div class="v036-tabs">
+          <button type="button" class="v036-tab active" onclick="switchV036Demo('md', this)" data-i18n="v036.demo.md">1. Markdown &amp; Sửa trực tiếp</button>
+          <button type="button" class="v036-tab" onclick="switchV036Demo('mp', this)" data-i18n="v036.demo.mp">2. Ghim kệ &amp; Dán gộp nhiều thẻ</button>
+          <button type="button" class="v036-tab" onclick="switchV036Demo('th', this)" data-i18n="v036.demo.th">3. 6 Bộ giao diện &amp; Sáng/Tối</button>
+        </div>
+        <div class="v036-stage">
+          <div class="v036-pane active" data-v036-pane="md">
+            <div class="v036-card">
+              <div class="v036-md-head"><span class="v036-md-pill">Markdown · Preview</span><span style="color:#7dd3fc">✎ Edit</span></div>
+              <div class="v036-md-tbl">
+                <div class="v036-md-r hd"><span>Tính năng</span><span>Trạng thái</span></div>
+                <div class="v036-md-r"><span>Xem trước Markdown</span><span style="color:#34d399">Sẵn sàng</span></div>
+                <div class="v036-md-r"><span>Sửa trực tiếp trên thẻ</span><span style="color:#34d399">Ctrl+Enter</span></div>
+              </div>
+              <div class="v036-md-ed">
+                <div>### Kế hoạch T-Drop v0.3.6</div>
+                <div>| Tính năng | Trạng thái |</div>
+                <div style="margin-top:auto;text-align:right;color:#fff">Lưu &amp; Sao chép ↵</div>
+              </div>
+            </div>
+          </div>
+          <div class="v036-pane" data-v036-pane="mp">
+            <div class="v036-card">
+              <div class="v036-md-head"><strong>T-Drop Shelf</strong><span style="color:#c4b5fd;font-weight:700">📌 Đã ghim mở</span></div>
+              <div class="v036-mp-row"><span class="v036-mp-num">1</span>1. Gửi báo cáo tiến độ lúc 9:00</div>
+              <div class="v036-mp-row"><span class="v036-mp-num">2</span>2. Đính kèm bản thiết kế mới</div>
+              <div class="v036-mp-bar"><span>2 đã chọn · ↵</span><span class="v036-mp-btn">Dán gộp</span></div>
+            </div>
+          </div>
+          <div class="v036-pane" data-v036-pane="th">
+            <div class="v036-th-box">
+              <div class="v036-th-neo"></div>
+              <div class="v036-th-blade">
+                <div class="v036-th-line" style="width:45%;background:currentColor"></div>
+                <div class="v036-th-line" style="width:90%"></div>
+                <div class="v036-th-line" style="width:72%"></div>
+                <div class="v036-th-line" style="width:82%"></div>
+              </div>
+              <div class="v036-th-dots">
+                <span style="background:linear-gradient(135deg,#0a0a0d,#8b5cf6)"></span>
+                <span style="background:linear-gradient(135deg,#07111f,#38bdf8)"></span>
+                <span style="background:linear-gradient(135deg,#061511,#34d399)"></span>
+                <span style="background:linear-gradient(135deg,#faf5ee,#d97706)"></span>
+                <span style="background:linear-gradient(135deg,#140b12,#f472b6)"></span>
+                <span style="background:linear-gradient(135deg,#f1f4fa,#4f46e5)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="change-group">
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v036.feat1.title">6 Bộ giao diện Neo &amp; Chế độ Sáng / Tối / Theo máy</h3>
+            <p data-i18n="v036.feat1.desc">Giữ nguyên giao diện tối mặc định quen thuộc, bổ sung thêm 5 bộ màu tuyển chọn (Đại dương đêm, Ngọc lục bảo, Hoàng hôn hổ phách, Nhung hồng, Sương Bắc Âu) cùng chế độ Sáng, Tối hoặc tự theo Windows, có khung xem trước hoạt ảnh ngay trong Cài đặt → Giao diện.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v036.feat2.title">Chỉnh sửa trực tiếp nội dung văn bản &amp; code trên thẻ</h3>
+            <p data-i18n="v036.feat2.desc">Bấm nút bút chì trong bản xem trước hoặc chuột phải → Chỉnh sửa văn bản để sửa nhanh bất kỳ thẻ chữ/code nào rồi bấm Lưu (Ctrl+Enter) hoặc Lưu &amp; Chép ngay tại chỗ.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge new" data-i18n="badge.new">Mới</span>
+          <div class="change-content">
+            <h3 data-i18n="v036.feat3.title">Ghim giữ kệ luôn mở &amp; Chọn nhiều thẻ để dán gộp 1 lần</h3>
+            <p data-i18n="v036.feat3.desc">Bấm nút Ghim trên thanh tiêu đề để khóa mở kệ khi làm việc liên tục mà không bị tự thu vào. Giữ Ctrl+Click trên nhiều thẻ văn bản để đánh số thứ tự chọn, chọn ký tự nối (xuống dòng, cách đoạn, dấu cách) rồi sao chép hoặc dán gộp tất cả chỉ với 1 cú bấm.</p>
+          </div>
+        </div>
+        <div class="change-item">
+          <span class="badge improved" data-i18n="badge.improved">Cải tiến</span>
+          <div class="change-content">
+            <h3 data-i18n="v036.feat4.title">Cửa sổ "Có gì mới" riêng biệt &amp; sửa nhận diện Markdown</h3>
+            <p data-i18n="v036.feat4.desc">Khi mở phiên bản mới lần đầu, T-Drop hiển thị cửa sổ giới thiệu tính năng mới tách biệt hoàn toàn với Welcome Tour. Đồng thời khắc phục triệt để lỗi văn bản Markdown chứa ký hiệu generic (như DbSet&lt;Evaluation&gt;) bị nhận nhầm thành JSX khi mở rộng.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+        <!-- ── VERSION 0.3.5 ───────────────────────────────────────── -->
+    <article class="release-card">
+      <div class="release-header">
+        <div class="release-version">
+          <span>Version v0.3.5</span>
         </div>
         <div class="release-date">23/11/2026</div>
       </div>
@@ -1560,7 +1743,19 @@
   <script>
     const translations = {
       vi: {
-        'nav.download': 'Tải về v0.3.5',
+        'nav.download': 'Tải về v0.3.6',
+        'v036.summary': 'Bộ 6 giao diện Neo cùng chế độ Sáng / Tối / Theo máy có xem trước hoạt ảnh trực tiếp, chỉnh sửa văn bản ngay trên thẻ, ghim giữ kệ luôn mở, chọn nhiều thẻ để dán gộp 1 lần và cửa sổ "Có gì mới" riêng biệt mỗi khi lên bản mới.',
+        'v036.demo.md': '1. Markdown & Sửa trực tiếp',
+        'v036.demo.mp': '2. Ghim kệ & Dán gộp nhiều thẻ',
+        'v036.demo.th': '3. 6 Bộ giao diện & Sáng/Tối',
+        'v036.feat1.title': '6 Bộ giao diện Neo & Chế độ Sáng / Tối / Theo máy',
+        'v036.feat1.desc': 'Giữ nguyên giao diện tối mặc định quen thuộc, bổ sung thêm 5 bộ màu tuyển chọn (Đại dương đêm, Ngọc lục bảo, Hoàng hôn hổ phách, Nhung hồng, Sương Bắc Âu) cùng chế độ Sáng, Tối hoặc tự theo Windows, có khung xem trước hoạt ảnh ngay trong Cài đặt → Giao diện.',
+        'v036.feat2.title': 'Chỉnh sửa trực tiếp nội dung văn bản & code trên thẻ',
+        'v036.feat2.desc': 'Bấm nút bút chì trong bản xem trước hoặc chuột phải → Chỉnh sửa văn bản để sửa nhanh bất kỳ thẻ chữ/code nào rồi bấm Lưu (Ctrl+Enter) hoặc Lưu & Chép ngay tại chỗ.',
+        'v036.feat3.title': 'Ghim giữ kệ luôn mở & Chọn nhiều thẻ để dán gộp 1 lần',
+        'v036.feat3.desc': 'Bấm nút Ghim trên thanh tiêu đề để khóa mở kệ khi làm việc liên tục mà không bị tự thu vào. Giữ Ctrl+Click trên nhiều thẻ văn bản để đánh số thứ tự chọn, chọn ký tự nối (xuống dòng, cách đoạn, dấu cách) rồi sao chép hoặc dán gộp tất cả chỉ với 1 cú bấm.',
+        'v036.feat4.title': 'Cửa sổ "Có gì mới" riêng biệt & sửa nhận diện Markdown',
+        'v036.feat4.desc': 'Khi mở phiên bản mới lần đầu, T-Drop hiển thị cửa sổ giới thiệu tính năng mới tách biệt hoàn toàn với Welcome Tour. Đồng thời khắc phục triệt để lỗi văn bản Markdown chứa ký hiệu generic (như DbSet<Evaluation>) bị nhận nhầm thành JSX khi mở rộng.',
         'v035.summary': 'Snippet thông minh dán văn bản mẫu chỉ với một cú nhấp, ngày giờ theo định dạng vùng của Windows, huy hiệu ngôn ngữ trên thẻ code và sửa lỗi nút sao chép cùng vùng thả file.',
         'v035.feat1.title': 'Snippet thông minh: văn bản mẫu dán chỉ với một cú nhấp',
         'v035.feat1.desc': 'Tab Snippet mới trong kệ (biểu tượng tia chớp) lưu những đoạn chữ bạn hay gõ: chữ ký email, câu trả lời mẫu, đoạn code. Bấm một snippet là dán ngay vào ứng dụng đang dùng, không làm đầy lịch sử clipboard. Soạn trong cửa sổ riêng có xem trước kết quả và hỗ trợ biến động {date}, {time}, {datetime}, {longdate}, {weekday}, {clipboard}, {uuid}.',
@@ -1782,7 +1977,19 @@
         'footer.issues': 'Báo lỗi & Góp ý'
       },
       en: {
-        'nav.download': 'Download v0.3.5',
+        'nav.download': 'Download v0.3.6',
+        'v036.summary': '6 curated shelf themes with System / Light / Dark modes and a live animated preview, inline editing on copied text cards, Pin Shelf Open, multi-card batch paste, and a dedicated "What\'s New" window on updates.',
+        'v036.demo.md': '1. Markdown & Inline Edit',
+        'v036.demo.mp': '2. Pin Shelf & Multi-Paste',
+        'v036.demo.th': '3. 6 Themes & Light/Dark',
+        'v036.feat1.title': '6 Curated Shelf Themes & System / Light / Dark Mode',
+        'v036.feat1.desc': 'Keeps the original Obsidian dark look as default while adding 5 curated themes (Midnight Ocean, Emerald Glass, Amber Dusk, Rose Velvet, Nordic Frost) plus System, Light, and Dark modes with a live animated preview in Settings → Appearance.',
+        'v036.feat2.title': 'Inline Text & Code Editing on Copied Cards',
+        'v036.feat2.desc': 'Click the pencil button in the preview or right-click → Edit text to tweak any copied text or code card directly, then Save (Ctrl+Enter) or Save & Copy in place.',
+        'v036.feat3.title': 'Pin Shelf Open & Multi-Card Batch Paste',
+        'v036.feat3.desc': 'Click the Pin icon in the header to keep the shelf open while working. Ctrl+Click multiple text cards in order, pick a separator (newline, blank line, or space), and copy or paste them all at once.',
+        'v036.feat4.title': 'Standalone "What\'s New" Window & Markdown Detection Fix',
+        'v036.feat4.desc': 'Returning users now see a dedicated "What\'s New" guide once per version without re-running the full Welcome Tour. Also fixes Markdown specs containing generic types (such as DbSet<Evaluation>) being misclassified as JSX on expand.',
         'v035.summary': 'Smart Snippets paste reusable text in one click, dates follow your Windows region format, code cards get a language badge, and the copy buttons and file drop zone are fixed.',
         'v035.feat1.title': 'Smart Snippets: reusable text pasted in one click',
         'v035.feat1.desc': 'A new Snippets tab in the shelf (lightning icon) keeps the text you type often: email signatures, canned replies, code blocks. Click one to paste it straight into the app you were using, without filling your clipboard history. Edit them in their own window with a live preview and variables {date}, {time}, {datetime}, {longdate}, {weekday}, {clipboard} and {uuid}.',
@@ -2028,6 +2235,14 @@
         langFlag.textContent = '🇬🇧';
         langLabel.textContent = 'English';
       }
+    }
+
+    function switchV036Demo(id, btn) {
+      document.querySelectorAll('.v036-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.v036-pane').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const target = document.querySelector('[data-v036-pane="' + id + '"]');
+      if (target) target.classList.add('active');
     }
 
     function toggleLanguage() {

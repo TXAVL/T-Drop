@@ -6,7 +6,7 @@
  * defaults so a bad field never takes the whole app down.
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
-import { DEFAULT_SETTINGS, isUpdateMode, normalizeHoverOpenDelay, type Settings } from '../../shared/types'
+import { DEFAULT_SETTINGS, isColorMode, isThemePreset, isUpdateMode, normalizeHoverOpenDelay, type Settings } from '../../shared/types'
 import { PATHS } from './paths'
 
 let cache: Settings | null = null
@@ -21,6 +21,26 @@ function merge(base: Settings, patch: Partial<Settings>): Settings {
   out.verticalOffset = Math.min(1.0, Math.max(0.0, typeof out.verticalOffset === 'number' ? out.verticalOffset : 0.5))
   if (out.uiStyle !== 'modern' && out.uiStyle !== 'compact') {
     out.uiStyle = 'modern'
+  }
+  if (!isColorMode(out.colorMode)) {
+    out.colorMode = 'dark'
+  }
+  if (!isThemePreset(out.themePreset)) {
+    out.themePreset = 'default'
+  }
+  if (out.appFilterMode !== 'exclude' && out.appFilterMode !== 'include') {
+    out.appFilterMode = 'exclude'
+  }
+  if (!Array.isArray(out.appFilterList)) {
+    out.appFilterList = []
+  } else {
+    out.appFilterList = out.appFilterList
+      .filter((x): x is string => typeof x === 'string' && x.trim().length > 0)
+      .map((x) => x.trim())
+      .slice(0, 100)
+  }
+  if (typeof out.imageViewerApp !== 'string') {
+    out.imageViewerApp = ''
   }
   if (out.stickPosition !== 'left' && out.stickPosition !== 'right' && out.stickPosition !== 'top') {
     out.stickPosition = 'left'

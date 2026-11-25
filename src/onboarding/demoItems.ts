@@ -54,6 +54,53 @@ export function demoText(at: number): ClipboardItemDto {
   }
 }
 
+/** Rich Markdown sample showcasing txa-markdown headings, bold text, and GFM table. */
+export function demoMarkdown(at: number): ClipboardItemDto {
+  const md = [
+    `### ${t('tour.demoMdHeading')}`,
+    '',
+    `| ${t('tour.demoMdColFeature')} | ${t('tour.demoMdColStatus')} |`,
+    '|---|---|',
+    `| ${t('tour.demoMdRow1')} | \`${t('tour.demoMdRow1Status')}\` |`,
+    `| ${t('tour.demoMdRow2')} | \`${t('tour.demoMdRow2Status')}\` |`
+  ].join('\n')
+  return {
+    id: 'demo-markdown',
+    capturedAt: at,
+    hitCount: 1,
+    pinned: false,
+    data: { kind: 'text', isUrl: false, text: md }
+  }
+}
+
+/** Pair of short text cards used to demonstrate multi-select & batch paste. */
+export function demoMultiTexts(at: number): ClipboardItemDto[] {
+  return [
+    {
+      id: 'demo-multi-1',
+      capturedAt: at,
+      hitCount: 1,
+      pinned: false,
+      data: {
+        kind: 'text',
+        isUrl: false,
+        text: t('tour.demoMulti1')
+      }
+    },
+    {
+      id: 'demo-multi-2',
+      capturedAt: at - 2000,
+      hitCount: 1,
+      pinned: false,
+      data: {
+        kind: 'text',
+        isUrl: false,
+        text: t('tour.demoMulti2')
+      }
+    }
+  ]
+}
+
 /** The page's address, dragged in from the browser's address bar (with its title, as browsers give it). */
 export function demoLink(at: number): ClipboardItemDto {
   return {

@@ -102,6 +102,9 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
 
   const isPreviewing = useStore((s) => s.previewItemId === item.id)
   const isMenuTarget = useStore((s) => s.cardMenu?.itemId === item.id)
+  const selectedOrder = useStore((s) =>
+    item.data.kind === 'text' ? s.selectedTextIds.indexOf(item.id) + 1 : 0
+  )
   const isBundle = (item.data.kind === 'files' && item.data.paths.length > 1) || item.data.kind === 'image-collection'
 
   const bundleCount = item.data.kind === 'image-collection'
@@ -180,8 +183,16 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
 
   const handleDragStart = useCallback((e: React.DragEvent, req: DragRequest) => {
     if (item.data.kind === 'text') {
-      // We no longer support dragging text/links.
-      // Prevent the default browser drag behavior (e.g. text selection dragging) entirely.
+      // Allow dragging pinned text cards to rearrange pinned order (Issue #77)
+      if (item.pinned) {
+        try {
+          e.dataTransfer.setData('text/x-tdrop-pin', item.id)
+          e.dataTransfer.effectAllowed = 'move'
+        } catch { /* ignore */ }
+        setInternalDragReq(req)
+        return
+      }
+      // We no longer support dragging unpinned text/links out of the shelf.
       e.preventDefault()
       return
     } else {
@@ -259,19 +270,31 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
       useStore.getState().setPreviewItemId(null)
     }
 
+    // Multi-select text cards (PR #93): Ctrl+Click (or normal click while multi-select is active)
+    if (item.data.kind === 'text') {
+      const multiCount = useStore.getState().selectedTextIds.length
+      if (e.ctrlKey || e.metaKey || multiCount > 0) {
+        e.stopPropagation()
+        e.preventDefault()
+        playToggleSound(selectedOrder === 0)
+        useStore.getState().toggleSelectedTextId(item.id)
+        return
+      }
+    }
+
     if (isBundle && !expanded) {
       onExpand(e)
     } else if (!isBundle) {
       onPaste(e)
     }
-  }, [isPreviewing, isBundle, expanded, onExpand, onPaste, item.id])
+  }, [isPreviewing, isBundle, expanded, onExpand, onPaste, item.id, item.data.kind, selectedOrder])
 
   return (
     <motion.div
       ref={ref}
       initial={false}
       animate={{ opacity: 1 }}
-      className={`item${item.pinned ? ' pinned' : ''}${isBundle ? ' bundle' : ''}${expanded ? ' is-expanded' : ''}${colorInfo ? ` is-color-card ${colorInfo.isLight ? 'is-light-color' : 'is-dark-color'}` : ''}${isMenuTarget ? ' menu-target' : ''}`}
+      className={`item${item.pinned ? ' pinned' : ''}${isBundle ? ' bundle' : ''}${expanded ? ' is-expanded' : ''}${colorInfo ? ` is-color-card ${colorInfo.isLight ? 'is-light-color' : 'is-dark-color'}` : ''}${isMenuTarget ? ' menu-target' : ''}${selectedOrder > 0 ? ' is-multi-selected' : ''}`}
       data-expanded-stack={expanded ? 'true' : undefined}
       style={{
         ...(expandedWidth ? { width: expandedWidth, minWidth: expandedWidth, maxWidth: expandedWidth } : {}),
@@ -281,6 +304,11 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
         } as React.CSSProperties : {})
       }}
     >
+      {selectedOrder > 0 && (
+        <span className="multi-select-badge" aria-hidden="true">
+          {selectedOrder}
+        </span>
+      )}
       {copied && (
         <motion.div
           key="copy-ripple"
@@ -324,11 +352,19 @@ const ClipboardItemBase = forwardRef<HTMLDivElement, Props>(({ item, quickIndex 
           }
         }}
         onDrop={(e) => {
+          const pinDragId = e.dataTransfer?.getData?.('text/x-tdrop-pin')
           const activeDrag = useStore.getState().internalDragReq
-          if (activeDrag && activeDrag.id !== item.id) {
+          const srcId = pinDragId || activeDrag?.id
+          if (srcId && srcId !== item.id) {
             e.preventDefault()
             e.stopPropagation()
-            window.edge.mergeItems(activeDrag.id, item.id)
+            const srcItem = useStore.getState().items.find((x) => x.id === srcId)
+            // Dragging one pinned card onto another pinned card rearranges pinned order (Issue #77)
+            if (item.pinned && srcItem?.pinned) {
+              void useStore.getState().reorderPinned(srcId, item.id)
+            } else {
+              window.edge.mergeItems(srcId, item.id)
+            }
             setInternalDragReq(null)
           } else if (activeDrag && activeDrag.id === item.id) {
             e.preventDefault()

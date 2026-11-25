@@ -25,6 +25,7 @@ export interface EdgeApi {
     } | null
   }>
   setPinned: (id: string, pinned: boolean) => Promise<import('./types').ClipboardItemDto[]>
+  reorderPinned: (sourceId: string, targetId: string) => Promise<import('./types').ClipboardItemDto[]>
   deleteItem: (id: string) => Promise<import('./types').ClipboardItemDto[]>
   deleteBatchItems: (ids: string[]) => Promise<import('./types').ClipboardItemDto[]>
   clearItems: () => Promise<import('./types').ClipboardItemDto[]>
@@ -35,10 +36,18 @@ export interface EdgeApi {
   pasteItem: (id: string, opts?: { plain?: boolean }) => Promise<boolean>
   /** Set or clear an item's note (see shared/itemMeta.ts). */
   setItemMeta: (id: string, meta: import('./itemMeta').ItemMetaPatch) => Promise<import('./types').ClipboardItemDto[]>
+  /** Edit the text payload of an existing text card in place. */
+  updateItemText: (id: string, text: string) => Promise<import('./types').ClipboardItemDto[]>
   /** Put derived text (clean link, color format, path) on the clipboard without a new card. */
   copyText: (text: string) => Promise<boolean>
+  /** Write arbitrary text to clipboard and paste into active app without adding a new card. */
+  pasteText: (text: string) => Promise<boolean>
   /** Save an image item's original file(s) into the user's Downloads folder. */
   saveImages: (id: string) => Promise<string[]>
+  /** Open an image/screenshot item with OS default or user-chosen viewer (Issue #109). */
+  openImageExternal: (id: string, imageId?: string) => Promise<boolean>
+  /** Pick an executable (.exe) to use as the custom image viewer. */
+  pickAppExecutable: () => Promise<string | null>
   pasteSubitem: (req: DragRequest) => Promise<boolean>
   pasteEmoji: (text: string) => Promise<boolean>
   listSnippets: () => Promise<import('./snippets').Snippet[]>

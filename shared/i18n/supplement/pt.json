@@ -382,5 +382,144 @@
     },
     "saveFromCard": "Salvar como snippet",
     "savedToast": "Salvo em Snippets"
+  },
+  "themeStudio": {
+    "section": "GIAO DIỆN & CHẾ ĐỘ MÀU",
+    "group": "BỘ GIAO DIỆN NEO",
+    "title": "Giao‑Interface & Modo de Luz",
+    "desc": "Pré‑visualização animada ao vivo para escolher o tema e o modo de cor da prateleira.",
+    "modeSystem": "Sistema",
+    "modeLight": "Claro",
+    "modeDark": "Escuro",
+    "sectionTitle": "Tema e modo de cor",
+    "groupLabel": "Tema da prateleira",
+    "cardTitle": "Tema e modo de cor",
+    "cardDesc": "Pré‑visualização animada ao vivo para escolher o tema e o modo de cor da prateleira",
+    "colorModeLabel": "Modo de cor",
+    "presetLabel": "Predefinição de tema"
+  },
+  "whatsNew": {
+    "windowTitle": "Novidades no T-Drop",
+    "badgeNew": "Novo",
+    "mdTitle": "Pré‑visualização Markdown & Edição Rápida",
+    "mdDesc": "Abrir um cartão Markdown exibe uma pré‑visualização formatada (títulos, tabelas, blocos de código) em vez de sintaxe bruta. Clique no ícone de lápis para editar qualquer cartão de texto copiado diretamente.",
+    "mdTip": "Dica: Pressione Ctrl+Enter para salvar rapidamente, ou alterne entre Pré‑visualização / Bruto a qualquer momento.",
+    "mpTitle": "Prateleira Fixada & Colar Múltiplos Cartões",
+    "mpDesc": "Clique Fixar no cabeçalho para manter a prateleira aberta enquanto trabalha. Ctrl+Clique em vários cartões de texto para copiá‑los ou colá‑los todos de uma vez.",
+    "mpTip": "Dica: Selecione o separador de nova linha (↵), parágrafo (¶) ou espaço (␣) diretamente na barra flutuante.",
+    "thTitle": "6 Temas de Prateleira & Sistema / Claro / Escuro",
+    "thDesc": "Mantém o tema escuro Obsidian como padrão, mais 5 temas curados e modos Sistema / Claro / Escuro com pré‑visualização animada em Configurações → Aparência.",
+    "thTip": "Dica: Escolha \"Sistema\" para seguir automaticamente o tema do Windows.",
+    "skip": "Pular",
+    "next": "Próximo →",
+    "done": "Entendi, começar",
+    "close": "Fechar",
+    "mdHeading": "Plano de fim de semana",
+    "mdColItem": "Item",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Edição ao vivo",
+    "mdReady": "Pronto",
+    "mdOn": "Ligado",
+    "mdSaveHint": "Ctrl+Enter · Salvar",
+    "mpCard1": "1. Enviar relatório de progresso às 9:00",
+    "mpCard2": "2. Anexar a última maquete de design"
+  },
+  "multiPaste": {
+    "selected": "{count} selecionado",
+    "copyAll": "Copiar tudo",
+    "pasteAll": "Colar",
+    "clear": "Limpar seleção",
+    "copiedToast": "{count} cartões combinados copiados!",
+    "selectMenu": "Selecionar para colagem múltipla (Ctrl+Click)",
+    "deselectMenu": "Remover da colagem múltipla",
+    "pinShelf": "Fixar prateleira aberta",
+    "unpinShelf": "Desafixar prateleira (ocultar ao sair)"
+  },
+  "textEdit": {
+    "editMenu": "Editar texto",
+    "editBtn": "Editar",
+    "cancelEdit": "Cancelar edição",
+    "hint": "Ctrl+Enter para salvar · Esc para cancelar",
+    "cancel": "Cancelar",
+    "saveCopy": "Salvar & Copiar",
+    "save": "Salvar",
+    "savedToast": "Texto editado salvo!",
+    "savedCopyToast": "Salvo & copiado!"
+  },
+  "appFilter": {
+    "group": "FILTRO DE APP",
+    "title": "Incluir / Excluir Apps",
+    "descExclude": "Ignorar gravação do histórico ao copiar de aplicativos listados",
+    "descInclude": "Registrar histórico apenas ao copiar de aplicativos listados",
+    "exclude": "Excluir",
+    "include": "Incluir apenas",
+    "placeholder": "ex.: KeePass.exe, chrome...",
+    "add": "Adicionar"
+  },
+  "imageViewer": {
+    "group": "VISUALIZADOR DE IMAGENS",
+    "title": "Aplicativo para abrir capturas",
+    "desc": "Escolha qual aplicativo abre ao clicar em \"Abrir imagem com o aplicativo\".",
+    "systemDefault": "Padrão do Sistema",
+    "choose": "Escolher app...",
+    "reset": "Redefinir",
+    "openMenu": "Abrir imagem com app",
+    "movePinUp": "Subir FIXADO",
+    "movePinDown": "Descer FIXADO"
+  },
+  "editor": {
+    "editTitle": "Editar texto",
+    "cancelEditTitle": "Cancelar edição",
+    "savedEdited": "Texto editado salvo!",
+    "hint": "Ctrl+Enter para salvar · Esc para cancelar",
+    "cancel": "Cancelar",
+    "savedCopied": "Salvo & copiado!",
+    "saved": "Salvo!",
+    "saveCopy": "Salvar & copiar",
+    "save": "Salvar",
+    "openImageWithApp": "Abrir imagem com app"
+  },
+  "multiSelect": {
+    "separator": "Separador",
+    "sepNewline": "Nova linha (\\n)",
+    "sepBlank": "Linha em branco (\\n\\n)",
+    "sepSpace": "Espaço"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Vidro escuro puro original"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "Azul marinho profundo & ciano elétrico"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "Obsidiana florestal & brilho de menta"
+    },
+    "sunsetAmber": {
+      "name": "Amber Dusk",
+      "tagline": "Carvão quente & âmbar dourado"
+    },
+    "roseVelvet": {
+      "name": "Rose Velvet",
+      "tagline": "Ameixa profunda & toque suave de rosa"
+    },
+    "nordicFrost": {
+      "name": "Nordic Frost",
+      "tagline": "Ardósia ártica & índigo nítido"
+    }
+  },
+  "tour": {
+    "demoMulti1": "1. Enviar relatório de progresso às 9h",
+    "demoMulti2": "2. Anexar maquete de design recente",
+    "demoMdHeading": "Plano de fim de semana **T-Drop**",
+    "demoMdColFeature": "Recurso",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "Pré-visualização do **Markdown**",
+    "demoMdRow1Status": "Pronto",
+    "demoMdRow2": "Edição rápida & Multi-colagem",
+    "demoMdRow2Status": "Ativo"
   }
 }

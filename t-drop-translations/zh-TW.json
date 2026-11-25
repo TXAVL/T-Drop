@@ -481,35 +481,35 @@
   },
   "count": {
     "images": {
-      "one": "{count} 張圖片",
+      "one": "{count} image",
       "other": "{count} 張圖片"
     },
     "files": {
-      "one": "{count} 個檔案",
+      "one": "{count} file",
       "other": "{count} 個檔案"
     },
     "copiedTimes": {
-      "one": "已複製 {count} 次",
+      "one": "Copied {count} time",
       "other": "已複製 {count} 次"
     },
     "moreImages": {
-      "one": "+{count} 張圖片",
+      "one": "+{count} more image",
       "other": "還有 {count} 張圖片"
     },
     "moreFiles": {
-      "one": "+{count} 個檔案",
+      "one": "+{count} more file",
       "other": "還有 {count} 個檔案"
     },
     "selected": {
-      "one": "已選 {count} 個",
+      "one": "{count} Selected",
       "other": "已選取 {count} 個"
     },
     "savedToDownloads": {
-      "one": "已將 {count} 張圖片存至下載",
+      "one": "Saved {count} image to Downloads",
       "other": "已將 {count} 張圖片儲存到「下載」"
     },
     "splitStacks": {
-      "one": "已分拆為 {count} 堆疊（每堆最多 10 個）",
+      "one": "Split into {count} stack (max 10 each)",
       "other": "已拆分為 {count} 個堆疊（每個最多 10 個）"
     }
   },
@@ -676,7 +676,16 @@
     "notesLine2": "週日 · 雲上稜線健行",
     "note": "火車票",
     "query": "火車",
-    "ctrl": "Ctrl"
+    "ctrl": "Ctrl",
+    "demoMulti1": "1. 於上午 9:00 送出進度報告",
+    "demoMulti2": "2. 附上最新設計稿",
+    "demoMdHeading": "週末計畫 **T-Drop**",
+    "demoMdColFeature": "功能",
+    "demoMdColStatus": "狀態",
+    "demoMdRow1": "**Markdown** 預覽",
+    "demoMdRow1Status": "就緒",
+    "demoMdRow2": "內嵌編輯 & 多重貼上",
+    "demoMdRow2Status": "即時"
   },
   "common": {
     "undo": "Undo",
@@ -846,7 +855,7 @@
     "toastCompressFailed": "圖片壓縮失敗：{error}",
     "ocrNeedsLicense": "OCR 文字擷取需要 VIP 或 PREMIUM 授權！",
     "ocrProcessing": "處理中…",
-    "ocrDone": "已擷取 {count} 個字詞！",
+    "ocrDone": "已成功擷取 {count} 個字！",
     "ocrNoText": "在圖片中找不到清晰的文字。",
     "ocrFailedStatus": "辨識失敗：{error}",
     "modelLoadError": "無法載入模型。",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "儲存為片段",
     "savedToast": "已儲存至片段"
+  },
+  "themeStudio": {
+    "section": "主題與色彩模式",
+    "group": "貨架主題",
+    "title": "主題與色彩模式",
+    "desc": "即時動畫預覽，快速挑選貨架主題與色彩模式",
+    "modeSystem": "系統",
+    "modeLight": "亮色",
+    "modeDark": "暗色",
+    "sectionTitle": "主題與色彩模式",
+    "groupLabel": "貨架主題",
+    "cardTitle": "主題與色彩模式",
+    "cardDesc": "即時動畫預覽，快速挑選貨架主題與色彩模式",
+    "colorModeLabel": "色彩模式",
+    "presetLabel": "主題預設"
+  },
+  "whatsNew": {
+    "windowTitle": "T-Drop 新功能",
+    "badgeNew": "新",
+    "mdTitle": "Markdown 預覽與行內文字編輯",
+    "mdDesc": "展開 Markdown 卡片即顯示整潔的格式化預覽（標題、表格、程式碼區塊），不會出現原始語法。點擊鉛筆圖示即可直接編輯任意文字卡片。",
+    "mdTip": "提示：按 Ctrl+Enter 快速儲存，或隨時切換預覽／原始。",
+    "mpTitle": "固定貨架開啟與多卡貼上",
+    "mpDesc": "點擊標題列的「固定」可讓貨架持續開啟。Ctrl+點擊多個文字卡片，即可一次性複製或貼上全部。",
+    "mpTip": "提示：直接在浮動工具列上選擇換行 (↵)、分段 (¶) 或空格 (␣) 分隔符。",
+    "thTitle": "6 種側欄主題與系統 / 淺色 / 深色",
+    "thDesc": "預設保留標誌性的黑曜石深色主題，新增 5 種精選主題，並支援系統 / 淺色 / 深色模式，可在「設定 → 外觀」中即時預覽動畫效果。",
+    "thTip": "提示：選擇「系統」可讓 T-Drop 自動跟隨 Windows 主題切換淺色/深色。",
+    "skip": "略過",
+    "next": "下一步 →",
+    "done": "了解，開始使用",
+    "close": "關閉",
+    "mdHeading": "週末計畫",
+    "mdColItem": "項目",
+    "mdColStatus": "狀態",
+    "mdRowEdit": "即時編輯",
+    "mdReady": "已就緒",
+    "mdOn": "已開啟",
+    "mdSaveHint": "Ctrl+Enter · 儲存",
+    "mpCard1": "1. 9:00 發送進度報告",
+    "mpCard2": "2. 附上最新設計稿"
+  },
+  "multiPaste": {
+    "selected": "{count} 已選取",
+    "copyAll": "合併複製",
+    "pasteAll": "貼上",
+    "clear": "清除選取",
+    "copiedToast": "已複製 {count} 張合併卡！",
+    "selectMenu": "選取多重貼上 (Ctrl+Click)",
+    "deselectMenu": "取消多重貼上",
+    "pinShelf": "固定貨架",
+    "unpinShelf": "取消固定 (離開自動隱藏)"
+  },
+  "textEdit": {
+    "editMenu": "編輯文字",
+    "editBtn": "編輯",
+    "cancelEdit": "取消編輯",
+    "hint": "Ctrl+Enter 儲存 · Esc 取消",
+    "cancel": "取消",
+    "saveCopy": "儲存並複製",
+    "save": "儲存",
+    "savedToast": "已儲存編輯文字！",
+    "savedCopyToast": "已儲存並複製！"
+  },
+  "appFilter": {
+    "group": "APP 篩選",
+    "title": "包含 / 排除 應用程式",
+    "descExclude": "從列出的應用程式複製時不記錄",
+    "descInclude": "僅列出應用程式時記錄",
+    "exclude": "排除",
+    "include": "僅包含",
+    "placeholder": "例如：KeePass.exe、chrome...",
+    "add": "新增"
+  },
+  "imageViewer": {
+    "group": "圖片檢視器",
+    "title": "開啟截圖的應用程式",
+    "desc": "選擇點擊「以應用程式開啟圖片」時使用的應用程式。",
+    "systemDefault": "系統預設",
+    "choose": "選擇應用程式...",
+    "reset": "重設",
+    "openMenu": "以應用程式開啟圖片",
+    "movePinUp": "上移已固定項目",
+    "movePinDown": "下移已固定"
+  },
+  "editor": {
+    "editTitle": "編輯文字",
+    "cancelEditTitle": "取消編輯",
+    "savedEdited": "已儲存編輯內容！",
+    "hint": "Ctrl+Enter 以儲存 · Esc 以取消",
+    "cancel": "取消",
+    "savedCopied": "已儲存 & 複製！",
+    "saved": "已儲存！",
+    "saveCopy": "儲存並複製",
+    "save": "儲存",
+    "openImageWithApp": "以應用程式開啟圖片"
+  },
+  "multiSelect": {
+    "separator": "分隔符",
+    "sepNewline": "換行 (\\n)",
+    "sepBlank": "空行 (\\n\\n)",
+    "sepSpace": "空格"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "原始純黑玻璃"
+    },
+    "midnightOcean": {
+      "name": "Midnight Ocean",
+      "tagline": "深海藍與螢光青"
+    },
+    "emeraldGlass": {
+      "name": "Emerald Glass",
+      "tagline": "森林黑曜石與薄荷光"
+    },
+    "sunsetAmber": {
+      "name": "Amber Dusk",
+      "tagline": "暖炭與金琥珀"
+    },
+    "roseVelvet": {
+      "name": "Rose Velvet",
+      "tagline": "深梅與柔玫瑰點綴"
+    },
+    "nordicFrost": {
+      "name": "Nordic Frost",
+      "tagline": "北極石板與清爽靛藍"
+    }
   }
 }

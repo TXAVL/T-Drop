@@ -676,7 +676,16 @@
     "notesLine2": "So · Gratwanderung über den Wolken",
     "note": "Bahntickets",
     "query": "bahn",
-    "ctrl": "Strg"
+    "ctrl": "Strg",
+    "demoMulti1": "1. Fortschrittsbericht um 9:00 Uhr senden",
+    "demoMulti2": "2. Letztes Design-Mockup anhängen",
+    "demoMdHeading": "Wochenendplan **T-Drop**",
+    "demoMdColFeature": "Funktion",
+    "demoMdColStatus": "Status",
+    "demoMdRow1": "**Markdown** Vorschau",
+    "demoMdRow1Status": "Bereit",
+    "demoMdRow2": "Inline-Bearbeitung & Mehrfach-Einfügen",
+    "demoMdRow2Status": "Live"
   },
   "common": {
     "undo": "Undo",
@@ -1049,5 +1058,133 @@
     },
     "saveFromCard": "Als Snippet speichern",
     "savedToast": "Snippet gespeichert"
+  },
+  "themeStudio": {
+    "section": "THEME & FARBMODUS",
+    "group": "KÜHSTHEMA",
+    "title": "Theme & Farbmodus",
+    "desc": "Live-animierte Vorschau zum Auswählen Ihres Kühthemas und Farbmodus.",
+    "modeSystem": "System",
+    "modeLight": "Hell",
+    "modeDark": "Dunkel",
+    "sectionTitle": "THEMA & FARBMODUS",
+    "groupLabel": "REGAL-THEMA",
+    "cardTitle": "Thema & Farbmodus",
+    "cardDesc": "Live-Vorschau zur Auswahl von Regal-Thema und Farbmodus.",
+    "colorModeLabel": "Farbmodus",
+    "presetLabel": "Thema-Voreinstellung"
+  },
+  "whatsNew": {
+    "windowTitle": "Neuerungen in T-Drop",
+    "badgeNew": "Neu",
+    "mdTitle": "Markdown-Vorschau & Inline-Textbearbeitung",
+    "mdDesc": "Beim Öffnen einer Markdown-Karte wird eine saubere formatierte Vorschau (Überschriften, Tabellen, Codeblöcke) angezeigt, anstatt roher Syntax. Klicken Sie auf die Stift-Schaltfläche, um jede kopierte Textkarte direkt zu bearbeiten und sofort zu speichern.",
+    "mdTip": "Tipp: Drücken Sie Strg+Eingabe, um schnell zu speichern, oder wechseln Sie jederzeit zwischen Vorschau/Raw.",
+    "mpTitle": "Kühe offen halten & Mehrfachkarten einfügen",
+    "mpDesc": "Klicken Sie auf \"Anpinnen\" in der Kopfzeile, um die Kühe während der Arbeit offen zu halten. Halten Sie Strg+Klick auf mehrere Textkarten, um sie alle gleichzeitig zu kopieren oder einzufügen.",
+    "mpTip": "Tipp: Wählen Sie Zeilenumbruch (↵), Absatz (¶) oder Leerzeichen (␣) als Trennzeichen direkt auf der schwebenden Leiste.",
+    "thTitle": "6 Kühthemen & System / Hell / Dunkel",
+    "thDesc": "Beibehaltung des bekannten dunklen Obsidian-Themas als Standard, plus 5 neue kuratierte Themen und System/ Hell/ Dunkel-Modi mit einer Live-animierten Vorschau in Einstellungen → Erscheinungsbild.",
+    "thTip": "Tipp: Wählen Sie \"System\", um automatisch dem Windows‑Theme zu folgen.",
+    "skip": "Überspringen",
+    "next": "Weiter →",
+    "done": "Verstanden, loslegen",
+    "close": "Schließen",
+    "mdHeading": "Wochenendplan",
+    "mdColItem": "Element",
+    "mdColStatus": "Status",
+    "mdRowEdit": "Live-Bearbeitung",
+    "mdReady": "Bereit",
+    "mdOn": "Aktiv",
+    "mdSaveHint": "Strg+Enter · Speichern",
+    "mpCard1": "1. Fortschrittsbericht um 9:00 Uhr senden",
+    "mpCard2": "2. Neuestes Design-Mockup anhängen"
+  },
+  "multiPaste": {
+    "selected": "{count} ausgewählt",
+    "copyAll": "Kombinieren kopieren",
+    "pasteAll": "Einfügen",
+    "clear": "Auswahl löschen",
+    "copiedToast": "{count} kombinierte Karten kopiert!",
+    "selectMenu": "Auswahl für Mehrfacheinfügen (Strg+Klick)",
+    "deselectMenu": "Auswahl entfernen",
+    "pinShelf": "Kühe offen halten",
+    "unpinShelf": "Kühe anpinnen (automatisches Verstecken beim Verlassen)"
+  },
+  "textEdit": {
+    "editMenu": "Text bearbeiten",
+    "editBtn": "Text bearbeiten",
+    "cancelEdit": "Bearbeitung abbrechen",
+    "hint": "Strg+Eingabe zum Speichern · Esc zum Abbrechen",
+    "cancel": "Abbrechen",
+    "saveCopy": "Speichern & Kopieren",
+    "save": "Speichern",
+    "savedToast": "Bearbeiteter Text gespeichert!",
+    "savedCopyToast": "Gespeichert & kopiert!"
+  },
+  "appFilter": {
+    "group": "APP‑FILTER",
+    "title": "Apps ein- / ausschließen",
+    "descExclude": "Keine Verlaufsaufzeichnung beim Kopieren aus aufgelisteten Apps.",
+    "descInclude": "Verlauf nur bei Kopieren aus aufgelisteten Apps aufzeichnen.",
+    "exclude": "Ausschließen",
+    "include": "Nur aufnehmen",
+    "placeholder": "z. B. KeePass.exe, chrome...",
+    "add": "Hinzufügen"
+  },
+  "imageViewer": {
+    "group": "BILDANZEIGE",
+    "title": "App für Screenshots",
+    "desc": "Bestimmen, welche App beim Klicken auf „Mit App öffnen“ startet.",
+    "systemDefault": "Systemstandard",
+    "choose": "App auswählen...",
+    "reset": "Zurücksetzen",
+    "openMenu": "Mit App öffnen",
+    "movePinUp": "Gepinntes nach oben verschieben",
+    "movePinDown": "Gepinntes nach unten verschieben"
+  },
+  "editor": {
+    "editTitle": "Text bearbeiten",
+    "cancelEditTitle": "Bearbeitung abbrechen",
+    "savedEdited": "Bearbeiteter Text gespeichert!",
+    "hint": "Strg+Enter zum Speichern · Esc zum Abbrechen",
+    "cancel": "Abbrechen",
+    "savedCopied": "Gespeichert & kopiert!",
+    "saved": "Gespeichert!",
+    "saveCopy": "Speichern & Kopieren",
+    "save": "Speichern",
+    "openImageWithApp": "Bild mit App öffnen"
+  },
+  "multiSelect": {
+    "separator": "Trennzeichen",
+    "sepNewline": "Neue Zeile (\\n)",
+    "sepBlank": "Leerzeile (\\n\\n)",
+    "sepSpace": "Leerzeichen"
+  },
+  "themes": {
+    "default": {
+      "name": "Obsidian",
+      "tagline": "Originelles, reines dunkles Glas"
+    },
+    "midnightOcean": {
+      "name": "Mitternachtsmeer",
+      "tagline": "Tiefes Marineblau & elektrisches Cyan"
+    },
+    "emeraldGlass": {
+      "name": "Smaragdglas",
+      "tagline": "Wald-Obsidian & Minz-Glow"
+    },
+    "sunsetAmber": {
+      "name": "Bernstein-Dämmerung",
+      "tagline": "Warmer Schiefer & goldener Bernstein"
+    },
+    "roseVelvet": {
+      "name": "Rosenvlies",
+      "tagline": "Tiefes Pflaume & weicher Rosé-Akzent"
+    },
+    "nordicFrost": {
+      "name": "Nordischer Frost",
+      "tagline": "Arktischer Schiefer & klares Indigo"
+    }
   }
 }

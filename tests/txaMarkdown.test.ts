@@ -32,6 +32,29 @@ describe('txa-markdown: detection', () => {
     expect(detectCode(sample).language).toBe('markdown')
   })
 
+  it('detects Markdown specs mentioning C#/generic types like DbSet<Evaluation> as markdown, not JSX', () => {
+    const sample = [
+      'Hãy đọc toàn bộ codebase hiện tại trên nhánh `main`',
+      '',
+      '### 1. Thêm bảng Đánh giá & Chấm điểm cuối kỳ',
+      '- Tạo model `Models/Evaluation.cs`:',
+      '  - `Id` (int)',
+      '  - `ApplicationId` (int - liên kết 1-1 với đơn)',
+      '  - `CompanyScore` (double? - Thang điểm 10)',
+      '  - `EvaluatedAt` (DateTime?)',
+      '- Cập nhật `ApplicationDbContext.cs`: Thêm `DbSet<Evaluation>`',
+      '- Cập nhật `Data/DbInitializer.cs`: Seed sẵn 1 bản ghi',
+      '',
+      '### 2. Xây dựng Module Chấm điểm (`EvaluationController.cs`)',
+      '- Tạo `Controllers/EvaluationController.cs` gắn route'
+    ].join('\n')
+
+    const detected = detectCode(sample)
+    expect(detected.isCode).toBe(true)
+    expect(detected.language).toBe('markdown')
+    expect(detected.displayName).toBe('Markdown')
+  })
+
   it('does not misclassify plain prose as markdown', () => {
     expect(isMarkdown('Just a normal sentence with nothing special.')).toBe(false)
     expect(detectCode('Just a normal sentence with nothing special.').isCode).toBe(false)

@@ -29,6 +29,61 @@ export function normalizeHoverOpenDelay(value: unknown): number {
 /** Update behavior mode. See Settings.updateMode. */
 export type UpdateMode = 'auto' | 'notify' | 'off'
 
+/** Color mode for the app shell. 'system' follows OS light/dark preference. */
+export type ColorMode = 'system' | 'light' | 'dark'
+
+/** Visual theme preset for the shelf ("neo") and flyouts. 'default' keeps the original Obsidian dark look. */
+export type ThemePreset =
+  | 'default'
+  | 'midnight-ocean'
+  | 'emerald-glass'
+  | 'sunset-amber'
+  | 'rose-velvet'
+  | 'nordic-frost'
+
+const COLOR_MODES: readonly ColorMode[] = ['system', 'light', 'dark']
+const THEME_PRESETS: readonly ThemePreset[] = [
+  'default',
+  'midnight-ocean',
+  'emerald-glass',
+  'sunset-amber',
+  'rose-velvet',
+  'nordic-frost'
+]
+
+/** App filter mode for clipboard capture (Issue #73). */
+export type AppFilterMode = 'exclude' | 'include'
+
+/** Normalize a process name or app label (lowercase, strip .exe). */
+export function normalizeAppName(name: string): string {
+  return name.trim().toLowerCase().replace(/\.exe$/i, '')
+}
+
+/**
+ * Decide whether clipboard capture should proceed given the foreground process
+ * name, filter mode ('exclude' | 'include'), and configured app list.
+ */
+export function shouldCaptureForApp(
+  processName: string | null | undefined,
+  mode: AppFilterMode = 'exclude',
+  list: readonly string[] = []
+): boolean {
+  const normalizedList = list.map(normalizeAppName).filter(Boolean)
+  if (normalizedList.length === 0) return true
+  if (!processName) return mode === 'exclude'
+  const cur = normalizeAppName(processName)
+  const matched = normalizedList.some((entry) => cur === entry || cur.includes(entry))
+  return mode === 'exclude' ? !matched : matched
+}
+
+export function isColorMode(value: unknown): value is ColorMode {
+  return (COLOR_MODES as readonly unknown[]).includes(value)
+}
+
+export function isThemePreset(value: unknown): value is ThemePreset {
+  return (THEME_PRESETS as readonly unknown[]).includes(value)
+}
+
 const UPDATE_MODES: readonly UpdateMode[] = ['auto', 'notify', 'off']
 
 /**
@@ -174,6 +229,16 @@ export interface Settings {
   autoDeleteHours: number
   /** UI visual style density ('modern' | 'compact'). */
   uiStyle: 'modern' | 'compact'
+  /** Color mode: 'system' | 'light' | 'dark'. Default: 'dark' (matches original look). */
+  colorMode?: ColorMode
+  /** Shelf theme preset. Default: 'default' (Obsidian). */
+  themePreset?: ThemePreset
+  /** App capture filter mode ('exclude' ignores listed apps, 'include' captures only listed apps). */
+  appFilterMode?: AppFilterMode
+  /** Process names (e.g. 'KeePass.exe', 'Bitwarden') matched against the foreground app on copy. */
+  appFilterList?: string[]
+  /** Optional custom executable path used to open images/screenshots (empty = OS default app). */
+  imageViewerApp?: string
   /** Flag to track if the onboarding tutorial is completed. */
   tutorialCompleted: boolean
   /** The welcome tour version the user has finished (shared/onboarding.ts); absent before 0.4.0. */
@@ -272,6 +337,11 @@ export const DEFAULT_SETTINGS: Settings = {
   clearUnpinnedOnRestart: false,
   autoDeleteHours: 0,
   uiStyle: 'modern',
+  colorMode: 'dark',
+  themePreset: 'default',
+  appFilterMode: 'exclude',
+  appFilterList: [],
+  imageViewerApp: '',
   tutorialCompleted: false,
   stickPosition: 'left',
   stickDisplayId: undefined,

@@ -12,7 +12,7 @@ import { useEffect, useRef } from 'react'
 import { Panel } from './components/Panel'
 import { useStore } from './store/appStore'
 import { edge } from './lib/edge'
-import { applyReduceMotion } from './lib/theme'
+import { applyReduceMotion, applyTheme, subscribeSystemColorMode } from './lib/theme'
 import { useEdgeHover } from './hooks/useEdgeHover'
 import { TxaTooltipProvider } from './components/TxaTooltip'
 
@@ -338,6 +338,17 @@ export default function App() {
     const scale = settings.fontSizeScale ?? 1.04
     document.documentElement.style.setProperty('--font-scale', String(scale))
   }, [settings.reduceMotion, settings.fontSizeScale])
+
+  // Apply theme preset & System / Light / Dark color mode (live OS sync in 'system' mode).
+  useEffect(() => {
+    const preset = settings.themePreset ?? 'default'
+    const mode = settings.colorMode ?? 'dark'
+    applyTheme(preset, mode)
+    if (mode !== 'system') return
+    return subscribeSystemColorMode(() => {
+      applyTheme(preset, 'system')
+    })
+  }, [settings.themePreset, settings.colorMode])
 
   if (!hydrated) {
     return <div className="root" />
