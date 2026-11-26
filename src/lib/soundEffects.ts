@@ -65,18 +65,49 @@ function armIdleSuspend(): void {
   }, IDLE_SUSPEND_MS)
 }
 
+/**
+ * When the audio device fails (unplugged headset, driver reset, Bluetooth drop) Chromium fires
+ * `error` on the context and every later resume() fails again, flooding the log and the audio
+ * service. Drop the broken context and stay silent for a while before trying a fresh one.
+ */
+const DEVICE_ERROR_COOLDOWN_MS = 15000
+let audioBrokenUntil = 0
+
+function dropBrokenContext(ctx: any): void {
+  if (audioCtx !== ctx) return
+  audioCtx = null
+  audioBrokenUntil = Date.now() + DEVICE_ERROR_COOLDOWN_MS
+  if (idleTimer !== undefined) {
+    clearTimeout(idleTimer)
+    idleTimer = undefined
+  }
+  try {
+    ctx.close?.().catch?.(() => {})
+  } catch { /* ignore */ }
+}
+
 function getAudioContext(): any | null {
   if (!isSoundEnabled()) return null
+  if (Date.now() < audioBrokenUntil) return null
   const win = typeof globalThis !== 'undefined' ? (globalThis as any).window : undefined
   if (!win) return null
   if (!audioCtx) {
     const AudioContextClass = win.AudioContext || win.webkitAudioContext
     if (AudioContextClass) {
-      audioCtx = new AudioContextClass()
+      const ctx = new AudioContextClass()
+      audioCtx = ctx
+      try {
+        ctx.addEventListener?.('error', () => dropBrokenContext(ctx))
+      } catch { /* ignore */ }
     }
   }
+  if (audioCtx && audioCtx.state === 'closed') {
+    dropBrokenContext(audioCtx)
+    return null
+  }
   if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume().catch(() => {})
+    const ctx = audioCtx
+    ctx.resume().catch(() => dropBrokenContext(ctx))
   }
   if (audioCtx) armIdleSuspend()
   return audioCtx
