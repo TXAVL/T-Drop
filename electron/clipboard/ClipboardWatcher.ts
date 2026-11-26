@@ -264,14 +264,16 @@ export class ClipboardWatcher {
       this.pendingNudge = false
       const seqNow = getClipboardSequenceNumber()
       if (this.settleTimer) {
-        // Incomplete file/image: retry is already scheduled. Only restart if
+        // Incomplete file/image: the scheduled retry re-reads anyway. Only restart if
         // a newer copy landed after that read.
-        if (seqNow !== this.lastSeq || hadPendingNudge) this.pollTick()
-      } else if (seqNow !== this.lastSeq || hadPendingNudge) {
+        if (seqNow !== this.lastSeq) this.pollTick()
+      } else if (seqNow !== this.lastSeq) {
         this.pollTick()
-      } else if (seqNow !== seqWhenSettled) {
-        // Seq moved during our read. Explorer delay-renders of a file list
-        // are absorbed without another OpenClipboard; a real new copy is not.
+      } else if (seqNow !== seqWhenSettled || hadPendingNudge) {
+        // Seq moved during our read (or a copy was nudged in meanwhile). The read
+        // already advanced lastSeq, so rewind it to the settled value; otherwise
+        // pollTick would see no change and drop the newer copy. Explorer
+        // delay-renders of a file list are still absorbed in changed().
         this.lastSeq = seqWhenSettled
         this.pollTick()
       }

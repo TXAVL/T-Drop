@@ -82,7 +82,7 @@ describe('Horizontal Card Shelf Settings Layout', () => {
 
   it('Appearance shelf renders Show Copy Indicator toggle card first, followed by Indicator Style card matching Left/Right', () => {
     const src = read('src/components/Settings.tsx')
-    const appearanceSection = src.slice(src.indexOf("horizontalTab === 'appearance'"), src.indexOf("horizontalTab === 'appearance'") + 4000)
+    const appearanceSection = src.slice(src.indexOf("horizontalTab === 'appearance'"), src.indexOf("horizontalTab === 'appearance'") + 7000) // Theme Studio card now sits first
     const toggleCardIdx = appearanceSection.indexOf('beacon-toggle-card')
     const styleCardIdx = appearanceSection.indexOf('copy-card')
 
