@@ -444,7 +444,10 @@
     "accountNumber": "Số tài khoản",
     "accountHolder": "Chủ tài khoản",
     "copied": "Đã sao chép vào bộ nhớ tạm",
-    "copy": "Sao chép"
+    "copy": "Sao chép",
+    "donateSubtitle": "Mỗi phần ủng hộ giúp T-Drop luôn miễn phí và được cập nhật.",
+    "donateScanHint": "Quét bằng app ngân hàng hoặc ví điện tử có hỗ trợ VietQR.",
+    "donateThanks": "Cảm ơn bạn đã ủng hộ T-Drop!"
   },
   "groups": {
     "feedback": "PHẢN HỒI",
@@ -685,7 +688,11 @@
     "demoMdRow1": "Xem trước **Markdown**",
     "demoMdRow1Status": "Hoàn tất",
     "demoMdRow2": "Sửa nhanh & Dán gộp",
-    "demoMdRow2Status": "Sẵn sàng"
+    "demoMdRow2Status": "Sẵn sàng",
+    "afSecret": "Mật khẩu ngân hàng",
+    "afBlocked": "Không lưu · ứng dụng bị loại trừ",
+    "afSaved": "Đã lưu vào T-Drop",
+    "afLink": "Link lịch trình chuyến đi"
   },
   "common": {
     "undo": "Hoàn tác",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Ghim giữ kệ luôn mở & Dán gộp nhiều thẻ",
     "mpDesc": "Bấm nút Ghim trên thanh tiêu đề để khóa mở kệ khi làm việc liên tục. Giữ Ctrl+Click trên nhiều thẻ văn bản để chọn theo thứ tự rồi sao chép hoặc dán gộp tất cả trong 1 lần.",
     "mpTip": "Mẹo: Chọn dấu nối xuống dòng (↵), cách đoạn (¶) hoặc dấu cách (␣) ngay trên thanh nổi.",
-    "thTitle": "6 Bộ giao diện Neo & Sáng / Tối / Theo máy",
-    "thDesc": "Mặc định giữ nguyên giao diện tối quen thuộc, bổ sung thêm 5 bộ màu tuyển chọn cùng chế độ Theo máy (System), Sáng (Light) và Tối (Dark) kèm xem trước hoạt ảnh trong Cài đặt → Giao diện.",
+    "thTitle": "11 bộ giao diện & Sáng / Tối / Theo máy",
+    "thDesc": "Giữ nguyên giao diện tối Obsidian mặc định, thêm 10 bộ màu tuyển chọn, màu nhấn tùy chọn, kiểu bo góc và chế độ Sáng / Tối / Theo máy, có xem trước trực tiếp trong Cài đặt → Giao diện.",
     "thTip": "Mẹo: Chọn \"Theo máy\" để T-Drop tự đổi Sáng/Tối theo Windows.",
     "skip": "Bỏ qua",
     "next": "Tiếp theo →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Đã bật",
     "mdSaveHint": "Ctrl+Enter · Lưu",
     "mpCard1": "1. Gửi báo cáo tiến độ lúc 9:00",
-    "mpCard2": "2. Đính kèm bản thiết kế mới"
+    "mpCard2": "2. Đính kèm bản thiết kế mới",
+    "afTitle": "Chọn ứng dụng được ghi clipboard",
+    "afDesc": "Bỏ qua nội dung copy từ những ứng dụng bạn không muốn lưu, như trình quản lý mật khẩu, hoặc chỉ ghi lại từ các ứng dụng bạn chọn.",
+    "afTip": "Mẹo: Cài đặt → Hành vi → Lọc ứng dụng. Có sẵn mẫu nhanh cho KeePass, Bitwarden và 1Password."
   },
   "multiPaste": {
     "selected": "{count} đã chọn",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Sương Bắc Âu",
       "tagline": "Xám đá Bắc Âu & xanh chàm"
+    },
+    "crimsonNoir": {
+      "name": "Hồng ngọc đêm",
+      "tagline": "Đen mực & đỏ hồng ngọc"
+    },
+    "cyberLime": {
+      "name": "Chanh neon",
+      "tagline": "Đen terminal & xanh chanh neon"
+    },
+    "lavenderHaze": {
+      "name": "Sương oải hương",
+      "tagline": "Tím nhạt dịu & tím hoàng hôn"
+    },
+    "mochaLatte": {
+      "name": "Cà phê sữa",
+      "tagline": "Cà phê rang & kem ấm"
+    },
+    "graphite": {
+      "name": "Than chì",
+      "tagline": "Xám trung tính & xanh dương"
     }
+  },
+  "appearanceExtra": {
+    "group": "MÀU NHẤN & HÌNH DÁNG",
+    "accentTitle": "Màu nhấn",
+    "accentDesc": "Dùng màu nhấn của giao diện hoặc chọn màu bạn thích cho các điểm nhấn.",
+    "accentTheme": "Theo giao diện",
+    "accentCustom": "Màu tùy chọn",
+    "cornerTitle": "Bo góc",
+    "cornerDesc": "Độ bo tròn của kệ và các thẻ.",
+    "corner_rounded": "Tròn",
+    "corner_soft": "Vừa",
+    "corner_sharp": "Vuông"
   }
 }

@@ -17,6 +17,8 @@ import { countdownText, expiryText, userNameText } from '../lib/licenseText'
 import { PurchaseModal } from './PurchaseModal'
 import { HotkeyRecorder } from './HotkeyRecorder'
 import { ThemeStudioCard } from './ThemeStudioCard'
+import { AppearanceExtrasCard } from './AppearanceExtrasCard'
+import { getThemePalette } from '../lib/theme'
 import { AppFilterSettingCard, ImageViewerSettingCard } from './AppFilterAndViewerCards'
 import { SlideCommit } from './SlideCommit'
 import { WakeSlider } from './WakeSlider'
@@ -269,7 +271,7 @@ export function Settings({
   const setRestoreModal = useStore((s) => s.setRestoreModal)
   const [isExporting, setIsExporting] = useState(false)
   const [donateModalOpen, setDonateModalOpen] = useState(false)
-  const [copiedStk, setCopiedStk] = useState(false)
+  const [donateCopied, setDonateCopied] = useState<'stk' | 'name' | null>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.edge?.onBackupFileOpened) return
@@ -1154,86 +1156,91 @@ export function Settings({
       if (isHorizontal) window.edge?.setPreviewMode?.(false)
     }
 
-    const handleCopyStk = async () => {
+    const copyField = async (value: string, which: 'stk' | 'name') => {
       playButtonClickSound()
-      if (!(await copyText('2211231106'))) return
-      setCopiedStk(true)
-      setTimeout(() => setCopiedStk(false), 2000)
+      if (!(await copyText(value))) return
+      setDonateCopied(which)
+      setTimeout(() => setDonateCopied((cur) => (cur === which ? null : cur)), 2000)
     }
+
+    const CopyIcon = ({ done }: { done: boolean }) =>
+      done ? (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+      ) : (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+      )
+
+    const rows: Array<{ label: string; value: string; copy?: 'stk' | 'name'; mono?: boolean }> = [
+      { label: t('footer.bankName'), value: 'MB Bank' },
+      { label: t('footer.accountNumber'), value: '2211231106', copy: 'stk', mono: true },
+      { label: t('footer.accountHolder'), value: 'TANG XUAN ANH', copy: 'name' }
+    ]
 
     return createPortal(
       <div
-        className="txa-modal-overlay"
+        className="donate-overlay"
         onClick={closeDonate}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') closeDonate()
+        }}
       >
         <div
-          className="txa-modal-card donate-modal-card"
+          className="donate-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="donate-title"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="txa-modal-header">
-            <div className="txa-modal-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#00d2ff' }}>
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01"/>
-              </svg>
-              <span>{t('footer.donateTitle')}</span>
+          <header className="donate-head">
+            <span className="donate-heart" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.8 4.5c2.1 0 3.6 1.1 4.4 2.5.4.6 1.2.6 1.6 0 .8-1.4 2.3-2.5 4.4-2.5 3.8 0 5.9 3.8 4.4 7.2C19.5 16.4 12 21 12 21z" /></svg>
+            </span>
+            <div className="donate-head-text">
+              <h2 id="donate-title">{t('footer.donateTitle')}</h2>
+              <p>{t('footer.donateSubtitle')}</p>
             </div>
             <button
               type="button"
-              className="txa-modal-close"
-              onClick={() => setDonateModalOpen(false)}
+              className="donate-close"
+              aria-label={t('common.close')}
+              onClick={() => {
+                playButtonClickSound()
+                closeDonate()
+              }}
+              autoFocus
             >
-              ✕
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
             </button>
+          </header>
+
+          <div className="donate-qr">
+            <img src={donateQr} alt="VietQR — MB Bank 2211231106" draggable={false} />
           </div>
+          <p className="donate-scan">{t('footer.donateScanHint')}</p>
 
-          <div className="donate-modal-body">
-            <div className="donate-qr-container">
-              <img
-                src={donateQr}
-                alt="MB Bank VietQR"
-                className="donate-qr-img"
-              />
-            </div>
-
-            <div className="donate-bank-info">
-              <div className="donate-bank-row">
-                <span className="donate-label">{t('footer.bankName')}</span>
-                <span className="donate-value highlight">MB Bank</span>
+          <dl className="donate-rows">
+            {rows.map((r) => (
+              <div className="donate-row" key={r.label}>
+                <dt>{r.label}</dt>
+                <dd className={r.mono ? 'mono' : undefined}>
+                  <span>{r.value}</span>
+                  {r.copy && (
+                    <button
+                      type="button"
+                      className={`donate-copy${donateCopied === r.copy ? ' done' : ''}`}
+                      aria-label={`${t('footer.copy')} ${r.label}`}
+                      onClick={() => copyField(r.value, r.copy!)}
+                    >
+                      <CopyIcon done={donateCopied === r.copy} />
+                      {donateCopied === r.copy ? t('footer.copied') : t('footer.copy')}
+                    </button>
+                  )}
+                </dd>
               </div>
-              <div className="donate-bank-row">
-                <span className="donate-label">{t('footer.accountNumber')}</span>
-                <div className="donate-stk-group">
-                  <span className="donate-value code">2211231106</span>
-                  <button
-                    type="button"
-                    className="donate-copy-btn"
-                    onClick={handleCopyStk}
-                  >
-                    {copiedStk ? (t('footer.copied')) : (t('footer.copy'))}
-                  </button>
-                </div>
-              </div>
-              <div className="donate-bank-row">
-                <span className="donate-label">{t('footer.accountHolder')}</span>
-                <span className="donate-value highlight">TANG XUAN ANH</span>
-              </div>
-            </div>
+            ))}
+          </dl>
 
-            <p className="donate-note">
-              {t('footer.donateNote')}
-            </p>
-          </div>
-
-          <div className="txa-modal-actions" style={{ justifyContent: 'center' }}>
-            <button
-              type="button"
-              className="txa-btn txa-btn-secondary"
-              onClick={closeDonate}
-            >
-              {t('common.close')}
-            </button>
-          </div>
+          <p className="donate-thanks">{t('footer.donateThanks')}</p>
         </div>
       </div>,
       document.body
@@ -1354,9 +1361,8 @@ export function Settings({
                 setDonateModalOpen(true)
               }}
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, color: '#0070f3' }}>
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01"/>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, color: '#f43f5e' }} aria-hidden="true">
+                <path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.8 4.5c2.1 0 3.6 1.1 4.4 2.5.4.6 1.2.6 1.6 0 .8-1.4 2.3-2.5 4.4-2.5 3.8 0 5.9 3.8 4.4 7.2C19.5 16.4 12 21 12 21z"/>
               </svg>
               <span>{t('footer.supportOnKofi')}</span>
             </button>
@@ -2674,6 +2680,16 @@ export function Settings({
                 </div>
               </div>
 
+              {/* Card 0b: Accent color & corner style */}
+              <AppearanceExtrasCard
+                cardClass="settings-shelf-card appearance-col"
+                accentColor={settings.accentColor ?? ''}
+                cornerStyle={settings.cornerStyle ?? 'rounded'}
+                themeAccent={getThemePalette(settings.themePreset ?? 'default', settings.colorMode ?? 'dark').palette.accent}
+                onChangeAccent={(accentColor) => patch({ accentColor })}
+                onChangeCorner={(cornerStyle) => patch({ cornerStyle })}
+              />
+
               {/* ── SUB-GROUP 1 DIVIDER: Copy Indicator ── */}
               <div className="shelf-section-divider">
                 <span className="shelf-section-divider-text">{t('appearance.copyIndicatorTitle') || 'COPY INDICATOR'}</span>
@@ -3636,6 +3652,16 @@ export function Settings({
                       />
                     </div>
                   </div>
+
+                  {/* Card 0b: Accent color & corner style */}
+                  <AppearanceExtrasCard
+                    cardClass="setting-card"
+                    accentColor={settings.accentColor ?? ''}
+                    cornerStyle={settings.cornerStyle ?? 'rounded'}
+                    themeAccent={getThemePalette(settings.themePreset ?? 'default', settings.colorMode ?? 'dark').palette.accent}
+                    onChangeAccent={(accentColor) => patch({ accentColor })}
+                    onChangeCorner={(cornerStyle) => patch({ cornerStyle })}
+                  />
 
                   {/* ── GROUP: Copy Indicator ────────────────────────────── */}
                   <div className="setting-section-divider">

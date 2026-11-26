@@ -50,7 +50,7 @@ const args = process.argv.slice(2)
 const CHECK = args.includes('--check')
 const onlyLangs = (args.find((a) => a.startsWith('--lang=')) || '').slice(7).split(',').filter(Boolean)
 const retrans = (args.find((a) => a.startsWith('--retranslate=')) || '').slice(14).split(',').filter(Boolean)
-const BATCH = Number(process.env.I18N_BATCH) || 10 // small batches: progress is saved and printed after every few strings
+const BATCH = Number(process.env.I18N_BATCH) || 40 // fewer, larger requests: free tiers limit requests per minute, not size
 
 function flatten(o: unknown, p = '', r: Flat = {}): Flat {
   if (o && typeof o === 'object') {

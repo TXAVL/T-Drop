@@ -444,7 +444,10 @@
     "accountNumber": "Kontonummer",
     "accountHolder": "Kontoinnehavare",
     "copied": "Kopierat till urklipp",
-    "copy": "Kopiera"
+    "copy": "Kopiera",
+    "donateSubtitle": "Varje gåva hjälper T-Drop att förbli gratis och uppdaterad.",
+    "donateScanHint": "Skanna med någon bankapp eller e‑plånbok som stödjer VietQR.",
+    "donateThanks": "Tack för att du stödjer T-Drop!"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -685,7 +688,11 @@
     "demoMdRow1": "**Markdown**-förhandsvisning",
     "demoMdRow1Status": "Redo",
     "demoMdRow2": "Inbyggd redigering & flerdelad klistra in",
-    "demoMdRow2Status": "Live"
+    "demoMdRow2Status": "Live",
+    "afSecret": "Banklösenord",
+    "afBlocked": "Sparas ej · app utesluten",
+    "afSaved": "Sparad i T-Drop",
+    "afLink": "Resplanlänk"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Fäst hyllan & klistra in flera kort",
     "mpDesc": "Klicka på Fäst i sidfoten för att hålla hyllan öppen medan du arbetar. Håll Ctrl och klicka på flera textkort i ordning för att kopiera eller klistra in dem alla samlade på en gång.",
     "mpTip": "Tips: Välj radbrytning (↵), stycke (¶) eller mellanslag (␣) som avgränsare direkt på den flytande fältet.",
-    "thTitle": "6 hyllteman & System / Ljust / Mörkt",
-    "thDesc": "Behåller det signaturliknande mörka Obsidian-temat som standard, plus 5 nya utvalda teman och lägena System / Ljust / Mörkt med en animerad direktvisning under Inställningar → Utseende.",
+    "thTitle": "11 hyllteman & System / Ljus / Mörk",
+    "thDesc": "Behåller Obsidian mörkt tema som standard, plus 10 utvalda teman, egen accentfärg, hörnstilar och System / Ljus / Mörk‑lägen med live‑förhandsvisning i Inställningar → Utseende.",
     "thTip": "Tips: Välj \"System\" för att automatiskt följa ditt Windows-tema.",
     "skip": "Hoppa över",
     "next": "Nästa →",
@@ -1098,7 +1105,10 @@
     "mdOn": "På",
     "mdSaveHint": "Ctrl+Enter · Spara",
     "mpCard1": "1. Skicka statusrapport kl 09:00",
-    "mpCard2": "2. Bifoga senaste designmockupen"
+    "mpCard2": "2. Bifoga senaste designmockupen",
+    "afTitle": "Välj vilka appar som sparas",
+    "afDesc": "Hoppa över kopior från appar du inte vill spara, t.ex. lösenordshanterare, eller spara bara de appar du väljer.",
+    "afTip": "Tips: Inställningar → Beteende → Inkludera / Exkludera appar. Snabbmallar för KeePass, Bitwarden och 1Password."
   },
   "multiPaste": {
     "selected": "{count} markerade",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Nordic Frost",
       "tagline": "Arktisk skiffer & skarp indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Bläcksvart & rubinrött"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminalsvart & neonlimegrönt"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Mjuk lilafärg & dyster violet"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Rostad kaffe & varm grädde"
+    },
+    "graphite": {
+      "name": "Grafit",
+      "tagline": "Neutral grå & ren blå"
     }
+  },
+  "appearanceExtra": {
+    "group": "ACCENT & FORM",
+    "accentTitle": "Accentfärg",
+    "accentDesc": "Använd temats accent eller välj din favoritfärg för markeringar.",
+    "accentTheme": "Tema",
+    "accentCustom": "Anpassad färg",
+    "cornerTitle": "Kanter",
+    "cornerDesc": "Hur rundade korgen och korten ser ut.",
+    "corner_rounded": "Rund",
+    "corner_soft": "Mjuk",
+    "corner_sharp": "Hård"
   }
 }

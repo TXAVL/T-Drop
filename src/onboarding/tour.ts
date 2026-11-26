@@ -28,7 +28,7 @@ import { aim, REST, toLocal, toScreen, zoomRest, zoomTo, type Rect, type View } 
 import {
   demoText, demoLink, demoImage, demoPdf, demoStack, demoStackWithPhoto, stackFiles, pageTitle, DEMO_DIR, demoNote, demoQuery, demoMarkdown, demoMultiTexts
 } from './demoItems'
-import { applyTheme } from '../lib/theme'
+import { applyTheme, THEME_CATALOG } from '../lib/theme'
 
 export const STOP = Symbol('stop')
 
@@ -80,6 +80,8 @@ export interface Stage {
   explorer: HTMLElement
   /** The backup & restore archive mockup view. */
   backupMock: HTMLElement
+  /** The app filter demo: a password manager (excluded) and a browser (recorded). */
+  appFilterMock: HTMLElement
   /** The camera over all of the above (lens.ts). */
   lens: HTMLElement
   /** Welcome: the real shelf in place of the drawn bar on the laptop (the closed bars match exactly). */
@@ -117,6 +119,8 @@ export function itemsFor(step: string, now = Date.now()): ClipboardItemDto[] {
       return [...demoMultiTexts(now - 1000), demoLink(now - 6000), demoText(now - 14000)]
     case 'themes':
       return [demoMarkdown(now - 1000), demoImage(now - 4000), demoLink(now - 6000), demoText(now - 14000)]
+    case 'appfilter':
+      return [demoText(now - 14000)]
     case 'backup':
     case 'settings': return sorted(demoNote())
     default: return []
@@ -128,7 +132,8 @@ const WINDOW_OF: Record<string, (stage: Stage) => HTMLElement> = {
   collect: (s) => s.browser,
   dropin: (s) => s.browser,
   drag: (s) => s.notes,
-  backup: (s) => s.backupMock
+  backup: (s) => s.backupMock,
+  appfilter: (s) => s.appFilterMock
 }
 
 /** Clear everything a demo may have left behind (on cancel, Back, Continue); `next` is the step coming up. */
@@ -144,7 +149,7 @@ export function resetDemoState(stage: Stage, next?: string): void {
     edgeTransition: null
   })
   const curSettings = useStore.getState().settings
-  applyTheme(curSettings.themePreset ?? 'default', curSettings.colorMode ?? 'dark')
+  applyTheme(curSettings.themePreset ?? 'default', curSettings.colorMode ?? 'dark', curSettings.accentColor ?? '')
   // a search empties at once, except when the shelf is folding away for a step on the laptop (the welcome,
   // the last step): there the shelf would fill back up as it closes, so Onboarding empties it once the
   // shelf is out of sight
@@ -166,7 +171,8 @@ export function resetDemoState(stage: Stage, next?: string): void {
   else window.setTimeout(() => { if (!stage.notes.classList.contains('is-up')) picture.classList.remove('is-in') }, 300)
   stage.backupMock?.querySelectorAll('.ob-backup-card.is-success').forEach((el) => el.classList.remove('is-success'))
   stage.backupMock?.querySelectorAll('.btn-exp.is-active, .btn-imp.is-active').forEach((el) => el.classList.remove('is-active'))
-  for (const w of [stage.notes, stage.browser, stage.explorer, stage.backupMock]) if (w && w !== keep) hideWindow(w)
+  stage.appFilterMock?.querySelectorAll('.ob-af-row').forEach((el) => el.classList.remove('is-blocked', 'is-saved', 'is-pressed'))
+  for (const w of [stage.notes, stage.browser, stage.explorer, stage.backupMock, stage.appFilterMock]) if (w && w !== keep) hideWindow(w)
   stage.root.querySelector('.ob-shelf')?.getAnimations().forEach((a) => a.cancel())
 }
 
@@ -1152,21 +1158,50 @@ export async function demoMultiPasteAndPin(run: Run, stage: Stage) {
   await p.hide()
 }
 
+/**
+ * App filter: copying a password from the excluded password manager leaves the shelf alone (the row
+ * says so), copying a link from the browser lands on the shelf as usual.
+ */
+export async function demoAppFilter(run: Run, stage: Stage) {
+  const win = stage.appFilterMock
+  showWindow(win)
+  const rows = [...win.querySelectorAll<HTMLElement>('.ob-af-row')]
+  const p = new Pointer(run, stage.cursor)
+  await p.show(420, 330)
+  zoomTo(stage.lens, onWindow(rect(stage, win)), 800)
+  await run.sleep(450)
+  for (const row of rows) {
+    const btn = row.querySelector<HTMLElement>('.ob-af-copy')
+    if (!btn) continue
+    const r = rect(stage, btn)
+    await p.move(r.left + r.width / 2, r.top + r.height / 2, 600)
+    row.classList.add('is-pressed')
+    await p.press()
+    row.classList.remove('is-pressed')
+    if (row.dataset.app === 'blocked') {
+      row.classList.add('is-blocked')
+    } else {
+      row.classList.add('is-saved')
+      capture(demoLink(Date.now()))
+      copyFlare(run)
+    }
+    await run.sleep(1100)
+  }
+  zoomRest(stage.lens, 800)
+  await p.hide()
+  await run.sleep(400)
+}
+
 /** Theme Studio showcase: smoothly cycle the live shelf across curated themes and light/dark modes. */
 export async function demoThemeShowcase(run: Run, stage: Stage) {
-  const sequence: Array<[import('../../shared/types').ThemePreset, import('../../shared/types').ColorMode]> = [
-    ['midnight-ocean', 'dark'],
-    ['emerald-glass', 'dark'],
-    ['sunset-amber', 'light'],
-    ['rose-velvet', 'dark'],
-    ['nordic-frost', 'light'],
-    ['default', 'dark']
-  ]
   void stage
-  for (const [preset, mode] of sequence) {
-    applyTheme(preset, mode)
-    await run.sleep(850)
+  const themes = THEME_CATALOG.filter((th) => th.id !== 'default')
+  for (let i = 0; i < themes.length; i++) {
+    applyTheme(themes[i].id, i % 3 === 2 ? 'light' : 'dark')
+    await run.sleep(700)
   }
+  applyTheme('default', 'dark')
+  await run.sleep(500)
 }
 
 export const DEMOS: Record<string, ((run: Run, stage: Stage) => Promise<void>) | undefined> = {
@@ -1180,6 +1215,7 @@ export const DEMOS: Record<string, ((run: Run, stage: Stage) => Promise<void>) |
   markdown: demoMarkdownPreview,
   multipaste: demoMultiPasteAndPin,
   themes: demoThemeShowcase,
+  appfilter: demoAppFilter,
   backup: demoBackup
 }
 
@@ -1214,7 +1250,7 @@ const shelfLayer = (stage: Stage) => stage.root.querySelector<HTMLElement>('.ob-
 async function rewind(run: Run, stage: Stage, step: string, open: boolean) {
   const st = useStore.getState()
   set({ previewItemId: null, previewItemRect: null, previewEditingId: null, selectedTextIds: [], shelfPinned: false, expandedStackId: null, cardMenu: null, cardMenuRect: null })
-  applyTheme(st.settings.themePreset ?? 'default', st.settings.colorMode ?? 'dark')
+  applyTheme(st.settings.themePreset ?? 'default', st.settings.colorMode ?? 'dark', st.settings.accentColor ?? '')
   // a search empties (the shelf fills back up) and lets go of the caret
   if (st.query) {
     leaveField()

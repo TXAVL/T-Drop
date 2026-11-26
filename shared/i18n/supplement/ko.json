@@ -119,7 +119,10 @@
     "accountNumber": "계좌번호",
     "accountHolder": "예금주",
     "copied": "클립보드에 복사됨",
-    "copy": "복사"
+    "copy": "복사",
+    "donateSubtitle": "기부가 T-Drop을 무료 유지·업데이트에 기여합니다.",
+    "donateScanHint": "VietQR을 지원하는 은행 앱·전자 지갑으로 스캔",
+    "donateThanks": "T-Drop을 지원해 주셔서 감사합니다!"
   },
   "imageStudio": {
     "tabConvert": "변환",
@@ -407,8 +410,8 @@
     "mpTitle": "선반 고정·다중 카드 붙여넣기",
     "mpDesc": "헤더의 고정 버튼을 클릭하면 작업 중에도 선반이 열려 있습니다. Ctrl+Click으로 여러 텍스트 카드를 순서대로 선택해 한 번에 복사·붙여넣기 할 수 있습니다.",
     "mpTip": "팁: 플로팅 바에서 줄바꿈(↵), 단락(¶), 공백(␣) 구분자를 바로 선택하세요.",
-    "thTitle": "6가지 선반 테마 & 시스템 / 라이트 / 다크",
-    "thDesc": "시그니처 옵시디언 다크 테마를 기본으로 유지하고, 5가지 신규 큐레이션 테마와 설정 → 외관에서 실시간 애니메이션 미리보기가 가능한 시스템 / 라이트 / 다크 모드를 추가했습니다.",
+    "thTitle": "11개 테마 & 시스템/밝음/어둠",
+    "thDesc": "Obsidian 다크 테마가 기본이며, 10가지 선정된 테마·사용자 액센트 색·모서리 스타일·시스템/밝음/어둠 모드와 실시간 미리보기가 설정 → 외관에서 제공됩니다.",
     "thTip": "팁: \"시스템\"을 선택하면 Windows 테마에 따라 자동으로 전환됩니다.",
     "skip": "건너뛰기",
     "next": "다음 →",
@@ -422,7 +425,10 @@
     "mdOn": "켜짐",
     "mdSaveHint": "Ctrl+Enter · 저장",
     "mpCard1": "1. 9시 진행 보고서 전송",
-    "mpCard2": "2. 최신 디자인 목업 첨부"
+    "mpCard2": "2. 최신 디자인 목업 첨부",
+    "afTitle": "기록할 앱 선택",
+    "afDesc": "원하지 않는 앱(예: 비밀번호 관리자)의 복사 내용은 건너뛰고, 선택한 앱만 기록합니다.",
+    "afTip": "팁: 설정 → 동작 → 포함/제외 앱. 빠른 preset이 KeePass, Bitwarden, 1Password를 지원합니다."
   },
   "multiPaste": {
     "selected": "{count} 선택됨",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "노르딕 프로스",
       "tagline": "아크틱 슬레이트 & 크립스 인디고"
+    },
+    "crimsonNoir": {
+      "name": "홍석야",
+      "tagline": "먹검 & 루비홍"
+    },
+    "cyberLime": {
+      "name": "사이버 라임",
+      "tagline": "터미널 블랙 & 네온 라임"
+    },
+    "lavenderHaze": {
+      "name": "라벤더 헤이즈",
+      "tagline": "부드러운 라일락 & 어스름한 보라"
+    },
+    "mochaLatte": {
+      "name": "모카 라떼",
+      "tagline": "로스팅 커피 & 따뜻한 크림"
+    },
+    "graphite": {
+      "name": "그라파이트",
+      "tagline": "중립 회색 & 맑은 파랑"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "**Markdown** 미리보기",
     "demoMdRow1Status": "완료",
     "demoMdRow2": "인라인 편집 & 다중 붙여넣기",
-    "demoMdRow2Status": "실시간"
+    "demoMdRow2Status": "실시간",
+    "afSecret": "은행 비밀번호",
+    "afBlocked": "저장 안 됨 · 앱 제외",
+    "afSaved": "T-Drop에 저장됨",
+    "afLink": "여행 일정 링크"
+  },
+  "appearanceExtra": {
+    "group": "포인트 색상 및 모서리",
+    "accentTitle": "포인트 색상",
+    "accentDesc": "테마 기본 색상을 사용하거나 원하는 강조 색상을 선택하세요.",
+    "accentTheme": "테마",
+    "accentCustom": "사용자 지정 색상",
+    "cornerTitle": "모서리 모양",
+    "cornerDesc": "선반과 카드의 모서리 곡률을 조절합니다.",
+    "corner_rounded": "둥글게",
+    "corner_soft": "부드럽게",
+    "corner_sharp": "각지게"
   }
 }

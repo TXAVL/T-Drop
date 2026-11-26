@@ -40,6 +40,14 @@ export type ThemePreset =
   | 'sunset-amber'
   | 'rose-velvet'
   | 'nordic-frost'
+  | 'crimson-noir'
+  | 'cyber-lime'
+  | 'lavender-haze'
+  | 'mocha-latte'
+  | 'graphite'
+
+/** Corner roundness of cards and the shelf. 'rounded' keeps the original look. */
+export type CornerStyle = 'rounded' | 'soft' | 'sharp'
 
 const COLOR_MODES: readonly ColorMode[] = ['system', 'light', 'dark']
 const THEME_PRESETS: readonly ThemePreset[] = [
@@ -48,8 +56,23 @@ const THEME_PRESETS: readonly ThemePreset[] = [
   'emerald-glass',
   'sunset-amber',
   'rose-velvet',
-  'nordic-frost'
+  'nordic-frost',
+  'crimson-noir',
+  'cyber-lime',
+  'lavender-haze',
+  'mocha-latte',
+  'graphite'
 ]
+const CORNER_STYLES: readonly CornerStyle[] = ['rounded', 'soft', 'sharp']
+
+export function isCornerStyle(value: unknown): value is CornerStyle {
+  return (CORNER_STYLES as readonly unknown[]).includes(value)
+}
+
+/** A #rrggbb accent override, or '' to use the theme's own accent. */
+export function isAccentColor(value: unknown): value is string {
+  return value === '' || (typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value))
+}
 
 /** App filter mode for clipboard capture (Issue #73). */
 export type AppFilterMode = 'exclude' | 'include'
@@ -233,6 +256,10 @@ export interface Settings {
   colorMode?: ColorMode
   /** Shelf theme preset. Default: 'default' (Obsidian). */
   themePreset?: ThemePreset
+  /** Accent color override (#rrggbb); '' follows the theme preset. Default: ''. */
+  accentColor?: string
+  /** Corner roundness of the shelf and cards. Default: 'rounded'. */
+  cornerStyle?: CornerStyle
   /** App capture filter mode ('exclude' ignores listed apps, 'include' captures only listed apps). */
   appFilterMode?: AppFilterMode
   /** Process names (e.g. 'KeePass.exe', 'Bitwarden') matched against the foreground app on copy. */
@@ -339,6 +366,8 @@ export const DEFAULT_SETTINGS: Settings = {
   uiStyle: 'modern',
   colorMode: 'dark',
   themePreset: 'default',
+  accentColor: '',
+  cornerStyle: 'rounded',
   appFilterMode: 'exclude',
   appFilterList: [],
   imageViewerApp: '',

@@ -119,7 +119,10 @@
     "accountNumber": "Numéro de compte",
     "accountHolder": "Titulaire du compte",
     "copied": "Copié dans le presse-papiers",
-    "copy": "Copier"
+    "copy": "Copier",
+    "donateSubtitle": "Chaque don aide à maintenir T-Drop gratuit et mis à jour.",
+    "donateScanHint": "Scannez avec n'importe quelle application bancaire ou portefeuille électronique compatible VietQR.",
+    "donateThanks": "Merci de soutenir T-Drop !"
   },
   "imageStudio": {
     "tabConvert": "Convertir",
@@ -407,8 +410,8 @@
     "mpTitle": "Gâle toujours ouverte & Collage multi-cartes",
     "mpDesc": "Cliquez sur Épingler dans l’en-tête pour garder la gâle ouverte pendant le travail. Ctrl+Cliquez sur plusieurs cartes texte pour les copier ou coller toutes en une seule fois.",
     "mpTip": "Astuce : choisissez le séparateur saut de ligne (↵), paragraphe (¶) ou espace (␣) directement sur la barre flottante.",
-    "thTitle": "6 Thèmes de Gâle & Modes Système / Clair / Sombre",
-    "thDesc": "Conserve le thème sombre Obsidian par défaut, plus 5 nouveaux thèmes sélectionnés et les modes Système / Clair / Sombre avec un aperçu animé en C‑Paramètres → Apparence.",
+    "thTitle": "11 thèmes de tiroir & Système / Clair / Sombre",
+    "thDesc": "Conserve le thème sombre Obsidian par défaut, plus 10 thèmes soignés, votre propre couleur d'accentuation, des styles de coins et les modes Système / Clair / Sombre avec un aperçu en direct dans Paramètres → Apparence.",
     "thTip": "Astuce : choisissez \"Système\" pour suivre automatiquement le thème Windows.",
     "skip": "Ignorer",
     "next": "Suivant →",
@@ -422,7 +425,10 @@
     "mdOn": "Activé",
     "mdSaveHint": "Ctrl+Enter · Enregistrer",
     "mpCard1": "1. Envoyer le rapport d’avancement à 9 h",
-    "mpCard2": "2. Joindre la dernière maquette"
+    "mpCard2": "2. Joindre la dernière maquette",
+    "afTitle": "Choisir les applications enregistrées",
+    "afDesc": "Ignorez les copies d'applications que vous ne souhaitez jamais enregistrer, comme les gestionnaires de mots de passe, ou enregistrez uniquement les applications de votre choix.",
+    "afTip": "Astuce : Paramètres → Comportement → Applications incluses / exclues. Des préréglages rapides couvrent KeePass, Bitwarden et 1Password."
   },
   "multiPaste": {
     "selected": "{count} sélectionné",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "Givre nordique",
       "tagline": "Ardoise arctique & indigo vif"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Noir encre & rouge rubis"
+    },
+    "cyberLime": {
+      "name": "Citron cyber",
+      "tagline": "Noir terminal & citron néon"
+    },
+    "lavenderHaze": {
+      "name": "Brume lavande",
+      "tagline": "Lilac doux & violet crépusculaire"
+    },
+    "mochaLatte": {
+      "name": "Moka latte",
+      "tagline": "Café torréfié & crème chaude"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Gris neutre & bleu pur"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "Aperçu **Markdown**",
     "demoMdRow1Status": "Prêt",
     "demoMdRow2": "Édition & Collage",
-    "demoMdRow2Status": "En direct"
+    "demoMdRow2Status": "En direct",
+    "afSecret": "Mot de passe bancaire",
+    "afBlocked": "Non enregistré · appli exclue",
+    "afSaved": "Enregistré dans T-Drop",
+    "afLink": "Lien d'itinéraire de voyage"
+  },
+  "appearanceExtra": {
+    "group": "COULEUR D'ACCENT & FORME",
+    "accentTitle": "Couleur d'accent",
+    "accentDesc": "Utilisez la couleur d'accent du thème ou choisissez votre couleur préférée pour les éléments mis en évidence.",
+    "accentTheme": "Thème",
+    "accentCustom": "Couleur personnalisée",
+    "cornerTitle": "Coins",
+    "cornerDesc": "Définit le niveau d'arrondi de l'étagère et des cartes.",
+    "corner_rounded": "Arrondi",
+    "corner_soft": "Doux",
+    "corner_sharp": "Aigu"
   }
 }

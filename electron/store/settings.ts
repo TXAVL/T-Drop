@@ -6,7 +6,7 @@
  * defaults so a bad field never takes the whole app down.
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
-import { DEFAULT_SETTINGS, isColorMode, isThemePreset, isUpdateMode, normalizeHoverOpenDelay, type Settings } from '../../shared/types'
+import { DEFAULT_SETTINGS, isAccentColor, isColorMode, isCornerStyle, isThemePreset, isUpdateMode, normalizeHoverOpenDelay, type Settings } from '../../shared/types'
 import { PATHS } from './paths'
 
 let cache: Settings | null = null
@@ -27,6 +27,12 @@ function merge(base: Settings, patch: Partial<Settings>): Settings {
   }
   if (!isThemePreset(out.themePreset)) {
     out.themePreset = 'default'
+  }
+  if (!isAccentColor(out.accentColor)) {
+    out.accentColor = ''
+  }
+  if (!isCornerStyle(out.cornerStyle)) {
+    out.cornerStyle = 'rounded'
   }
   if (out.appFilterMode !== 'exclude' && out.appFilterMode !== 'include') {
     out.appFilterMode = 'exclude'

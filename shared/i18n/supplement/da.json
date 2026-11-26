@@ -119,7 +119,10 @@
     "accountNumber": "Kontonummer",
     "accountHolder": "Kontoindehaver",
     "copied": "Kopieret til udklipsholderen",
-    "copy": "Kopiér"
+    "copy": "Kopiér",
+    "donateSubtitle": "Hver donation hjælper med at holde T-Drop gratis og opdateret.",
+    "donateScanHint": "Scan med en bankapp eller en e-lommebøse, der understøtter VietQR.",
+    "donateThanks": "Tak for din støtte til T-Drop!"
   },
   "imageStudio": {
     "tabConvert": "Konvertér",
@@ -407,8 +410,8 @@
     "mpTitle": "Fastgør hylden & indsæt flere kort",
     "mpDesc": "Klik på Fastgør i overskriften for at holde hylden åben, mens du arbejder. Hold Ctrl nede og klik på flere tekstkort for at kopiere eller indsætte dem alle samlet.",
     "mpTip": "Tip: Vælg linjeskift (↵), afsnit (¶) eller mellemrum (␣) som skilletegn på den svævende bjælke.",
-    "thTitle": "6 hyldetemaer & System / Lyst / Mørkt",
-    "thDesc": "Det mørke Obsidian-tema er standard, men du kan nu også vælge 5 nye temaer samt System / Lyst / Mørkt med live-fremvisning under Indstillinger → Udseende.",
+    "thTitle": "11 hylde-temaer & System / Lys / Mørk",
+    "thDesc": "Beholder det signaturmørke Obsidian-tema som standard, plus 10 kuraterede temaer, din egen accentfarve, hjørnestile og System / Lys / Mørk-tilstande med live-forhåndsvisning i Indstillinger → Udseende.",
     "thTip": "Tip: Vælg \"System\" for at følge Windows-temaet automatisk.",
     "skip": "Spring over",
     "next": "Næste →",
@@ -422,7 +425,10 @@
     "mdOn": "Til",
     "mdSaveHint": "Ctrl+Enter · Gem",
     "mpCard1": "1. Send statusrapport kl. 9:00",
-    "mpCard2": "2. Vedhæft den nyeste mockup"
+    "mpCard2": "2. Vedhæft den nyeste mockup",
+    "afTitle": "Vælg, hvilke apps der registreres",
+    "afDesc": "Spring kopieringer fra apps, du aldrig vil gemme, som f.eks. adgangskodehåndterere, over, eller registrér kun de apps, du vælger.",
+    "afTip": "Tip: Indstillinger → Adfærd → Inkluder/Ekskluder apps. Hurtige forudindstillinger dækker KeePass, Bitwarden og 1Password."
   },
   "multiPaste": {
     "selected": "{count} valgt",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "Nordic Frost",
       "tagline": "Arktisk skifer & skarp indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Blyantsort & rubinrød"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminal sort & neon lime"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Blød lila & dyster violet"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Ristet kaffe & varm creme"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Neutral grå & ren blå"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "**Markdown**-forhåndsvisning",
     "demoMdRow1Status": "Klar",
     "demoMdRow2": "Inline-redigering & flerdobbelt indsætning",
-    "demoMdRow2Status": "Aktiv"
+    "demoMdRow2Status": "Aktiv",
+    "afSecret": "Bankkode",
+    "afBlocked": "Ikke gemt · app udelukket",
+    "afSaved": "Gemt i T-Drop",
+    "afLink": "Rejseplan‑link"
+  },
+  "appearanceExtra": {
+    "group": "ACCENT & FORM",
+    "accentTitle": "Accentfarve",
+    "accentDesc": "Brug temaets egen accent eller vælg din yndlingsfarve til fremhævning.",
+    "accentTheme": "Tema",
+    "accentCustom": "Tilpasset farve",
+    "cornerTitle": "Kanter",
+    "cornerDesc": "Hvor runde kisten og kortene er.",
+    "corner_rounded": "Rund",
+    "corner_soft": "Blød",
+    "corner_sharp": "Skarp"
   }
 }

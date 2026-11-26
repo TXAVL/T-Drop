@@ -444,7 +444,10 @@
     "accountNumber": "Nomor rekening",
     "accountHolder": "Nama pemilik rekening",
     "copied": "Disalin ke papan klip",
-    "copy": "Salin"
+    "copy": "Salin",
+    "donateSubtitle": "Setiap donasi membantu T-Drop tetap gratis dan selalu diperbarui.",
+    "donateScanHint": "Pindai dengan aplikasi bank atau dompet digital yang mendukung VietQR.",
+    "donateThanks": "Terima kasih telah mendukung T-Drop!"
   },
   "groups": {
     "feedback": "UMPAN BALIK",
@@ -685,7 +688,11 @@
     "demoMdRow1": "Pratinjau **Markdown**",
     "demoMdRow1Status": "Siap",
     "demoMdRow2": "Edit Langsung & Tempel Massal",
-    "demoMdRow2Status": "Aktif"
+    "demoMdRow2Status": "Aktif",
+    "afSecret": "Kata sandi bank",
+    "afBlocked": "Tidak disimpan · di luar",
+    "afSaved": "Tersimpan ke T-Drop",
+    "afLink": "Tautan rencana perjalanan"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Pin Rak Terbuka & Tempel Multi‑Kartu",
     "mpDesc": "Klik Pin di header untuk menjaga rak tetap terbuka saat bekerja. Ctrl+Click beberapa kartu teks secara berurutan untuk menyalin atau menempel semuanya sekaligus.",
     "mpTip": "Tip: Pilih pemisah baris (↵), paragraf (¶), atau spasi (␣) di bilah mengambang.",
-    "thTitle": "6 Tema Rak & Sistem / Terang / Gelap",
-    "thDesc": "Gunakan tema gelap Obsidian sebagai bawaan, plus 5 tema baru dan mode Sistem / Terang / Gelap dengan pratinjau animasi di Pengaturan → Tampilan.",
+    "thTitle": "11 Tema Rak & Sistem / Terang / Gelap",
+    "thDesc": "Mempertahankan tema gelap khas Obsidian sebagai bawaan, ditambah 10 tema pilihan, warna aksen sendiri, gaya sudut, serta mode Sistem / Terang / Gelap dengan pratinjau langsung di Pengaturan → Penampilan.",
     "thTip": "Tip: Pilih \"Sistem\" agar T‑Drop menyesuaikan tema Windows secara otomatis.",
     "skip": "Lewati",
     "next": "Berikutnya →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Aktif",
     "mdSaveHint": "Ctrl+Enter · Simpan",
     "mpCard1": "1. Kirim laporan progres pukul 09.00",
-    "mpCard2": "2. Lampirkan mockup desain terbaru"
+    "mpCard2": "2. Lampirkan mockup desain terbaru",
+    "afTitle": "Pilih aplikasi yang direkam",
+    "afDesc": "Lewati salinan dari aplikasi yang tidak ingin Anda simpan, seperti pengelola kata sandi, atau rekam hanya dari aplikasi yang Anda pilih.",
+    "afTip": "Tip: Pengaturan → Perilaku → Sertakan / Kecualikan Aplikasi. Tersedia preset cepat untuk KeePass, Bitwarden, dan 1Password."
   },
   "multiPaste": {
     "selected": "{count} dipilih",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Salamandik Nordik",
       "tagline": "Slate arktik & indigo segar"
+    },
+    "crimsonNoir": {
+      "name": "Noir Delima",
+      "tagline": "Hitam tinta & merah delima"
+    },
+    "cyberLime": {
+      "name": "Cyber Hijau",
+      "tagline": "Terminal hitam & neon hijau"
+    },
+    "lavenderHaze": {
+      "name": "Lavanda Kabut",
+      "tagline": "Ungu lembut & ungu gelap"
+    },
+    "mochaLatte": {
+      "name": "Kopi Mocha",
+      "tagline": "Kopi panggang & krim hangat"
+    },
+    "graphite": {
+      "name": "Grafit",
+      "tagline": "Abu-abu netral & biru bersih"
     }
+  },
+  "appearanceExtra": {
+    "group": "AKSEN & BENTUK",
+    "accentTitle": "Warna aksen",
+    "accentDesc": "Gunakan aksen tema atau pilih warna favorit untuk sorotan.",
+    "accentTheme": "Tema",
+    "accentCustom": "Warna kustom",
+    "cornerTitle": "Sudut",
+    "cornerDesc": "Seberapa bulat rak dan kartu.",
+    "corner_rounded": "Bulat",
+    "corner_soft": "Lunak",
+    "corner_sharp": "Tajam"
   }
 }

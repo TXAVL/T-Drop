@@ -119,7 +119,10 @@
     "accountNumber": "Számlaszám",
     "accountHolder": "Számlatulajdonos",
     "copied": "Vágólapra másolva",
-    "copy": "Másolás"
+    "copy": "Másolás",
+    "donateSubtitle": "Minden támogatás segít abban, hogy a T-Drop ingyenes és naprakész maradjon.",
+    "donateScanHint": "Szkennelje be bármelyik banki alkalmazással vagy e-pénztárcával, amely támogatja a VietQR-t.",
+    "donateThanks": "Köszönjük, hogy támogatja a T-Dropot!"
   },
   "imageStudio": {
     "tabConvert": "Átalakítás",
@@ -407,8 +410,8 @@
     "mpTitle": "Polc rögzítése nyitva & Több kártya beillesztése",
     "mpDesc": "Kattintson a Fejlécben lévő Rögzítés gombra a polc nyitva tartásához munka közben. Ctrl+Kattintással több szöveges kártyát jelölhet ki, majd egy lépésben másolhatja vagy beillesztheti őket.",
     "mpTip": "Tipp: Válaszd ki a sortörő (↵), bekezdést (¶) vagy szóközt (␣) közvetlenül a lebegő sávon.",
-    "thTitle": "6 polcstílus és Rendszer / Világos / Sötét",
-    "thDesc": "Az alapértelmezett a jellegzetes Obsidian sötét téma, plusz 5 új, kurátori témák, valamint Rendszer / Világos / Sötét módok élő animált előnézettel a Beállítások → Megjelenés menüben.",
+    "thTitle": "11 polctéma és Rendszer / Világos / Sötét mód",
+    "thDesc": "Megőrzi az Alapértelmezett Obsidian sötét témát, plusz 10 válogatott téma, saját kiemelőszín, sarokstílusok, valamint Rendszer / Világos / Sötét mód élő előnézettel a Beállítások → Megjelenés menüpontban.",
     "thTip": "Tipp: Válaszd a „Rendszer” opciót, hogy a T-Drop automatikusan kövesse a Windows témáját.",
     "skip": "Kihagyás",
     "next": "Következő →",
@@ -422,7 +425,10 @@
     "mdOn": "Be",
     "mdSaveHint": "Ctrl+Enter · Mentés",
     "mpCard1": "1. Haladási jelentés küldése 9:00-kor",
-    "mpCard2": "2. Legfrissebb tervrajz csatolása"
+    "mpCard2": "2. Legfrissebb tervrajz csatolása",
+    "afTitle": "A rögzítendő alkalmazások kiválasztása",
+    "afDesc": "Kihagyhatja a másolásokat olyan alkalmazásokból, amelyeket sosem szeretne menteni (például jelszókezelők), vagy rögzítheti csak az Ön által kiválasztottakat.",
+    "afTip": "Tipp: Beállítások → Viselkedés → Alkalmazások szűrése. Gyors beállítások KeePass, Bitwarden és 1Password programokhoz."
   },
   "multiPaste": {
     "selected": "{count} kiválasztva",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "Északi fagy",
       "tagline": "Sarkvidéki pala és friss indigó"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Fekete és rubinvörös"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminálfekete és neonzöld"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Lágy lila és hamvas ibolya"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Pörkölt kávé és meleg krém"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Semleges szürke és tiszta kék"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "**Markdown** előnézet",
     "demoMdRow1Status": "Kész",
     "demoMdRow2": "Beágyazott szerkesztés & többszörös beillesztés",
-    "demoMdRow2Status": "Élő"
+    "demoMdRow2Status": "Élő",
+    "afSecret": "Banki jelszó",
+    "afBlocked": "Nincs mentve · kizárt alkalmazás",
+    "afSaved": "Mentve a T-Dropba",
+    "afLink": "Utazási útvonal linkje"
+  },
+  "appearanceExtra": {
+    "group": "KIEMELÉS ÉS ALAK",
+    "accentTitle": "Kiemelő szín",
+    "accentDesc": "Használja a téma saját színét, vagy válassza ki kedvencét a kiemelésekhez.",
+    "accentTheme": "Téma",
+    "accentCustom": "Egyéni szín",
+    "cornerTitle": "Sarokkialakítás",
+    "cornerDesc": "A panel és a kártyák lekerekítési mértéke.",
+    "corner_rounded": "Lekerekített",
+    "corner_soft": "Lágy",
+    "corner_sharp": "Éles"
   }
 }

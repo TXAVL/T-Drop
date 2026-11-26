@@ -444,7 +444,10 @@
     "accountNumber": "Číslo účtu",
     "accountHolder": "Majitel účtu",
     "copied": "Zkopírováno do schránky",
-    "copy": "Kopírovat"
+    "copy": "Kopírovat",
+    "donateSubtitle": "Každý příspěvek pomáhá udržet T-Drop zdarma a aktuální.",
+    "donateScanHint": "Naskenujte libovolnou bankovní aplikací nebo peněženkou podporující VietQR.",
+    "donateThanks": "Děkujeme, že podporujete T-Drop!"
   },
   "groups": {
     "feedback": "ZPĚTNÁ VAZBA",
@@ -685,7 +688,11 @@
     "demoMdRow1": "Náhled **Markdown**",
     "demoMdRow1Status": "Připraveno",
     "demoMdRow2": "Úprava a vícenásobné vložení",
-    "demoMdRow2Status": "Aktivní"
+    "demoMdRow2Status": "Aktivní",
+    "afSecret": "Bankovní heslo",
+    "afBlocked": "Neuloženo · vyloučená aplikace",
+    "afSaved": "Uloženo do T-Drop",
+    "afLink": "Odkaz na itinerář"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Připnout otevřenou polici a vkládání více karet",
     "mpDesc": "Kliknutím na Připnout v záhlaví ponecháte polici otevřenou během práce. Ctrl+klik na více textových karet je vybere a umožní zkopírovat nebo vložit najednou.",
     "mpTip": "Tip: Na plovoucí liště si přímo zvolte oddělovač: nový řádek (↵), odstavec (¶) nebo mezerník (␣).",
-    "thTitle": "6 motivů lišty a režimy Systém / Světlý / Tmavý",
-    "thDesc": "Výchozí zůstává charakteristická tmavá barva Obsidian, přidává se 5 nových motivů a režimy Systém / Světlý / Tmavý s živým náhledem v Nastavení → Vzhled.",
+    "thTitle": "11 motivů panelu a Systémový / Světlý / Tmavý",
+    "thDesc": "Zachovává výchozí tmavý motiv Obsidian, navíc přidává 10 vyladěných motivů, vlastní barvu zvýraznění, styly rohů a režimy Systém / Světlý / Tmavý s živým náhledem v Nastavení → Vzhled.",
     "thTip": "Tip: Výběrem „Systém“ se T-Drop automaticky přizpůsobí motivu Windows.",
     "skip": "Přeskočit",
     "next": "Další →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Zapnuto",
     "mdSaveHint": "Ctrl+Enter · Uložit",
     "mpCard1": "1. Odeslat zprávu o pokroku v 9:00",
-    "mpCard2": "2. Přiložit nejnovější návrh"
+    "mpCard2": "2. Přiložit nejnovější návrh",
+    "afTitle": "Výběr zaznamenávaných aplikací",
+    "afDesc": "Vynechte kopírování z aplikací, které nechcete nikdy ukládat (např. správci hesla), nebo zaznamenávejte pouze vybrané aplikace.",
+    "afTip": "Tip: Nastavení → Chování → Zahrnout / Vyloučit aplikace. Rychlé předvolby pokrývají KeePass, Bitwarden a 1Password."
   },
   "multiPaste": {
     "selected": "{count} vybráno",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Severská mráz",
       "tagline": "Arktická břidlice & ostrá indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Inková čerň a rubínová červeň"
+    },
+    "cyberLime": {
+      "name": "Neonový limet",
+      "tagline": "Terminálová černá a neonová limetka"
+    },
+    "lavenderHaze": {
+      "name": "Levandulový opar",
+      "tagline": "Jemná šeříková a tmavě fialová"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Pražená káva a teplý krém"
+    },
+    "graphite": {
+      "name": "Grafit",
+      "tagline": "Neutrální šedá a čistá modrá"
     }
+  },
+  "appearanceExtra": {
+    "group": "AKCENT & TVAR",
+    "accentTitle": "Barva akcentu",
+    "accentDesc": "Použijte akcent motivu nebo zvolte vlastní barvu pro zvýraznění",
+    "accentTheme": "Motiv",
+    "accentCustom": "Vlastní barva",
+    "cornerTitle": "Zaoblení",
+    "cornerDesc": "Jak kulaté jsou police a karty",
+    "corner_rounded": "Zaoblené",
+    "corner_soft": "Zaoblené",
+    "corner_sharp": "Ostré"
   }
 }

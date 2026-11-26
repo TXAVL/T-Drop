@@ -119,7 +119,10 @@
     "accountNumber": "Número de cuenta",
     "accountHolder": "Titular de la cuenta",
     "copied": "Copiado al portapapeles",
-    "copy": "Copiar"
+    "copy": "Copiar",
+    "donateSubtitle": "Cada aportación ayuda a mantener T-Drop gratis y actualizado.",
+    "donateScanHint": "Escanea con cualquier app bancaria o monedero electrónico compatible con VietQR.",
+    "donateThanks": "¡Gracias por apoyar T-Drop!"
   },
   "imageStudio": {
     "tabConvert": "Convertir",
@@ -407,8 +410,8 @@
     "mpTitle": "Estantería fija y pegado múltiple",
     "mpDesc": "Haz clic en Fijar en la cabecera para mantener la estantería abierta mientras trabajas. Ctrl+clic en varias tarjetas de texto para copiarlas o pegarlas todas juntas de una vez.",
     "mpTip": "Tip: Elige separador de salto de línea (↵), párrafo (¶) o espacio (␣) directamente en la barra flotante.",
-    "thTitle": "6 temas de estantería y modos Sistema / Claro / Oscuro",
-    "thDesc": "Mantiene el tema oscuro Obsidian por defecto, más 5 nuevos temas seleccionados y modos Sistema / Claro / Oscuro con vista previa animada en Configuración → Apariencia.",
+    "thTitle": "11 temas de bandeja y Sistema / Claro / Oscuro",
+    "thDesc": "Mantiene el tema oscuro Obsidian original como predeterminado, más 10 temas seleccionados, tu propio color de acento, estilos de esquinas y modos Sistema / Claro / Oscuro, con vista previa en tiempo real en Configuración → Apariencia.",
     "thTip": "Tip: Elige \"Sistema\" para que T‑Drop siga automáticamente el tema de Windows.",
     "skip": "Omitir",
     "next": "Siguiente →",
@@ -422,7 +425,10 @@
     "mdOn": "Activado",
     "mdSaveHint": "Ctrl+Enter · Guardar",
     "mpCard1": "1. Enviar informe de progreso a las 9:00",
-    "mpCard2": "2. Adjuntar el último mockup de diseño"
+    "mpCard2": "2. Adjuntar el último mockup de diseño",
+    "afTitle": "Elige qué aplicaciones se registran",
+    "afDesc": "Omite las copias de aplicaciones que no quieres guardar, como los gestores de contraseñas, o registra solo las aplicaciones que elijas.",
+    "afTip": "Consejo: Configuración → Comportamiento → Incluir / Excluir aplicaciones. Hay ajustes rápidos para KeePass, Bitwarden y 1Password."
   },
   "multiPaste": {
     "selected": "{count} seleccionados",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "Escarcha Nórdica",
       "tagline": "Pizarra ártica y añil nítido"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Negro tinta y rojo rubí"
+    },
+    "cyberLime": {
+      "name": "Ciber Lima",
+      "tagline": "Negro terminal y lima neón"
+    },
+    "lavenderHaze": {
+      "name": "Lavanda Niebla",
+      "tagline": "Niebla lavanda y violeta oscuro"
+    },
+    "mochaLatte": {
+      "name": "Latte de Mocha",
+      "tagline": "Café tostado y crema cálida"
+    },
+    "graphite": {
+      "name": "Grafito",
+      "tagline": "Gris neutro y azul limpio"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "Vista previa de **Markdown**",
     "demoMdRow1Status": "Listo",
     "demoMdRow2": "Edición en línea & pegado múltiple",
-    "demoMdRow2Status": "En vivo"
+    "demoMdRow2Status": "En vivo",
+    "afSecret": "Contraseña bancaria",
+    "afBlocked": "No guardado · app excluida",
+    "afSaved": "Guardado en T-Drop",
+    "afLink": "Enlace de itinerario de viaje"
+  },
+  "appearanceExtra": {
+    "group": "COLOR DE ACENTO Y FORMA",
+    "accentTitle": "Color de acento",
+    "accentDesc": "Usa el color de acento del tema o elige tu color favorito para los resaltados.",
+    "accentTheme": "Tema",
+    "accentCustom": "Color personalizado",
+    "cornerTitle": "Esquinas",
+    "cornerDesc": "Qué tan redondeadas se ven la estantería y las tarjetas.",
+    "corner_rounded": "Redondeadas",
+    "corner_soft": "Suaves",
+    "corner_sharp": "Rectas"
   }
 }

@@ -119,7 +119,10 @@
     "accountNumber": "口座番号",
     "accountHolder": "口座名義",
     "copied": "クリップボードにコピーしました",
-    "copy": "コピー"
+    "copy": "コピー",
+    "donateSubtitle": "ご支援は、T-Drop の無料提供と継続的なアップデートに役立ちます。",
+    "donateScanHint": "VietQR 対応の銀行アプリまたは電子マネーアプリでスキャンしてください。",
+    "donateThanks": "T-Drop をご支援いただきありがとうございます！"
   },
   "imageStudio": {
     "tabConvert": "変換",
@@ -407,8 +410,8 @@
     "mpTitle": "棚を常に開いたままに & 複数カード貼り付け",
     "mpDesc": "ヘッダーのピンをクリックして作業中に棚をロック。Ctrl+クリックで複数テキストカードを順に選択し、一括コピーまたは貼り付けできます。",
     "mpTip": "Tip: 文字の区切りを浮動バーで改行(↵)、段落(¶)、スペース(␣)から選択",
-    "thTitle": "6つの棚テーマ & システム/ライト/ダーク",
-    "thDesc": "デフォルトはObsidianダークテーマを維持し、さらに5つの新しいテーマとシステム/ライト/ダークモードを設定→外観でライブアニメーションプレビュー付きで追加",
+    "thTitle": "11種類のシェルフテーマ & システム / ライト / ダーク",
+    "thDesc": "デフォルトのシグネチャーテーマ「Obsidian Dark」に加え、厳選された10種のテーマ、アクセントカラー、角丸スタイル、システム / ライト / ダークモードに対応。設定 → 外観でライブプレビューできます。",
     "thTip": "Tip: \"システム\"を選択すると、T-DropがWindowsテーマに自動で追従します",
     "skip": "スキップ",
     "next": "次へ →",
@@ -422,7 +425,10 @@
     "mdOn": "オン",
     "mdSaveHint": "Ctrl+Enter · 保存",
     "mpCard1": "1. 進捗報告を9:00に送信",
-    "mpCard2": "2. 最新デザインモックアップを添付"
+    "mpCard2": "2. 最新デザインモックアップを添付",
+    "afTitle": "記録対象アプリの選択",
+    "afDesc": "パスワードマネージャーなど、保存したくないアプリのコピーをスキップしたり、選択したアプリのみ記録したりできます。",
+    "afTip": "ヒント: 設定 → 動作 → アプリの含め/除外。KeePass、Bitwarden、1Password用のクイックプリセットがあります。"
   },
   "multiPaste": {
     "selected": "{count} 選択済み",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "ノルディックフロスト",
       "tagline": "北極のスレートと鮮やかなインディゴ"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "墨黒とルビーレッド"
+    },
+    "cyberLime": {
+      "name": "サイバーライム",
+      "tagline": "ターミナルブラック＆ネオングリーン"
+    },
+    "lavenderHaze": {
+      "name": "ラベンダーハズ",
+      "tagline": "柔らかなライラック＆薄紫"
+    },
+    "mochaLatte": {
+      "name": "モカラテ",
+      "tagline": "焙煎コーヒー＆温かいクリーム"
+    },
+    "graphite": {
+      "name": "グラファイト",
+      "tagline": "ニュートラルグレー＆クリーンブルー"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "**Markdown** プレビュー",
     "demoMdRow1Status": "準備完了",
     "demoMdRow2": "インライン編集 & 複数ペースト",
-    "demoMdRow2Status": "稼働中"
+    "demoMdRow2Status": "稼働中",
+    "afSecret": "銀行パスワード",
+    "afBlocked": "保存されていません · アプリ除外",
+    "afSaved": "T-Dropに保存",
+    "afLink": "旅行日程リンク"
+  },
+  "appearanceExtra": {
+    "group": "アクセント＆形状",
+    "accentTitle": "アクセントカラー",
+    "accentDesc": "テーマのアクセントを使用するか、ハイライトに好きな色を選択します。",
+    "accentTheme": "テーマ",
+    "accentCustom": "カスタムカラー",
+    "cornerTitle": "角",
+    "cornerDesc": "棚とカードの丸みの度合いです。",
+    "corner_rounded": "丸み",
+    "corner_soft": "角丸",
+    "corner_sharp": "四角"
   }
 }

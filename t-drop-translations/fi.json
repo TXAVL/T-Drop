@@ -444,7 +444,10 @@
     "accountNumber": "Tilinumero",
     "accountHolder": "Tilinomistaja",
     "copied": "Kopioitu leikepöydälle",
-    "copy": "Kopioi"
+    "copy": "Kopioi",
+    "donateSubtitle": "Jokainen lahja pitää T-Drop ilmaisena ja ajan tasalla.",
+    "donateScanHint": "Skannaa pankki- tai e‑lompakko‑sovelluksella, joka tukee VietQR:ää.",
+    "donateThanks": "Kiitos tuesta T-Drop!"
   },
   "groups": {
     "feedback": "PALAUTE",
@@ -685,7 +688,11 @@
     "demoMdRow1": "**Markdown**-esikatselu",
     "demoMdRow1Status": "Valmis",
     "demoMdRow2": "Sisäinen muokkaus & moninkertainen liittäminen",
-    "demoMdRow2Status": "Käynnissä"
+    "demoMdRow2Status": "Käynnissä",
+    "afSecret": "Pankkisalasana",
+    "afBlocked": "Ei tallennettu · sovellus poistettu käytöstä",
+    "afSaved": "Tallennettu T-Dropiin",
+    "afLink": "Matkasuunnitelman linkki"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Kiinnitä hylly auki & monikortti‑liitä",
     "mpDesc": "Napsauta Kiinnitä‑painiketta otsikossa pitääksesi hyllyn auki työskennellessäsi. Ctrl+Napsauta useita tekstikortteja valitaksesi ne peräkkäin ja kopioi tai liitä kaikki kerralla.",
     "mpTip": "Vihje: Valitse rivinvaihto (↵), kappale (¶) tai välilyönti (␣) erottimena liukuvalla palkilla.",
-    "thTitle": "6 hyllyteemoja ja System / Light / Dark",
-    "thDesc": "Oletuksena säilytetään Obsidianin tumman teeman, lisäksi 5 uutta valittua teemaa ja System / Light / Dark -tilat, joissa on elävä animoitu esikatselu Asetukset → Ulkoasu.",
+    "thTitle": "11 teemaa & Järjestelmä / Valo / Tumma",
+    "thDesc": "Obsidianin tumma teema oletuksena, 10 valittua teemaa, oma väri‑korostus, kulmien tyyli sekä S / V / T -asetukset, esikatselu Asetukset → Ulkonäkö.",
     "thTip": "Vihje: Valitse \"System\" seuraamaan Windows-teemaa automaattisesti.",
     "skip": "Ohita",
     "next": "Seuraava →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Käytössä",
     "mdSaveHint": "Ctrl+Enter · Tallenna",
     "mpCard1": "1. Lähetä edistymisraportti klo 9:00",
-    "mpCard2": "2. Liitä viimeisin suunnittelumalli"
+    "mpCard2": "2. Liitä viimeisin suunnittelumalli",
+    "afTitle": "Valitse tallennettavat sovellukset",
+    "afDesc": "Jätä kopioimatta sovellukset, joista et halua tallentaa, tai tallenna vain valitsemasi.",
+    "afTip": "Vihje: Asetukset → Käyttäytyminen → Sisällytä / Poista sovellukset. Nopeat presetit: KeePass, Bitwarden, 1Password."
   },
   "multiPaste": {
     "selected": "{count} valittu",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Pohjolan pakkas",
       "tagline": "Arktinen pinta ja raikas indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Mustan muste & rubiinin punainen"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Termikaanmusta ja neonlime"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Pehmeä sireeni ja hämäränvioletti"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Paahdettu kahvi ja lämmin kerma"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Neutraali harmaa ja puhdas sininen"
     }
+  },
+  "appearanceExtra": {
+    "group": "KOROSTUSVÄRI JA MUOTO",
+    "accentTitle": "Korostusväri",
+    "accentDesc": "Käytä teeman omaa korostusväriä tai valitse suosikkivärisi korostuksiin.",
+    "accentTheme": "Teema",
+    "accentCustom": "Mukautettu väri",
+    "cornerTitle": "Kulmat",
+    "cornerDesc": "Miten pyöreiltä hylly ja kortit näyttävät.",
+    "corner_rounded": "Pyöristetty",
+    "corner_soft": "Pehmeä",
+    "corner_sharp": "Terävä"
   }
 }

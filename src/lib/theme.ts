@@ -5,7 +5,7 @@
  * When themePreset === 'default' and resolved mode === 'dark', the app keeps
  * its exact original Obsidian dark palette with zero visual drift.
  */
-import type { ColorMode, ThemePreset } from '../../shared/types'
+import type { ColorMode, CornerStyle, ThemePreset } from '../../shared/types'
 
 export interface ThemePalette {
   bladeBg: string
@@ -37,6 +37,82 @@ export interface ThemeDefinition {
   tagline: string
   dark: ThemePalette
   light: ThemePalette
+}
+
+
+/** Hex (#rrggbb) to "r, g, b". */
+function rgb(hex: string): string {
+  const n = parseInt(hex.slice(1), 16)
+  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`
+}
+
+interface Seed {
+  blade: string
+  card: string
+  hover: string
+  text: string
+  accent: string
+  /** Text on an active (accent-filled) pill. */
+  onAccent: string
+  wallpaper: string
+}
+
+/** A full dark palette from a handful of colors (used by the presets added in 0.3.7). */
+function darkFrom(s: Seed): ThemePalette {
+  const a = rgb(s.accent)
+  const t = rgb(s.text)
+  return {
+    bladeBg: s.blade,
+    flareBg: s.blade,
+    cardBg: s.card,
+    cardHover: s.hover,
+    chipBg: s.card,
+    inputBg: s.card,
+    border: `rgba(${a}, 0.16)`,
+    borderStrong: `rgba(${a}, 0.28)`,
+    divider: `rgba(${a}, 0.11)`,
+    textPrimary: s.text,
+    textSecondary: `rgba(${t}, 0.8)`,
+    textTertiary: `rgba(${t}, 0.58)`,
+    accent: s.accent,
+    accentGlow: `rgba(${a}, 0.52)`,
+    pillBg: s.card,
+    pillActiveBg: s.accent,
+    pillActiveFg: s.onAccent,
+    bladeShadow: `14px 0 42px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(${a}, 0.16)`,
+    stageWallpaper: s.wallpaper,
+    stageWindowBg: `rgba(${a}, 0.07)`,
+    stageWindowBar: `rgba(${a}, 0.14)`
+  }
+}
+
+/** A full light palette from a handful of colors. */
+function lightFrom(s: Seed): ThemePalette {
+  const a = rgb(s.accent)
+  const t = rgb(s.text)
+  return {
+    bladeBg: s.blade,
+    flareBg: s.blade,
+    cardBg: s.card,
+    cardHover: s.hover,
+    chipBg: s.hover,
+    inputBg: s.card,
+    border: `rgba(${a}, 0.14)`,
+    borderStrong: `rgba(${a}, 0.26)`,
+    divider: `rgba(${a}, 0.1)`,
+    textPrimary: s.text,
+    textSecondary: `rgba(${t}, 0.74)`,
+    textTertiary: `rgba(${t}, 0.54)`,
+    accent: s.accent,
+    accentGlow: `rgba(${a}, 0.34)`,
+    pillBg: s.hover,
+    pillActiveBg: s.accent,
+    pillActiveFg: s.onAccent,
+    bladeShadow: `12px 0 36px rgba(${t}, 0.16), 0 0 1px 1px rgba(${a}, 0.14)`,
+    stageWallpaper: s.wallpaper,
+    stageWindowBg: 'rgba(255, 255, 255, 0.76)',
+    stageWindowBar: `rgba(${a}, 0.1)`
+  }
 }
 
 export const THEME_CATALOG: readonly ThemeDefinition[] = [
@@ -345,7 +421,42 @@ export const THEME_CATALOG: readonly ThemeDefinition[] = [
       stageWindowBg: 'rgba(255, 255, 255, 0.78)',
       stageWindowBar: 'rgba(79, 70, 229, 0.1)'
     }
-  }
+  },
+{
+      id: 'crimson-noir',
+      name: 'Crimson Noir',
+      tagline: 'Ink black & ruby red',
+      dark: darkFrom({ blade: '#0d0809', card: '#1a1012', hover: '#24161a', text: '#fff1f2', accent: '#f43f5e', onAccent: '#ffffff', wallpaper: 'linear-gradient(135deg, #1f0a10 0%, #120709 55%, #2a0d16 100%)' }),
+      light: lightFrom({ blade: '#fbf3f4', card: '#ffffff', hover: '#f6e3e6', text: '#2a0d14', accent: '#e11d48', onAccent: '#ffffff', wallpaper: 'linear-gradient(135deg, #fecdd3 0%, #fff1f2 55%, #fbcfe8 100%)' })
+    },
+    {
+      id: 'cyber-lime',
+      name: 'Cyber Lime',
+      tagline: 'Terminal black & neon lime',
+      dark: darkFrom({ blade: '#080b07', card: '#11160f', hover: '#192115', text: '#f0fdf4', accent: '#a3e635', onAccent: '#0b1406', wallpaper: 'linear-gradient(135deg, #0f1a0a 0%, #070b06 55%, #132412 100%)' }),
+      light: lightFrom({ blade: '#f5f9ef', card: '#ffffff', hover: '#e8f2da', text: '#14200b', accent: '#4d7c0f', onAccent: '#ffffff', wallpaper: 'linear-gradient(135deg, #d9f99d 0%, #f7fee7 55%, #bbf7d0 100%)' })
+    },
+    {
+      id: 'lavender-haze',
+      name: 'Lavender Haze',
+      tagline: 'Soft lilac & dusky violet',
+      dark: darkFrom({ blade: '#100d18', card: '#1a1626', hover: '#241e34', text: '#f5f3ff', accent: '#c4b5fd', onAccent: '#1e1538', wallpaper: 'linear-gradient(135deg, #1e1636 0%, #110d1c 55%, #2a1c3f 100%)' }),
+      light: lightFrom({ blade: '#f6f3fd', card: '#ffffff', hover: '#ebe5fa', text: '#1e1538', accent: '#7c3aed', onAccent: '#ffffff', wallpaper: 'linear-gradient(135deg, #ddd6fe 0%, #f5f3ff 55%, #fae8ff 100%)' })
+    },
+    {
+      id: 'mocha-latte',
+      name: 'Mocha Latte',
+      tagline: 'Roasted coffee & warm cream',
+      dark: darkFrom({ blade: '#120d0a', card: '#1e1612', hover: '#2a1f19', text: '#fdf4ec', accent: '#d4a373', onAccent: '#24170d', wallpaper: 'linear-gradient(135deg, #2a1c13 0%, #150f0b 55%, #33241a 100%)' }),
+      light: lightFrom({ blade: '#faf4ec', card: '#fffdf9', hover: '#f1e6d8', text: '#2b1d12', accent: '#9c6644', onAccent: '#ffffff', wallpaper: 'linear-gradient(135deg, #ede0d4 0%, #faf4ec 55%, #e6ccb2 100%)' })
+    },
+    {
+      id: 'graphite',
+      name: 'Graphite',
+      tagline: 'Neutral gray & clean blue',
+      dark: darkFrom({ blade: '#111214', card: '#1b1d21', hover: '#25282d', text: '#f4f5f7', accent: '#60a5fa', onAccent: '#08162b', wallpaper: 'linear-gradient(135deg, #1d2026 0%, #111214 55%, #24272e 100%)' }),
+      light: lightFrom({ blade: '#f3f4f6', card: '#ffffff', hover: '#e5e7eb', text: '#111827', accent: '#2563eb', onAccent: '#ffffff', wallpaper: 'linear-gradient(135deg, #e5e7eb 0%, #f9fafb 55%, #dbeafe 100%)' })
+    }
 ] as const
 
 export function getThemeDefinition(preset: ThemePreset = 'default'): ThemeDefinition {
@@ -370,8 +481,8 @@ export function getThemePalette(preset: ThemePreset = 'default', mode: ColorMode
   return { resolvedMode, palette: def[resolvedMode], def }
 }
 
-/** Apply theme preset + color mode to documentElement. */
-export function applyTheme(preset: ThemePreset = 'default', mode: ColorMode = 'dark'): 'dark' | 'light' {
+/** Apply theme preset + color mode (and an optional #rrggbb accent override) to documentElement. */
+export function applyTheme(preset: ThemePreset = 'default', mode: ColorMode = 'dark', accentOverride = ''): 'dark' | 'light' {
   if (typeof document === 'undefined') return 'dark'
   const { resolvedMode, palette } = getThemePalette(preset, mode)
   const root = document.documentElement
@@ -397,14 +508,36 @@ export function applyTheme(preset: ThemePreset = 'default', mode: ColorMode = 'd
   root.style.setProperty('--text-primary', palette.textPrimary)
   root.style.setProperty('--text-secondary', palette.textSecondary)
   root.style.setProperty('--text-tertiary', palette.textTertiary)
-  root.style.setProperty('--accent', palette.accent)
-  root.style.setProperty('--accent-glow', palette.accentGlow)
+  const accent = /^#[0-9a-f]{6}$/i.test(accentOverride) ? accentOverride : ''
+  root.style.setProperty('--accent', accent || palette.accent)
+  root.style.setProperty('--accent-glow', accent ? `rgba(${rgb(accent)}, ${resolvedMode === 'dark' ? 0.52 : 0.34})` : palette.accentGlow)
   root.style.setProperty('--pill-bg', palette.pillBg)
   root.style.setProperty('--pill-active-bg', palette.pillActiveBg)
   root.style.setProperty('--pill-active-fg', palette.pillActiveFg)
   root.style.setProperty('--blade-shadow', palette.bladeShadow)
 
   return resolvedMode
+}
+
+/** Corner radii per style; 'rounded' clears the overrides so tokens.css (the original look) applies. */
+const CORNERS: Record<CornerStyle, { blade: string; card: string } | null> = {
+  rounded: null,
+  soft: { blade: '16px', card: '12px' },
+  sharp: { blade: '8px', card: '6px' }
+}
+
+export function applyCornerStyle(style: CornerStyle = 'rounded'): void {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  const c = CORNERS[style] ?? null
+  root.dataset.corners = style
+  if (!c) {
+    root.style.removeProperty('--radius-blade')
+    root.style.removeProperty('--radius-card')
+    return
+  }
+  root.style.setProperty('--radius-blade', c.blade)
+  root.style.setProperty('--radius-card', c.card)
 }
 
 /** Listen for OS prefers-color-scheme changes (used when colorMode === 'system'). */

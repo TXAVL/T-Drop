@@ -444,7 +444,10 @@
     "accountNumber": "Kontonummer",
     "accountHolder": "Kontoinhaber",
     "copied": "In die Zwischenablage kopiert",
-    "copy": "Kopieren"
+    "copy": "Kopieren",
+    "donateSubtitle": "Jede Spende hilft, T-Drop kostenlos und aktuell zu halten.",
+    "donateScanHint": "Mit jeder Bank‑App oder E‑Wallet, die VietQR unterstützt, scannen.",
+    "donateThanks": "Vielen Dank, dass Sie T-Drop unterstützen!"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -685,7 +688,11 @@
     "demoMdRow1": "**Markdown** Vorschau",
     "demoMdRow1Status": "Bereit",
     "demoMdRow2": "Inline-Bearbeitung & Mehrfach-Einfügen",
-    "demoMdRow2Status": "Live"
+    "demoMdRow2Status": "Live",
+    "afSecret": "Bankpasswort",
+    "afBlocked": "Nicht gespeichert · App ausgeschlossen",
+    "afSaved": "Gespeichert in T-Drop",
+    "afLink": "Reiseroute-Link"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Kühe offen halten & Mehrfachkarten einfügen",
     "mpDesc": "Klicken Sie auf \"Anpinnen\" in der Kopfzeile, um die Kühe während der Arbeit offen zu halten. Halten Sie Strg+Klick auf mehrere Textkarten, um sie alle gleichzeitig zu kopieren oder einzufügen.",
     "mpTip": "Tipp: Wählen Sie Zeilenumbruch (↵), Absatz (¶) oder Leerzeichen (␣) als Trennzeichen direkt auf der schwebenden Leiste.",
-    "thTitle": "6 Kühthemen & System / Hell / Dunkel",
-    "thDesc": "Beibehaltung des bekannten dunklen Obsidian-Themas als Standard, plus 5 neue kuratierte Themen und System/ Hell/ Dunkel-Modi mit einer Live-animierten Vorschau in Einstellungen → Erscheinungsbild.",
+    "thTitle": "11 Shelf‑Themes & System / Light / Dark",
+    "thDesc": "Der standardmäßige Obsidian‑Dunkelmodus bleibt erhalten, zusätzlich 10 kuratierte Themes, eigene Akzentfarbe, Eckstile und System/Light/Dark‑Modi mit Live‑Vorschau in Einstellungen → Erscheinungsbild.",
     "thTip": "Tipp: Wählen Sie \"System\", um automatisch dem Windows‑Theme zu folgen.",
     "skip": "Überspringen",
     "next": "Weiter →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Aktiv",
     "mdSaveHint": "Strg+Enter · Speichern",
     "mpCard1": "1. Fortschrittsbericht um 9:00 Uhr senden",
-    "mpCard2": "2. Neuestes Design-Mockup anhängen"
+    "mpCard2": "2. Neuestes Design-Mockup anhängen",
+    "afTitle": "Wählen Sie, welche Apps aufgezeichnet werden",
+    "afDesc": "Überspringen Sie Kopien von Apps, die Sie nicht speichern wollen, wie Passwort‑Manager, oder zeichnen Sie nur die von Ihnen gewählten Apps auf.",
+    "afTip": "Tipp: Einstellungen → Verhalten → Apps einbeziehen / ausschließen. Schnellvorlagen für KeePass, Bitwarden und 1Password."
   },
   "multiPaste": {
     "selected": "{count} ausgewählt",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Nordischer Frost",
       "tagline": "Arktischer Schiefer & klares Indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Tinten‑schwarz & rubinrot"
+    },
+    "cyberLime": {
+      "name": "Cyber-Limette",
+      "tagline": "Terminalschwarz & Neonlimette"
+    },
+    "lavenderHaze": {
+      "name": "Lavendelnebel",
+      "tagline": "Sanftes Flieder & gedämpftes Violett"
+    },
+    "mochaLatte": {
+      "name": "Mokka-Latte",
+      "tagline": "Gerösteter Kaffee & warme Creme"
+    },
+    "graphite": {
+      "name": "Graphit",
+      "tagline": "Neutrales Grau & klares Blau"
     }
+  },
+  "appearanceExtra": {
+    "group": "Akzent & Form",
+    "accentTitle": "Akzentfarbe",
+    "accentDesc": "Thema-Akzentfarbe oder Lieblingsfarbe wählen",
+    "accentTheme": "Thema",
+    "accentCustom": "Benutzerfarbe",
+    "cornerTitle": "Ecken",
+    "cornerDesc": "Rundheit von Regalen und Karten",
+    "corner_rounded": "Abgerundet",
+    "corner_soft": "Abgerundet",
+    "corner_sharp": "Eckig"
   }
 }

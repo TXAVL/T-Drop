@@ -119,7 +119,10 @@
     "accountNumber": "Număr de cont",
     "accountHolder": "Titularul contului",
     "copied": "Copiat în clipboard",
-    "copy": "Copiază"
+    "copy": "Copiază",
+    "donateSubtitle": "Fiecare donație ajută la menținerea T-Drop gratuit și actualizat.",
+    "donateScanHint": "Scanează cu orice aplicație bancară sau portofel electronic care suportă VietQR.",
+    "donateThanks": "Mulțumim pentru sprijinul T-Drop!"
   },
   "imageStudio": {
     "tabConvert": "Convertește",
@@ -407,8 +410,8 @@
     "mpTitle": "Cărucior fixat deschis & Dăunare multi-card",
     "mpDesc": "Apăsați Fix în antet pentru a menține căruciorul deschis în timp ce lucrați. Ctrl+Click pe mai multe carduri de text pentru a le copia sau lipi toate împreună într-o singură acțiune.",
     "mpTip": "Sfat: Alege separatorul newline (↵), paragraph (¶) sau space (␣) direct pe bara flotantă.",
-    "thTitle": "6 Tematici de raft & Sistem / Luminos / Întunecat",
-    "thDesc": "Păstrează tema întunecată Obsidian ca implicit, plus 5 tematici noi și moduri Sistem / Luminos / Întunecat cu previzualizare animată live în Setări → Aspect.",
+    "thTitle": "11 teme de raft & Sistem / Luminos / Întunecat",
+    "thDesc": "Păstrează tema întunecată Obsidian ca implicită, plus 10 teme selectate, culoarea de accent personală, stiluri de colț și moduri Sistem / Luminos / Întunecat cu previzualizare live în Setări → Aspect",
     "thTip": "Sfat: Alege \"Sistem\" pentru a urmări automat tema Windows.",
     "skip": "Omite",
     "next": "Următor →",
@@ -422,7 +425,10 @@
     "mdOn": "Activat",
     "mdSaveHint": "Ctrl+Enter · Salvează",
     "mpCard1": "1. Trimite raportul de progres la 9:00",
-    "mpCard2": "2. Atașează ultima machetă de design"
+    "mpCard2": "2. Atașează ultima machetă de design",
+    "afTitle": "Alege aplicațiile înregistrate",
+    "afDesc": "Ignoră copiile din aplicațiile pe care nu le vrei salvate, cum ar fi managerii de parole, sau înregistrează doar aplicațiile alese",
+    "afTip": "Tip: Setări → Comportament → Include / Exclude aplicații. Presete rapide pentru KeePass, Bitwarden și 1Password"
   },
   "multiPaste": {
     "selected": "{count} selectate",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "Frost nordic",
       "tagline": "Grisă arctică & indigo neted"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Negru mătase & roșu rubin"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Negru terminal & lime neon"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Lila blând & violet crepuscular"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Cafea prăjită & cremă caldă"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Gri neutru & albastru curat"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "Previzualizare **Markdown**",
     "demoMdRow1Status": "Pregătit",
     "demoMdRow2": "Editare rapidă & Lipire multiplă",
-    "demoMdRow2Status": "Activ"
+    "demoMdRow2Status": "Activ",
+    "afSecret": "Parola bancă",
+    "afBlocked": "Nu salvează · aplicație exclusă",
+    "afSaved": "Salvat în T-Drop",
+    "afLink": "Link itinerariu de călătorie"
+  },
+  "appearanceExtra": {
+    "group": "CULOARE & FORMĂ",
+    "accentTitle": "Culoare de accent",
+    "accentDesc": "Folosește culoarea de accent a temei sau alege culoarea preferată pentru evidențieri.",
+    "accentTheme": "Temă",
+    "accentCustom": "Culoare personalizată",
+    "cornerTitle": "Colțuri",
+    "cornerDesc": "Cât de rotunjite arată raftul și cardurile.",
+    "corner_rounded": "Rotunjit",
+    "corner_soft": "Suav",
+    "corner_sharp": "Fierbinte"
   }
 }

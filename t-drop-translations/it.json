@@ -444,7 +444,10 @@
     "accountNumber": "Numero di conto",
     "accountHolder": "Intestatario del conto",
     "copied": "Copiato negli appunti",
-    "copy": "Copia"
+    "copy": "Copia",
+    "donateSubtitle": "Ogni contributo aiuta a mantenere T-Drop gratuito e aggiornato.",
+    "donateScanHint": "Scansiona con qualsiasi app bancaria o portafoglio digitale che supporta VietQR.",
+    "donateThanks": "Grazie per aver sostenuto T-Drop!"
   },
   "groups": {
     "feedback": "FEEDBACK",
@@ -685,7 +688,11 @@
     "demoMdRow1": "Anteprima **Markdown**",
     "demoMdRow1Status": "Pronto",
     "demoMdRow2": "Modifica e Incolla multiplo",
-    "demoMdRow2Status": "Attivo"
+    "demoMdRow2Status": "Attivo",
+    "afSecret": "Password bancaria",
+    "afBlocked": "Non salvato · app esclusa",
+    "afSaved": "Salvato in T-Drop",
+    "afLink": "Link itinerario"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Gabbietto Sempre Aperto & Incolla Multiplo",
     "mpDesc": "Fai clic su Ghimma nell'intestazione per mantenere il gabbietto aperto mentre lavori. Ctrl+Fai clic su più schede di testo per copiarle o incollarle tutte insieme in un unico passaggio.",
     "mpTip": "Suggerimento: scegli come separatore di riga (↵), paragrafo (¶) o spazio (␣) direttamente sulla barra flottante.",
-    "thTitle": "6 Temi del Gabbietto & Sistema / Chiaro / Scuro",
-    "thDesc": "Mantiene il tema scuro Obsidian come predefinito, più 5 nuovi temi curati e modalità Sistema / Chiaro / Scuro con anteprima animata in Impostazioni → Aspetto.",
+    "thTitle": "11 temi per la barra & Sistema / Chiaro / Scuro",
+    "thDesc": "Mantiene l'iconico tema scuro Obsidian come predefinito, più 10 temi curati, il tuo colore accento personalizzato, stili degli angoli e modalità Sistema / Chiaro / Scuro con un'anteprima in tempo reale in Impostazioni → Aspetto.",
     "thTip": "Suggerimento: scegli \"Sistema\" per far seguire automaticamente a T‑Drop la modalità Chiaro/Scuro di Windows.",
     "skip": "Salta",
     "next": "Avanti →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Attivo",
     "mdSaveHint": "Ctrl+Invio · Salva",
     "mpCard1": "1. Invia rapporto di avanzamento alle 9:00",
-    "mpCard2": "2. Allegare l'ultima bozza di design"
+    "mpCard2": "2. Allegare l'ultima bozza di design",
+    "afTitle": "Scegli quali app registrare",
+    "afDesc": "Salta le copie da app che non vuoi mai vengano salvate, come i password manager, o registra solo le app che scegli.",
+    "afTip": "Suggerimento: Impostazioni → Comportamento → Includi / Escludi App. I preset rapidi includono KeePass, Bitwarden e 1Password."
   },
   "multiPaste": {
     "selected": "{count} selezionati",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Gelo Artico",
       "tagline": "Ardesia artica e indaco vivido"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Nero inchiostro e rosso rubino"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Nero terminale e lime neon"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Lilla tenue e viola crepuscolo"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Caffè torrefatto e crema calda"
+    },
+    "graphite": {
+      "name": "Grafite",
+      "tagline": "Grigio neutro e blu pulito"
     }
+  },
+  "appearanceExtra": {
+    "group": "ACCENTO & FORMA",
+    "accentTitle": "Colore di accento",
+    "accentDesc": "Usa il colore di accento del tema o scegli il tuo colore preferito per gli accenti",
+    "accentTheme": "Tema",
+    "accentCustom": "Colore personalizzato",
+    "cornerTitle": "Angoli",
+    "cornerDesc": "Arrotondamento della mensola e delle schede",
+    "corner_rounded": "Arrotondato",
+    "corner_soft": "Arrotondati",
+    "corner_sharp": "Spigolosi"
   }
 }

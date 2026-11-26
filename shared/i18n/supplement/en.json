@@ -167,7 +167,10 @@
     "accountHolder": "Account Holder",
     "supportTagline": "Free & Open Source forever",
     "copied": "Copied to clipboard",
-    "copy": "Copy"
+    "copy": "Copy",
+    "donateSubtitle": "Every gift helps keep T-Drop free and updated.",
+    "donateScanHint": "Scan with any banking app or e-wallet that supports VietQR.",
+    "donateThanks": "Thank you for supporting T-Drop!"
   },
   "emoji": {
     "open": "Emoji & Symbols",
@@ -466,8 +469,8 @@
     "mpTitle": "Pin Shelf Open & Multi-Card Paste",
     "mpDesc": "Click Pin in the header to keep the shelf open while working. Ctrl+Click multiple text cards in order to copy or paste them all combined in one go.",
     "mpTip": "Tip: Pick newline (↵), paragraph (¶), or space (␣) separator right on the floating bar.",
-    "thTitle": "6 Shelf Themes & System / Light / Dark",
-    "thDesc": "Keeps the signature Obsidian dark theme as default, plus 5 new curated themes and System / Light / Dark modes with a live animated preview in Settings → Appearance.",
+    "thTitle": "11 Shelf Themes & System / Light / Dark",
+    "thDesc": "Keeps the signature Obsidian dark theme as default, plus 10 curated themes, your own accent color, corner styles and System / Light / Dark modes with a live preview in Settings → Appearance.",
     "thTip": "Tip: Choose \"System\" to automatically follow your Windows theme.",
     "skip": "Skip",
     "next": "Next →",
@@ -481,7 +484,10 @@
     "mdOn": "On",
     "mdSaveHint": "Ctrl+Enter · Save",
     "mpCard1": "1. Send progress report at 9:00",
-    "mpCard2": "2. Attach the latest design mockup"
+    "mpCard2": "2. Attach the latest design mockup",
+    "afTitle": "Choose which apps are recorded",
+    "afDesc": "Skip copies from apps you never want saved, like password managers, or record only the apps you pick.",
+    "afTip": "Tip: Settings → Behaviour → Include / Exclude Apps. Quick presets cover KeePass, Bitwarden and 1Password."
   },
   "multiPaste": {
     "selected": "{count} selected",
@@ -568,6 +574,26 @@
     "nordicFrost": {
       "name": "Nordic Frost",
       "tagline": "Arctic slate & crisp indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Ink black & ruby red"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminal black & neon lime"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Soft lilac & dusky violet"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Roasted coffee & warm cream"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Neutral gray & clean blue"
     }
   },
   "tour": {
@@ -579,6 +605,22 @@
     "demoMdRow1": "**Markdown** Preview",
     "demoMdRow1Status": "Ready",
     "demoMdRow2": "Inline Edit & Multi-Paste",
-    "demoMdRow2Status": "Live"
+    "demoMdRow2Status": "Live",
+    "afSecret": "Bank password",
+    "afBlocked": "Not saved · app excluded",
+    "afSaved": "Saved to T-Drop",
+    "afLink": "Trip itinerary link"
+  },
+  "appearanceExtra": {
+    "group": "ACCENT & SHAPE",
+    "accentTitle": "Accent color",
+    "accentDesc": "Use the theme's own accent or pick your favorite color for highlights.",
+    "accentTheme": "Theme",
+    "accentCustom": "Custom color",
+    "cornerTitle": "Corners",
+    "cornerDesc": "How round the shelf and cards look.",
+    "corner_rounded": "Rounded",
+    "corner_soft": "Soft",
+    "corner_sharp": "Sharp"
   }
 }

@@ -95,6 +95,7 @@ export function Onboarding() {
       title: t('whatsNew.thTitle'),
       body: t('whatsNew.thDesc')
     },
+    { key: 'appfilter', view: 'full', open: false, title: t('whatsNew.afTitle'), body: t('whatsNew.afDesc') },
     { key: 'backup', view: 'full', open: false, title: t('onboarding.backupTitle'), body: t('onboarding.backupDesc') },
     { key: 'settings', view: 'frame', open: false, title: t('onboarding.configTitle'), body: t('onboarding.configDesc') }
   ]
@@ -124,6 +125,7 @@ export function Onboarding() {
   const browserRef = useRef<HTMLDivElement>(null)
   const explorerRef = useRef<HTMLDivElement>(null)
   const backupMockRef = useRef<HTMLDivElement>(null)
+  const appFilterMockRef = useRef<HTMLDivElement>(null)
   const lensRef = useRef<HTMLDivElement>(null)
   const penRef = useRef<SVGPathElement>(null)
   const lettersRef = useRef<HTMLDivElement>(null)
@@ -172,6 +174,7 @@ export function Onboarding() {
     browser: browserRef.current!,
     explorer: explorerRef.current!,
     backupMock: backupMockRef.current!,
+    appFilterMock: appFilterMockRef.current!,
     lens: lensRef.current!,
     showShelf: (on) => {
       setShelf(on)
@@ -481,6 +484,41 @@ export function Onboarding() {
                       {t('backup.importBtn')}
                     </button>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* App filter demo: copy from an excluded password manager vs. a browser */}
+            <div ref={appFilterMockRef} className="ob-win ob-backup-mock ob-af-mock">
+              <div className="ob-win-bar">
+                <span className="ob-notes-title">
+                  <i className="ob-settings-icon" />
+                  {t('appFilter.title')}
+                </span>
+                <Caption />
+              </div>
+              <div className="ob-af-body">
+                <div className="ob-af-rule">
+                  <span className="ob-af-chip">{t('appFilter.exclude')}</span>
+                  <span className="ob-af-proc">KeePass.exe</span>
+                </div>
+                <div className="ob-af-row" data-app="blocked">
+                  <span className="ob-af-icon key" aria-hidden="true" />
+                  <div className="ob-af-text">
+                    <b>KeePass</b>
+                    <span>{t('tour.afSecret')} ••••••••</span>
+                  </div>
+                  <span className="ob-af-copy">{t('footer.copy')}</span>
+                  <span className="ob-af-status blocked">{t('tour.afBlocked')}</span>
+                </div>
+                <div className="ob-af-row" data-app="allowed">
+                  <span className="ob-af-icon web" aria-hidden="true" />
+                  <div className="ob-af-text">
+                    <b>Chrome</b>
+                    <span>{t('tour.afLink')}</span>
+                  </div>
+                  <span className="ob-af-copy">{t('footer.copy')}</span>
+                  <span className="ob-af-status saved">{t('tour.afSaved')}</span>
                 </div>
               </div>
             </div>

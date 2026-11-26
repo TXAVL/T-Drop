@@ -444,7 +444,10 @@
     "accountNumber": "Kontonummer",
     "accountHolder": "Kontoeier",
     "copied": "Kopiert til utklippstavlen",
-    "copy": "Kopier"
+    "copy": "Kopier",
+    "donateSubtitle": "Hver gave bidrar til å holde T-Drop gratis og oppdatert.",
+    "donateScanHint": "Skann med en hvilken som helst bankapp eller e-lommebok som støtter VietQR.",
+    "donateThanks": "Takk for at du støtter T-Drop!"
   },
   "groups": {
     "feedback": "TILBAKEMELDING",
@@ -685,7 +688,11 @@
     "demoMdRow1": "**Markdown**-forhåndsvisning",
     "demoMdRow1Status": "Klar",
     "demoMdRow2": "Inline-redigering & multi-liming",
-    "demoMdRow2Status": "Live"
+    "demoMdRow2Status": "Live",
+    "afSecret": "Bankpassord",
+    "afBlocked": "Ikke lagret · app ekskludert",
+    "afSaved": "Lagret i T-Drop",
+    "afLink": "Lenke til reiserute"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Fest kjeledør åpen & lim flere kort",
     "mpDesc": "Klikk på Fest i tittellinjen for å holde kjeledøren åpen mens du arbeider. Ctrl‑klikk flere tekstkort for å kopiere eller lime dem samlet i én handling.",
     "mpTip": "Tips: Vel linjeskift (↵), avsnitt (¶) eller mellomrom (␣) direkte på den flytende linjen.",
-    "thTitle": "6 hyller-temaer & System / Lys / Mørk",
-    "thDesc": "Beholder det karakteristiske Obsidian-mørke temaet som standard, pluss 5 nye kurerte temaer og System / Lys / Mørk-modus med animert forhåndsvisning i Innstillinger → Utseende.",
+    "thTitle": "11 hyttetemaer og System / Lys / Mørk",
+    "thDesc": "Beholder det klassiske Obsidian-mørketemaet som standard, pluss 10 kuraterte temaer, din egen aksentfarge, hjørnestiler og System / Lys / Mørk-moduser med live forhåndsvisning i Innstillinger → Utseende.",
     "thTip": "Tips: Vel «System» for å følge Windows-temaet automatisk.",
     "skip": "Hopp over",
     "next": "Neste →",
@@ -1098,7 +1105,10 @@
     "mdOn": "På",
     "mdSaveHint": "Ctrl+Enter · Lagre",
     "mpCard1": "1. Send fremdriftsrapport kl. 09:00",
-    "mpCard2": "2. Legg ved nyeste designmockup"
+    "mpCard2": "2. Legg ved nyeste designmockup",
+    "afTitle": "Velg hvilke apper som skal lagres",
+    "afDesc": "Unngå kopiering fra apper du aldri vil skal lagres, for eksempel passordbehandlere, eller ta bare opp de appene du velger.",
+    "afTip": "Tips: Innstillinger → Oppførsel → Inkluder / ekskluder apper. Hurtigforhåndsinnstillinger dekker KeePass, Bitwarden og 1Password."
   },
   "multiPaste": {
     "selected": "{count} valgt",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Nordisk frost",
       "tagline": "Arktisk skifer & knusende indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Blekksvart og rubinrød"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminalsvart og neonlime"
+    },
+    "lavenderHaze": {
+      "name": "Lavendeldis",
+      "tagline": "Myk lilla og dempet fiolett"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Ristet kaffe og varm krem"
+    },
+    "graphite": {
+      "name": "Grafitt",
+      "tagline": "Nøytral grå og ren blå"
     }
+  },
+  "appearanceExtra": {
+    "group": "AKSENT & FORM",
+    "accentTitle": "Akcentfarge",
+    "accentDesc": "Bruk temaets egen akcentfarge eller velg din favorittfarge for fremhevinger.",
+    "accentTheme": "Tema",
+    "accentCustom": "Egen farge",
+    "cornerTitle": "Hjørner",
+    "cornerDesc": "Hvor runde hyllen og kortene skal se ut.",
+    "corner_rounded": "Avrundet",
+    "corner_soft": "Myk",
+    "corner_sharp": "Skarp"
   }
 }

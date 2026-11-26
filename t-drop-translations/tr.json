@@ -444,7 +444,10 @@
     "accountNumber": "Hesap numarası",
     "accountHolder": "Hesap sahibi",
     "copied": "Panoya kopyalandı",
-    "copy": "Kopyala"
+    "copy": "Kopyala",
+    "donateSubtitle": "Her katkı, T-Drop'un ücretsiz ve güncel kalmasını sağlar.",
+    "donateScanHint": "VietQR destekleyen herhangi bir bankacılık uygulaması veya e-cüzdanla taratın.",
+    "donateThanks": "T-Drop'u desteklediğiniz için teşekkür ederiz!"
   },
   "groups": {
     "feedback": "GERİ BİLDİRİM",
@@ -685,7 +688,11 @@
     "demoMdRow1": "**Markdown** Önizleme",
     "demoMdRow1Status": "Hazır",
     "demoMdRow2": "Satır içi düzenleme & Çoklu yapıştırma",
-    "demoMdRow2Status": "Canlı"
+    "demoMdRow2Status": "Canlı",
+    "afSecret": "Banka şifresi",
+    "afBlocked": "Kaydedilmedi · uygulama hariç tutuldu",
+    "afSaved": "T-Drop'a kaydedildi",
+    "afLink": "Gezi programı bağlantısı"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Rafı Sabitle & Çoklu Kart Yapıştır",
     "mpDesc": "Başlıkta Sabitle düğmesine tıklayarak rafı açık tutun. Ctrl+Click ile birden fazla metin kartını seçip tek seferde kopyalayıp yapıştırabilirsiniz.",
     "mpTip": "İpucu: Satır sonu (↵), paragraf (¶) veya boşluk (␣) ayraçlarını doğrudan yüzen çubuktan seçin.",
-    "thTitle": "6 Raf Teması & Sistem / Açık / Koyu",
-    "thDesc": "Özelleştirilmiş koyu tema varsayılan olarak korunur; Ayarlar → Görünüm bölümünde canlı animasyonlu önizleme ile 5 yeni seçkin tema ve Sistem / Açık / Koyu modları eklendi.",
+    "thTitle": "11 Raf Teması ve Sistem / Açık / Koyu",
+    "thDesc": "Varsayılan imza niteliğindeki Obsidian koyu temasının yanı sıra özenle seçilmiş 10 tema, özel vurgu rengi, köşe stilleri ve Ayarlar → Görünüm üzerinden canlı önizlemeli Sistem / Açık / Koyu modları sunar.",
     "thTip": "İpucu: T-Drop'un Windows temasına göre otomatik olarak Açık/Koyu arasında geçiş yapması için \"Sistem\" seçeneğini kullanın.",
     "skip": "Geç",
     "next": "İleri →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Açık",
     "mdSaveHint": "Ctrl+Enter · Kaydet",
     "mpCard1": "1. 9:00’da ilerleme raporu gönder",
-    "mpCard2": "2. En yeni tasarım örneğini ekle"
+    "mpCard2": "2. En yeni tasarım örneğini ekle",
+    "afTitle": "Hangi uygulamaların kaydedileceğini seçin",
+    "afDesc": "Parola yöneticileri gibi asla kaydedilmesini istemediğiniz uygulamalardan yapılan kopyalamaları atlayın veya yalnızca seçtiğiniz uygulamaları kaydedin.",
+    "afTip": "İpucu: Ayarlar → Davranış → Uygulama Hariç Tut / Dahil Et. KeePass, Bitwarden ve 1Password için hazır ön ayarlar bulunur."
   },
   "multiPaste": {
     "selected": "{count} seçildi",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Kuzey Donu",
       "tagline": "Arktik arduvaz & berrak çivit"
+    },
+    "crimsonNoir": {
+      "name": "Gece Yakutu",
+      "tagline": "Mürekkep siyahı & yakut kırmızısı"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminal siyahı ve neon yeşili"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Yumuşak lila ve akşam moru"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Kavrulmuş kahve ve sıcak krem"
+    },
+    "graphite": {
+      "name": "Grafit",
+      "tagline": "Nötr gri ve sade mavi"
     }
+  },
+  "appearanceExtra": {
+    "group": "VURGU VE ŞEKİL",
+    "accentTitle": "Vurgu rengi",
+    "accentDesc": "Temanın kendi vurgu rengini kullanın veya vurgular için favori renginizi seçin.",
+    "accentTheme": "Tema",
+    "accentCustom": "Özel renk",
+    "cornerTitle": "Köşeler",
+    "cornerDesc": "Panelin ve kartların ne kadar yuvarlak görüneceği.",
+    "corner_rounded": "Yuvarlak",
+    "corner_soft": "Yuvarlak",
+    "corner_sharp": "Keskin"
   }
 }

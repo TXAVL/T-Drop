@@ -444,7 +444,10 @@
     "accountNumber": "帳號",
     "accountHolder": "戶名",
     "copied": "已複製到剪貼簿",
-    "copy": "複製"
+    "copy": "複製",
+    "donateSubtitle": "每一份支持，都能讓 T-Drop 保持免費、持續更新。",
+    "donateScanHint": "使用支援 VietQR 的任一銀行應用程式或電子錢包掃描。",
+    "donateThanks": "感謝您支持 T-Drop！"
   },
   "groups": {
     "feedback": "意見回饋",
@@ -685,7 +688,11 @@
     "demoMdRow1": "**Markdown** 預覽",
     "demoMdRow1Status": "就緒",
     "demoMdRow2": "內嵌編輯 & 多重貼上",
-    "demoMdRow2Status": "即時"
+    "demoMdRow2Status": "即時",
+    "afSecret": "銀行密碼",
+    "afBlocked": "未保存 · 應用排除",
+    "afSaved": "已儲存至 T-Drop",
+    "afLink": "行程連結"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "固定貨架開啟與多卡貼上",
     "mpDesc": "點擊標題列的「固定」可讓貨架持續開啟。Ctrl+點擊多個文字卡片，即可一次性複製或貼上全部。",
     "mpTip": "提示：直接在浮動工具列上選擇換行 (↵)、分段 (¶) 或空格 (␣) 分隔符。",
-    "thTitle": "6 種側欄主題與系統 / 淺色 / 深色",
-    "thDesc": "預設保留標誌性的黑曜石深色主題，新增 5 種精選主題，並支援系統 / 淺色 / 深色模式，可在「設定 → 外觀」中即時預覽動畫效果。",
+    "thTitle": "11 款層架主題與系統／淺色／深色",
+    "thDesc": "保留招牌的 Obsidian 深色主題為預設，另加 10 款精選主題、自訂強調色、圓角樣式，以及系統／淺色／深色模式，並可在「設定 → 外觀」中即時預覽。",
     "thTip": "提示：選擇「系統」可讓 T-Drop 自動跟隨 Windows 主題切換淺色/深色。",
     "skip": "略過",
     "next": "下一步 →",
@@ -1098,7 +1105,10 @@
     "mdOn": "已開啟",
     "mdSaveHint": "Ctrl+Enter · 儲存",
     "mpCard1": "1. 9:00 發送進度報告",
-    "mpCard2": "2. 附上最新設計稿"
+    "mpCard2": "2. 附上最新設計稿",
+    "afTitle": "選擇要記錄的應用程式",
+    "afDesc": "略過不想保存的應用程式（例如密碼管理器）所複製的內容，或只記錄您挑選的應用程式。",
+    "afTip": "提示：設定 → 行為 → 包含／排除應用程式。快速預設涵蓋 KeePass、Bitwarden 與 1Password。"
   },
   "multiPaste": {
     "selected": "{count} 已選取",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Nordic Frost",
       "tagline": "北極石板與清爽靛藍"
+    },
+    "crimsonNoir": {
+      "name": "緋紅之夜",
+      "tagline": "墨黑與寶石紅"
+    },
+    "cyberLime": {
+      "name": "賽博青柠",
+      "tagline": "黑底螢光青柠"
+    },
+    "lavenderHaze": {
+      "name": "薰衣草霧",
+      "tagline": "柔和淡紫與暗紫"
+    },
+    "mochaLatte": {
+      "name": "摩卡拿鐵",
+      "tagline": "烘焙咖啡與溫奶"
+    },
+    "graphite": {
+      "name": "石墨",
+      "tagline": "中性灰與清新藍"
     }
+  },
+  "appearanceExtra": {
+    "group": "強調色與形狀",
+    "accentTitle": "強調色",
+    "accentDesc": "使用主題的強調色，或選擇您喜歡的顏色作為高亮。",
+    "accentTheme": "主題",
+    "accentCustom": "自訂顏色",
+    "cornerTitle": "圓角",
+    "cornerDesc": "調整面板與卡片的圓角程度。",
+    "corner_rounded": "圓角",
+    "corner_soft": "圓角",
+    "corner_sharp": "直角"
   }
 }

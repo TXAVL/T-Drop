@@ -12,7 +12,7 @@ import { useEffect, useRef } from 'react'
 import { Panel } from './components/Panel'
 import { useStore } from './store/appStore'
 import { edge } from './lib/edge'
-import { applyReduceMotion, applyTheme, subscribeSystemColorMode } from './lib/theme'
+import { applyReduceMotion, applyTheme, subscribeSystemColorMode, applyCornerStyle } from './lib/theme'
 import { useEdgeHover } from './hooks/useEdgeHover'
 import { TxaTooltipProvider } from './components/TxaTooltip'
 
@@ -343,12 +343,17 @@ export default function App() {
   useEffect(() => {
     const preset = settings.themePreset ?? 'default'
     const mode = settings.colorMode ?? 'dark'
-    applyTheme(preset, mode)
+    const accent = settings.accentColor ?? ''
+    applyTheme(preset, mode, accent)
     if (mode !== 'system') return
     return subscribeSystemColorMode(() => {
-      applyTheme(preset, 'system')
+      applyTheme(preset, 'system', accent)
     })
-  }, [settings.themePreset, settings.colorMode])
+  }, [settings.themePreset, settings.colorMode, settings.accentColor])
+
+  useEffect(() => {
+    applyCornerStyle(settings.cornerStyle ?? 'rounded')
+  }, [settings.cornerStyle])
 
   if (!hydrated) {
     return <div className="root" />

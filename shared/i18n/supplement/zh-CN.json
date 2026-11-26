@@ -119,7 +119,10 @@
     "accountNumber": "账号",
     "accountHolder": "户名",
     "copied": "已复制到剪贴板",
-    "copy": "复制"
+    "copy": "复制",
+    "donateSubtitle": "每一份捐助都能让 T-Drop 保持免费并持续更新。",
+    "donateScanHint": "使用支持 VietQR 的任意银行 App 或电子钱包扫码。",
+    "donateThanks": "感谢您支持 T-Drop！"
   },
   "imageStudio": {
     "tabConvert": "转换",
@@ -407,8 +410,8 @@
     "mpTitle": "固定托盘与批量粘贴",
     "mpDesc": "点击标题栏的固定按钮保持托盘开启；Ctrl+点击多张文本卡片即可一次性复制或粘贴。",
     "mpTip": "提示：在浮动栏选择换行（↵）、段落（¶）或空格（␣）分隔符。",
-    "thTitle": "6 款托盘主题与系统/亮色/暗色模式",
-    "thDesc": "默认保留 Obsidian 暗色主题，新增 5 款精选主题，并支持系统/亮色/暗色模式，均可在设置→外观中实时预览。",
+    "thTitle": "11 款货架主题 & 系统 / 浅色 / 深色",
+    "thDesc": "默认保留 Obsidian 深色主题，另加 10 款精选主题、可自定义强调色、角落样式，以及系统 / 浅色 / 深色模式，设置 → 外观 中可实时预览。",
     "thTip": "提示：选择“系统”可随 Windows 主题自动切换。",
     "skip": "跳过",
     "next": "下一步 →",
@@ -422,7 +425,10 @@
     "mdOn": "已开启",
     "mdSaveHint": "Ctrl+Enter · 保存",
     "mpCard1": "1. 9:00 发送进度报告",
-    "mpCard2": "2. 附加最新设计稿"
+    "mpCard2": "2. 附加最新设计稿",
+    "afTitle": "选择记录的应用",
+    "afDesc": "跳过不想保存的应用复制内容，如密码管理器；或仅记录您选中的应用。",
+    "afTip": "提示：设置 → 行为 → 包含 / 排除 应用。快速预设已覆盖 KeePass、Bitwarden、1Password。"
   },
   "multiPaste": {
     "selected": "{count} 已选",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "北欧霜雪",
       "tagline": "极地板岩与清冽靛蓝"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "墨黑 & 宝石红"
+    },
+    "cyberLime": {
+      "name": "赛博青柠",
+      "tagline": "终端黑与霓虹青柠"
+    },
+    "lavenderHaze": {
+      "name": "薰衣草薄雾",
+      "tagline": "柔和丁香与暮色紫罗兰"
+    },
+    "mochaLatte": {
+      "name": "摩卡拿铁",
+      "tagline": "烘焙咖啡与暖奶油"
+    },
+    "graphite": {
+      "name": "石墨",
+      "tagline": "中性灰与纯净蓝"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "**Markdown** 预览",
     "demoMdRow1Status": "已完成",
     "demoMdRow2": "快速编辑 & 多重粘贴",
-    "demoMdRow2Status": "已就绪"
+    "demoMdRow2Status": "已就绪",
+    "afSecret": "银行密码",
+    "afBlocked": "未保存 · 应用已排除",
+    "afSaved": "已保存至 T-Drop",
+    "afLink": "行程链接"
+  },
+  "appearanceExtra": {
+    "group": "强调色 & 形状",
+    "accentTitle": "强调色",
+    "accentDesc": "使用主题自带的强调色，或选择你喜欢的高亮色。",
+    "accentTheme": "主题",
+    "accentCustom": "自定义颜色",
+    "cornerTitle": "圆角",
+    "cornerDesc": "调整托盘和卡片的圆角程度。",
+    "corner_rounded": "圆角",
+    "corner_soft": "柔软",
+    "corner_sharp": "锐角"
   }
 }

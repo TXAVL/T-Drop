@@ -444,7 +444,10 @@
     "accountNumber": "Numer konta",
     "accountHolder": "Właściciel konta",
     "copied": "Skopiowano do schowka",
-    "copy": "Kopiuj"
+    "copy": "Kopiuj",
+    "donateSubtitle": "Każda darowizna pomaga utrzymać T-Drop darmowy i aktualizowany.",
+    "donateScanHint": "Zeskanuj kod dowolną aplikacją bankową lub portfelem elektronicznym obsługującym VietQR.",
+    "donateThanks": "Dziękujemy za wsparcie T-Drop!"
   },
   "groups": {
     "feedback": "OPINIE",
@@ -685,7 +688,11 @@
     "demoMdRow1": "Podgląd **Markdown**",
     "demoMdRow1Status": "Gotowe",
     "demoMdRow2": "Edycja inline i wielokrotne wklejanie",
-    "demoMdRow2Status": "Aktywne"
+    "demoMdRow2Status": "Aktywne",
+    "afSecret": "Hasło bankowe",
+    "afBlocked": "Nie zapisano · aplikacja wykluczona",
+    "afSaved": "Zapisano w T-Drop",
+    "afLink": "Link do planu podróży"
   },
   "common": {
     "undo": "Undo",
@@ -1083,8 +1090,8 @@
     "mpTitle": "Zamrożony koszyk i wielokrotne wklejanie kart",
     "mpDesc": "Kliknij przycisk „Ghim” w nagłówku, aby utrzymać koszyk otwarty podczas pracy. Przytrzymaj Ctrl+klik na wielu kartach tekstowych, aby je wybrać kolejno, a następnie skopiuj lub wklej wszystkie razem w jednym kroku.",
     "mpTip": "Wskazówka: Wybierz separator: nowa linia (↵), akapit (¶) lub spacja (␣) bezpośrednio na pływającym pasku.",
-    "thTitle": "6 motywów półki: System / Jasny / Ciemny",
-    "thDesc": "Domyślnie zachowujemy charakterystyczny ciemny motyw Obsidian, a do tego dodajemy 5 nowych, starannie dobranych motywów oraz tryby System / Jasny / Ciemny z podglądem animowanym w Ustawienia → Wygląd.",
+    "thTitle": "11 motywów półki & System / Jasny / Ciemny",
+    "thDesc": "Domyślnie pozostaje charakterystyczny ciemny motyw Obsidian, a do tego 10 wyselekcjonowanych motywów, własny kolor akcentu, style narożników oraz tryby System / Jasny / Ciemny z podglądem na żywo w Ustawieniach → Wygląd.",
     "thTip": "Wskazówka: Wybierz „System”, aby T-Drop automatycznie dostosowywał się do motywu Windows.",
     "skip": "Pomiń",
     "next": "Dalej →",
@@ -1098,7 +1105,10 @@
     "mdOn": "Włączone",
     "mdSaveHint": "Ctrl+Enter · Zapisz",
     "mpCard1": "1. Wyślij raport postępu o 9:00",
-    "mpCard2": "2. Dołącz najnowszy projekt"
+    "mpCard2": "2. Dołącz najnowszy projekt",
+    "afTitle": "Wybierz aplikacje do zapisywania",
+    "afDesc": "Pomiń kopiowanie z aplikacji, których nie chcesz zapisywać (np. menedżerów haseł), lub zapisuj tylko wybrane programy.",
+    "afTip": "Wskazówka: Ustawienia → Zachowanie → Włącz / Wyłącz aplikacje. Gotowe szablony obejmują KeePass, Bitwarden i 1Password."
   },
   "multiPaste": {
     "selected": "{count} wybrane",
@@ -1185,6 +1195,38 @@
     "nordicFrost": {
       "name": "Nordycki Frost",
       "tagline": "Artycki popiół i wyraźny indygowiec"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Czerń atramentu i rubinowa czerwień"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Czarny terminal i neonowy limon"
+    },
+    "lavenderHaze": {
+      "name": "Lavender Haze",
+      "tagline": "Miękki lawendowy i przygaszony fiolet"
+    },
+    "mochaLatte": {
+      "name": "Mocha Latte",
+      "tagline": "Prażona kawa i ciepły krem"
+    },
+    "graphite": {
+      "name": "Graphite",
+      "tagline": "Neutralny szary i czyste niebieskie"
     }
+  },
+  "appearanceExtra": {
+    "group": "AKCENT I KĄTY",
+    "accentTitle": "Kolor akcentu",
+    "accentDesc": "Użyj koloru akcentu motywu lub wybierz własny dla podkreśleń",
+    "accentTheme": "Motyw",
+    "accentCustom": "Kolor własny",
+    "cornerTitle": "Kąty",
+    "cornerDesc": "Jak zaokrąglone są kółka i karty",
+    "corner_rounded": "Zaokrąglone",
+    "corner_soft": "Miękkie",
+    "corner_sharp": "Ostre"
   }
 }

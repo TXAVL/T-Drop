@@ -119,7 +119,10 @@
     "accountNumber": "Rekeningnummer",
     "accountHolder": "Rekeninghouder",
     "copied": "Gekopieerd naar klembord",
-    "copy": "Kopiëren"
+    "copy": "Kopiëren",
+    "donateSubtitle": "Elke donatie houdt T-Drop gratis en bijgewerkt.",
+    "donateScanHint": "Scan met elke bankapp of e-wallet die VietQR ondersteunt.",
+    "donateThanks": "Dank u voor het ondersteunen van T-Drop!"
   },
   "imageStudio": {
     "tabConvert": "Converteren",
@@ -407,8 +410,8 @@
     "mpTitle": "Kast vastzetten & meerdere kaarten plakken",
     "mpDesc": "Klik op Vastzetten in de kop om de kast open te houden tijdens werken. Ctrl+klik meerdere tekstkaarten om ze samen te kopiëren of plakken in één stap.",
     "mpTip": "Tip: Kies rechtstreeks op de zwevende balk voor regeleinde (↵), alinea (¶) of spatie (␣) als scheidingsteken.",
-    "thTitle": "6 schuifthema's & Systeem / Licht / Donker",
-    "thDesc": "Behoudt het kenmerkende Obsidian-donkerthema als standaard, plus 5 nieuwe geselecteerde thema's en Systeem / Licht / Donker-modi met een live geanimeerde voorvertoning in Instellingen → Weergave.",
+    "thTitle": "11 thema's & Systeem / Licht / Donker",
+    "thDesc": "Standaard Obsidian-donker thema, 10 gecurated thema's, eigen accentkleur, hoekstijlen en Systeem / Licht / Donker-modi, live-preview in Instellingen → Uiterlijk.",
     "thTip": "Tip: Kies \"Systeem\" om automatisch het Windows-thema te volgen.",
     "skip": "Overslaan",
     "next": "Volgende →",
@@ -422,7 +425,10 @@
     "mdOn": "Aan",
     "mdSaveHint": "Ctrl+Enter · Opslaan",
     "mpCard1": "1. Verstuur voortgangsrapport om 9:00",
-    "mpCard2": "2. Voeg de nieuwste mockup toe"
+    "mpCard2": "2. Voeg de nieuwste mockup toe",
+    "afTitle": "Kies welke apps worden geregistreerd",
+    "afDesc": "Negeer kopieën van apps die u niet wilt bewaren, zoals wachtwoordmanagers, of registreer alleen de apps die u kiest.",
+    "afTip": "Tip: Instellingen → Gedrag → Inclusief / Exclusief Apps. Snelle voorinstellingen voor KeePass, Bitwarden en 1Password."
   },
   "multiPaste": {
     "selected": "{count} geselecteerd",
@@ -509,6 +515,26 @@
     "nordicFrost": {
       "name": "Nordic Frost",
       "tagline": "Arctisch leisteen & frisse indigo"
+    },
+    "crimsonNoir": {
+      "name": "Crimson Noir",
+      "tagline": "Inktzwart & robijnrood"
+    },
+    "cyberLime": {
+      "name": "Cyber Lime",
+      "tagline": "Terminalzwart & neonlime"
+    },
+    "lavenderHaze": {
+      "name": "Lavendelhazeu",
+      "tagline": "Zacht lila & schemerpaars"
+    },
+    "mochaLatte": {
+      "name": "Mocca Latte",
+      "tagline": "Geroosterde koffie & warme room"
+    },
+    "graphite": {
+      "name": "Grafiet",
+      "tagline": "Neutraal grijs & helder blauw"
     }
   },
   "tour": {
@@ -520,6 +546,22 @@
     "demoMdRow1": "**Markdown** Voorbeeld",
     "demoMdRow1Status": "Klaar",
     "demoMdRow2": "Inline Bewerken & Meervoudig Plakken",
-    "demoMdRow2Status": "Live"
+    "demoMdRow2Status": "Live",
+    "afSecret": "Bankwachtwoord",
+    "afBlocked": "Niet opgeslagen · app uitgesloten",
+    "afSaved": "Opgeslagen in T-Drop",
+    "afLink": "Link naar reisroute"
+  },
+  "appearanceExtra": {
+    "group": "ACCENT & VORM",
+    "accentTitle": "Accentkleur",
+    "accentDesc": "Gebruik het thema-accent of kies je eigen favoriete kleur voor accenten.",
+    "accentTheme": "Thema",
+    "accentCustom": "Aangepaste kleur",
+    "cornerTitle": "Hoeken",
+    "cornerDesc": "Bepaal hoe rond de zijbalk en kaarten ogen.",
+    "corner_rounded": "Rond",
+    "corner_soft": "Zacht",
+    "corner_sharp": "Hoekig"
   }
 }

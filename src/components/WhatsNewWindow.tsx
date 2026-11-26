@@ -8,9 +8,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from '../i18n'
 import { playButtonClickSound } from '../lib/soundEffects'
+import { THEME_CATALOG, themeKey } from '../lib/theme'
 import '../styles/whatsNewWindow.css'
 
-type FeatureId = 'markdown' | 'multipaste' | 'themes'
+type FeatureId = 'markdown' | 'multipaste' | 'themes' | 'appfilter'
 
 interface FeatureSlide {
   id: FeatureId
@@ -24,6 +25,14 @@ export function WhatsNewWindowView() {
   const { t } = useTranslation()
   const [active, setActive] = useState<FeatureId>('markdown')
   const [version, setVersion] = useState('0.3.6')
+  /** The theme the themes demo is showing (cycles through the whole catalog). */
+  const [themeIdx, setThemeIdx] = useState(0)
+
+  useEffect(() => {
+    if (active !== 'themes') return
+    const id = window.setInterval(() => setThemeIdx((i) => (i + 1) % THEME_CATALOG.length), 1400)
+    return () => window.clearInterval(id)
+  }, [active])
 
   useEffect(() => {
     document.title = t('whatsNew.windowTitle')
@@ -53,8 +62,18 @@ export function WhatsNewWindowView() {
       title: t('whatsNew.thTitle'),
       desc: t('whatsNew.thDesc'),
       tip: t('whatsNew.thTip')
+    },
+    {
+      id: 'appfilter',
+      badge: t('whatsNew.badgeNew'),
+      title: t('whatsNew.afTitle'),
+      desc: t('whatsNew.afDesc'),
+      tip: t('whatsNew.afTip')
     }
   ]
+  const demoTheme = THEME_CATALOG[themeIdx % THEME_CATALOG.length]
+  const demoMode = themeIdx % 3 === 2 ? 'light' : 'dark'
+  const demoPal = demoTheme[demoMode]
 
   const currentIdx = slides.findIndex((s) => s.id === active)
   const slide = slides[currentIdx] ?? slides[0]
@@ -137,20 +156,55 @@ export function WhatsNewWindowView() {
           )}
 
           {slide.id === 'themes' && (
-            <div className="wn-demo-th">
+            <div
+              className="wn-demo-th"
+              style={{ background: demoPal.stageWallpaper, color: demoPal.accent }}
+            >
               <div className="wn-th-neo" />
-              <div className="wn-th-blade">
-                <div className="wn-th-bar"><span className="wn-th-dot" /><span className="wn-th-pill" /></div>
-                <div className="wn-th-card"><span className="wn-th-l w80" /><span className="wn-th-l w55" /></div>
-                <div className="wn-th-card"><span className="wn-th-l w70" /><span className="wn-th-l w45" /></div>
+              <div className="wn-th-blade" style={{ background: demoPal.bladeBg, borderColor: demoPal.borderStrong }}>
+                <div className="wn-th-bar">
+                  <span className="wn-th-dot" />
+                  <span className="wn-th-pill" style={{ background: demoPal.cardBg }} />
+                </div>
+                {[0, 1].map((n) => (
+                  <div className="wn-th-card" key={n} style={{ background: demoPal.cardBg, borderColor: demoPal.border }}>
+                    <span className="wn-th-l w80" style={{ background: demoPal.textPrimary }} />
+                    <span className="wn-th-l w55" style={{ background: demoPal.textPrimary }} />
+                  </div>
+                ))}
+                <span className="wn-th-name" style={{ color: demoPal.textSecondary }}>
+                  {t(`themes.${themeKey(demoTheme.id)}.name`)} · {demoMode === 'dark' ? t('themeStudio.modeDark') : t('themeStudio.modeLight')}
+                </span>
               </div>
               <div className="wn-th-swatches">
-                <span className="sw s1" />
-                <span className="sw s2" />
-                <span className="sw s3" />
-                <span className="sw s4" />
-                <span className="sw s5" />
-                <span className="sw s6" />
+                {THEME_CATALOG.map((th, i) => (
+                  <span
+                    key={th.id}
+                    className={`sw${i === themeIdx % THEME_CATALOG.length ? ' on' : ''}`}
+                    style={{ background: `linear-gradient(135deg, ${th.dark.bladeBg} 45%, ${th.dark.accent})` }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {slide.id === 'appfilter' && (
+            <div className="wn-demo-af">
+              <div className="wn-af-rule">
+                <span className="wn-af-chip">{t('appFilter.exclude')}</span>
+                <span className="wn-af-proc">KeePass.exe</span>
+              </div>
+              <div className="wn-af-row r1">
+                <span className="wn-af-icon key" />
+                <div className="wn-af-text"><b>KeePass</b><span>{t('tour.afSecret')} ••••••••</span></div>
+                <span className="wn-af-copy">{t('footer.copy')}</span>
+                <span className="wn-af-status blocked">{t('tour.afBlocked')}</span>
+              </div>
+              <div className="wn-af-row r2">
+                <span className="wn-af-icon web" />
+                <div className="wn-af-text"><b>Chrome</b><span>{t('tour.afLink')}</span></div>
+                <span className="wn-af-copy">{t('footer.copy')}</span>
+                <span className="wn-af-status saved">{t('tour.afSaved')}</span>
               </div>
             </div>
           )}
