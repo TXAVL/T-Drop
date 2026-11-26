@@ -106,7 +106,12 @@
     "convertTo": "Konvertieren in …",
     "compressBtn": "Komprimieren",
     "quickCompress": "Schnell komprimieren",
-    "transformCase": "Groß-/Kleinschreibung ändern (GROSS / klein / Wortanfang Groß)"
+    "transformCase": "Groß-/Kleinschreibung ändern (GROSS / klein / Wortanfang Groß)",
+    "clearLast48h": "Letzte 48 Std. löschen",
+    "clearLast72h": "Letzte 72 Std. löschen",
+    "clearLast7d": "Letzte 7 Tage löschen",
+    "clearLast14d": "Letzte 14 Tage löschen",
+    "clearLast30d": "Letzte 30 Tage löschen"
   },
   "backup": {
     "securityLabel": "Sicherheit",

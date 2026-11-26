@@ -106,7 +106,12 @@
     "convertTo": "Konversi ke...",
     "compressBtn": "Kompres",
     "quickCompress": "Kompres cepat",
-    "transformCase": "Ubah huruf (KAPITAL / kecil / Awal Kata Kapital)"
+    "transformCase": "Ubah huruf (KAPITAL / kecil / Awal Kata Kapital)",
+    "clearLast48h": "Hapus 48 jam",
+    "clearLast72h": "Hapus 72 jam",
+    "clearLast7d": "Hapus 7 hari",
+    "clearLast14d": "Hapus 14 hari",
+    "clearLast30d": "Hapus 30 hari"
   },
   "backup": {
     "securityLabel": "Keamanan",

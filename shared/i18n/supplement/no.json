@@ -106,7 +106,12 @@
     "convertTo": "Konverter til …",
     "compressBtn": "Komprimer",
     "quickCompress": "Rask komprimering",
-    "transformCase": "Endre store/små bokstaver (STORE / små / Hvert Ord Med Stor)"
+    "transformCase": "Endre store/små bokstaver (STORE / små / Hvert Ord Med Stor)",
+    "clearLast48h": "Slett siste 48 timer",
+    "clearLast72h": "Slett siste 72 timer",
+    "clearLast7d": "Slett siste 7 dager",
+    "clearLast14d": "Slett siste 14 dager",
+    "clearLast30d": "Slett siste 30 dager"
   },
   "backup": {
     "securityLabel": "Sikkerhet",

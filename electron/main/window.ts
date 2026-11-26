@@ -823,6 +823,11 @@ export function createWindow(): BrowserWindow {
   }
 
   registerFullscreenActiveListener(() => {
+    // While one of our own windows has the keyboard (the note editor, search, a
+    // license field), Windows reports *our* large topmost window as the full-screen
+    // app. Closing the shelf then handed focus straight back every 800ms, so typing
+    // in the shelf was impossible.
+    if (BrowserWindow.getFocusedWindow()) return
     const settings = loadSettings()
     if (settings.suppressInFullscreen && (settings.hoverActivation ?? true)) {
       sendToMainWindow('window:toggle', false)

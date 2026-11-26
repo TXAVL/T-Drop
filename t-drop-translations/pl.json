@@ -219,7 +219,12 @@
     "convertTo": "Konwertuj na…",
     "compressBtn": "Kompresuj",
     "quickCompress": "Szybka kompresja",
-    "transformCase": "Zmień wielkość liter (WIELKIE / małe / Każde Słowo)"
+    "transformCase": "Zmień wielkość liter (WIELKIE / małe / Każde Słowo)",
+    "clearLast48h": "Wyczyść 48 h",
+    "clearLast72h": "Wyczyść 72 h",
+    "clearLast7d": "Wyczyść 7 dni",
+    "clearLast14d": "Wyczyść 14 dni",
+    "clearLast30d": "Wyczyść 30 dni"
   },
   "menu": {
     "title": "Akcje elementu",

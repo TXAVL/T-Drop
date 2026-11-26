@@ -219,7 +219,12 @@
     "convertTo": "Convert to...",
     "compressBtn": "Compress",
     "quickCompress": "Quick Compress",
-    "transformCase": "Change case (UPPER / lower / Title Case)"
+    "transformCase": "Change case (UPPER / lower / Title Case)",
+    "clearLast48h": "Clear last 48 hours",
+    "clearLast72h": "Clear last 72 hours",
+    "clearLast7d": "Clear last 7 days",
+    "clearLast14d": "Clear last 14 days",
+    "clearLast30d": "Clear last 30 days"
   },
   "menu": {
     "title": "Item actions",

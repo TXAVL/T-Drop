@@ -106,7 +106,12 @@
     "convertTo": "Konvertera till …",
     "compressBtn": "Komprimera",
     "quickCompress": "Snabbkomprimering",
-    "transformCase": "Ändra skiftläge (VERSALER / gemener / Varje Ord Med Versal)"
+    "transformCase": "Ändra skiftläge (VERSALER / gemener / Varje Ord Med Versal)",
+    "clearLast48h": "Rensa 48 h",
+    "clearLast72h": "Rensa 72 h",
+    "clearLast7d": "Rensa 7 d",
+    "clearLast14d": "Rensa 14 d",
+    "clearLast30d": "Rensa 30 d"
   },
   "backup": {
     "securityLabel": "Säkerhet",

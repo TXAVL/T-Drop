@@ -219,7 +219,12 @@
     "convertTo": "Converteren naar…",
     "compressBtn": "Comprimeren",
     "quickCompress": "Snel comprimeren",
-    "transformCase": "Hoofdletters wijzigen (HOOFDLETTERS / kleine letters / Elk Woord Hoofdletter)"
+    "transformCase": "Hoofdletters wijzigen (HOOFDLETTERS / kleine letters / Elk Woord Hoofdletter)",
+    "clearLast48h": "48 uur wissen",
+    "clearLast72h": "72 uur wissen",
+    "clearLast7d": "7 dagen wissen",
+    "clearLast14d": "14 dagen wissen",
+    "clearLast30d": "30 dagen wissen"
   },
   "menu": {
     "title": "Itemacties",

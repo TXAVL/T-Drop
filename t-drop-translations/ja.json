@@ -219,7 +219,12 @@
     "convertTo": "変換先…",
     "compressBtn": "圧縮",
     "quickCompress": "クイック圧縮",
-    "transformCase": "大文字・小文字を変換（大文字 / 小文字 / 先頭のみ大文字）"
+    "transformCase": "大文字・小文字を変換（大文字 / 小文字 / 先頭のみ大文字）",
+    "clearLast48h": "48時間分を削除",
+    "clearLast72h": "72時間分を削除",
+    "clearLast7d": "7日間を削除",
+    "clearLast14d": "14日間を削除",
+    "clearLast30d": "30日間を削除"
   },
   "menu": {
     "title": "項目の操作",

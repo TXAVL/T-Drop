@@ -106,7 +106,12 @@
     "convertTo": "轉換為…",
     "compressBtn": "壓縮",
     "quickCompress": "快速壓縮",
-    "transformCase": "變更大小寫（大寫 / 小寫 / 單字首字母大寫）"
+    "transformCase": "變更大小寫（大寫 / 小寫 / 單字首字母大寫）",
+    "clearLast48h": "清除最近 48 小時",
+    "clearLast72h": "清除最近 72 小時",
+    "clearLast7d": "清除最近 7 天",
+    "clearLast14d": "清除最近 14 天",
+    "clearLast30d": "清除最近 30 天"
   },
   "backup": {
     "securityLabel": "安全性",

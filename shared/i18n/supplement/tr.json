@@ -106,7 +106,12 @@
     "convertTo": "Şuna dönüştür…",
     "compressBtn": "Sıkıştır",
     "quickCompress": "Hızlı sıkıştır",
-    "transformCase": "Harf büyüklüğünü değiştir (BÜYÜK / küçük / Baş Harfler Büyük)"
+    "transformCase": "Harf büyüklüğünü değiştir (BÜYÜK / küçük / Baş Harfler Büyük)",
+    "clearLast48h": "48 saat sil",
+    "clearLast72h": "72 saat sil",
+    "clearLast7d": "7 gün sil",
+    "clearLast14d": "14 gün sil",
+    "clearLast30d": "30 gün sil"
   },
   "backup": {
     "securityLabel": "Güvenlik",

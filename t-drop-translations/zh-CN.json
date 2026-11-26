@@ -219,7 +219,12 @@
     "convertTo": "转换为…",
     "compressBtn": "压缩",
     "quickCompress": "快速压缩",
-    "transformCase": "更改大小写（大写 / 小写 / 单词首字母大写）"
+    "transformCase": "更改大小写（大写 / 小写 / 单词首字母大写）",
+    "clearLast48h": "清除48小时",
+    "clearLast72h": "清除72小时",
+    "clearLast7d": "清除7天",
+    "clearLast14d": "清除14天",
+    "clearLast30d": "清除30天"
   },
   "menu": {
     "title": "项目操作",

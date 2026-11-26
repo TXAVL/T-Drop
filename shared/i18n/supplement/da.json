@@ -106,7 +106,12 @@
     "convertTo": "Konvertér til …",
     "compressBtn": "Komprimér",
     "quickCompress": "Hurtig komprimering",
-    "transformCase": "Skift store/små bogstaver (STORE / små / Hvert Ord Med Stort)"
+    "transformCase": "Skift store/små bogstaver (STORE / små / Hvert Ord Med Stort)",
+    "clearLast48h": "Ryd 48 t",
+    "clearLast72h": "Ryd 72 t",
+    "clearLast7d": "Ryd 7 d",
+    "clearLast14d": "Ryd 14 d",
+    "clearLast30d": "Ryd 30 d"
   },
   "backup": {
     "securityLabel": "Sikkerhed",

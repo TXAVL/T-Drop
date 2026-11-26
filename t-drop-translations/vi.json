@@ -219,7 +219,12 @@
     "convertTo": "Chuyển đổi sang...",
     "compressBtn": "Nén ảnh",
     "quickCompress": "Nén nhanh",
-    "transformCase": "Đổi kiểu chữ (HOA / thường / Viết Hoa Đầu Từ)"
+    "transformCase": "Đổi kiểu chữ (HOA / thường / Viết Hoa Đầu Từ)",
+    "clearLast48h": "Xóa 48 giờ qua",
+    "clearLast72h": "Xóa 72 giờ qua",
+    "clearLast7d": "Xóa 7 ngày qua",
+    "clearLast14d": "Xóa 14 ngày qua",
+    "clearLast30d": "Xóa 30 ngày qua"
   },
   "menu": {
     "title": "Thao tác mục",

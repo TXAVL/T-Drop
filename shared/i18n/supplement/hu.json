@@ -106,7 +106,12 @@
     "convertTo": "Átalakítás erre…",
     "compressBtn": "Tömörítés",
     "quickCompress": "Gyors tömörítés",
-    "transformCase": "Kis- és nagybetűk váltása (NAGYBETŰS / kisbetűs / Minden Szó Nagybetűs)"
+    "transformCase": "Kis- és nagybetűk váltása (NAGYBETŰS / kisbetűs / Minden Szó Nagybetűs)",
+    "clearLast48h": "48 óra törlése",
+    "clearLast72h": "72 óra törlése",
+    "clearLast7d": "7 nap törlése",
+    "clearLast14d": "14 nap törlése",
+    "clearLast30d": "30 nap törlése"
   },
   "backup": {
     "securityLabel": "Biztonság",

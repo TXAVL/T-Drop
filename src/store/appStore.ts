@@ -609,6 +609,9 @@ export const useStore = create<AppState>((set, get) => ({
 
   setQuery: (query) => set({ query }),
   setOpen: (open) => {
+    // Already closed: nothing to close, and no focus to hand back (a repeated close
+    // request used to release the keyboard of whatever field was just taking it).
+    if (!open && !get().open) return
     // The shelf closing with the note editor open (the pointer left it, the
     // hotkey, the tray) keeps what was typed, like a click outside does.
     if (!open && get().cardMenu?.mode === 'edit') {

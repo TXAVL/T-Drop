@@ -106,7 +106,12 @@
     "convertTo": "Converti in...",
     "compressBtn": "Comprimi",
     "quickCompress": "Compressione rapida",
-    "transformCase": "Cambia maiuscole/minuscole (MAIUSCOLO / minuscolo / Iniziali Maiuscole)"
+    "transformCase": "Cambia maiuscole/minuscole (MAIUSCOLO / minuscolo / Iniziali Maiuscole)",
+    "clearLast48h": "Ultime 48 ore",
+    "clearLast72h": "Ultime 72 ore",
+    "clearLast7d": "Ultimi 7 giorni",
+    "clearLast14d": "Ultimi 14 giorni",
+    "clearLast30d": "Ultimi 30 giorni"
   },
   "backup": {
     "securityLabel": "Sicurezza",

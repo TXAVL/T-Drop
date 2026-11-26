@@ -106,7 +106,12 @@
     "convertTo": "Convertir a...",
     "compressBtn": "Comprimir",
     "quickCompress": "Compresión rápida",
-    "transformCase": "Cambiar mayúsculas (MAYÚSCULAS / minúsculas / Tipo Título)"
+    "transformCase": "Cambiar mayúsculas (MAYÚSCULAS / minúsculas / Tipo Título)",
+    "clearLast48h": "Borrar últimas 48 h",
+    "clearLast72h": "Borrar últimas 72 h",
+    "clearLast7d": "Borrar últimos 7 días",
+    "clearLast14d": "Borrar últimos 14 días",
+    "clearLast30d": "Borrar últimos 30 días"
   },
   "backup": {
     "securityLabel": "Seguridad",

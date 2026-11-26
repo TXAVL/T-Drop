@@ -106,7 +106,12 @@
     "convertTo": "Μετατροπή σε…",
     "compressBtn": "Συμπίεση",
     "quickCompress": "Γρήγορη συμπίεση",
-    "transformCase": "Αλλαγή πεζών/κεφαλαίων (ΚΕΦΑΛΑΙΑ / πεζά / Κάθε Λέξη Κεφαλαία)"
+    "transformCase": "Αλλαγή πεζών/κεφαλαίων (ΚΕΦΑΛΑΙΑ / πεζά / Κάθε Λέξη Κεφαλαία)",
+    "clearLast48h": "48 ωρών",
+    "clearLast72h": "72 ωρών",
+    "clearLast7d": "7 ημερών",
+    "clearLast14d": "14 ημερών",
+    "clearLast30d": "30 ημερών"
   },
   "backup": {
     "securityLabel": "Ασφάλεια",

@@ -219,7 +219,12 @@
     "convertTo": "Muunna muotoon…",
     "compressBtn": "Pakkaa",
     "quickCompress": "Pikapakkaus",
-    "transformCase": "Vaihda kirjainkokoa (ISOT / pienet / Jokainen Sana Isolla)"
+    "transformCase": "Vaihda kirjainkokoa (ISOT / pienet / Jokainen Sana Isolla)",
+    "clearLast48h": "Tyhjennä 48 h",
+    "clearLast72h": "Tyhjennä 72 h",
+    "clearLast7d": "Tyhjennä 7 pv",
+    "clearLast14d": "Tyhjennä 14 pv",
+    "clearLast30d": "Tyhjennä 30 pv"
   },
   "menu": {
     "title": "Kohteen toiminnot",

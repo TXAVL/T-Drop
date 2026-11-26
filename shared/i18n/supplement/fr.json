@@ -106,7 +106,12 @@
     "convertTo": "Convertir en…",
     "compressBtn": "Compresser",
     "quickCompress": "Compression rapide",
-    "transformCase": "Changer la casse (MAJUSCULES / minuscules / Première Lettre)"
+    "transformCase": "Changer la casse (MAJUSCULES / minuscules / Première Lettre)",
+    "clearLast48h": "Effacer 48 h",
+    "clearLast72h": "Effacer 72 h",
+    "clearLast7d": "Effacer 7 jours",
+    "clearLast14d": "Effacer 14 jours",
+    "clearLast30d": "Effacer 30 jours"
   },
   "backup": {
     "securityLabel": "Sécurité",

@@ -19,10 +19,15 @@ interface ClearMenuProps {
   menuDirection?: 'up' | 'down'
 }
 
-const WINDOWS: { key: '1h' | '6h' | '24h'; hours: number }[] = [
-  { key: '1h', hours: 1 },
-  { key: '6h', hours: 6 },
-  { key: '24h', hours: 24 }
+const WINDOWS: { key: string; hours: number; fallback: string }[] = [
+  { key: '1h', hours: 1, fallback: 'Clear last hour' },
+  { key: '6h', hours: 6, fallback: 'Clear last 6 hours' },
+  { key: '24h', hours: 24, fallback: 'Clear last 24 hours' },
+  { key: '48h', hours: 48, fallback: 'Clear last 48 hours' },
+  { key: '72h', hours: 72, fallback: 'Clear last 72 hours' },
+  { key: '7d', hours: 24 * 7, fallback: 'Clear last 7 days' },
+  { key: '14d', hours: 24 * 14, fallback: 'Clear last 14 days' },
+  { key: '30d', hours: 24 * 30, fallback: 'Clear last 30 days' }
 ]
 
 const menuItemStyle: CSSProperties = {
@@ -137,11 +142,12 @@ export function ClearMenu({
               zIndex: 350
             }}
           >
-            {WINDOWS.map((w) => {
-              const defaultLabel = w.key === '1h' ? 'Clear last hour' : w.key === '6h' ? 'Clear last 6 hours' : 'Clear last 24 hours'
+            {WINDOWS.map((w, i) => {
+              const defaultLabel = w.fallback
               return (
+                <div key={w.key}>
+                {i === 3 && <div style={{ height: 1, background: 'rgba(255, 255, 255, 0.1)', margin: '4px 2px' }} />}
                 <button
-                  key={w.key}
                   type="button"
                   onClick={() => clearWindow(w.hours)}
                   style={menuItemStyle}
@@ -150,6 +156,7 @@ export function ClearMenu({
                 >
                   {t(`item.clearLast${w.key}` as any) || defaultLabel}
                 </button>
+                </div>
               )
             })}
 

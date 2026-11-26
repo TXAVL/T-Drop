@@ -106,7 +106,12 @@
     "convertTo": "Convertește în…",
     "compressBtn": "Comprimă",
     "quickCompress": "Comprimare rapidă",
-    "transformCase": "Schimbă majusculele (MAJUSCULE / minuscule / Fiecare Cuvânt)"
+    "transformCase": "Schimbă majusculele (MAJUSCULE / minuscule / Fiecare Cuvânt)",
+    "clearLast48h": "Șterge ultimele 48h",
+    "clearLast72h": "Șterge ultimele 72h",
+    "clearLast7d": "Șterge ultimele 7 zile",
+    "clearLast14d": "Șterge ultimele 14 zile",
+    "clearLast30d": "Șterge ultimele 30 zile"
   },
   "backup": {
     "securityLabel": "Securitate",

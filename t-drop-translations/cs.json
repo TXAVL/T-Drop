@@ -219,7 +219,12 @@
     "convertTo": "Převést na…",
     "compressBtn": "Komprimovat",
     "quickCompress": "Rychlá komprese",
-    "transformCase": "Změnit velikost písmen (VELKÁ / malá / Každé Slovo Velké)"
+    "transformCase": "Změnit velikost písmen (VELKÁ / malá / Každé Slovo Velké)",
+    "clearLast48h": "Vymazat 48 hodin",
+    "clearLast72h": "Vymazat 72 hodin",
+    "clearLast7d": "Vymazat 7 dnů",
+    "clearLast14d": "Vymazat 14 dnů",
+    "clearLast30d": "Vymazat 30 dnů"
   },
   "menu": {
     "title": "Akce položky",
