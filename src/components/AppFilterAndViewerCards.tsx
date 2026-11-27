@@ -3,13 +3,14 @@
  *  - Issue #73: Include / Exclude app filter for clipboard capture
  *  - Issue #109: Choose external application for opening screenshots / images
  */
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { AppFilterMode } from '../../shared/types'
 import { useTranslation } from '../i18n'
 import { playButtonClickSound } from '../lib/soundEffects'
 import { acquireKeyboard, releaseKeyboard } from '../lib/keyboardFocus'
 
 const QUICK_APP_PRESETS = ['KeePass.exe', 'Bitwarden.exe', '1Password.exe', 'KeePassXC.exe']
+const APP_FILTER_FOCUS_OWNER = 'settings-app-filter'
 
 export function AppFilterSettingCard({
   mode,
@@ -26,6 +27,17 @@ export function AppFilterSettingCard({
 }) {
   const { t } = useTranslation()
   const [draft, setDraft] = useState('')
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => () => {
+    releaseKeyboard(APP_FILTER_FOCUS_OWNER)
+  }, [])
+
+  const engageInput = () => {
+    void acquireKeyboard(APP_FILTER_FOCUS_OWNER).then(() => {
+      try { inputRef.current?.focus() } catch { /* ignore */ }
+    })
+  }
 
   const addApp = (raw: string) => {
     const clean = raw.trim()
@@ -77,17 +89,26 @@ export function AppFilterSettingCard({
 
         <div style={{ display: 'flex', gap: 6 }}>
           <input
+            ref={inputRef}
             type="text"
             value={draft}
             placeholder={t('appFilter.placeholder')}
-            onFocus={() => acquireKeyboard('settings-app-filter')}
-            onBlur={() => releaseKeyboard('settings-app-filter')}
+            onPointerDown={(e) => {
+              e.stopPropagation()
+              engageInput()
+            }}
+            onFocus={engageInput}
+            onBlur={() => releaseKeyboard(APP_FILTER_FOCUS_OWNER)}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => {
+              e.stopPropagation()
               if (e.key === 'Enter') {
                 e.preventDefault()
                 playButtonClickSound()
                 addApp(draft)
+              } else if (e.key === 'Escape') {
+                e.preventDefault()
+                inputRef.current?.blur()
               }
             }}
             style={{
@@ -96,8 +117,8 @@ export function AppFilterSettingCard({
               height: 28,
               padding: '0 9px',
               borderRadius: 7,
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              background: 'var(--input-bg, rgba(255, 255, 255, 0.06))',
+              border: '1px solid var(--edge-strong, rgba(255, 255, 255, 0.14))',
               color: 'var(--text-primary, #fff)',
               fontSize: 11.5,
               outline: 'none'
@@ -165,9 +186,9 @@ export function AppFilterSettingCard({
                 addApp(preset)
               }}
               style={{
-                border: '1px dashed rgba(255, 255, 255, 0.18)',
+                border: '1px dashed var(--edge-strong, rgba(255, 255, 255, 0.18))',
                 background: 'transparent',
-                color: 'var(--text-tertiary, rgba(255,255,255,0.6))',
+                color: 'var(--text-secondary, rgba(255,255,255,0.68))',
                 borderRadius: 999,
                 padding: '2px 7px',
                 fontSize: 10.5,

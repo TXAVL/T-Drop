@@ -166,3 +166,129 @@
   border-color: var(--edge-light);
   color: var(--accent);
 }
+
+
+/* ── Extended Light Mode contrast fixes across Shelf, Settings, Menu & Preview ── */
+:root[data-theme="light"] .header,
+:root[data-theme="light"] .header span,
+:root[data-theme="light"] .header .icon-btn {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="light"] .search {
+  background: var(--input-bg) !important;
+  border: 1px solid var(--edge-strong) !important;
+}
+
+:root[data-theme="light"] .search input,
+:root[data-theme="light"] .search-icon {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="light"] .search input::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+:root[data-theme="light"] .section-head,
+:root[data-theme="light"] .section-title,
+:root[data-theme="light"] .section-count,
+:root[data-theme="light"] .empty-title,
+:root[data-theme="light"] .empty-sub,
+:root[data-theme="light"] .item-main,
+:root[data-theme="light"] .item-text,
+:root[data-theme="light"] .item-link-title,
+:root[data-theme="light"] .item-file-name,
+:root[data-theme="light"] .item-note,
+:root[data-theme="light"] .stack-row-name,
+:root[data-theme="light"] .footer-capsule-count {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="light"] .item-link-url,
+:root[data-theme="light"] .item-file-meta,
+:root[data-theme="light"] .stack-row-size,
+:root[data-theme="light"] .meta-badge,
+:root[data-theme="light"] .slider-label-btn {
+  color: var(--text-secondary) !important;
+}
+
+:root[data-theme="light"] .slider-label-btn.active {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+:root[data-theme="light"] .footer-capsule,
+:root[data-theme="light"] .clear-btn,
+:root[data-theme="light"] .clear-menu-trigger {
+  background: var(--pill-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--edge-light) !important;
+}
+
+:root[data-theme="light"] .card-menu {
+  background: var(--bg-card) !important;
+  border-color: var(--edge-strong) !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16) !important;
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="light"] .card-menu-row {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="light"] .card-menu-row:hover {
+  background: var(--bg-card-hover) !important;
+}
+
+:root[data-theme="light"] .card-menu-sep {
+  background: var(--divider) !important;
+}
+
+:root[data-theme="light"] .setting-card,
+:root[data-theme="light"] .settings-shelf-card {
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .setting-card button:not(.active):not(.pill.active):not(.ts-mode-btn.active),
+:root[data-theme="light"] .settings-shelf-card button:not(.active):not(.pill.active):not(.ts-mode-btn.active) {
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .preview-flyout,
+:root[data-theme="light"] .preview-flyout div,
+:root[data-theme="light"] .preview-flyout span,
+:root[data-theme="light"] .preview-flyout button {
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .preview-flyout textarea {
+  background: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--accent) !important;
+}
+
+:root[data-theme="light"] .preview-flyout .txa-md-toggle {
+  background: var(--pill-bg) !important;
+  border-color: var(--edge-light) !important;
+}
+
+:root[data-theme="light"] .preview-flyout .txa-md-toggle-btn {
+  color: var(--text-secondary) !important;
+}
+
+:root[data-theme="light"] .preview-flyout .txa-md-toggle-btn.active {
+  background: var(--pill-active-bg) !important;
+  color: var(--pill-active-fg) !important;
+}
+
+:root[data-theme="light"] .preview-flyout .txa-md-badge {
+  color: var(--accent) !important;
+}
+
+:root[data-theme="light"] .ts-mode-btn:not(.active) {
+  color: var(--text-secondary) !important;
+}
+
+:root[data-theme="light"] .ts-preset-sub {
+  color: var(--text-secondary) !important;
+}

@@ -1,9 +1,9 @@
 /**
- * WhatsNewWindowView — Standalone "What's New" feature guide (#/whats-new).
+ * WhatsNewWindowView — Standalone "What's New" feature & fixes guide (#/whats-new).
  *
  * Shown once on first launch of a new version for returning users (completely
  * separate from the full Welcome Tour), with interactive HTML/CSS animated
- * video demos for each headline feature.
+ * demos for each highlight in v0.3.7.
  */
 import { useEffect, useState } from 'react'
 import { useTranslation } from '../i18n'
@@ -11,10 +11,11 @@ import { playButtonClickSound } from '../lib/soundEffects'
 import { THEME_CATALOG, themeKey } from '../lib/theme'
 import '../styles/whatsNewWindow.css'
 
-type FeatureId = 'markdown' | 'multipaste' | 'themes' | 'appfilter'
+type SlideId = 'focus' | 'lightmode' | 'stability' | 'cleanup'
 
 interface FeatureSlide {
-  id: FeatureId
+  id: SlideId
+  kind: 'fixed' | 'improved'
   badge: string
   title: string
   desc: string
@@ -23,13 +24,12 @@ interface FeatureSlide {
 
 export function WhatsNewWindowView() {
   const { t } = useTranslation()
-  const [active, setActive] = useState<FeatureId>('markdown')
-  const [version, setVersion] = useState('0.3.6')
-  /** The theme the themes demo is showing (cycles through the whole catalog). */
+  const [active, setActive] = useState<SlideId>('focus')
+  const [version, setVersion] = useState('0.3.7')
   const [themeIdx, setThemeIdx] = useState(0)
 
   useEffect(() => {
-    if (active !== 'themes') return
+    if (active !== 'lightmode') return
     const id = window.setInterval(() => setThemeIdx((i) => (i + 1) % THEME_CATALOG.length), 1400)
     return () => window.clearInterval(id)
   }, [active])
@@ -43,36 +43,41 @@ export function WhatsNewWindowView() {
 
   const slides: FeatureSlide[] = [
     {
-      id: 'markdown',
-      badge: t('whatsNew.badgeNew'),
-      title: t('whatsNew.mdTitle'),
-      desc: t('whatsNew.mdDesc'),
-      tip: t('whatsNew.mdTip')
+      id: 'focus',
+      kind: 'fixed',
+      badge: t('whatsNew.badgeFixed'),
+      title: t('whatsNew.v37FocusTitle'),
+      desc: t('whatsNew.v37FocusDesc'),
+      tip: t('whatsNew.v37FocusTip')
     },
     {
-      id: 'multipaste',
-      badge: t('whatsNew.badgeNew'),
-      title: t('whatsNew.mpTitle'),
-      desc: t('whatsNew.mpDesc'),
-      tip: t('whatsNew.mpTip')
+      id: 'lightmode',
+      kind: 'fixed',
+      badge: t('whatsNew.badgeFixed'),
+      title: t('whatsNew.v37LightTitle'),
+      desc: t('whatsNew.v37LightDesc'),
+      tip: t('whatsNew.v37LightTip')
     },
     {
-      id: 'themes',
-      badge: t('whatsNew.badgeNew'),
-      title: t('whatsNew.thTitle'),
-      desc: t('whatsNew.thDesc'),
-      tip: t('whatsNew.thTip')
+      id: 'stability',
+      kind: 'fixed',
+      badge: t('whatsNew.badgeFixed'),
+      title: t('whatsNew.v37StabTitle'),
+      desc: t('whatsNew.v37StabDesc'),
+      tip: t('whatsNew.v37StabTip')
     },
     {
-      id: 'appfilter',
-      badge: t('whatsNew.badgeNew'),
-      title: t('whatsNew.afTitle'),
-      desc: t('whatsNew.afDesc'),
-      tip: t('whatsNew.afTip')
+      id: 'cleanup',
+      kind: 'improved',
+      badge: t('whatsNew.badgeImproved'),
+      title: t('whatsNew.v37CleanTitle'),
+      desc: t('whatsNew.v37CleanDesc'),
+      tip: t('whatsNew.v37CleanTip')
     }
   ]
+
   const demoTheme = THEME_CATALOG[themeIdx % THEME_CATALOG.length]
-  const demoMode = themeIdx % 3 === 2 ? 'light' : 'dark'
+  const demoMode = themeIdx % 2 === 0 ? 'light' : 'dark'
   const demoPal = demoTheme[demoMode]
 
   const currentIdx = slides.findIndex((s) => s.id === active)
@@ -114,48 +119,28 @@ export function WhatsNewWindowView() {
           ))}
         </div>
 
-        {/* Interactive HTML/CSS Animated Video Stage */}
+        {/* Interactive HTML/CSS Animated Stage */}
         <div className={`wn-stage stage-${slide.id}`} aria-hidden="true">
-          {slide.id === 'markdown' && (
-            <div className="wn-demo-md">
-              <div className="wn-demo-md-head">
-                <span className="wn-md-pill">Markdown · Preview</span>
-                <span className="wn-md-edit-btn">✎</span>
+          {slide.id === 'focus' && (
+            <div className="wn-demo-focus">
+              <div className="wn-fx-head">
+                <span className="wn-fx-label">{t('appFilter.title')}</span>
+                <span className="wn-fx-ok">✓ {t('whatsNew.v37FocusStatus')}</span>
               </div>
-              <div className="wn-demo-md-body">
-                <div className="wn-md-h">{t('whatsNew.mdHeading')}</div>
-                <div className="wn-md-table">
-                  <div className="wn-md-row head"><span>{t('whatsNew.mdColItem')}</span><span>{t('whatsNew.mdColStatus')}</span></div>
-                  <div className="wn-md-row"><span>Markdown Preview</span><span className="ok">{t('whatsNew.mdReady')}</span></div>
-                  <div className="wn-md-row"><span>{t('whatsNew.mdRowEdit')}</span><span className="ok">{t('whatsNew.mdOn')}</span></div>
-                </div>
+              <div className="wn-fx-input">
+                <span className="wn-fx-typed">KeePass.exe</span>
+                <span className="wn-caret" />
+                <span className="wn-fx-add">+ {t('appFilter.add')}</span>
               </div>
-              <div className="wn-demo-md-editor">
-                <div className="wn-ed-line">### {t('whatsNew.mdHeading')}</div>
-                <div className="wn-ed-line">| {t('whatsNew.mdColItem')} | {t('whatsNew.mdColStatus')} |<span className="wn-caret" /></div>
-                <div className="wn-ed-bar"><span>{t('whatsNew.mdSaveHint')}</span></div>
+              <div className="wn-fx-chips">
+                <span className="wn-fx-chip">Bitwarden.exe ×</span>
+                <span className="wn-fx-chip">1Password.exe ×</span>
+                <span className="wn-fx-chip active">KeePass.exe ×</span>
               </div>
             </div>
           )}
 
-          {slide.id === 'multipaste' && (
-            <div className="wn-demo-mp">
-              <div className="wn-mp-header">
-                <span className="wn-mp-title">T-Drop Shelf</span>
-                <span className="wn-mp-pin">📌 {t('multiPaste.pinShelf')}</span>
-              </div>
-              <div className="wn-mp-cards">
-                <div className="wn-mp-card c1"><span className="wn-mp-num">1</span>{t('whatsNew.mpCard1')}</div>
-                <div className="wn-mp-card c2"><span className="wn-mp-num">2</span>{t('whatsNew.mpCard2')}</div>
-              </div>
-              <div className="wn-mp-bar">
-                <span>{t('multiPaste.selected', { count: 2 })} · ↵</span>
-                <span className="wn-mp-paste">{t('multiPaste.pasteAll')}</span>
-              </div>
-            </div>
-          )}
-
-          {slide.id === 'themes' && (
+          {slide.id === 'lightmode' && (
             <div
               className="wn-demo-th"
               style={{ background: demoPal.stageWallpaper, color: demoPal.accent }}
@@ -188,31 +173,39 @@ export function WhatsNewWindowView() {
             </div>
           )}
 
-          {slide.id === 'appfilter' && (
-            <div className="wn-demo-af">
-              <div className="wn-af-rule">
-                <span className="wn-af-chip">{t('appFilter.exclude')}</span>
-                <span className="wn-af-proc">KeePass.exe</span>
+          {slide.id === 'stability' && (
+            <div className="wn-demo-stab">
+              <div className="wn-st-row r1">
+                <span className="wn-st-badge">Ctrl+C ×2</span>
+                <span className="wn-st-text">{t('whatsNew.v37StabCopy')}</span>
+                <span className="wn-st-ok">✓</span>
               </div>
-              <div className="wn-af-row r1">
-                <span className="wn-af-icon key" />
-                <div className="wn-af-text"><b>KeePass</b><span>{t('tour.afSecret')} ••••••••</span></div>
-                <span className="wn-af-copy">{t('footer.copy')}</span>
-                <span className="wn-af-status blocked">{t('tour.afBlocked')}</span>
+              <div className="wn-st-row r2">
+                <span className="wn-st-badge audio">Audio</span>
+                <span className="wn-st-text">{t('whatsNew.v37StabAudio')}</span>
+                <span className="wn-st-ok">✓</span>
               </div>
-              <div className="wn-af-row r2">
-                <span className="wn-af-icon web" />
-                <div className="wn-af-text"><b>Chrome</b><span>{t('tour.afLink')}</span></div>
-                <span className="wn-af-copy">{t('footer.copy')}</span>
-                <span className="wn-af-status saved">{t('tour.afSaved')}</span>
+            </div>
+          )}
+
+          {slide.id === 'cleanup' && (
+            <div className="wn-demo-clean">
+              <div className="wn-cl-title">{t('whatsNew.v37CleanMenu')}</div>
+              <div className="wn-cl-pills">
+                <span className="wn-cl-pill">48h</span>
+                <span className="wn-cl-pill">72h</span>
+                <span className="wn-cl-pill active">7d</span>
+                <span className="wn-cl-pill">14d</span>
+                <span className="wn-cl-pill">30d</span>
               </div>
+              <div className="wn-cl-foot">{t('whatsNew.v37CleanFoot')}</div>
             </div>
           )}
         </div>
 
         <div className="wn-copy">
           <div className="wn-copy-head">
-            <span className="wn-badge">{slide.badge}</span>
+            <span className={`wn-badge ${slide.kind}`}>{slide.badge}</span>
             <h2>{slide.title}</h2>
           </div>
           <p className="wn-desc">{slide.desc}</p>

@@ -164,10 +164,10 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
             onHoverItem={(val) => {
               if (val === 'emoji') void loadEmojiCatalog()
             }}
-            trackColor="#141414"
-            thumbColor="#ffffff"
-            textColor="rgba(255, 255, 255, 0.72)"
-            activeTextColor="#000000"
+            trackColor="var(--pill-bg, #141414)"
+            thumbColor="var(--pill-active-bg, #ffffff)"
+            textColor="var(--text-secondary, rgba(255, 255, 255, 0.72))"
+            activeTextColor="var(--pill-active-fg, #000000)"
             size="custom"
             height={filterTrackHeight}
             minWidth={filterSlotSize}
@@ -332,7 +332,7 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
               toggleShelfPinned()
             }}
             style={{
-              color: shelfPinned ? 'var(--accent, #8b5cf6)' : 'rgba(255, 255, 255, 0.72)',
+              color: shelfPinned ? 'var(--accent, #8b5cf6)' : 'var(--text-secondary, rgba(255, 255, 255, 0.72))',
               background: shelfPinned ? 'rgba(139, 92, 246, 0.16)' : 'transparent',
               border: shelfPinned ? '1px solid var(--accent, #8b5cf6)' : '1px solid transparent',
               boxShadow: 'none',
@@ -374,7 +374,7 @@ export function Header({ isHorizontal = false, itemCount, clearProps }: HeaderPr
             }
           }}
           style={{
-            color: '#ffffff',
+            color: 'var(--text-primary, #ffffff)',
             background: 'transparent',
             border: 'none',
             boxShadow: 'none',

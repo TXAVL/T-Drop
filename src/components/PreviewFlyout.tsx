@@ -753,12 +753,14 @@ function PreviewContent({
   // Manage Electron keyboard focus while editing text
   useEffect(() => {
     if (!isEditingText) return
-    acquireKeyboard('preview-text-editor')
-    const id = window.setTimeout(() => {
-      editorRef.current?.focus()
-    }, 30)
+    let active = true
+    void acquireKeyboard('preview-text-editor').then(() => {
+      if (active) {
+        try { editorRef.current?.focus() } catch { /* ignore */ }
+      }
+    })
     return () => {
-      window.clearTimeout(id)
+      active = false
       releaseKeyboard('preview-text-editor')
     }
   }, [isEditingText])
